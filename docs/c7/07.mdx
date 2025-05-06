@@ -1,0 +1,147 @@
+---
+sidebar_position: 7
+slug: /c7/07
+description: Demonstrații geometrice în plan
+---
+import Katex from '@site/src/components/Katex';
+import PitagoraKonva from '@site/src/components/PitagoraKonva';
+
+# 07 - Demonstrații geometrice în plan
+
+## I. Teorema lui Pitagora
+
+### Definiție
+
+Teorema lui Pitagora afirmă că, într-un triunghi dreptunghic, pătratul ipotenuzei este egal cu suma pătratelor catetelor. Cu alte cuvinte, dacă un triunghi are catetele de lungimi <Katex>{String.raw`a`}</Katex> și <Katex>{String.raw`b`}</Katex>, iar ipotenuza este <Katex>{String.raw`c`}</Katex>, atunci:
+
+<Katex>{String.raw`\boxed{a^2 + b^2 = c^2}`}</Katex>
+
+### Demonstrație grafică
+
+<div className="diagram-wrapper">
+    <svg width="1000" height="6000" xmlns="http://www.w3.org/2000/svg" style={{background: 'white'}}>
+    <g className="config1" transform="translate(50,50)">
+        <rect x="0" y="0" width="300" height="300" stroke="black" fill="none" stroke-width="1" />
+        
+        <polygon points="0,0 100,0 0,200" fill="#f0f0f0" stroke="black" stroke-width="1" />
+        <polygon points="300,0 100,0 300,100" fill="#f0f0f0" stroke="black" stroke-width="1" />
+        <polygon points="300,300 200,300 300,100" fill="#f0f0f0" stroke="black" stroke-width="1" />
+        <polygon points="0,300 200,300 0,200" fill="#f0f0f0" stroke="black" stroke-width="1" />
+
+        <foreignObject x="105" y="85" width="100" height="90">
+        <div xmlns="http://www.w3.org/1999/xhtml" style={{ fontSize: '36px', fontFamily: 'Courier New', color: 'black' }}>
+            <Katex>{String.raw`c^2`}</Katex>
+        </div>
+        </foreignObject>
+
+        <text x="120" y="190" font-size="36" font-family="Courier New" fill="black"></text>
+
+        <text x="200" y="-20" font-size="36" font-family="Courier New" fill="black">a</text>
+        <text x="30" y="-20" font-size="36" font-family="Courier New" fill="black">b</text>
+        <text x="180" y="75" font-size="36" font-family="Courier New" fill="black">c</text>
+
+        <text x="80" y="340" font-size="36" font-family="Courier New" fill="black">a</text>
+        <text x="240" y="340" font-size="36" font-family="Courier New" fill="black">b</text>
+        <text x="100" y="240" font-size="36" font-family="Courier New" fill="black">c</text>
+
+        <text x="-40" y="100" font-size="36" font-family="Courier New" fill="black">a</text>
+        <text x="-40" y="260" font-size="36" font-family="Courier New" fill="black">b</text>
+        <text x="60" y="125" font-size="36" font-family="Courier New" fill="black">c</text>
+
+        <text x="320" y="220" font-size="36" font-family="Courier New" fill="black">a</text>
+        <text x="320" y="50" font-size="36" font-family="Courier New" fill="black">b</text>
+        <text x="220" y="190" font-size="36" font-family="Courier New" fill="black">c</text>
+
+        <text x="30" y="40" font-size="36" font-family="Courier New" fill="black">I</text>
+        <text x="230" y="40" font-size="36" font-family="Courier New" fill="black">II</text>
+        <text x="225" y="280" font-size="36" font-family="Courier New" fill="black">III</text>
+        <text x="30" y="280" font-size="36" font-family="Courier New" fill="black">IV</text>
+        <foreignObject x="340" y="100" width="100" height="90">
+        <div xmlns="http://www.w3.org/1999/xhtml" style={{ fontSize: '36px', fontFamily: 'Courier New', color: 'black' }}>
+            <Katex>{String.raw`\rightarrow`}</Katex>
+        </div>
+        </foreignObject>
+    </g>
+
+    <g className="config2" transform="translate(500,50)">
+        <rect x="0" y="0" width="300" height="300" stroke="black" fill="none" stroke-width="1" />
+
+        <polygon points="0,0 0,200 100,0" fill="#f0f0f0" stroke="black" stroke-width="1" />
+        <polygon points="100,0 100,200 0,200" fill="#f0f0f0" stroke="black" stroke-width="1" />
+        <polygon points="100,200 300,200 300,300" fill="#f0f0f0" stroke="black" stroke-width="1" />
+        <polygon points="100,200 100,300 300,300" fill="#f0f0f0" stroke="black" stroke-width="1" />
+
+        <foreignObject x="0" y="190" width="100" height="90">
+        <div xmlns="http://www.w3.org/1999/xhtml" style={{ fontSize: '36px', fontFamily: 'Courier New', color: 'black' }}>
+            <Katex>{String.raw`b^2`}</Katex>
+        </div>
+        </foreignObject>
+
+        <foreignObject x="150" y="40" width="100" height="90">
+        <div xmlns="http://www.w3.org/1999/xhtml" style={{ fontSize: '36px', fontFamily: 'Courier New', color: 'black' }}>
+            <Katex>{String.raw`a^2`}</Katex>
+        </div>
+        </foreignObject>
+
+        <text x="30" y="-20" font-size="36" font-family="Courier New" fill="black">b</text>
+        <text x="180" y="340" font-size="36" font-family="Courier New" fill="black">a</text>
+
+        <text x="-40" y="100" font-size="36" font-family="Courier New" fill="black">a</text>
+        <text x="320" y="260" font-size="36" font-family="Courier New" fill="black">b</text>
+
+        <text x="30" y="40" font-size="36" font-family="Courier New" fill="black">I</text>
+        <text x="120" y="280" font-size="36" font-family="Courier New" fill="black">IV</text>
+        <text x="250" y="240" font-size="36" font-family="Courier New" fill="black">II</text>
+        <text x="30" y="180" font-size="36" font-family="Courier New" fill="black">III</text>
+    </g>
+    </svg>
+</div>
+
+
+### Explicație
+
+În prima configurație, observăm un pătrat mare, format din 4 triunghiuri dreptunghice și un pătrat mic central. Fiecare triunghi are catetele <Katex>{String.raw`a`}</Katex> și <Katex>{String.raw`b`}</Katex>, iar ipotenuza <Katex>{String.raw`c`}</Katex>. Aria pătratului mare este:
+
+<Katex>{String.raw`(a + b)^2`}</Katex>
+
+iar aria celor patru triunghiuri este:
+
+<Katex>{String.raw`4 \cdot \frac{1}{2}ab = 2ab`}</Katex>
+
+Aria pătratului mic (format în interiorul pătratului mare) este:
+
+<Katex>{String.raw`c^2`}</Katex>
+
+Deci:
+
+<Katex>{String.raw`\begin{aligned}
+(a + b)^2 &= 2ab + c^2 \\\\
+a^2 + 2ab + b^2 &= 2ab + c^2 \\\\
+a^2 + b^2 &= c^2
+\end{aligned}`}</Katex>
+
+Astfel, teorema este demonstrată.
+
+## II. Diagonala unui pătrat
+
+### Problemă
+
+Fie un pătrat cu latura <Katex>{String.raw`l`}</Katex>. Să determinăm lungimea diagonalei <Katex>{String.raw`d`}</Katex>.
+
+### Observație
+
+Diagonala pătratului formează un triunghi dreptunghic cu două laturi egale cu <Katex>{String.raw`l`}</Katex> (pentru că sunt laturi ale pătratului), iar diagonala este ipotenuza.
+
+### Aplicăm teorema lui Pitagora:
+
+<Katex>{String.raw`d^2 = l^2 + l^2 = 2l^2`}</Katex>
+
+Aplicând rădăcina pătrată:
+
+<Katex>{String.raw`d = \sqrt{2l^2} = l\sqrt{2}`}</Katex>
+
+### Concluzie
+
+Lungimea diagonalei unui pătrat cu latura <Katex>{String.raw`l`}</Katex> este:
+
+<Katex>{String.raw`\boxed{d = l\sqrt{2}}`}</Katex>

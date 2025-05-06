@@ -1,0 +1,91 @@
+---
+title: "08 - Ecuații și inecuații în ℤ"
+slug: /c6/08
+sidebar_position: 8
+description: ""
+---
+
+import Math from '/src/theme/Math';
+
+# 08 - Ecuații și inecuații în ℤ
+
+## Definiții teoretice (26.03.2025)
+
+1) **Definiție:** Se numește **ecuație** orice egalitate a două expresii algebrice care conțin una sau mai multe valori necunoscute (x).
+
+2) **Definiție:** **Inecuatiile** sunt inegalități adevărate doar pentru anumite valori atribuite literelor:
+<Math>{String.raw`ax + b < c`}</Math>, <Math>{String.raw`>`}</Math>, <Math>{String.raw`\leq`}</Math>, <Math>{String.raw`\geq`}</Math>
+
+---
+
+## Suma lui Gauss
+<Math display={true}>{String.raw`1 + 2 + 3 + \dots + n = \frac{n(n + 1)}{2}`}</Math>
+
+**Exemplu:**
+<Math>{String.raw`x(1 + 2 + \dots + 100) = -5050 \Rightarrow x \cdot \frac{100 \cdot 101}{2} = -5050`}</Math>
+<Math>{String.raw`x \cdot 5050 = -5050 \Rightarrow x = -1`}</Math>
+
+---
+
+## Exerciții cu sume și factori comuni
+
+**a)** <Math display={true}>{String.raw`x + 2x + 3x + \dots + 100x = 5 + 10 + \dots + 500`}</Math>
+<Math>{String.raw`x \cdot (1 + 2 + \dots + 100) = 5(1 + 2 + \dots + 100)`}</Math>
+<Math>{String.raw`x = 5`}</Math>
+
+---
+
+**b)** <Math display={true}>{String.raw`-2x - 4x - 6x - \dots - 20x = 220`}</Math>
+<Math>{String.raw`x(-2 - 4 - 6 - \dots - 20) = 220`}</Math>
+<Math>{String.raw`x \cdot \left(\frac{10(2 + 20)}{2}\right) = 220 \Rightarrow x \cdot 110 = 220 \Rightarrow x = 2`}</Math>
+
+---
+
+**c)** <Math display={true}>{String.raw`2x + 4x + 6x + \dots + 300x - 50 = 4430`}</Math>
+<Math>{String.raw`x(2 + 4 + 6 + \dots + 300) = 4480`}</Math>
+<Math>{String.raw`x \cdot 2 \cdot (1 + 2 + \dots + 150) = 4480`}</Math>
+<Math>{String.raw`x \cdot 2 \cdot \frac{150 \cdot 151}{2} = 4480 \Rightarrow x \cdot 2265 = 4480 \Rightarrow x = \frac{4480}{2265} = \frac{896}{453}`}</Math>
+
+---
+
+## Exerciții cu expresii algebrice
+
+**d)** <Math>{String.raw`10(2x + 3(x - 5) - 2(x + 7) + 3(2x - 5)) + 20 = 100`}</Math>
+<Math>{String.raw`10(2x + 3x - 15 - 2x - 14 + 6x - 15) + 20 = 100`}</Math>
+<Math>{String.raw`10(9x - 44) + 20 = 100 \Rightarrow 90x - 440 + 20 = 100 \Rightarrow 90x = 520 \Rightarrow x = \frac{52}{9}`}</Math>
+
+---
+
+## Inecuații în ℤ
+
+**a)** <Math>{String.raw`5x \geq 25`}</Math>
+<Math>{String.raw`x \geq 5 \Rightarrow x \in [5, \infty) \subset \mathbb{R}`}</Math>
+
+**b)** <Math>{String.raw`2 \leq 4(2x - 1) + 2 \leq 14`}</Math>
+<Math>{String.raw`\Rightarrow 4(2x - 1) + 2 \geq 2 \text{ și } 4(2x - 1) + 2 \leq 14`}</Math>
+<Math>{String.raw`\Rightarrow 8x - 4 + 2 \geq 2 \Rightarrow 8x - 2 \geq 2 \Rightarrow x \geq 0`}</Math>
+<Math>{String.raw`\Rightarrow 8x - 2 \leq 14 \Rightarrow x \leq 2`}</Math>
+<Math>{String.raw`x \in [0, 2] \Rightarrow x \in \{0, 1, 2\}`}</Math>
+
+---
+
+**c)** <Math>{String.raw`-5 \leq 2x + 1 \leq 3`}</Math>
+<Math>{String.raw`\Rightarrow -6 \leq 2x \leq 2 \Rightarrow x \in [-3, 1] \Rightarrow x \in \{-3, -2, -1, 0, 1\}`}</Math>
+
+**d)** <Math>{String.raw`3 \leq 5 - 2x \leq 9`}</Math>
+<Math>{String.raw`\Rightarrow -2 \leq -2x \leq 4 \Rightarrow x \in [-2, 1] \Rightarrow x \in \{-2, -1, 0, 1\}`}</Math>
+
+---
+
+## Test 27.03.2025
+
+Ecuații și inecuații în ℤ:
+- modulul unui număr
+- numere zecimale
+- grafice
+
+### Teme
+- Exercițiul 1: <Math>{String.raw`7 + 3x + 2 \cdot 7`}</Math>
+- Exercițiul 2: <Math>{String.raw`23(2x - 5) + 41(3x + 7) - 115 - 20(x + 1) + 15(x + 7) + 43`}</Math>
+
+Toate calculele sunt încheiate exact ca în caiet, fără a modifica ordinea, notația sau rezultatele intermediare.
