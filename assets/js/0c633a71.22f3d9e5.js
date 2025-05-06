@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkedumat_58=self.webpackChunkedumat_58||[]).push([[6145],{2341:e=>{e.exports=JSON.parse('{"metadata":{"permalink":"/curs/blog","page":1,"postsPerPage":10,"totalPages":1,"totalCount":4,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);
