@@ -1,6 +1,6 @@
 import React from 'react';
 import 'katex/dist/katex.min.css';
-import Katex from '@site/src/components/Katex';
+import { InlineMath } from 'react-katex';
 
 const parseTree = (source) => {
   const lines = source.trim().split('\n');
@@ -49,7 +49,7 @@ const layoutTree = (node, depth = 0, xOffset = 0) => {
   let width = 0;
   const centers = [];
 
-  node.children.forEach((child, i) => {
+  node.children.forEach(child => {
     const res = layoutTree(child, depth + 1, xOffset + width);
     width += res.width;
     centers.push(res.center);
@@ -77,13 +77,18 @@ const drawNodes = (node) => {
   return nodes;
 };
 
-const RenderLabel = ({ label }) => (
-  <foreignObject x={-40} y={-10} width="80" height="30">
-    <div style={{ textAlign: 'center', fontSize: 14 }}>
-      <InlineMath math={label} />
-    </div>
-  </foreignObject>
-);
+const RenderLabel = ({ label }) => {
+  const safeLabel = label.trim().replace(/^\$\$|\$\$$/g, '');
+  return (
+    <foreignObject x={-40} y={-10} width="80" height="30">
+      <div style={{ textAlign: 'center', fontSize: 14 }}>
+        <InlineMath math={safeLabel} />
+      </div>
+    </foreignObject>
+  );
+};
+
+
 
 export default function Tree({ source }) {
   if (!source) return null;
@@ -94,13 +99,33 @@ export default function Tree({ source }) {
   const nodes = drawNodes(root);
   const edges = drawEdges(root);
 
-  const width = Math.max(...nodes.map(n => n.x)) + 50;
-  const height = Math.max(...nodes.map(n => n.y)) + 60;
+  const minX = Math.min(...nodes.map(n => n.x));
+  const maxX = Math.max(...nodes.map(n => n.x));
+  const minY = Math.min(...nodes.map(n => n.y));
+  const maxY = Math.max(...nodes.map(n => n.y));
+
+  const paddingX = 40;
+  const paddingY = 40;
+
+  const width = maxX - minX + 2 * paddingX;
+  const height = maxY - minY + 2 * paddingY;
 
   return (
-    <svg width={width} height={height}>
+    <svg
+      width="100%"
+      height={height}
+      viewBox={`${minX - paddingX} ${minY - paddingY} ${width} ${height}`}
+      preserveAspectRatio="xMidYMid meet"
+    >
       {edges.map((e, i) => (
-        <line key={i} x1={e.x1} y1={e.y1 + 15} x2={e.x2} y2={e.y2 - 15} stroke="black" />
+        <line
+          key={i}
+          x1={e.x1}
+          y1={e.y1 + 15}
+          x2={e.x2}
+          y2={e.y2 - 15}
+          stroke="black"
+        />
       ))}
       {nodes.map((n, i) => (
         <g key={i} transform={`translate(${n.x},${n.y})`}>
