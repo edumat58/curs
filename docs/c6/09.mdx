@@ -40,7 +40,7 @@ Fig. 1
 *Fig. 2*
 
 ---
-### Drepte coliniare
+## Drepte coliniare
 :::tip Definiție
 Trei sau mai multe puncte care aparțin aceleiași drepte se numesc **coliniare**.
 :::
@@ -60,27 +60,41 @@ Trei sau mai multe puncte care aparțin aceleiași drepte se numesc **coliniare*
 *Fig. 3*
 
 ---
-### Drepte concurente
+## Drepte concurente
 :::tip Definiție
 Mai multe drepte care au un punct comun se numesc **drepte concurente**.
 :::
-<div style={{ border: '2px solid black', display: 'inline-block', padding: '5px' }}>
+<div style={{ display: 'flex', gap: '70px', justifyContent: 'left' }}>
+  <div style={{ border: '2px solid black', display: 'inline-block', padding: '5px' }}>
+      <svg width="200" height="200" viewBox="0 0 100 100">
+      <line x1="50" y1="50" x2="90" y2="90" stroke="black"/>
+      <line x1="50" y1="50" x2="90" y2="10" stroke="black"/>
+      <line x1="50" y1="50" x2="10" y2="90" stroke="black"/>
+      <line x1="50" y1="50" x2="10" y2="10" stroke="black"/>
+      <line x1="50" y1="90" x2="50" y2="10" stroke="black"/>
+      <circle cx="50" cy="50" r="2" fill="black"/>
+      <text fontSize={10} fontWeight={'bold'} x="60" y="55">O</text>
+      <text fontSize={10} x="18" y="15">a</text>
+      <text fontSize={10} x="55" y="15">b</text>
+      <text fontSize={10} x="92" y="15">c</text>
+      </svg>
+  </div>
+  <div style={{ border: '2px solid black', display: 'inline-block', padding: '5px' }}>
     <svg width="200" height="200" viewBox="0 0 100 100">
-    <line x1="50" y1="50" x2="90" y2="90" stroke="black"/>
-    <line x1="50" y1="50" x2="90" y2="10" stroke="black"/>
-    <line x1="50" y1="50" x2="10" y2="90" stroke="black"/>
-    <line x1="50" y1="50" x2="10" y2="10" stroke="black"/>
-    <line x1="50" y1="90" x2="50" y2="10" stroke="black"/>
-    <circle cx="50" cy="50" r="2" fill="black"/>
-    <text fontSize={10} fontWeight={'bold'} x="60" y="55">O</text>
-    <text fontSize={10} x="18" y="15">a</text>
-    <text fontSize={10} x="55" y="15">b</text>
-    <text fontSize={10} x="92" y="15">c</text>
+    <line x1="10" y1="50" x2="90" y2="50" stroke="black" /> 
+    <line x1="50" y1="10" x2="50" y2="90" stroke="black" /> 
+    <text fontSize={10} x="92" y="55">x</text> 
+    <text fontSize={10} x="55" y="15">y</text>
+    <circle cx="50" cy="50" r="2" fill="black" /> 
+    <text fontSize={10} fontWeight={'bold'} x="55" y="65">O</text> 
     </svg>
+  </div>
 </div>
+
+
 ---
 
-## 3. Planul
+## Planul
 
 * Planul se notează cu **litere grecești**: <Math>{String.raw`\alpha, \beta, \gamma...`}</Math>
 * Un punct poate sau nu să aparțină unui plan.
@@ -93,9 +107,37 @@ Mai multe drepte care au un punct comun se numesc **drepte concurente**.
   <text x="140" y="30">B ×</text>
   <text x="35" y="155">α</text>
 </svg>
+<br/>
+<Math>{String.raw`\begin{cases} 
+A \in \alpha \\ 
+B \notin \alpha
+\end{cases}`}</Math>
+
+<br/>
+<br/>
+
 
 * Dacă două puncte distincte aparțin unui plan, atunci dreapta determinată de acestea este inclusă în acel plan.
 
+<svg width="300" height="180" viewBox="0 0 300 180">
+  <!-- paralelogram -->
+  <polygon points="40,140 80,40 260,40 220,140" fill="none" stroke="black" />
+  <!-- linie intre punctele A si B -->
+  <line x1="100" y1="117" x2="210" y2="65" stroke="black" />
+  <!-- etichete -->
+  <text x="80" y="120">A ×</text>
+  <text x="190" y="70">B ×</text>
+  <text fontWeight={"bold"} x="140" y="90">a</text>
+  <text x="35" y="155">β</text>
+</svg>
+<br/>
+<Math>{String.raw`\begin{cases} 
+A \in \beta \\ 
+B \in \beta
+\end{cases} \Rightarrow a \in \beta`}</Math>
+
+<br/>
+<br/>
 
 * O dreaptă poate fi inclusă în plan, poate avea un punct comun cu planul, sau poate să **nu aibă niciun punct comun** — în acest caz spunem că este **paralelă cu planul**.
 
@@ -120,11 +162,13 @@ Mai multe drepte care au un punct comun se numesc **drepte concurente**.
 
 ---
 
-## 2. Drepte coplanare și necoplanare
+## Drepte coplanare și necoplanare
 
 * Două drepte **conținute în același plan** se numesc **coplanare**.
 * Două drepte care **nu sunt în același plan** se numesc **necoplanare**.
 * Două drepte coplanare care **nu au puncte comune** se numesc **paralele**: <Math>{String.raw`a \parallel b`}</Math>
+<br/>
+<Math >{String.raw`a \cap b = \emptyset `}</Math> - mulțimea intersecției a două drepte paralele este **vidă**.
 
 <svg width="250" height="100" viewBox="0 0 250 100">
   <line x1="30" y1="20" x2="220" y2="20" stroke="black"/>

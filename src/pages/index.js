@@ -32,8 +32,8 @@ export default function Home() {
   const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
-      title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />">
+      title={`Bonjour, stud.Edumat58`}
+      description="Platformă de învățare online pentru cursurile de Matematică">
       <HomepageHeader />
       <main>
         <HomepageFeatures />

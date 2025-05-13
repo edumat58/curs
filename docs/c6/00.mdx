@@ -1,9 +1,214 @@
 ---
+title: "Organigramă"
 sidebar_position: 0
 slug: /c6/00
+hide_title: false
+description: ""
 ---
-import MyCalendar2 from '@site/src/components/MyCalendar2';
+import React, { useState } from 'react';
 
-# Organigramă Lecții
 
-<MyCalendar2 />
+export default function LectiiTreeView() {
+  const saptamani = [
+    {
+      titlu: 'Săptămâna 1 - 24.02.2025 - 28.02.2025',
+      note: '',
+      lectii: [
+        { titlu: 'C1 – Mulțimi de numere', zi: 'Luni 24.02', tip: 'Algebra', link: 'c6/01', pdf: '01 - Mulțimi de numere _ Edumat58.pdf' },
+        { titlu: 'C2 – Intervale, comparații și aproximări', zi: 'Miercuri 26.02', tip: 'Algebra', link: 'c6/02', pdf: '02 - Intervale, comparații și aproximări _ Edumat58.pdf' },
+      ],
+    },
+    {
+      titlu: 'Săptămâna 2 - 03.03.2025 - 07.03.2025',
+      note: '',
+      lectii: [
+        { titlu: 'C3 – Proporții și procente', zi: 'Luni 03.03', tip: 'Algebra', link: 'c6/03', pdf: '03 - Proporții și procente _ Edumat58.pdf' },
+        { titlu: 'C4 – Grafice, tabele și interpretarea acestora', zi: 'Miercuri 05.03', tip: 'Algebra', link: 'c6/04', pdf: '04 - Grafice, tabele și interpretarea acestora _ Edumat58.pdf' },
+      ],
+    },
+    {
+      titlu: 'Săptămâna 3 - 10.03.2025 - 14.03.2025',
+      note: '',
+      lectii: [
+        { titlu: 'C5 – Numere raționale (I)', zi: 'Luni 10.03', tip: 'Algebra', link: 'c6/05', pdf: '05 - Numere raționale (I) _ Edumat58.pdf' },
+        { titlu: 'C6 – Modulul unui număr întreg (valoarea absolută)', zi: 'Joi 13.03', tip: 'Algebra', link: 'c6/06', pdf: '06 - Modulul unui număr întreg (valoarea absolută) _ Edumat58.pdf' },
+      ],
+    },
+    {
+      titlu: 'Săptămâna 4 - 17.03.2025 - 21.03.2025',
+      note: '17.03 | 18.03 - Simulări Naționale',
+      lectii: [
+        { titlu: 'C7 – Ecuații și inecuații în mulțimea numerelor întregi (I)', zi: 'Joi 20.03', tip: 'Algebra', link: 'c6/07', pdf: '07 - Ecuații și inecuații în mulțimea numerelor întregi (I) _ Edumat58.pdf' },
+      ],
+    },
+    {
+      titlu: 'Săptămâna 5 - 24.03.2025 - 28.03.2025',
+      note: '',
+      lectii: [
+        { titlu: 'C8 – Ecuații și inecuații în mulțimea numerelor întregi (II)', zi: 'Miercuri 26.03', tip: 'Algebra', link: 'c6/08', pdf: '08 - Ecuații și inecuații în mulțimea numerelor întregi (II) _ Edumat58.pdf' },
+      ],
+    },
+    {
+      titlu: 'Săptămâna 6 - 31.03.2025 - 04.04.2025',
+      note: '',
+      lectii: [
+        { titlu: 'C9 – Punct, dreaptă, plan', zi: 'Luni 31.03', tip: 'Geometrie', link: 'c6/09', pdf: '09 - Punct, dreaptă, plan _ Edumat58.pdf' },
+        { titlu: 'C10 – Fracții ireductibile și numere prime', zi: 'Miercuri 02.04', tip: 'Algebra', link: 'c6/10', pdf: 'c10.pdf' },
+      ],
+    },
+    {
+      titlu: 'Săptămâna 7 - 07.04.2025 - 11.04.2025',
+      note: 'Săptămână verde',
+      lectii: [],
+    },
+    {
+      titlu: 'Săptămâna 8 - 14.04.2025 - 18.04.2025',
+      note: '',
+      lectii: [
+        { titlu: 'C11 – Unghiul. Clasificare și măsurarea unghiurilor', zi: 'Luni 14.04', tip: 'Geometrie', link: 'c6/11', pdf: 'c11.pdf' },
+        { titlu: 'C12 – Mărimi și unități de măsură', zi: 'Miercuri 16.04', tip: 'Algebra', link: 'c6/12', pdf: 'c12.pdf' },
+      ],
+    },
+    {
+        titlu: 'Săptămâna 9 - 21.04.2025 - 25.04.2025',
+        note: 'Vacanța de primăvară',
+        lectii: [],
+    },
+    {
+      titlu: 'Săptămâna 10 - 28.04.2025 - 02.05.2025',
+      note: '01.05 și 02.05 - Zile Libere',
+      lectii: [
+        { titlu: 'C13 – Operații cu puteri (Numere întregi și exponenți naturali)', zi: 'Luni 28.04', tip: 'Algebra', link: 'c6/13', pdf: 'c13.pdf' },
+      ],
+    },
+    {
+      titlu: 'Săptămâna 11 - 05.05.2025 - 09.05.2025',
+      note: '',
+      lectii: [
+        { titlu: 'C14 – Curbe, poligoane și triunghiuri', zi: 'Luni 05.05', tip: 'Geometrie', link: 'c6/14', pdf: 'c14.pdf' },
+        { titlu: 'C15 – Ecuația de gradul I cu o singură necunoscută', zi: 'Miercuri 07.05', tip: 'Algebra', link: 'c6/15', pdf: 'c15.pdf' },
+        { titlu: 'C16 – Triunghiul dreptunghic și Teorema lui Pitagora', zi: 'Joi 08.05', tip: 'Geometrie', link: 'c6/16', pdf: 'c16.pdf' },
+      ],
+    },
+    {
+      titlu: 'Săptămâna 12 - 12.05.2025 - 16.05.2025',
+      note: '',
+      lectii: [
+        { titlu: 'C17', zi: 'Luni 12.05', tip: 'Geometrie', link: 'c6/17', pdf: 'c17.pdf' },
+        { titlu: 'C18 ', zi: 'Miercuri 16.05', tip: 'Algebra', link: 'c6/18', pdf: 'c18.pdf' },
+      ],
+    },
+  ];
+
+  const [query, setQuery] = useState('');
+  const [expandedSaptamani, setExpandedSaptamani] = useState(saptamani.map(() => false));
+  const [tipFilter, setTipFilter] = useState('');
+
+  const toggleAll = () => {
+    const allExpanded = expandedSaptamani.every(Boolean);
+    setExpandedSaptamani(expandedSaptamani.map(() => !allExpanded));
+  };
+
+  const toggleSaptamana = (idx) => {
+    const updated = [...expandedSaptamani];
+    updated[idx] = !updated[idx];
+    setExpandedSaptamani(updated);
+  };
+
+  const filtered = saptamani.map((s, idx) => {
+    const lectiiFiltrate = s.lectii.filter((lec) => {
+      const matchesQuery =
+        lec.titlu.toLowerCase().includes(query.toLowerCase()) ||
+        lec.zi.toLowerCase().includes(query.toLowerCase());
+      const matchesTip = tipFilter === '' || lec.tip === tipFilter;
+      return matchesQuery && matchesTip;
+    });
+    return { ...s, lectii: lectiiFiltrate, idx };
+  }).filter((s) => s.lectii.length > 0 || s.note);
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <input
+        type="text"
+        placeholder="Caută lecție sau zi..."
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        style={{ padding: '0.5rem', fontSize: '1rem', borderRadius: '6px', border: '1px solid #ccc' }}
+      />
+      <select
+        value={tipFilter}
+        onChange={(e) => setTipFilter(e.target.value)}
+        style={{ padding: '0.5rem', fontSize: '1rem', borderRadius: '6px', border: '1px solid #ccc', width: 'fit-content' }}
+      >
+        <option value="">Toate tipurile</option>
+        <option value="Algebra">Algebra</option>
+        <option value="Geometrie">Geometrie</option>
+      </select>
+      <button
+        onClick={toggleAll}
+        style={{
+          alignSelf: 'flex-start',
+          padding: '0.5rem 1rem',
+          fontWeight: 'bold',
+          background: '#4f46e5',
+          color: 'white',
+          border: 'none',
+          borderRadius: '6px',
+          cursor: 'pointer',
+        }}
+      >
+        {expandedSaptamani.every(Boolean) ? 'Ascunde tot' : 'Arată tot'}
+      </button>
+
+      {filtered.map((s) => (
+        <div key={s.idx} style={{ border: '1px solid #ccc', borderRadius: '10px', padding: '1rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <span style={{ fontWeight: 'bold', fontSize: '1.1rem' }}>{s.titlu}</span>
+            {s.lectii.length > 0 && (
+              <button
+                onClick={() => toggleSaptamana(s.idx)}
+                style={{
+                  padding: '0.3rem 0.7rem',
+                  fontSize: '0.9rem',
+                  background: '#e0e0e0',
+                  border: '1px solid #aaa',
+                  borderRadius: '5px',
+                  cursor: 'pointer',
+                }}
+              >
+                {expandedSaptamani[s.idx] ? '−' : '+'}
+              </button>
+            )}
+          </div>
+          {s.note && (
+            <div style={{ marginTop: '0.5rem' }}>
+              Note suplimentare:{' '}
+              <span style={{ color: '#b45309', fontWeight: 'bold' }}>{s.note}</span>
+            </div>
+          )}
+          {expandedSaptamani[s.idx] && s.lectii.length > 0 && (
+            <ul style={{ marginTop: '0.5rem' }}>
+              {s.lectii.map((lec, i) => (
+                <li key={i} style={{ marginBottom: '0.5rem' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
+                    <span>
+                      <strong>{lec.titlu}</strong> – {lec.zi} ({lec.tip})
+                    </span>
+                    <span style={{ display: 'flex', gap: '0.5rem' }}>
+                      <a href={`/curs/docs/${lec.link}`} className="button button--primary button--sm" target="_blank">
+                        Vezi lecția
+                      </a>
+                      <a href={`/curs/c6_pdf/${lec.pdf}`} className="button button--secondary button--sm" download>
+                        Descarcă PDF
+                      </a>
+                    </span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}

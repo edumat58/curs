@@ -1,5 +1,4 @@
 ---
-title: "08 - Ecuații și inecuații în ℤ"
 slug: /c6/08
 sidebar_position: 8
 description: ""
@@ -7,85 +6,310 @@ description: ""
 
 import Math from '/src/theme/Math';
 
-# 08 - Ecuații și inecuații în ℤ
+# 08 - Ecuații și inecuații în mulțimea numerelor întregi (II)
 
-## Definiții teoretice (26.03.2025)
+:::tip Recomandare
+**A se parcurge împreunǎ cu [CURS 07](07.mdx)**
+:::
+---
+## Definiții
 
-1) **Definiție:** Se numește **ecuație** orice egalitate a două expresii algebrice care conțin una sau mai multe valori necunoscute (x).
+:::tip Foarte Important
 
-2) **Definiție:** **Inecuatiile** sunt inegalități adevărate doar pentru anumite valori atribuite literelor:
-<Math>{String.raw`ax + b < c`}</Math>, <Math>{String.raw`>`}</Math>, <Math>{String.raw`\leq`}</Math>, <Math>{String.raw`\geq`}</Math>
+* **Ecuație**: Se numește ecuație orice `egalitate` a două expresii algebrice care conține una sau mai multe valori necunoscute ($=$).
+$$
+a x + b = c
+$$
+
+* **Inecuație**: Inecuatiile sunt `inegalități` adevărate doar pentru anumite valori atribuite literelor.
+
+$$
+a x + b \ \square \ c \quad \text{unde} \ \square \in \{ <, >, \leq, \geq \}
+$$
+
+:::
 
 ---
 
 ## Suma lui Gauss
-<Math display={true}>{String.raw`1 + 2 + 3 + \dots + n = \frac{n(n + 1)}{2}`}</Math>
+:::danger De reținut
+Pentru:
+$1 + 2 + 3 + 4 + 5 + \ldots + n$ 
+<br />
+aplicăm formula: $\Large \quad \frac{n \cdot (n + 1)}{2}$
+:::
+---
 
-**Exemplu:**
-<Math>{String.raw`x(1 + 2 + \dots + 100) = -5050 \Rightarrow x \cdot \frac{100 \cdot 101}{2} = -5050`}</Math>
-<Math>{String.raw`x \cdot 5050 = -5050 \Rightarrow x = -1`}</Math>
+### Exemple Ecuații
+
+:::note
+#### 1. Sa se rezolve următoarele ecuații:
+:::
+**a)** 
+$
+x + 2x + 3x + \ldots + 100x = -5050
+$
+
+$
+x (1 + 2 + 3 + \ldots + 100) = -5050
+$
+
+$
+x \cdot \frac{100 \cdot 101}{2} = -5050
+$
+
+$
+x \cdot 5050 = -5050
+$
+
+$
+x = \frac{-5050}{5050} = -1
+$
 
 ---
 
-## Exerciții cu sume și factori comuni
+**b)**
+$
+-2x - 4x - 6x - \ldots - 20x = 220 \Rightarrow
+$
 
-**a)** <Math display={true}>{String.raw`x + 2x + 3x + \dots + 100x = 5 + 10 + \dots + 500`}</Math>
-<Math>{String.raw`x \cdot (1 + 2 + \dots + 100) = 5(1 + 2 + \dots + 100)`}</Math>
-<Math>{String.raw`x = 5`}</Math>
+$
+(-1)(-2x - 4x - 6x - \ldots - 20x) = 220 \cdot (-1)
+$
 
----
+$
+2x + 4x + 6x + \ldots + 20x = -220
+$
 
-**b)** <Math display={true}>{String.raw`-2x - 4x - 6x - \dots - 20x = 220`}</Math>
-<Math>{String.raw`x(-2 - 4 - 6 - \dots - 20) = 220`}</Math>
-<Math>{String.raw`x \cdot \left(\frac{10(2 + 20)}{2}\right) = 220 \Rightarrow x \cdot 110 = 220 \Rightarrow x = 2`}</Math>
+$
+x \cdot (2 + 4 + 6 + \ldots + 20) = 220
+$
 
----
+$
+x \cdot 2 \cdot (1 + 2 + 3 + \ldots + 10) = -220
+$
 
-**c)** <Math display={true}>{String.raw`2x + 4x + 6x + \dots + 300x - 50 = 4430`}</Math>
-<Math>{String.raw`x(2 + 4 + 6 + \dots + 300) = 4480`}</Math>
-<Math>{String.raw`x \cdot 2 \cdot (1 + 2 + \dots + 150) = 4480`}</Math>
-<Math>{String.raw`x \cdot 2 \cdot \frac{150 \cdot 151}{2} = 4480 \Rightarrow x \cdot 2265 = 4480 \Rightarrow x = \frac{4480}{2265} = \frac{896}{453}`}</Math>
-
----
-
-## Exerciții cu expresii algebrice
-
-**d)** <Math>{String.raw`10(2x + 3(x - 5) - 2(x + 7) + 3(2x - 5)) + 20 = 100`}</Math>
-<Math>{String.raw`10(2x + 3x - 15 - 2x - 14 + 6x - 15) + 20 = 100`}</Math>
-<Math>{String.raw`10(9x - 44) + 20 = 100 \Rightarrow 90x - 440 + 20 = 100 \Rightarrow 90x = 520 \Rightarrow x = \frac{52}{9}`}</Math>
-
----
-
-## Inecuații în ℤ
-
-**a)** <Math>{String.raw`5x \geq 25`}</Math>
-<Math>{String.raw`x \geq 5 \Rightarrow x \in [5, \infty) \subset \mathbb{R}`}</Math>
-
-**b)** <Math>{String.raw`2 \leq 4(2x - 1) + 2 \leq 14`}</Math>
-<Math>{String.raw`\Rightarrow 4(2x - 1) + 2 \geq 2 \text{ și } 4(2x - 1) + 2 \leq 14`}</Math>
-<Math>{String.raw`\Rightarrow 8x - 4 + 2 \geq 2 \Rightarrow 8x - 2 \geq 2 \Rightarrow x \geq 0`}</Math>
-<Math>{String.raw`\Rightarrow 8x - 2 \leq 14 \Rightarrow x \leq 2`}</Math>
-<Math>{String.raw`x \in [0, 2] \Rightarrow x \in \{0, 1, 2\}`}</Math>
+$
+2x \cdot \frac{10 \cdot 11}{2} = -220 \\[10pt]
+\Rightarrow x \cdot 110 = -220 \\[10pt]
+\Rightarrow x = \frac{-220}{110} = -2
+$
 
 ---
 
-**c)** <Math>{String.raw`-5 \leq 2x + 1 \leq 3`}</Math>
-<Math>{String.raw`\Rightarrow -6 \leq 2x \leq 2 \Rightarrow x \in [-3, 1] \Rightarrow x \in \{-3, -2, -1, 0, 1\}`}</Math>
+**c)**
+$
+2x + 4x + 6x + \ldots + 300x - 50 = 4430
+$
 
-**d)** <Math>{String.raw`3 \leq 5 - 2x \leq 9`}</Math>
-<Math>{String.raw`\Rightarrow -2 \leq -2x \leq 4 \Rightarrow x \in [-2, 1] \Rightarrow x \in \{-2, -1, 0, 1\}`}</Math>
+$
+2x (1 + 2 + 3 + \ldots + 150) - 50 = 4430
+$
+
+$
+2x \cdot \frac{150 \cdot 151}{2} = 4480
+$
+
+$
+x \cdot 150 \cdot 151 = 4480 \\[10pt] 
+2265 \cdot x = 4480 \\[10pt]
+\Rightarrow x = \Large \frac{4480}{2265} = \frac{896}{453}
+$
 
 ---
 
-## Test 27.03.2025
+:::note
+#### 2. Sa se rezolve următoarele ecuații:
+:::
 
-Ecuații și inecuații în ℤ:
-- modulul unui număr
-- numere zecimale
-- grafice
+**a)**
+$
+x + 2x + 3x + \ldots + 100x = 5 + 10 + \ldots + 500
+$
 
-### Teme
-- Exercițiul 1: <Math>{String.raw`7 + 3x + 2 \cdot 7`}</Math>
-- Exercițiul 2: <Math>{String.raw`23(2x - 5) + 41(3x + 7) - 115 - 20(x + 1) + 15(x + 7) + 43`}</Math>
+$
+x \cdot (1 + 2 + 3 + \ldots + 100) = 5 \cdot (1 + 2 + 3 + \ldots + 100)
+$
 
-Toate calculele sunt încheiate exact ca în caiet, fără a modifica ordinea, notația sau rezultatele intermediare.
+$
+x \cdot \cancel {(1 + 2 + 3 + \ldots + 100)} = 5 \cdot \cancel {(1 + 2 + 3 + \ldots + 100)}
+$
+
+$
+x = 5
+$
+
+---
+
+**b)**
+$
+10 \cdot {2x + [3(x - 5) - 2(-x + 7)] + 3(2x - 5)} + 20 = 100
+$
+
+$
+10 \cdot {2x + [3(x - 5) - 2(-x + 7)] + 3(2x - 5)} = 80
+$
+
+$
+10 \cdot {2x + [3x - 15 - (-2x) - 14] + 6x - 15} = 80
+$
+
+$
+10 \cdot [2x + (3x - 15 + 2x - 14) + 6x - 15] = 80
+$
+
+$
+10 \cdot (2x + 5x - 29 + 6x - 15) = 80
+$
+
+$
+10 \cdot (13x - 44) = 80
+$
+
+$
+13x - 44 = 80:10 \Rightarrow 13x = 52 \Rightarrow x = \frac{52}{13} = 4
+$
+
+---
+
+### Exemple Inecuații
+:::note
+#### Sa se rezolve următoarele inecuații:
+:::
+
+**a)**
+$ 
+-5 \leq 2x + 1 \leq 3 \Rightarrow
+\begin{cases}
+2x + 1 \geq -5 \\
+2x + 1 \leq 3
+\end{cases} 
+$
+
+**Cazul I:**
+$
+\quad 2x + 1 = -5 \\[10pt]
+\Rightarrow 2x = -5 - 1 \\[10pt]
+2x = -6 \Rightarrow x = -3
+$
+
+**Cazul II:**
+$
+\quad 2x + 1 = 3 \\[10pt]
+\Rightarrow 2x = 3 - 1 \\[10pt]
+2x = 2 \Rightarrow x = 1
+$
+
+:::info Important
+$
+\text{din I și II} \Rightarrow \\[10pt]
+\boldsymbol{-3 \leq x \leq 1}
+$
+:::
+
+$
+\Rightarrow x \in \{-3, -2, -1, 0, 1\} \quad sau \\[10pt]
+x \in [-3, 1] 
+$
+
+---
+
+**b)**
+$
+3 \leq 5 - 2x \leq 9 \Rightarrow
+\begin{cases}
+5 - 2x \geq 3 \\
+5 - 2x \leq 9 
+\end{cases}
+$
+
+**Cazul I:**
+$
+\quad 5 - 2x = 3 \\[10pt]
+\Rightarrow -2x = 3 - 5 \\[10pt]
+-2x = -2 \Rightarrow x = 1
+$
+
+**Cazul II:**
+$
+\quad 5 - 2x = 9 \\[10pt]
+\Rightarrow -2x = 9 - 5 \\[10pt]
+-2x = 4 \Rightarrow x = -2
+$
+:::info Important
+$
+\text{din I și II} \Rightarrow \\[10pt]
+\boldsymbol{-2 \leq x \leq 1}
+$
+:::
+$
+\Rightarrow x \in \{-2, -1, 0, 1\} \quad sau \\[10pt]
+x \in [-2, 1]
+$
+
+---
+**c)**
+$
+5x \geq -25
+$
+
+$
+5x \geq -25 \quad | :5 
+\Rightarrow x \geq -5
+$
+
+$
+x \in \{ -5, -4, -3, -2, \ldots \} \subset \mathbb{Z}\quad sau \\[8pt]
+x \in [-5, +\infty) \subset \mathbb{R}
+$
+
+---
+
+**d)**
+$
+-2 \leq 4 \cdot (2x - 1) + 2 \leq 14 \Rightarrow
+\begin{cases}
+4 \cdot (2x - 1) + 2 \geq -2 \\
+4 \cdot (2x - 1) + 2 \leq 14
+\end{cases}
+$
+
+**Cazul I:**
+$
+\quad 4 \cdot (2x - 1) + 2 = -2 \\[10pt]
+\Rightarrow 4 \cdot (2x - 1) = -2 - 2 \\[10pt]
+\Rightarrow 4 \cdot (2x - 1) = -4 \\[10pt]
+\Rightarrow 2x - 1 = -1 \\[10pt]
+\Rightarrow 2x = -1 + 1 \\[10pt]
+\Rightarrow 2x = 0 \\[10pt]
+\Rightarrow x = 0
+$
+
+**Cazul II:**
+$
+\quad 4 \cdot (2x - 1) + 2 = 14 \\[10pt]
+\Rightarrow 4 \cdot (2x - 1) = 14 - 2 \\[10pt]
+\Rightarrow 4 \cdot (2x - 1) = 12 \\[10pt]
+\Rightarrow 2x - 1 = 3 \\[10pt]
+\Rightarrow 2x = 3 + 1 \\[10pt]
+\Rightarrow 2x = 4 \\[10pt]
+\Rightarrow x = 2
+$
+
+:::info Important
+$
+\text{din I și II} \Rightarrow \\[10pt]
+\boldsymbol{0 \leq x \leq 2}
+$
+:::
+
+$
+\Rightarrow x \in \{ 0, 1, 2\} \quad sau \\[10pt]
+x \in [0, 2]
+$
+
+
+
+
+
+

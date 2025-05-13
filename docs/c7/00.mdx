@@ -1,10 +1,206 @@
 ---
 sidebar_position: 0
 slug: /c7/00
+title: "Organigramă"
+hide_title: false
+description: ""
 ---
-import MyCalendar from '@site/src/components/MyCalendar';
+import React, { useState } from 'react';
 
-# Organigramă Lecții
+export default function LectiiTreeView() {
+  const saptamani = [
+    {
+      titlu: 'Săptămâna 1 - 24.02.2025 - 28.02.2025',
+      note: '',
+      lectii: [
+        { titlu: 'C1 – Funcția de gradul I și graficul acesteia', zi: 'Marți 25.02', tip: 'Algebra', link: 'c7/01', pdf: 'c1.pdf' },
+        { titlu: 'C2 – Intervale și comparații', zi: 'Joi 27.02', tip: 'Algebra', link: 'c7/02', pdf: 'c2.pdf' },
+      ],
+    },
+    {
+      titlu: 'Săptămâna 2 - 03.03.2025 - 07.03.2025',
+      note: '',
+      lectii: [
+        { titlu: 'C3 – Calcul cu radicali și proprietăți', zi: 'Marți 04.03', tip: 'Algebra', link: 'c7/03', pdf: 'c3.pdf' },
+        { titlu: 'C4 – Operații cu puteri și proprietăți', zi: 'Joi 06.03', tip: 'Algebra', link: 'c7/04', pdf: 'c4.pdf' },
+      ],
+    },
+    {
+      titlu: 'Săptămâna 3 - 10.03.2025 - 14.03.2025',
+      note: '',
+      lectii: [
+        { titlu: 'C5 – Trigonometrie. Funcții trigonometrice', zi: 'Marți 11.03', tip: 'Algebra', link: 'c7/05', pdf: 'c5.pdf' },
+        { titlu: 'C6 – Rădăcina pătrată a unui număr pozitiv', zi: 'Joi 13.03', tip: 'Algebra', link: 'c7/06', pdf: 'c6.pdf' },
+      ],
+    },
+    {
+      titlu: 'Săptămâna 4 - 17.03.2025 - 21.03.2025',
+      note: '17.03 & 18.03 - SIMULĂRI NAȚIONALE',
+      lectii: [
+        { titlu: 'C7 – Modulul unui număr real', zi: 'Miercuri 19.03', tip: 'Algebra', link: 'c7/07', pdf: 'c7.pdf' },
+      ],
+    },
+    {
+      titlu: 'Săptămâna 5 - 24.03.2025 - 28.03.2025',
+      note: '',
+      lectii: [
+        { titlu: 'C8 - Regula de 3 simplă. Mărimi direct și invers proporționale', zi: 'Marți 25.03', tip: 'Algebra', link: 'c7/08', pdf: 'c8.pdf' },
+        { titlu: 'C9 – Ecuații și inecuații în mulțimea numerelor întregi', zi: 'Joi 27.03', tip: 'Algebra', link: 'c7/09', pdf: 'c9.pdf' },
+      ],
+    },
+    {
+      titlu: 'Săptămâna 6 - 31.03.2025 - 04.04.2025',
+      note: '',
+      lectii: [
+        { titlu: 'C10 – Calcul literal: reducere, dezvoltare, factorizare', zi: 'Marți 01.04', tip: 'Algebra', link: 'c7/10', pdf: 'c10.pdf' },
+        { titlu: 'C11 – Teorema lui Thales (I)', zi: 'Joi 03.04', tip: 'Geometrie', link: 'c7/11', pdf: 'c11.pdf' },
+      ],
+    },
+    {
+      titlu: 'Săptămâna 7 - 07.04.2025 - 11.04.2025',
+      note: 'Săptămâna verde',
+      lectii: [],
+    },
+    {
+      titlu: 'Săptămâna 8 - 14.04.2025 - 18.04.2025',
+      note: '',
+      lectii: [
+        { titlu: 'C12 – Ecuația de gradul I cu o singură necunoscută', zi: 'Marți 15.04', tip: 'Algebra', link: 'c7/12', pdf: 'c12.pdf' },
+      ],
+    },
+    {
+      titlu: 'Săptămâna 9 - 21.04.2025 - 25.04.2025',
+      note: 'Vacanța de primăvară',
+      lectii: [],
+    },
+    {
+      titlu: 'Săptămâna 10 - 28.04.2025 - 02.05.2025',
+      note: '01.05 & 02.05 - Zile libere',
+      lectii: [
+        { titlu: 'C13 – Probabilități', zi: 'Marți 29.04', tip: 'Algebra', link: 'c7/13', pdf: 'c13.pdf' },
+      ],
+    },
+    {
+      titlu: 'Săptămâna 11 - 05.05.2025 - 09.05.2025',
+      note: '',
+      lectii: [
+        { titlu: 'C14', zi: 'Marți 06.05', tip: 'Algebra', link: 'c7/14', pdf: 'c14.pdf' },
+        { titlu: 'C15', zi: 'Joi 08.05', tip: 'Algebra', link: 'c7/15', pdf: 'c15.pdf' },
+      ],
+    },
+  ];
 
-<MyCalendar />
+  const [query, setQuery] = useState('');
+  const [expandedSaptamani, setExpandedSaptamani] = useState(saptamani.map(() => false));
+  const [tipFilter, setTipFilter] = useState('');
+
+  const toggleAll = () => {
+    const allExpanded = expandedSaptamani.every(Boolean);
+    setExpandedSaptamani(expandedSaptamani.map(() => !allExpanded));
+  };
+
+  const toggleSaptamana = (idx) => {
+    const updated = [...expandedSaptamani];
+    updated[idx] = !updated[idx];
+    setExpandedSaptamani(updated);
+  };
+
+  const filtered = saptamani.map((s, idx) => {
+    const lectiiFiltrate = s.lectii.filter((lec) => {
+      const matchesQuery =
+        lec.titlu.toLowerCase().includes(query.toLowerCase()) ||
+        lec.zi.toLowerCase().includes(query.toLowerCase());
+      const matchesTip = tipFilter === '' || lec.tip === tipFilter;
+      return matchesQuery && matchesTip;
+    });
+    return { ...s, lectii: lectiiFiltrate, idx };
+  }).filter((s) => s.lectii.length > 0 || s.note);
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <input
+        type="text"
+        placeholder="Caută lecție sau zi..."
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        style={{ padding: '0.5rem', fontSize: '1rem', borderRadius: '6px', border: '1px solid #ccc' }}
+      />
+      <select
+        value={tipFilter}
+        onChange={(e) => setTipFilter(e.target.value)}
+        style={{ padding: '0.5rem', fontSize: '1rem', borderRadius: '6px', border: '1px solid #ccc', width: 'fit-content' }}
+      >
+        <option value="">Toate tipurile</option>
+        <option value="Algebra">Algebra</option>
+        <option value="Geometrie">Geometrie</option>
+      </select>
+      <button
+        onClick={toggleAll}
+        style={{
+          alignSelf: 'flex-start',
+          padding: '0.5rem 1rem',
+          fontWeight: 'bold',
+          background: '#4f46e5',
+          color: 'white',
+          border: 'none',
+          borderRadius: '6px',
+          cursor: 'pointer',
+        }}
+      >
+        {expandedSaptamani.every(Boolean) ? 'Ascunde tot' : 'Arată tot'}
+      </button>
+
+      {filtered.map((s) => (
+        <div key={s.idx} style={{ border: '1px solid #ccc', borderRadius: '10px', padding: '1rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <span style={{ fontWeight: 'bold', fontSize: '1.1rem' }}>{s.titlu}</span>
+            {s.lectii.length > 0 && (
+              <button
+                onClick={() => toggleSaptamana(s.idx)}
+                style={{
+                  padding: '0.3rem 0.7rem',
+                  fontSize: '0.9rem',
+                  background: '#e0e0e0',
+                  border: '1px solid #aaa',
+                  borderRadius: '5px',
+                  cursor: 'pointer',
+                }}
+              >
+                {expandedSaptamani[s.idx] ? '−' : '+'}
+              </button>
+            )}
+          </div>
+          {s.note && (
+            <div style={{ marginTop: '0.5rem' }}>
+              Note suplimentare:{' '}
+              <span style={{ color: '#b45309', fontWeight: 'bold' }}>{s.note}</span>
+            </div>
+          )}
+          {expandedSaptamani[s.idx] && s.lectii.length > 0 && (
+            <ul style={{ marginTop: '0.5rem' }}>
+              {s.lectii.map((lec, i) => (
+                <li key={i} style={{ marginBottom: '0.5rem' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
+                    <span>
+                      <strong>{lec.titlu}</strong> – {lec.zi} ({lec.tip})
+                    </span>
+                    <span style={{ display: 'flex', gap: '0.5rem' }}>
+                      <a href={`/curs/docs/${lec.link}`} className="button button--primary button--sm" target="_blank">
+                        Vezi lecția
+                      </a>
+                      <a href={`/pdf/${lec.pdf}`} className="button button--secondary button--sm" download>
+                        Descarcă PDF
+                      </a>
+                    </span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 

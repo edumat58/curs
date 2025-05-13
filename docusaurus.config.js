@@ -20,24 +20,24 @@ const config = {
   url: 'https://edumat58.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/',
+  baseUrl: '/curs/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'EDUMAT58', // Usually your GitHub org/user name.
+  organizationName: 'edumat58', // Usually your GitHub org/user name.
   projectName: 'curs', // Usually your repo name.
   deploymentBranch: 'gh-pages',
   trailingSlash: false,
 
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
   i18n: {
-    defaultLocale: 'ro',
-    locales: ['ro'],
+    defaultLocale: 'en',
+    locales: ['en'],
   },
 
   presets: [
@@ -81,60 +81,89 @@ const config = {
     {
       href: 'https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css',
       type: 'text/css',
-      integrity: 'sha384-mll67QQS8mZHX2MYo9+4yXpn9jWLd0BtZZt8ZI+ZB4RI+6Sr3Ulb9FKkVU4+ZfZB',
       crossorigin: 'anonymous',
     },
   ],
-
-  themeConfig:
-    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
-    ({
-      // Replace with your project's social card
-      image: 'img/logo.png',
-      admonitions: {
-        customTypes: {
-          def: 'tip', // Mapează `def` la `tip`
+  scripts: [
+    '/status.js',
+  ],
+  themeConfig: ({
+    image: 'img/logo.png',
+    admonitions: {
+      customTypes: {
+        def: 'tip',
+      },
+    },
+    navbar: {
+      title: 'Edumat58',
+      logo: {
+        alt: 'My Site Logo',
+        src: 'img/logo.png',
+      },
+      items: [
+        {
+          position: 'left',
+          label: 'Curs VI',
+          to: '/docs/category/curs-vi',
         },
-      },
-      navbar: {
-        title: 'Edumat58',
-        logo: {
-          alt: 'My Site Logo',
-          src: 'img/logo.png',
+        {
+          position: 'left',
+          label: 'Curs VII',
+          to: '/docs/category/curs-vii',
         },
-        items: [
-          {
-            position: 'left',
-            label: 'Curs VI',
-            to: '/docs/category/curs-vi',
-          },
-          {
-            position: 'left',
-            label: 'Curs VII',
-            to: '/docs/category/curs-vii',
-          },
-        ],
-      },
-      footer: {
-        style: 'dark',
-        links: [
-          {
-            title: 'Mai multe',
-            items: [
-              {
-                label: 'GitHub',
-                href: 'https://github.com/facebook/docusaurus',
-              },
-            ],
-          },
-        ],
-        copyright: `Copyright © ${new Date().getFullYear()} Edumat58`,
-      },
-      prism: {
-        theme: prismThemes.github,
-        darkTheme: prismThemes.dracula,
-      },
-    }),
+        {
+          type: 'html',
+          position: 'right',
+          value: `
+            <span style="font-size: 0.9rem; opacity: 0.7;">Ultima actualizare: 13.05.2025, 11:50</span>
+          `,
+        },
+        {
+          type: 'html',
+          position: 'right',
+          value: `
+            <div id="site-status" data-status="unstable" style="
+              display: flex;
+              align-items: center;
+              gap: 10px;
+              padding: 6px 12px;
+              border-left: 5px solid #f1c40f;
+              border-radius: 6px;
+              background-color: #fef9e7;
+              color: #f39c12;
+              font-size: 0.9rem;
+              font-family: sans-serif;
+              cursor: pointer;
+            " onclick="window.location.href='/curs/docs/status';">
+              <svg viewBox="0 0 16 16" width="18" height="18" xmlns="http://www.w3.org/2000/svg" fill="#f1c40f">
+                <path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"/>
+              </svg>
+              <span style="font-weight: 600;">Mod Dezvoltare</span>
+            </div>
+          `,
+        }
+      ],
+    },
+    footer: {
+      style: 'dark',
+      links: [
+        {
+          title: 'Mai multe',
+          items: [
+            {
+              label: 'GitHub',
+              href: 'https://github.com/facebook/docusaurus',
+            },
+          ],
+        },
+      ],
+      copyright: `Copyright © ${new Date().getFullYear()} Edumat58`,
+    },
+    prism: {
+      theme: prismThemes.github,
+      darkTheme: prismThemes.dracula,
+    },
+  }),
 };
 
 module.exports = config;

@@ -123,7 +123,7 @@ const MUI_X_PRODUCTS = [
       },
       {
         id: '19',
-        label: ('Miercuri 07.05: C15'),
+        label: ('Miercuri 07.05: C15 - Ecuatia de gradul I cu o singura necunoscuta'),
       },
     ],
   }
