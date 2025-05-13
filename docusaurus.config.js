@@ -115,7 +115,7 @@ const config = {
           type: 'html',
           position: 'right',
           value: `
-            <span style="font-size: 0.9rem; opacity: 0.7;">Ultima actualizare: 13.05.2025, 12:30</span>
+            <span style="font-size: 0.9rem; opacity: 0.7;">Ultima actualizare: 13.05.2025, 13:08</span>
           `,
         },
         {
