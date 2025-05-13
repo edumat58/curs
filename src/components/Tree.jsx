@@ -1,6 +1,6 @@
 import React from 'react';
 import 'katex/dist/katex.min.css';
-import { InlineMath } from 'react-katex';
+import Katex from '@site/src/components/Katex';
 
 const parseTree = (source) => {
   const lines = source.trim().split('\n');
