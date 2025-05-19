@@ -1,5 +1,5 @@
 ---
-title: "15"
+title: "15 - Ecuația de gradul I cu o singură necunoscută"
 slug: /c6/15
 sidebar_position: 15
 description: ""
@@ -7,4 +7,142 @@ description: ""
 
 import Math from '/src/theme/Math';
 
-### Pagina in curs de actualizare...
+# 15 - Ecuația de gradul I cu o singură necunoscută
+---
+## Definiție
+
+:::tip
+O ecuație de gradul I cu o necunoscută este o ecuație care, după transformări, poate fi redusă la forma:
+
+$$
+a\cdot x = b
+$$
+
+:::
+
+---
+
+## Transformarea unei ecuații
+
+Se realizează prin:
+
+- dezvoltare, reducere sau factorizare a celor doi membri
+- adăugarea aceleași valori în cei doi membri
+- înmulțirea sau împărțirea cu un număr diferit ($\neq$) de $0$.
+
+:::info Important
+Dacă $a \neq 0$, atunci ecuația are ca soluție:
+$$
+x = \frac{b}{a}
+$$
+:::
+
+---
+
+### Metoda reducerii
+:::note
+Fie:
+
+$A = 4x + 24$
+
+$B = -6x + 3$
+
+Să se rezolve ecuația $A = B$.
+:::
+
+$A = B \Rightarrow 4x + 24 = -6x + 3$ 
+> reducem prin scadere cu $-24$
+
+$$4x + 24 - 24 = -6x + 3 - 24$$
+
+$$4x = -6x + 3 - 24$$
+
+> reducem prin adunare cu $+6x$
+
+$$4x + 6x = -6x + 3 - 24 + 6x$$
+
+$$\Rightarrow 10x = 3 - 24$$
+
+$$10x = -21$$
+
+$$x = \Large\frac{-21}{10}$$
+
+
+--- 
+
+### Ecuația produs
+
+:::note
+Fie:
+
+$(2x + 7)(3x - 5) = 0$
+:::
+
+Se folosește regula:
+
+> $A \cdot B = 0 \iff A = 0$ sau $B = 0$
+
+
+Rezultă două variante:
+
+$
+\begin{cases}
+1)\quad 2x + 7 = 0 \Rightarrow 2x + 7 - 7 = 0 - 7 \Rightarrow 2x = -7 \Rightarrow x = -\Large\frac{7}{2} \\[10pt]
+2)\quad 3x - 5 = 0 \Rightarrow 3x - 5 + 5 = 0 + 5 \Rightarrow 3x = 5 \Rightarrow x = \Large \frac{5}{3}\\
+\end{cases}
+$
+
+---
+
+## Etapele de rezolvare
+:::note
+Într-un $\triangle ABC$, unghiul $\hat{A} = 117^\circ$, iar $\hat{C}$ este dublul lui $\hat{B}$.
+
+**Ce măsuri au unghiurile $\hat{B}$ și $\hat{C}$?**
+:::
+
+
+**1. Alegem necunoscuta**
+>Folosim o literă pentru desemnarea necunoscutei
+
+Notăm cu `x` măsura unghiului $\hat{B}$
+
+---
+
+**2. Precizăm unitățile și condițiile impuse de necunoscută**
+
+Unitate de măsură: $^{\circ}$ (grade)
+
+0 < x < 180
+
+---
+
+**3. Punerea în ecuație a problemei**
+$$ 
+\hat{C} = 2 \cdot \hat{B} \Rightarrow 
+\hat{C} = 2 \cdot x
+$$
+> Spunem că suma unghiurilor este egală cu $180^{\circ}$
+
+$
+\hat{A} + \hat{B} + \hat{C} = 180^{\circ}, unde \\[8pt]
+\begin{cases}
+\hat{A} = 117^{\circ}\\
+\hat{B} = x\\
+\hat{C} = 2x\\
+\end{cases}
+\\[8pt]
+\boldsymbol{\hat{A} + \hat{B} + \hat{C} = 117^{\circ} + x + 2x}
+$
+
+---
+
+**4. Rezolvarea ecuației**
+
+$
+117^{\circ} + x + 2x = 180^{\circ} \Rightarrow\\[8pt]
+117^{\circ} + 3x = 180^{\circ}\\[8pt]
+3x = 180^{\circ} - 117^{\circ}\\[8pt]
+3x = 63^{\circ}\\[8pt]
+\boldsymbol{x = 63 : 3 = 21^{\circ}}
+$

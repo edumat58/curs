@@ -30,11 +30,13 @@ function SingleGeometry({ code }) {
   const segmentLine = lines.find(line => /^[A-Z]{2}/.test(line));
   const pointLines = lines.filter(line => /\(/.test(line) && !line.startsWith("label"));
   const labelLines = lines.filter(line => line.startsWith("label"));
+  const circleLines = lines.filter(line => line.startsWith("circ{"));
 
   const segments = segmentLine ? segmentLine.split(";").map(seg => seg.trim()) : [];
   const points = {};
   const hiddenPoints = new Set();
   const customLabels = [];
+  const circles = [];
 
   pointLines.forEach(line => {
     const name = line[0];
@@ -48,6 +50,17 @@ function SingleGeometry({ code }) {
     if (match) {
       const [, text, xStr, yStr] = match;
       customLabels.push({ text, x: Number(xStr), y: Number(yStr) });
+    }
+  });
+
+  circleLines.forEach(line => {
+    const match = line.match(/circ\{d(\d+);([a-zA-Z])\(([^,]+),([^)]+)\)\}/);
+    if (match) {
+      const [, dStr, name, xStr, yStr] = match;
+      const d = Number(dStr);
+      const x = Number(xStr);
+      const y = Number(yStr);
+      circles.push({ name, x, y, r: d / 2 });
     }
   });
 
@@ -109,6 +122,22 @@ function SingleGeometry({ code }) {
           );
         })}
 
+        {circles.map((c, i) => {
+          const center = scaleCoord(c.x, c.y, 320);
+          const rScaled = (c.r / 32) * 320;
+          return (
+            <circle
+              key={`circle-${i}`}
+              cx={center.x}
+              cy={center.y}
+              r={rScaled}
+              stroke="green"
+              strokeWidth="2"
+              fill="none"
+            />
+          );
+        })}
+
         {Object.values(points).map((p, i) => {
           if (hiddenPoints.has(p.name)) return null;
           const { x, y } = scaleCoord(p.x, p.y, 320);
@@ -116,9 +145,6 @@ function SingleGeometry({ code }) {
           return (
             <g key={`p-${i}`}>
               <circle cx={x} cy={y} r={4} fill="red" />
-              <text x={x + dx} y={y + dy} fontSize="12" fontFamily="Arial">
-                {p.name}
-              </text>
             </g>
           );
         })}
@@ -154,7 +180,6 @@ export default function GeometryDraw({ code }) {
 
   const isResponsive = !!inlineMatch;
   const isMobile = typeof navigator !== "undefined" && /Mobi|Android/i.test(navigator.userAgent);
-
 
   const justifyMap = {
     left: "flex-start",
