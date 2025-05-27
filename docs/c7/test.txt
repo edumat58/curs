@@ -1,0 +1,419 @@
+---
+title: "Pagină 1"
+slug: /c7/17
+sidebar_position: 17
+description: ""
+---
+import Math from '/src/theme/Math';
+import GeometryDraw from '@site/src/components/GeometryDraw';
+import Tree from '@site/src/components/Tree';
+
+# Test Clasa a VII-a - 29.05.2025
+**Nume: \
+_______________________** \
+**Prenume: \
+_______________________** 
+
+**Estimare notă: __________**
+
+- Toate subiectele sunt obligatorii
+- Utilizarea instrumentelor de geometrie este **permisă și recomandată**
+- Timpul total de lucru este de **120 de minute**
+- Timpul efectiv de lucru este de **100 de minute** (20 minute verificare)
+- Timpul minim obligatoriu înainte de predarea lucrării este de **80 de minute**
+- Se acordă **5 puncte** în plus pentru estimarea corectă a notei într-o marjă de **± 0.5 puncte**
+- Se acordă **20 puncte** din oficiu
+
+---
+
+## Subiectul I
+> Tema abordată: **algebră**
+
+> Timp estimativ de lucru: **30 de minute**
+
+> Capitole incluse: \
+*Ecuații în mulțimea numerelor raționale* \
+*Inecuatii în mulțimea numerelor întregi* \
+*Sisteme de ecuații de gradul I*
+
+> Se acordă pentru acest subiect: **25 puncte**
+:::note Partea I - 10 puncte
+1. Se dă următoarea sumă algebrică:
+$$
+S = 4x^2 - 5x + 3x^2 +2x -9
+$$
+
+- a) Reduceți suma de 5 termeni la o sumă de 3 termeni **(2p)**
+- b) Calculați valoarea lui $S$ pentru $x = -5$ **(1p)**
+
+
+
+2. Rezolvați ecuația: **(3p)**
+
+$$
+2(3x + 5) + 3(2x - 5) = 4(5x - 9) - 5(4x + 9)
+$$
+
+> Precizați cărei mulțimi aparține $x$: **(1p)**
+
+$ \quad a) \; x \in \mathbb{N} \quad\quad 
+b) \; x \in \mathbb{Z} \quad\quad
+c) \; x \in \mathbb{Q} $
+
+3. Încercăm să vedem dacă ecuația $ 2x^2 - 5x + 9 =  x^2 - 5x + 25 $ admite ca soluție un număr
+întreg cuprins între 0 și 6. \
+Cu ajutorul tabelului de valori de mai jos, completați și verificați dacă există o soluție în acest interval. **(3p)**
+
+| A             | &nbsp; &nbsp; B &nbsp; &nbsp;  | &nbsp; &nbsp; C &nbsp; &nbsp;    |  &nbsp; &nbsp; D   &nbsp; &nbsp;   | &nbsp; &nbsp; E   &nbsp; &nbsp;   | &nbsp; &nbsp; F    &nbsp; &nbsp;  | &nbsp; &nbsp; G  &nbsp; &nbsp;    |  &nbsp; &nbsp; H    &nbsp; &nbsp;  |
+| ---           | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| $\mathbf {x}$             | 0     | 1     | 2     | 3     | 4     | 5     | 6     |
+| $\mathbf {2x^2-5x+9}$   | 9     |       |       |       |       |       |       |
+| $\mathbf {x^2-5x+25}$   | 25    |       |       |       |       |       |       |
+
+*Punctajul se acordă în urma completării tabelului; alte metode de rezolvare SUNT acceptate,
+punctajul acordându-se integral sau parțial în funcție de redactarea și corectitudinea acestora.*
+
+> Soluția este:
+
+$ \quad a) \; x = 1 \quad\quad 
+b) \; x = 2 \quad\quad
+c) \; x = 3 \quad\quad
+d) \; x = 4 \quad\quad
+e) \; x = 5 \quad\quad
+f) \; x = 6 \\[5pt]
+\quad g) \; \text {nu există soluție în intervalul [0, 6]}
+$
+:::
+
+:::note Partea a II-a - 15 puncte
+1. Să se rezolve în $\mathbb{N}$ inecuația: **(2p)**
+
+$$
+\frac{x+1}{3} + \frac{x+2}{4} + \frac{x+3}{5} < 5
+$$
+
+2. Rezolvați inecuația: **(2p)**
+$$
+2x + 5 - 3x + 7 > -2x -6
+$$
+
+3. Rezolvați inecuația: **(3p)**
+$$
+-2 \le 4(2x-1) + 2 \le 14
+$$
+
+4. Să se determine toate `numerele întregi` ce verifică: **(3p)**
+
+$$
+|-2x+5|-4<3
+$$
+
+5. Determinați $x$ și $y$ pentru sistemul de ecuații: **(5p)**
+$$
+\begin{cases}
+13x - 7y = 6 \\
+7x + 13y = 20
+\end{cases}
+$$
+:::
+## Subiectul al II-lea
+> Tema abordată: **algebră** 
+
+> Timp estimativ de lucru: **40 de minute** 
+
+> Capitole incluse: \
+*Funcții de gradul I* \
+*Calcul cu puteri și radicali* \
+*Probabilități și statistică* \
+*Calcul procentual și cu numere raționale*
+
+> Se acordă pentru acest subiect: **30 puncte**
+
+:::note Partea I - 10 puncte
+1. Folosindu-vă de proprietățile puterilor, calculați: **(5p)**
+$$
+[3^{14} \cdot (-3)^{12} : (-3)^{15}]^7 : (-9)^{36}
+$$
+2. Aflați rezultatul calculului: **(5p)**
+$$
+4 \sqrt{3} + 2 \sqrt{27} - 3 \sqrt{48} + \sqrt{75}
+$$
+:::
+
+:::note Partea a II-a - 20 puncte
+1. După o competiție de sărit în înălțime între licee, seria statistică a performanțelor a fost ilustrată 
+printr-o diagramă publicată în presa locală.
+
+- a) Calculați media seriei statistice. **(7p)** 
+- b) Calculați procentul elevilor care au obținut note mai mari decât media statistică. **(5p)**
+<br />
+<svg width="500" height="350" viewBox="0 0 500 350" xmlns="http://www.w3.org/2000/svg">
+    <!-- Axe -->
+    <line x1="50" y1="300" x2="470" y2="300" stroke="black" stroke-width="2"/>
+    <line x1="50" y1="300" x2="50" y2="30" stroke="black" stroke-width="2"/>
+
+    <!-- Linii orizontale -->
+    <g stroke="#a9c0d3" stroke-dasharray="4">
+        <line x1="50" y1="260" x2="470" y2="260"/>
+        <line x1="50" y1="220" x2="470" y2="220"/>
+        <line x1="50" y1="180" x2="470" y2="180"/>
+        <line x1="50" y1="140" x2="470" y2="140"/>
+        <line x1="50" y1="100" x2="470" y2="100"/>
+        <line x1="50" y1="60"  x2="470" y2="60"/>
+    </g>
+
+    <!-- Bare (bar chart) -->
+    <g fill="green">
+        <rect x="70"  y="260" width="30" height="40"/>
+        <rect x="110" y="220" width="30" height="80"/>
+        <rect x="150" y="140" width="30" height="160"/>
+        <rect x="190" y="100" width="30" height="200"/>
+        <rect x="230" y="120" width="30" height="180"/>
+        <rect x="270" y="220" width="30" height="80"/>
+        <rect x="310" y="240" width="30" height="60"/>
+    </g>
+
+    <!-- Axe verticale (etichete Effectifs) -->
+    <text x="10" y="305" font-size="14">0</text>
+    <text x="10" y="265" font-size="14">4</text>
+    <text x="10" y="225" font-size="14">8</text>
+    <text x="5"  y="185" font-size="14">12</text>
+    <text x="5"  y="145" font-size="14">16</text>
+    <text x="5"  y="105" font-size="14">20</text>
+    <text x="5"  y="65"  font-size="14">24</text>
+
+    <!-- Etichete jos (Hauteurs) -->
+    <text x="80" y="320" font-size="14">1</text>
+    <text x="114" y="320" font-size="14">1,1</text>
+    <text x="154" y="320" font-size="14">1,2</text>
+    <text x="194" y="320" font-size="14">1,3</text>
+    <text x="234" y="320" font-size="14">1,4</text>
+    <text x="274" y="320" font-size="14">1,5</text>
+    <text x="314" y="320" font-size="14">1,6</text>
+
+    <!-- Titluri -->
+    <text x="20" y="20" font-size="18" font-weight="bold">Nr. Elevi</text>
+    <text x="200" y="345" font-size="16" font-weight="bold">Înălțime (m)</text>
+</svg>
+
+<br />
+<br />
+<br />
+
+2. Desenați graficul funcției $f(x) = 2x + 3$  **(3p)**
+<br />
+<GeometryDraw code={`
+align: center
+[
+OX;OY;OZ;OW
+O(16,16)
+X(16,31){hide}
+Y(31,16){hide}
+Z(1,16){hide}
+W(16,1){hide}
+label{'y';(17,31)}
+label{'x';(31,17)}
+]`}/ >
+
+3. O urnă conține două bile roșii marcate **R1** și **R2** și două bile negre marcate **N1** și **N2**.
+Toate bilele sunt indiscernabile. 
+> Extragem la întâmplare o bilă din urnă și nu o mai punem la loc. \
+> Extragem apoi o altă bilă din cele rămase în urnă.
+
+- a) Completați arborele de mai jos ce ilustrează cele două extrageri. **(2p)**
+
+<Tree source={`
+        O 
+                R1
+                                R2
+                                N1
+                                N2
+                R2
+                                ?
+                                ?
+                                ? 
+                N1
+                                ?
+                                ?
+                                ?
+                N2
+                                ?
+                                ?
+                                ?
+
+`} />
+*Punctul `O` reprezintă rădăcina arborelui și se ignoră. Rândurile următoare reprezintă succesiv prima respectiv a doua extragere.*
+- b) Fie evenimentul $A = \text{"am extras două bile negre"}$. Calculați probabilitatea ca evenimentul $A$ să se întâmple. **(3p)**
+:::
+
+<br />
+<br />
+## Subiectul al III-lea
+> Tema abordată: **geometrie în plan**
+
+> Timp estimativ de lucru: **30 de minute**
+
+> Capitole incluse: \
+*Teorema lui Thales și reciproca* \
+*Triunghiuri asemenea* \
+*Teorema lui Pitagora* \
+*Măsura unghiurilor*
+
+
+> Se acordă pentru acest subiect: **25 puncte**
+:::note Partea I - 15 puncte
+1. ABC este un triunghi astfel încât $AB = 2,5cm$, $BC = 3cm$ și $AC = 2cm$. 
+> I este punct pe $[AB]$ astfel încât $AI = 2cm$. \
+> Paralela la $[BC]$ trece prin $I$ și taie $[AC]$ în punctul $J$. 
+
+Calculați lungimea $[IJ]$ și $[AJ]$. **(4p)**
+
+<GeometryDraw code={`
+align: left
+[
+BA;BC;AC;IJ
+A(16,20){hide}
+B(5,5){hide}
+C(24,5){hide}
+I(3,8){hide}
+J(27,8){hide}
+label{'A';(16,21)}
+label{'B';(4,4)}
+label{'C';(24,4)}
+label{'I';(7,9)}
+label{'J';(23,9)}
+]
+`}/ >
+
+2. Punctele $O$, $A$ și $B$ sunt aliniate pe semidreapta $[Ox)$.
+> Avem: $OA = 2cm$ și $AB = 3cm$
+
+Punctele $O$, $C$, $D$ și $E$ sunt aliniate pe semidreapta $[Oy)$.
+> Avem: $OC = 1,2cm$, $CD = 1,8cm$ și $DE = 4,5cm$
+
+- a) Trasați dreptele $[BD]$ și $[AC]$. Demonstrați că sunt paralele. **(2p)**
+- b) Trasați dreptele $[BE]$ și $[AD]$. Demonstrați că sunt paralele. **(2p)**
+
+<GeometryDraw code={`
+align: left
+[
+AB;AC
+A(28,28)
+B(2,13){hide}
+C(20,7){hide}
+D(23.7,25.5)
+E(25.3,20.6)
+F(18,22.2)
+G(5.7,15.1)
+H(21,9.4)
+label{'x';(20.9,7.1)}
+label{'y';(3.1,12.7)}
+label{'O';(28.6,28.9)}
+label{'A';(26.3,20.4)}
+label{'B';(22.3,9.6)}
+label{'C';(23,26.8)}
+label{'D';(17,23.8)}
+label{'E';(5,16.2)}
+]
+`}/ >
+
+
+
+3. Fie triunghiul $\triangle ABT$ un triunghi dreptunghic în $A$.
+Numim punctul $M$ - piciorul înălțimii trasate din vârful $A$.
+- a) Demonstrați că triunghiurile $\triangle ATB$ și $\triangle ATM$ sunt asemenea. **(4p)**
+- b) Dacă $AB = 4cm$ și $AT = 3cm$ \
+Calculați $TB$, $TM$ și $MB$. **(3p)**
+
+
+<GeometryDraw code={`
+align: left
+[
+TA;TB;AB;AM
+A(25,26)
+T(10,26)
+B(25,8)
+M(15.8,19){hide}
+label{'A';(25,27)}
+label{'B';(25,6)}
+label{'T';(9,27)}
+label{'M';(13.8,18)}
+]
+`}/ >
+:::
+:::note Partea a II-a - 10 puncte
+1. În figurile de mai jos, sunt reprezentate 4 triunghiuri oarecare ABC. 
+
+<GeometryDraw code={`
+align: left
+[
+label{'Figura a)';(3,30)}
+AB;AC;BC
+A(8,26)
+B(5,8)
+C(30,8)
+label{'A';(7,27)}
+label{'B';(4,6)}
+label{'C';(30,6)}
+]
+[
+label{'Figura b)';(3,30)}
+AB;AC;BC
+A(26,20)
+B(5,8)
+C(29,8)
+label{'A';(26,21)}
+label{'B';(4,6)}
+label{'C';(30,7)}
+]
+[
+label{'Figura c)';(3,30)}
+AB;AC;BC
+A(21,23)
+B(5,8)
+C(30,8)
+label{'A';(22,23)}
+label{'B';(4,6)}
+label{'C';(30,6)}
+]
+[
+label{'Figura d)';(3,30)}
+AB;AC;BC
+A(1.2,26)
+B(5,8)
+C(30,8)
+label{'A';(0.7,27)}
+label{'B';(4,6)}
+label{'C';(30,6)}
+]
+[
+]
+`}/ >
+- a) Trasați bisectoarea unghiului $A$ **(1.25p)** 
+- b) Trasați înălțimea din $A$ **(1.25p)**
+- c) Trasați mediana din punctul $B$ pe $AC$ **(1.25p)**
+- d) Trasați mediatoarea pe latura $BC$ **(1.25p)** 
+
+2. În figura alăturată este reprezentat triunghiul $\triangle ABC$ dreptunghic cu
+$ \measuredangle A = 90^{\circ} $, punctul $M$ este mijlocul laturii
+$BC$, iar $BD$ este bisectoarea unghiului $A\hat BC$, cu
+$D \in AC$, astfel încât dreptele $BD$ și $AM$ sunt perpendiculare.
+
+Arătați că triunghiul $AMB$ este echilateral. **(5p)**
+<GeometryDraw code={`
+align: left
+[
+AB;AC;BC;AM;BD
+A(4,2)
+C(4,28)
+B(20,2)
+M(11.5,15.7){hide}
+D(4,11.5){hide}
+label{'A';(2,1)}
+label{'B';(21,1)}
+label{'C';(2,29)}
+label{'M';(12.4,16.6)}
+label{'D';(2.7,12)}
+]
+`}/ >
+:::

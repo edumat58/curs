@@ -1,0 +1,72 @@
+---
+title: "15 - Teorema lui Thales (II)"
+sidebar_position: 15
+slug: /c7/15
+description: ""
+---
+
+# 15 - Teorema lui Thales (II)
+---
+:::warning Recomandare
+**A se parcurge împreunǎ cu [CURS 11](11.mdx) și [CURS 16](15.mdx)**
+:::
+---
+## Dilatare (triunghiuri omotetice)
+
+:::warning Definiție DEX
+> **omoteție, omoteții - substantiv feminin**
+
+În geometrie, omoteția este o relație între două figuri asemenea, în care dreptele care unesc puncte omoloage se întâlnesc într-un singur punct.
+:::
+
+Avem un $\triangle ABC$, un punct $O$ și un număr pozitiv $k$ (ex: $\frac{3}{2}$)
+
+Construim punctele $I$, $J$, $K$ astfel încât:
+
+* $I \in [OA)$ și $OI = \Large \frac{3}{2} \normalsize \cdot OA$
+
+* $J \in [OB)$ și $OJ = \Large \frac{3}{2} \normalsize \cdot OB$
+
+* $K \in [OC)$ și $OK = \Large \frac{3}{2} \normalsize \cdot OC$
+
+<svg width="800" height="500" xmlns="http://www.w3.org/2000/svg">
+  <!-- Linii punctate de omotetie -->
+  <line x1="400" y1="200" x2="10" y2="70" stroke="dodgerblue" stroke-dasharray="6,4" stroke-width="2" class="dashed"/>
+  <line x1="10" y1="70" x2="500" y2="400" stroke="dodgerblue" stroke-dasharray="6,4" stroke-width="2" class="dashed"/>
+  <line x1="11" y1="70" x2="200" y2="450" stroke="dodgerblue" stroke-dasharray="6,4" stroke-width="2" class="dashed"/>
+
+  <!-- Triunghiul ABC -->
+  <polygon points="150,350 350,300 300,167"
+           fill="none" stroke="black" stroke-width="2"/>
+
+  <!-- Triunghiul IJK -->
+  <polygon points="200,450 500,400 400,200"
+           fill="none" stroke="black" stroke-width="2"/>
+
+  <!-- Etichete -->
+  <text x="290" y="165">C</text>
+  <text x="140" y="365">A</text>
+  <text x="350" y="295">B</text>
+
+  <text x="190" y="470">I</text>
+  <text x="505" y="420">J</text>
+  <text x="405" y="195">K</text>
+
+  <text x="0" y="65">O</text>
+</svg>
+
+
+---
+
+:::info Observație
+Triunghiul $\triangle IJK$ este imaginea $\triangle ABC$ prin dilația de centru $O$ și raport $\Large \frac{3}{2}$.
+:::
+
+- $\triangle IJK$ este imaginea prin mărire a $\triangle ABC$ de proporție $\Large\frac{3}{2}$ (adică $1.5$)
+
+- $\triangle ABC$ este imaginea prin micșorare a $\triangle IJK$ de proporție $\Large\frac{2}{3}$ (invers)
+
+- $\triangle ABC$ este o reducere a $\triangle IJK$ (proporție $k = \Large\frac{2}{3}$)
+
+**Avem:**
+$[IJ]//[AB], [JK]//[BC], [IK]//[AC]$

@@ -6,5 +6,103 @@ description: ""
 ---
 
 import Math from '/src/theme/Math';
+import GeometryDraw from '@site/src/components/GeometryDraw';
 
-### Pagina in curs de actualizare...
+# 10 - Fracții ireductibile, divizori și numere prime
+
+## Împărțirea euclidiană
+:::tip
+Într-o **împărțire euclidiană**, număratorul, numitorul ($>= 0$) și câtul sunt numere întregi.
+<svg width="220" height="90" viewBox="0 0 220 90" style={{ display: 'block', margin: '40px auto 0 0' }}>
+    <!-- Vertical line (împărțitor) -->
+    <line x1="40" y1="20" x2="40" y2="90" stroke="#3b82f6" strokeWidth="3"/>
+    <!-- Horizontal line (de împărțit) -->
+    <line x1="40" y1="50" x2="80" y2="50" stroke="#3b82f6" strokeWidth="3"/>
+    <!-- N (de împărțit) -->
+    <text x="20" y="40" fontSize="22" textAnchor="middle" fill="#1e293b">N</text>
+    <!-- n  -->
+    <text x="60" y="40" fontSize="22" textAnchor="middle" fill="#b45309">n</text>
+    <!-- Q (cat) -->
+    <text x="110" y="65" fontSize="12" textAnchor="middle" fill="#047857">câtul (parte întreagǎ)</text>
+    <!-- R (rest) -->
+    <text x="20" y="70" fontSize="22" textAnchor="middle" fill="orange">r</text>
+</svg>
+:::
+
+Este o împărțire în care:
+
+* numărul \$N\$ se împarte la \$n\$
+* rezultatul este \$R\$ (partea întreagă)
+
+Note:
+
+* \$N\$ = numărator
+* \$n\$ = numitor
+* \$R\$ = rest
+
+Schema:
+
+$N : n = \text{rezultat cu rest } R$
+
+Dacă \$R = 0\$, atunci \$N\$ este **divizibil cu** \$n\$
+
+### Exemple:
+
+1. \$64 : 5 = 12\$, rest \$4\$
+2. \$14 : 7 = 2\$, rest \$0\$
+3. \$-12 : 7 = -2\$, rest \$2\$
+
+### Numere prime
+
+Un **număr prim** este un număr diferit de 1, care are exact doi divizori: 1 și el însuși.
+
+Numere prime: \$2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, \dots\$
+
+Toate **numerele neprime** se scriu **într-o manieră unică** sub forma unui produs de **factori primi**.
+
+## Descompunerea în factori primi
+
+Exemplu: descompunerea numărului 280
+
+$$
+280 = 28 \cdot 10 = 4 \cdot 7 \cdot 2 \cdot 5 = 2^3 \cdot 5 \cdot 7
+$$
+
+Deci:
+
+* 280 = \$2^3 \cdot 5 \cdot 7\$
+
+---
+
+## Fracții ireductibile
+
+O **fracție ireductibilă** este o fracție care **nu se poate simplifica**. Adică pentru orice numărator și numitor din fracție, nu există un divizor comun diferit de 1.
+
+### Verificare:
+
+* dacă **nu putem avea un factor comun** în descompunerea în factori primi a numărătorului și a numitorului, atunci fracția este ireductibilă.
+
+### Exemplu:
+
+Fracția:
+
+$\frac{154}{110}$
+
+Descompunem:
+
+* 154 = \$2 \cdot 7 \cdot 11\$
+* 110 = \$2 \cdot 5 \cdot 11\$
+
+Simplificăm: $\frac{154}{110} = \frac{7}{5}$
+
+### LP: Divizor, multiplu și număr prim
+
+#### Exercițiu:
+
+Găsiți fracția ireductibilă pentru:
+
+1. \$\frac{27}{30}\$
+2. \$\frac{56}{40}\$
+3. \$\frac{49}{63}\$
+
+---
