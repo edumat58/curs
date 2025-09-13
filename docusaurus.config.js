@@ -51,8 +51,6 @@ const config = {
           sidebarPath: './sidebars.js',
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
         blog: {
           remarkPlugins: [math],
@@ -64,8 +62,6 @@ const config = {
           },
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
           // Useful options to enforce blogging best practices
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
@@ -103,6 +99,11 @@ const config = {
       items: [
         {
           position: 'left',
+          label: 'Curs V',
+          to: '/docs/category/curs-v',
+        },
+        {
+          position: 'left',
           label: 'Curs VI',
           to: '/docs/category/curs-vi',
         },
@@ -110,6 +111,11 @@ const config = {
           position: 'left',
           label: 'Curs VII',
           to: '/docs/category/curs-vii',
+        },
+        {
+          position: 'left',
+          label: 'Curs VIII',
+          to: '/docs/category/curs-viii',
         },
         {
           type: 'html',
@@ -122,26 +128,45 @@ const config = {
           type: 'html',
           position: 'right',
           value: `
-            <div id="site-status" data-status="unstable" style="
+            <div id="site-status" data-status="stable" style="
               display: flex;
               align-items: center;
               gap: 10px;
               padding: 6px 12px;
-              border-left: 5px solid #f1c40f;
+              border-left: 5px solid #27ae60;
               border-radius: 6px;
-              background-color: #fef9e7;
-              color: #f39c12;
+              background-color: #d5f4e6;
+              color: #27ae60;
               font-size: 0.9rem;
               font-family: sans-serif;
               cursor: pointer;
             " onclick="window.location.href='/curs/docs/status';">
-              <svg viewBox="0 0 16 16" width="18" height="18" xmlns="http://www.w3.org/2000/svg" fill="#f1c40f">
-                <path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"/>
+              <svg viewBox="0 0 16 16" width="18" height="18" xmlns="http://www.w3.org/2000/svg" fill="#27ae60">
+                <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
               </svg>
-              <span style="font-weight: 600;">Mod Dezvoltare</span>
+              <span style="font-weight: 600;">Mod Stabil</span>
             </div>
           `,
-        }
+        },
+        // <div id="site-status" data-status="unstable" style="
+        //       display: flex;
+        //       align-items: center;
+        //       gap: 10px;
+        //       padding: 6px 12px;
+        //       border-left: 5px solid #f1c40f;
+        //       border-radius: 6px;
+        //       background-color: #fef9e7;
+        //       color: #f39c12;
+        //       font-size: 0.9rem;
+        //       font-family: sans-serif;
+        //       cursor: pointer;
+        //     " onclick="window.location.href='/curs/docs/status';">
+        //   <svg viewBox="0 0 16 16" width="18" height="18" xmlns="http://www.w3.org/2000/svg" fill="#f1c40f">
+        //     <path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z" />
+        //   </svg>
+        //   <span style="font-weight: 600;">Mod Stabil</span>
+        // </div>
+        
       ],
     },
     footer: {
