@@ -36,10 +36,10 @@ export default function LectiiTreeView() {
       titlu: 'Săptămâna 3 - 22.09 - 26.09',
       note: 'Materiale încarcate',
       lectii: [
-        { titlu: 'C5.5 - Rapoarte', zi: '24.09', tip: 'Algebra', link: 'c6/09', pdf: '' },
-        { titlu: 'C5.6 - Scara numerică', zi: '25.09 (ora 1)', tip: 'Algebra', link: 'c6/10', pdf: '' },
+        { titlu: 'C5.5 - Rapoarte', zi: '24.09', tip: 'Algebra', link: 'c6/modul-1/09', pdf: '' },
+        { titlu: 'C5.6 - Scara numerică', zi: '25.09 (ora 1)', tip: 'Algebra', link: 'c6/modul-1/10', pdf: '' },
         { titlu: 'C5.6 - Scara numerică', zi: '25.09 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
-        { titlu: 'C5.7 - Proporții', zi: '26.09 (ora 1)', tip: 'Algebra', link: 'c6/11', pdf: '' },
+        { titlu: 'C5.7 - Proporții', zi: '26.09 (ora 1)', tip: 'Algebra', link: 'c6/modul-1/11', pdf: '' },
         { titlu: 'TEST DIN LECTIA DE ZI si LP - Proportii', zi: '26.09 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
       ],
     },
@@ -47,21 +47,21 @@ export default function LectiiTreeView() {
       titlu: 'Săptămâna 2 - 15.09 - 19.09',
       note: 'Materiale încarcate',
       lectii: [
-        { titlu: 'C5.1 – Diagrame în bastoane și histograme', zi: '17.09', tip: 'Algebra', link: 'c6/05', pdf: '' },
-        { titlu: 'C5.2 - Diagrame circulare', zi: '18.09 (ora 1)', tip: 'Algebra', link: 'c6/06', pdf: '' },
+        { titlu: 'C5.1 – Diagrame în bastoane și histograme', zi: '17.09', tip: 'Algebra', link: 'c6/modul-1/05', pdf: '' },
+        { titlu: 'C5.2 - Diagrame circulare', zi: '18.09 (ora 1)', tip: 'Algebra', link: 'c6/modul-1/06', pdf: '' },
         { titlu: 'LP - Diagrame circulare', zi: '18.09 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
-        { titlu: 'C5.3 - Procente. Calcul procentual', zi: '19.09 (ora 1)', tip: 'Algebra', link: 'c6/07', pdf: '' },
-        { titlu: 'C5.4 - Procente de marire si micsorare', zi: '19.09 (ora 2)', tip: 'Algebra', link: 'c6/08', pdf: '' },
+        { titlu: 'C5.3 - Procente. Calcul procentual', zi: '19.09 (ora 1)', tip: 'Algebra', link: 'c6/modul-1/07', pdf: '' },
+        { titlu: 'C5.4 - Procente de marire si micsorare', zi: '19.09 (ora 2)', tip: 'Algebra', link: 'c6/modul-1/08', pdf: '' },
       ],
     }, 
     {
       titlu: 'Săptămâna 1: 08.09 - 12.09',
       note: 'Modulul 1: 08.09.2025 -> 25.10.2025',
       lectii: [
-        { titlu: 'C1 - Multiplii si divizori', zi: '10.09.2025', tip: 'Algebra', link: 'c6/01', pdf: 'c6_01.pdf' },
-        { titlu: 'C2 - Numere prime. Descompunerea in factori primi', zi: '11.09.2025 (ora 1)', tip: 'Algebra', link: 'c6/02', pdf: 'c6_02.pdf' },
-        { titlu: 'C3 - Multimi. Multimea nr. naturale', zi: '11.09.2025 (ora 2)', tip: 'Algebra', link: 'c6/03', pdf: 'c6_03.pdf' },
-        { titlu: 'C4 - Multimea nr. intregi. Sistemul de coordonate', zi: '12.09.2025', tip: 'Algebra', link: 'c6/04', pdf: 'c6_04.pdf' },
+        { titlu: 'C1 - Multiplii si divizori', zi: '10.09.2025', tip: 'Algebra', link: 'c6/modul-1/01', pdf: 'c6_01.pdf' },
+        { titlu: 'C2 - Numere prime. Descompunerea in factori primi', zi: '11.09.2025 (ora 1)', tip: 'Algebra', link: 'c6/modul-1/02', pdf: 'c6_02.pdf' },
+        { titlu: 'C3 - Multimi. Multimea nr. naturale', zi: '11.09.2025 (ora 2)', tip: 'Algebra', link: 'c6/modul-1/03', pdf: 'c6_03.pdf' },
+        { titlu: 'C4 - Multimea nr. intregi. Sistemul de coordonate', zi: '12.09.2025', tip: 'Algebra', link: 'c6/modul-1/04', pdf: 'c6_04.pdf' },
       ],
     }
   ];

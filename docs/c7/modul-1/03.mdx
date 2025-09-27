@@ -1,0 +1,111 @@
+---
+sidebar_position: 3
+slug: /c7/modul-1/03
+description: ""
+---
+
+# C3 – Calcul cu radicali și proprietăți
+
+---
+
+## Noțiuni
+
+:::danger De reținut
+Pentru orice număr real $a \ge 0$ și număr natural $n \ge 2$, **rădăcina n-a** a lui $a$ este numărul pozitiv $b$ astfel încât:
+$$
+b^n = a.
+$$
+Se notează cu:
+$$
+\sqrt[n]{a}.
+$$
+Caz particular:  
+$\sqrt{a} = \sqrt[2]{a}$ se numește **rădăcină pătrată**.
+:::
+
+---
+
+## Tabel de valori
+
+:::info Valori importante ale radicalilor
+| Număr | Rădăcină pătrată | Rădăcină cubică |
+|-------|------------------|-----------------|
+| $4$   | $2$             | —               |
+| $9$   | $3$             | —               |
+| $16$  | $4$             | —               |
+| $27$  | —               | $3$             |
+| $64$  | $8$             | $4$             |
+:::
+
+---
+
+## Aplicații curs
+
+### 1 – Operații cu radicali
+
+:::note Cerință
+Simplificați:
+$$
+\sqrt{50}.
+$$
+:::
+
+Rezolvare:
+
+Descompunem 50 în factori primi:
+$$
+50 = 25 \times 2.
+$$
+Extragem pătratul perfect:
+$$
+\sqrt{50} = \sqrt{25 \times 2} = \sqrt{25}\times\sqrt{2} = 5\sqrt{2}.
+$$
+
+---
+
+Alte reguli utile:
+- Produs:
+$$
+\sqrt{a}\times \sqrt{b} = \sqrt{a \times b}.
+$$
+- Raport:
+$$
+\frac{\sqrt{a}}{\sqrt{b}} = \sqrt{\frac{a}{b}}.
+$$
+- Putere:
+$$
+\sqrt{a^2} = |a|.
+$$
+
+---
+
+### 2 – Exerciții suplimentare
+
+:::note Cerință
+Simplificați radicalii folosind **descompunerea în factori primi**.
+:::
+
+**Exemple**
+1. $\sqrt{72} = \sqrt{36\times 2} = 6\sqrt{2}$
+2. $\sqrt[3]{54} = \sqrt[3]{27 \times 2} = 3\sqrt[3]{2}$
+
+---
+
+#### Conform descompunerii în factori primi
+
+Pentru orice $a\ge0$:
+$$
+\sqrt[n]{a} = \sqrt[n]{p_1^{k_1}\cdots p_m^{k_m}} =
+\prod p_i^{\lfloor k_i/n\rfloor}\times \sqrt[n]{p_i^{k_i\bmod n}}.
+$$
+
+#### Conform regulilor de calcul cu puteri
+
+Pentru $a\ge0$:
+$$
+\sqrt[n]{a} = a^{\frac{1}{n}}.
+$$
+Astfel:
+$$
+\sqrt{a} = a^{1/2},\qquad \sqrt[3]{a} = a^{1/3}.
+$$

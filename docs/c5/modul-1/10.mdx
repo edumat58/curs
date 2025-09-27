@@ -1,0 +1,477 @@
+---
+title: "C8.1 - Proprietăți ale înmulțirii"
+sidebar_position: 3
+slug: /c5/modul-1/10
+description: ""
+---
+
+# C8.1 - Proprietăți ale înmulțirii
+
+---
+:::danger Esențial de reținut
+Proprietățile înmulțirii numerelor sunt:
+
+- **Comutativitatea**: Ordinea factorilor nu schimbă produsul.
+    $$
+    a \cdot b = b \cdot a
+    $$
+
+- **Asociativitatea**: Gruparea factorilor nu schimbă produsul.
+    $$
+    (a \cdot b) \cdot c = a \cdot (b \cdot c)
+    $$
+
+- **Elementul neutru**: Înmulțirea cu 1 nu schimbă numărul.
+    $$
+    a \cdot 1 = a
+    $$
+
+- **Înmulțirea cu 0**: Orice număr înmulțit cu 0 este 0.
+    $$
+    a \cdot 0 = 0
+    $$
+:::
+
+---
+
+:::note Enunț
+Albert ajută cafeteria școlii sale să organizeze o cină comunitară cu spaghete pentru a strânge fonduri. 
+
+El are sarcina de a pregăti sosul de spaghete. Rețeta cere $\Large \frac{2}{9}$ kg de carne tocată de vită. 
+
+Dacă trebuie să prepare de **18** ori rețeta, ce cantitate de carne trebuie să cumpere?
+:::
+
+## Reprezentarea grafică
+
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="480" viewBox="0 0 640 380">
+  <title>18 dreptunghiuri verticale 2/9 umbrite</title>
+  <desc>3 rânduri × 6 coloane, fiecare împărțit în 9 părți, primele 2 umbrite.</desc>
+
+  <!-- Grup reutilizabil: bară verticală 30x90 împărțită în 9 părți; primele 2 părți umbrite -->
+  <defs>
+    <g id="vbar-2of9">
+      <rect x="0" y="0" width="30" height="90" rx="4" ry="4" fill="none" stroke="black" stroke-width="1.5"/>
+      <rect x="0" y="0"  width="30" height="10" rx="4" ry="4" fill="#b6d0ff"/>
+      <rect x="0" y="10" width="30" height="10" fill="#b6d0ff"/>
+      <path d="M0 10 H30 M0 20 H30 M0 30 H30 M0 40 H30 M0 50 H30 M0 60 H30 M0 70 H30 M0 80 H30"
+            stroke="black" stroke-width="1"/>
+    </g>
+  </defs>
+
+  <!-- Rândul 1 -->
+  <g transform="translate(60,40)">
+    <use href="#vbar-2of9" x="0"   y="0"/>
+    <use href="#vbar-2of9" x="60"  y="0"/>
+    <use href="#vbar-2of9" x="120" y="0"/>
+    <use href="#vbar-2of9" x="180" y="0"/>
+    <use href="#vbar-2of9" x="240" y="0"/>
+    <use href="#vbar-2of9" x="300" y="0"/>
+    <!-- Etichete fracții -->
+    <foreignObject x="-30" y="26" width="40" height="50">
+        <span class="katex">$ \Large\frac{2}{9} $</span>
+    </foreignObject>
+    <foreignObject x="340" y="26" width="40" height="50">
+        <span class="katex">$ \Large\frac{12}{9} $</span>
+    </foreignObject>
+        <foreignObject x="340" y="156" width="40" height="50">
+        <span class="katex">$ \Large\frac{12}{9} $</span>
+    </foreignObject>
+        <foreignObject x="340" y="286" width="40" height="50">
+        <span class="katex">$ \Large\frac{12}{9} $</span>
+    </foreignObject>
+    <foreignObject x="550" y="156" width="40" height="50">
+        <span class="katex">$ \Large\frac{36}{9} $</span>
+    </foreignObject>
+  </g>
+
+<!-- Trei linii care pornesc din etichetele 12/9 și se intersectează într-un punct comun la dreapta jos -->
+<line x1="450" y1="86"  x2="600" y2="216" stroke="black" stroke-width="2"/>
+<line x1="450" y1="216" x2="600" y2="216" stroke="black" stroke-width="2"/>
+<line x1="450" y1="346" x2="600" y2="216" stroke="black" stroke-width="2"/>
+
+
+
+  <!-- Rândul 2 -->
+  <g transform="translate(60,170)">
+    <use href="#vbar-2of9" x="0"   y="0"/>
+    <use href="#vbar-2of9" x="60"  y="0"/>
+    <use href="#vbar-2of9" x="120" y="0"/>
+    <use href="#vbar-2of9" x="180" y="0"/>
+    <use href="#vbar-2of9" x="240" y="0"/>
+    <use href="#vbar-2of9" x="300" y="0"/>
+  </g>
+
+  <!-- Rândul 3 -->
+  <g transform="translate(60,300)">
+    <use href="#vbar-2of9" x="0"   y="0"/>
+    <use href="#vbar-2of9" x="60"  y="0"/>
+    <use href="#vbar-2of9" x="120" y="0"/>
+    <use href="#vbar-2of9" x="180" y="0"/>
+    <use href="#vbar-2of9" x="240" y="0"/>
+    <use href="#vbar-2of9" x="300" y="0"/>
+  </g>
+</svg>
+
+
+Albert trebuie să cumpere $\Large \frac{12}{9}$ $\cdot \, 3 =$ $\Large \frac{36}{9}$ kg de carne. Transform fracția improprie într-o fracție proprie, ceea ce îmi dă ca rezultat **4 kg** de carne.
+
+#### Utilizând proprietatea asociativității:
+
+> 18 grupuri de $\Large \frac{2}{9}$
+
+$$
+\large 18\cdot\frac{2}{9}
+= 18\cdot(2\cdot\frac{1}{9})
+= 36\cdot\frac{1}{9}
+= \frac{36}{9}
+= 4
+$$
+
+---
+## 
+
+:::note Enunț
+Daniel a folosit paie cu lungimea de **3,4 cm** fiecare pentru a construi un pătrat.  
+Determină perimetrul pătratului.
+
+Estimare: $3,4 \cdot 4$
+
+Perimetrul este în jur de 12 cm, deoarece m-am gândit la $3 + 3 + 3 + 3 = 12$.
+
+Perimetrul este în jur de 12 cm, deoarece m-am gândit la $4 \cdot 3 = 12$.
+:::
+
+## Reprezentarea pe dreapta numerică
+
+:::info Important
+Reprezint mai întâi **<span style={{color:"#0e9f6e"}}>4 sărituri de 3 unități</span>** pe dreaptă.  
+Apoi, reprezint zecimile. Reprezint în total **<span style={{color:"#0e9f6e"}}>4 sărituri care reprezintă 0,4</span>** fiecare.
+:::
+
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="220" viewBox="0 0 600 220" role="img" aria-label="Dreaptă numerică cu sărituri 3 și zecimi până la 13,6">
+    <!-- Axa principală -->
+    <g transform="translate(60,140)">
+        <line x1="0" y1="0" x2="520" y2="0" stroke="#111" stroke-width="3"/>
+        <path d="M520,-6 L520,6 L535,0 Z" fill="#111"/>
+        <!-- Repere 0–12 -->
+        <!-- 13 repere, 0..12, la fiecare 40px -->
+        <g>
+            <g transform="translate(0,0)">
+                <line x1="0" y1="-8" x2="0" y2="8" stroke="#111" stroke-width="2"/>
+                <text x="-9" y="24" font-size="14" fill="#111">0</text>
+            </g>
+            <g transform="translate(40,0)">
+                <line x1="0" y1="-8" x2="0" y2="8" stroke="#111" stroke-width="2"/>
+                <text x="-9" y="24" font-size="14" fill="#111">1</text>
+            </g>
+            <g transform="translate(80,0)">
+                <line x1="0" y1="-8" x2="0" y2="8" stroke="#111" stroke-width="2"/>
+                <text x="-9" y="24" font-size="14" fill="#111">2</text>
+            </g>
+            <g transform="translate(120,0)">
+                <line x1="0" y1="-8" x2="0" y2="8" stroke="#111" stroke-width="2"/>
+                <text x="-9" y="24" font-size="14" fill="#111">3</text>
+            </g>
+            <g transform="translate(160,0)">
+                <line x1="0" y1="-8" x2="0" y2="8" stroke="#111" stroke-width="2"/>
+                <text x="-9" y="24" font-size="14" fill="#111">4</text>
+            </g>
+            <g transform="translate(200,0)">
+                <line x1="0" y1="-8" x2="0" y2="8" stroke="#111" stroke-width="2"/>
+                <text x="-9" y="24" font-size="14" fill="#111">5</text>
+            </g>
+            <g transform="translate(240,0)">
+                <line x1="0" y1="-8" x2="0" y2="8" stroke="#111" stroke-width="2"/>
+                <text x="-9" y="24" font-size="14" fill="#111">6</text>
+            </g>
+            <g transform="translate(280,0)">
+                <line x1="0" y1="-8" x2="0" y2="8" stroke="#111" stroke-width="2"/>
+                <text x="-9" y="24" font-size="14" fill="#111">7</text>
+            </g>
+            <g transform="translate(320,0)">
+                <line x1="0" y1="-8" x2="0" y2="8" stroke="#111" stroke-width="2"/>
+                <text x="-9" y="24" font-size="14" fill="#111">8</text>
+            </g>
+            <g transform="translate(360,0)">
+                <line x1="0" y1="-8" x2="0" y2="8" stroke="#111" stroke-width="2"/>
+                <text x="-9" y="24" font-size="14" fill="#111">9</text>
+            </g>
+            <g transform="translate(400,0)">
+                <line x1="0" y1="-8" x2="0" y2="8" stroke="#111" stroke-width="2"/>
+                <text x="-9" y="24" font-size="14" fill="#111">10</text>
+            </g>
+            <g transform="translate(440,0)">
+                <line x1="0" y1="-8" x2="0" y2="8" stroke="#111" stroke-width="2"/>
+                <text x="-13" y="24" font-size="14" fill="#111">11</text>
+            </g>
+            <g transform="translate(480,0)">
+                <line x1="0" y1="-8" x2="0" y2="8" stroke="#111" stroke-width="2"/>
+                <text x="-13" y="24" font-size="14" fill="#111">12</text>
+            </g>
+        </g>
+        <!-- Arcuri mari verzi (0-3, 3-6, 6-9, 9-12) -->
+        <path d="M0,0 Q60,-48 120,0" stroke="#0f766e" stroke-width="3" fill="none"/>
+        <text x="56" y="-54" font-size="16" fill="#0f766e">3</text>
+        <path d="M120,0 Q180,-48 240,0" stroke="#0f766e" stroke-width="3" fill="none"/>
+        <text x="176" y="-54" font-size="16" fill="#0f766e">3</text>
+        <path d="M240,0 Q300,-48 360,0" stroke="#0f766e" stroke-width="3" fill="none"/>
+        <text x="296" y="-54" font-size="16" fill="#0f766e">3</text>
+        <path d="M360,0 Q420,-48 480,0" stroke="#0f766e" stroke-width="3" fill="none"/>
+        <text x="416" y="-54" font-size="16" fill="#0f766e">3</text>
+    </g>
+</svg>
+
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="220" viewBox="0 0 600 220" role="img" aria-label="Dreaptă numerică cu sărituri 3 și zecimi până la 13,6">
+  <!-- Axa principală -->
+  <g transform="translate(90,140)">
+    <line x1="0" y1="0" x2="450" y2="0" stroke="#111" stroke-width="3"/>
+    <path d="M450,-6 L450,6 L465,0 Z" fill="#111"/>
+    <!-- Repere 0–14 -->
+    {Array.from({length:23}).map((_,i)=>(
+      <g key={i} transform={`translate(${i*20},0)`}>
+        <line x1="0" y1="-8" x2="0" y2="8" stroke="#111" stroke-width="2"/>
+      </g>
+    ))}
+    <text x="-9" y="24" font-size="14" fill="#0f766e">{12}</text>
+    <text x="189" y="24" font-size="14" fill="#0f766e">{13}</text>
+    <text x="389" y="24" font-size="14" fill="#111">{14}</text>
+    <line x1="80" y1="-38" x2="80" y2="38" stroke="#0f766e" stroke-width="2"/>
+    <line x1="160" y1="-38" x2="160" y2="38" stroke="#0f766e" stroke-width="2"/>
+    <line x1="240" y1="-38" x2="240" y2="38" stroke="#0f766e" stroke-width="2"/>
+    <line x1="320" y1="-38" x2="320" y2="38" stroke="#0f766e" stroke-width="2"/>
+    <line x1="100" y1="-8" x2="100" y2="38" stroke="#111" stroke-width="2"/>
+    <line x1="300" y1="-8" x2="300" y2="38" stroke="#111" stroke-width="2"/>
+        <!-- Sărituri mici mov -->
+    <path d="M0,0 Q40,-38 80,0" stroke="#7c3aed" stroke-width="3" fill="none"/>
+    <text x="30" y="-34" font-size="14" fill="#7c3aed">0,4</text>
+    <path d="M80,0 Q120,-38 160,0" stroke="#7c3aed" stroke-width="3" fill="none"/>
+    <text x="110" y="-34" font-size="14" fill="#7c3aed">0,4</text>
+    <path d="M160,0 Q180,-18 200,0" stroke="#7c3aed" stroke-width="3" fill="none"/>
+    <text x="170" y="-18" font-size="14" fill="#7c3aed">0,2</text>
+    <path d="M200,0 Q220,-18 240,0" stroke="#7c3aed" stroke-width="3" fill="none"/>
+    <text x="210" y="-18" font-size="14" fill="#7c3aed">0,2</text>
+    <path d="M240,0 Q280,-38 320,0" stroke="#7c3aed" stroke-width="3" fill="none"/>
+    <text x="270" y="-34" font-size="14" fill="#7c3aed">0,4</text>
+        <!-- Marcaje intermediare mov sub axă -->
+    <text x="64" y="-60" font-size="14">12,4</text>
+    <text x="86" y="60" font-size="14">12,5</text>
+    <text x="286" y="60" font-size="14">13,5</text>
+    <text x="145" y="-60" font-size="14" fill="#0f766e">12,8</text>
+    <text x="230" y="-60" font-size="14">13,2</text>
+    <g>
+      <text x="305" y="-60" font-size="14" fill="#0f766e">13,6</text>
+      <rect x="300" y="-78" width="36" height="24" rx="3" ry="3" stroke="#0f766e" stroke-width="2" fill="none"/>
+    </g>
+
+    </g>
+
+</svg>
+
+
+$$
+\textcolor{#7c3aed}{3 + 3 + 3 + 3} \textcolor{#0f766e}{= 12} \\[10pt]
+\textcolor{#0f766e}{12 +} \textcolor{#7c3aed}{0,4 + 0,4} \textcolor{#0f766e}{= 12,8} \\[10pt]
+\textcolor{#0f766e}{12,8+} \textcolor{#7c3aed}{0,2} \textcolor{#0f766e}{= 13} \\[10pt]
+\textcolor{#0f766e}{13 +} \textcolor{#7c3aed}{0,2 + 0,4} \textcolor{#0f766e}{= 13,6} \\[10pt]
+$$
+
+
+> Perimetrul pătratului este de **13,6 cm**.
+
+---
+
+## Reprezentarea în bază 10
+
+:::info Important
+O latură a pătratului poate fi reprezentată prin **3 pătrate și 4 bețișoare**,  
+deci trasez **<span style={{color:"#0e9f6e"}}>4 grupuri de 3 pătrate</span>** și **<span style={{color:"#7c3aed"}}>4 grupuri de 4 bețișoare</span>**.
+
+Regrupez **<span style={{color:"#7c3aed"}}>10 bețișoare</span>** pentru a reprezenta **<span style={{color:"#0e9f6e"}}>1 pătrat</span>**.  
+Obțin **<span style={{color:"#0e9f6e"}}>13 pătrate</span>** și **<span style={{color:"#7c3aed"}}>6 bețișoare</span>**, ceea ce reprezintă **<span style={{color:"#0e9f6e"}}>13 întregi</span> și <span style={{color:"#7c3aed"}}>6 zecimi</span>**, adică **<span style={{color:"#0e9f6e"}}>13</span>,<span style={{color:"#7c3aed"}}>6</span>**.
+:::
+
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="520" viewBox="0 0 900 520" role="img" aria-label="Materiale base 10: 3x4 pătrate și bețișoare regroupate în 1 și rest 0,6">
+  <!-- Grilă 3x4 de pătrate (unități de 1) -->
+  <!-- parametri: dim pătrat s=34, spațiu g=6, start (x0,y0)=(90,80) -->
+  <g transform="translate(90,40)">
+    <!-- rând 0 -->
+    <rect x="0" y="0" width="56" height="56" fill="none" stroke="#0e9f6e" stroke-width="2"/>
+    <rect x="80" y="0" width="56" height="56" fill="none" stroke="#0e9f6e" stroke-width="2"/>
+    <rect x="160" y="0" width="56" height="56" fill="none" stroke="#0e9f6e" stroke-width="2"/>
+    <!-- rând 1 -->
+    <rect x="0" y="64" width="56" height="56" fill="none" stroke="#0e9f6e" stroke-width="2"/>
+    <rect x="80" y="64" width="56" height="56" fill="none" stroke="#0e9f6e" stroke-width="2"/>
+    <rect x="160" y="64" width="56" height="56" fill="none" stroke="#0e9f6e" stroke-width="2"/>
+    <!-- rând 2 -->
+    <rect x="0" y="128" width="56" height="56" fill="none" stroke="#0e9f6e" stroke-width="2"/>
+    <rect x="80" y="128" width="56" height="56" fill="none" stroke="#0e9f6e" stroke-width="2"/>
+    <rect x="160" y="128" width="56" height="56" fill="none" stroke="#0e9f6e" stroke-width="2"/>
+    <!-- rând 3 -->
+    <rect x="0" y="192" width="56" height="56" fill="none" stroke="#0e9f6e" stroke-width="2"/>
+    <rect x="80" y="192" width="56" height="56" fill="none" stroke="#0e9f6e" stroke-width="2"/>
+    <rect x="160" y="192" width="56" height="56" fill="none" stroke="#0e9f6e" stroke-width="2"/>
+  </g>
+
+  <!-- Bețișoare mov: patru grupuri verticale a câte 4 (16 în total) -->
+  <!-- fiecare bețișor: lățime 12, înălțime 56, distanță verticală 8 -->
+  <!-- poziționare: grupuri la x=360, 396, 432, 468; start y=40 -->
+  <g transform="translate(340,40)">
+    <!-- grup 1 -->
+    <rect x="0" y="0"  width="12" height="56" fill="none" stroke="#7c3aed" stroke-width="2"/>
+    <rect x="0" y="64" width="12" height="56" fill="none" stroke="#7c3aed" stroke-width="2"/>
+    <rect x="0" y="128" width="12" height="56" fill="none" stroke="#7c3aed" stroke-width="2"/>
+    <rect x="0" y="192" width="12" height="56" fill="none" stroke="#7c3aed" stroke-width="2"/>
+
+    <!-- grup 2 -->
+    <rect x="36" y="0"  width="12" height="56" fill="none" stroke="#7c3aed" stroke-width="2"/>
+    <rect x="36" y="64" width="12" height="56" fill="none" stroke="#7c3aed" stroke-width="2"/>
+    <rect x="36" y="128" width="12" height="56" fill="none" stroke="#7c3aed" stroke-width="2"/>
+    <rect x="36" y="192" width="12" height="56" fill="none" stroke="#7c3aed" stroke-width="2"/>
+
+    <!-- grup 3 -->
+    <rect x="72" y="0"  width="12" height="56" fill="none" stroke="#7c3aed" stroke-width="2"/>
+    <rect x="72" y="64" width="12" height="56" fill="none" stroke="#7c3aed" stroke-width="2"/>
+    <rect x="72" y="128" width="12" height="56" fill="none" stroke="#7c3aed" stroke-width="2"/>
+    <rect x="72" y="192" width="12" height="56" fill="none" stroke="#7c3aed" stroke-width="2"/>
+
+    <!-- grup 4 -->
+    <rect x="108" y="0"  width="12" height="56" fill="none" stroke="#7c3aed" stroke-width="2"/>
+    <rect x="108" y="64" width="12" height="56" fill="none" stroke="#7c3aed" stroke-width="2"/>
+    <rect x="108" y="128" width="12" height="56" fill="none" stroke="#7c3aed" stroke-width="2"/>
+    <rect x="108" y="192" width="12" height="56" fill="none" stroke="#7c3aed" stroke-width="2"/>
+
+    <!-- Încadrare mov a 10 bețișoare (1 unitate) -->
+    <!-- selectăm: toate cele 8 din grupurile 1 și 2 (y=0..192) + primele 2 din grupul 3 (y=0 și y=64) -->
+    <rect x="-8" y="-10" width="136" height="133" rx="6" ry="6" fill="none" stroke="#0e9f6e" stroke-width="3"/>
+    <text x="138" y="6" font-size="18" fill="#0e9f6e">1</text>
+    <rect x="-8" y="125" width="68" height="63" rx="6" ry="6" fill="none" stroke="#0e9f6e" stroke-width="3"/>
+    <rect x="60" y="125" width="68" height="63" rx="6" ry="6" fill="none" stroke="#7c3aed" stroke-width="3"/>
+    <rect x="-8" y="188" width="136" height="63" rx="6" ry="6" fill="none" stroke="#7c3aed" stroke-width="3"/>
+
+    <!-- Etichetă „0,6” pentru cele 6 bețișoare rămase -->
+    <text x="138" y="254" font-size="18" fill="#7c3aed">0,6</text>
+  </g>
+
+  <!-- Pătratul-legendă =1 în dreapta -->
+  <g transform="translate(90,380)">
+    <rect x="0" y="0" width="34" height="34" fill="none" stroke="#111" stroke-width="2"/>
+    <text x="46" y="24" font-size="18" fill="#111">= 1</text>
+  </g>
+
+  <!-- Pătratul-legendă =1 în dreapta -->
+  <g transform="translate(90,380)">
+    <rect x="160" y="0" width="14" height="56" fill="none" stroke="#111" stroke-width="2"/>
+    <text x="186" y="34" font-size="18" fill="#111">= 0,1</text>
+  </g>
+
+  <!-- Reetichetări sub grilă: „4 4 4 4 0,6” (cele 4 sub coloane + 0,6 sub bețișoare) -->
+  <g>
+    <text x="110" y="320" font-size="18" fill="#0e9f6e">4</text>
+    <text x="190" y="320" font-size="18" fill="#0e9f6e">4</text>
+    <text x="270" y="320" font-size="18" fill="#0e9f6e">4</text>
+  </g>
+
+  <!-- Titlu scurt pentru zonă bețișoare (opțional vizual) -->
+  <text x="335" y="18" font-size="16" fill="#7c3aed">Bețișoare (zecimi)</text>
+
+</svg>
+
+> Perimetrul pătratului lui Daniel este de **13,6 cm**.
+
+
+---
+
+### Calcul folosind fracții zecimale
+
+$$
+3,4 + 3,4 + 3,4 + 3,4 = 3\frac{4}{10} + 3\frac{4}{10} + 3\frac{4}{10} + 3\frac{4}{10} \\[10pt]
+= \textcolor{#0f766e}{3 + 3 + 3 + 3 +} \textcolor{#7c3aed}{\frac{4}{10} + \frac{4}{10} + \frac{4}{10} + \frac{4}{10}} \\[10pt]
+$$
+
+> Calculul se restrânge sub forma:
+
+$$
+3,4 \cdot 4 = \textcolor{#0f766e}{3} \cdot 4 + \textcolor{#7c3aed}{\frac{4}{10}} \cdot 4\\[10pt]
+= \textcolor{#0f766e}{12} + \textcolor{#7c3aed}{\frac{4\cdot 4}{10}}\\[10pt]
+= \textcolor{#0f766e}{12} + \textcolor{#7c3aed}{\frac{16}{10}}\\[10pt]
+= \textcolor{#0f766e}{12 + 1} \textcolor{#7c3aed}{\frac{6}{10}}\\[10pt]
+= \textcolor{#0f766e}{13} \textcolor{#7c3aed}{\frac{6}{10}}\\[10pt]
+= \textcolor{#0f766e}{13} \textcolor{#7c3aed}{,6}\\[10pt]
+$$
+
+---
+### Calcul folosind descompunerea zecimalǎ
+$$
+3,4 \cdot 4 = 3,4 + 3,4 + 3,4 + 3,4 \\[10pt]
+= \textcolor{#0f766e}{3 + 3 + 3 + 3 +} \textcolor{#7c3aed}{0,4 + 0,4 + 0,4 + 0,4} \\[10pt]
+= \textcolor{#0f766e}{3\cdot 4} + \textcolor{#7c3aed}{0,4\cdot 4} \\[10pt]
+= \textcolor{#0f766e}{12} +  \textcolor{#7c3aed}{1,6} \\[10pt]
+= \textcolor{#0f766e}{13} \textcolor{#7c3aed}{,6} \\[10pt]
+$$
+
+---
+
+:::note Enunț
+Pentru **ziua Verde**, toți elevii școlii participă la un marș.  
+Dacă cei **278 de elevi** ai școlii primare merg fiecare câte **0,9 km**,  
+câți kilometri vor parcurge ei în total?
+:::
+
+
+## METODA 1 - Înmulțiri folosind regula descompunerii
+
+Estimez că elevii vor parcurge puțin mai puțin de **278 km**,  
+deoarece $278 \cdot 0,9 \approx 278 \cdot 1$.
+
+Efectuez înmulțirea folosind **dispoziția dreptunghiulară**.  
+Descompun $278$ în $200 + 70 + 8$ și înmulțesc fiecare termen cu $0,9$.  
+
+> Adun apoi produsele parțiale pentru a găsi totalul.
+
+|200|70|8|**x1**|
+|----|---|---| ----|
+|180|63|7,2| **x0,9** |
+
+>Total: $180 + 63 + 7,2 = 250,2$
+
+>Elevii au parcurs **250,2 km** în total.
+
+---
+
+## METODA 2 - Calculul mental și algoritm
+
+Dacă iau $0,9$ și adaug $0,1$, obțin $1$.  
+Folosesc acest număr reper pentru a înmulți:  
+$278 \times 1 = 278$ km.
+
+Cum am adăugat $0,1$ km pentru fiecare elev, trebuie să scad acest surplus.  
+Calculez câți kilometri înseamnă 0,1 km pentru toți elevii:
+$278 \times 0,1 = 27,8$.
+
+Scad surplusul: $278 - 27,8 = 250,2$.
+
+Așadar
+$$
+278 \times 0,9 = 250,2.
+$$
+
+Elevii au parcurs **250,2 km** în total.
+
+---
+
+## METODA 3 — Descompunerea în factori și asociativitatea
+
+Descompun $0,9$ ca $9 \times 0,1$ pentru a ușura înmulțirea.  
+Înmulțesc mai întâi $278$ cu $9$, apoi înmulțesc mental rezultatul cu $0,1$.
+
+$$
+278 \times 0,9
+= 278 \times 9 \times 0,1
+= 2502 \times 0,1
+= 250,2.
+$$
+
+Elevii au parcurs **250,2 km** în total.
+
+---

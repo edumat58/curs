@@ -1,0 +1,151 @@
+---
+title: "C7.2 - Fracții și scrierea procentuală"
+sidebar_position: 4
+slug: /c5/modul-1/09
+description: ""
+---
+
+# C7.2 – Fracții și scrierea procentuală
+
+---
+
+## Introducere
+
+:::tip Ce sunt procente?
+Procentele reprezintă părți dintr-un întreg de 100 de părți egale. Cuvântul „procent” vine din latină și înseamnă „la sută”.
+
+Exemple:
+
+- **50 %** înseamnă $ \dfrac{50}{100} $
+
+- **25 %** înseamnă $ \dfrac{25}{100} $
+:::
+
+---
+
+## Scrierea unui procent sub formă de fracție ordinară
+
+:::danger Metodă de conversie
+Pentru a scrie un procent sub formă de fracție ordinară:
+
+1. Împărțim procentul la 100 (eliminăm semnul %)
+2. Simplificăm fracția obținută (dacă este posibil)
+
+Formula generală:
+
+$$
+x\% = \dfrac{x}{100}
+$$
+:::
+
+### Exemple
+
+- **Exemplul 1** : $50\% = \dfrac{50}{100} = \dfrac{1}{2}$
+
+- **Exemplul 2** : $25\% = \dfrac{25}{100} = \dfrac{1}{4}$
+
+- **Exemplul 3** : $75\% = \dfrac{75}{100} = \dfrac{3}{4}$
+
+- **Exemplul 4** : $10\% = \dfrac{10}{100} = \dfrac{1}{10}$
+
+- **Exemplul 5** : $40\% = \dfrac{40}{100} = \dfrac{2}{5}$
+
+---
+
+## Reprezentări grafice
+
+<div style={{display:'flex',flexDirection:'row',gap:'2rem',alignItems:'center',justifyContent:'center',flexWrap:'wrap'}}>
+
+<div style={{textAlign:'center'}}>
+<svg width="120" height="120" viewBox="0 0 120 120">
+  <circle cx="60" cy="60" r="50" fill="none" stroke="black" strokeWidth="2"/>
+  <path d="M 60 10 A 50 50 0 0 1 60 110 L 60 60 Z" fill="#90caf9"/>
+</svg>
+<p><strong>50% = 1/2</strong></p>
+<p>Jumătate din cerc</p>
+</div>
+
+<div style={{textAlign:'center'}}>
+<svg width="120" height="120" viewBox="0 0 120 120">
+  <circle cx="60" cy="60" r="50" fill="none" stroke="black" strokeWidth="2"/>
+  <path d="M 60 10 A 50 50 0 0 1 110 60 L 60 60 Z" fill="#ffcc80"/>
+</svg>
+<p><strong>25% = 1/4</strong></p>
+<p>Sfert din cerc</p>
+</div>
+
+<div style={{textAlign:'center'}}>
+<svg width="120" height="120" viewBox="0 0 120 120">
+  <circle cx="60" cy="60" r="50" fill="none" stroke="black" strokeWidth="2"/>
+  <path d="M 60 10 A 50 50 0 1 1 60 110 A 50 50 0 0 1 10 60 L 60 60 Z" fill="#81c784"/>
+</svg>
+<p><strong>75% = 3/4</strong></p>
+<p>Trei sferturi din cerc</p>
+</div>
+
+</div>
+
+---
+
+## Verificarea echivalenţei a două fracţii prin diferite reprezentări
+
+:::tip Echivalența fracțiilor
+Două fracții sunt echivalente dacă reprezintă aceeași parte dintr-un întreg, chiar dacă sunt scrise diferit.
+
+Exemplu:  
+
+$ \dfrac{1}{2} = \dfrac{2}{4} = \dfrac{3}{6} = 50\% $
+:::
+
+### Metode de verificare
+
+#### 1. Reprezentare vizuală
+
+<div style={{display:'flex',flexDirection:'row',gap:'2rem',alignItems:'center',justifyContent:'center',flexWrap:'wrap'}}>
+
+<div style={{textAlign:'center'}}>
+<svg width="120" height="80" viewBox="0 0 120 80">
+  <rect x="10" y="10" width="100" height="60" fill="none" stroke="black" strokeWidth="2"/>
+  <rect x="10" y="10" width="50" height="60" fill="#90caf9"/>
+  <line x1="60" y1="10" x2="60" y2="70" stroke="black" strokeWidth="2"/>
+</svg>
+<p><strong>1/2</strong></p>
+</div>
+
+<div style={{textAlign:'center'}}>
+<svg width="120" height="80" viewBox="0 0 120 80">
+  <rect x="10" y="10" width="100" height="60" fill="none" stroke="black" strokeWidth="2"/>
+  <rect x="10" y="10" width="25" height="60" fill="#ffcc80"/>
+  <rect x="35" y="10" width="25" height="60" fill="#ffcc80"/>
+  <line x1="35" y1="10" x2="35" y2="70" stroke="black" strokeWidth="1"/>
+  <line x1="60" y1="10" x2="60" y2="70" stroke="black" strokeWidth="2"/>
+</svg>
+<p><strong>2/4</strong></p>
+</div>
+
+<div style={{textAlign:'center'}}>
+<svg width="120" height="80" viewBox="0 0 120 80">
+  <rect x="10" y="10" width="100" height="60" fill="none" stroke="black" strokeWidth="2"/>
+  <rect x="10" y="10" width="16.67" height="60" fill="#81c784"/>
+  <rect x="26.67" y="10" width="16.67" height="60" fill="#81c784"/>
+  <rect x="43.34" y="10" width="16.67" height="60" fill="#81c784"/>
+  <line x1="26.67" y1="10" x2="26.67" y2="70" stroke="black" strokeWidth="1"/>
+  <line x1="43.34" y1="10" x2="43.34" y2="70" stroke="black" strokeWidth="1"/>
+  <line x1="60" y1="10" x2="60" y2="70" stroke="black" strokeWidth="2"/>
+</svg>
+<p><strong>3/6</strong></p>
+</div>
+
+</div>
+
+#### 2. Calcul matematic
+
+Pentru a verifica dacă $ \dfrac{a}{b} = \dfrac{c}{d} $, înmulțim încrucișat.  
+
+Dacă $ a \times d = b \times c $, fracțiile sunt echivalente.
+
+Exemplu: $ \dfrac{1}{2} = \dfrac{2}{4} $  
+
+$1 \times 4 = 4$ și $2 \times 2 = 4$ → echivalente.
+
+---

@@ -36,10 +36,10 @@ export default function LectiiTreeView() {
       titlu: 'Săptămâna 3 - 22.09 - 26.09',
       note: 'Materiale încarcate',
       lectii: [
-        { titlu: 'C5.1 - Multimea nr. reale', zi: '22.09', tip: 'Algebra', link: 'c7/06', pdf: '' },
-        { titlu: 'C5.2 - Multimea nr. reale (h1)', zi: '24.09 (ora 1)', tip: 'Algebra', link: 'c7/07', pdf: '' },
-        { titlu: 'C6 - Modulul, compararea si ordonarea nr. reale', zi: '24.09 (ora 2)', tip: 'Algebra', link: 'c7/08', pdf: '' },
-        { titlu: 'C7 - Rationalizarea numitorului de forma a√b', zi: '26.09 (ora 1)', tip: 'Algebra', link: 'c7/09', pdf: '' },
+        { titlu: 'C5.1 - Multimea nr. reale', zi: '22.09', tip: 'Algebra', link: 'c7/modul-1/06', pdf: '' },
+        { titlu: 'C5.2 - Multimea nr. reale (h1)', zi: '24.09 (ora 1)', tip: 'Algebra', link: 'c7/modul-1/07', pdf: '' },
+        { titlu: 'C6 - Modulul, compararea si ordonarea nr. reale', zi: '24.09 (ora 2)', tip: 'Algebra', link: 'c7/modul-1/08', pdf: '' },
+        { titlu: 'C7 - Rationalizarea numitorului de forma a√b', zi: '26.09 (ora 1)', tip: 'Algebra', link: 'c7/modul-1/09', pdf: '' },
         { titlu: 'LP - Rationalizarea numitorului', zi: '26.09 (ora 2)', tip: 'EVALUARE SUMATIVA', link: '', pdf: '' },
       ],
     },
@@ -49,8 +49,8 @@ export default function LectiiTreeView() {
       lectii: [
         { titlu: 'LP - Calcul cu radicali', zi: '17.09 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
         { titlu: 'LP - Calcul cu radicali', zi: '17.09 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
-        { titlu: 'C4.1 - Notatia stiintifica si simplifcarea puterilor', zi: '18.09', tip: 'Algebra', link: 'c7/04', pdf: '' },
-        { titlu: 'C4.2 - Puteri: prioritatea operatiilor si notatia stiintifica', zi: '19.09', tip: 'Algebra', link: 'c7/05', pdf: '' },
+        { titlu: 'C4.1 - Notatia stiintifica si simplifcarea puterilor', zi: '18.09', tip: 'Algebra', link: 'c7/modul-1/04', pdf: '' },
+        { titlu: 'C4.2 - Puteri: prioritatea operatiilor si notatia stiintifica', zi: '19.09', tip: 'Algebra', link: 'c7/modul-1/05', pdf: '' },
         
       ],
     },
@@ -58,10 +58,10 @@ export default function LectiiTreeView() {
       titlu: 'Săptămâna 1: 08.09 - 12.09',
       note: 'Modulul 1: 08.09.2025 -> 25.10.2025',
       lectii: [
-        { titlu: 'C1 - Definitia si utilizarea puterilor', zi: '09.09.2025', tip: 'Algebra', link: 'c7/01', pdf: '' },
-        { titlu: 'C2 - Formule de calcul cu puteri', zi: '10.09.2025 (ora 1)', tip: 'Algebra', link: 'c7/02', pdf: '' },
+        { titlu: 'C1 - Definitia si utilizarea puterilor', zi: '09.09.2025', tip: 'Algebra', link: 'c7/modul-1/01', pdf: '' },
+        { titlu: 'C2 - Formule de calcul cu puteri', zi: '10.09.2025 (ora 1)', tip: 'Algebra', link: 'c7/modul-1/02', pdf: '' },
         { titlu: 'LP - Puteri', zi: '10.09.2025 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
-        { titlu: 'C3 - Calcul cu radicali. Proprietati', zi: '11.09.2025', tip: 'Algebra', link: 'c7/03', pdf: '' },
+        { titlu: 'C3 - Calcul cu radicali. Proprietati', zi: '11.09.2025', tip: 'Algebra', link: 'c7/modul-1/03', pdf: '' },
       ],
     },
   ];

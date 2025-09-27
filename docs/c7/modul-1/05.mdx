@@ -1,0 +1,78 @@
+---
+sidebar_position: 1
+slug: /c7/modul-1/05
+description: ""
+---
+
+# C4.2 – Puteri: prioritatea operațiilor și notația științifică
+
+---
+
+## Prioritatea operațiilor
+
+:::info Proprietate
+Pentru a efectua un calcul **fără paranteze**, se procedează astfel:
+
+1. Se calculează **puterile**.
+2. Apoi **înmulțirile** și **împărțirile** (de la stânga la dreapta).
+3. În final **adunările** și **scăderile** (de la stânga la dreapta).
+:::
+
+### Exemple
+
+1.  
+   $$
+   9 - 5 \times 3^3
+   = 9 - 5 \times 27
+   = 9 - 135
+   = -126
+   $$
+
+2.  
+   $$
+   (8 - 2^5) \times 4
+   = (8 - 32) \times 4
+   = -24 \times 4
+   = -96
+   $$
+
+---
+
+## Notația științifică
+
+:::tip Definiție
+Notația științifică a unui număr zecimal pozitiv este o scriere de forma:
+$$
+a \times 10^n,
+$$
+unde $1 \le a < 10$ și $n \in \mathbb{Z}$ (pozitiv, negativ sau zero).
+:::
+
+### Exemple și contraexemple
+
+- $1{,}201 \times 10^8$ (corect, deoarece $1 \le 1{,}201 < 10$)
+- $9{,}99 \times 10^7$ (corect)
+- $0{,}54 \times 10^3$ (greșit, deoarece $a < 1$)
+- $52{,}486 \times 10^8$ (greșit, deoarece $a \ge 10$)
+
+---
+
+## Cum obținem o notație științifică
+
+### Cazul I – Număr mai mare sau egal cu 10
+
+**Exemplu**: $256\,800\,000$  
+- Mutăm virgula după prima cifră nenulă: $2{,}56800000$.  
+- Numărăm pozițiile (8):  
+  $$
+  256\,800\,000 = 2{,}568 \times 10^8.
+  $$
+
+### Cazul II – Număr cuprins între 0 și 1
+
+**Exemplu**: $0{,}00054$  
+- Mutăm virgula după prima cifră nenulă: $5{,}4$.  
+- Numărăm pozițiile (4):  
+  $$
+  0{,}00054 = 5{,}4 \times 10^{-4}.
+  $$

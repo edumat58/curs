@@ -14,8 +14,8 @@ export default function LectiiTreeView() {
       titlu: 'Săptămâna 1: 08.09 - 12.09',
       note: 'Modulul 1: 08.09.2025 -> 25.10.2025',
       lectii: [
-        { titlu: 'C1 - Notatii si simboluri matematice', zi: '11.09.2025 (ora 1)', tip: 'Algebra', link: 'c8/01', pdf: 'c8_01.pdf' },
-        { titlu: 'C2 - Multimea nr. reale R', zi: '11.09.2025 (ora 2)', tip: 'Algebra', link: 'c8/02', pdf: 'c8_02.pdf' },
+        { titlu: 'C1 - Notatii si simboluri matematice', zi: '11.09.2025 (ora 1)', tip: 'Algebra', link: 'c8/modul-1/01', pdf: 'c8_01.pdf' },
+        { titlu: 'C2 - Multimea nr. reale R', zi: '11.09.2025 (ora 2)', tip: 'Algebra', link: 'c8/modul-1/02', pdf: 'c8_02.pdf' },
       ],
     },
     {
