@@ -1,0 +1,82 @@
+---
+sidebar_position: 3
+slug: /c8/03
+description: ""
+---
+
+# C3.1 – Egalitatea expresiilor literale. Distributivitate simplă
+
+---
+
+## Expresii literale egale
+
+:::tip Definiție
+Două expresii literale sunt **egale** dacă dau același rezultat pentru orice valoare atribuită literelor acestor expresii.
+:::
+
+---
+
+## Metode
+
+### Testarea egalității a două expresii literale
+
+Pentru a verifica dacă două expresii sunt egale, se pot înlocui literele cu diverse valori:
+
+- Dacă se obțin rezultate diferite pentru cel puțin o valoare, expresiile **nu sunt egale**.
+- Dacă pentru toate valorile testate se obțin aceleași rezultate, se caută o demonstrație generală a egalității.
+
+**Exemplu**
+
+Fie $A = 5 + 4x, \,B = 9x$
+
+Sunt egale?
+
+- Pentru $x = 1$: $A = 5 + 4\cdot 1 = 9$, $B = 9 \cdot 1 = 9$.
+- Pentru $x = 2$: $A = 5 + 4\cdot 2 = 13$, $B = 9 \cdot 2 = 18$.
+
+Cum $13 \neq 18$, rezultă că $A$ și $B$ **nu sunt egale**.
+
+> **Atenție**  
+> Dacă două expresii dau același rezultat doar pentru o valoare particulară a literei, **nu** putem spune că sunt egale în general, ci doar pentru acea valoare.
+
+---
+
+### Utilizarea proprietății de distributivitate simplă
+
+:::tip Distributivitate simplă
+Pentru orice numere $a$, $b$, $c$ sunt valabile egalitățile:
+$$
+a(b + c) = ab + ac,
+$$
+$$
+a(b - c) = ab - ac.
+$$
+:::
+
+**Exemple de dezvoltare**
+
+- $3(x + 2) = 3x + 6$
+- $(a - 3)\times 2 = 2a - 6$
+
+**Exemple de factorizare**
+
+- $ab + ac = a(b + c)$
+- $ab - ac = a(b - c)$
+
+**Alte exemple**
+
+- $7a + 7 \times 2 = 7(a + 2)$
+- $6 + 6c = 6(1 + c)$
+- $4a + 7a = (4 + 7)a = 11a$
+
+:::danger Foarte important
+- $+(a + b) = a + b$
+- $+(a - b) = a - b$
+- $-(a + b) = -a - b$
+- $-(a - b) = -a + b$
+:::
+
+**Justificare**  
+$$
+-(a - b) = (-1)\times (a - b) = -a + b.
+$$

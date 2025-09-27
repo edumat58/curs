@@ -1,0 +1,148 @@
+---
+sidebar_position: 5
+slug: /c6/05
+description: ""
+---
+
+import * as React from 'react';
+import { BarChart } from '@mui/x-charts/BarChart';
+
+# C5.1 – Diagrame în bastoane și histograme
+
+---
+
+## Citirea unei diagrame în bastoane sau a unei histograme
+
+:::tip Definiție
+Pentru a interpreta date statistice putem folosi:
+- **Diagrama în bastoane:** înălțimea fiecărei bastoane este proporțională cu efectivul (numărul de elemente) sau cu frecvența.
+- **Histograma:** aria fiecărui dreptunghi este proporțională cu efectivul (sau frecvența).
+
+Dacă grupele (intervalele) unei histograme au aceeași amplitudine, atunci și înălțimea fiecărui dreptunghi este proporțională cu efectivul (sau frecvența).
+:::
+
+### Exemplu de citire
+
+<div style={{ display: 'flex', gap: '2rem', alignItems: 'flex-start', flexWrap: 'wrap' }}>
+    <div style={{ flex: 3, minWidth: 300 }}>
+#### a) Diagrama în bastoane
+
+| Etape | Soluție |
+|-------|---------|
+| 1. Identificăm ce reprezintă axele. | Avem numărul de elevi în funcție de sportul preferat. |
+| 2. Determinăm valoarea unei gradații pe axa verticală. | O gradație verticală reprezintă 20 de elevi. Deci 80 de elevi preferă fotbalul. |
+</div>
+
+    <div style={{ flex: 1, minWidth: 300 }}>
+<BarChart
+  xAxis={[
+    {
+      id: 'barCategories',
+      data: ['Fotbal', 'Handbal', 'Tenis', 'Basket'],
+    },
+  ]}
+  series={[
+    {
+      data: [80, 40, 60, 30],
+    },
+  ]}
+  height={400}
+/>
+</div>
+</div>
+
+---
+
+#### b) Histogramă
+
+| Etape | Soluție |
+|-------|---------|
+| 1. Identificăm ce reprezintă axele. | Avem procentul de elevi în funcție de durata medie a temelor. |
+| 2. Determinăm valoarea unei gradații pe axa verticală. | O gradație verticală reprezintă 10 % dintre elevi. Deci 50 % dintre elevi lucrează între 0 și 30 min. |
+
+`Distribuție: 50% (0–30), 30% (30–60), 20% (60–90).`
+
+<svg viewBox="0 0 800 350" width="100%" xmlns="http://www.w3.org/2000/svg">
+<text x="300" y="16" text-anchor="middle" font-size="16" font-weight="700" fill="#222">Histogramă – Durata medie a temelor (%)</text>
+<g stroke="#dddddd" stroke-width="1">
+<line x1="60" y1="310" x2="580" y2="310"></line>
+<line x1="60" y1="252" x2="580" y2="252"></line>
+<line x1="60" y1="194" x2="580" y2="194"></line>
+<line x1="60" y1="136" x2="580" y2="136"></line>
+<line x1="60" y1="78" x2="580" y2="78"></line>
+<line x1="60" y1="20" x2="580" y2="20"></line>
+</g>
+<g stroke="#222" stroke-width="2">
+<line x1="60" y1="20" x2="60" y2="310"></line>
+<line x1="60" y1="310" x2="580" y2="310"></line>
+</g>
+<g font-size="12" fill="#222" text-anchor="end">
+<text x="55" y="314">0</text>
+<text x="55" y="285">10</text>
+<text x="55" y="256">20</text>
+<text x="55" y="227">30</text>
+<text x="55" y="198">40</text>
+<text x="55" y="169">50</text>
+<text x="18" y="150" transform="rotate(-90 18 150)">% din elevi</text>
+</g>
+<g font-size="12" fill="#222" text-anchor="middle">
+<text x="60" y="330">0</text>
+<text x="233.33" y="330">30</text>
+<text x="406.67" y="330">60</text>
+<text x="580" y="330">90</text>
+<text x="320" y="346">Durata temelor (minute)</text>
+</g>
+<rect x="60" y="165" width="173.33" height="145" fill="#4e79a7"></rect>
+<rect x="233.33" y="223" width="173.33" height="87" fill="#4e79a7"></rect>
+<rect x="406.67" y="252" width="173.33" height="58" fill="#4e79a7"></rect>
+</svg>
+
+---
+
+## Construirea unei diagrame în bastoane sau a unei histograme
+
+`Date: Orele de sosire ale elevilor la școalǎ`
+
+| Interval orar | 9 ≤ h < 10 | 10 ≤ h < 11 | 11 ≤ h < 12 |
+|---------------|-----------|------------|------------|
+| Efectiv       | 10        | 35         | 20         |
+
+| Etape | Soluție |
+|-------|---------|
+| 1. Gradăm axele, indicând ce reprezintă. | Pe axa orizontală se marchează orele, pe cea verticală efectivul, din 10 în 10. |
+| 2. Plasăm datele: trasăm bastoane pentru diagrama în bastoane sau dreptunghiuri pentru histogramă. | Se desenează dreptunghiuri corespunzătoare efectivelor 10, 35, 20. |
+
+`Date: 9–10 → 10, 10–11 → 35, 11–12 → 20 (total 65). Intervalul de vârf este 10–11.`
+
+<svg viewBox="0 0 800 350" width="100%" xmlns="http://www.w3.org/2000/svg">
+<text x="300" y="16" text-anchor="middle" font-size="16" font-weight="700" fill="#222">Histogramă – Ora de sosire</text>
+<g stroke="#dddddd" stroke-width="1">
+<line x1="60" y1="310" x2="580" y2="310"></line>
+<line x1="60" y1="237.5" x2="580" y2="237.5"></line>
+<line x1="60" y1="165" x2="580" y2="165"></line>
+<line x1="60" y1="92.5" x2="580" y2="92.5"></line>
+<line x1="60" y1="20" x2="580" y2="20"></line>
+</g>
+<g stroke="#222" stroke-width="2">
+<line x1="60" y1="20" x2="60" y2="310"></line>
+<line x1="60" y1="310" x2="580" y2="310"></line>
+</g>
+<g font-size="12" fill="#222" text-anchor="end">
+<text x="55" y="314">0</text>
+<text x="55" y="241.5">10</text>
+<text x="55" y="169">20</text>
+<text x="55" y="96.5">30</text>
+<text x="55" y="24">40</text>
+<text x="18" y="170" transform="rotate(-90 18 170)">Număr de elevi</text>
+</g>
+<g font-size="12" fill="#222" text-anchor="middle">
+<text x="60" y="330">9</text>
+<text x="233.33" y="330">10</text>
+<text x="406.67" y="330">11</text>
+<text x="580" y="330">12</text>
+<text x="320" y="346">Ora de sosire (h)</text>
+</g>
+<rect x="60" y="237.5" width="173.33" height="72.5" fill="#4e79a7"></rect>
+<rect x="233.33" y="56.25" width="173.33" height="253.75" fill="#4e79a7"></rect>
+<rect x="406.67" y="165" width="173.33" height="145" fill="#4e79a7"></rect>
+</svg>

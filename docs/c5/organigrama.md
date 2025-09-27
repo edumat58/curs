@@ -11,27 +11,59 @@ import React, { useState } from 'react';
 export default function LectiiTreeView() {
   const saptamani = [
     {
-      titlu: 'Săptămâna 1: 08.09 - 12.09',
-      note: 'Modulul 1: 08.09.2025 -> 25.10.2025',
+      titlu: 'Săptămâna 5 - În pregătire',
+      note: 'Materiale în curs de creare',
       lectii: [
-        { titlu: 'C1 - Multiplii si divizori', zi: '10.09.2025', tip: 'Algebra', link: 'c6/01', pdf: 'c6_01.pdf' },
-        { titlu: 'C2 - Numere prime. Descompunerea in factori primi', zi: '11.09.2025 (ora 1)', tip: 'Algebra', link: 'c6/02', pdf: 'c6_02.pdf' },
-        { titlu: 'C3 - Multimi. Multimea nr. naturale', zi: '11.09.2025 (ora 2)', tip: 'Algebra', link: 'c6/03', pdf: 'c6_03.pdf' },
-        { titlu: 'C4 - Multimea nr. intregi. Sistemul de coordonate', zi: '12.09.2025', tip: 'Algebra', link: 'c6/04', pdf: 'c6_04.pdf' },
+        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
+        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
+        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
+        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
+        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
+      ],
+    },
+    {
+      titlu: 'Săptămâna 4 - 29.09 - 03.10',
+      note: 'Materiale în curs de creare',
+      lectii: [
+        { titlu: 'C8.1 - Proprietati ale inmultirii', zi: '', tip: 'Algebra', link: 'c5/10.mdx', pdf: '' },
+        { titlu: 'C8.2 - Factor comun', zi: '', tip: 'Algebra', link: 'c5/11.mdx', pdf: '' },
+        { titlu: 'LP - Inmultiri si factorizare', zi: '', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'C9 - Proprietati puteri cu exponent natural', zi: '', tip: 'Algebra', link: 'c5/12.mdx', pdf: '' },
+        { titlu: 'LP - Puteri', zi: '', tip: 'Algebra', link: '', pdf: '' },
+      ],
+    },   
+    {
+      titlu: 'Săptămâna 3 - 22.09 - 26.09',
+      note: 'Materiale încarcate',
+      lectii: [
+        { titlu: 'C7.1 - Ilustrarea fractiilor echiunitare, subunitare si supraunitare', zi: '23.09', tip: 'Algebra', link: 'c5/08', pdf: '' },
+        { titlu: 'TEST DIN LECTIA DE ZI (C6.2) | 100% NOTA 1', zi: '23.09', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'CORECTARE TEST', zi: '24.09', tip: 'CORECTARE', link: '', pdf: '' },
+        { titlu: 'C7.2 - Fractii si scrierea procentuala', zi: '25.09', tip: 'Algebra', link: 'c5/09', pdf: '' },
+        { titlu: 'LP - Fractii si RECAPITULARE TEST', zi: '26.09 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'TEST 1 (C1 -> C6.2) | 50% NOTA 2 [1/2]', zi: '26.09 (ora 2)', tip: 'EVALUARE SUMATIVA', link: '', pdf: '' },
       ],
     },
     {
       titlu: 'Săptămâna 2: 15.09 - 19.09',
-      note: 'Materiale în curs de creare',
+      note: 'Materiale încarcate',
       lectii: [
-        { titlu: 'C', zi: '', tip: '', link: '', pdf: '' },
+        { titlu: 'C5 - Semidreapta gradata', zi: '16.09', tip: 'Algebra', link: 'c5/05', pdf: '' },
+        { titlu: 'LP - Semidreapta gradata', zi: '17.09', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'C6.1 - Multimi. Multimea nr. naturale', zi: '18.09', tip: 'Algebra', link: 'c5/06', pdf: '' },
+        { titlu: 'C6.2 - Scrierea si citirea nr. naturale', zi: '19.09 (ora 1)', tip: 'Algebra', link: 'c5/07', pdf: '' },
+        { titlu: 'LP - Scrierea si citirea nr. naturale', zi: '19.09 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
+        
       ],
     },
     {
-      titlu: 'Săptămâna 3 - În pregătire',
-      note: 'Materiale în curs de creare',
+      titlu: 'Săptămâna 1: 08.09 - 12.09',
+      note: 'Modulul 1: 08.09.2025 -> 25.10.2025',
       lectii: [
-        { titlu: 'C', zi: '', tip: '', link: '', pdf: '' },
+        { titlu: 'C1 - Scrierea sub forma zecimala', zi: '10.09.2025', tip: 'Algebra', link: 'c5/01', pdf: '' },
+        { titlu: 'C2 - Adunarea si scaderea nr. zecimale', zi: '11.09.2025 (ora 1)', tip: 'Algebra', link: 'c5/02', pdf: '' },
+        { titlu: 'C3 - Inmultirea numerelor zecimale', zi: '11.09.2025 (ora 2)', tip: 'Algebra', link: 'c5/03', pdf: '' },
+        { titlu: 'C4 - Impartirea Euclidiana. Impartirea nr. zecimale', zi: '12.09.2025', tip: 'Algebra', link: 'c5/04', pdf: '' },
       ],
     },
   ];
@@ -131,12 +163,16 @@ export default function LectiiTreeView() {
                       <strong>{lec.titlu}</strong> – {lec.zi} ({lec.tip})
                     </span>
                     <span style={{ display: 'flex', gap: '0.5rem' }}>
-                      <a href={`/curs/docs/${lec.link}`} className="button button--primary button--sm" target="_blank">
-                        Vezi lecția
-                      </a>
-                      <a href={`/curs/c5_pdf/${lec.pdf}`} className="button button--secondary button--sm" download>
-                        Descarcă PDF
-                      </a>
+                      {lec.link && (
+                        <a href={`/curs/docs/${lec.link}`} className="button button--primary button--sm" target="_blank">
+                          Vezi lecția
+                        </a>
+                      )}
+                      {lec.pdf && (
+                        <a href={`/curs/c5_pdf/${lec.pdf}`} className="button button--secondary button--sm" download>
+                          Descarcă PDF
+                        </a>
+                      )}
                     </span>
                   </div>
                 </li>

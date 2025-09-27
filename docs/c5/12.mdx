@@ -1,0 +1,236 @@
+---
+title: "C9 - Proprietăți puteri cu exponent natural"
+sidebar_position: 12
+slug: /c5/12
+description: ""
+---
+
+# C9 - Proprietăți puteri cu exponent natural
+
+---
+
+## Introducere
+
+:::tip Ce este o putere?
+Puterea unui număr reprezintă produsul acelui număr cu el însuși de mai multe ori.
+Dacă $a$ este un număr și $n \ge 1$, atunci:
+
+$$
+a^n = \underbrace{a \times a \times \dots \times a}_{n\ \text{factori}}
+$$
+
+Se citește „$a$ la puterea $n$” sau „$a$ la exponent $n$”.
+:::
+
+Exemple:
+
+- $2^5 = 2 \times 2 \times 2 \times 2 \times 2 = 32$
+
+- $2000^1 = 2000$
+
+- $(-3)^2 = (-3) \times (-3) = 9$
+
+- $(-3)^3 = (-3) \times (-3) \times (-3) = -27$
+
+- $\left(\dfrac{2}{3}\right)^3 = \dfrac{2 \times 2 \times 2}{3 \times 3 \times 3} = \dfrac{8}{27}$
+
+- $0^3 = 0$
+
+:::note Observații
+- $a^2$ se citește „$a$ la pătrat”  
+
+- $a^3$ se citește „$a$ la cub”
+
+- Atenție: $2^3 = 8$, pe când $3 \times 2 = 6$.
+:::
+
+---
+
+## 1. Puteri ale unui număr
+
+### Exponent pozitiv
+
+Dacă $n \ge 1$ și $a$ este un număr real,  
+$$
+a^n = a \times a \times \dots \times a
+$$
+(cu $n$ factori egali cu $a$).
+
+---
+
+### Produsul al două puteri cu aceeași bază
+
+Pentru $a$ număr real și $m, n \ge 1$:
+$$
+a^m \times a^n = a^{m+n}
+$$
+
+Exemple:
+
+- $2^3 \times 2^4 = 2^{3+4} = 2^7$
+- $5^2 \times 5^1 = 5^{3}$
+- $8^3 \times 8^2 \times 8^4 = 8^{3+2+4} = 8^{9}$
+
+:::note Atenție
+Dacă bazele sunt diferite, regula nu se aplică:
+$5^2 \times 4^3$ nu se poate scrie ca o singură putere.
+
+Nici o **suma** de puteri nu se reduce:
+$3^6 + 3^2$ nu este o singură putere.
+:::
+
+#### Puterea cu exponent zero
+
+:::danger De Retinut
+Observăm că $a^0 = 1$ pentru orice număr real $a$:
+$$
+a^0 \times a^4 = a^{0+4} = a^4
+\quad\Rightarrow\quad
+a^0 = 1
+$$
+
+În special, $0^0 = 1$ (convenție).
+:::
+
+---
+
+#### Puterea unei puteri
+
+Pentru $a$ număr real și $m, n \ge 1$:
+$$
+\bigl(a^m\bigr)^n = a^{m \times n}
+$$
+
+Exemple:
+- $(2^3)^2 = 2^{3 \times 2} = 2^6$
+- $(7^6)^3 = 7^{6 \times 3} = 7^{18}$
+
+---
+
+### Câtul a două puteri cu aceeași bază
+
+Pentru $a \neq 0$ și $m, n$ naturali:
+$$
+\dfrac{a^m}{a^n} = a^{m-n}
+$$
+
+Exemple:
+
+- $\dfrac{2^5}{2^2} = 2^{5-2} = 2^3$
+
+- $\dfrac{3^6}{3^4} = 3^{6-4} = 3^{2}$
+
+
+---
+
+### Puterea unui produs și a unui cât
+
+Pentru $a, b \neq 0$ și $n$ întreg:
+$$
+(a \times b)^n = a^n \times b^n,
+\qquad
+\left(\dfrac{a}{b}\right)^n = \dfrac{a^n}{b^n}
+$$
+
+Exemple:
+
+- $(2 \times 3)^4 = 2^4 \times 3^4$
+- $\left(\dfrac{2}{5}\right)^3 = \dfrac{2^3}{5^3}$
+- $4^3 \times 7^3 = (4 \times 7)^3 = 28^3$
+
+---
+
+## 2. Puterile lui 10
+
+### Exemple de bază
+
+- $10^3 = 10 \times 10 \times 10 = 1\,000$
+- $10^{-2} = \dfrac{1}{10^2} = 0{,}01$
+
+:::note Proprietate
+Pentru $n \ge 1$:
+- $10^n$ este numărul 1 urmat de $n$ zerouri.
+- $10^{-n} = \dfrac{1}{10^n}$ reprezintă numărul cu $n$ cifre după virgulă, de forma $0,00\dots 01$.
+:::
+
+Exemple:
+- $10^5 = 100\,000$
+- $10^{-4} = 0{,}0001$
+- $10^0 = 1$
+- $10^1 = 10$
+- $10^{-1} = 0{,}1$
+
+---
+
+### Reguli de calcul
+
+:::danger De Reținut
+$$
+10^m \times 10^n = 10^{m+n}, \quad
+\dfrac{10^m}{10^n} = 10^{m-n}, \quad
+\bigl(10^m\bigr)^n = 10^{m \times n}
+$$
+:::
+
+Exemple:
+
+- $10^3 \times 10^4 = 10^{7}$
+
+- $\dfrac{10^7}{10^3} = 10^{4}$
+
+- $\bigl(10^5\bigr)^2 = 10^{10}$
+
+---
+
+### Deplasarea virgulei
+
+- Înmulțirea unui număr zecimal cu $10^n$ deplasează virgula $n$ ranguri spre **dreapta**.
+- Înmulțirea cu $10^{-n}$ deplasează virgula $n$ ranguri spre **stânga**.
+
+Exemple:
+
+- $25{,}1 \times 10^5 = 2\,510\,000$
+- $25{,}1 \times 10^{-1} = 25,1 : 10 = 2{,}51$
+
+---
+
+## 3. Scrierea (notația) științifică
+
+:::tip Definiție
+Scrierea științifică a unui număr real este forma:
+$$
+a \times 10^n
+$$
+unde $a$ este un număr zecimal cu **un singur cifru nenul înainte de virgulă**, iar $n$ este un număr întreg.
+:::
+
+Exemple:
+
+- $A = 8{,}56 \times 10^7$ este scris corect în notație științifică.
+- $B = 0{,}45 \times 10^{2}$ **nu** este scris corect (cifra înainte de virgulă este nulă).
+- $C = 9{,}1 \times 5^3$ **nu** este scris corect (al doilea factor nu este o putere a lui 10).
+
+---
+
+### Compararea numerelor scrise științific
+
+Pentru $A = a \times 10^m$ și $B = b \times 10^n$:
+
+1. Comparăm mai întâi exponenții $m$ și $n$.  
+2. Dacă sunt egali, comparăm valorile $a$ și $b$.
+
+Exemple:
+
+- $6{,}04 \times 10^5 < 2{,}03 \times 10^7$ (deoarece $5<7$)
+- $4{,}51 \times 10^7 < 6{,}7 \times 10^7$ (exponenți egali, comparăm coeficienții)
+
+---
+
+
+## Tabel – Reguli de calcul pentru puterile lui $10$
+
+| Regula | Exemplu 1 | Exemplu 2 |
+|--------|----------|----------|
+| $10^m \times 10^n = 10^{m+n}$ | $10^3 \times 10^4 = 10^{7}$ | $10^{-6} \times 10^{4} = 10^{-2}$ |
+| $\dfrac{10^m}{10^n} = 10^{m-n}$ | $\dfrac{10^7}{10^3} = 10^{4}$ | $\dfrac{10^{-5}}{10^{8}} = 10^{-13}$ |
+| $\bigl(10^m\bigr)^n = 10^{m \times n}$ | $(10^5)^2 = 10^{10}$ | $(10^3)^{-4} = 10^{-12}$ |

@@ -1,0 +1,130 @@
+---
+sidebar_position: 8
+slug: /c6/08
+description: ""
+---
+
+import KaTeX from 'katex';
+
+# C5.4 – Procente de mărire și micșorare
+
+---
+
+## Calcul cu procente de mărire și micșorare
+
+### Proprietăți
+
+- **A mări un număr cu $a\%$** înseamnă a-l înmulți cu  
+  $$
+  1+\frac{a}{100}
+  $$
+  
+  **Cantitatea finală** $=\left(1+\frac{a}{100}\right)\times \text{cantitatea inițială}.$
+
+---
+
+- **A micșora un număr cu $a\%$** înseamnă a-l înmulți cu  
+  $$
+  1-\frac{a}{100}
+  $$
+
+  **Cantitatea finală**  
+  $$=\left(1-\frac{a}{100}\right)\times \text{cantitatea inițială}.$$
+
+---
+
+:::info Formule-cheie
+- **Mărire cu $a\%$**  
+  $$
+  Q_{\text{final}}=\left(1+\frac{a}{100}\right)Q_{\text{inițial}}
+  $$
+- **Micșorare cu $a\%$**  
+  $$
+  Q_{\text{final}}=\left(1-\frac{a}{100}\right)Q_{\text{inițial}}
+  $$
+:::
+
+**Exemple rapide**
+
+- Creștere cu $5\%$: $1+\dfrac{5}{100}=1{,}05 \;\Rightarrow\;$ înmulțim cu $1{,}05$.
+- Scădere cu $35\%$: $1-\dfrac{35}{100}=0{,}65 \;\Rightarrow\;$ înmulțim cu $0{,}65$.
+
+**Justificare** (pentru o creștere de $5\%$):  
+Fie $x$ numărul inițial. Creșterea este $\dfrac{5}{100}x=0{,}05x$.  
+Numărul mărit devine  
+$$x+0{,}05x=x\bigl(1+0{,}05\bigr)=1{,}05x.$$
+
+---
+
+:::tip Factorul multiplicativ
+Numim **coeficient de proporționalitate**  
+$$
+k=\begin{cases}
+1+\dfrac{a}{100} & \text{(mărire)}\\[6pt]
+1-\dfrac{a}{100} & \text{(micșorare)}
+\end{cases}
+$$
+și calculăm mereu
+$$Q_{\text{final}}=k\cdot Q_{\text{inițial}}.$$
+:::
+
+---
+
+## Metoda 1 — Calculul **cantității finale**
+
+1. Alege formula potrivită (mărire / micșorare).  
+2. Înlocuiește datele.  
+3. Calculează.
+
+:::note Cerință
+Populația unei localități este $10\,200$ și **crește cu $14\%$**.
+:::
+
+Rezolvare:
+$$
+Q_f=\left(1+\frac{14}{100}\right)\cdot10\,200
+   =1{,}14\cdot10\,200
+   =11\,628.
+$$
+
+---
+
+:::note Cerință
+Un preț de $80$ lei **scade cu $35\%$**.
+:::
+
+Rezolvare:
+$$
+Q_f=\left(1-\frac{35}{100}\right)\cdot80
+   =0{,}65\cdot80
+   =52\;\text{lei}.
+$$
+
+---
+
+## Metoda 2 — Calculul **procentului** de mărire/micșorare
+
+Plecăm de la formule:
+
+- Pentru **mărire**:
+  $$
+  Q_f=\left(1+\frac{a}{100}\right)Q_i
+  \;\Longrightarrow\;
+  1+\frac{a}{100}=\frac{Q_f}{Q_i}.
+  $$
+- Pentru **micșorare**:
+  $$
+  Q_f=\left(1-\frac{a}{100}\right)Q_i
+  \;\Longrightarrow\;
+  1-\frac{a}{100}=\frac{Q_f}{Q_i}.
+  $$
+
+:::note Exemplu
+
+Un articol trece de la 125 lei la 140lei. Cât este procentul cu care s-a modificat prețul?
+:::
+
+$$
+1 + \frac{a}{100} = \frac{140}{125} = 1,12 \Rightarrow \frac{a}{100} = 0,12 \Rightarrow 12 \% 
+$$
+---

@@ -1,0 +1,87 @@
+---
+sidebar_position: 4
+slug: /c8/04
+description: ""
+---
+
+# C3.2 – Dezvoltarea și simplificarea expresiilor literale
+
+---
+
+## Sumă sau produs
+
+:::tip Definiție 1
+O expresie literală este o **sumă** (respectiv un **produs**) dacă ultima operație efectuată, respectând regulile de prioritate, este o adunare (respectiv o înmulțire).
+:::
+
+**Exemple**
+- $4x^2 + 7x$ este o **sumă**.
+- $3(x + 7)$ este un **produs**.
+
+:::tip Definiție 2
+**A dezvolta** o expresie înseamnă a transforma un produs într-o sumă.
+:::
+
+---
+
+## Metode
+
+### Simplificarea produselor
+
+Se grupează numerele între ele și termenii cu variabile între ei, apoi se efectuează calculele.
+
+**Exemplu**  
+Simplifică $A = 4x \times 7x$:
+
+$$
+\begin{aligned}
+A &= 4 \times x \times 7 \times x \\
+  &= 4 \times 7 \times x \times x \\
+  &= 28 \times x^2 \\
+  &= 28x^2.
+\end{aligned}
+$$
+
+> La început, poți rescrie explicit semnele $\times$ pentru claritate.
+
+---
+
+### Simplificarea sumelor
+
+Se grupează termenii de același tip: cei cu $x^2$, cei cu $x$, și numerele. Se efectuează calculele și simplificările, utilizând la nevoie proprietatea de **distributivitate simplă**.
+
+**Exemplu**  
+Simplifică
+$$
+B = 5x^2 + 7x - 3x^2 - 7 + 2x + 3.
+$$
+
+$$
+\begin{aligned}
+B &= \underbrace{5x^2 - 3x^2}_{2x^2}
+   + \underbrace{7x + 2x}_{9x}
+   + \underbrace{-7 + 3}_{-4} \\
+  &= 2x^2 + 9x - 4.
+\end{aligned}
+$$
+
+> Atenție: nu orice sumă poate fi simplificată!
+
+---
+
+### Dezvoltarea (folosind distributivitatea simplă) și simplificarea
+
+Pentru a elimina parantezele într-o expresie literală, se folosește proprietatea **distributivității simple**.
+
+**Exemplu**  
+Dezvoltă și simplifică
+$$
+C = 5(3x - 2) - (2x - 3).
+$$
+
+| Etapă | Soluție |
+|-------|--------|
+| 1. Se elimină parantezele aplicând distributivitatea | $C = 5 \times 3x - 5 \times 2 - 2x + 3$ |
+| 2. Se efectuează produsele | $C = 15x - 10 - 2x + 3$ |
+| 3. Se grupează termenii de același tip | $C = 15x - 2x - 10 + 3$ |
+| 4. Se efectuează sumele | $C = 13x - 7$ |

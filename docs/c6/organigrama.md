@@ -10,6 +10,50 @@ import React, { useState } from 'react';
 
 export default function LectiiTreeView() {
   const saptamani = [
+        {
+      titlu: 'Săptămâna 5 - În pregătire',
+      note: 'Materiale în curs de creare',
+      lectii: [
+        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
+        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
+        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
+        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
+        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
+      ],
+    },
+    {
+      titlu: 'Săptămâna 4 - 29.09 - 03.10',
+      note: 'Materiale în curs de creare',
+      lectii: [
+        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
+        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
+        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
+        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
+        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
+      ],
+    }, 
+        {
+      titlu: 'Săptămâna 3 - 22.09 - 26.09',
+      note: 'Materiale încarcate',
+      lectii: [
+        { titlu: 'C5.5 - Rapoarte', zi: '24.09', tip: 'Algebra', link: 'c6/09', pdf: '' },
+        { titlu: 'C5.6 - Scara numerică', zi: '25.09 (ora 1)', tip: 'Algebra', link: 'c6/10', pdf: '' },
+        { titlu: 'C5.6 - Scara numerică', zi: '25.09 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'C5.7 - Proporții', zi: '26.09 (ora 1)', tip: 'Algebra', link: 'c6/11', pdf: '' },
+        { titlu: 'TEST DIN LECTIA DE ZI si LP - Proportii', zi: '26.09 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
+      ],
+    },
+    {
+      titlu: 'Săptămâna 2 - 15.09 - 19.09',
+      note: 'Materiale încarcate',
+      lectii: [
+        { titlu: 'C5.1 – Diagrame în bastoane și histograme', zi: '17.09', tip: 'Algebra', link: 'c6/05', pdf: '' },
+        { titlu: 'C5.2 - Diagrame circulare', zi: '18.09 (ora 1)', tip: 'Algebra', link: 'c6/06', pdf: '' },
+        { titlu: 'LP - Diagrame circulare', zi: '18.09 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'C5.3 - Procente. Calcul procentual', zi: '19.09 (ora 1)', tip: 'Algebra', link: 'c6/07', pdf: '' },
+        { titlu: 'C5.4 - Procente de marire si micsorare', zi: '19.09 (ora 2)', tip: 'Algebra', link: 'c6/08', pdf: '' },
+      ],
+    }, 
     {
       titlu: 'Săptămâna 1: 08.09 - 12.09',
       note: 'Modulul 1: 08.09.2025 -> 25.10.2025',
@@ -19,21 +63,7 @@ export default function LectiiTreeView() {
         { titlu: 'C3 - Multimi. Multimea nr. naturale', zi: '11.09.2025 (ora 2)', tip: 'Algebra', link: 'c6/03', pdf: 'c6_03.pdf' },
         { titlu: 'C4 - Multimea nr. intregi. Sistemul de coordonate', zi: '12.09.2025', tip: 'Algebra', link: 'c6/04', pdf: 'c6_04.pdf' },
       ],
-    },
-    {
-      titlu: 'Săptămâna 2: 15.09 - 19.09',
-      note: 'Materiale în curs de creare',
-      lectii: [
-        { titlu: 'C', zi: '', tip: '', link: '', pdf: '' },
-      ],
-    },
-    {
-      titlu: 'Săptămâna 3 - În pregătire',
-      note: 'Materiale în curs de creare',
-      lectii: [
-        { titlu: 'C', zi: '', tip: '', link: '', pdf: '' },
-      ],
-    },
+    }
   ];
 
   const [query, setQuery] = useState('');

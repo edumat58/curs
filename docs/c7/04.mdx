@@ -1,0 +1,71 @@
+---
+sidebar_position: 4
+slug: /c7/04
+description: ""
+---
+
+# C4.1 – Notația științifică și simplificarea puterilor
+
+---
+
+## Notație științifică a unui număr zecimal pozitiv
+
+:::tip Definiție
+Notația științifică a unui număr zecimal pozitiv este de forma:
+$$
+a \times 10^n,
+$$
+unde:
+- $1 \le a < 10$ este un număr zecimal pozitiv;
+- $n$ este un număr întreg relativ.
+:::
+
+**Exemplu:**
+$$
+32300 = 3,23 \times 10^4.
+$$
+
+:::danger Regulă importantă
+Într-o notație științifică, $a$ este **întotdeauna** cuprins între 1 și 10.
+:::
+
+---
+
+## Metodele
+
+### Simplificarea produselor de puteri
+
+:::tip Regula de simplificare
+Pentru orice număr real $a$ și exponenți $m,n \in \mathbb{Z}$:
+$$
+a^m \times a^n = a^{m+n}.
+$$
+:::
+
+**Exemple:**
+- $3^4 \times 3^2 = 3^{4+2} = 3^6$
+- $2^3 \times 2^{11} = 2^{14}$
+
+---
+
+### Trecerea de la o notație științifică la o scriere zecimală
+
+:::info Pași de conversie
+1. Aplicați regula priorității puterilor față de înmulțiri.  
+2. Folosiți definiția puterilor lui 10 ($10^k$ înseamnă înmulțire cu 1 urmat de $k$ zerouri, iar $10^{-k}$ înseamnă împărțire la $10^k$).
+:::
+
+**Exemple:**
+- $D = 2,4 \times 10^4 = 2,4 \times 10000 = 24000$
+- $B = 8,25 \times 10^{-3} = 8,25 \times 0,001 = 0,00825$
+
+---
+
+### Determinarea notației științifice a unui număr zecimal
+
+**Pasul 1:** Scrieți numărul ca un număr cuprins între 1 și 10 (plasați virgula după prima cifră diferită de 0).  
+**Pasul 2:** Înmulțiți cu puterea lui 10 corespunzătoare.
+
+**Exemple:**
+- $E = 235000 = 2,35 \times 10^5$
+- $F = 0,00015 = 1,5 \times 10^{-4}$

@@ -10,7 +10,60 @@ import React, { useState } from 'react';
 
 export default function LectiiTreeView() {
   const saptamani = [
-    // Lecțiile vor fi adăugate aici când vor fi create
+    {
+      titlu: 'Săptămâna 5 - În pregătire',
+      note: 'Materiale în curs de creare',
+      lectii: [
+        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
+        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
+        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
+        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
+        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
+      ],
+    },
+    {
+      titlu: 'Săptămâna 4 - 29.09 - 03.10',
+      note: 'Materiale în curs de creare',
+      lectii: [
+        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
+        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
+        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
+        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
+        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
+      ],
+    },  
+    {
+      titlu: 'Săptămâna 3 - 22.09 - 26.09',
+      note: 'Materiale încarcate',
+      lectii: [
+        { titlu: 'C5.1 - Multimea nr. reale', zi: '22.09', tip: 'Algebra', link: 'c7/06', pdf: '' },
+        { titlu: 'C5.2 - Multimea nr. reale (h1)', zi: '24.09 (ora 1)', tip: 'Algebra', link: 'c7/07', pdf: '' },
+        { titlu: 'C6 - Modulul, compararea si ordonarea nr. reale', zi: '24.09 (ora 2)', tip: 'Algebra', link: 'c7/08', pdf: '' },
+        { titlu: 'C7 - Rationalizarea numitorului de forma a√b', zi: '26.09 (ora 1)', tip: 'Algebra', link: 'c7/09', pdf: '' },
+        { titlu: 'LP - Rationalizarea numitorului', zi: '26.09 (ora 2)', tip: 'EVALUARE SUMATIVA', link: '', pdf: '' },
+      ],
+    },
+    {
+      titlu: 'Săptămâna 2: 15.09 - 19.09',
+      note: 'Materiale încarcate',
+      lectii: [
+        { titlu: 'LP - Calcul cu radicali', zi: '17.09 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'LP - Calcul cu radicali', zi: '17.09 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'C4.1 - Notatia stiintifica si simplifcarea puterilor', zi: '18.09', tip: 'Algebra', link: 'c7/04', pdf: '' },
+        { titlu: 'C4.2 - Puteri: prioritatea operatiilor si notatia stiintifica', zi: '19.09', tip: 'Algebra', link: 'c7/05', pdf: '' },
+        
+      ],
+    },
+    {
+      titlu: 'Săptămâna 1: 08.09 - 12.09',
+      note: 'Modulul 1: 08.09.2025 -> 25.10.2025',
+      lectii: [
+        { titlu: 'C1 - Definitia si utilizarea puterilor', zi: '09.09.2025', tip: 'Algebra', link: 'c7/01', pdf: '' },
+        { titlu: 'C2 - Formule de calcul cu puteri', zi: '10.09.2025 (ora 1)', tip: 'Algebra', link: 'c7/02', pdf: '' },
+        { titlu: 'LP - Puteri', zi: '10.09.2025 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'C3 - Calcul cu radicali. Proprietati', zi: '11.09.2025', tip: 'Algebra', link: 'c7/03', pdf: '' },
+      ],
+    },
   ];
 
   const [query, setQuery] = useState('');
@@ -41,12 +94,6 @@ export default function LectiiTreeView() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-      <div style={{ textAlign: 'center', padding: '2rem', backgroundColor: '#f0f8ff', borderRadius: '15px', border: '3px solid #4ECDC4' }}>
-        <h2 style={{ color: '#008B8B', margin: '0 0 1rem 0' }}>📚 Organigrama Clasa a VII-a</h2>
-        <p style={{ fontSize: '1.2rem', margin: 0 }}>Materialele didactice sunt în pregătire pentru anul școlar 2025-2026.</p>
-        <p style={{ fontSize: '1rem', margin: '1rem 0 0 0', color: '#666' }}>Lecțiile vor fi adăugate pe măsură ce sunt create.</p>
-      </div>
-
       <input
         type="text"
         placeholder="Caută lecție sau zi..."
@@ -78,14 +125,6 @@ export default function LectiiTreeView() {
       >
         {expandedSaptamani.every(Boolean) ? 'Ascunde tot' : 'Arată tot'}
       </button>
-
-      {filtered.length === 0 && (
-        <div style={{ textAlign: 'center', padding: '2rem', backgroundColor: '#fff8dc', borderRadius: '15px', border: '3px solid #ffd700' }}>
-          <h3 style={{ color: '#daa520', margin: '0 0 1rem 0' }}>🚧 În pregătire</h3>
-          <p style={{ fontSize: '1.1rem', margin: 0 }}>Nu există lecții disponibile momentan.</p>
-          <p style={{ fontSize: '1rem', margin: '1rem 0 0 0', color: '#666' }}>Reveniți mai târziu pentru actualizări!</p>
-        </div>
-      )}
 
       {filtered.map((s) => (
         <div key={s.idx} style={{ border: '1px solid #ccc', borderRadius: '10px', padding: '1rem' }}>
@@ -122,12 +161,16 @@ export default function LectiiTreeView() {
                       <strong>{lec.titlu}</strong> – {lec.zi} ({lec.tip})
                     </span>
                     <span style={{ display: 'flex', gap: '0.5rem' }}>
-                      <a href={`/curs/docs/${lec.link}`} className="button button--primary button--sm" target="_blank">
-                        Vezi lecția
-                      </a>
-                      <a href={`/curs/c7_pdf/${lec.pdf}`} className="button button--secondary button--sm" download>
-                        Descarcă PDF
-                      </a>
+                      {lec.link && (
+                        <a href={`/curs/docs/${lec.link}`} className="button button--primary button--sm" target="_blank">
+                          Vezi lecția
+                        </a>
+                      )}
+                      {lec.pdf && (
+                        <a href={`/curs/c5_pdf/${lec.pdf}`} className="button button--secondary button--sm" download>
+                          Descarcă PDF
+                        </a>
+                      )}
                     </span>
                   </div>
                 </li>
