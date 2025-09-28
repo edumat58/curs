@@ -1,0 +1,158 @@
+---
+sidebar_position: -2
+slug: /c8/modul-1/08
+description: ""
+---
+
+# C6 – Raționalizarea numitorului folosind conjugata
+
+---
+
+## Introducere
+
+:::tip[DE CE RAȚIONALIZĂM NUMITORUL?]
+Raționalizarea numitorului înseamnă transformarea unei fracții care are un radical în numitor într-o fracție echivalentă fără radical în numitor. Acest lucru se face pentru a simplifica calculele și pentru a obține forme mai ușor de lucrat.
+
+Pentru numitori care sunt sume sau diferențe de termeni cu radicali, folosim metoda conjugatului.
+:::
+
+---
+
+## Conjugatul unui număr
+
+:::tip[DEFINIȚIE]
+Conjugatul unui număr de forma $a + b\sqrt{c}$, unde $a$ și $b$ sunt numere raționale, iar $c$ este un număr natural care nu este pătrat perfect, este $a - b\sqrt{c}$.
+
+Similar, conjugatul lui $a - b\sqrt{c}$ este $a + b\sqrt{c}$.
+
+Produsul unui număr cu conjugatul său este întotdeauna un număr rațional: $(a + b\sqrt{c})(a - b\sqrt{c}) = a^2 - b^2 c$.
+:::
+
+---
+
+## Metoda de raționalizare pentru numitor de forma a + b√c
+
+:::danger[METODĂ]
+Pentru a raționaliza un numitor de forma $a + b\sqrt{c}$, unde $a$ și $b$ sunt numere raționale, iar $c$ este un număr natural care nu este pătrat perfect:
+
+1. Înmulțește numărătorul și numitorul cu conjugatul numitorului: $a - b\sqrt{c}$.
+2. Simplifică expresia rezultată folosind identitatea remarcabilă $(a + b\sqrt{c})(a - b\sqrt{c}) = a^2 - (b\sqrt{c})^2 = a^2 - b^2 c$.
+
+Formula generală:
+$$
+\dfrac{p}{a + b\sqrt{c}} = \dfrac{p(a - b\sqrt{c})}{(a + b\sqrt{c})(a - b\sqrt{c})} = \dfrac{p(a - b\sqrt{c})}{a^2 - b^2 c}
+$$
+:::
+
+#### Exemple
+
+1. Raționalizează $\dfrac{1}{2 + \sqrt{3}}$.
+
+   Înmulțim cu conjugatul $2 - \sqrt{3}$:
+   $$
+   \dfrac{1}{2 + \sqrt{3}} \cdot \dfrac{2 - \sqrt{3}}{2 - \sqrt{3}} = \dfrac{2 - \sqrt{3}}{(2 + \sqrt{3})(2 - \sqrt{3})} = \dfrac{2 - \sqrt{3}}{4 - 3} = \dfrac{2 - \sqrt{3}}{1} = 2 - \sqrt{3}
+   $$
+
+2. Raționalizează $\dfrac{5}{3 + 2\sqrt{2}}$.
+
+   Înmulțim cu conjugatul $3 - 2\sqrt{2}$:
+   $$
+   \dfrac{5}{3 + 2\sqrt{2}} \cdot \dfrac{3 - 2\sqrt{2}}{3 - 2\sqrt{2}} = \dfrac{5(3 - 2\sqrt{2})}{(3 + 2\sqrt{2})(3 - 2\sqrt{2})} = \dfrac{5(3 - 2\sqrt{2})}{9 - 8} = \dfrac{5(3 - 2\sqrt{2})}{1} = 15 - 10\sqrt{2}
+   $$
+
+3. Raționalizează $\dfrac{\sqrt{5}}{1 + \sqrt{5}}$.
+
+   Înmulțim cu conjugatul $1 - \sqrt{5}$:
+   $$
+   \dfrac{\sqrt{5}}{1 + \sqrt{5}} \cdot \dfrac{1 - \sqrt{5}}{1 - \sqrt{5}} = \dfrac{\sqrt{5}(1 - \sqrt{5})}{(1 + \sqrt{5})(1 - \sqrt{5})} = \dfrac{\sqrt{5} - 5}{1 - 5} = \dfrac{\sqrt{5} - 5}{-4} = \dfrac{5 - \sqrt{5}}{4}
+   $$
+
+---
+
+## Metoda de raționalizare pentru numitor de forma a - b√c
+
+:::danger[METODĂ]
+Pentru un numitor de forma $a - b\sqrt{c}$, procedeul este similar. Înmulțim cu conjugatul $a + b\sqrt{c}$.
+
+Formula generală:
+$$
+\dfrac{p}{a - b\sqrt{c}} = \dfrac{p(a + b\sqrt{c})}{(a - b\sqrt{c})(a + b\sqrt{c})} = \dfrac{p(a + b\sqrt{c})}{a^2 - b^2 c}
+$$
+:::
+
+#### Exemple
+
+1. Raționalizează $\dfrac{1}{2 - \sqrt{3}}$.
+
+   Înmulțim cu conjugatul $2 + \sqrt{3}$:
+   $$
+   \dfrac{1}{2 - \sqrt{3}} \cdot \dfrac{2 + \sqrt{3}}{2 + \sqrt{3}} = \dfrac{2 + \sqrt{3}}{4 - 3} = 2 + \sqrt{3}
+   $$
+
+2. Raționalizează $\dfrac{4}{5 - 3\sqrt{2}}$.
+
+   Înmulțim cu conjugatul $5 + 3\sqrt{2}$:
+   $$
+   \dfrac{4}{5 - 3\sqrt{2}} \cdot \dfrac{5 + 3\sqrt{2}}{5 + 3\sqrt{2}} = \dfrac{4(5 + 3\sqrt{2})}{25 - 18} = \dfrac{4(5 + 3\sqrt{2})}{7} = \dfrac{20 + 12\sqrt{2}}{7}
+   $$
+
+---
+
+### Proprietăți și observații
+
+:::info[PROPRIETĂȚI IMPORTANTE]
+1. Conjugatul unui număr de forma $a + b\sqrt{c}$ este $a - b\sqrt{c}$, și invers.
+2. Produsul unui număr cu conjugatul său este întotdeauna un număr rațional: $(a + b\sqrt{c})(a - b\sqrt{c}) = a^2 - b^2 c$.
+3. Dacă numitorul conține doar un radical simplu (fără sumă sau diferență), folosim metodele anterioare (înmulțire cu radicalul).
+4. Raționalizarea ajută la compararea, adunarea sau înmulțirea fracțiilor cu radicali în numitor.
+:::
+
+### Exemplu de aplicare
+
+Calculează $\dfrac{1}{1 + \sqrt{2}} + \dfrac{1}{1 - \sqrt{2}}$.
+
+Raționalizăm fiecare fracție:
+- $\dfrac{1}{1 + \sqrt{2}} = 1 - \sqrt{2}$
+- $\dfrac{1}{1 - \sqrt{2}} = 1 + \sqrt{2}$
+
+Suma: $(1 - \sqrt{2}) + (1 + \sqrt{2}) = 2$
+
+---
+
+## Metoda de raționalizare pentru numitor de forma √a ± √b
+
+:::tip[DEFINIȚIE]
+Pentru expresii de forma $\sqrt{a} \pm \sqrt{b}$, conjugatul este $\sqrt{a} \mp \sqrt{b}$.
+
+Produsul: $(\sqrt{a} + \sqrt{b})(\sqrt{a} - \sqrt{b}) = a - b$.
+:::
+
+:::danger[METODĂ]
+Pentru a raționaliza un numitor de forma $\sqrt{a} + \sqrt{b}$ sau $\sqrt{a} - \sqrt{b}$:
+
+1. Înmulțește numărătorul și numitorul cu conjugatul: pentru $\sqrt{a} + \sqrt{b}$, conjugatul este $\sqrt{a} - \sqrt{b}$, și invers.
+2. Simplifică folosind identitatea $(\sqrt{a} + \sqrt{b})(\sqrt{a} - \sqrt{b}) = a - b$.
+
+Formula generală:
+$$
+\dfrac{p}{\sqrt{a} + \sqrt{b}} = \dfrac{p(\sqrt{a} - \sqrt{b})}{(\sqrt{a} + \sqrt{b})(\sqrt{a} - \sqrt{b})} = \dfrac{p(\sqrt{a} - \sqrt{b})}{a - b}
+$$
+:::
+
+#### Exemple
+
+1. Raționalizează $\dfrac{1}{\sqrt{3} + \sqrt{2}}$.
+
+   Înmulțim cu conjugatul $\sqrt{3} - \sqrt{2}$:
+   $$
+   \dfrac{1}{\sqrt{3} + \sqrt{2}} \cdot \dfrac{\sqrt{3} - \sqrt{2}}{\sqrt{3} - \sqrt{2}} = \dfrac{\sqrt{3} - \sqrt{2}}{3 - 2} = \sqrt{3} - \sqrt{2}
+   $$
+
+2. Raționalizează $\dfrac{5}{\sqrt{5} - \sqrt{3}}$.
+
+   Înmulțim cu conjugatul $\sqrt{5} + \sqrt{3}$:
+   $$
+   \dfrac{5}{\sqrt{5} - \sqrt{3}} \cdot \dfrac{\sqrt{5} + \sqrt{3}}{\sqrt{5} + \sqrt{3}} = \dfrac{5(\sqrt{5} + \sqrt{3})}{5 - 3} = \dfrac{5(\sqrt{5} + \sqrt{3})}{2}
+   $$
+
+---

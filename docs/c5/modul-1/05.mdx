@@ -1,0 +1,201 @@
+---
+sidebar_position: 5
+slug: /c5/modul-1/05
+description: ""
+---
+
+# C5 - Semidreapta gradată
+
+---
+
+## Definiție
+:::tip Definitie
+Pe o semidreaptă gradată, fiecare punct este reperat printr-un număr numit **abscisă**.
+:::
+
+---
+
+### Exemple
+
+- Pe semidreapta de mai jos, abscisa punctului A este 3.  
+  Cea a punctului B este cuprinsă între 8 și 9.
+
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="220" viewBox="0 0 600 220" role="img" aria-label="Dreaptă numerică cu sărituri 3 și zecimi până la 13,6">
+  <!-- Axa principală -->
+  <g transform="translate(90,140)">
+    <line x1="0" y1="0" x2="450" y2="0" stroke="#111" stroke-width="3"/>
+    <line x1="105" y1="-38" x2="105" y2="10" stroke="#9d20e6ff" stroke-width="2"/>
+    <line x1="300" y1="-38" x2="300" y2="10" stroke="#9d20e6ff" stroke-width="2"/>
+    <path d="M450,-6 L450,6 L465,0 Z" fill="#111"/>
+    <!-- Repere 0–14 -->
+    {Array.from({length:13}).map((_,i)=>(
+      <g key={i} transform={`translate(${i*35},0)`}>
+        <line x1="0" y1="-8" x2="0" y2="8" stroke="#111" stroke-width="2"/>
+        <text x="-6" y="30" font-size="14">{i}</text>
+      </g>
+    ))}
+
+        <!-- Marcaje intermediare mov sub axă -->
+
+        <text x="100" y="-50" font-size="16">A</text>
+        <text x="295" y="-50" font-size="16">B</text>
+    </g>
+
+</svg>
+
+
+- Abscisa punctului C este 5,8.
+
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="220" viewBox="0 0 600 220" role="img" aria-label="Dreaptă numerică cu sărituri 3 și zecimi până la 13,6">
+  <!-- Axa principală -->
+  <g transform="translate(90,140)">
+    <line x1="0" y1="0" x2="600" y2="0" stroke="#111" stroke-width="3"/>
+    <line x1="348" y1="-38" x2="348" y2="10" stroke="#9d20e6ff" stroke-width="2"/>
+    <path d="M500,-6 L500,6 L515,0 Z" fill="#111"/>
+    <!-- Repere 0–14 -->
+    {Array.from({length:13}).map((_,i)=>(
+      <g key={i} transform={`translate(${i*60},0)`}>
+        <line x1="0" y1="-8" x2="0" y2="8" stroke="#111" stroke-width="2"/>
+        <text x="-6" y="30" font-size="14">{i}</text>
+      </g>
+    ))}
+    {Array.from({length:80}).map((_,i)=>(
+      <g key={i} transform={`translate(${i*6},0)`}>
+        <line x1="0" y1="-6" x2="0" y2="6" stroke="#111" stroke-width="2"/>
+      </g>
+    ))}
+
+        <!-- Marcaje intermediare mov sub axă -->
+        <text x="343" y="-50" font-size="16">C</text>
+    </g>
+
+</svg>
+
+- Abscisa punctului D este 2 + $\dfrac{1}{3}$, adică $2\dfrac{1}{3} = \dfrac{7}{3}$.  
+
+    Abscisa punctului E este cuprinsă între $\dfrac{4}{3}$ și $\dfrac{5}{3}$.
+
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="220" viewBox="0 0 600 220" role="img" aria-label="Dreaptă numerică cu sărituri 3 și zecimi până la 13,6">
+  <!-- Axa principală -->
+  <g transform="translate(90,140)">
+    <line x1="0" y1="0" x2="600" y2="0" stroke="#111" stroke-width="3"/>
+    <line x1="210" y1="-38" x2="210" y2="10" stroke="#9d20e6ff" stroke-width="2"/>
+    <line x1="130" y1="-38" x2="130" y2="10" stroke="#9d20e6ff" stroke-width="2"/>
+    <path d="M500,-6 L500,6 L515,0 Z" fill="#111"/>
+    <!-- Repere 0–14 -->
+    {Array.from({length:6}).map((_,i)=>(
+      <g key={i} transform={`translate(${i*90},0)`}>
+        <line x1="0" y1="-8" x2="0" y2="8" stroke="#111" stroke-width="2"/>
+        <text x="-6" y="30" font-size="14">{i}</text>
+      </g>
+    ))}
+    {Array.from({length:15}).map((_,i)=>(
+      <g key={i} transform={`translate(${i*30},0)`}>
+        <line x1="0" y1="-6" x2="0" y2="6" stroke="#111" stroke-width="2"/>
+      </g>
+    ))}
+
+        <!-- Marcaje intermediare mov sub axă -->
+        <text x="205" y="-50" font-size="16">C</text>
+        <text x="125" y="-50" font-size="16">E</text>
+        <foreignObject x="202" y="20" width="100" height="40">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+                $\dfrac{7}{3}$
+            </div>
+        </foreignObject>
+        <foreignObject x="22" y="20" width="100" height="40">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+                $\dfrac{1}{3}$
+            </div>
+        </foreignObject>
+
+        <foreignObject x="52" y="20" width="100" height="40">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+                $\dfrac{2}{3}$
+            </div>
+        </foreignObject>
+        <foreignObject x="112" y="20" width="100" height="40">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+                $\dfrac{4}{3}$
+            </div>
+        </foreignObject>
+    </g>
+
+</svg>
+
+---
+
+## Metodă
+
+### Gradarea unei semidrepte și plasarea reperelor
+
+:::note Enunț
+Un magazin vinde diferite aparate la următoarele prețuri:
+- DVD player = 199 €
+- Aparat foto = 280 €
+- Televizor = 450 €
+:::
+
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="220" viewBox="0 0 600 220" role="img" aria-label="Dreaptă numerică cu sărituri 3 și zecimi până la 13,6">
+  <!-- Axa principală -->
+  <g transform="translate(90,140)">
+    <line x1="0" y1="0" x2="450" y2="0" stroke="#111" stroke-width="3"/>
+    <path d="M450,-6 L450,6 L465,0 Z" fill="#111"/>
+    <!-- Repere 0–14 -->
+    {Array.from({length:2}).map((_,i)=>(
+      <g key={i} transform={`translate(${i*350},0)`}>
+        <line x1="0" y1="-8" x2="0" y2="8" stroke="#111" stroke-width="2"/>
+      </g>
+    ))}
+
+        <!-- Marcaje intermediare mov sub axă -->
+    <text x="-6" y="30" font-size="14">0 €</text>
+    <text x="330" y="30" font-size="14">500 €</text>
+
+    </g>
+
+</svg>
+
+> Pentru a indica aceste prețuri pe această semidreaptă:
+
+**Etapa 1)** Măsor intervalul dintre 0 € și 500 €.
+>Ex: Intervalul are 10 cm.
+
+**Etapa 2)** Gradez această semidreaptă.  
+   Pentru a face acest lucru, caut să răspund la întrebarea:  
+   „Pentru câți euro corespunde 1 cm?”  
+   Construiesc un tabel de proporționalitate.  
+   După ce determin coeficientul de proporționalitate, găsesc că:  
+   > 1 cm corespunde cu 50 €.
+
+   | Lungime (cm) | 10 | 1 |
+   |--------------|----|---|
+   | Preț (€)     |500 | ? |
+
+**Etapa 3)** Plasez cu precizie (sau aproximativ) punctele P, A și T corespunzătoare prețurilor DVD-ului, aparatului foto și televizorului.
+
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="220" viewBox="0 0 600 220" role="img" aria-label="Dreaptă numerică cu sărituri 3 și zecimi până la 13,6">
+  <!-- Axa principală -->
+  <g transform="translate(90,140)">
+    <line x1="0" y1="0" x2="450" y2="0" stroke="#111" stroke-width="3"/>
+    <line x1="315" y1="-38" x2="315" y2="10" stroke="#9d20e6ff" stroke-width="2"/>
+    <line x1="200" y1="-38" x2="200" y2="10" stroke="#9d20e6ff" stroke-width="2"/>
+    <line x1="136" y1="-38" x2="136" y2="10" stroke="#9d20e6ff" stroke-width="2"/>
+    <path d="M450,-6 L450,6 L465,0 Z" fill="#111"/>
+    <!-- Repere 0–14 -->
+    {Array.from({length:11}).map((_,i)=>(
+      <g key={i} transform={`translate(${i*35},0)`}>
+        <line x1="0" y1="-8" x2="0" y2="8" stroke="#111" stroke-width="2"/>
+        <text x="-6" y="30" font-size="14">{50 * i}</text>
+      </g>
+    ))}
+
+        <!-- Marcaje intermediare mov sub axă -->
+        <text x="310" y="-50" font-size="16">T</text>
+        <text x="195" y="-50" font-size="16">A</text>
+        <text x="131" y="-50" font-size="16">P</text>
+    </g>
+
+</svg>
+
+---

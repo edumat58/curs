@@ -1,0 +1,184 @@
+---
+sidebar_position: -4
+slug: /c8/modul-1/10
+description: ""
+---
+
+# C8 - Fracții algebrice: amplificarea și simplificarea
+
+---
+
+## Simplificarea unei fracții
+
+:::tip[DEFINIȚIE 1]
+A simplifica o fracție înseamnă a scrie o fracție egală cu ea, al cărei numărător și al cărei numitor sunt mai mici.
+:::
+
+---
+
+## Fracția ireductibilă
+
+:::tip[DEFINIȚIE 2]
+O fracție ireductibilă este o fracție simplificată la maximum.
+:::
+
+**Exemple:**
+$$
+\dfrac{5}{18}
+$$
+este o fracție ireductibilă.
+
+$$
+\dfrac{18}{27}
+$$
+nu este o fracție ireductibilă, deoarece această fracție se poate simplifica prin 3.
+
+---
+
+### Metode
+
+### Simplificarea unei fracții
+
+Pentru a simplifica o fracție, împărțim numărătorul și numitorul ei printr-un divizor comun diferit de 1.
+
+**Exemplu:**
+$$
+\dfrac{21}{28}
+= \dfrac{21 : 7}{28 : 7}
+= \dfrac{3}{4}
+$$
+sau
+$$
+\dfrac{21}{28}
+= \dfrac{7 \times 3}{7 \times 4}
+= \dfrac{3}{4}.
+$$
+
+> 21 și 28 sunt multiplii lui 7, deci putem împărți numărătorul și numitorul prin 7.  
+
+Se spune că am simplificat $\dfrac{21}{28}$ prin 7.
+
+---
+
+## Forma ireductibilă
+
+### Metoda 1 - Simplificare pas cu pas
+
+Simplificăm progresiv până când nu se mai poate continua.
+
+**Exemplu:**  
+Aduce la forma ireductibilă fracția
+$$
+\dfrac{42}{48}.
+$$
+
+$$
+\dfrac{42}{48}
+= \dfrac{21}{24}
+= \dfrac{7}{8}.
+$$
+
+Fracția $\dfrac{7}{8}$ este ireductibilă.
+
+(Am fi putut de asemenea simplifica direct prin 6.)
+
+---
+
+### Metoda 2 - Descompunerea în produs de factori primi
+
+Descompunem numărătorul și numitorul în produs de factori primi, apoi simplificăm.
+
+**Exemplu:**  
+Aduce la forma ireductibilă fracția
+$$
+\dfrac{630}{735}.
+$$
+
+630 se descompune astfel:  
+$$
+630 = 2 \times 3 \times 3 \times 5 \times 7.
+$$  
+735 se descompune astfel:  
+$$
+735 = 3 \times 5 \times 7 \times 7.
+$$
+
+$$
+\dfrac{630}{735}
+= \dfrac{2 \times 3 \times 3 \times 5 \times 7}{3 \times 5 \times 7 \times 7}
+= \dfrac{2 \times 3}{7}
+= \dfrac{6}{7}.
+$$
+
+Fracția $\dfrac{6}{7}$ este ireductibilă.
+
+---
+
+## Amplificarea unei fracții
+
+:::tip[DEFINIȚIE]
+Amplificarea unei fracții înseamnă înmulțirea numărătorului și numitorului fracției cu același număr natural nenul, obținând astfel o fracție echivalentă.
+
+Amplificarea este operația inversă simplificării și este esențială în aritmetica fracțiilor pentru a efectua operații și comparații.
+:::
+
+---
+
+### Metode
+Pentru a amplifica o fracție $\dfrac{a}{b}$ cu un număr $k$ (unde $k$ este un număr natural nenul):
+
+Înmulțește numărătorul și numitorul cu $k$:
+$$
+\dfrac{a}{b} = \dfrac{a \times k}{b \times k}
+$$
+
+**Exemplu:**
+Amplifică fracția $\dfrac{2}{3}$ cu 4:
+$$
+\dfrac{2}{3} = \dfrac{2 \times 4}{3 \times 4} = \dfrac{8}{12}
+$$
+
+Amplifică fracția $\dfrac{5}{7}$ cu 3:
+$$
+\dfrac{5}{7} = \dfrac{5 \times 3}{7 \times 3} = \dfrac{15}{21}
+$$
+
+
+---
+
+### Proprietați
+
+:::info[PROPRIETĂȚI]
+1. O fracție amplificată rămâne echivalentă cu fracția inițială.
+2. Amplificarea se poate face cu orice număr natural nenul.
+3. Amplificarea este utilă pentru a aduce fracții la același numitor comun sau pentru a facilita calculele.
+:::
+
+Amplificarea fracțiilor se folosește în următoarele situații:
+
+1. **Adunarea sau scăderea fracțiilor cu numitori diferiți:** 
+   Exemplu: Calculează $\dfrac{1}{2} + \dfrac{1}{3}$.
+
+   Amplificăm prima fracție cu 3: $\dfrac{1 \times 3}{2 \times 3} = \dfrac{3}{6}$
+
+   Amplificăm a doua fracție cu 2: $\dfrac{1 \times 2}{3 \times 2} = \dfrac{2}{6}$
+
+   Acum: $\dfrac{3}{6} + \dfrac{2}{6} = \dfrac{5}{6}$
+
+2. **Compararea fracțiilor:** 
+
+   Exemplu: Compară $\dfrac{2}{3}$ și $\dfrac{3}{4}$.
+
+   Amplificăm prima cu 4: $\dfrac{8}{12}$
+
+   Amplificăm a doua cu 3: $\dfrac{9}{12}$
+
+   $\dfrac{8}{12} < \dfrac{9}{12}$, deci $\dfrac{2}{3} < \dfrac{3}{4}$
+
+
+3. **Înmulțirea fracțiilor:** 
+
+   Exemplu: $\dfrac{2}{3} \times \dfrac{3}{4} = \dfrac{2 \times 3}{3 \times 4} = \dfrac{6}{12} = \dfrac{1}{2}$ 
+
+---
+

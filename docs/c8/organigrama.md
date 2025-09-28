@@ -11,6 +11,50 @@ import React, { useState } from 'react';
 export default function LectiiTreeView() {
   const saptamani = [
     {
+      titlu: 'Săptămâna 5 - În pregătire',
+      note: 'Materiale în curs de creare',
+      lectii: [
+        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
+        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
+        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
+        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
+        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
+      ],
+    },
+    {
+      titlu: 'Săptămâna 4 - 29.09 - 03.10',
+      note: 'Materiale în curs de creare',
+      lectii: [
+        { titlu: 'C6 - Raționalizarea numitorului unei fractii folosind conjugata', zi: '29.09', tip: 'Algebra', link: 'c8/modul-1/08', pdf: '' },
+        { titlu: 'LP - Raționalizarea numitorului unei fractii folosind conjugata', zi: '01.10 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'LP - Calcul algebric in multimea nr. reale', zi: '01.10 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'C7 - Metode de descompunere in factori in multimea nr. reale', zi: '02.10 (ora 1)', tip: 'Algebra', link: 'c8/modul-1/09', pdf: '' },
+        { titlu: 'C8 - Fractii algebrice: amplificarea si simplificarea', zi: '02.10 (ora 2)', tip: 'Algebra', link: 'c8/modul-1/10', pdf: '' },
+      ],
+    },
+    {
+      titlu: 'Săptămâna 3 - 22.09 - 26.09',
+      note: 'Materiale încarcate',
+      lectii: [
+        { titlu: 'LP - Expresii algebrice si formule de calcul prescurtat', zi: '23.09 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'C4 - Intervale si comparatii in multimea nr. reale', zi: '23.09 (ora 2)', tip: 'Algebra', link: 'c8/modul-1/06', pdf: '' },
+        { titlu: 'LP - Intervale si comparatii', zi: '24.09', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'C5 - Inecuatii de forma ax + b', zi: '25.09 (ora 1)', tip: 'Algebra', link: 'c8/modul-1/07', pdf: '' },
+        { titlu: 'TEST 1 (C1 -> C3.3) | 100% NOTA 1', zi: '25.09 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
+      ],
+    },
+    {
+      titlu: 'Săptămâna 2: 15.09 - 19.09',
+      note: 'Materiale încarcate',
+      lectii: [
+        { titlu: 'C3.1 - Egalitatea expresiilor literale. Distributivitate simplă', zi: '16.09 (ora 1)', tip: 'Algebra', link: 'c8/modul-1/03', pdf: '' },
+        { titlu: 'C3.2 - Dezvoltarea și simplificarea expresiilor literale', zi: '16.09 (ora 2)', tip: 'Algebra', link: 'c8/modul-1/04', pdf: '' },
+        { titlu: 'LP - Expresii Algebrice', zi: '17.09', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'C3.3 - Dublă distributivitate și identitate remarcabilă', zi: '18.09 (ora 1)', tip: 'Algebra', link: 'c8/modul-1/05', pdf: '' },
+        { titlu: 'LP - Dublă distributivitate și identitate remarcabilă', zi: '18.09 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
+      ],
+    },
+    {
       titlu: 'Săptămâna 1: 08.09 - 12.09',
       note: 'Modulul 1: 08.09.2025 -> 25.10.2025',
       lectii: [
@@ -146,12 +190,16 @@ export default function LectiiTreeView() {
                       <strong>{lec.titlu}</strong> – {lec.zi} ({lec.tip})
                     </span>
                     <span style={{ display: 'flex', gap: '0.5rem' }}>
-                      <a href={`/curs/docs/${lec.link}`} className="button button--primary button--sm" target="_blank">
-                        Vezi lecția
-                      </a>
-                      <a href={`/curs/c5_pdf/${lec.pdf}`} className="button button--secondary button--sm" download>
-                        Descarcă PDF
-                      </a>
+                      {lec.link && (
+                        <a href={`/curs/docs/${lec.link}`} className="button button--primary button--sm" target="_blank">
+                          Vezi lecția
+                        </a>
+                      )}
+                      {lec.pdf && (
+                        <a href={`/curs/c8_pdf/${lec.pdf}`} className="button button--secondary button--sm" download>
+                          Descarcă PDF
+                        </a>
+                      )}
                     </span>
                   </div>
                 </li>
