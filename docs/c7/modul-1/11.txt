@@ -1,0 +1,78 @@
+---
+sidebar_position: -5
+slug: /c7/modul-1/11
+description: ""
+--- 
+# C8.2 – Media geometrică
+
+---
+
+## Introducere
+
+:::tip[CE ESTE MEDIA GEOMETRICĂ?]
+Media geometrică (sau proporțională) a două numere reale pozitive este o măsură care reprezintă valoarea centrală a celor două numere, calculată ca rădăcina pătrată a produsului lor.
+
+Ea este folosită în situații în care valorile se multiplică, cum ar fi ratele de creștere sau proporțiile.
+:::
+
+---
+
+## Formula mediei geometrice
+
+:::danger[FORMULA]
+Pentru două numere reale pozitive $a$ și $b$, media geometrică se calculează astfel:
+
+$$
+M_g = \sqrt{a \cdot b}
+$$
+:::
+
+#### Exemple
+
+1. Calculează media geometrică a numerelor $4$ și $9$.
+
+   Produsul: $4 \cdot 9 = 36$
+
+   Media geometrică: $\sqrt{36} = 6$
+
+2. Calculează media geometrică a numerelor $2$ și $8$.
+
+   Produsul: $2 \cdot 8 = 16$
+
+   Media geometrică: $\sqrt{16} = 4$
+
+3. Calculează media geometrică a numerelor $\dfrac{1}{2}$ și $2$.
+
+   Produsul: $\dfrac{1}{2} \cdot 2 = 1$
+
+   Media geometrică: $\sqrt{1} = 1$
+
+4. Calculează media geometrică a numerelor $5$ și $20$.
+
+   Produsul: $5 \cdot 20 = 100$
+
+   Media geometrică: $\sqrt{100} = 10$
+
+---
+
+## Proprietăți ale mediei geometrice
+
+:::info[PROPRIETĂȚI IMPORTANTE]
+1. Media geometrică a două numere pozitive este întotdeauna mai mică sau egală cu media aritmetică a acelorași numere.
+
+2. Dacă cele două numere sunt egale, media geometrică este egală cu ele.
+
+3. Media geometrică este pozitivă pentru numere pozitive.
+:::
+
+#### Exemplu de aplicare
+
+Compară media aritmetică și media geometrică pentru numerele $1$ și $4$.
+
+Media aritmetică: $\dfrac{1+4}{2} = 2.5$
+
+Media geometrică: $\sqrt{1 \cdot 4} = \sqrt{4} = 2$
+
+Observăm că $2 < 2.5$, deci media geometrică este mai mică decât media aritmetică.
+
+---

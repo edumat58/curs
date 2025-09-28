@@ -1,0 +1,148 @@
+---
+sidebar_position: -1
+slug: /c6/modul-1/13
+description: ""
+---
+
+# C6.2 - Mărimi invers proporționale
+
+---
+
+## Definiție
+
+:::tip Definitie
+
+Două mărimi se numesc **invers proporționale** dacă atunci când una crește (sau se micșorează) de un număr de ori, cealaltă se micșorează (respectiv crește) de același număr de ori.
+:::
+
+:::note Exemplu
+
+Numărul de muncitori și numărul de zile în care finalizează o lucrare:
+
+
+| Nr. muncitori | Nr. zile |
+|---------------|---------|
+| 8             | 6       |
+| 16            | 3       |
+| 4             | 12      |
+
+Din tabel observăm că:
+
+- $\dfrac{8}{16} = \dfrac{16}{8} = \dfrac{4}{16} = \dfrac{6}{3} = \dfrac{3}{6} = \dfrac{12}{4}$
+
+- $8 \cdot 6 = 16 \cdot 3 = 4 \cdot 12$
+
+:::
+
+---
+
+## Proprietăți
+
+:::info Proprietatea 1
+Raportul a două valori din prima mărime este egal cu **inversul** raportului valorilor corespunzătoare din cealaltă mărime.  
+   $$
+   \frac{a_1}{a_2} = \frac{b_2}{b_1}
+   $$
+:::
+
+:::info Proprietatea 2
+Produsul valorilor corespunzătoare din cele două mărimi este **constant**.  
+   $$
+   a_1 b_1 = a_2 b_2 = \cdots = a_n b_n
+   $$
+:::
+
+---
+
+### Mulțimi de numere
+
+:::tip Definitie
+Fiind date două mulțimi  
+$$A=\{a_1,a_2,\dots,a_n\},\quad B=\{b_1,b_2,\dots,b_n\},$$  
+vom spune că între elementele acestora există o dependență **invers proporțională** (sunt invers proporționale) dacă
+$$
+a_1 b_1 = a_2 b_2 = \cdots = a_n b_n,
+$$
+sau, echivalent,
+$$
+\frac{a_1}{a_2} = \frac{b_2}{b_1} = \cdots = \frac{a_n}{b_n}.
+$$
+:::
+
+---
+
+## Probleme rezolvate
+
+:::note Problema 1
+
+4 robinete umplu un bazin în 9 ore. În câte ore umplu bazinul 6 robinete?
+
+:::
+
+**Rezolvare**  
+$$
+\frac{4}{6} = \frac{x}{9} \implies x = \frac{4 \cdot 9}{6} = 6\ \text{ore}
+$$
+
+---
+
+:::note Problema 2
+
+Determinați numerele $a, b, c$, știind că sunt invers proporționale cu 5, 3 și 15 și  
+$$
+\frac{a^2 + b^2 + c^2}{a b c} = \frac{7}{9}
+$$
+:::
+
+**Rezolvare**  
+$\{a,b,c\}$ i.p. $\{5,3,15\}$  
+
+$\Rightarrow 5a = 3b = 15c \implies a=3c,\ b=5c$  
+
+$$
+\frac{9c^2 + 25c^2 + c^2}{3c \cdot 5c \cdot c} = \frac{35c^2}{15c^3} = \frac{7}{3c} = \frac{7}{9}
+$$
+
+$$
+\implies 3c = 9 \implies c = 3,\ a = 9,\ b = 15
+$$
+
+---
+
+:::note Problema 3
+
+Determinați numerele $a, b, c, d, e$, știind că primele trei sunt direct proporționale cu 2, 3, 4, ultimele trei sunt invers proporționale cu 2, 3, 4 și
+$$a + b + c + d + e = 246.$$
+
+:::
+
+**Rezolvare**
+
+$\{a, b, c\}$ d.p. $\{2,3,4\}$ 
+ 
+$\implies \dfrac{a}{2} = \dfrac{b}{3} = \dfrac{c}{4}$ (1)
+
+$\{c, d, e\}$ i.p. $\{2,3,4\}$  
+
+$\implies 2c = 3d = 4e$  
+
+$\implies \dfrac{c}{4} = \dfrac{3d}{8} = \dfrac{e}{2}$  
+
+$\implies \dfrac{c}{4} = \dfrac{d}{8/3} = \dfrac{e}{2}$ (2)
+
+Din (1) și (2):
+$$
+\frac{a}{2} = \frac{b}{3} = \frac{c}{4} = \frac{d}{\frac{8}{3}} = \frac{e}{2} = \frac{a + b + c + d + e}{2 + 3 + 4 + \frac{8}{3} + 2}
+= \frac{246}{11 + \frac{8}{3}} = \frac{246 \cdot 3}{41} = 18.
+$$
+
+Prin urmare:
+$$
+a = 2 \cdot 18 = 36,\quad
+b = 3 \cdot 18 = 54,\\[10pt]
+c = 4 \cdot 18 = 72,\quad
+d = \frac{8}{3} \cdot 18 = 48,\quad
+e = 2 \cdot 18 = 36.
+$$
+
+---

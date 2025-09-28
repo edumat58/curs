@@ -28,7 +28,7 @@ export default function LectiiTreeView() {
         { titlu: 'C8.1 - Proprietati ale inmultirii', zi: '', tip: 'Algebra', link: 'c5/10.mdx', pdf: '' },
         { titlu: 'C8.2 - Factor comun', zi: '', tip: 'Algebra', link: 'c5/11.mdx', pdf: '' },
         { titlu: 'LP - Inmultiri si factorizare', zi: '', tip: 'Algebra', link: '', pdf: '' },
-        { titlu: 'C9 - Proprietati puteri cu exponent natural', zi: '', tip: 'Algebra', link: 'c5/12.mdx', pdf: '' },
+        { titlu: 'C9 - Proprietati ale puteri cu exponent natural', zi: '', tip: 'Algebra', link: 'c5/12.mdx', pdf: '' },
         { titlu: 'LP - Puteri', zi: '', tip: 'Algebra', link: '', pdf: '' },
       ],
     },   

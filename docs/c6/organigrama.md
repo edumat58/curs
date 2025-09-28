@@ -25,11 +25,11 @@ export default function LectiiTreeView() {
       titlu: 'Săptămâna 4 - 29.09 - 03.10',
       note: 'Materiale în curs de creare',
       lectii: [
-        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
-        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
-        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
-        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
-        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
+        { titlu: 'C6.1 - Marimi direct proportionale', zi: '30.09', tip: 'Algebra', link: 'c6/modul-1/12', pdf: '' },
+        { titlu: 'LP - Marimi direct proportionale', zi: '01.10 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'C6.2 - Marimi invers proportionale', zi: '01.10 (ora 2)', tip: 'Algebra', link: 'c6/modul-1/13', pdf: '' },
+        { titlu: 'LP - Marimi invers proportionale', zi: '02.10 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'TEST 1 (C1 -> C5.7) | 50% NOTA 1 [2/2]', zi: '02.10 (ora 2)', tip: 'EVALUARE SUMATIVA', link: '', pdf: '' },
       ],
     }, 
         {
@@ -40,7 +40,7 @@ export default function LectiiTreeView() {
         { titlu: 'C5.6 - Scara numerică', zi: '25.09 (ora 1)', tip: 'Algebra', link: 'c6/modul-1/10', pdf: '' },
         { titlu: 'C5.6 - Scara numerică', zi: '25.09 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
         { titlu: 'C5.7 - Proporții', zi: '26.09 (ora 1)', tip: 'Algebra', link: 'c6/modul-1/11', pdf: '' },
-        { titlu: 'TEST DIN LECTIA DE ZI si LP - Proportii', zi: '26.09 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'TEST DIN LECTIA DE ZI | 50% NOTA 1 [1/2] si LP - Proportii', zi: '26.09 (ora 2)', tip: 'EVALUARE FORMATIVA/CONTINUA', link: '', pdf: '' },
       ],
     },
     {

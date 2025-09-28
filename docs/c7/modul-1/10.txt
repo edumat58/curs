@@ -1,0 +1,103 @@
+---
+sidebar_position: -4
+slug: /c7/modul-1/10
+description: ""
+---
+# C8.1 – Media aritmetică
+
+---
+
+## Introducere
+
+:::tip[CE ESTE MEDIA ARITMETICĂ?]
+Media aritmetică este o măsură a valorii centrale a unui set de numere reale. Ea reprezintă valoarea obținută prin împărțirea sumei tuturor valorilor la numărul de valori.
+
+De exemplu, media aritmetică a notelor unui elev la mai multe teste sau a temperaturilor înregistrate într-o săptămână.
+:::
+
+---
+
+## Media aritmetică a `n` numere reale
+
+:::danger[FORMULA]
+Pentru n numere reale $a_1, a_2, \dots, a_n$, unde $n \geq 2$, media aritmetică se calculează astfel:
+
+$$
+\overline{x} = \dfrac{a_1 + a_2 + \dots + a_n}{n}
+$$
+:::
+
+#### Exemple
+
+:::note
+1. Calculează media aritmetică a numerelor $4, 6, 8$.
+:::
+   Suma numerelor: $4 + 6 + 8 = 18$
+
+   Numărul de valori: $3$
+
+   Media aritmetică: $\dfrac{18}{3} = 6$
+
+---
+
+:::note
+2. Calculează media aritmetică a numerelor $-2, 0, 2, 4$.
+:::
+   Suma numerelor: $-2 + 0 + 2 + 4 = 4$
+
+   Numărul de valori: $4$
+
+   Media aritmetică: $\dfrac{4}{4} = 1$
+
+---
+
+:::note
+3. Calculează media aritmetică a numerelor $\dfrac{1}{2}, \dfrac{3}{4}, 1$.
+:::
+   Suma numerelor: $\dfrac{1}{2} + \dfrac{3}{4} + 1 = \dfrac{2}{4} + \dfrac{3}{4} + \dfrac{4}{4} = \dfrac{9}{4}$
+
+   Numărul de valori: $3$
+
+   Media aritmetică: $\dfrac{\dfrac{9}{4}}{3} = \dfrac{9}{12} = \dfrac{3}{4}$
+
+---
+
+## Media aritmetică ponderată
+
+:::tip[CE ESTE MEDIA ARITMETICĂ PONDERATĂ?]
+Media aritmetică ponderată este o medie în care fiecare valoare are o pondere (importanță) diferită. Ponderea arată cât de importantă este fiecare valoare în calculul mediei.
+:::
+
+:::danger[FORMULA]
+Pentru n valori $a_1, a_2, \dots, a_n$ cu ponderile corespunzătoare $p_1, p_2, \dots, p_n$ (numere pozitive), media aritmetică ponderată se calculează astfel:
+
+$$
+\overline{x} = \dfrac{a_1 \cdot p_1 + a_2 \cdot p_2 + \dots + a_n \cdot p_n}{p_1 + p_2 + \dots + p_n}
+$$
+:::
+
+#### Exemple
+
+:::note
+1. Un elev are notele: $8$ (pondere $2$), $7$ (pondere $3$), $9$ (pondere $1$).
+:::
+
+   Suma ponderată: $8 \cdot 2 + 7 \cdot 3 + 9 \cdot 1 = 16 + 21 + 9 = 46$
+
+   Suma ponderilor: $2 + 3 + 1 = 6$
+
+   Media ponderată: $\dfrac{46}{6} = \dfrac{23}{3} \approx 7,67$
+
+---
+
+:::note
+2. Într-un concurs, punctajele sunt: proba A: $85$ puncte (pondere $3$), proba B: $90$ puncte (pondere $2$), proba C: $80$ puncte (pondere $1$).
+:::
+
+   Suma ponderată: $85 \cdot 3 + 90 \cdot 2 + 80 \cdot 1 = 255 + 180 + 80 = 515$
+
+   Suma ponderilor: $3 + 2 + 1 = 6$
+
+   Media ponderată: $\dfrac{515}{6} \approx 85,83$
+
+---

@@ -1,0 +1,76 @@
+---
+sidebar_position: 0
+slug: /c7/modul-1/06
+description: ""
+---
+
+# C5 - Mulțimea nr. reale (1)
+
+---
+
+## Incluziune
+
+:::danger De Retinut
+$$
+\Large \mathbb{N}\subset\mathbb{Z}\subset\mathbb{Q}\subset\mathbb{R}
+$$
+:::
+
+- Notăm $\mathbb{N}$ mulțimea numerelor întregi naturale: $ \mathbb{N} = \{0;1;2;3;\dots\}$.
+
+- Notăm $\mathbb{Z}$ mulțimea numerelor întregi: $\mathbb{Z} = \{\dots;-3;-2;-1;0;1;2;3;\dots\}$.
+
+- Notăm $\mathbb{Q}$ mulțimea numerelor raționale: adică numerele care se scriu sub forma $\dfrac{p}{q}$, cu $p\in\mathbb{Z}$ și $q\in\mathbb{Z}^*$.
+
+- Notăm $\mathbb{R}$ mulțimea numerelor reale, adică mulțimea tuturor numerelor.
+
+
+> Observație: toate numerele zecimale sunt raționale, deci mulțimea numerelor zecimale este inclusă în $\mathbb{Q}$.
+
+Notăm $\mathbb{R}\setminus\mathbb{Q}$ mulțimea numerelor **iraționale**, acele numere care, scrise zecimal, au o infinitate de cifre în dreapta virgulei care **nu se repeta periodic**.
+
+Notăm $\mathbb{N}^*$ mulțimea numerelor naturale nenule.
+
+---
+
+## Cea mai mică mulțime
+
+:::tip[DEFINIȚIE]
+Dacă un număr $x$ aparține unei mulțimi $A$, scriem: $x\in A$.
+
+Dacă un număr $x$ nu aparține unei mulțimi $A$, scriem: $x\notin A$.
+:::
+
+Vom desemna prin **„cea mai mică mulțime”** a unui număr acea mulțime din ierarhia mulțimilor numerelor din care face parte, _începând cel puțin de la mulțimea $\mathbb{Q}$_ — deoarece orice număr zecimal este rațional.
+
+**Exemplu:**  
+Cea mai mică mulțime a numărului $\dfrac{51}{5}$ este $\mathbb{Q}$ (nu este întreg). Scriem:
+$$
+\dfrac{51}{5}\in\mathbb{Q}.
+$$
+
+---
+
+## Proprietatea lui radical din 2
+
+$
+\sqrt{2}\ \text{nu este rațional.}
+$
+
+**Demonstrație.**  
+Presupunem, prin reducere la absurd, că $\sqrt{2} = \dfrac{p}{q}$ cu $p,q\in\mathbb{Z}$, $q\neq 0$, iar fracția este ireductibilă (adică $p$ și $q$ nu au divizori comuni $>1$).  
+Atunci:
+$$
+2q^2 = p^2.
+$$
+Din egalitate rezultă că $p^2$ este par, deci $p$ este par: există $k\in\mathbb{Z}$ cu $p=2k$. Înlocuind:
+$$
+2q^2 = (2k)^2 \implies q^2 = 2k^2.
+$$
+Deci $q^2$ este par, ceea ce implică și că $q$ este par. Astfel $p$ și $q$ sunt amândoi pari, deci au factorul $2$ în comun, contrazicând ipoteza de ireductibilitate.  
+Contradicția arată că presupunerea inițială este falsă; deci
+$$
+\sqrt{2}\notin\mathbb{Q}.
+$$
+
+---
