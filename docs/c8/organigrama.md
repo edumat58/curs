@@ -17,21 +17,7 @@ export default function LectiiTreeView() {
         { titlu: 'C1 - Notatii si simboluri matematice', zi: '11.09.2025 (ora 1)', tip: 'Algebra', link: 'c8/modul-1/01', pdf: 'c8_01.pdf' },
         { titlu: 'C2 - Multimea nr. reale R', zi: '11.09.2025 (ora 2)', tip: 'Algebra', link: 'c8/modul-1/02', pdf: 'c8_02.pdf' },
       ],
-    },
-    {
-      titlu: 'Săptămâna 2: 15.09 - 19.09',
-      note: 'Materiale în curs de creare',
-      lectii: [
-        { titlu: 'C', zi: '', tip: '', link: '', pdf: '' },
-      ],
-    },
-    {
-      titlu: 'Săptămâna 3 - În pregătire',
-      note: 'Materiale în curs de creare',
-      lectii: [
-        { titlu: 'C', zi: '', tip: '', link: '', pdf: '' },
-      ],
-    },
+    }
   ];
 
   const [query, setQuery] = useState('');
@@ -62,6 +48,37 @@ export default function LectiiTreeView() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+    <hr />
+      <h2>
+      Orar - 5 ore/saptamana
+      </h2>
+      <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '1rem' }}>
+        <thead>
+          <tr>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Luni</th>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Marți</th>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Miercuri</th>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Joi</th>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Vineri</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>8:00 - 8:50</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>10:00 - 10:50</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>8:00 - 8:50</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+          </tr>
+          <tr>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>11:00 - 11:50</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>9:00 - 9:50</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+          </tr>
+        </tbody>
+      </table>
       <input
         type="text"
         placeholder="Caută lecție sau zi..."

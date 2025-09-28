@@ -37,8 +37,8 @@ export default function LectiiTreeView() {
       note: 'Materiale încarcate',
       lectii: [
         { titlu: 'C5.5 - Rapoarte', zi: '24.09', tip: 'Algebra', link: 'c6/modul-1/09', pdf: '' },
-        { titlu: 'C5.6 - Scara numerică', zi: '25.09 (ora 1)', tip: 'Algebra', link: 'c6/modul-1/10', pdf: '' },
-        { titlu: 'C5.6 - Scara numerică', zi: '25.09 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'C5.6 - Scara numerică (1)', zi: '25.09 (ora 1)', tip: 'Algebra', link: 'c6/modul-1/10', pdf: '' },
+        { titlu: 'C5.6 - Scara numerică (2)', zi: '25.09 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
         { titlu: 'C5.7 - Proporții', zi: '26.09 (ora 1)', tip: 'Algebra', link: 'c6/modul-1/11', pdf: '' },
         { titlu: 'TEST DIN LECTIA DE ZI | 50% NOTA 1 [1/2] si LP - Proportii', zi: '26.09 (ora 2)', tip: 'EVALUARE FORMATIVA/CONTINUA', link: '', pdf: '' },
       ],
@@ -94,6 +94,37 @@ export default function LectiiTreeView() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+    <hr />
+      <h2>
+      Orar - 5 ore/saptamana
+      </h2>
+      <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '1rem' }}>
+        <thead>
+          <tr>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Luni</th>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Marți</th>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Miercuri</th>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Joi</th>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Vineri</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>13:00 - 13:50</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>8:00 - 8:50</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>10:00 - 10:50</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+          </tr>
+          <tr>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>13:00-13:50</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>13:00 - 13:50</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+          </tr>
+        </tbody>
+      </table>
       <input
         type="text"
         placeholder="Caută lecție sau zi..."
@@ -161,12 +192,16 @@ export default function LectiiTreeView() {
                       <strong>{lec.titlu}</strong> – {lec.zi} ({lec.tip})
                     </span>
                     <span style={{ display: 'flex', gap: '0.5rem' }}>
-                      <a href={`/curs/docs/${lec.link}`} className="button button--primary button--sm" target="_blank">
-                        Vezi lecția
-                      </a>
-                      <a href={`/curs/c5_pdf/${lec.pdf}`} className="button button--secondary button--sm" download>
-                        Descarcă PDF
-                      </a>
+                      {lec.link && (
+                        <a href={`/curs/docs/${lec.link}`} className="button button--primary button--sm" target="_blank">
+                          Vezi lecția
+                        </a>
+                      )}
+                      {lec.pdf && (
+                        <a href={`/curs/c6_pdf/${lec.pdf}`} className="button button--secondary button--sm" download>
+                          Descarcă PDF
+                        </a>
+                      )}
                     </span>
                   </div>
                 </li>

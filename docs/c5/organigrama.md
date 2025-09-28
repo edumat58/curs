@@ -9,6 +9,7 @@ import React, { useState } from 'react';
 
 
 export default function LectiiTreeView() {
+
   const saptamani = [
     {
       titlu: 'Săptămâna 5 - În pregătire',
@@ -96,6 +97,37 @@ export default function LectiiTreeView() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+    <hr />
+      <h2>
+      Orar - 5 ore/saptamana
+      </h2>
+      <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '1rem' }}>
+        <thead>
+          <tr>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Luni</th>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Marți</th>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Miercuri</th>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Joi</th>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Vineri</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>8:00 - 8:50</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>12:00 - 12:50</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>11:00 - 11:50</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>9:00 - 9:50</td>
+          </tr>
+          <tr>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>12:00 - 12:50</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+          </tr>
+        </tbody>
+      </table>
       <input
         type="text"
         placeholder="Caută lecție sau zi..."
