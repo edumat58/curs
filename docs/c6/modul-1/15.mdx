@@ -1,0 +1,152 @@
+---
+sidebar_position: -3
+slug: /c6/modul-1/15
+description: ""
+---
+import Katex from '@site/src/components/Katex';
+import Tree from '@site/src/components/Tree';
+import GeometryDraw from '@site/src/components/GeometryDraw';
+
+
+# C7 - Probabilități
+
+---
+
+## Noțiunea probabilității
+:::note Exemplu
+ex: dacă aruncăm un zar cade pe pământ și notăm numărul de puncte de pe fața superioară
+
+* spunem că este o experiență aleatorie
+* în total sunt 6 fețe (cazuri posibile): 1 – 2 – 3 – 4 – 5 – 6
+* dacă efectuăm mai multe aruncări, frecvența de apariție a unei fețe variază între fiecare față; dacă efectuăm 36 de aruncări, frecvența de apariție a feței „1” este de $\frac{4}{36}$, pt. „2” este de $\frac{6}{36}$ …
+* Dacă vom continua să facem un număr mare de aruncări, frecvența de apariție a uneia dintre fețe se apropie de
+  $\frac{1}{6}$
+:::
+
+--- 
+
+## Proprietăți 
+
+:::info Important
+- Probabilitatea e un număr pozitiv cuprins între 0 și 1
+- Suma probabilităților tuturor posibilităților este mereu 1
+:::
+
+--- 
+
+## Situația echiprobabilă
+
+Dacă toate cazurile posibile ale unei experiențe aleatorii au probabilități egale, atunci spunem că este o `echiprobabilitate`.
+
+---
+
+## Probabilitatea unui eveniment
+> Pe baza exemplului anterior, notam cu $"E"$ - evenimentul \
+> Spunem ca `3` si `6` sunt cazuri favorabile \
+> $E$ - multiplii lui 3
+- Probabilitatea evenimentului $E$ este suma probabilitatilor fetelor favorabile
+
+$$
+P(E) = \frac{1}{6} + \frac{1}{6} = \frac{2}{6} = \frac{1}{3}
+$$
+
+> Notam cu $F$ - tot ce `nu` este multiplu a lui `3` \
+> Bazandu-ne pe aceasi logica, calculam $P(F)$
+- Probabilitatea evenimentului $F$ este suma probabilitatilor fetelor favorabile
+
+$$
+P(F) = \frac{1}{6} + \frac{1}{6} + 0 + \frac{1}{6} + \frac{1}{6} + 0 = \frac{4}{6} = \frac{2}{3}
+$$
+
+:::danger Important
+Suma dintre probabilitatea unui eveniment si probabilitatea cazului contrar al aceluiasi eveniment trebuie sa fie mereu egala cu 1.
+
+Cum in exemplul nostru avem evenimentul $E$ si $F$ este contrar lui $E$, atunci:
+
+$$
+P(E) + P(F) = 1 , \; deoarece
+\begin{cases}
+P(E) = \frac{1}{3} \\[10pt]
+P(F) = \frac{2}{3}
+\end{cases}
+$$
+:::
+---
+
+## Denumărare
+:::note Exemplu
+Considerăm 2 urne care conțin bile numerotate și imposibil de văzut.
+Una conține bile numerotate de la 1 la 3 și cealaltă de la 1 la 4.
+Scoatem la nimereală o bilă din fiecare urnă, notăm numarul și efectuăm suma numerelor obținute.
+:::
+
+>Pentru a denumăra toate cazurile posibile și cele favorabile, putem utiliza un **arbore** sau un **tablou** cu intrări multiple
+- În această experiență sunt 12 cazuri posibile.
+- Fie evenimentul A: `"suma obținută este un nr. prim"`.
+
+### Tabelul cu intrări multiple
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td><b><i>2</i></b></td>
+      <td><b><i>3</i></b></td>
+      <td>4</td>
+      <td><b><i>5</i></b></td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td><b><i>3</i></b></td>
+      <td>4</td>
+      <td><b><i>5</i></b></td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td><b><i>5</i></b></td>
+      <td>6</td>
+      <td><b><i>7</i></b></td>
+    </tr>
+  </tbody>
+</table>
+
+Din tabel rezulta $3 \cdot 4$ `(nr. linii X nr. coloane)` cazuri posibile, dintre care doar ***numerele prime*** sunt favorabile.
+
+$\Rightarrow P(A) = \Large \frac{7}{12}$
+
+---
+
+### Arbore
+
+<Tree source={`
+    O 
+        1
+                1 -> 2
+                2 -> 3
+                3 -> 4
+                4 -> 5
+        2
+                1 -> 3
+                2 -> 4
+                3 -> 5
+                4 -> 6
+        3
+                1 -> 4
+                2 -> 5
+                3 -> 6
+                4 -> 7
+`} />
+
+Observam ca pe ultima linie sunt reprezentate ***12 posibilitati*** de bile, dintre care cele ***favorabile*** sunt doar cele `7 numere prime`. 
+
+$\Rightarrow P(A) = \Large \frac{7}{12}$

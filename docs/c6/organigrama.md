@@ -11,7 +11,7 @@ import React, { useState } from 'react';
 export default function LectiiTreeView() {
   const saptamani = [
         {
-      titlu: 'Săptămâna 5 - În pregătire',
+      titlu: 'Săptămâna 6 - În pregătire',
       note: 'Materiale în curs de creare',
       lectii: [
         { titlu: '', zi: '', tip: '', link: '', pdf: '' },
@@ -21,15 +21,26 @@ export default function LectiiTreeView() {
         { titlu: '', zi: '', tip: '', link: '', pdf: '' },
       ],
     },
+        {
+      titlu: 'Săptămâna 5 - 06.10 - 10.10',
+      note: 'Materiale în curs de creare',
+      lectii: [
+        { titlu: 'C6.3 - Regula de trei simpla', zi: '07.10', tip: 'Algebra', link: 'c6/modul-1/14', pdf: '' },
+        { titlu: 'LP - Regula de trei simpla', zi: '08.10 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'C7 - Probabilitati', zi: '08.10 (ora 2)', tip: 'Algebra', link: 'c6/modul-1/15', pdf: '' },
+        { titlu: 'LP - Probabilitati', zi: '09.10 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'LP - Probabilitati', zi: '09.10 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
+      ],
+    },
     {
       titlu: 'Săptămâna 4 - 29.09 - 03.10',
-      note: 'Materiale în curs de creare',
+      note: 'Materiale încarcate',
       lectii: [
         { titlu: 'C6.1 - Marimi direct proportionale', zi: '30.09', tip: 'Algebra', link: 'c6/modul-1/12', pdf: '' },
         { titlu: 'LP - Marimi direct proportionale', zi: '01.10 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
         { titlu: 'C6.2 - Marimi invers proportionale', zi: '01.10 (ora 2)', tip: 'Algebra', link: 'c6/modul-1/13', pdf: '' },
         { titlu: 'LP - Marimi invers proportionale', zi: '02.10 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
-        { titlu: 'TEST 1 (C1 -> C5.7) | 50% NOTA 1 [2/2]', zi: '02.10 (ora 2)', tip: 'EVALUARE SUMATIVA', link: '', pdf: '' },
+        { titlu: 'TEST 1 (C1 -> C5.7) | 100% NOTA 1', zi: '02.10 (ora 2)', tip: 'EVALUARE SUMATIVA', link: '', pdf: '' },
       ],
     }, 
         {
@@ -40,7 +51,7 @@ export default function LectiiTreeView() {
         { titlu: 'C5.6 - Scara numerică (1)', zi: '25.09 (ora 1)', tip: 'Algebra', link: 'c6/modul-1/10', pdf: '' },
         { titlu: 'C5.6 - Scara numerică (2)', zi: '25.09 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
         { titlu: 'C5.7 - Proporții', zi: '26.09 (ora 1)', tip: 'Algebra', link: 'c6/modul-1/11', pdf: '' },
-        { titlu: 'TEST DIN LECTIA DE ZI | 50% NOTA 1 [1/2] si LP - Proportii', zi: '26.09 (ora 2)', tip: 'EVALUARE FORMATIVA/CONTINUA', link: '', pdf: '' },
+        { titlu: 'TEST DIN LECTIA DE ZI | 0% NOTA 1 si LP - Proportii', zi: '26.09 (ora 2)', tip: 'EVALUARE FORMATIVA/CONTINUA', link: '', pdf: '' },
       ],
     },
     {
@@ -94,7 +105,48 @@ export default function LectiiTreeView() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-    <hr />
+    <hr /><h2>
+      Grila de notare
+      </h2>
+      <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '1rem' }}>
+        <thead>
+          <tr>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>PONDERE</th>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Nota 1</th>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Nota 2</th>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Nota 3</th>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Nota 4</th>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Nota 5</th>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Nota 6</th>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Nota 7</th>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Nota 8</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>50% (1/2)</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+          </tr>
+          <tr>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>100% (2/2)</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>02.10</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+          </tr>
+        </tbody>
+      </table>
       <h2>
       Orar - 5 ore/saptamana
       </h2>

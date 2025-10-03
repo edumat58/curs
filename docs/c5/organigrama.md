@@ -99,6 +99,48 @@ export default function LectiiTreeView() {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
     <hr />
       <h2>
+      Grila de notare
+      </h2>
+      <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '1rem' }}>
+        <thead>
+          <tr>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>PONDERE</th>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Nota 1</th>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Nota 2</th>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Nota 3</th>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Nota 4</th>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Nota 5</th>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Nota 6</th>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Nota 7</th>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Nota 8</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>50% (1/2)</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>X</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>26.09</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+          </tr>
+          <tr>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>100% (2/2)</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>23.09</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+          </tr>
+        </tbody>
+      </table>
+      <h2>
       Orar - 5 ore/saptamana
       </h2>
       <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '1rem' }}>

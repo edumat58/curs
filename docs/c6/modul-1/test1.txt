@@ -1,0 +1,177 @@
+---
+title: "Test Clasa a VI-a - 16.05.2025"
+slug: /c6/25
+sidebar_position: 25
+description: ""
+---
+import Math from '/src/theme/Math';
+import GeometryDraw from '@site/src/components/GeometryDraw';
+import * as React from 'react';
+import { BarChart } from '@mui/x-charts/BarChart';
+import { PieChart } from '@mui/x-charts/PieChart';
+
+# Test Clasa a VI-a
+**Nume: \
+_______________________** \
+**Prenume: \
+_______________________**
+
+- Toate subiectele sunt obligatorii
+- Timpul efectiv de lucru este de **50 de minute**
+- Utilizarea instrumentelor de geometrie este **permisă și recomandată**
+- Se acordă **20 puncte** din oficiu
+
+---
+
+## Subiectul I
+> Tema abordată: **algebră**
+
+> Capitole incluse: \
+*C1 - Multipli și divizori* \
+*C2 - Numere prime. Descompunerea în factori primi*\
+*C3 - Mulțimi. Mulțimea numerelor naturale N*\
+*C4 - Mulțimea nr. întregi Z*\
+*C5.1 – Diagrame în bastoane și histograme*\
+*C5.2 - Diagrame circulare*\
+*C5.3 - Procente. Calcul procentual*\
+*C5.4 – Procente de mărire și micșorare*
+
+> Se acordă pentru acest subiect: **60 puncte**
+:::note Partea I - 20 puncte
+1. Descompuneți în factori primi următoarele numere: **(6x2p = 12p)**
+
+    $
+    a)\; 1024;\quad b)\; 1296;\quad c)\; 10296 \\[10pt]
+    d)\; 860;\quad e)\; 425;\quad f)\; 860
+    $
+
+2. Descompuneți în factori primi următoarele numere: **(3x1p = 3p)**
+
+    $
+    a)\; 1200;\quad b)\; 35000;\quad c)\; 495000 \\[10pt]
+    $
+
+3.  Scrieți următoarele mulțimi de numere: **(5p)**
+
+    $
+    a)\;A = \{x \in \mathbb{N} | -73 < x < 2\}
+    $ **(2p)**
+
+    $
+    b)\;B = \{x \in \mathbb{Z} | -5 < x < 5\}
+    $**(1,5p)**
+
+    $
+    c)\;C = \{x \in \mathbb{Z} | -8 \le x < 0\}
+    $ **(1,5p)**
+:::
+:::note Partea a II-a - 20 puncte
+1. În diagrama în bastoane de mai jos este reprezentat nr. copiilor ce au luat nota 9 la clasele de gimnaziu la Matematică. Care este numărul (efectivul) total de elevi cu nota 9 de la Clasa a 6-a? **(2.5p)**
+
+<BarChart
+  xAxis={[
+    {
+      id: 'barCategories',
+      data: ['Clasa a 5-a', 'Clasa a 6-a A', 'Clasa a 6-a B', 'Clasa a 7-a A', 'Clasa a 7-a B', 'Clasa a 8-a'],
+    },
+  ]}
+  series={[
+    {
+      data: [10, 15, 5, 20, 10, 5],
+    },
+  ]}
+  height={400}
+/>
+
+2. Reprezentați printr-o diagramă în bastoane următoarea situație statistică:
+În urma unui examen la informatică, elevii liceului Edumat care au obținut certificate sunt: **(7.5p)**
+-  4 elevi la Clasa a 5-a
+- 8 elevi la Clasa a 6-a
+- 2 elevi la Clasa a 7-a
+- 14 elevi la Clasa a 8-a
+
+
+
+3. La Clasa a 7-a A au avut loc alegeri pentru reprezentantul clasei. Mai jos este reprezentat un tabel de proporționalitate. Completați tabelul și pe baza lui,
+realizați **folosind raportorul** diagramă circulară a votului: **(2x5p = 10p)**
+
+| Candidatul | Cosmin | Radu | Sorin | Mario | **Total** |
+|------------|:------:|:-----:|:----:|:----:|:--------:|
+| **Număr de voturi** | 10 | 5 | 20 | 5 | 40 |
+| **Unghi (în °)** | 90 | | | | 360 |
+
+<svg width="550" height="550">
+<circle cx="260" cy="260" r="250" fill="white" stroke="black" stroke-width="2"/>
+</svg>
+
+
+:::
+
+:::note Partea a III-a - 20 puncte
+1. Să se scrie sub formă procentuală următoarele: **(3x4p = 12p)**
+
+    $
+    a)\; 35\% \text{ din 220}
+    $
+
+    $
+    b)\; 3,5\% \text{ din 22}
+    $
+
+    $
+    c)\; 72\% \text{ din 50}
+    $
+
+2. În urma inflației, prețurile lactatelor au crescut cu $3,5\%$. Care este noul preț al următoarelor produse: **(4x2p = 8p)**
+    
+    $
+    a)\; \text{1 l de lapte costa 5,99 lei}\\[10pt]
+    b)\; \text{100g branza de burduf costa 4,19 lei}\\[10pt]
+    c)\; \text{375g smantana 20\% grasime costa 6,59 lei}\\[10pt]
+    d)\; \text{500g iaurt cu capsuni costa 7,49 lei}
+    $
+
+:::
+
+---
+
+## Subiectul al II-lea
+> Tema abordată: **algebră** 
+
+> Timp estimativ de lucru: **30 de minute** 
+
+> Capitole incluse: \
+*C5.5 - Rapoarte*\
+*C5.6 - Scara numerică*\
+*C5.7 - Proporții*
+
+> Se acordă pentru acest subiect: **20 puncte**
+
+:::note 
+1. Daca proportia: $\dfrac{a}{5} = \dfrac{3}{b}$, calculati: **(3x2p = 6p)**
+
+    $
+    a)\;10\cdot a \cdot b \\[10pt]
+    b)\;15 - a\cdot b \\[10pt]
+    c)\;206 - \dfrac{90}{ab}
+    $
+
+2. Daca $x$ este de patru ori mai mare decat $y$, calculati valorile rapoartelor: **(2x5p = 10p)**
+
+    $
+    a)\;\dfrac{x}{x+y}\\[15pt]
+    b)\;\dfrac{2x+3y}{3x-2y}
+    $
+
+3. Pe o hartă geografică din Uruguay, distanța dintre Las Piedras și Artigas
+este de $10cm$. În realitate, distanța este de 580km.
+
+Scara la care a fost realizată harta este: **(4p)**
+$$
+1:............
+$$
+
+> exprimați rezultatul în metri
+:::
+
+---

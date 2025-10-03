@@ -11,7 +11,7 @@ import React, { useState } from 'react';
 export default function LectiiTreeView() {
   const saptamani = [
     {
-      titlu: 'Săptămâna 5 - În pregătire',
+      titlu: 'Săptămâna 6 - În pregătire',
       note: 'Materiale în curs de creare',
       lectii: [
         { titlu: '', zi: '', tip: '', link: '', pdf: '' },
@@ -22,14 +22,25 @@ export default function LectiiTreeView() {
       ],
     },
     {
-      titlu: 'Săptămâna 4 - 29.09 - 03.10',
+      titlu: 'Săptămâna 5 - 06.10 - 10.10',
       note: 'Materiale în curs de creare',
+      lectii: [
+        { titlu: 'LP - RECAPITULARE TEST si aplicatii calcule algebrice', zi: '06.10 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'TEST 1 - C1 -> C8.2 [100% NOTA 1]', zi: '06.10 (ora 2) ', tip: 'EVALUARE SUMATIVA', link: '', pdf: '' },
+        { titlu: 'G1 - Linie, dreapta si plan', zi: '08.10', tip: 'Geometrie', link: 'c7/modul-1/12', pdf: '' },
+        { titlu: 'G2 - Masura unui unghi', zi: '09.10', tip: 'Geometrie', link: 'c7/modul-1/13', pdf: '' },
+        { titlu: 'LP - Elemente de geometrie in plan', zi: '10.10', tip: 'Geometrie', link: '', pdf: '' },
+      ],
+    },
+    {
+      titlu: 'Săptămâna 4 - 29.09 - 03.10',
+      note: 'Materiale încarcate',
       lectii: [
         { titlu: 'LP - Operatii in multimea nr. reale', zi: '29.09 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
         { titlu: 'LP - Operatii in multimea nr. reale', zi: '29.09 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
         { titlu: 'C8.1 - Media aritmetica', zi: '01.10', tip: 'Algebra', link: 'c7/modul-1/10', pdf: '' },
         { titlu: 'C8.2 - Media geometrica', zi: '02.10', tip: 'Algebra', link: 'c7/modul-1/11', pdf: '' },
-        { titlu: 'TEST 1 (C1 -> C7) | 100% NOTA 1 ', zi: '03.10', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'LP - Media aritmetica si media geometrica', zi: '03.10', tip: 'Algebra', link: '', pdf: '' },
       ],
     },  
     {
@@ -95,6 +106,48 @@ export default function LectiiTreeView() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
     <hr />
+<h2>
+      Grila de notare
+      </h2>
+      <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '1rem' }}>
+        <thead>
+          <tr>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>PONDERE</th>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Nota 1</th>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Nota 2</th>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Nota 3</th>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Nota 4</th>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Nota 5</th>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Nota 6</th>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Nota 7</th>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Nota 8</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>50% (1/2)</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>X</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+          </tr>
+          <tr>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>100% (2/2)</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>06.10</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+          </tr>
+        </tbody>
+      </table>
       <h2>
       Orar - 5 ore/saptamana
       </h2>

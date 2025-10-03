@@ -10,8 +10,8 @@ import React, { useState } from 'react';
 
 export default function LectiiTreeView() {
   const saptamani = [
-    {
-      titlu: 'Săptămâna 5 - În pregătire',
+      {
+      titlu: 'Săptămâna 6 - În pregătire',
       note: 'Materiale în curs de creare',
       lectii: [
         { titlu: '', zi: '', tip: '', link: '', pdf: '' },
@@ -22,14 +22,25 @@ export default function LectiiTreeView() {
       ],
     },
     {
-      titlu: 'Săptămâna 4 - 29.09 - 03.10',
+      titlu: 'Săptămâna 5 - 06.10 - 10.10',
       note: 'Materiale în curs de creare',
+      lectii: [
+        { titlu: 'C8.1 - Expresii algebrice', zi: '06.10', tip: 'Algebra', link: 'c8/modul-1/10', pdf: '' },
+        { titlu: 'C8.2 - Descompuneri in factori', zi: '08.10 (ora 1)', tip: 'Algebra', link: 'c8/modul-1/11', pdf: '' },
+        { titlu: 'LP - Expresii algebrice', zi: '08.10 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'G1 - Puncte, drepte si plane', zi: '09.10 (ora 1)', tip: 'Geometrie', link: 'c8/modul-1/12', pdf: '' },
+        { titlu: 'LP - Puncte, drepte si plane', zi: '09.10 (ora 2)', tip: 'Geometrie', link: '', pdf: '' },
+      ],
+    },
+    {
+      titlu: 'Săptămâna 4 - 29.09 - 03.10',
+      note: 'Materiale încarcate',
       lectii: [
         { titlu: 'C6 - Raționalizarea numitorului unei fractii folosind conjugata', zi: '29.09', tip: 'Algebra', link: 'c8/modul-1/08', pdf: '' },
         { titlu: 'LP - Raționalizarea numitorului unei fractii folosind conjugata', zi: '01.10 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
-        { titlu: 'LP - Calcul algebric in multimea nr. reale', zi: '01.10 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
-        { titlu: 'C7 - Metode de descompunere in factori in multimea nr. reale', zi: '02.10 (ora 1)', tip: 'Algebra', link: 'c8/modul-1/09', pdf: '' },
-        { titlu: 'C8 - Fractii algebrice: amplificarea si simplificarea', zi: '02.10 (ora 2)', tip: 'Algebra', link: 'c8/modul-1/10', pdf: '' },
+        { titlu: 'C7 - Fractii algebrice: amplificarea si simplificarea', zi: '01.10 (ora 2)', tip: 'Algebra', link: 'c8/modul-1/09', pdf: '' },
+        { titlu: 'LP - Calcul algebric in multimea nr. reale', zi: '02.10 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'LP - Fractii algebrice: amplificarea si simplificarea', zi: '02.10 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
       ],
     },
     {
@@ -93,6 +104,48 @@ export default function LectiiTreeView() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
     <hr />
+    <h2>
+      Grila de notare
+      </h2>
+      <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '1rem' }}>
+        <thead>
+          <tr>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>PONDERE</th>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Nota 1</th>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Nota 2</th>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Nota 3</th>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Nota 4</th>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Nota 5</th>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Nota 6</th>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Nota 7</th>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Nota 8</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>50% (1/2)</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>X</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+          </tr>
+          <tr>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>100% (2/2)</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>25.09</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+          </tr>
+        </tbody>
+      </table>
       <h2>
       Orar - 5 ore/saptamana
       </h2>
