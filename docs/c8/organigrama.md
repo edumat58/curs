@@ -25,11 +25,11 @@ export default function LectiiTreeView() {
       titlu: 'Săptămâna 5 - 06.10 - 10.10',
       note: 'Materiale în curs de creare',
       lectii: [
-        { titlu: 'C8.1 - Expresii algebrice', zi: '06.10', tip: 'Algebra', link: 'c8/modul-1/10', pdf: '' },
-        { titlu: 'C8.2 - Descompuneri in factori', zi: '08.10 (ora 1)', tip: 'Algebra', link: 'c8/modul-1/11', pdf: '' },
+        { titlu: 'C8.1 - Calcul literal: expresii algebrice', zi: '06.10', tip: 'Algebra', link: 'c8/modul-1/10', pdf: '' },
+        { titlu: 'C8.2 - Calcul literal: descompuneri in factori', zi: '08.10 (ora 1)', tip: 'Algebra', link: 'c8/modul-1/11', pdf: '' },
         { titlu: 'LP - Expresii algebrice', zi: '08.10 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
-        { titlu: 'G1 - Puncte, drepte si plane', zi: '09.10 (ora 1)', tip: 'Geometrie', link: 'c8/modul-1/12', pdf: '' },
-        { titlu: 'LP - Puncte, drepte si plane', zi: '09.10 (ora 2)', tip: 'Geometrie', link: '', pdf: '' },
+        { titlu: 'G1 - Punct, dreaptă și plan', zi: '09.10 (ora 1)', tip: 'Geometrie', link: 'c8/modul-1/12', pdf: '' },
+        { titlu: 'LP - Punct, dreaptă și plan', zi: '09.10 (ora 2)', tip: 'Geometrie', link: '', pdf: '' },
       ],
     },
     {
@@ -38,7 +38,7 @@ export default function LectiiTreeView() {
       lectii: [
         { titlu: 'C6 - Raționalizarea numitorului unei fractii folosind conjugata', zi: '29.09', tip: 'Algebra', link: 'c8/modul-1/08', pdf: '' },
         { titlu: 'LP - Raționalizarea numitorului unei fractii folosind conjugata', zi: '01.10 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
-        { titlu: 'C7 - Fractii algebrice: amplificarea si simplificarea', zi: '01.10 (ora 2)', tip: 'Algebra', link: 'c8/modul-1/09', pdf: '' },
+        { titlu: 'C7 - Fractii: amplificarea si simplificarea', zi: '01.10 (ora 2)', tip: 'Algebra', link: 'c8/modul-1/09', pdf: '' },
         { titlu: 'LP - Calcul algebric in multimea nr. reale', zi: '02.10 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
         { titlu: 'LP - Fractii algebrice: amplificarea si simplificarea', zi: '02.10 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
       ],
@@ -164,14 +164,14 @@ export default function LectiiTreeView() {
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>8:00 - 8:50</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>10:00 - 10:50</td>
-            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>8:00 - 8:50</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>11:00 - 11:50</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
           </tr>
           <tr>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>11:00 - 11:50</td>
-            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>9:00 - 9:50</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>14:00 - 14:50</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
           </tr>
         </tbody>

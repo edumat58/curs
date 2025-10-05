@@ -1,0 +1,151 @@
+---
+sidebar_position: "-6"
+slug: /c8/modul-1/11
+description: ""
+---
+import Katex from '@site/src/components/Katex';
+
+# C8.2 - Calcul literar: descompuneri în factori
+---
+
+## Dezvoltare și factorizare
+:::tip Definiție 1
+- **Dezvoltarea** reprezintă un produs (înmulțire) înlocuit de o sumă egală, pentru toate valorile atribuite literelor.
+::: 
+  **Exemplu:**  
+  <Katex>
+  {String.raw`
+  \begin{aligned}
+  (2x - 3)(5x + 7) &= 2x\cdot5x + 2x\cdot7 - 3\cdot5x - 3\cdot7 \\
+                   &= 10x^2 + 14x - 15x - 21 \\
+                   &= 10x^2 - x - 21
+  \end{aligned}
+  `}
+  </Katex>
+:::tip Definiție 2
+- **Factorizarea** reprezintă o sumă înlocuită de un produs egal, pentru toate valorile atribuite literelor.
+:::
+  **Exemplu 1:**  
+  <Katex>
+  {String.raw`
+  \begin{aligned}
+  &12x^2 - 15x = 3 \cdot 4x^2 - 3\cdot 5x = \\[10pt] 
+  &=3(4x^2 - 5x) = 3x(4x - 5)\quad // \text{factorul comun este } 3x
+  \end{aligned}
+  `}
+  </Katex>  
+  **Exemplu 2:**
+  <Katex>
+  {String.raw`
+  5(y + 2) + x(y + 2) = (y + 2)(5 + x)\quad // \text{factorul comun este } (y + 2)
+  `}
+  </Katex>
+
+---
+
+### Factorizarea unei expresii algebrice
+
+:::note Exemplu
+Factorizează următoarele expresii, dacă este posibil:
+$$
+ E_1(x) = 5x^2 + 3x \quad\quad E_2(x) = 9-4x^2 \quad\quad E_3(x) = 25 + x^2
+$$
+:::
+
+> Observăm toți termenii din expresie (aici, în cazul nostru, fiecare expresie are câte 2 termeni). Acești termeni conțin un **factor comun**?
+- **DA** pentru $E_1(x)$
+:::info Metoda
+Amplicăm proprietatea **distributivității simple**
+
+$ab + ac = a(b+c)$
+
+$ab - ac = a(b-c)$
+:::
+
+$\large E_1(x) = 5x^2 + 3x = 5x \cdot \underline x + 3\underline x$
+
+>Tragem concluzia că `x` este factorul comun
+
+$\large E_1(x) = x(5x+3)$
+
+---
+
+- **NU** pentru $E_2(x) \quad și \quad E_3(x)$
+:::info Metoda
+Putem utiliza **identități remarcabile**
+
+$a^2 - b^2 = (a+b)(a-b)$
+
+$(a+b)^2=a^2+2ab+b^2$
+
+$(a-b)^2=a^2-2ab+b^2$
+
+:::
+>Pentru $E_2(x)$: **folosim identitatea $a^2-b^2$**
+
+$\large E_2(x) = 9 - 4x^2 = 3^2 - (2x)^2 \;,\;cu\;a=3 \quad și \quad b=2x$
+
+$\large E_2(x) = (3-2x)(3+2x)$
+
+>Pentru $E_3(x)$: **nu putem factoriza și nici să folosim formule de calcul prescurtat**
+
+$\large E_3(x) = 25 + x^2$
+
+---
+
+## Caz particular: diferența de pătrate
+
+:::danger De Reținut
+Pentru orice `a,b`:  
+<Katex>
+{String.raw`
+\boldsymbol{
+(a + b)(a - b) = a^2 - b^2
+}
+`}
+</Katex>
+:::
+
+- Citită de la stânga la dreapta, egalitatea permite următoarea **dezvoltare**:
+  :::note Exemplu:
+  <Katex>
+  {String.raw`
+  (3x - 5)(3x + 5) = ?
+  `}
+  </Katex>
+  :::
+  <Katex>
+  {String.raw`
+  \begin{aligned}
+  &(3x - 5)(3x + 5) \Rightarrow\begin{cases}a = 3x \\
+  b = 5
+  \end{cases}\\[10pt]
+  \\
+  &\Rightarrow(3x - 5)(3x + 5)=(3x)^2 - 5^2 = \\[10pt]
+  &\boldsymbol{9x^2-25}
+  \end{aligned}
+  `}
+  </Katex>
+
+- Citită de la dreapta la stânga, egalitatea permite următoarea **factorizare**: 
+  :::note Exemplu
+  <Katex>
+  {String.raw`
+  16 - 49x^2 = ?
+  `}
+  </Katex>
+  :::
+  <Katex>
+  {String.raw`
+  \begin{aligned}
+  &16 - 49x^2 \Rightarrow
+  \begin{cases}
+  a^2 = 16 \Rightarrow\boldsymbol{a = \sqrt{16} = 4} \\
+  b^2 = 49x^2 \Rightarrow\boldsymbol{b = \sqrt{49\cdot x^2} = \sqrt{49}\cdot \sqrt{x^2} = 7x}
+  \end{cases}\\[10pt]
+  \\
+  &\Rightarrow16-49x^2 = \boldsymbol{(4+7x)\cdot (4-7x)}
+  \end{aligned}
+  `}
+  </Katex>
+

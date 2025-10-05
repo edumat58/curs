@@ -25,11 +25,11 @@ export default function LectiiTreeView() {
       titlu: 'Săptămâna 5 - 06.10 - 10.10',
       note: 'Materiale în curs de creare',
       lectii: [
-        { titlu: 'C6.3 - Regula de trei simpla', zi: '07.10', tip: 'Algebra', link: 'c6/modul-1/14', pdf: '' },
-        { titlu: 'LP - Regula de trei simpla', zi: '08.10 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
-        { titlu: 'C7 - Probabilitati', zi: '08.10 (ora 2)', tip: 'Algebra', link: 'c6/modul-1/15', pdf: '' },
-        { titlu: 'LP - Probabilitati', zi: '09.10 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
-        { titlu: 'LP - Probabilitati', zi: '09.10 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'C6.3 - Regula de trei simpla (1)', zi: '08.10 (ora 1)', tip: 'Algebra', link: 'c6/modul-1/14', pdf: '' },
+        { titlu: 'C6.3 - Regula de trei simpla (2)', zi: '08.10 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'LP - Regula de trei simpla', zi: '08.10 (ora 3)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'C7 - Probabilitati', zi: '09.10', tip: 'Algebra', link: 'c6/modul-1/15', pdf: '' },
+        { titlu: 'LP - Probabilitati', zi: '10.10', tip: 'Algebra', link: '', pdf: '' },
       ],
     },
     {
@@ -125,7 +125,7 @@ export default function LectiiTreeView() {
         <tbody>
           <tr>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>50% (1/2)</td>
-            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>X</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
@@ -163,16 +163,23 @@ export default function LectiiTreeView() {
         <tbody>
           <tr>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
-            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>13:00 - 13:50</td>
-            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>8:00 - 8:50</td>
-            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>10:00 - 10:50</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>8:00 - 8:50</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>9:00 - 9:50</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>8:00 - 8:50</td>
           </tr>
           <tr>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
-            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>13:00-13:50</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>12:00-12:50</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+          </tr>
+                    <tr>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>13:00 - 13:50</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
           </tr>
         </tbody>

@@ -27,8 +27,8 @@ export default function LectiiTreeView() {
       lectii: [
         { titlu: 'LP - RECAPITULARE TEST si aplicatii calcule algebrice', zi: '06.10 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
         { titlu: 'TEST 1 - C1 -> C8.2 [100% NOTA 1]', zi: '06.10 (ora 2) ', tip: 'EVALUARE SUMATIVA', link: '', pdf: '' },
-        { titlu: 'G1 - Linie, dreapta si plan', zi: '08.10', tip: 'Geometrie', link: 'c7/modul-1/12', pdf: '' },
-        { titlu: 'G2 - Masura unui unghi', zi: '09.10', tip: 'Geometrie', link: 'c7/modul-1/13', pdf: '' },
+        { titlu: 'G1 - Punct, dreapta si plan', zi: '08.10', tip: 'Geometrie', link: 'c7/modul-1/12', pdf: '' },
+        { titlu: 'G2 - Unghiul. Clasificare și măsurarea unghiurilor', zi: '09.10', tip: 'Geometrie', link: 'c7/modul-1/13', pdf: '' },
         { titlu: 'LP - Elemente de geometrie in plan', zi: '10.10', tip: 'Geometrie', link: '', pdf: '' },
       ],
     },

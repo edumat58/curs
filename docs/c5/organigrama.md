@@ -12,7 +12,7 @@ export default function LectiiTreeView() {
 
   const saptamani = [
     {
-      titlu: 'Săptămâna 5 - În pregătire',
+      titlu: 'Săptămâna 6 - În pregătire',
       note: 'Materiale în curs de creare',
       lectii: [
         { titlu: '', zi: '', tip: '', link: '', pdf: '' },
@@ -23,14 +23,25 @@ export default function LectiiTreeView() {
       ],
     },
     {
-      titlu: 'Săptămâna 4 - 29.09 - 03.10',
+      titlu: 'Săptămâna 5 - 06.10 - 10.10',
       note: 'Materiale în curs de creare',
       lectii: [
-        { titlu: 'C8.1 - Proprietati ale inmultirii', zi: '', tip: 'Algebra', link: 'c5/10.mdx', pdf: '' },
-        { titlu: 'C8.2 - Factor comun', zi: '', tip: 'Algebra', link: 'c5/11.mdx', pdf: '' },
-        { titlu: 'LP - Inmultiri si factorizare', zi: '', tip: 'Algebra', link: '', pdf: '' },
-        { titlu: 'C9 - Proprietati ale puteri cu exponent natural', zi: '', tip: 'Algebra', link: 'c5/12.mdx', pdf: '' },
-        { titlu: 'LP - Puteri', zi: '', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'C10 - Factor comun', zi: '06.10', tip: 'Algebra', link: 'c5/12', pdf: '' },
+        { titlu: 'LP - Inmultiri si factorizare', zi: '07.10 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'C11 - Compararea nr. ridicate la o putere și pătratul perfect', zi: '07.10 (ora 2)', tip: 'Algebra', link: 'c5/13', pdf: '' },
+        { titlu: 'LP - Operatii cu puteri', zi: '09.10 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'LP - Operatii cu puteri', zi: '09.10 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
+      ],
+    },
+    {
+      titlu: 'Săptămâna 4 - 29.09 - 03.10',
+      note: 'Materiale încarcate',
+      lectii: [
+        { titlu: 'C8 - Proprietati ale inmultirii (1)', zi: '30.09', tip: 'Algebra', link: 'c5/10.mdx', pdf: '' },
+        { titlu: 'C8.1 - Proprietati ale inmultirii (2)', zi: '', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'LP - Inmultiri', zi: '02.10 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'Seminar Anti-Bullying SALVATI COPIII', zi: '02.10 (ora 2)', tip: 'EXTRASCOLAR', link: '', pdf: '' },
+        { titlu: 'C9 - Proprietati puteri cu exponent natural', zi: '03.10', tip: 'Algebra', link: 'c5/11', pdf: '' },
       ],
     },   
     {
@@ -155,17 +166,17 @@ export default function LectiiTreeView() {
         </thead>
         <tbody>
           <tr>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>9:00 - 9:50</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>8:00 - 8:50</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>8:00 - 8:50</td>
-            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>12:00 - 12:50</td>
-            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>11:00 - 11:50</td>
-            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>9:00 - 9:50</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
           </tr>
           <tr>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>13:00 - 13:50</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
-            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
-            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>12:00 - 12:50</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>13:00 - 13:50</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
           </tr>
         </tbody>
