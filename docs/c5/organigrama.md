@@ -12,23 +12,34 @@ export default function LectiiTreeView() {
 
   const saptamani = [
     {
-      titlu: 'Săptămâna 6 - În pregătire',
+      titlu: 'Săptămâna 7 - 20.10 - 24.10 | FINAL MODUL 1',
+      note: 'EVALUARE SUMATIVA: Miercuri 22.10',
+      lectii: [
+        { titlu: 'C14 - Media aritmetica a doua numere', zi: '20.10', tip: 'Algebra', link: 'c5/modul-1/16', pdf: '' },
+        { titlu: 'LP - Media aritmetica', zi: '21.10', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'LP - RECAPITULARE TEST', zi: '22.10 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'TEST 2 (C7.1 -> C14) | 50% NOTA 2 [2/2]', zi: '22.10 (ora 2)', tip: 'EVALUARE SUMATIVA', link: '', pdf: '' },
+        { titlu: 'LP - REZOLVARE TEST si TEMA DE VACANTA', zi: '23.10', tip: 'Algebra', link: '', pdf: '' },
+      ],
+    },
+    {
+      titlu: 'Săptămâna 6 - 13.10 - 17.10',
       note: 'Materiale în curs de creare',
       lectii: [
-        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
-        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
-        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
-        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
-        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
+        { titlu: 'LP - Compararea puterilor', zi: '13.10', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'C12 - Scrierea în baza 10 și baza 2', zi: '14.10', tip: 'Algebra', link: 'c5/modul-1/14', pdf: '' },
+        { titlu: 'LP - Scrierea în baza 10 și baza 2 si REEVALUARE ELEVI ABSENTI TEST 1', zi: '15.10 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'C13 - Ordinea efectuarii operatiilor', zi: '15.10 (ora 2)', tip: 'Algebra', link: 'c5/modul-1/15', pdf: '' },
+        { titlu: 'LP - Ordinea efectuarii operatiilor', zi: '16.10', tip: 'Algebra', link: '', pdf: '' },
       ],
     },
     {
       titlu: 'Săptămâna 5 - 06.10 - 10.10',
-      note: 'Materiale în curs de creare',
+      note: 'Materiale încărcate',
       lectii: [
-        { titlu: 'C10 - Factor comun', zi: '06.10', tip: 'Algebra', link: 'c5/12', pdf: '' },
+        { titlu: 'C10 - Factor comun', zi: '06.10', tip: 'Algebra', link: 'c5/modul-1/12', pdf: '' },
         { titlu: 'LP - Inmultiri si factorizare', zi: '07.10 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
-        { titlu: 'C11 - Compararea nr. ridicate la o putere și pătratul perfect', zi: '07.10 (ora 2)', tip: 'Algebra', link: 'c5/13', pdf: '' },
+        { titlu: 'C11 - Compararea nr. ridicate la o putere și pătratul perfect', zi: '07.10 (ora 2)', tip: 'Algebra', link: 'c5/modul-1/13', pdf: '' },
         { titlu: 'LP - Operatii cu puteri', zi: '09.10 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
         { titlu: 'LP - Operatii cu puteri', zi: '09.10 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
       ],
@@ -37,21 +48,21 @@ export default function LectiiTreeView() {
       titlu: 'Săptămâna 4 - 29.09 - 03.10',
       note: 'Materiale încarcate',
       lectii: [
-        { titlu: 'C8 - Proprietati ale inmultirii (1)', zi: '30.09', tip: 'Algebra', link: 'c5/10.mdx', pdf: '' },
+        { titlu: 'C8 - Proprietati ale inmultirii (1)', zi: '30.09', tip: 'Algebra', link: 'c5/modul-1/10.mdx', pdf: '' },
         { titlu: 'C8.1 - Proprietati ale inmultirii (2)', zi: '', tip: 'Algebra', link: '', pdf: '' },
         { titlu: 'LP - Inmultiri', zi: '02.10 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
         { titlu: 'Seminar Anti-Bullying SALVATI COPIII', zi: '02.10 (ora 2)', tip: 'EXTRASCOLAR', link: '', pdf: '' },
-        { titlu: 'C9 - Proprietati puteri cu exponent natural', zi: '03.10', tip: 'Algebra', link: 'c5/11', pdf: '' },
+        { titlu: 'C9 - Proprietati puteri cu exponent natural', zi: '03.10', tip: 'Algebra', link: 'c5/modul-1/11', pdf: '' },
       ],
     },   
     {
       titlu: 'Săptămâna 3 - 22.09 - 26.09',
       note: 'Materiale încarcate',
       lectii: [
-        { titlu: 'C7.1 - Ilustrarea fractiilor echiunitare, subunitare si supraunitare', zi: '23.09', tip: 'Algebra', link: 'c5/08', pdf: '' },
+        { titlu: 'C7.1 - Ilustrarea fractiilor echiunitare, subunitare si supraunitare', zi: '23.09', tip: 'Algebra', link: 'c5/modul-1/08', pdf: '' },
         { titlu: 'TEST DIN LECTIA DE ZI (C6.2) | 100% NOTA 1', zi: '23.09', tip: 'Algebra', link: '', pdf: '' },
         { titlu: 'CORECTARE TEST', zi: '24.09', tip: 'CORECTARE', link: '', pdf: '' },
-        { titlu: 'C7.2 - Fractii si scrierea procentuala', zi: '25.09', tip: 'Algebra', link: 'c5/09', pdf: '' },
+        { titlu: 'C7.2 - Fractii si scrierea procentuala', zi: '25.09', tip: 'Algebra', link: 'c5/modul-1/09', pdf: '' },
         { titlu: 'LP - Fractii si RECAPITULARE TEST', zi: '26.09 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
         { titlu: 'TEST 1 (C1 -> C6.2) | 50% NOTA 2 [1/2]', zi: '26.09 (ora 2)', tip: 'EVALUARE SUMATIVA', link: '', pdf: '' },
       ],
@@ -60,10 +71,10 @@ export default function LectiiTreeView() {
       titlu: 'Săptămâna 2: 15.09 - 19.09',
       note: 'Materiale încarcate',
       lectii: [
-        { titlu: 'C5 - Semidreapta gradata', zi: '16.09', tip: 'Algebra', link: 'c5/05', pdf: '' },
+        { titlu: 'C5 - Semidreapta gradata', zi: '16.09', tip: 'Algebra', link: 'c5/modul-1/05', pdf: '' },
         { titlu: 'LP - Semidreapta gradata', zi: '17.09', tip: 'Algebra', link: '', pdf: '' },
-        { titlu: 'C6.1 - Multimi. Multimea nr. naturale', zi: '18.09', tip: 'Algebra', link: 'c5/06', pdf: '' },
-        { titlu: 'C6.2 - Scrierea si citirea nr. naturale', zi: '19.09 (ora 1)', tip: 'Algebra', link: 'c5/07', pdf: '' },
+        { titlu: 'C6.1 - Multimi. Multimea nr. naturale', zi: '18.09', tip: 'Algebra', link: 'c5/modul-1/06', pdf: '' },
+        { titlu: 'C6.2 - Scrierea si citirea nr. naturale', zi: '19.09 (ora 1)', tip: 'Algebra', link: 'c5/modul-1/07', pdf: '' },
         { titlu: 'LP - Scrierea si citirea nr. naturale', zi: '19.09 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
         
       ],
@@ -72,9 +83,9 @@ export default function LectiiTreeView() {
       titlu: 'Săptămâna 1: 08.09 - 12.09',
       note: 'Modulul 1: 08.09.2025 -> 25.10.2025',
       lectii: [
-        { titlu: 'C1 - Scrierea sub forma zecimala', zi: '10.09.2025', tip: 'Algebra', link: 'c5/01', pdf: '' },
-        { titlu: 'C2 - Adunarea si scaderea nr. zecimale', zi: '11.09.2025 (ora 1)', tip: 'Algebra', link: 'c5/02', pdf: '' },
-        { titlu: 'C3 - Inmultirea numerelor zecimale', zi: '11.09.2025 (ora 2)', tip: 'Algebra', link: 'c5/03', pdf: '' },
+        { titlu: 'C1 - Scrierea sub forma zecimala', zi: '10.09.2025', tip: 'Algebra', link: 'c5/modul-1/01', pdf: '' },
+        { titlu: 'C2 - Adunarea si scaderea nr. zecimale', zi: '11.09.2025 (ora 1)', tip: 'Algebra', link: 'c5/modul-1/02', pdf: '' },
+        { titlu: 'C3 - Inmultirea numerelor zecimale', zi: '11.09.2025 (ora 2)', tip: 'Algebra', link: 'c5/modul-1/03', pdf: '' },
         { titlu: 'C4 - Impartirea Euclidiana. Impartirea nr. zecimale', zi: '12.09.2025', tip: 'Algebra', link: 'c5/04', pdf: '' },
       ],
     },
@@ -141,7 +152,7 @@ export default function LectiiTreeView() {
           <tr>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>100% (2/2)</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>23.09</td>
-            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>22.10</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
@@ -166,17 +177,17 @@ export default function LectiiTreeView() {
         </thead>
         <tbody>
           <tr>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>8:00 - 8:50</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>13:00 - 13:50</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>8:00 - 8:50</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>9:00 - 9:50</td>
-            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>8:00 - 8:50</td>
-            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
-            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>8:00 - 8:50</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
           </tr>
           <tr>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
-            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>13:00 - 13:50</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>13:00 - 13:50</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
           </tr>
         </tbody>
