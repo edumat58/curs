@@ -11,19 +11,30 @@ import React, { useState } from 'react';
 export default function LectiiTreeView() {
   const saptamani = [
     {
-      titlu: 'Săptămâna 6 - În pregătire',
-      note: 'Materiale în curs de creare',
+      titlu: 'Săptămâna 7 - 20.10 - 24.10 | FINAL MODUL 1',
+      note: 'EVALUARE SUMATIVA: Vineri 24.10',
       lectii: [
-        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
-        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
-        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
-        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
-        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
+        { titlu: 'LP - Patrulatere si paralelograme', zi: '20.10 (ora 1)', tip: 'Geometrie', link: '', pdf: '' },
+        { titlu: 'C10 - Aproximări ale numerelor iraționale', zi: '20.10 (ora 2)', tip: 'Algebra', link: 'c7/modul-1/17', pdf: '' },
+        { titlu: 'LP - Aproximări ale numerelor iraționale și REEVALUARE - ELEVI ABSENTI TEST 1', zi: '22.10', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'LP - RECAPITULARE TEST', zi: '23.10', tip: 'Geometrie', link: '', pdf: '' },
+        { titlu: 'TEST 2 (C9, C10 | G1 -> G4) | 100% NOTA 2', zi: '24.10', tip: 'EVALUARE SUMATIVA', link: '', pdf: '' },
+      ],
+    },
+    {
+      titlu: 'Săptămâna 6 - 13.10 - 17.10',
+      note: 'Materiale încarcate',
+      lectii: [
+        { titlu: 'C9 - Ecuatia x² = a', zi: '13.10 (ora 1)', tip: 'Algebra', link: 'c7/modul-1/14', pdf: '' },
+        { titlu: 'LP - Ecuatia x² = a', zi: '13.10 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'G3 - Patrulaterul convex', zi: '15.10', tip: 'Geometrie', link: 'c7/modul-1/15', pdf: '' },
+        { titlu: 'LP - Patrulaterul convex', zi: '16.10', tip: 'Geometrie', link: '', pdf: '' },
+        { titlu: 'G4 - Paralelogramul', zi: '17.10', tip: 'Geometrie', link: 'c7/modul-1/16', pdf: '' },
       ],
     },
     {
       titlu: 'Săptămâna 5 - 06.10 - 10.10',
-      note: 'Materiale în curs de creare',
+      note: 'Materiale încarcate',
       lectii: [
         { titlu: 'LP - RECAPITULARE TEST si aplicatii calcule algebrice', zi: '06.10 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
         { titlu: 'TEST 1 - C1 -> C8.2 [100% NOTA 1]', zi: '06.10 (ora 2) ', tip: 'EVALUARE SUMATIVA', link: '', pdf: '' },
@@ -127,7 +138,7 @@ export default function LectiiTreeView() {
           <tr>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>50% (1/2)</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>X</td>
-            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>X</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
@@ -138,7 +149,7 @@ export default function LectiiTreeView() {
           <tr>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>100% (2/2)</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>06.10</td>
-            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>24.10</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
@@ -166,8 +177,8 @@ export default function LectiiTreeView() {
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>9:00 - 9:50</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>9:00 - 9:50</td>
-            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>14:00 - 14:50</td>
-            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>8:00 - 8:50</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>12:00 - 12:50</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>9:00 - 9:50</td>
           </tr>
           <tr>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>13:00 - 13:50</td>

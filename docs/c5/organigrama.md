@@ -24,11 +24,11 @@ export default function LectiiTreeView() {
     },
     {
       titlu: 'Săptămâna 6 - 13.10 - 17.10',
-      note: 'Materiale în curs de creare',
+      note: 'Materiale încarcate',
       lectii: [
         { titlu: 'LP - Compararea puterilor', zi: '13.10', tip: 'Algebra', link: '', pdf: '' },
         { titlu: 'C12 - Scrierea în baza 10 și baza 2', zi: '14.10', tip: 'Algebra', link: 'c5/modul-1/14', pdf: '' },
-        { titlu: 'LP - Scrierea în baza 10 și baza 2 si REEVALUARE ELEVI ABSENTI TEST 1', zi: '15.10 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'LP - Scrierea în baza 10 și baza 2 si REEVALUARE - ELEVI ABSENTI TEST 1', zi: '15.10 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
         { titlu: 'C13 - Ordinea efectuarii operatiilor', zi: '15.10 (ora 2)', tip: 'Algebra', link: 'c5/modul-1/15', pdf: '' },
         { titlu: 'LP - Ordinea efectuarii operatiilor', zi: '16.10', tip: 'Algebra', link: '', pdf: '' },
       ],
@@ -60,7 +60,7 @@ export default function LectiiTreeView() {
       note: 'Materiale încarcate',
       lectii: [
         { titlu: 'C7.1 - Ilustrarea fractiilor echiunitare, subunitare si supraunitare', zi: '23.09', tip: 'Algebra', link: 'c5/modul-1/08', pdf: '' },
-        { titlu: 'TEST DIN LECTIA DE ZI (C6.2) | 100% NOTA 1', zi: '23.09', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'TEST DIN LECTIA DE ZI (C6.2) | 100% NOTA 1', zi: '23.09', tip: 'EVALUARE FORMATIVA', link: '', pdf: '' },
         { titlu: 'CORECTARE TEST', zi: '24.09', tip: 'CORECTARE', link: '', pdf: '' },
         { titlu: 'C7.2 - Fractii si scrierea procentuala', zi: '25.09', tip: 'Algebra', link: 'c5/modul-1/09', pdf: '' },
         { titlu: 'LP - Fractii si RECAPITULARE TEST', zi: '26.09 (ora 1)', tip: 'Algebra', link: '', pdf: '' },

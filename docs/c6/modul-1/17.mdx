@@ -1,0 +1,135 @@
+---
+sidebar_position: -5
+slug: /c6/modul-1/17
+description: ""
+---
+
+# C8.2 - Cel mai mic multiplu comun
+
+---
+
+:::tip Definitie
+
+Cel mai mic multiplu comun al două sau mai multe numere naturale (c.m.m.m.c.) este acel **multiplu comun al lor, nenul**, care divide toți ceilalți multipli comuni ai numerelor date.
+
+Pentru $a$ și $b$ notăm **c.m.m.m.c.** al lor cu:
+
+$$
+[a, b]
+$$
+
+:::
+
+
+
+$M_{15} = \{0, 15, 30, 45, 60, 75, \ldots\}$ – mulțimea multiplilor lui 15.  
+$M_{10} = \{0, 10, 20, 30, 40, 50, 60, \ldots\}$ – mulțimea multiplilor lui 10.  
+
+$M_{10} \cap M_{15} = \{0, 30, 60, 90, \ldots\}$ – mulțimea multiplilor comuni.
+
+> Cel mai mic, nenul, cu proprietatea că îi divide pe ceilalți este **30**.
+
+
+---
+
+## Algoritmul de determinare
+
+:::danger De Retinut
+
+Pentru a determina cel mai mic multiplu comun pentru două sau mai multe numere naturale procedăm astfel:
+
+1. Descompunem numerele date în produs de puteri de numere prime.  
+2. Cel mai mic multiplu comun (**c.m.m.m.c.**) va fi egal cu **produsul factorilor comuni și necomuni**, luați o singură dată, cu **exponentul cel mai mare**.
+
+:::
+---
+
+**PASUL 1:**
+
+Reluăm exemplul de mai sus:
+
+$$
+10 = 2 \cdot 5, \quad 15 = 3 \cdot 5
+$$
+
+Factorii comuni și necomuni sunt $2$, $3$ și $5$.  
+La fiecare luăm în considerare exponentul cel mai mare, adică $1$.  
+
+Rezultă:
+
+$$
+[10, 15] = 2 \cdot 3 \cdot 5 = 30
+$$
+
+
+---
+
+**PASUL 2:**
+
+Descompunem în factori primi nr. $144$, $360$ și $216$.
+
+$$
+\begin{align*}
+144 &= 2^4 \cdot 3^2 \\
+360 &= 2^3 \cdot 3^2 \cdot 5 \\
+216 &= 2^3 \cdot 3^3
+\end{align*}
+$$
+
+Factorii comuni și necomuni sunt $2$, $3$ și $5$.  
+Pentru factorul $2$, exponentul cel mai mare este $4$;  
+pentru factorul $3$, exponentul cel mai mare este $3$;  
+pentru factorul $5$, exponentul cel mai mare este $1$.
+
+Rezultă:
+
+$$
+[144, 360, 216] = 2^4 \cdot 3^3 \cdot 5 = 2160
+$$
+
+Verificare:
+
+$$
+2160 = 144 \cdot 15, \quad 2160 = 360 \cdot 6, \quad 2160 = 216 \cdot 10
+$$
+
+
+---
+
+## Observații
+
+- Cel mai mic multiplu comun al două sau al mai multor numere naturale, **oricare două prime între ele**, este produsul lor.
+
+:::note Exemplu 1
+
+$$
+[2, 3] = 6, \quad [7, 10] = 70, \quad [8, 9] = 72
+$$
+:::
+
+---
+
+Dacă $a$ și $b$ sunt două numere naturale nenule astfel încât $a \mid b$, atunci:
+
+$$
+[a, b] = b
+$$
+
+:::note Exemplu 2
+
+1. $5 \mid 10 \Rightarrow [5, 10] = 10$  
+2. $7 \mid 35 \Rightarrow [7, 35] = 35$
+:::
+
+---
+
+## Relația dintre c.m.m.d.c. și c.m.m.m.c.
+
+:::danger De retinut
+Relația dintre c.m.m.d.c. și c.m.m.m.c. al numerelor naturale $a$ și $b$ este:
+
+$$
+(a, b) \cdot [a, b] = a \cdot b
+$$
+:::
+---

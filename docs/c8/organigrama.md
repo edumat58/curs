@@ -11,25 +11,36 @@ import React, { useState } from 'react';
 export default function LectiiTreeView() {
   const saptamani = [
       {
-      titlu: 'Săptămâna 6 - În pregătire',
+      titlu: 'Săptămâna 7 - 20.10 - 24.10 | FINAL MODUL 1',
+      note: 'EVALUARE SUMATIVA: Miercuri 22.10',
+      lectii: [
+        { titlu: 'G3 - Piramida', zi: '20.10', tip: 'Geometrie', link: 'c8/modul-1/15', pdf: '' },
+        { titlu: 'LP - RECAPITULARE TEST', zi: '22.10 (ora 1)', tip: 'Geometrie', link: '', pdf: '' },
+        { titlu: 'TEST 2 (C5 -> C9 | G1, G2) | 100% NOTA 3', zi: '22.10 (ora 2)', tip: 'EVALUARE SUMATIVA', link: '', pdf: '' },
+        { titlu: 'LP - Piramida', zi: '23.10 (ora 1)', tip: 'Geometrie', link: '', pdf: '' },
+        { titlu: 'LP - REZOLVARE TEST si TEMA DE VACANTA', zi: '23.10 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
+      ],
+    },
+    {
+      titlu: 'Săptămâna 6 - 13.10 - 17.10',
       note: 'Materiale în curs de creare',
       lectii: [
-        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
-        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
-        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
-        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
-        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
+        { titlu: 'G2 - Relatii intre puncte, drepte si plane (1)', zi: '13.10', tip: 'Geometrie', link: 'c8/modul-1/13', pdf: '' },
+        { titlu: 'G2 - Relatii intre puncte, drepte si plane (2)', zi: '15.10 (ora 1)', tip: 'Geometrie', link: '', pdf: '' },
+        { titlu: 'LP - Determinarea dreptei si planului și REEVALUARE - ELEVI ABSENTI TEST 1', zi: '15.10 (ora 2)', tip: 'Geometrie', link: '', pdf: '' },
+        { titlu: 'C9 - Existenta,amplificarea si simplificarea fractiilor algebrice', zi: '16.10 (ora 1)', tip: 'Algebra', link: 'c8/modul-1/14', pdf: '' },
+        { titlu: 'LP - Existenta,amplificarea si simplificarea fractiilor algebrice', zi: '17.10 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
       ],
     },
     {
       titlu: 'Săptămâna 5 - 06.10 - 10.10',
-      note: 'Materiale în curs de creare',
+      note: 'Materiale încarcate',
       lectii: [
         { titlu: 'C8.1 - Calcul literal: expresii algebrice', zi: '06.10', tip: 'Algebra', link: 'c8/modul-1/10', pdf: '' },
         { titlu: 'C8.2 - Calcul literal: descompuneri in factori', zi: '08.10 (ora 1)', tip: 'Algebra', link: 'c8/modul-1/11', pdf: '' },
         { titlu: 'LP - Expresii algebrice', zi: '08.10 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
-        { titlu: 'G1 - Punct, dreaptă și plan', zi: '09.10 (ora 1)', tip: 'Geometrie', link: 'c8/modul-1/12', pdf: '' },
-        { titlu: 'LP - Punct, dreaptă și plan', zi: '09.10 (ora 2)', tip: 'Geometrie', link: '', pdf: '' },
+        { titlu: 'TEST DIN LECTIA DE ZI (C8.1 | C8.2) | 100% NOTA 2', zi: '09.10 (ora 1)', tip: 'EVALUARE FORMATIVA', link: '', pdf: '' },
+        { titlu: 'G1 - Punct, dreaptă și plan', zi: '09.10 (ora 2)', tip: 'Geometrie', link: 'c8/modul-1/12', pdf: '' },
       ],
     },
     {
@@ -125,8 +136,8 @@ export default function LectiiTreeView() {
           <tr>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>50% (1/2)</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>X</td>
-            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
-            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>X</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>X</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
@@ -136,8 +147,8 @@ export default function LectiiTreeView() {
           <tr>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>100% (2/2)</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>25.09</td>
-            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
-            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>09.10</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>22.10</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
@@ -161,7 +172,7 @@ export default function LectiiTreeView() {
         </thead>
         <tbody>
           <tr>
-            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>8:00 - 8:50</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>12:00 - 12:50</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>10:00 - 10:50</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>11:00 - 11:50</td>

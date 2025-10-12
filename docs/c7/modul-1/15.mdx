@@ -1,0 +1,258 @@
+---
+sidebar_position: -9
+slug: /c7/modul-1/15
+description: ""
+---
+
+# G3 - Patrulaterul convex
+
+---
+## Introducere
+
+:::info Important
+- Patru puncte, oricare trei necoliniare, determină un **patrulater**. 
+
+- Punctele $A$, $B$, $C$ și $D$ se numesc **vârfurile patrulaterului**. 
+
+- Segmentele $AB$, $BC$, $CD$ și $DA$ se numesc **laturile patrulaterului**.  
+
+- Dreptele care includ laturile patrulaterului se vor numi **drepte suport ale laturilor patrulaterului**.
+:::
+
+---
+
+## Patrulater convex și patrulater concav
+
+:::tip Definitie
+Un **patrulater este convex** dacă, pentru oricare dintre laturi, două vârfuri ale patrulaterului se află de aceeași parte a dreptei sale suport.  
+În caz contrar, patrulaterul este **concav**.
+
+
+Ordinea vârfurilor în numirea patrulaterului este de mare importanță:  
+când numim un patrulater, **enumerăm vârfurile circular**.
+:::
+
+**Patrulater Convex**
+
+<svg width="600" height="400" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Patrulater convex -->
+  <polygon points="90,160 160,120 210,140 130,220"
+           fill="none" stroke="#000000" stroke-width="2" />
+
+  <!-- Prelungiri punctate -->
+  <line x1="90" y1="160" x2="50" y2="110" stroke="#000" stroke-width="1.5" stroke-dasharray="6,4" />
+  <line x1="160" y1="120" x2="320" y2="20" stroke="#000" stroke-width="1.5" stroke-dasharray="6,4" />
+  <line x1="210" y1="140" x2="320" y2="20" stroke="#000" stroke-width="1.5" stroke-dasharray="6,4" />
+  <line x1="130" y1="220" x2="150" y2="250" stroke="#000" stroke-width="1.5" stroke-dasharray="6,4" />
+  <line x1="130" y1="220" x2="100" y2="250" stroke="#000" stroke-width="1.5" stroke-dasharray="6,4" />
+
+  <!-- Etichete vârfuri -->
+  <text x="80" y="155" font-size="14" font-family="Arial" font-weight="bold">D</text>
+  <text x="160" y="110" font-size="14" font-family="Arial" font-weight="bold">A</text>
+  <text x="215" y="135" font-size="14" font-family="Arial" font-weight="bold">B</text>
+  <text x="120" y="250" font-size="14" font-family="Arial" font-weight="bold">C</text>
+</svg>
+
+---
+
+**Patrulater Concav**
+
+<svg width="600" height="400">
+
+  <line stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_1" y2="218" x2="352" y1="146" x1="183" stroke="#000" fill="none"/>
+  <line stroke="#000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_2" y2="122" x2="489" y1="218" x1="349" fill="none"/>
+  <line stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_3" y2="362" x2="368" y1="146" x1="185" stroke="#000" fill="none"/>
+  <line stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_4" y2="361" x2="369" y1="122" x1="487" stroke="#000" fill="none"/>
+  <line stroke-dasharray="5,5" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_5" y2="367" x2="107" y1="217" x1="350" stroke="#000" fill="none"/>
+  <line stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_6" y2="290" x2="489" y1="221" x1="356" stroke-dasharray="5,5" stroke="#000" fill="none"/>
+  <line stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_7" y2="65" x2="572" y1="124" x1="484" stroke-dasharray="5,5" stroke="#000" fill="none"/>
+  <line stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_8" y2="118" x2="123" y1="147" x1="186" stroke-dasharray="5,5" stroke="#000" fill="none"/>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" stroke-width="0" id="svg_9" y="195" x="340" stroke-dasharray="5,5" stroke="#000" fill="#000000">M</text>
+  <text font-family="Noto Sans JP" font-size="24" stroke-width="0" id="svg_10" y="116" x="471" stroke-dasharray="5,5" stroke="#000" fill="#000000">N</text>
+  <text font-family="Noto Sans JP" font-size="24" stroke-width="0" id="svg_11" y="396" x="362" stroke-dasharray="5,5" stroke="#000" fill="#000000">P</text>
+  <text font-family="Noto Sans JP" font-size="24" stroke-width="0" id="svg_12" y="171" x="157" stroke-dasharray="5,5" stroke="#000" fill="#000000">Q</text>
+</svg>
+
+---
+
+## Elemente ale patrulaterului
+
+<svg width="600" height="420" viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg">
+  <!-- Laturile patrulaterului -->
+  <polygon points="60,140 120,80 230,50 230,170"
+           fill="none" stroke="#333" stroke-width="2" />
+
+  <!-- Diagonalele -->
+  <line x1="60" y1="140" x2="230" y2="50" stroke="#f4a261" stroke-width="2" />
+  <line x1="120" y1="80" x2="230" y2="170" stroke="#f4a261" stroke-width="2" />
+
+  <!-- Punctele (vârfurile) -->
+  <circle cx="60" cy="140" r="3" fill="#000" />
+  <circle cx="120" cy="80" r="3" fill="#000" />
+  <circle cx="230" cy="50" r="3" fill="#000" />
+  <circle cx="230" cy="170" r="3" fill="#000" />
+
+  <!-- Etichete -->
+  <text x="40" y="145" font-size="14" font-family="Arial" font-weight="bold">D</text>
+  <text x="115" y="70" font-size="14" font-family="Arial" font-weight="bold">A</text>
+  <text x="235" y="50" font-size="14" font-family="Arial" font-weight="bold">B</text>
+  <text x="235" y="180" font-size="14" font-family="Arial" font-weight="bold">C</text>
+</svg>
+
+
+### Proprietăți
+
+În figura alăturată avem patrulaterul $ABCD$ cu elementele:
+
+- Punctele $A$, $B$, $C$ și $D$ sunt **vârfurile patrulaterului**.  
+  - Vârfurile $A$ și $B$, de exemplu, sunt **vârfuri vecine**.  
+  - Vârfurile $A$ și $C$, de exemplu, sunt **vârfuri opuse**.
+
+- Patrulaterul $ABCD$ are laturile: $AB$, $BC$, $CD$ și $DA$.  
+  - Laturile $AB$ și $CD$, de exemplu, sunt **laturi opuse**.  
+  - Laturile $AB$ și $BC$, de exemplu, sunt **laturi alăturate** (au un punct comun).
+
+- Două vârfuri opuse ale unui patrulater convex determină o **diagonală**:  
+  segmentele $AC$ și $BD$ sunt **diagonalele patrulaterului $ABCD$**.
+
+- Oricare două laturi alăturate ale unui patrulater convex formează câte un **unghi**.  
+  Unghiurile patrulaterului $ABCD$ sunt:  
+  $\measuredangle DAB$, $\measuredangle ABC$, $\measuredangle BCD$ și $\measuredangle CDA$.  
+  Dacă nu este pericol de confuzie, se pot nota cu $\measuredangle A$, $\measuredangle B$, $\measuredangle C$, $\measuredangle D$.
+
+  - $\measuredangle A$ și $\measuredangle B$, de exemplu, sunt **unghiuri alăturate**.  
+  - $\measuredangle A$ și $\measuredangle C$, de exemplu, sunt **unghiuri opuse**.
+
+- Partea comună a interioarelor a două unghiuri opuse formează **interiorul patrulaterului convex**.
+
+
+---
+
+## Teoremă
+
+:::danger De retinut
+
+**Suma măsurilor unghiurilor interioare ale unui patrulater convex este $360^\circ$.**
+
+$$
+m\measuredangle A + m\measuredangle B + m\measuredangle C + m\measuredangle D = 360^\circ
+$$
+
+:::
+
+---
+
+## Aplicații
+
+
+### Aplicația 1
+
+<svg width="250" height="350" viewBox="0 0 250 350" xmlns="http://www.w3.org/2000/svg">
+  <!-- Laturi patrulater -->
+  <polygon points="80,120 130,60 180,100 90,300"
+           fill="none" stroke="#333" stroke-width="2" />
+
+  <!-- Puncte (vârfuri) -->
+  <circle cx="80" cy="120" r="3" fill="#000" />
+  <circle cx="130" cy="60" r="3" fill="#000" />
+  <circle cx="180" cy="100" r="3" fill="#000" />
+  <circle cx="90" cy="300" r="3" fill="#000" />
+
+  <!-- Etichete vârfuri -->
+  <text x="65" y="125" font-size="14" font-family="Arial" font-weight="bold">A</text>
+  <text x="125" y="50" font-size="14" font-family="Arial" font-weight="bold">B</text>
+  <text x="185" y="105" font-size="14" font-family="Arial" font-weight="bold">C</text>
+  <text x="80" y="315" font-size="14" font-family="Arial" font-weight="bold">D</text>
+
+  <!-- Măsuri unghiuri -->
+  <text x="120" y="90" font-size="13" font-family="Arial">85°</text>
+  <text x="140" y="115" font-size="13" font-family="Arial">110°</text>
+  <text x="90" y="250" font-size="13" font-family="Arial">44°</text>
+</svg>
+
+
+:::note
+Se consideră patrulaterul de alături cu măsurile unghiurilor $\measuredangle B$, $\measuredangle C$, $\measuredangle D$ date în figură.  
+Vom determina măsura unghiului $A$.
+:::
+
+**Rezolvare:**
+
+$$
+m\measuredangle A + m\measuredangle B + m\measuredangle C + m\measuredangle D = 360^\circ
+$$
+
+$$
+m\measuredangle A = 360^\circ - (85^\circ + 110^\circ + 44^\circ) = 360^\circ - 239^\circ = 121^\circ
+$$
+
+
+---
+
+
+### Aplicația 2
+
+<svg width="500" height="500" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Laturi patrulater -->
+  <polygon points="70,160 150,100 230,130 150,250"
+           fill="none" stroke="#333" stroke-width="2" />
+
+  <!-- Puncte (vârfuri) -->
+  <circle cx="70" cy="160" r="3" fill="#000" />
+  <circle cx="150" cy="100" r="3" fill="#000" />
+  <circle cx="230" cy="130" r="3" fill="#000" />
+  <circle cx="150" cy="250" r="3" fill="#000" />
+
+  <!-- Etichete vârfuri -->
+  <text x="55" y="165" font-size="14" font-family="Arial" font-weight="bold">A</text>
+  <text x="145" y="90" font-size="14" font-family="Arial" font-weight="bold">B</text>
+  <text x="235" y="135" font-size="14" font-family="Arial" font-weight="bold">C</text>
+  <text x="145" y="265" font-size="14" font-family="Arial" font-weight="bold">D</text>
+
+  <!-- Etichete unghiuri -->
+  <text x="85" y="170" font-size="13" font-family="Arial">80°</text>
+  <text x="135" y="130" font-size="13" font-family="Arial">3x°+10°</text>
+  <text x="200" y="145" font-size="13" font-family="Arial">2x°</text>
+  <text x="130" y="225" font-size="13" font-family="Arial">x°+30°</text>
+</svg>
+
+
+:::note
+Se consideră patrulaterul de alături cu măsurile unghiurilor notate în figură,  
+$x$ – număr rațional pozitiv.  
+Vom determina valoarea lui $x$ și măsurile unghiurilor $\measuredangle B$, $\measuredangle C$, $\measuredangle D$.
+:::
+
+**Rezolvare:**
+
+$$
+m\measuredangle A + m\measuredangle B + m\measuredangle C + m\measuredangle D = 360^\circ
+$$
+
+Înlocuim:
+
+$$
+80^\circ + (3x^\circ + 10^\circ) + (2x^\circ) + (x^\circ + 30^\circ) = 360^\circ
+$$
+
+$$
+6x^\circ + 120^\circ = 360^\circ
+$$
+
+$$
+6x^\circ = 240^\circ \Rightarrow x^\circ = 40^\circ
+$$
+
+$$
+m\measuredangle B = 3 \cdot 40^\circ + 10^\circ = 130^\circ
+$$
+
+$$
+m\measuredangle C = 2 \cdot 40^\circ = 80^\circ
+$$
+
+$$
+m\measuredangle D = 40^\circ + 30^\circ = 70^\circ
+$$
+
+---

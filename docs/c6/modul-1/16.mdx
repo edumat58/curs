@@ -1,0 +1,131 @@
+---
+sidebar_position: -4
+slug: /c6/modul-1/16
+description: ""
+---
+
+# C8.1 - Cel mai mare divizor comun
+
+---
+
+:::tip Definitie
+Cel mai mare divizor comun pentru două sau mai multe numere naturale reprezintă **cel mai mare număr natural care divide numerele date** și care este divizibil cu toți ceilalți divizori comuni.  
+
+Pentru numerele $a$ și $b$ se notează cel mai mare divizor comun al lor cu:
+
+$$
+(a, b)
+$$
+
+:::
+
+$D_{12} = \{1, 2, 3, 4, 6, 12\}$ – mulțimea divizorilor lui 12  
+$D_{18} = \{1, 2, 3, 6, 9, 18\}$ – mulțimea divizorilor lui 18  
+
+$$
+D_{12} \cap D_{18} = \{1, 2, 3, 6\}
+$$
+
+Cel mai mare este 6, deci:
+
+$$
+(12, 18) = 6
+$$
+
+> Observăm că 6 este divizibil cu ceilalți divizori comuni.
+
+
+---
+
+## Algoritmul de determinare
+
+:::danger De retinut
+Pentru a determina **cel mai mare divizor comun** pentru două sau mai multe numere naturale procedăm astfel:
+
+1. Descompunem numerele date în produs de puteri de numere prime.  
+2. Cel mai mare divizor comun (**c.m.m.d.c.**) va fi egal cu **produsul factorilor comuni**, luați o singură dată, cu **exponentul cel mai mic**.
+:::
+
+---
+
+
+**PASUL 1:**
+
+Reluăm exemplul de mai sus:
+
+$$
+12 = 2^2 \cdot 3, \quad 18 = 2 \cdot 3^2
+$$
+
+Factorii comuni sunt $2$ și $3$.  
+La fiecare luăm în considerare exponentul cel mai mic, deci:
+
+$$
+(12, 18) = 2 \cdot 3 = 6
+$$
+
+
+---
+
+**PASUL 2:**
+
+Determinăm **c.m.m.d.c.** pentru $144$, $360$ și $216$.
+
+$$
+\begin{align*}
+144 &= 2^4 \cdot 3^2 \\
+360 &= 2^3 \cdot 3^2 \cdot 5 \\
+216 &= 2^3 \cdot 3^3
+\end{align*}
+$$
+
+Factorii comuni sunt $2$ și $3$.  
+Pentru factorul $2$ exponentul cel mai mic este $3$,  
+iar pentru factorul $3$ exponentul cel mai mic este $2$.
+
+Rezultă:
+
+$$
+(144, 360, 216) = 2^3 \cdot 3^2 = 72
+$$
+
+Verificare:
+
+$$
+144 = 72 \cdot 2, \quad 360 = 72 \cdot 5, \quad 216 = 72 \cdot 3
+$$
+
+
+---
+
+## Observații
+
+- C.m.m.d.c. al numerelor $0$ și $a$, $a$ natural nenul, este:
+
+$$
+(0, a) = a
+$$
+
+- Două sau mai multe numere naturale care au **c.m.m.d.c. = 1** se numesc **prime între ele**.  
+  Dacă numerele $a$, $b$ sunt prime între ele, notăm:
+
+$$
+(a, b) = 1
+$$
+
+:::note Exemplu:
+
+$$
+(2, 5) = 1, \quad (4, 9) = 1, \quad (10, 11) = 1, \quad (35, 27) = 1
+$$
+:::
+
+:::danger De retinut
+
+- Orice două numere **prime** sunt **prime între ele**.  
+- Există **numere compuse** care sunt **prime între ele**.  
+- Orice două **numere naturale consecutive** sunt **prime între ele**.
+
+:::
+
+---
