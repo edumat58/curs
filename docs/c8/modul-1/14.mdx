@@ -1,0 +1,178 @@
+---
+sidebar_position: -9
+slug: /c8/modul-1/14
+description: ""
+--- 
+
+# C9 - Existența, amplificarea și simplificarea fracțiilor algebrice
+
+---
+
+## Introducere
+
+:::tip Definiție
+
+Numim fracție algebrică raportul dintre două expresii algebrice.
+
+
+$$
+E(x) = \frac{7x + 1}{3x - 6}, \quad F(x) = \frac{x^3 + 1}{2x}, \quad F(a) = \frac{3a - 1}{a^2 + a + 1}
+$$
+
+:::
+
+---
+
+**Exemplul 1:**
+
+Calculează valoarea numerică a fracției algebrice $F(x) = \dfrac{3x + 1}{x - 2}$ pentru $x = 3$.
+
+**Soluție:**
+
+$$
+F(3) = \frac{3 \cdot 3 + 1}{3 - 2} = \frac{9 + 1}{1} = \frac{10}{1} = 10
+$$
+
+---
+
+### Observație
+
+:::danger De Retinut
+**Valoarea numerică a unei fracții algebrice nu se poate calcula pentru orice număr real.**
+
+De exemplu, pentru $x = 2$ vom obține:
+
+$$
+E(2) = \frac{3 \cdot 2 + 1}{2 - 2} = \frac{6 + 1}{0} = \frac{7}{0}
+$$
+
+Fracția nu este definită (o fracție sau un raport nu pot avea numitorul egal cu zero).
+:::
+---
+
+**Exemplul 2:**
+
+Determinați valorile lui $x$ pentru care fracția algebrică $E(x)$ nu este definită, în următoarele cazuri:
+
+#### a) $ E(x) = \dfrac{7x + 1}{3x - 6}$
+
+**Soluție:**
+
+$$
+3x - 6 = 0 \Rightarrow 3x = 6 \Rightarrow x = \frac{6}{3} = 2
+$$
+
+> Prin urmare, $E(x)$ nu este definită pentru $x = 2$.
+
+---
+
+#### b) $E(x) = \dfrac{5 - x^2}{x^2 + 6x}$
+
+**Soluție:**
+
+$$
+x^2 + 6x = 0 \Rightarrow x(x + 6) = 0 \Rightarrow x = 0 \ \text{sau} \ x = -6
+$$
+
+> Prin urmare $E(x)$ nu este definită pentru $x \in \{0, -6\}$.
+
+---
+
+:::tip Definiție
+
+Mulțimea numerelor reale pentru care **se poate calcula** valoarea numerică a unei fracții algebrice se numește domeniul de definiție al fracției algebrice (D).
+
+:::
+---
+
+**Exemplul 3:**
+
+Determinați domeniul de definiție pentru fracția algebrică $F(x)$ în următoarele cazuri:
+
+#### a) $$F(x) = \dfrac{x^3}{4x - 8}$$
+
+**Soluție:**
+
+$$
+4x - 8 = 0 \Rightarrow 4x = 8 \Rightarrow x = \frac{8}{4} = 2
+$$
+
+Deci:
+
+$$
+D = \mathbb{R} \setminus \{2\}
+$$
+
+---
+
+#### b) $F(x) = \dfrac{x^2}{x^2 - 9}$
+
+**Soluție:**
+
+$$
+x^2 - 9 = 0 \Rightarrow x^2 = 9 \Rightarrow x = \pm 3
+$$
+
+Deci:
+
+$$
+D = \mathbb{R} \setminus \{-3, 3\}
+$$
+
+---
+
+## Operația de amplificare
+
+:::info Proprietate 1
+Operația de amplificare a unui raport algebric constă în a înmulți atât numărătorul cât și numitorul cu o expresie algebrică nenulă.
+:::
+
+**Exemple:**
+
+$
+\text{a)} \quad \dfrac{3x}{x^2 + 1} = \dfrac{4 \cdot 3x}{4 \cdot (x^2 + 1)} = \dfrac{12x}{4x^2 + 4}
+$
+
+$
+\text{b)} \quad \dfrac{2x}{3x} = \dfrac{3x \cdot 2x}{3x \cdot (x + 5)} = \dfrac{6x^2}{3x^2 + 15x}
+$
+
+$
+\text{c)} \quad \dfrac{x - 2}{x + 2} = \dfrac{(x + 2)(x - 2)}{(x + 2)(x + 2)} = \dfrac{x^2 - 4}{x^2 + 4x + 4}
+$
+
+$
+\text{d)} \quad \dfrac{11x - 3}{x^2 + 1} = \dfrac{(x - 1)(11x - 3)}{(x - 1)(x^2 + 1)} = \dfrac{11x^2 - 14x + 3}{x^3 - x^2 + x - 1}
+$
+
+---
+
+## Operația de simplificare
+
+:::info Proprietate 2
+Operația de simplificare a unui raport algebric constă în a împărți atât numărătorul, cât și numitorul prin aceeași expresie algebrică nenulă.
+:::
+
+**Exemple:**
+
+1. $\dfrac{7x^3}{2x^6} = \dfrac{7x^3 : x}{2x^6 : x} = \dfrac{7x^2}{2x^5}$
+
+2.  $\dfrac{18x^2}{6x^4 + 10x^3} = \dfrac{18x^2 : 2x^2}{(6x^4 + 10x^3) : 2x^2} = \dfrac{9}{3x^2 + 5x}$
+
+---
+
+### Observație
+
+:::danger De Retinut
+În general, pentru simplificarea fracțiilor algebrice este necesară descompunerea în factori a numărătorului și a numitorului.
+
+
+**Exemplu:**
+
+$$
+\frac{3x + 15}{x^2 - 25} = \frac{3(x + 5)}{(x - 5)(x + 5)} = \frac{3}{x - 5}
+$$
+
+:::
+---
+

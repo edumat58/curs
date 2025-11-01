@@ -1,0 +1,174 @@
+---
+sidebar_position: 19
+slug: /c7/modul-2/2
+description: ""
+---
+
+# C11 - Relația de egalitate
+
+---
+
+## Proprietăți ale relației de egalitate
+
+:::tip Reguli fundamentale
+Pornind de la o egalitate, se pot obține **egalități echivalente** prin următoarele transformări:
+:::
+
+1. **Se adună sau se scade**, din ambii membri ai egalității, **același număr real**.  
+2. **Se înmulțesc sau se împart** ambii membri ai egalității, cu **același număr real nenul**.  
+3. **Se ridică la puterea $n \in \mathbb{Z}^*$**, ambii membri ai egalității, dacă ambii membri sunt **numere pozitive**.  
+4. **Se extrage radicalul** din ambii membri ai egalității, dacă ambii membri sunt **numere pozitive**.
+
+---
+
+### Scriere matematică
+
+Fie $a, b, c \in \mathbb{R}$, cu $c \ne 0$:
+
+$$
+\begin{aligned}
+1. \quad & a = b \iff a + c = b + c, && \forall c \in \mathbb{R} \\
+          & a = b \iff a - c = b - c, && \forall c \in \mathbb{R} \\
+\\
+2. \quad & a = b \iff a \cdot c = b \cdot c, && \forall c \in \mathbb{R}^* \\
+          & a = b \iff a : c = b : c, && \forall c \in \mathbb{R}^* \\
+\\
+3. \quad & \text{Dacă } a > 0, \ b > 0, \text{ atunci } a = b \iff a^n = b^n, && n \in \mathbb{Z}^* \\
+\\
+4. \quad & \text{Dacă } a \ge 0, \ b \ge 0, \text{ atunci } a = b \iff \sqrt{a} = \sqrt{b}
+\end{aligned}
+$$
+
+---
+
+### Exemple
+
+1. $x = y \iff x + 3 = y + 3$  
+2. $z = t \iff z - 11 = t - 11$  
+3. $c = d \iff c \cdot 7 = d \cdot 7$  
+4. $a = b \iff \dfrac{a}{-2} = \dfrac{b}{-2}$
+
+---
+
+## Obținerea de noi egalități din egalități date
+
+:::tip Reguli de transformare
+Fiind date **două egalități**, se pot obține **noi egalități** utile prin următoarele operații:
+:::
+
+1. Se **adună**, membru cu membru, cele două egalități.  
+2. Se **scad**, membru cu membru, cele două egalități.  
+3. Se **înmulțesc**, membru cu membru, cele două egalități.  
+4. Se **împart**, membru cu membru, cele două egalități.  
+5. Se **ridică la putere**, membru cu membru, cele două egalități.
+
+---
+
+### Exemple
+
+#### Exemplul 1
+:::note Problema:
+Dacă $a + b = 11$ și $c + d = 9$, determinați $a + b + c + d$.
+:::
+
+**Rezolvare:**
+
+$$
+\begin{cases}
+a + b = 11 \\
+c + d = 9
+\end{cases}
+$$
+
+Adunăm relațiile:
+
+$$
+a + b + c + d = 11 + 9 = 20
+$$
+
+**R:** $a + b + c + d = 20$
+
+---
+
+#### Exemplul 2
+:::note Problema:
+Dacă $x = 4$ și $b + c = 13$, determinați $b + c - x$.
+:::
+
+**Rezolvare:**
+
+$$
+\begin{cases}
+b + c = 13 \\
+x = 4
+\end{cases}
+$$
+
+Scădem relațiile:
+
+$$
+b + c - x = 13 - 4 = 9
+$$
+
+**R:** $b + c - x = 9$
+
+---
+
+#### Exemplul 3
+:::note Problema:
+Dacă $x = 4$ și $b + c = 13$, determinați $2b + 2c - 3x$.
+:::
+
+**Rezolvare:**
+
+Din $b + c = 13$, înmulțim relația cu 2:
+
+$$
+2b + 2c = 26
+$$
+
+Din $x = 4$, înmulțim relația cu 3:
+
+$$
+3x = 12
+$$
+
+Scădem relațiile:
+
+$$
+2b + 2c - 3x = 26 - 12 = 14
+$$
+
+**R:** $2b + 2c - 3x = 14$
+
+---
+
+#### Exemplul 4
+:::note Problema:
+Dacă $5a - 5b = 15$ și $2a + c = 7$, determinați $3a - b + c$.
+:::
+
+**Rezolvare:**
+
+Din prima relație:
+$$
+5a - 5b = 15 \quad \Rightarrow \quad a - b = 3 \quad (/ : 5)
+$$
+
+Avem:
+$$
+\begin{cases}
+a - b = 3 \\
+2a + c = 7
+\end{cases}
+$$
+
+Adunăm relațiile:
+
+$$
+3a - b + c = 10
+$$
+
+**R:** $3a - b + c = 10$
+
+---

@@ -1,0 +1,78 @@
+---
+sidebar_position: 16
+slug: /c5/modul-2/5
+description: ""
+---
+
+# C15.4 - Metoda mersului invers
+---
+
+:::tip Definiție
+**Metoda mersului invers** este o metodă de rezolvare a problemelor prin care se parcurg în sens invers operațiile efectuate asupra unui număr necunoscut, pentru a afla valoarea inițială.
+
+Ea constă în **descompunerea problemei în pași succesivi**, apoi rezolvarea în ordinea inversă a pașilor descriși în enunț.
+:::
+
+---
+
+## Exemple
+
+> Exemplul 1
+
+:::note Problema:
+Antonia s-a gândit la un număr pe care l-a înmulțit cu 7.  
+Apoi a mărit numărul obținut cu 11, a împărțit noul rezultat la 5 și astfel a obținut 19.  
+La ce număr s-a gândit Antonia?
+:::
+
+#### Analiză
+
+Problema se poate împărți în trei etape:
+
+1. Antonia a înmulțit un număr necunoscut cu 7 — obține un produs $P$.
+2. A mărit produsul cu 11 — obține o sumă $S$.
+3. A împărțit suma la 5 și a obținut 19.
+
+#### Rezolvare prin mers invers
+
+Parcurgem în ordine inversă pașii efectuați:
+
+1. Din problema 3:  
+   $$S : 5 = 19 \Rightarrow S = 19 \times 5 = 95$$
+
+2. Din problema 2:  
+   $$P + 11 = 95 \Rightarrow P = 95 - 11 = 84$$
+
+3. Din problema 1:  
+   $$n \times 7 = 84 \Rightarrow n = 84 : 7 = 12$$
+
+**R:** Numărul gândit este **12**.
+
+---
+
+> Exemplul 2
+
+:::note Problema:
+Numărul de angajați ai unei firme se dublează o dată la cinci ani.  
+Știind că firma are o vechime de 25 de ani și în prezent sunt 3 520 de angajați,  
+câți angajați erau la început?
+:::
+
+#### Rezolvare
+
+Rezolvăm **în ordine inversă**, scăzând din 5 în 5 ani:
+
+| Moment în timp | Număr angajați |
+|-----------------|----------------|
+| În prezent | 3 520 |
+| Acum 5 ani | $3520 : 2 = 1760$ |
+| Acum 10 ani | $1760 : 2 = 880$ |
+| Acum 15 ani | $880 : 2 = 440$ |
+| Acum 20 ani | $440 : 2 = 220$ |
+| Acum 25 ani (la început) | $220 : 2 = 110$ |
+
+**R:** La început firma avea **110 angajați**.
+
+---
+
+

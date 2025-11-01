@@ -1,0 +1,160 @@
+---
+sidebar_position: 15
+slug: /c7/modul-3/6
+description: ""
+---
+
+# C13.2 - Probleme care se rezolvă cu ajutorul sistemelor de ecuații
+
+---
+
+## Etapele rezolvării unei probleme prin ecuații
+
+:::tip Pașii de rezolvare
+Pentru a rezolva o problemă cu ajutorul ecuațiilor se parcurg următoarele etape:
+
+1. Se stabilesc **datele cunoscute** și **cele necunoscute** din problemă;  
+2. Se alege necunoscuta principală și se exprimă celelalte date în funcție de aceasta;  
+3. Se stabilesc **legăturile matematice** între aceste date;  
+4. Se rezolvă **modelul matematic** obținut (ecuația sau sistemul de ecuații);  
+5. Se verifică soluția găsită;  
+6. Se interpretează rezultatul și se scrie **răspunsul final**.
+:::
+
+---
+
+## Probleme rezolvate
+
+---
+
+### Problema 1
+
+:::note Enunț
+Un elev are iepuri și porumbei.  
+Întrebat fiind câți iepuri și câți porumbei are, acesta a răspuns:  
+„Am în total 15 capete și 34 de picioare.”  
+Câți iepuri și câți porumbei are elevul?
+:::
+
+#### Rezolvare
+
+Notăm:
+- $x$ = numărul iepurilor  
+- $y$ = numărul porumbeilor
+
+Formăm sistemul:
+
+$$
+\begin{cases}
+x + y = 15 \\
+4x + 2y = 34
+\end{cases}
+$$
+
+Împărțim a doua ecuație prin 2:
+
+$$
+\begin{cases}
+x + y = 15 \\
+2x + y = 17
+\end{cases}
+$$
+
+Scădem prima ecuație din a doua:
+
+$$
+x = 2
+$$
+
+Înlocuim în prima:
+
+$$
+2 + y = 15 \Rightarrow y = 13
+$$
+
+**R:** $S = \{(2, 13)\}$  
+Elevul are **2 iepuri** și **13 porumbei**.
+
+---
+
+### Problema 2
+
+:::note Enunț
+Aflați două numere reale știind că **diferența lor este 34**  
+iar numărul mai mare este **cu 35 mai mic decât dublul numărului mai mic**.
+:::
+
+#### Rezolvare
+
+Notăm:
+- $x$ = numărul mai mare  
+- $y$ = numărul mai mic
+
+$$
+\begin{cases}
+x - y = 34 \\
+x = 2y - 35
+\end{cases}
+$$
+
+Înlocuim a doua ecuație în prima:
+
+$$
+2y - 35 - y = 34 \Rightarrow y = 69
+$$
+
+$$
+x = 2\cdot69 - 35 = 138 - 35 = 103
+$$
+
+**R:** $S = \{(103, 69)\}$  
+Cele două numere sunt **103** și **69**.
+
+---
+
+### Problema 3
+
+:::note Enunț
+Diferența a două numere naturale este **de patru ori mai mare** decât numărul mai mic.  
+Împărțind unul dintre cele două numere la 6, se obține **câtul 12** și **restul 3**.  
+Aflați cele două numere.
+:::
+
+#### Rezolvare
+
+Notăm:
+- $x$ = numărul mai mare  
+- $y$ = numărul mai mic  
+
+$$
+\begin{cases}
+x - y = 4y \\
+x = 6\cdot12 + 3
+\end{cases}
+$$
+
+Rezultă:
+
+$$
+x = 75
+$$
+
+Înlocuim în prima ecuație:
+
+$$
+75 - y = 4y \Rightarrow 5y = 75 \Rightarrow y = 15
+$$
+
+**R:** $S = \{(75, 15)\}$  
+Cele două numere sunt **75** și **15**.
+
+---
+
+### Observație
+
+:::info Observatie
+Dacă se consideră varianta inversă (adică se schimbă ordinea numerelor),  
+se poate obține și perechea $(375, 75)$, în funcție de interpretarea datelor.
+:::
+
+---

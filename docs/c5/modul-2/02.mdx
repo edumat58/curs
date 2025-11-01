@@ -1,0 +1,182 @@
+---
+sidebar_position: 19
+slug: /c5/modul-2/2
+description: ""
+---
+
+# C15.2 - Metoda comparației
+
+---
+
+:::tip Definiție
+Rezolvarea unei probleme prin **metoda comparației** constă în a compara două situații diferite,  
+eliminarea unei necunoscute și determinarea celeilalte necunoscute.  
+Prin înlocuire într-una din situațiile inițiale se află și cealaltă necunoscută.
+:::
+
+---
+
+## Situații posibile
+
+Se disting două tipuri de situații:
+
+1. **Eliminarea unei necunoscute prin scădere**, precedată eventual de aducerea la același termen de comparație.
+2. **Eliminarea unei necunoscute prin înlocuire.**
+
+---
+
+## Exemple
+
+---
+
+> Exemplul 1
+
+:::note Problema:
+Pentru 6 pixuri și 5 creioane, Natalia a plătit 28 lei, iar Alexandra a cumpărat 7 creioane și 6 pixuri de același fel și a plătit 32 lei.  
+Cât costă un creion și cât costă un pix?
+:::
+
+#### Rezolvare:
+
+Pentru a compara, așezăm datele problemei astfel:
+
+| Pixuri | Creioane | Suma |
+|:------:|:---------:|:----:|
+| 6 | 5 | 28 lei |
+| 6 | 7 | 32 lei |
+
+Comparând cele două situații observăm că avem același termen de comparație: **6 pixuri**.  
+Reiese că diferența dintre sumele de bani se datorează numărului de creioane în plus pe care le-a cumpărat Alexandra.
+
+Scădem relațiile astfel:
+
+| Diferență | Creioane | Suma |
+|:----------:|:---------:|:----:|
+|  | $(7 - 5) = 2$ | $32 - 28 = 4$ lei |
+
+De unde:
+
+$$
+2 \text{ creioane} \rightarrow 4 \text{ lei}
+$$
+$$
+1 \text{ creion} \rightarrow 4 : 2 = 2 \text{ lei}
+$$
+
+Rescriem prima relație astfel:
+
+| Pixuri | Creioane | Total |
+|:------:|:---------:|:-----:|
+| 6 | $5 \times 2$ lei | 28 lei |
+
+De unde:
+
+$$
+6 \text{ pixuri} \rightarrow 28 - 10 = 18 \text{ lei}
+$$
+$$
+1 \text{ pix} \rightarrow 18 : 6 = 3 \text{ lei}
+$$
+
+**R:** 1 creion costă **2 lei**, 1 pix costă **3 lei**.
+
+---
+
+:::info Observație
+Spre deosebire de exemplul de mai sus, în alte cazuri este nevoie ca datele să fie aduse la **același termen de comparație**.  
+Uneori este nevoie să înmulțim una dintre relații (vezi exemplul 2) sau, alteori, ambele relații (exemplul 3).
+:::
+
+---
+
+> Exemplul 2
+
+:::note Problema:
+3 saci de ovăz și 5 saci de grâu cântăresc 595 kg,  
+iar 6 saci de ovăz și 3 saci de grâu cântăresc 630 kg.  
+Cât cântărește un sac de ovăz și cât cântărește un sac de grâu?
+:::
+
+#### Rezolvare:
+
+| Ovăz | Grâu | Greutate |
+|:----:|:----:|:---------:|
+| 3 saci | 5 saci | 595 kg |
+| 6 saci | 3 saci | 630 kg |
+
+Pentru a aduce la același termen de comparație, înmulțim prima relație cu 2:
+
+| Ovăz | Grâu | Greutate |
+|:----:|:----:|:---------:|
+| $3×2=6$ | $5×2=10$ | $595×2=1190$ |
+| 6 | 3 | 630 |
+
+Acum avem același termen de comparație: **6 saci de ovăz**.
+
+Scădem relațiile:
+
+$$
+(10 - 3) \text{ saci grâu} \rightarrow 1190 - 630 = 560 \text{ kg}
+$$
+$$
+1 \text{ sac grâu} \rightarrow 560 : 7 = 80 \text{ kg}
+$$
+
+Folosind prima relație:
+
+$$
+3 \text{ saci ovăz} + 5 \times 80 = 595 \Rightarrow 3 \text{ saci ovăz} = 595 - 400 = 195
+$$
+$$
+1 \text{ sac ovăz} = 195 : 3 = 65 \text{ kg}
+$$
+
+**R:** 1 sac ovăz cântărește **65 kg**, iar 1 sac grâu cântărește **80 kg**.
+
+---
+
+> Exemplul 3
+
+:::note Problema:
+Un croitor folosește pentru 7 rochii și 5 fuste 31 m stofă.  
+Când face 2 rochii și 6 fuste, folosește 18 m stofă.  
+Câți metri de stofă se folosesc pentru o rochie și câți pentru o fustă?
+:::
+
+#### Rezolvare:
+
+| Rochii | Fuste | Stofă |
+|:------:|:-----:|:-----:|
+| 7 | 5 | 31 m |
+| 2 | 6 | 18 m |
+
+Pentru a aduce la același termen de comparație, înmulțim prima relație cu 2 și a doua relație cu 7:
+
+| Rochii | Fuste | Stofă |
+|:------:|:-----:|:-----:|
+| $7×2=14$ | $5×2=10$ | $31×2=62$ |
+| $2×7=14$ | $6×7=42$ | $18×7=126$ |
+
+Am obținut același termen de comparație: **14 rochii**.
+
+Scădem relațiile:
+
+$$
+42 - 10 = 32 \text{ fuste} \Rightarrow 126 - 62 = 64 \text{ m stofă}
+$$
+$$
+1 \text{ fustă} \rightarrow 64 : 32 = 2 \text{ m}
+$$
+
+Rescriem prima relație:
+
+$$
+7 \text{ rochii} + 5 \times 2 = 31 \Rightarrow 7 \text{ rochii} = 31 - 10 = 21
+$$
+$$
+1 \text{ rochie} = 21 : 7 = 3 \text{ m}
+$$
+
+**R:** Pentru o rochie se folosesc **3 m stofă**, iar pentru o fustă **2 m stofă**.
+
+---

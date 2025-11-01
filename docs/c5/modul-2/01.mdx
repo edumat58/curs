@@ -1,0 +1,205 @@
+---
+sidebar_position: 20
+slug: /c5/modul-2/1
+description: ""
+---
+
+# C15.1 - Metoda reducerii la unitate
+---
+
+:::tip Definitie
+Metoda reducerii la unitate este una din metodele aritmetice utile de rezolvare a problemelor.  
+
+Algoritmul de rezolvare al acestui tip de probleme constă în aflarea mărimii cerute
+printr-o fază intermediară de comparare cu unitatea.  
+> În acest sens, trebuie să avem mare atenție în stabilirea dependenței între mărimi.
+:::
+
+---
+
+## Tipuri de probleme
+
+Putem întâlni două tipuri de probleme:
+
+1. **Tipul I:**  
+   Dacă o mărime crește (scade) de $n$ ori, atunci și cealaltă mărime crește (scade) de $n$ ori.
+
+2. **Tipul II:**  
+   Dacă o mărime crește (scade) de $n$ ori, atunci cealaltă mărime scade (crește) de $n$ ori.
+
+---
+
+## Exemple
+
+### Tipul I — Dependență direct proporțională
+
+> „Dacă o mărime crește (scade) de $n$ ori, atunci și cealaltă mărime crește (scade) de $n$ ori.”
+
+---
+
+> Exemplul 1
+
+:::note Problema: 
+Dacă 6 kg de mere costă 18 lei, aflați cât costă 2 kg de mere de aceeași calitate.
+:::
+
+Vom rezolva problema în două moduri.
+
+#### I. Rezolvarea cu plan
+
+Aflăm mai întâi cât costă 1 kg de mere și apoi cât costă 2 kg de mere, de aceeași calitate.
+
+Observăm că dacă prima mărime (cantitatea de mere) scade, a doua mărime (suma plătită)
+trebuie să scadă și ea.
+
+a) Cât costă 1 kg de mere?
+
+$$
+18 \text{ lei} : 6 = 3 \text{ lei}
+$$
+
+Deci 1 kg de mere costă **3 lei**.
+
+b) Cât costă 2 kg de mere?
+
+$$
+2 \times 3 = 6 \text{ lei}
+$$
+
+**R:** 6 lei
+
+---
+
+#### II. Rezolvare cu metoda reducerii la unitate
+
+| Cantitate | Preț |
+|------------|------|
+| 6 kg mere | 18 lei |
+| 1 kg mere | $18 : 6 = 3$ lei |
+| 2 kg mere | $2 \times 3 = 6$ lei |
+
+**R:** 6 lei
+
+:::info Observatie
+Cantitatea de mere scade de 3 ori (de la 6 kg la 2 kg),  
+deci pentru o cantitate de 3 ori mai mică, și suma plătită trebuie să fie de 3 ori mai mică:  
+$18 : 3 = 6$ lei.
+:::
+
+---
+
+> Exemplul 2
+
+:::note Problema:
+Inima unui om bate de aproximativ 210 ori în 3 minute.  
+De câte ori bate într-o oră?
+:::
+
+#### I. Rezolvarea cu plan
+
+a) De câte ori bate într-un minut?
+
+$$
+210 : 3 = 70 \text{ bătăi/minut}
+$$
+
+b) De câte ori bate într-o oră (60 minute)?
+
+$$
+70 \times 60 = 4200 \text{ bătăi}
+$$
+
+**R:** 4200 bătăi
+
+#### II. Rezolvare cu metoda reducerii la unitate
+
+| Timp | Bătăi |
+|------|-------|
+| 3 minute | 210 |
+| 1 minut | $210 : 3 = 70$ |
+| 60 minute | $70 \times 60 = 4200$ |
+
+**R:** 4200 bătăi
+
+:::info Observatie
+Dacă a doua mărime crește (de la 3 minute la 60 minute — adică de 20 de ori),  
+atunci și prima mărime trebuie să crească de 20 de ori.
+:::
+
+---
+
+### Tipul II — Dependență invers proporțională
+
+> „Dacă o mărime crește (scade) de $n$ ori, atunci cealaltă mărime scade (crește) de $n$ ori.”
+
+---
+
+> Exemplul 3
+
+:::note Problema: 
+Cinci robinete care curg simultan, cu același debit, umplu un bazin de apă în 12 ore.  
+În cât timp vor umple bazinul 4 robinete (cu același debit)?
+:::
+
+#### I. Rezolvarea cu plan
+
+a) În câte ore ar umple bazinul un singur robinet?
+
+$$
+12 \times 5 = 60 \text{ ore}
+$$
+
+b) În câte ore vor umple bazinul 4 robinete?
+
+$$
+60 : 4 = 15 \text{ ore}
+$$
+
+**R:** 15 ore
+
+#### II. Rezolvare prin metoda reducerii la unitate
+
+| Robinete | Timp |
+|-----------|------|
+| 5 robinete | 12 ore |
+| 1 robinet | $12 \times 5 = 60$ ore |
+| 4 robinete | $60 : 4 = 15$ ore |
+
+**R:** 15 ore
+
+---
+
+> Exemplul 4
+
+:::note Problema:
+Știind că 30 de tractoare ară o suprafață de teren în 6 ore, află în cât timp ară aceeași suprafață 18 tractoare.
+:::
+
+#### I. Rezolvarea cu plan
+
+1) În cât timp ară un singur tractor terenul?
+
+$$
+30 \times 6 = 180 \text{ ore}
+$$
+
+2) În cât timp vor ara terenul 18 tractoare?
+
+$$
+180 : 18 = 10 \text{ ore}
+$$
+
+**R:** 10 ore
+
+#### II. Rezolvare prin metoda reducerii la unitate
+
+| Tractoare | Timp |
+|------------|------|
+| 30 tractoare | 6 ore |
+| 1 tractor | $30 \times 6 = 180$ ore |
+| 18 tractoare | $180 : 18 = 10$ ore |
+
+**R:** 10 ore
+
+---
+

@@ -10,6 +10,17 @@ import React, { useState } from 'react';
 
 export default function LectiiTreeView() {
   const saptamani = [
+    {
+      titlu: 'Săptămâna 8: 03.11 - 07.11',
+      note: 'Modulul 2: 03.11.2025 -> 19.12.2025',
+      lectii: [
+        { titlu: 'C10.1 - Adunarea și scăderea fracțiilor algebrice', zi: '03.11', tip: 'Algebra', link: 'c8/modul-2/1', pdf: '' },
+        { titlu: 'C10.2 - Înmulțirea, împărțirea și ridicarea la putere a fracțiilor algebrice', zi: '05.11 (ora 1)', tip: 'Algebra', link: 'c8/modul-2/2', pdf: '' },
+        { titlu: 'LP - Înmulțirea, împărțirea și ridicarea la putere a fracțiilor algebrice', zi: '05.11 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'C10.3 - Ordinea efectuării operațiilor a fracțiilor algebrice', zi: '06.11 (ora 1)', tip: 'Algebra', link: 'c8/modul-2/3', pdf: '' },
+        { titlu: 'LP - Ordinea efectuării operațiilor a fracțiilor algebrice', zi: '06.11 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
+      ],
+    },
       {
       titlu: 'Săptămâna 7 - 20.10 - 24.10 | FINAL MODUL 1',
       note: 'EVALUARE SUMATIVA: Miercuri 22.10',
@@ -138,7 +149,7 @@ export default function LectiiTreeView() {
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>X</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>X</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>X</td>
-            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>19.11</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
@@ -149,7 +160,7 @@ export default function LectiiTreeView() {
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>25.09</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>09.10</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>22.10</td>
-            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>10.12</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
@@ -157,6 +168,13 @@ export default function LectiiTreeView() {
           </tr>
         </tbody>
       </table>
+          <h2>
+      Simulari pentru EN:
+      </h2>
+      <ul>
+      <li>19.11 (50% nota 4) - Simulare EN 1</li>
+      </ul>
+      <hr />
       <h2>
       Orar - 5 ore/saptamana
       </h2>

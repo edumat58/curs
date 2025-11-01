@@ -11,14 +11,24 @@ import React, { useState } from 'react';
 export default function LectiiTreeView() {
   const saptamani = [
     {
+      titlu: 'Săptămâna 8: 03.11 - 07.11',
+      note: 'Modulul 2: 03.11.2025 -> 19.12.2025',
+      lectii: [
+        { titlu: 'C10 - Modulul unui numar intreg (valoarea absoluta)', zi: '05.11 (ora 1)', tip: 'Algebra', link: 'c6/modul-2/1', pdf: '' },
+        { titlu: 'LP - Modulul unui numar intreg (valoarea absoluta)', zi: '05.11 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'C11 - Compararea si ordonarea nr. intregi', zi: '06.11 (ora 1)', tip: 'Algebra', link: 'c6/modul-2/2', pdf: '' },
+        { titlu: 'LP - Compararea si ordonarea nr. intregi', zi: '06.11 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'LP - Relatii si operatii intre multimi', zi: '07.11', tip: 'Algebra', link: '', pdf: '' },
+      ],
+    },
+    {
       titlu: 'Săptămâna 7 - 20.10 - 24.10 | FINAL MODUL 1',
-      note: 'EVALUARE SUMATIVA: Joi 23.10',
+      note: 'Materiale încarcate',
       lectii: [
         { titlu: 'C9 - Relatii si operatii intre multimi', zi: '21.10', tip: 'Algebra', link: 'c6/modul-1/18', pdf: '' },
-        { titlu: 'LP - Relatii si operatii intre multimi', zi: '22.10', tip: 'Algebra', link: '', pdf: '' },
         { titlu: 'LP - RECAPITULARE TEST', zi: '23.10 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
-        { titlu: 'TEST 2 (C6.1 -> C9) | 100% NOTA 2', zi: '23.10 (ora 2)', tip: 'EVALUARE SUMATIVA', link: '', pdf: '' },
-        { titlu: 'LP - REZOLVARE TEST si TEMA DE VACANTA', zi: '24.10', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'TEST 2 (C6.1 -> C8.2) | 100% NOTA 2', zi: '23.10 (ora 2)', tip: 'EVALUARE SUMATIVA', link: '', pdf: '' },
+        { titlu: 'LP - REZOLVARE TEST', zi: '24.10', tip: 'Algebra', link: '', pdf: '' },
       ],
     },
     {
@@ -174,15 +184,15 @@ export default function LectiiTreeView() {
         <tbody>
           <tr>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>8:00 - 8:50</td>
-            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>12:00 - 12:50</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>8:00 - 8:50</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>8:00 - 8:50</td>
           </tr>
           <tr>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
-            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>12:00 - 12:50</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>13:50 - 13:50</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
           </tr>

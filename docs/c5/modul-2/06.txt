@@ -1,0 +1,137 @@
+---
+sidebar_position: 15
+slug: /c5/modul-2/6
+description: ""
+---
+
+# G2 - Semiplan, semidreaptă și segment
+
+---
+
+## Semiplanul
+
+Semiplanul reprezintă **toate punctele dintr-un plan** aflate **de aceeași parte** a unei drepte date din acel plan.
+
+- Dreapta care separă planul în două regiuni se numește **frontiera semiplanului**.
+
+Exemplu:  
+Avem:
+- planul $\beta$;  
+- dreapta $d$ din planul $\beta$;  
+- punctul $A$ din planul $\beta$;  
+- semiplanul $(d, A)$;  
+- $d$ este **frontiera semiplanului**.
+
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" stroke="null">
+ <g stroke="null">
+  <title stroke="null">Layer 1</title>
+  <path stroke="#7f0000" stroke-width="2" id="svg_21" d="m142.10712,348.22697l60.60607,-100l242.42424,0l-60.60607,100l-242.42424,0z" fill="#ff5656"/>
+  <path id="svg_22" d="m308.35956,374.23606l0.298,-0.99333l1.192,0l-0.298,0.99333l-1.192,0z" stroke-width="0" stroke="#007f7f" fill="#56ffff"/>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_23" y="337.51515" x="167.75758" stroke-width="0" stroke="#007f7f" fill="#000000">β</text>
+  <path stroke="#7f0000" stroke-width="2" id="svg_30" d="m203.44045,246.89363l60.60606,-100l242.42424,0l-60.60607,100l-242.42423,0z" fill="#7f3f00"/>
+  <line id="svg_31" y2="247.33333" x2="447.27822" y1="247.33333" x1="201.33333" stroke-width="2" stroke="#000000" fill="none"/>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_32" y="241.79569" x="227.31163" stroke-width="0" stroke="#000000" fill="#000000">d</text>
+  <ellipse ry="3.27863" rx="3.27863" id="svg_33" cy="191.52333" cx="357.36404" stroke-width="0" stroke="#000000" fill="#000000"/>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_35" y="184.41963" x="368.29281" stroke-width="0" stroke="#000000" fill="#000000">A</text>
+ </g>
+
+</svg>
+
+> O dreaptă dintr-un plan determină **două semiplane opuse**.
+
+Exemplu:  
+- Semiplanul $(d, A)$ și semiplanul $(d, B)$ sunt **semiplane opuse**.
+
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="300" stroke="null">
+ <g stroke="null">
+  <title stroke="null">Layer 1</title>
+  <path stroke="#7f0000" stroke-width="2" id="svg_21" d="m238.10712,252.22697l60.60607,-100l242.42424,0l-60.60607,100l-242.42424,0z" fill="#ff5656"/>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_23" y="241.51515" x="263.75758" stroke-width="0" stroke="#007f7f" fill="#000000">β</text>
+  <path stroke="#7f0000" stroke-width="2" id="svg_30" d="m299.44045,150.89363l60.60606,-100l242.42424,0l-60.60607,100l-242.42423,0z" fill="#ffaa56"/>
+  <line id="svg_31" y2="151.33333" x2="543.27822" y1="151.33333" x1="297.33333" stroke-width="2" stroke="#000000" fill="none"/>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_32" y="145.79569" x="323.31163" stroke-width="0" stroke="#000000" fill="#000000">d</text>
+  <ellipse ry="3.27863" rx="3.27863" id="svg_33" cy="95.52333" cx="419.36404" stroke-width="0" stroke="#000000" fill="#000000"/>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_35" y="88.41963" x="430.29281" stroke-width="0" stroke="#000000" fill="#000000">A</text>
+  <ellipse ry="3.27863" rx="3.27863" id="svg_36" cy="209.52333" cx="459.36404" stroke-width="0" stroke="#000000" fill="#000000"/>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_37" y="202.41963" x="471.29281" stroke-width="0" stroke="#000000" fill="#000000">M</text>
+ </g>
+
+</svg>
+---
+
+## Semidreapta
+
+Se consideră o dreaptă $d$ și un punct $O$ situat pe această dreaptă.  
+Punctele dreptei aflate **de aceeași parte a punctului $O$** reprezintă o **semidreaptă cu originea în $O$**.
+
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="300" stroke="null">
+ <g stroke="null">
+  <title stroke="null">Layer 1</title>
+  <ellipse ry="3.27863" rx="3.27863" id="svg_33" cy="177.52333" cx="281.36404" stroke-width="0" stroke="#000000" fill="#000000"/>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_35" y="168.41963" x="273.29281" stroke-width="0" stroke="#000000" fill="#000000">O</text>
+  <line stroke-dasharray="5,5" id="svg_38" y2="177.5" x2="281.07308" y1="177.5" x1="110" stroke="#000000" fill="none"/>
+  <line id="svg_39" y2="177.5" x2="641.40567" y1="177.5" x1="285" stroke="#000000" fill="none"/>
+  <ellipse ry="3.27863" rx="3.27863" id="svg_40" cy="177.52333" cx="483.36404" stroke-width="0" stroke="#000000" fill="#000000"/>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_41" y="167.41963" x="475.29281" stroke-width="0" stroke="#000000" fill="#000000">E</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_42" y="171.41963" x="116.29281" stroke-width="0" stroke="#000000" fill="#000000">d</text>
+ </g>
+
+</svg>
+
+### Tipuri de semidrepte
+
+- **Semidreapta deschisă** $(OE)$ – nu își conține originea;  
+- **Semidreapta închisă** $[OE)$ – își conține originea;  
+- Dreapta $d$ se numește **dreapta suport** a semidreptei.
+
+Un punct de pe o dreaptă determină **două semidrepte opuse**.
+
+Exemplu:  
+Semidreptele $(OD)$ și $(OC)$ sunt **semidrepte opuse**.
+
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="200" stroke="null">
+ <g stroke="null">
+  <title stroke="null">Layer 1</title>
+  <line stroke="#000000" id="svg_39" y2="121.5" x2="581.40565" y1="121.5" x1="388.50001" fill="none"/>
+  <line stroke="#bf0000" id="svg_43" y2="121.5" x2="388.90565" y1="121.5" x1="196.00001" fill="none"/>
+  <ellipse ry="3.27863" rx="3.27863" id="svg_40" cy="122.02333" cx="388.36404" stroke-width="0" stroke="#000000" fill="#000000"/>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_41" y="111.91963" x="380.29281" stroke-width="0" stroke="#000000" fill="#000000">O</text>
+  <ellipse ry="3.27863" rx="3.27863" id="svg_44" cy="122.52333" cx="500.36404" stroke-width="0" stroke="#000000" fill="#000000"/>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_45" y="112.41963" x="492.29281" stroke-width="0" stroke="#000000" fill="#000000">C</text>
+  <ellipse ry="3.27863" rx="3.27863" id="svg_33" cy="121.52333" cx="274.36404" stroke-width="0" stroke="#000000" fill="#000000"/>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_35" y="112.41963" x="266.29281" stroke-width="0" stroke="#000000" fill="#000000">D</text>
+ </g>
+
+</svg>
+---
+
+## Segmentul de dreaptă
+
+Fie o dreaptă $d$ și două puncte distincte $A$ și $B$ situate pe aceasta.  
+Toate punctele dreptei situate **între $A$ și $B$** formează un **segment de dreaptă**.
+
+- Punctele $A$ și $B$ se numesc **extremitățile segmentului** $[AB]$.  
+- Dreapta $d$ se numește **dreapta suport** a segmentului.
+
+### Tipuri de segmente
+
+- **Segment deschis** $(AB)$ – nu își conține extremitățile;  
+- **Segment închis** $[AB]$ – își conține extremitățile.
+
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="200" stroke="null">
+ <g stroke="null">
+  <title stroke="null">Layer 1</title>
+  <line stroke="#000000" id="svg_39" y2="124.16667" x2="705.40565" y1="124.16667" x1="512.50001" fill="none"/>
+  <line stroke="#bf0000" id="svg_43" y2="124.16667" x2="512.90565" y1="124.16667" x1="320.00001" fill="none"/>
+  <ellipse ry="3.27863" rx="3.27863" id="svg_40" cy="124.69" cx="512.36404" stroke-width="0" stroke="#000000" fill="#000000"/>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_41" y="114.58629" x="504.29281" stroke-width="0" stroke="#000000" fill="#000000">B</text>
+  <line stroke="#000000" id="svg_47" y2="124.16667" x2="705" y1="124" x1="513" fill="none"/>
+  <line stroke="#000000" id="svg_48" y2="124.33333" x2="321.40565" y1="124.16667" x1="129" fill="none"/>
+  <line stroke="#000000" id="svg_49" y2="124.33333" x2="321" y1="124" x1="129" fill="none"/>
+  <ellipse ry="3.27863" rx="3.27863" id="svg_50" cy="125.19" cx="320.36404" stroke-width="0" stroke="#000000" fill="#000000"/>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_51" y="115.08629" x="312.29281" stroke-width="0" stroke="#000000" fill="#000000">A</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_53" y="112.08629" x="146.29281" stroke-width="0" stroke="#000000" fill="#000000">d</text>
+ </g>
+
+</svg>
+---

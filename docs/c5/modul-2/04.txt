@@ -1,0 +1,269 @@
+---
+sidebar_position: 17
+slug: /c5/modul-2/4
+description: ""
+---
+
+# C15.3 - Metoda figurativă
+
+---
+
+:::tip Definiție
+**Metoda figurativă** (sau **grafică**) este o metodă sugestivă prin care o problemă poate fi „tradusă” în limbaj matematic.  
+Reprezentarea se face, de obicei, prin **segmente de dreaptă**, considerate părți egale.
+
+Prin această metodă se pot afla numere atunci când se cunosc:
+
+- **suma și diferența**,
+- **suma și câtul**, sau
+- **diferența și câtul** lor.
+:::
+
+---
+
+## Exemple
+
+---
+
+> Exemplul 1 — Când se cunosc **suma și diferența**
+
+:::note Problema:
+Oana are 87 baloane colorate: roșii și verzi.  
+Numărul baloanelor roșii este cu 17 mai mare decât al celor verzi.  
+Câte baloane de fiecare fel are Oana?
+:::
+
+#### Rezolvare:
+
+Suma este $87$, diferența este $17$.
+
+Reprezentăm grafic prin segmente egale:
+
+$$
+\text{[verzi]}\\[15pt]
+
+\text{[roșii]} = \text{[verzi]} + 17
+$$
+
+<svg viewBox="0 0 400 120" width="100%" height="120" style={{maxWidth: '400px', border: '1px solid #ccc', borderRadius: '8px'}}>
+  {/* Titluri */}
+  <text x="10" y="20" fontSize="14" fontFamily="sans-serif">Verzi</text>
+  <text x="10" y="80" fontSize="14" fontFamily="sans-serif">Roșii</text>
+
+  {/* Banda verzi */}
+  <rect x="80" y="35" width="200" height="20" fill="none" stroke="black" strokeWidth="2" />
+  <text x="190" y="30" textAnchor="middle" fontSize="12" fontFamily="sans-serif">parte egală</text>
+
+  {/* Banda roșii: aceeași parte + bucata de 17 */}
+  <rect x="80" y="95" width="200" height="20" fill="none" stroke="black" strokeWidth="2" />
+  <rect x="280" y="95" width="60" height="20" fill="none" stroke="black" strokeWidth="2" strokeDasharray="4 3"/>
+  <text x="310" y="90" textAnchor="middle" fontSize="12" fontFamily="sans-serif">+17</text>
+</svg>
+
+Avem două părți egale. Calculăm suma părților egale:
+
+$$
+87 - 17 = 70
+$$
+
+O parte este:
+
+$$
+70 : 2 = 35
+$$
+
+De unde:
+
+- număr baloane verzi: $35$  
+- număr baloane roșii: $35 + 17 = 52$
+
+**R:** 35 baloane verzi, 52 baloane roșii.
+
+---
+
+> Exemplul 2 — Când se cunosc **câtul și suma**
+
+:::note Problema:
+Suma a trei numere este 96.  
+Aflați numerele știind că primul este de două ori mai mare decât al doilea,  
+iar al treilea este de cinci ori mai mare decât primul.
+:::
+
+#### Rezolvare:
+
+Suma celor trei numere este 96.  
+Câtul dintre primul și al doilea este $2$,  
+iar câtul dintre al treilea și al doilea este $5$.
+
+Reprezentăm grafic astfel:
+
+<svg viewBox="0 0 400 200" width="100%" height="200" style={{maxWidth: '400px', border: '1px solid #ccc', borderRadius: '8px'}}>
+  {/* Al doilea număr: 1 parte */}
+  <text x="10" y="30" fontSize="14" fontFamily="sans-serif">Al doilea</text>
+  <rect x="100" y="15" width="40" height="20" fill="none" stroke="black" strokeWidth="2" />
+  <text x="120" y="12" textAnchor="middle" fontSize="12" fontFamily="sans-serif">1 parte</text>
+
+  {/* Primul număr: 2 părți */}
+  <text x="10" y="90" fontSize="14" fontFamily="sans-serif">Primul</text>
+  <rect x="100" y="75" width="40" height="20" fill="none" stroke="black" strokeWidth="2" />
+  <rect x="140" y="75" width="40" height="20" fill="none" stroke="black" strokeWidth="2" />
+  <text x="140" y="70" textAnchor="middle" fontSize="12" fontFamily="sans-serif">2 părți</text>
+
+  {/* Al treilea număr: 5 părți */}
+  <text x="10" y="150" fontSize="14" fontFamily="sans-serif">Al treilea</text>
+  <rect x="100" y="135" width="40" height="20" fill="none" stroke="black" strokeWidth="2" />
+  <rect x="140" y="135" width="40" height="20" fill="none" stroke="black" strokeWidth="2" />
+  <rect x="180" y="135" width="40" height="20" fill="none" stroke="black" strokeWidth="2" />
+  <rect x="220" y="135" width="40" height="20" fill="none" stroke="black" strokeWidth="2" />
+  <rect x="260" y="135" width="40" height="20" fill="none" stroke="black" strokeWidth="2" />
+  <text x="180" y="130" textAnchor="middle" fontSize="12" fontFamily="sans-serif">5 părți</text>
+
+  {/* Total părți egale */}
+  <text x="10" y="185" fontSize="12" fontFamily="sans-serif">
+    Total părți egale: 8
+  </text>
+</svg>
+
+Avem în total $8$ părți egale.  
+O parte este:
+
+$$
+96 : 8 = 12
+$$
+
+De unde:
+
+- primul: $2 × 12 = 24$  
+- al doilea: $12$  
+- al treilea: $5 × 12 = 60$
+
+**R:** Numerele sunt 24, 12, 60.
+
+---
+
+> Exemplul 3 — Când se cunosc **câtul și diferența**
+
+:::note Problema:
+Peste 2 ani tatăl va fi de trei ori mai în vârstă ca fiul.  
+Acum 2 ani, tatăl era cu 28 ani mai în vârstă ca fiul.  
+Ce vârstă are fiecare în prezent?
+:::
+
+#### Rezolvare:
+
+<svg viewBox="0 0 420 150" width="100%" height="150" style={{maxWidth: '420px', border: '1px solid #ccc', borderRadius: '8px'}}>
+  {/* Fiul */}
+  <text x="10" y="40" fontSize="14" fontFamily="sans-serif">Fiul (peste 2 ani)</text>
+  <rect x="160" y="25" width="60" height="20" fill="none" stroke="black" strokeWidth="2" />
+  <text x="190" y="20" textAnchor="middle" fontSize="12" fontFamily="sans-serif">1 parte</text>
+
+  {/* Tatăl */}
+  <text x="10" y="100" fontSize="14" fontFamily="sans-serif">Tatăl (peste 2 ani)</text>
+  <rect x="160" y="85" width="60" height="20" fill="none" stroke="black" strokeWidth="2" />
+  <rect x="220" y="85" width="60" height="20" fill="none" stroke="black" strokeWidth="2" />
+  <rect x="280" y="85" width="60" height="20" fill="none" stroke="black" strokeWidth="2" />
+  <text x="250" y="80" textAnchor="middle" fontSize="12" fontFamily="sans-serif">3 părți</text>
+</svg>
+
+O observație esențială: **diferența de vârstă este aceeași** în trecut, prezent și viitor.
+
+Reprezentăm vârstele peste 2 ani:
+
+$$
+\text{Fiul} = 1\ \text{parte}, \quad \text{Tatăl} = 3\ \text{părți}
+$$
+
+Diferența: $2$ părți = 28  
+O parte este:
+
+$$
+28 : 2 = 14
+$$
+
+Peste 2 ani:
+- fiul: 14 ani  
+- tatăl: $14 × 3 = 42$ ani
+
+Așadar, în prezent:
+- fiul: $14 - 2 = 12$ ani  
+- tatăl: $42 - 2 = 40$ ani
+
+**R:** Tatăl are 40 ani, fiul are 12 ani.
+
+---
+
+> Exemplul 4 — Când se cunosc relații de tip **împărțire cu rest**
+
+:::note Problema:
+Suma a trei numere este 92.  
+Știind că, împărțind al doilea număr la primul, obținem câtul 2 și restul 5,  
+iar al treilea este de două ori mai mare decât al doilea,  
+aflați numerele.
+:::
+
+#### Rezolvare:
+
+Folosind **teorema împărțirii cu rest**, avem:
+
+$$
+\text{al doilea} = 2 × \text{primul} + 5
+$$
+$$
+\text{al treilea} = 2 × \text{al doilea} = 4 × \text{primul} + 10
+$$
+
+Reprezentăm grafic:
+
+$$
+\text{Primul} = 1\ \text{parte}, \quad \text{Al doilea} = 2\ \text{părți} + 5, \quad \text{Al treilea} = 4\ \text{părți} + 10
+$$
+
+<svg viewBox="0 0 480 220" width="100%" height="220" style={{maxWidth: '480px', border: '1px solid #ccc', borderRadius: '8px'}}>
+  {/* Primul */}
+  <text x="10" y="35" fontSize="14" fontFamily="sans-serif">Primul</text>
+  <rect x="120" y="20" width="50" height="20" fill="none" stroke="black" strokeWidth="2" />
+  <text x="145" y="15" textAnchor="middle" fontSize="12" fontFamily="sans-serif">1 parte</text>
+
+  {/* Al doilea */}
+  <text x="10" y="95" fontSize="14" fontFamily="sans-serif">Al doilea</text>
+  <rect x="120" y="80" width="50" height="20" fill="none" stroke="black" strokeWidth="2" />
+  <rect x="170" y="80" width="50" height="20" fill="none" stroke="black" strokeWidth="2" />
+  <rect x="230" y="80" width="40" height="20" fill="none" stroke="black" strokeWidth="2" strokeDasharray="4 3" />
+  <text x="250" y="75" textAnchor="middle" fontSize="12" fontFamily="sans-serif">+5</text>
+  <text x="170" y="75" textAnchor="middle" fontSize="12" fontFamily="sans-serif">2 părți</text>
+
+  {/* Al treilea */}
+  <text x="10" y="165" fontSize="14" fontFamily="sans-serif">Al treilea</text>
+  <rect x="120" y="150" width="50" height="20" fill="none" stroke="black" strokeWidth="2" />
+  <rect x="170" y="150" width="50" height="20" fill="none" stroke="black" strokeWidth="2" />
+  <rect x="220" y="150" width="50" height="20" fill="none" stroke="black" strokeWidth="2" />
+  <rect x="270" y="150" width="50" height="20" fill="none" stroke="black" strokeWidth="2" />
+  <rect x="330" y="150" width="50" height="20" fill="none" stroke="black" strokeWidth="2" strokeDasharray="4 3" />
+  <text x="355" y="145" textAnchor="middle" fontSize="12" fontFamily="sans-serif">+10</text>
+  <text x="235" y="145" textAnchor="middle" fontSize="12" fontFamily="sans-serif">4 părți</text>
+
+  {/* Legendă părți egale */}
+  <text x="10" y="205" fontSize="12" fontFamily="sans-serif">
+    Total „părți egale” folosite: 7
+  </text>
+</svg>
+
+
+Total: $7$ părți egale.  
+Aflăm suma părților egale:
+
+$$
+7 \text{ părți} = 92 - (5 + 10) = 77
+$$
+$$
+1 \text{ parte} = 11
+$$
+
+Astfel:
+- primul: $11$  
+- al doilea: $2 × 11 + 5 = 27$  
+- al treilea: $4 × 11 + 10 = 54$
+
+**R:** Numerele sunt 11, 27, 54.
+
+---

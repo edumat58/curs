@@ -1,0 +1,146 @@
+---
+sidebar_position: 18
+slug: /c8/modul-2/3
+description: ""
+---
+
+# C10.3 - Ordinea efectuării operațiilor a fracțiilor algebrice
+
+---
+
+## Ordinea efectuării operațiilor cu fracții algebrice
+
+> Ordinea efectuării operațiilor la fracții algebrice este aceeași ca la fracțiile numerice.
+
+:::info Proprietate
+Adunarea și scăderea sunt operații de **ordinul I**, înmulțirea și împărțirea de **ordinul II**, iar puterile de **ordinul III**.
+:::
+
+**I. Dacă într-o expresie apar operații de ordine diferite, atunci:**
+
+- Operațiile de ordinul III  
+- Operațiile de ordinul II  
+- Operațiile de ordinul I  
+
+**II. Dacă într-o expresie avem paranteze, ordinea este:**
+
+- Paranteza rotundă $( \quad )$  
+- Paranteza dreaptă $[ \quad ]$  
+- Paranteza acoladă $\{ \quad \}$
+
+**III. Dacă într-o expresie algebrică avem numai operații de ordinul I (adunare și scădere), acestea se pot efectua în același timp.**
+
+
+
+#### Exemplu
+
+:::note
+Efectuați:
+:::
+
+$$
+\frac{3}{x+5} - \frac{2}{x-5} + \frac{20}{x^2-25}
+$$
+
+> Deoarece avem doar adunare/scădere → aducem la același numitor:
+
+$$
+x^2 - 25 = (x-5)(x+5)
+$$
+
+$$
+\frac{3}{x+5} = \frac{3(x-5)}{(x-5)(x+5)}, \quad
+\frac{2}{x-5} = \frac{2(x+5)}{(x-5)(x+5)}
+$$
+
+> Scriem:
+
+$$
+\frac{3(x-5) - 2(x+5) + 20}{(x-5)(x+5)}
+$$
+
+> Efectuăm calculele la numărător:
+
+$$
+\frac{3x - 15 - 2x - 10 + 20}{(x-5)(x+5)}
+=
+\frac{x - 5}{(x-5)(x+5)}
+=
+\frac{1}{x-5}
+$$
+
+---
+
+**IV. Dacă într-o expresie avem numai operații de ordinul II (înmulțiri și împărțiri), se transformă împărțirea în înmulțire și apoi se efectuează înmulțirile.**
+
+#### Exemplu
+
+:::note
+Calculați:
+:::
+
+$$
+\frac{x^2 - 4}{x^2 - 7x + 10} : \frac{x^2 - 25}{3x + 6} \cdot \frac{x+5}{9}
+$$
+
+Transformăm împărțirea în înmulțire:
+
+$$
+\frac{x^2 - 4}{x^2 - 7x + 10} \cdot \frac{3x+6}{x^2 - 25} \cdot \frac{x+5}{9}
+$$
+
+Descompunem și simplificăm:
+
+$$
+\frac{(x-2)(x+2)}{(x-2)(x-5)} \cdot
+\frac{3(x+2)}{(x-5)(x+5)} \cdot
+\frac{x+5}{9}
+= 3
+$$
+
+---
+
+**V. Dacă într-o expresie există operații de ordin diferit, se efectuează în ordinea:**
+
+:::danger De Retinut
+III → II → I
+:::
+
+#### Exemplu
+
+$$
+\frac{x}{x^2 - 1} \cdot \left(\frac{1}{x+1}\right)^2 + \frac{x}{x-2} \cdot \frac{2x-4}{x-1} - 1
+$$
+
+Reduceri, amplificări și calcule succesive:
+
+$$
+\frac{x(x+1) + 2x - (x-1)}{x-1}
+=
+\frac{(x+1)^2}{x-1}
+$$
+
+---
+
+**VI. Dacă o expresie conține paranteze → aplicăm regula II, iar **în interior** regulile III, IV, V.**
+
+#### Exemplu
+
+$$
+\left[
+\frac{1}{x^2-2x+1} + \frac{x^2+x}{2x+1}
+\left(
+\frac{1}{x^2-x} + \frac{1}{x^2-1}
+\right)
+\right] : \frac{1}{x-1}
+$$
+
+>După transformări, aducere la același numitor și simplificări succesive:
+
+>Rezultatul final este:
+
+$$
+\frac{x}{x-1}
+$$
+
+---

@@ -1,0 +1,7 @@
+---
+sidebar_position: 17
+slug: /c8/modul-2/4
+description: ""
+---
+
+# G4 - Prisma dreaptă

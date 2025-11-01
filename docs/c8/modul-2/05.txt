@@ -1,0 +1,207 @@
+---
+sidebar_position: 16
+slug: /c8/modul-2/5
+description: ""
+---
+
+# C11 - Ecuația de gradul al doilea
+
+---
+
+## Forma generală
+
+:::tip Definiție
+O **ecuație de gradul al doilea** este o ecuație de forma:
+
+$$
+a x^2 + b x + c = 0,
+$$
+
+unde $a, b, c \in \mathbb{R}$ și $a \ne 0$ sunt coeficienții ecuației, iar $x$ este necunoscuta.
+:::
+
+---
+
+## Discriminantul ecuației
+
+Se notează cu:
+
+$$
+\Delta = b^2 - 4ac
+$$
+
+și determină **numărul soluțiilor reale** ale ecuației.
+
+---
+
+## Cazuri posibile
+
+:::info Cazurile posibile în funcție de $\Delta$
+- Dacă $\Delta > 0$, ecuația are **două soluții reale distincte**:
+
+$$
+x_1 = \frac{-b + \sqrt{\Delta}}{2a}, \quad
+x_2 = \frac{-b - \sqrt{\Delta}}{2a}
+$$
+
+- Dacă $\Delta = 0$, ecuația are **două soluții egale**:
+
+$$
+x_1 = x_2 = \frac{-b}{2a}
+$$
+
+- Dacă $\Delta < 0$, ecuația **nu are soluții reale**.
+:::
+
+---
+
+## Exemple
+
+---
+
+### Exemplul 1
+
+:::note Problema
+Rezolvați ecuația:
+$$
+x^2 + 5x + 6 = 0
+$$
+:::
+
+**Identificăm coeficienții:**  
+$a = 1, \quad b = 5, \quad c = 6$
+
+**Calculăm discriminantul:**
+
+$$
+\Delta = b^2 - 4ac = 5^2 - 4\cdot1\cdot6 = 25 - 24 = 1 > 0
+$$
+
+Deci ecuația are **două soluții reale distincte**:
+
+$$
+x_1 = \frac{-b + \sqrt{\Delta}}{2a} = \frac{-5 + 1}{2} = -2
+$$
+
+$$
+x_2 = \frac{-b - \sqrt{\Delta}}{2a} = \frac{-5 - 1}{2} = -3
+$$
+
+**R:** $S = \{-3, -2\}$
+
+---
+
+### Exemplul 2
+
+:::note Problema
+Rezolvați ecuația:
+$$
+x^2 - 10x + 25 = 0
+$$
+:::
+
+**Identificăm coeficienții:**  
+$a = 1, \quad b = -10, \quad c = 25$
+
+**Calculăm discriminantul:**
+
+$$
+\Delta = (-10)^2 - 4\cdot1\cdot25 = 100 - 100 = 0
+$$
+
+Deci ecuația are **două soluții egale**:
+
+$$
+x_1 = x_2 = \frac{-b}{2a} = \frac{10}{2} = 5
+$$
+
+**R:** $S = \{5\}$
+
+---
+
+### Exemplul 3
+
+:::note Problema
+Rezolvați ecuația:
+$$
+-2x^2 + x - 1 = 0
+$$
+:::
+
+**Identificăm coeficienții:**  
+$a = -2, \quad b = 1, \quad c = -1$
+
+**Calculăm discriminantul:**
+
+$$
+\Delta = b^2 - 4ac = 1^2 - 4\cdot(-2)\cdot(-1) = 1 - 8 = -7 < 0
+$$
+
+Deci ecuația **nu are soluții reale**.
+
+**R:** $S = \varnothing$
+
+---
+
+## 5. Observație
+
+Uneori, ecuațiile de gradul al doilea nu sunt scrise în forma canonică  
+$a x^2 + b x + c = 0$.  
+În acest caz, se efectuează calcule algebrice pentru a le aduce la această formă.
+
+---
+
+### Exemplul 4
+
+:::note Problema
+Aduceți ecuația la forma canonică și rezolvați:
+$$
+(x - 1)^2 + 2(x - 3)^2 - 8 = 0
+$$
+:::
+
+**Rezolvare:**
+
+$$
+(x - 1)^2 + 2(x - 3)^2 - 8 = 0
+$$
+
+Dezvoltăm parantezele:
+
+$$
+x^2 - 2x + 1 + 2(x^2 - 6x + 9) - 8 = 0
+$$
+
+$$
+x^2 - 2x + 1 + 2x^2 - 12x + 18 - 8 = 0
+$$
+
+Reducem termenii asemenea:
+
+$$
+3x^2 - 14x + 11 = 0
+$$
+
+**Identificăm coeficienții:**  
+$a = 3, \quad b = -14, \quad c = 11$
+
+**Calculăm discriminantul:**
+
+$$
+\Delta = b^2 - 4ac = (-14)^2 - 4\cdot3\cdot11 = 196 - 132 = 64 > 0
+$$
+
+Deci ecuația are **două soluții reale distincte**:
+
+$$
+x_1 = \frac{-b + \sqrt{\Delta}}{2a} = \frac{14 + 8}{6} = \frac{22}{6} = \frac{11}{3}
+$$
+
+$$
+x_2 = \frac{-b - \sqrt{\Delta}}{2a} = \frac{14 - 8}{6} = \frac{6}{6} = 1
+$$
+
+**R:** $S = \left\{1, \frac{11}{3}\right\}$
+
+---
+

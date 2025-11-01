@@ -1,0 +1,162 @@
+---
+sidebar_position: 17
+slug: /c7/modul-2/4
+description: ""
+---
+
+# G5 - Linia mijlocie în triunghi
+
+---
+
+## Definiție
+
+:::tip Definiție
+**Segmentul care unește mijloacele a două laturi ale unui triunghi se numește linie mijlocie a triunghiului.**
+
+Dacă $M, N, P$ sunt mijloacele laturilor triunghiului $ABC$,  
+atunci segmentele $MN, NP, MP$ sunt **liniile mijlocii** ale triunghiului.
+:::
+
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" stroke="null">
+ <g stroke="null">
+  <title stroke="null">Layer 1</title>
+  <path id="svg_1" d="m161.5,275l53.5,-151l189,151l-242.5,0z" opacity="NaN" stroke="#000" fill="#fff"/>
+  <path id="svg_2" d="m164.5,223" opacity="NaN" stroke="#000" fill="#fff"/>
+  <path id="svg_4" d="m184.5,209l137.5,0l-44,66l-93.5,-66z" opacity="NaN" stroke="#ff0000" fill="#fff"/>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" stroke-width="0" id="svg_5" y="211" x="154.5" stroke="#ff0000" fill="#000000">M</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" stroke-width="0" id="svg_6" y="210" x="332.5" stroke="#ff0000" fill="#000000">N</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" stroke-width="0" id="svg_7" y="307" x="272.5" stroke="#ff0000" fill="#000000">P</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" stroke-width="0" id="svg_8" y="116" x="207.5" stroke="#ff0000" fill="#000000">A</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" stroke-width="0" id="svg_9" y="293" x="138.5" stroke="#ff0000" fill="#000000">B</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" stroke-width="0" id="svg_10" y="293" x="408.5" stroke="#ff0000" fill="#000000">C</text>
+  <ellipse ry="3.5" rx="3.5" id="svg_11" cy="273.5" cx="163" stroke-width="0" stroke="#ff0000" fill="#000000"/>
+  <ellipse ry="3.5" rx="3.5" id="svg_12" cy="275.5" cx="403" stroke-width="0" stroke="#ff0000" fill="#000000"/>
+  <ellipse ry="3.5" rx="3.5" id="svg_13" cy="126.5" cx="216" stroke-width="0" stroke="#ff0000" fill="#000000"/>
+  <ellipse ry="3.5" rx="3.5" id="svg_14" cy="209.5" cx="322" stroke-width="0" stroke="#ff0000" fill="#000000"/>
+  <ellipse ry="3.5" rx="3.5" id="svg_15" cy="209.5" cx="185" stroke-width="0" stroke="#ff0000" fill="#000000"/>
+  <ellipse ry="3.5" rx="3.5" id="svg_16" cy="274.5" cx="278" stroke-width="0" stroke="#ff0000" fill="#000000"/>
+ </g>
+
+</svg>
+---
+
+## Proprietate
+
+:::info Proprietate
+**Linia mijlocie determinată de mijloacele a două laturi ale unui triunghi este paralelă cu a treia latură și are lungimea egală cu jumătate din lungimea acesteia.**
+:::
+
+Astfel, pentru triunghiul $ABC$:
+
+$$
+MN \parallel BC,\quad NP \parallel AB,\quad MP \parallel AC
+$$
+
+și
+
+$$
+MN = \frac{BC}{2}, \quad NP = \frac{AB}{2}, \quad MP = \frac{AC}{2}
+$$
+
+sau echivalent:
+
+$$
+BC = 2\cdot MN, \quad AB = 2\cdot NP, \quad AC = 2\cdot MP
+$$
+
+---
+
+## Aplicații
+
+### Exemplul 1
+
+:::note Problemă
+Fie triunghiul $ABC$ în care $MN$, $NP$, $MP$ sunt liniile mijlocii.  
+Știind că $BC = 8\text{ cm}$, $AC = 7\text{ cm}$ și $NP = 3\text{ cm}$,  
+să se calculeze **perimetrul triunghiului $MNP$**.
+:::
+
+<!-- SVG: Triunghiul ABC cu liniile mijlocii MN, NP, MP -->
+
+#### Rezolvare:
+
+$$
+MN = \frac{BC}{2} = \frac{8}{2} = 4\text{ cm}
+$$
+$$
+MP = \frac{AC}{2} = \frac{7}{2} = 3{,}5\text{ cm}
+$$
+$$
+NP = 3\text{ cm}
+$$
+
+Perimetrul triunghiului $MNP$ este:
+
+$$
+P_{MNP} = MN + NP + MP = 4 + 3 + 3{,}5 = 10{,}5\text{ cm}
+$$
+
+:::danger De reținut
+$$
+P_{MNP} = \frac{P_{ABC}}{2}
+$$
+:::
+
+---
+
+### Exemplul 2
+
+:::note Problemă
+Fie paralelogramul $ABCD$, în care $S, T, U, V$ sunt mijloacele laturilor.  
+Se cere să se arate că patrulaterul $STUV$ este **paralelogram**.
+:::
+
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" stroke="null">
+ <g stroke="null">
+  <title stroke="null">Layer 1</title>
+  <path id="svg_17" d="m43.79751,285.69333l103,-156l411.99994,0l-103,156l-411.99994,0z" stroke-width="2" stroke="#000000" fill="none"/>
+  <path stroke-dasharray="5,5" id="svg_18" d="m46.5,286l516.5,-155" opacity="NaN" stroke-width="0" stroke="#000000" fill="none"/>
+  <path stroke-dasharray="5,5" id="svg_19" d="m45.5,285l514.5,-154" opacity="NaN" stroke-width="2" stroke="#000000" fill="none"/>
+  <path stroke-dasharray="5,5" id="svg_20" d="m146.5,129l309.5,156" opacity="NaN" stroke-width="2" stroke="#000000" fill="none"/>
+  <path id="svg_21" d="m97.5,204c0,1 157,81 156.5,81c0.5,0 250.5,-73 250,-73c0.5,0 -176.5,-83 -177,-83c0.5,0 -229.5,74 -229.5,75z" opacity="NaN" stroke-width="2" stroke="#007f00" fill="none"/>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_22" y="207" x="65.5" stroke-width="0" stroke="#007f00" fill="#000000">V</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_23" y="312" x="246.5" stroke-width="0" stroke="#007f00" fill="#000000">U</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_24" y="222" x="513.5" stroke-width="0" stroke="#007f00" fill="#000000">T</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_25" y="115" x="317.5" stroke-width="0" stroke="#007f00" fill="#000000">S</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_26" y="123" x="124.5" stroke-width="0" stroke="#007f00" fill="#000000">A</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_27" y="127" x="567.5" stroke-width="0" stroke="#007f00" fill="#000000">B</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_28" y="302" x="460.5" stroke-width="0" stroke="#007f00" fill="#000000">C</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_29" y="302" x="15.5" stroke-width="0" stroke="#007f00" fill="#000000">D</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_30" y="237" x="291.5" stroke-width="0" stroke="#007f00" fill="#000000">O</text>
+ </g>
+
+</svg>
+
+#### Rezolvare:
+
+În $\triangle ABD$, punctele $V$ și $S$ sunt mijloacele laturilor $AD$ și $AB$,  
+deci $SV$ este **linie mijlocie**:
+
+$$
+VS \parallel BD, \quad VS = \frac{BD}{2}
+$$
+
+În $\triangle CBD$, punctele $U$ și $T$ sunt mijloacele laturilor $CD$ și $CB$,  
+deci $UT$ este **linie mijlocie**:
+
+$$
+UT \parallel BD, \quad UT = \frac{BD}{2}
+$$
+
+Rezultă:
+
+- $VS \parallel BD$ și $UT \parallel BD \Rightarrow VS \parallel UT$
+- $VS = \frac{BD}{2}$ și $UT = \frac{BD}{2} \Rightarrow VS = UT$
+
+Prin urmare:
+
+$$
+STUV \text{ este paralelogram.}
+$$
+
+---

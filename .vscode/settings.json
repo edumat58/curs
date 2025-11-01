@@ -1,3 +1,6 @@
 {
-    "idf.pythonInstallPath": "/opt/homebrew/bin/python3"
+    "idf.pythonInstallPath": "/opt/homebrew/bin/python3",
+    "files.watcherExclude": {
+        "**/target": true
+    }
 }

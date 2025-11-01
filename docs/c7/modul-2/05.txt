@@ -1,0 +1,210 @@
+---
+sidebar_position: 16
+slug: /c7/modul-3/5
+description: ""
+---
+
+# C13.1 - Sisteme de ecuații
+
+---
+
+## Forma generală
+
+Un **sistem de două ecuații de gradul I cu două necunoscute** are forma generală:
+
+$$
+\begin{cases}
+a_1x + b_1y = c_1 \\
+a_2x + b_2y = c_2
+\end{cases}
+$$
+
+unde $x, y \in \mathbb{R}$ sunt necunoscutele, iar $a_1, b_1, a_2, b_2, c_1, c_2 \in \mathbb{R}$ sunt coeficienții.
+
+---
+
+### Noțiune
+
+Prin **rezolvarea sistemului** de ecuații se înțelege determinarea tuturor perechilor ordonate $(x, y)$  
+pentru care **ambele ecuații** sunt adevărate simultan.
+
+---
+
+## Cazurile posibile
+
+:::tip Cazuri
+1. $S = S_1 \cap S_2 = \{(a, b)\}$ – sistemul are **o soluție unică**.  
+2. $S = S_1 \cap S_2 = \emptyset$ – sistemul **nu are soluții** (ecuațiile sunt **incompatibile**).  
+3. $S = S_1 \cap S_2 = S_1$ sau $S_2$ – sistemul are **o infinitate de soluții** în $\mathbb{R}$.
+:::
+
+Două sisteme se numesc **echivalente** dacă au aceeași mulțime de soluții.
+
+---
+
+## Metode de rezolvare
+
+Există două metode principale:
+
+1. **Metoda substituției**  
+2. **Metoda reducerii**
+
+---
+
+## 1. Metoda substituției
+
+:::info Etapele metodei substituției
+1. Se scoate una dintre necunoscute dintr-o ecuație.  
+2. Se înlocuiește necunoscuta extrasă în cealaltă ecuație.  
+3. Se calculează valoarea celeilalte necunoscute.  
+4. Se înlocuiește valoarea găsită în prima ecuație pentru a afla și a doua necunoscută.
+:::
+
+---
+
+### Exemple
+
+#### Exemplul 1
+
+$$
+\begin{cases}
+x + y = 1999 \\
+x - y = -1999
+\end{cases}
+$$
+
+**Rezolvare:**
+
+Din prima ecuație:
+$$x = 1999 - y$$
+
+Înlocuim în a doua ecuație:
+$$1999 - y - y = -1999$$  
+$$-2y = -1999 - 1999$$  
+$$y = 1999$$
+
+Apoi:
+$$x = 1999 - y = 1999 - 1999 = 0$$
+
+**R:** $S = \{(0, 1999)\}$
+
+---
+
+#### Exemplul 2
+
+$$
+\begin{cases}
+2x - 3y = 5 \\
+3x + y = 2
+\end{cases}
+$$
+
+**Rezolvare:**
+
+Din a doua ecuație:
+$$y = 2 - 3x$$
+
+Înlocuim în prima:
+$$2x - 3(2 - 3x) = 5$$  
+$$2x - 6 + 9x = 5$$  
+$$11x - 6 = 5$$  
+$$11x = 11 \Rightarrow x = 1$$
+
+Înlocuim în $y = 2 - 3x$:
+$$y = 2 - 3\cdot1 = -1$$
+
+**R:** $S = \{(1, -1)\}$
+
+---
+
+## 2. Metoda reducerii
+
+:::info Etapele metodei reducerii
+1. Se înmulțesc termenii unei ecuații (sau ai ambelor) cu un număr astfel încât,  
+prin **adunarea sau scăderea** celor două ecuații, să se **anuleze una dintre necunoscute**.  
+2. Se rezolvă ecuația obținută cu o singură necunoscută.  
+3. Se înlocuiește valoarea găsită într-una din ecuațiile inițiale pentru a afla și cealaltă necunoscută.  
+4. Dacă, după adunare, se anulează toți termenii care conțin necunoscutele,  
+sistemul **nu are soluție unică** (poate fi incompatibil sau echivalent).
+:::
+
+---
+
+### Exemple
+
+#### Exemplul 1
+
+$$
+\begin{cases}
+x + y = 1999 \\
+x - y = -1999
+\end{cases}
+$$
+
+Adunăm cele două ecuații:
+
+$$
+(x + y) + (x - y) = 1999 + (-1999)
+$$
+
+$$
+2x = 0 \Rightarrow x = 0
+$$
+
+Apoi:
+
+$$
+x + y = 1999 \Rightarrow 0 + y = 1999 \Rightarrow y = 1999
+$$
+
+**R:** $S = \{(0, 1999)\}$
+
+---
+
+#### Exemplul 2
+
+$$
+\begin{cases}
+2x - 3y = 5 \\
+3x + y = 2
+\end{cases}
+$$
+
+Înmulțim a doua ecuație cu $3$ pentru a elimina $y$:
+
+$$
+\begin{cases}
+2x - 3y = 5 \\
+9x + 3y = 6
+\end{cases}
+$$
+
+Adunăm ecuațiile:
+
+$$
+(2x - 3y) + (9x + 3y) = 5 + 6
+$$
+
+$$
+11x = 11 \Rightarrow x = 1
+$$
+
+Înlocuim în a doua ecuație:
+$$
+3x + y = 2 \Rightarrow 3\cdot1 + y = 2 \Rightarrow y = -1
+$$
+
+**R:** $S = \{(1, -1)\}$
+
+---
+
+## Concluzii
+
+:::danger De retinut
+- Ambele metode (substituția și reducerea) conduc la același rezultat.  
+- Alegerea metodei depinde de **forma sistemului**:
+  - dacă o necunoscută are coeficient 1 sau -1, se preferă **substituția**;
+  - dacă se pot anula ușor termenii prin amplificare, se preferă **reducerea**.
+:::
+
+---

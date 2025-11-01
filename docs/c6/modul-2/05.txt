@@ -1,0 +1,243 @@
+---
+sidebar_position: 16
+slug: /c6/modul-2/5
+description: ""
+---
+
+# C12.2 - Înmulțirea și împărțirea numerelor întregi
+
+---
+
+:::tip Definiție
+Produsul a două numere întregi nenule este **numărul întreg** care are:
+
+- modulul egal cu **produsul modulelor factorilor**;
+- semnul **„+”** dacă factorii au **același semn**;
+- semnul **„–”** dacă factorii au **semne contrare**.
+
+Dacă **cel puțin unul** dintre factori este **nul**, atunci produsul este **0**.
+:::
+
+---
+
+### Regula semnelor
+
+| Operație | Rezultat |
+|-----------|-----------|
+| $(+)\cdot(+)$ | $(+)$ |
+| $(-)\cdot(-)$ | $(+)$ |
+| $(+)\cdot(-)$ | $(-)$ |
+| $(-)\cdot(+)$ | $(-)$ |
+
+---
+
+### Exemple
+
+<div style={{display: 'flex', gap: '20px'}}>
+<div>
+
+| Nr. | Calcul | Rezultat |
+|-----|---------|-----------|
+| 1 | $(+4)\cdot(+3)$ | $+12$ |
+| 2 | $(-4)\cdot(-3)$ | $+12$ |
+| 3 | $(+4)\cdot(-3)$ | $-12$ |
+| 4 | $(-4)\cdot(+3)$ | $-12$ |
+| 5 | $(+5)\cdot(+9)$ | $+45$ |
+| 6 | $(-6)\cdot(+7)$ | $-42$ |
+| 7 | $(-8)\cdot(-5)$ | $+40$ |
+| 8 | $(+10)\cdot(-6)$ | $-60$ |
+| 9 | $(+11)\cdot(-2)$ | $-22$ |
+
+</div>
+<div>
+
+| Nr. | Calcul | Rezultat |
+|-----|---------|-----------|
+| 10 | $(+4)\cdot 0$ | $0$ |
+| 11 | $(-4)\cdot 0$ | $0$ |
+| 12 | $0\cdot(+3)$ | $0$ |
+| 13 | $0\cdot(-3)$ | $0$ |
+| 14 | $(+4)\cdot(-2)\cdot(+6)$ | $-48$ |
+| 15 | $(-5)\cdot(-8)\cdot(-2)$ | $-80$ |
+| 16 | $(+6)\cdot(-4)\cdot(-3)$ | $+72$ |
+| 17 | $(+4)\cdot(-10)\cdot 0$ | $0$ |
+| 18 | $(-3)\cdot(+2)\cdot(-6)\cdot(-2)$ | $-72$ |
+
+</div>
+</div>
+
+---
+
+## Proprietățile înmulțirii numerelor întregi
+
+Înmulțirea numerelor întregi are aceleași proprietăți ca și înmulțirea numerelor naturale:
+
+1. **Asociativitate:**  
+   $$(a\cdot b)\cdot c = a\cdot(b\cdot c), \quad \forall a,b,c\in\mathbb{Z}$$
+
+2. **Comutativitate:**  
+   $$a\cdot b = b\cdot a, \quad \forall a,b\in\mathbb{Z}$$
+
+3. **Element neutru:**  
+   $$a\cdot 1 = 1\cdot a = a, \quad \forall a\in\mathbb{Z}$$
+
+4. **Distributivitate față de adunare și scădere:**  
+   $$
+   a\cdot(b+c) = a\cdot b + a\cdot c \\
+   a\cdot(b-c) = a\cdot b - a\cdot c
+   $$
+
+---
+
+### Exemple de aplicare a proprietăților
+
+| Nr. | Calcul | Rezultat |
+|-----|---------|-----------|
+| 1 | $(+2)\cdot 1$ | $+2$ |
+| 2 | $1\cdot(-2)$ | $-2$ |
+| 3 | $(+2)\cdot(-1)$ | $-2$ |
+| 4 | $(-2)\cdot(-1)$ | $+2$ |
+| 5 | $(-2)\cdot(-7)\cdot(-5) = (-2)\cdot(-5)\cdot(-7) = (+10)\cdot(-7)$ | $-70$ |
+| 6 | $(-3)\cdot(-4)\cdot(+25) = (-3)\cdot(-100)$ | $+300$ |
+| 7 | $(+4)\cdot(-50)\cdot(+9) = (-200)\cdot(+9)$ | $-1800$ |
+
+#### Calculați în două moduri:
+
+1. $(-6)\cdot(+7) + (-6)\cdot(+9) = (-42) + (-54) = -96$  
+   sau  
+   $(-6)\cdot[(+7) + (+9)] = (-6)\cdot(+16) = -96$
+
+2. $(-10)\cdot(+8) - (-10)\cdot(+6) = (-80) - (-60) = -80 + 60 = -20$  
+   sau  
+   $(-10)\cdot[(+8) - (+6)] = (-10)\cdot(+2) = -20$
+
+3. $-4\cdot(-8 + 12) = -4\cdot(+4) = -16$  
+   sau  
+   $-4\cdot(-8) + (-4)\cdot 12 = +32 - 48 = -16$
+
+---
+
+## Multiplii unui număr întreg
+
+:::info Definiție
+Fie $a$ și $b$ două numere întregi.  
+Spunem că **$a$ este multiplul lui $b$** (sau că $a$ se divide cu $b$) dacă există un număr întreg $c$ astfel încât:
+
+$$
+a = b \cdot c
+$$
+
+Scriem $a : b$ sau $b \mid a$.  
+Numărul $b$ se numește **divizor al lui $a$**.
+:::
+
+Mulțimea multiplilor numărului întreg $n$ se notează cu:
+
+$$
+M_n = \{k\cdot n \mid k \in \mathbb{Z}\}
+$$
+
+Se observă că:
+$$
+M_n = M_{-n}, \quad \forall n \in \mathbb{Z}
+$$
+
+---
+
+### Exemple
+
+1. $M_5 = \{0, \pm5, \pm10, \pm15, \pm20, \dots, \pm5n, \dots\}$  
+2. $M_{-3} = \{0, \pm3, \pm6, \pm9, \pm12, \pm15, \dots, \pm3n, \dots\}$  
+3. Dintre numerele $10, 44, 125, -108, 253, 120, -200, -302, 624$, multiplii lui $4$ sunt:  
+   **44, -108, 120, -200, 624**.  
+4. Înșirați 11 multipli întregi ai numărului $-2$, dintre care 5 să fie negativi:  
+   $-10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10$
+
+---
+
+## Împărțirea numerelor întregi
+
+:::tip Definiție
+Fie $a, b \in \mathbb{Z}$, cu $b \neq 0$ și $a$ un multiplu al lui $b$.  
+Câtul dintre $a$ și $b$, notat $a : b$, este acel număr întreg $c$ pentru care:
+
+$$
+a = b \cdot c
+$$
+
+$a$ se numește **deîmpărțit**, iar $b$ **împărțitor**.
+:::
+
+---
+
+### Observații
+
+- Regula semnelor este aceeași ca la înmulțire.  
+- Valoarea absolută a câtului este egală cu câtul valorilor absolute.  
+- Dacă deîmpărțitul este nul, atunci câtul este 0.  
+- Dacă împărțitorul este nul, împărțirea **nu are sens**.
+
+---
+
+### Exemple
+
+<div style={{display: 'flex', gap: '20px'}}>
+<div>
+
+| Nr. | Calcul | Rezultat |
+|-----|---------|-----------|
+| 1 | $(+20) : (+10)$ | $+2$ |
+| 2 | $(-20) : (-10)$ | $+2$ |
+| 3 | $(+20) : (-10)$ | $-2$ |
+| 4 | $(-20) : (+10)$ | $-2$ |
+| 5 | $0 : (+5)$ | $0$ |
+| 6 | $0 : (-6)$ | $0$ |
+| 7 | $(+8) : 0$ | nu are sens |
+| 8 | $(-7) : 0$ | nu are sens |
+| 9 | $0 : 0$ | nu are sens |
+
+</div>
+<div>
+
+| Nr. | Calcul | Rezultat |
+|-----|---------|-----------|
+| 10 | $(-12) : (+1)$ | $-12$ |
+| 11 | $(-12) : (-1)$ | $+12$ |
+| 12 | $(-35) : (-7)$ | $+5$ |
+| 13 | $(+144) : (-12) : (+6)$ | $(-12) : (+6) = -2$ |
+| 14 | $(-18) : (-3) : (+6)$ | $(+6) : (+6) = +1$ |
+| 15 | $(-100) : (+25) : (-1)$ | $(-4) : (-1) = +4$ |
+| 16 | $(+13) : (-13) : (+1)$ | $(-1) : (+1) = -1$ |
+| 17 | $(+1024) : (-32)$ | $-32$ |
+| 18 | $(-760) : (-10)$ | $+76$ |
+
+</div>
+</div>
+
+---
+
+## Divizorii unui număr întreg
+
+:::info Definiție
+Dacă $a$ este un multiplu al lui $b$, atunci $b$ este un **divizor** al numărului $a$.
+:::
+
+Mulțimea divizorilor unui număr întreg $n$ se notează cu:
+
+$$
+D_n = D_{-n}, \quad \forall n \in \mathbb{Z}
+$$
+
+---
+
+### Exemple
+
+1. $D_6 = \{\pm1, \pm2, \pm3, \pm6\}$  
+2. $D_{-15} = \{\pm1, \pm3, \pm5, \pm15\}$  
+3. Divizorii numerelor:
+   - $18$: divizori naturali $=\{1, 2, 3, 6, 9, 18\}$, divizori întregi $=\{\pm1, \pm2, \pm3, \pm6, \pm9, \pm18\}$  
+   - $-37$: divizori naturali $=\{1, 37\}$, divizori întregi $=\{\pm1, \pm37\}$
+4. Dintre numerele $-9, +6, -12, 14, 21, -16, +24, -36, 32$, divizorii lui $144$ sunt:  
+   **-9, +6, -12, -16, +24, -36**
+
+---

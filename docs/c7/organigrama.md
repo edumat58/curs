@@ -11,14 +11,25 @@ import React, { useState } from 'react';
 export default function LectiiTreeView() {
   const saptamani = [
     {
-      titlu: 'Săptămâna 7 - 20.10 - 24.10 | FINAL MODUL 1',
-      note: 'EVALUARE SUMATIVA: Vineri 24.10',
+      titlu: 'Săptămâna 8: 03.11 - 07.11',
+      note: 'Modulul 2: 03.11.2025 -> 19.12.2025',
       lectii: [
-        { titlu: 'LP - Patrulatere si paralelograme', zi: '20.10 (ora 1)', tip: 'Geometrie', link: '', pdf: '' },
+        { titlu: 'G4 - Paralelogramul - ', zi: '03.11 (ora 1)', tip: 'Geometrie', link: 'c7/modul-2/1', pdf: '' },
+        { titlu: 'LP - Paralelogramul', zi: '03.11 (ora 2)', tip: 'Geometrie', link: '', pdf: '' },
+        { titlu: 'C11 - Relația de egalitate', zi: '05.11', tip: 'Algebra', link: 'c7/modul-2/2', pdf: '' },
+        { titlu: 'LP - Relația de egalitate', zi: '06.11', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'C12 - Ecuația ax+b=0', zi: '07.11', tip: 'Algebra', link: 'c7/modul-2/3', pdf: '' },
+      ],
+    },
+    {
+      titlu: 'Săptămâna 7 - 20.10 - 24.10 | FINAL MODUL 1',
+      note: 'Materiale încarcate',
+      lectii: [
+        { titlu: 'LP - (rec) Operatii in multimea nr. reale', zi: '20.10 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
         { titlu: 'C10 - Aproximări ale numerelor iraționale', zi: '20.10 (ora 2)', tip: 'Algebra', link: 'c7/modul-1/17', pdf: '' },
         { titlu: 'LP - Aproximări ale numerelor iraționale și REEVALUARE - ELEVI ABSENTI TEST 1', zi: '22.10', tip: 'Algebra', link: '', pdf: '' },
         { titlu: 'LP - RECAPITULARE TEST', zi: '23.10', tip: 'Geometrie', link: '', pdf: '' },
-        { titlu: 'TEST 2 (C9, C10 | G1 -> G4) | 100% NOTA 2', zi: '24.10', tip: 'EVALUARE SUMATIVA', link: '', pdf: '' },
+        { titlu: 'TEST 2 (C9 | G1 -> G3) | 100% NOTA 2', zi: '24.10', tip: 'EVALUARE SUMATIVA', link: '', pdf: '' },
       ],
     },
     {
@@ -29,7 +40,7 @@ export default function LectiiTreeView() {
         { titlu: 'LP - Ecuatia x² = a', zi: '13.10 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
         { titlu: 'G3 - Patrulaterul convex', zi: '15.10', tip: 'Geometrie', link: 'c7/modul-1/15', pdf: '' },
         { titlu: 'LP - Patrulaterul convex', zi: '16.10', tip: 'Geometrie', link: '', pdf: '' },
-        { titlu: 'G4 - Paralelogramul', zi: '17.10', tip: 'Geometrie', link: 'c7/modul-1/16', pdf: '' },
+        { titlu: 'LP - (rec) Operatii in multimea nr. reale', zi: '17.10', tip: 'Algebra', link: '', pdf: '' },
       ],
     },
     {

@@ -1,0 +1,210 @@
+---
+sidebar_position: 15
+slug: /c6/modul-2/6
+description: ""
+---
+
+# G2 - Unghiuri opuse la vârf și unghiuri formate în jurul unui punct
+
+---
+
+## Unghiuri opuse la vârf
+
+:::tip Definiție
+Două **unghiuri** care au **același vârf**, iar **laturile lor sunt perechi de semidrepte opuse**,  
+se numesc **unghiuri opuse la vârf**.
+:::
+
+:::info Proprietate
+Dacă două unghiuri sunt **opuse la vârf**, atunci ele sunt **congruente**.
+:::
+
+---
+
+### Exemplu
+
+În figura alăturată:
+
+- $\measuredangle AOC$ și $\measuredangle BOD$ sunt **opuse la vârf**.  
+- De asemenea, $\measuredangle AOD$ și $\measuredangle BOC$ sunt **opuse la vârf**.
+
+Rezultă:
+
+$$
+\measuredangle AOC \equiv \measuredangle BOD, \quad \measuredangle AOD \equiv \measuredangle BOC
+$$
+
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" stroke="null">
+ <g stroke="null">
+  <title stroke="null">Layer 1</title>
+  <line id="svg_156" y2="96.66667" x2="664" y1="331.33333" x1="128" stroke="#000000" fill="none"/>
+  <line transform="rotate(-32.3891 382.667 206.667)" id="svg_157" y2="366" x2="630.66667" y1="47.33333" x1="134.66667" stroke="#000000" fill="none"/>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_159" y="232.66667" x="413.33334" stroke-width="0" stroke="#000000" fill="#000000">O</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_160" y="194" x="118.66668" stroke-width="0" stroke="#000000" fill="#000000">A</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_161" y="108.66667" x="596.00003" stroke-width="0" stroke="#000000" fill="#000000">D</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_162" y="196.66667" x="606.66669" stroke-width="0" stroke="#000000" fill="#000000">B</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_163" y="332.66667" x="180.00004" stroke-width="0" stroke="#000000" fill="#000000">C</text>
+ </g>
+
+</svg>
+
+---
+
+## Unghiuri formate în jurul unui punct
+
+:::tip Definiție
+Trei sau mai multe **unghiuri** cu **același vârf**, **fără puncte interioare comune**,  
+și care, reunite cu interioarele lor, **acoperă întreg planul**,  
+se numesc **unghiuri în jurul unui punct**.
+:::
+
+:::info Proprietate
+**Suma măsurilor unghiurilor** formate în jurul unui punct este egală cu:
+
+$$
+360^\circ
+$$
+:::
+
+---
+
+### Exemplu
+
+În figura alăturată,  
+$\measuredangle ASB$, $\measuredangle BSC$, $\measuredangle CSD$, $\measuredangle DSA$  
+sunt **patru unghiuri în jurul aceluiași punct $S$**.
+
+Rezultă:
+
+$$
+m(\measuredangle ASB) + m(\measuredangle BSC) + m(\measuredangle CSD) + m(\measuredangle DSA) = 360^\circ
+$$
+
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" stroke="null">
+ <g stroke="null">
+  <title stroke="null">Layer 1</title>
+  <line transform="rotate(-62.4848 478.711 336.453)" stroke="#000000" id="svg_157" y2="428.45294" x2="548.51605" y1="244.45327" x1="408.90572" fill="none"/>
+  <line transform="rotate(-30.0957 408.78 431.974)" id="svg_168" y2="520.51491" x2="408.77985" y1="343.43377" x1="408.77985" stroke="#000000" fill="none"/>
+  <line transform="rotate(-30.0957 364.996 247.612)" stroke="#000000" id="svg_169" y2="154.01251" x2="419.56203" y1="341.21073" x1="310.42945" fill="none"/>
+  <line transform="rotate(-30.0957 297.936 426.682)" id="svg_170" y2="454.38606" x2="204.68855" y1="398.97824" x1="391.18315" stroke="#000000" fill="none"/>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_175" y="311.33333" x="556" stroke-width="0" stroke="#000000" fill="#000000">B</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_176" y="355.33333" x="336" stroke-width="0" stroke="#000000" fill="#000000">S</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_177" y="166.00001" x="334.66667" stroke-width="0" stroke="#000000" fill="#000000">A</text>
+  <text stroke="#000000" xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_178" y="503.33333" x="257.33334" stroke-width="0" fill="#000000">D</text>
+  <text stroke="#000000" xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_179" y="484.66667" x="452.00001" stroke-width="0" fill="#000000">C</text>
+ </g>
+
+</svg>
+
+---
+
+## Aplicații
+
+### Problema 1
+
+:::note Enunț
+Zece unghiuri în jurul unui punct sunt **congruente**.  
+Care este măsura unuia?
+:::
+
+**Rezolvare:**
+
+$$
+360^\circ : 10 = 36^\circ
+$$
+
+**R:** Măsura fiecărui unghi este **36°**.
+
+---
+
+### Problema 2
+
+:::note Enunț
+Se consideră figura alăturată în care avem unghiuri **opuse la vârf** și  
+$m(\measuredangle AOD) = 50^\circ$.  
+Calculați $m(\measuredangle AOB)$ și $m(\measuredangle BOC)$.
+:::
+
+**Rezolvare:**
+
+$$
+m(\measuredangle AOB) = 180^\circ - m(\measuredangle AOD) = 180^\circ - 50^\circ = 130^\circ
+$$
+
+$$
+m(\measuredangle BOC) = m(\measuredangle AOD) = 50^\circ
+$$
+
+**R:**  
+$m(\measuredangle AOB) = 130^\circ$,  
+$m(\measuredangle BOC) = 50^\circ$.
+
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" stroke="null">
+ <g stroke="null">
+  <title stroke="null">Layer 1</title>
+  <line transform="rotate(-32.3891 382.667 206.667)" id="svg_157" y2="366" x2="630.66667" y1="47.33333" x1="134.66667" stroke="#000000" fill="none"/>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_159" y="235.33334" x="348" stroke-width="0" stroke="#000000" fill="#000000">O</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_160" y="63.33333" x="520.00001" stroke-width="0" stroke="#000000" fill="#000000">A</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_161" y="204.66667" x="621.33336" stroke-width="0" stroke="#000000" fill="#000000">D</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_162" y="199.33333" x="152.00004" stroke-width="0" stroke="#000000" fill="#000000">B</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_163" y="367.33333" x="214.6667" stroke-width="0" stroke="#000000" fill="#000000">C</text>
+  <line stroke="#000000" id="svg_164" y2="42" x2="565.33333" y1="379.33333" x1="225.33332" fill="none"/>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_167" y="196.0084" x="443.69748" stroke-width="0" stroke="#000000" fill="#000000">50°</text>
+ </g>
+
+</svg>
+
+---
+
+
+### Problema 3
+
+:::note Enunț
+În figura alăturată avem patru unghiuri în jurul unui punct,  
+cu măsurile:  
+$m(\measuredangle ZOY) = 90^\circ$,  
+$m(\measuredangle YOX) = 72^\circ$,  
+$m(\measuredangle XOT) = 120^\circ$.
+
+Calculați:  
+$m(\measuredangle ZOT)$, $m(\measuredangle YOT)$, $m(\measuredangle ZOX)$.
+:::
+
+**Rezolvare:**
+
+$$
+m(\measuredangle ZOT) = 360^\circ - (90^\circ + 72^\circ + 120^\circ) = 360^\circ - 282^\circ = 78^\circ
+$$
+
+$$
+m(\measuredangle YOT) = m(\measuredangle ZOT) + m(\measuredangle ZOY) = 78^\circ + 90^\circ = 168^\circ
+$$
+
+$$
+m(\measuredangle ZOX) = m(\measuredangle ZOY) + m(\measuredangle YOX) = 90^\circ + 72^\circ = 162^\circ
+$$
+
+**R:**  
+$m(\measuredangle ZOT) = 78^\circ$,  
+$m(\measuredangle YOT) = 168^\circ$,  
+$m(\measuredangle ZOX) = 162^\circ$.
+
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" stroke="null">
+ <g stroke="null">
+  <title stroke="null">Layer 1</title>
+  <line transform="rotate(-32.3891 509.429 207.398)" stroke="#000000" id="svg_157" y2="298.21148" x2="650.77879" y1="116.58497" x1="368.07979" fill="none"/>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_160" y="51.17064" x="380.12905" stroke-width="0" stroke="#000000" fill="#000000">X</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_161" y="197.23391" x="609.84637" stroke-width="0" stroke="#000000" fill="#000000">Y</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_162" y="368.93531" x="352.00873" stroke-width="0" stroke="#000000" fill="#000000">Z</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_167" y="238.57783" x="354.50441" stroke-width="0" stroke="#000000" fill="#000000">90°</text>
+  <line id="svg_168" y2="382.84204" x2="341.24847" y1="205.7609" x1="341.24847" stroke="#000000" fill="none"/>
+  <line id="svg_169" y2="31.42899" x2="415.57602" y1="206.4366" x1="341.24847" stroke="#000000" fill="none"/>
+  <line id="svg_170" y2="261.84442" x2="154.75387" y1="206.4366" x1="341.24847" stroke="#000000" fill="none"/>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_171" y="193.9813" x="365.31569" stroke-width="0" stroke="#000000" fill="#000000">72°</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_172" y="189.92707" x="297.74518" stroke-width="0" stroke="#000000" fill="#000000">120°</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_173" y="241.90275" x="174.2983" stroke-width="0" stroke="#000000" fill="#000000">T</text>
+ </g>
+
+</svg>
+
+---

@@ -1,0 +1,125 @@
+---
+sidebar_position: 19
+slug: /c6/modul-2/2
+description: ""
+---
+
+# C11 - Compararea și ordonarea numerelor întregi
+
+---
+
+:::danger De Retinut
+Fiecărui **număr întreg** îi corespunde pe **axa numerelor** un **punct**.  
+Numărul asociat punctului se numește **abscisa (coordonata)** acestuia.
+:::
+
+:::note Exemplu
+Pe axa numerelor, avem următoarele abscise:  
+$A(-5)$, $B(-2)$, $O(0)$, $C(2)$, $D(5)$, $E(6)$.
+:::
+
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="220" viewBox="0 0 600 220" role="img" aria-label="Dreaptă numerică cu sărituri 3 și zecimi până la 13,6">
+  <!-- Axa principală -->
+  <g transform="translate(90,140)">
+    <line x1="0" y1="0" x2="450" y2="0" stroke="#111" stroke-width="3"/>
+    <line x1="35" y1="-38" x2="35" y2="10" stroke="#9d20e6ff" stroke-width="2"/>
+    <line x1="140" y1="-38" x2="140" y2="10" stroke="#9d20e6ff" stroke-width="2"/>
+    <line x1="280" y1="-38" x2="280" y2="10" stroke="#9d20e6ff" stroke-width="2"/>
+    <line x1="385" y1="-38" x2="385" y2="10" stroke="#9d20e6ff" stroke-width="2"/>
+    <line x1="420" y1="-38" x2="420" y2="10" stroke="#9d20e6ff" stroke-width="2"/>
+    <path d="M450,-6 L450,6 L465,0 Z" fill="#111"/>
+    <!-- Repere 0–14 -->
+    {Array.from({length:13}).map((_,i)=>(
+      <g key={i} transform={`translate(${i*35},0)`}>
+        <line x1="0" y1="-8" x2="0" y2="8" stroke="#111" stroke-width="2"/>
+        <text x="-6" y="30" font-size="14">{i-6}</text>
+      </g>
+    ))}
+
+        <!-- Marcaje intermediare mov sub axă -->
+
+        <text x="30" y="-50" font-size="16">A</text>
+        <text x="135" y="-50" font-size="16">B</text>
+        <text x="275" y="-50" font-size="16">C</text>
+        <text x="380" y="-50" font-size="16">D</text>
+        <text x="415" y="-50" font-size="16">E</text>
+        <text x="205" y="-20" font-size="16">O</text>
+    </g>
+
+</svg>
+---
+
+## Compararea numerelor întregi
+
+:::tip Reguli importante
+1. Dintre două numere întregi diferite, **mai mare este cel care se află în dreapta pe axă**.  
+   Exemplu:  
+   $-7 < -6 < -5 < -4$
+
+2. Dintre două numere întregi **pozitive**, este mai mare cel care are **modulul mai mare**.  
+   Exemplu:  
+   $+9 > +2$, deoarece $9 > 2$
+
+3. Dintre două numere întregi **negative**, este mai mare cel care are **modulul mai mic**.  
+   Exemplu:  
+   $-12 < -10$, deoarece $|{-12}| = 12 > 10 = |{-10}|$
+
+4. **Orice număr pozitiv este mai mare decât orice număr negativ.**  
+   Exemple:  
+   $-5 < +1$, $+2 > -19$
+:::
+
+---
+
+## Aplicații
+
+### Exercițiul 1 — Compararea numerelor întregi
+
+Comparați următoarele numere:
+
+| Numere | Relație corectă |
+|---------|----------------|
+| $-76$ și $-9$ | $-76 < -9$ |
+| $+98$ și $0$ | $+98 > 0$ |
+| $0$ și $-87$ | $0 > -87$ |
+| $-19$ și $-3$ | $-19 < -3$ |
+| $+75$ și $-75$ | $+75 > -75$ |
+| $+7$ și $7$ | $+7 = 7$ |
+| $-76$ și $-67$ | $-76 < -67$ |
+| $-456$ și $-564$ | $-456 > -564$ |
+| $-1$ și $-121$ | $-1 > -121$ |
+| $-93$ și $0$ | $-93 < 0$ |
+
+---
+
+### Exercițiul 2 — Ordonare crescătoare
+
+Ordonăm crescător șirul de numere:
+
+$$
++9,\ -98,\ -89,\ 89,\ 989,\ 99,\ -998,\ 0
+$$
+
+**Rezolvare:**
+
+$$
+-998,\ -98,\ -89,\ 0,\ +9,\ 89,\ 99,\ 989
+$$
+
+---
+
+### Exercițiul 3 — Ordonare descrescătoare
+
+Ordonăm descrescător șirul de numere:
+
+$$
+-43,\ -4300,\ -4003,\ +4,\ +430,\ -430,\ 403
+$$
+
+**Rezolvare:**
+
+$$
++430,\ 403,\ +4,\ -43,\ -430,\ -4003,\ -4300
+$$
+
+---

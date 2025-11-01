@@ -1,0 +1,110 @@
+---
+sidebar_position: 20
+slug: /c6/modul-2/1
+description: ""
+---
+import Katex from '@site/src/components/Katex';
+
+
+# C10 - Modulul unui număr întreg (valoarea absolută)
+
+---
+
+:::tip (re) | Definiție
+Se numește număr întreg numărul natural `0` și orice număr natural diferit de `0`, precedat de semnul `+` sau `-`.
+:::
+:::tip Definiție
+Distanța de la origine la punctul prin care este reprezentat un număr întreg `a` , pe axa numerelor, se numește `modulul numărului a` și se notează `|a|`.
+:::
+
+---
+
+## Proprietăți fundamentale
+
+- Modulul oricărui număr este mereu mai mare sau egal cu `0`:
+
+<Katex>
+{String.raw`
+|a| \geq 0,\quad \forall\ a \in \mathbb{Z}
+`}
+</Katex>
+:::danger De Reținut
+<Katex>
+{String.raw`
+\forall\ (oricare) \ și\ \in\ (aparține)
+`}
+</Katex>
+:::
+
+---
+
+### Cum se calculează modulul unui număr întreg
+
+<Katex>
+{String.raw`
+|a|=\begin{cases}
+ a, & \text{dacă } a>0\\[6pt]
+ 0, & \text{dacă } a=0\\[6pt]
+ -a, & \text{dacă } a<0
+\end{cases}
+`}
+</Katex>
+
+---
+
+### Exemple rapide
+
+- `|7|=7`
+- `|-7|=7`
+- `-|7|=-7`
+
+Exemplu:
+- Dacă `a=-3`, atunci => `cazul III, a<0`:
+
+<Katex>
+{String.raw`
+|a| = -a = -(-3) = 3
+`}
+</Katex>
+
+---
+
+## Exemplu de rezolvare exercițiu
+:::note
+Rezolvă: `|x+1|=5`
+:::
+
+Se analizează cazurile posibile:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+\text{I)}\quad &\text{dacă } x+1>0 \quad \Rightarrow \quad x+1=5 \quad \Rightarrow \quad x=4\\[6pt]
+\text{III)}\quad &\text{dacă } x+1<0 \quad \Rightarrow \quad -(x+1)=5 \quad \Rightarrow \quad x=-6
+\end{aligned}
+`}
+</Katex>
+
+Astfel, soluțiile sunt:
+
+<Katex>
+{String.raw`
+x=4 \ și\ x=-6
+`}
+</Katex>
+
+---
+
+## Observații importante
+
+- Când rezolvăm ecuații cu modul, tratăm întotdeauna **două cazuri**: unul pozitiv și unul negativ.
+- Soluțiile trebuie verificate să respecte condițiile de semn presupuse!
+
+Verificare:
+
+- Pentru `x=4` => `x+1 = 5` ,deci `|x+1| = |5| = 5` ✔️
+- Pentru `x=-6` => `x+1 = -5` ,deci `|x+1| = |-5| = 5` ✔️
+
+Ambele soluții sunt valide.
+
+---

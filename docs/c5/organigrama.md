@@ -12,8 +12,19 @@ export default function LectiiTreeView() {
 
   const saptamani = [
     {
+      titlu: 'Săptămâna 8: 03.11 - 07.11',
+      note: 'Modulul 2: 03.11.2025 -> 19.12.2025',
+      lectii: [
+        { titlu: 'C15.1 - Metoda reducerii la unitate', zi: '03.11', tip: 'Algebra', link: 'c5/modul-2/1', pdf: '' },
+        { titlu: 'LP - Metoda reducerii la unitate', zi: '04.11 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'C15.2 - Metoda comparatiei', zi: '04.11 (ora 2)', tip: 'Algebra', link: 'c5/modul-2/2', pdf: '' },
+        { titlu: 'LP - Metoda comparatiei', zi: '05.11', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'G1 - Punct, dreapta si plan', zi: '06.11', tip: 'Geometrie', link: 'c5/modul-2/3', pdf: '' },
+      ],
+    },
+    {
       titlu: 'Săptămâna 7 - 20.10 - 24.10 | FINAL MODUL 1',
-      note: 'EVALUARE SUMATIVA: Miercuri 22.10',
+      note: 'Materiale încarcate',
       lectii: [
         { titlu: 'C14 - Media aritmetica a doua numere', zi: '20.10', tip: 'Algebra', link: 'c5/modul-1/16', pdf: '' },
         { titlu: 'LP - Media aritmetica', zi: '21.10', tip: 'Algebra', link: '', pdf: '' },
@@ -178,15 +189,15 @@ export default function LectiiTreeView() {
         <tbody>
           <tr>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>8:00 - 8:50</td>
-            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>13:00 - 13:50</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>8:00 - 8:50</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>13:00 - 13:50</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>9:00 - 9:50</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
           </tr>
           <tr>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
-            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>13:00 - 13:50</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
           </tr>
