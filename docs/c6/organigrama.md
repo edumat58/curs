@@ -14,11 +14,11 @@ export default function LectiiTreeView() {
       titlu: 'Săptămâna 8: 03.11 - 07.11',
       note: 'Modulul 2: 03.11.2025 -> 19.12.2025',
       lectii: [
-        { titlu: 'C10 - Modulul unui numar intreg (valoarea absoluta)', zi: '05.11 (ora 1)', tip: 'Algebra', link: 'c6/modul-2/1', pdf: '' },
-        { titlu: 'LP - Modulul unui numar intreg (valoarea absoluta)', zi: '05.11 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
-        { titlu: 'C11 - Compararea si ordonarea nr. intregi', zi: '06.11 (ora 1)', tip: 'Algebra', link: 'c6/modul-2/2', pdf: '' },
-        { titlu: 'LP - Compararea si ordonarea nr. intregi', zi: '06.11 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
-        { titlu: 'LP - Relatii si operatii intre multimi', zi: '07.11', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'DISCUTII TEST SI REFACERE TEST', zi: '05.11 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'C10 - Modulul unui numar intreg (valoarea absoluta)', zi: '05.11 (ora 2)', tip: 'Algebra', link: 'c6/modul-2/1', pdf: '' },
+        { titlu: 'LP - Modulul unui numar intreg (valoarea absoluta)', zi: '06.11 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'C11 - Compararea si ordonarea nr. intregi', zi: '06.11 (ora 2)', tip: 'Algebra', link: 'c6/modul-2/2', pdf: '' },
+        { titlu: 'LP - Compararea si ordonarea nr. intregi', zi: '07.11', tip: 'Algebra', link: '', pdf: '' },
       ],
     },
     {

@@ -16,10 +16,10 @@ export default function LectiiTreeView() {
       note: 'Modulul 2: 03.11.2025 -> 19.12.2025',
       lectii: [
         { titlu: 'C15.1 - Metoda reducerii la unitate', zi: '03.11', tip: 'Algebra', link: 'c5/modul-2/1', pdf: '' },
-        { titlu: 'LP - Metoda reducerii la unitate', zi: '04.11 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
-        { titlu: 'C15.2 - Metoda comparatiei', zi: '04.11 (ora 2)', tip: 'Algebra', link: 'c5/modul-2/2', pdf: '' },
-        { titlu: 'LP - Metoda comparatiei', zi: '05.11', tip: 'Algebra', link: '', pdf: '' },
-        { titlu: 'G1 - Punct, dreapta si plan', zi: '06.11', tip: 'Geometrie', link: 'c5/modul-2/3', pdf: '' },
+        { titlu: 'C15.1 - Metoda reducerii la unitate', zi: '04.11 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'LP - Metoda reducerii la unitate', zi: '04.11 (ora 2)', tip: 'Algebra', link: 'c5/modul-2/2', pdf: '' },
+        { titlu: 'LP (RELUARE) - Metoda reducerii la unitate', zi: '05.11', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'C15.2 - Metoda Comparatiei', zi: '06.11', tip: 'Geometrie', link: 'c5/modul-2/3', pdf: '' },
       ],
     },
     {
