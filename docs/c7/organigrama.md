@@ -10,11 +10,34 @@ import React, { useState } from 'react';
 
 export default function LectiiTreeView() {
   const saptamani = [
+      {
+      titlu: 'Săptămâna 10: 17.11 - 21.11',
+      note: 'TEST 24.11 (ora 2) [NOTA 3]: C11 - C13.2 și G4 - G6',
+      lectii: [
+        { titlu: 'C13.2 - Probleme care se rezolvă cu ajutorul sistemelor de ecuații', zi: '17.11 (ora 1)', tip: 'Algebra', link: 'c7/modul-2/6', pdf: '' },
+        { titlu: 'LP - Sisteme de ecuații', zi: '17.11 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'LP - Sisteme de ecuații', zi: '19.11', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'G6 - Centrul de greutate al unui triunghi', zi: '20.11', tip: 'Geometrie', link: 'c7/modul-2/7', pdf: '' },
+        { titlu: 'LP - Centrul de greutate al unui triunghi', zi: '21.11', tip: 'Geometrie', link: '', pdf: '' },
+        
+      ],
+    },
+    {
+      titlu: 'Săptămâna 9: 10.11 - 14.11',
+      note: 'Materiale încarcate',
+      lectii: [
+        { titlu: 'G5 - Linia mijlocie în triunghi', zi: '10.11 (ora 1)', tip: 'Geometrie', link: 'c7/modul-2/4', pdf: '' },
+        { titlu: 'LP - Linia mijlocie în triunghi', zi: '10.11 (ora 2)', tip: 'Geometrie', link: '', pdf: '' },
+        { titlu: 'C13.1 - Sisteme de ecuații (1)', zi: '12.11', tip: 'Algebra', link: 'c7/modul-2/5', pdf: '' },
+        { titlu: 'C13.1 - Sisteme de ecuații (2)', zi: '14.11', tip: 'Algebra', link: '', pdf: '' },
+        
+      ],
+    },
     {
       titlu: 'Săptămâna 8: 03.11 - 07.11',
       note: 'Modulul 2: 03.11.2025 -> 19.12.2025',
       lectii: [
-        { titlu: 'G4 - Paralelogramul - ', zi: '03.11 (ora 1)', tip: 'Geometrie', link: 'c7/modul-2/1', pdf: '' },
+        { titlu: 'G4 - Paralelogramul', zi: '03.11 (ora 1)', tip: 'Geometrie', link: 'c7/modul-2/1', pdf: '' },
         { titlu: 'LP - Paralelogramul', zi: '03.11 (ora 2)', tip: 'Geometrie', link: '', pdf: '' },
         { titlu: 'C11 - Relația de egalitate', zi: '05.11', tip: 'Algebra', link: 'c7/modul-2/2', pdf: '' },
         { titlu: 'LP - Relația de egalitate', zi: '06.11', tip: 'Algebra', link: '', pdf: '' },
@@ -150,7 +173,7 @@ export default function LectiiTreeView() {
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>50% (1/2)</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>X</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>X</td>
-            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>X</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
@@ -161,7 +184,7 @@ export default function LectiiTreeView() {
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>100% (2/2)</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>06.10</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>24.10</td>
-            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>24.11</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>

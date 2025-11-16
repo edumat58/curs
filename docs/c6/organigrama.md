@@ -11,6 +11,26 @@ import React, { useState } from 'react';
 export default function LectiiTreeView() {
   const saptamani = [
     {
+      titlu: 'Săptămâna 10: 17.11 - 21.11',
+      note: 'TEST 26.11 (ora 2) [NOTA 3]: C10 - C12.2 și G1 - G2',
+      lectii: [
+        { titlu: 'G1 - Unghiuri adiacente și bisectoarea unui unghi', zi: '19.11 (ora 1)', tip: 'Geometrie', link: 'c6/modul-2/5', pdf: '' },
+        { titlu: 'LP - Unghiuri adiacente și bisectoarea unui unghi', zi: '19.11 (ora 2)', tip: 'Geometrie', link: '', pdf: '' },
+        { titlu: 'LP - Unghiuri adiacente și bisectoarea unui unghi', zi: '20.11 (ora 1)', tip: 'Geometrie', link: '', pdf: '' },
+        { titlu: 'G2 - Unghiuri opuse la vârf și unghiuri formate în jurul unui punct', zi: '20.11 (ora 2)', tip: 'Geometrie', link: 'c6/modul-2/6', pdf: '' },
+      ],
+    },
+    {
+      titlu: 'Săptămâna 9: 10.11 - 14.11',
+      note: 'Materiale încarcate',
+      lectii: [
+        { titlu: 'C12.1 - Adunarea și scăderea numerelor întregi', zi: '12.11 (ora 1)', tip: 'Algebra', link: 'c6/modul-2/3', pdf: '' },
+        { titlu: 'LP - Adunarea și scăderea numerelor întregi', zi: '12.11 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'C12.2 - Înmulțirea și împărțirea numerelor întregi', zi: '13.11', tip: 'Algebra', link: 'c6/modul-2/4', pdf: '' },
+        { titlu: 'LP - Înmulțirea și împărțirea numerelor întregi', zi: '14.11', tip: 'Algebra', link: '', pdf: '' },
+      ],
+    },
+    {
       titlu: 'Săptămâna 8: 03.11 - 07.11',
       note: 'Modulul 2: 03.11.2025 -> 19.12.2025',
       lectii: [
@@ -148,18 +168,18 @@ export default function LectiiTreeView() {
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>50% (1/2)</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>X</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>X</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>X</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
-            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
-            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>s
           </tr>
           <tr>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>100% (2/2)</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>02.10</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>23.10</td>
-            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>26.11</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>

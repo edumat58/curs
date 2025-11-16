@@ -10,6 +10,30 @@ import React, { useState } from 'react';
 
 export default function LectiiTreeView() {
   const saptamani = [
+      {
+      titlu: 'Săptămâna 10: 17.11 - 21.11',
+      note: 'Simulare EN 27.11 (ora 1 și ora 2) [50 % NOTA 4]',
+      lectii: [
+        { titlu: 'G4.2 - Prisma dreaptă (arii și volum)', zi: '17.11', tip: 'Geometrie', link: 'c7/modul-2/6', pdf: '' },
+        { titlu: 'LP - Prisma dreaptă', zi: '19.11 (ora 1)', tip: 'Geometrie', link: '', pdf: '' },
+        { titlu: 'G5.1 - Cilindrul circular drept (1)', zi: '19.11 (ora 2)', tip: 'Geometrie', link: 'c7/modul-2/7', pdf: '' },
+        { titlu: 'G5.2 - Cilindrul circular drept (arii și volum)', zi: '20.11 (ora 1)', tip: 'Geometrie', link: 'c7/modul-2/8', pdf: '' },
+        { titlu: 'LP - Cilindrul circular drept', zi: '20.11 (ora 2)', tip: 'Geometrie', link: '', pdf: '' },
+
+
+      ],
+    },
+    {
+      titlu: 'Săptămâna 9: 10.11 - 14.11',
+      note: 'Materiale încarcate',
+      lectii: [
+        { titlu: 'C11 - Ecuația de gradul al doilea', zi: '10.11', tip: 'Algebra', link: 'c7/modul-2/4', pdf: '' },
+        { titlu: 'LP - Ecuația de gradul al doilea', zi: '12.11 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'LP - Ecuația de gradul al doilea', zi: '12.11 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'G4.1 - Prisma dreaptă', zi: '13.11 (ora 1)', tip: 'Geometrie', link: 'c7/modul-2/5', pdf: '' },
+        { titlu: 'LP - Prisma dreaptă', zi: '13.11 (ora 2)', tip: 'Geometrie', link: '', pdf: '' },
+      ],
+    },
     {
       titlu: 'Săptămâna 8: 03.11 - 07.11',
       note: 'Modulul 2: 03.11.2025 -> 19.12.2025',
@@ -149,7 +173,7 @@ export default function LectiiTreeView() {
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>X</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>X</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>X</td>
-            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>19.11</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>27.11</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
@@ -172,7 +196,7 @@ export default function LectiiTreeView() {
       Simulari pentru EN:
       </h2>
       <ul>
-      <li>19.11 (50% nota 4) - Simulare EN 1</li>
+      <li>27.11 (50% nota 4) - Simulare EN 1</li>
       </ul>
       <hr />
       <h2>

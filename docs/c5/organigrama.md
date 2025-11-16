@@ -11,15 +11,36 @@ import React, { useState } from 'react';
 export default function LectiiTreeView() {
 
   const saptamani = [
+      {
+      titlu: 'Săptămâna 10: 17.11 - 21.11',
+      note: 'Materiale încarcate',
+      lectii: [
+        { titlu: 'C15.4 - Metoda mersului invers', zi: '17.11', tip: 'Algebra', link: 'c5/modul-2/4', pdf: '' },
+        { titlu: 'LP - Metoda mersului invers', zi: '18.11 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'LP - Metoda mersului invers', zi: '18.11 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'G1 - Punct, dreaptă și plan', zi: '19.11', tip: 'Geometrie', link: 'c5/modul-2/5', pdf: '' },
+        { titlu: 'LP - Punct, dreaptă și plan', zi: '19.11', tip: 'Geometrie', link: '', pdf: '' },
+      ],
+    },
+    {
+      titlu: 'Săptămâna 9: 10.11 - 14.11',
+      note: 'Materiale încarcate',
+      lectii: [
+        { titlu: 'LP - Metoda reducerii la unitate', zi: '10.11', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'LP - Metoda Comparatiei', zi: '11.11 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'C15.3 - Metoda figurativă', zi: '11.11 (ora 2)', tip: 'Algebra', link: 'c5/modul-2/3', pdf: '' },
+        { titlu: 'LP - Metoda figurativă', zi: '12.11', tip: 'Algebra', link: '', pdf: '' },
+      ],
+    },
     {
       titlu: 'Săptămâna 8: 03.11 - 07.11',
       note: 'Modulul 2: 03.11.2025 -> 19.12.2025',
       lectii: [
         { titlu: 'C15.1 - Metoda reducerii la unitate', zi: '03.11', tip: 'Algebra', link: 'c5/modul-2/1', pdf: '' },
         { titlu: 'C15.1 - Metoda reducerii la unitate', zi: '04.11 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
-        { titlu: 'LP - Metoda reducerii la unitate', zi: '04.11 (ora 2)', tip: 'Algebra', link: 'c5/modul-2/2', pdf: '' },
+        { titlu: 'LP - Metoda reducerii la unitate', zi: '04.11 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
         { titlu: 'LP (RELUARE) - Metoda reducerii la unitate', zi: '05.11', tip: 'Algebra', link: '', pdf: '' },
-        { titlu: 'C15.2 - Metoda Comparatiei', zi: '06.11', tip: 'Geometrie', link: 'c5/modul-2/3', pdf: '' },
+        { titlu: 'C15.2 - Metoda Comparatiei', zi: '06.11', tip: 'Algebra', link: 'c5/modul-2/2', pdf: '' },
       ],
     },
     {

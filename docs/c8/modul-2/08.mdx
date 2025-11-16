@@ -1,0 +1,169 @@
+---
+sidebar_position: 13
+slug: /c8/modul-2/8
+description: ""
+---
+
+# G5.2 - Cilindrul circular drept (arii și volum)
+
+---
+
+## Elemente ale cilindrului
+
+* raza: $R = OA = O'A'$
+* generatoarea: $G = AA' = BB'$
+* înălţimea: $H = OO'$ (pentru cilindrul drept, $H = G$)
+
+
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300">
+ <g>
+  <title>Layer 1</title>
+  <path stroke="#000000" id="svg_29" d="m138.5,266.5c-41.71271,0 -75.5,-10.74033 -75.5,-24c0,-13.25967 33.78729,-24 75.5,-24c41.71271,0 75.5,10.74033 75.5,24c0,13.25967 -33.78729,24 -75.5,24z" opacity="undefined" fill="none"/>
+  <line id="svg_16" y2="241.73807" x2="214" y1="71.5" x1="214" stroke="#000000" fill="none"/>
+  <line id="svg_17" y2="241.73807" x2="214" y1="71.5" x1="214" stroke="#000000" fill="none"/>
+  <line id="svg_18" y2="241.73807" x2="214" y1="71.5" x1="214" stroke="#000000" fill="none"/>
+  <line id="svg_19" y2="241.73807" x2="214" y1="71.5" x1="214" stroke="#000000" fill="none"/>
+  <line id="svg_20" y2="241.73807" x2="64" y1="71.5" x1="64" stroke="#000000" fill="none"/>
+  <line id="svg_21" y2="241.73807" x2="64" y1="71.5" x1="64" stroke="#000000" fill="none"/>
+  <line id="svg_22" y2="241.73807" x2="64" y1="71.5" x1="64" stroke="#000000" fill="none"/>
+  <line id="svg_23" y2="241.73807" x2="64" y1="71.5" x1="64" stroke="#000000" fill="none"/>
+  <ellipse stroke="#000000" ry="24" rx="75.5" id="svg_24" cy="74.5" cx="139.5" fill="none"/>
+  <line stroke-dasharray="5,5" id="svg_25" y2="73.5" x2="214.33296" y1="73.5" x1="64" stroke="#000000" fill="none"/>
+  <path stroke-dasharray="5,5" id="svg_28" d="m62.99999,241.5c0,-13.25967 33.78729,-24 75.5,-24c41.71271,0 75.5,10.74033 75.5,24l-151.00001,0z" opacity="undefined" stroke="#000000" fill="#ffffff"/>
+  <line stroke-dasharray="5,5" id="svg_30" y2="244.60523" x2="138" y1="73.5" x1="138" stroke="#000000" fill="none"/>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="16" stroke-width="0" id="svg_31" y="164.5" x="221" stroke-dasharray="5,5" stroke="#000000" fill="#000000">G</text>
+  <text stroke="#000000" xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="16" stroke-width="0" id="svg_32" y="65.5" x="165" stroke-dasharray="5,5" fill="#000000">R</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="16" stroke-width="0" id="svg_42" y="166.5" x="149" stroke-dasharray="5,5" stroke="#000000" fill="#000000">h</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="16" id="svg_43" y="242.5" x="43.5" stroke-dasharray="5,5" stroke-width="0" stroke="#000000" fill="#000000">A</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="16" id="svg_45" y="246.5" x="222.5" stroke-dasharray="5,5" stroke-width="0" stroke="#000000" fill="#000000">B</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="16" id="svg_46" y="78.5" x="43.5" stroke-dasharray="5,5" stroke-width="0" stroke="#000000" fill="#000000">A'</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="16" id="svg_48" y="78.5" x="224.5" stroke-dasharray="5,5" stroke-width="0" stroke="#000000" fill="#000000">B'</text>
+  <text stroke="#000000" xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="16" id="svg_49" y="66.5" x="125.5" stroke-dasharray="5,5" stroke-width="0" fill="#000000">O'</text>
+  <text stroke="#000000" xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="16" id="svg_50" y="236.5" x="118.5" stroke-dasharray="5,5" stroke-width="0" fill="#000000">O</text>
+ </g>
+
+</svg>
+
+
+:::tip Definitie
+Cilindrul este un corp de rotaţie (se poate obţine prin rotirea unui dreptunghi în jurul unei
+laturi)
+
+Secțiunea axială este dreptunghiul $ABB'A'$ de dimensiuni $2R$ și $G$.
+
+Cilindrul se poate desfășura într-un plan, rezultând:
+
+* două cercuri congruente (baze)
+* un dreptunghi cu laturile $2\pi R$ și $H$
+:::
+
+
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="500">
+ <g>
+  <title>Layer 1</title>
+  <path stroke="#000000" id="svg_29" d="m110.5,352.5c-41.71271,0 -75.5,-10.74033 -75.5,-24c0,-13.25967 33.78729,-24 75.5,-24c41.71271,0 75.5,10.74033 75.5,24c0,13.25967 -33.78729,24 -75.5,24z" opacity="undefined" fill="none"/>
+  <line id="svg_16" y2="327.73807" x2="186" y1="157.5" x1="186" stroke="#000000" fill="none"/>
+  <line id="svg_17" y2="327.73807" x2="186" y1="157.5" x1="186" stroke="#000000" fill="none"/>
+  <line id="svg_18" y2="327.73807" x2="186" y1="157.5" x1="186" stroke="#000000" fill="none"/>
+  <line id="svg_19" y2="327.73807" x2="186" y1="157.5" x1="186" stroke="#000000" fill="none"/>
+  <line id="svg_20" y2="327.73807" x2="36" y1="157.5" x1="36" stroke="#000000" fill="none"/>
+  <line id="svg_21" y2="327.73807" x2="36" y1="157.5" x1="36" stroke="#000000" fill="none"/>
+  <line id="svg_22" y2="327.73807" x2="36" y1="157.5" x1="36" stroke="#000000" fill="none"/>
+  <line id="svg_23" y2="327.73807" x2="36" y1="157.5" x1="36" stroke="#000000" fill="none"/>
+  <ellipse stroke="#000000" ry="24" rx="75.5" id="svg_24" cy="160.5" cx="111.5" fill="none"/>
+  <line stroke-dasharray="5,5" id="svg_25" y2="159.5" x2="186.33296" y1="159.5" x1="36" stroke="#000000" fill="none"/>
+  <path stroke-dasharray="5,5" id="svg_28" d="m34.99999,327.5c0,-13.25967 33.78729,-24 75.5,-24c41.71271,0 75.5,10.74033 75.5,24l-151.00001,0z" opacity="undefined" stroke="#000000" fill="#ffffff"/>
+  <line stroke-dasharray="5,5" id="svg_30" y2="330.60523" x2="110" y1="159.5" x1="110" stroke="#000000" fill="none"/>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="16" stroke-width="0" id="svg_31" y="250.5" x="193" stroke-dasharray="5,5" stroke="#000000" fill="#000000">h = G</text>
+  <text stroke="#000000" xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="16" stroke-width="0" id="svg_32" y="321.5" x="136" stroke-dasharray="5,5" fill="#000000">R</text>
+  <rect stroke="#000000" id="svg_33" height="167" width="300" y="164.5" x="254" fill="none"/>
+  <ellipse ry="76" rx="76" id="svg_34" cy="87" cx="476" stroke="#000000" fill="none"/>
+  <ellipse ry="76" rx="76" id="svg_35" cy="408" cx="331" stroke="#000000" fill="none"/>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="16" stroke-width="0" id="svg_36" y="322" x="387" stroke="#000000" fill="#000000">2πR</text>
+  <line id="svg_37" y2="408" x2="406.00641" y1="408" x1="328" stroke-dasharray="5,5" stroke="#000000" fill="none"/>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="16" id="svg_38" y="395" x="359" stroke-dasharray="5,5" stroke-width="0" stroke="#000000" fill="#000000">R</text>
+  <line id="svg_39" y2="86" x2="481.00641" y1="86" x1="403" stroke-dasharray="5,5" stroke="#000000" fill="none"/>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="16" id="svg_40" y="73" x="434" stroke-dasharray="5,5" stroke-width="0" stroke="#000000" fill="#000000">R</text>
+ </g>
+
+</svg>
+
+---
+
+## Formule
+
+### Aria bazei
+
+:::danger de retinut 
+$$A_b = \pi R^2$$
+:::
+
+### Aria laterală
+
+:::danger de retinut 
+$$A_l = 2\pi R G$$
+:::
+
+### Aria totală
+
+
+:::danger de retinut 
+$$A_t = A_l + 2A_b = 2\pi R (G + R)$$
+:::
+
+### Volumul
+
+:::danger de retinut 
+
+$$V = A_b \cdot H = \pi R^2 G$$
+
+:::
+
+---
+
+## Exemple
+
+### Exemplul 1
+
+Fie un cilindru circular drept cu $R = 3,cm$ și $G = 7,cm$. Aflați aria laterală, aria totală și volumul.
+
+#### Rezolvare
+
+Aria bazei:
+$$A_b = \pi R^2 = \pi \cdot 3^2 = 9\pi,cm^2$$
+
+Aria laterală:
+$$A_l = 2\pi R G = 2\pi \cdot 3 \cdot 7 = 42\pi,cm^2$$
+
+Aria totală:
+$$A_t = A_l + 2A_b = 42\pi + 18\pi = 60\pi,cm^2$$
+
+Volumul:
+$$V = \pi R^2 G = \pi \cdot 3^2 \cdot 7 = 63\pi,cm^3$$
+
+---
+
+### Exemplul 2
+
+Un cilindru are aria laterală $66\pi,cm^2$ și volumul $363\pi,cm^3$. Determinați aria secțiunii axiale.
+
+#### Rezolvare
+
+Din aria laterală:
+$$A_l = 2\pi R G$$
+$$66\pi = 2\pi R G \ \Rightarrow RG = 33 \quad (1)$$
+
+Din volum:
+$$V = \pi R^2 G$$
+$$363\pi = \pi R^2 G$$
+Substituim $G$ din (1):
+$$363 = R^2 \cdot \frac{33}{R}$$
+$$363 = 33R \Rightarrow R = 11 cm$$ (2)
+
+Din (1) și (2):
+$$11 \cdot G = 33 \Rightarrow G = 3,cm$$
+
+Secțiunea axială este dreptunghiul $ABB'A'$ cu dimensiunile $2R$ și $G$:
+$$A_{sec} = 2R \cdot G = 22 \cdot 3 = 66,cm^2$$
+
+---
