@@ -18,8 +18,8 @@ export default function LectiiTreeView() {
         { titlu: 'C15.4 - Metoda mersului invers', zi: '17.11', tip: 'Algebra', link: 'c5/modul-2/4', pdf: '' },
         { titlu: 'LP - Metoda mersului invers', zi: '18.11 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
         { titlu: 'LP - Metoda mersului invers', zi: '18.11 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
-        { titlu: 'G1 - Punct, dreaptă și plan', zi: '19.11', tip: 'Geometrie', link: 'c5/modul-2/5', pdf: '' },
-        { titlu: 'LP - Punct, dreaptă și plan', zi: '19.11', tip: 'Geometrie', link: '', pdf: '' },
+        { titlu: 'G1 - Punct, dreaptă și plan', zi: '19.11 (ora 1)', tip: 'Geometrie', link: 'c5/modul-2/5', pdf: '' },
+        { titlu: 'LP - Punct, dreaptă și plan', zi: '19.11 (ora 2)', tip: 'Geometrie', link: '', pdf: '' },
       ],
     },
     {
