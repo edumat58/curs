@@ -1,0 +1,135 @@
+---
+sidebar_position: 14
+slug: /c5/modul-2/7
+description: ""
+---
+
+# C15.5 - Metoda falsei ipoteze
+
+---
+
+:::tip Definitie
+Metoda falsei ipoteze este o tehnică de rezolvare a problemelor în care se presupune **în mod intenționat** că toate elementele din problemă aparțin unei singure categorii. După compararea rezultatului obținut cu datele reale ale problemei, observăm „eroarea” și calculăm de câte ori sau cu cât este falsă presupunerea.
+
+Această diferență ne ajută să determinăm numărul fiecărui tip de element.
+:::
+---
+
+## Exemple
+
+:::note Exemplul 1
+
+Într-un bloc sunt **24 apartamente**, unele cu **2 camere**, altele cu **3 camere**, în total **54 camere**.  
+Câte apartamente sunt cu 2 camere și câte cu 3 camere?
+:::
+
+:::info Mod de lucru
+Metoda de rezolvare constă în a porni de la presupunerea (ipoteza) că toate
+apartamentele sunt de același fel, se continuă cu raționamentul până se ajunge la o comparație
+cu datele problemei în urma căreia se stabilește că presupunerea este falsă și se determină cu
+cât sau de câte ori.
+:::
+
+> Rezolvare
+
+Presupunem că **toate** cele 24 de apartamente au **3 camere**:
+
+$$
+24 \cdot 3 = 72 \text{ camere}
+$$
+
+Dar în realitate sunt **54 camere**, deci presupunerea este falsă.
+
+Diferența:
+
+$$
+72 - 54 = 18
+$$
+
+Această diferență apare pentru că unele apartamente au **2 camere**, nu **3**.
+
+Cu câte camere este mai mare un apartament cu 3 camere față de unul cu 2?
+
+$$
+3 - 2 = 1
+$$
+
+Numărul apartamentelor cu 2 camere este:
+
+$$
+18 : 1 = 18
+$$
+
+Numărul apartamentelor cu 3 camere:
+
+$$
+24 - 18 = 6
+$$
+
+**Răspuns:** 18 apartamente cu 2 camere, 6 apartamente cu 3 camere.
+
+---
+
+:::note Exemplul 2
+
+Un fermier are găini și iepuri. În total sunt **100 capete** și **240 picioare**.  
+Câte găini și câți iepuri are fermierul?
+
+:::
+
+> Rezolvare
+
+Presupunem că **toate** cele 100 de animale sunt **iepuri**:
+
+$$
+100 \cdot 4 = 400 \text{ picioare}
+$$
+
+Dar în realitate sunt **240 picioare**, deci presupunerea este falsă.
+
+Diferența:
+
+$$
+400 - 240 = 160
+$$
+
+Această diferență provine din animalele care sunt **găini** (2 picioare), nu **iepuri** (4 picioare).
+
+Cu câte picioare are în plus un iepure față de o găină?
+
+$$
+4 - 2 = 2
+$$
+
+Numărul găinilor este:
+
+$$
+160 : 2 = 80
+$$
+
+Numărul iepurilor este:
+
+$$
+100 - 80 = 20
+$$
+
+**Răspuns:** 80 găini, 20 iepuri.
+
+---
+
+Rezolvați următoarele probleme folosind metoda falsei ipoteze.
+
+1. În **9 bidoane**, unele de **3 litri**, altele de **5 litri**, încap **31 litri apă**.  
+   Câte bidoane de fiecare fel sunt?
+
+2. Se toarnă **49 litri apă** în **17 sticle**, unele de **2 litri**, altele de **5 litri**.  
+   Câte sticle de fiecare fel sunt?
+
+3. Într-o fabrică s-au produs într-o lună **424 mașini**, unele cu **2 uși**, altele cu **4 uși**.  
+   În total, mașinile au **1496 uși**.  
+   Câte mașini de fiecare fel s-au produs?
+
+4. Tatăl lui Teodor a cumpărat **21 de acțiuni**: unele la o fabrică de încălțăminte (30 euro bucata),  
+   altele la o brutărie (23 euro bucata). A plătit în total **567 euro**.  
+   Câte acțiuni de fiecare fel a cumpărat?
+

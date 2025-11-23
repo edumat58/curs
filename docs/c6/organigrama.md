@@ -11,6 +11,18 @@ import React, { useState } from 'react';
 export default function LectiiTreeView() {
   const saptamani = [
     {
+      titlu: 'Săptămâna 11: 24.11 - 28.11',
+      note: 'Materiale încarcate',
+      lectii: [
+        { titlu: 'LP - Unghiuri opuse la vârf și unghiuri formate în jurul unui punct', zi: '25.11', tip: 'Geometrie', link: '', pdf: ''},
+        { titlu: 'LP - RECAPITULARE TEST', zi: '26.11 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'TEST 3 (C10 - C12.2 și G1 - G2) | 100% NOTA 3', zi: '26.11 (ora 2)', tip: 'Evaluare Sumativa', link: '', pdf: '' },
+        { titlu: 'LP - Rezolvare test', zi: '27.11 (ora 1)', tip: '-', link: '', pdf: '' },
+        { titlu: 'G3 - Unghiul. Clasificare și măsurarea unghiurilor', zi: '27.11 (ora 2)', tip: 'Geometrie', link: 'c6/modul-2/7', pdf: '' },
+        { titlu: 'LP - Unghiul. Clasificare și măsurarea unghiurilor', zi: '28.11 (ora 1)', tip: 'Geometrie', link: '', pdf: '' },
+      ],
+    },
+    {
       titlu: 'Săptămâna 10: 17.11 - 21.11',
       note: 'TEST 26.11 (ora 2) [NOTA 3]: C10 - C12.2 și G1 - G2',
       lectii: [
@@ -173,7 +185,7 @@ export default function LectiiTreeView() {
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
-            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>s
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
           </tr>
           <tr>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>100% (2/2)</td>

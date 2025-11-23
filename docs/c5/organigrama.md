@@ -12,6 +12,17 @@ export default function LectiiTreeView() {
 
   const saptamani = [
       {
+      titlu: 'Săptămâna 11: 24.11 - 28.11',
+      note: 'TEST 4.12 [NOTA 3]: C15.1 - C16 și G1 - G2',
+      lectii: [
+        { titlu: 'G2 - Semiplan, semidreaptă și segment', zi: '24.11', tip: 'Geometrie', link: 'c5/modul-2/6', pdf: '' },
+        { titlu: 'LP - Semiplan, semidreaptă și segment', zi: '25.11 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'C15.5 - Metoda falsei ipoteze', zi: '25.11 (ora 2)', tip: 'Algebra', link: '', pdf: 'c5/modul-2/7' },
+        { titlu: 'LP - Metoda falsei ipoteze', zi: '26.11 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'C16 - Divizori și multiplii.', zi: '27.11', tip: 'Algebra', link: 'c5/modul-2/8', pdf: '' },
+      ],
+    },
+      {
       titlu: 'Săptămâna 10: 17.11 - 21.11',
       note: 'Materiale încarcate',
       lectii: [
@@ -174,7 +185,7 @@ export default function LectiiTreeView() {
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>50% (1/2)</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>X</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>26.09</td>
-            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>X</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
@@ -185,7 +196,7 @@ export default function LectiiTreeView() {
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>100% (2/2)</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>23.09</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>22.10</td>
-            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>4.12</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>

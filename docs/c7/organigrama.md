@@ -11,6 +11,17 @@ import React, { useState } from 'react';
 export default function LectiiTreeView() {
   const saptamani = [
       {
+      titlu: 'Săptămâna 11: 24.11 - 28.11',
+      note: 'Materiale încarcate',
+      lectii: [
+        { titlu: 'LP - RECAPITULARE TEST | Geometrie', zi: '24.11 (ora 1)', tip: 'Geometrie', link: '', pdf: '' },
+        { titlu: 'TEST 3 (C11 - C13.2 și G4 - G6) | 100% NOTA 3', zi: '24.11 (ora 2)', tip: 'Evaluare Sumativa', link: '', pdf: '' },
+        { titlu: 'LP - Rezolvare test', zi: '26.11', tip: '-', link: '', pdf: '' },
+        {titlu: 'C14 - Operații cu numere reale (recapitulare)', zi: '27.11', tip: 'Algebra', link: 'c7/modul-2/8', pdf: '' },
+        {titlu: 'LP - Operații cu numere reale (recapitulare)', zi: '28.11', tip: 'Algebra', link: '', pdf: '' },
+      ],
+    },
+      {
       titlu: 'Săptămâna 10: 17.11 - 21.11',
       note: 'TEST 24.11 (ora 2) [NOTA 3]: C11 - C13.2 și G4 - G6',
       lectii: [
@@ -18,7 +29,7 @@ export default function LectiiTreeView() {
         { titlu: 'LP - Sisteme de ecuații', zi: '17.11 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
         { titlu: 'LP - Sisteme de ecuații', zi: '19.11', tip: 'Algebra', link: '', pdf: '' },
         { titlu: 'G6 - Centrul de greutate al unui triunghi', zi: '20.11', tip: 'Geometrie', link: 'c7/modul-2/7', pdf: '' },
-        { titlu: 'LP - Centrul de greutate al unui triunghi', zi: '21.11', tip: 'Geometrie', link: '', pdf: '' },
+        { titlu: 'LP - RECAPITULARE TEST | Algebră', zi: '21.11', tip: 'Algebra', link: '', pdf: '' },
         
       ],
     },

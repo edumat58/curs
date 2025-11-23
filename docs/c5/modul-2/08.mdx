@@ -1,0 +1,140 @@
+---
+sidebar_position: 13
+slug: /c5/modul-2/8
+description: ""
+---
+
+# C16 - Divizori și multiplii
+
+---
+
+:::tip Defintie
+Un număr natural $a$ este **divizibil** (sau *se divide*) cu un număr natural $b$ dacă există un număr natural $c$ astfel încât:
+
+$$
+a = b \cdot c.
+$$
+
+:::
+
+Dacă $a = b \cdot c$, spunem că:
+
+- $a$ este **multiplu** al numerelor $b$ și $c$,
+- $b$ și $c$ sunt **divizori** ai lui $a$.
+
+### Notații
+
+- Scriem:  
+  $$
+  a \mid b
+  $$
+  și citim: „numărul $a$ este divizibil cu numărul natural $b$”.
+
+- Scriem:  
+  $$
+  b \mid a
+  $$
+  și citim: „numărul $b$ divide numărul $a$”.
+
+## Exemple
+
+:::note
+Exemple simple de relații de divizibilitate:
+:::
+
+- $15 \mid 3$ deoarece $15 = 3 \cdot 5$  
+- $27 \mid 9$ deoarece $27 = 9 \cdot 3$  
+- $35 \mid 7$ deoarece $35 = 7 \cdot 5$  
+- $99 \mid 11$ deoarece $99 = 11 \cdot 9$
+
+## Observații importante
+
+:::info Observatia 1
+Orice număr natural $a$ se divide cu $1$:  
+   $$
+   a \mid 1
+   $$
+:::
+
+:::info Observatia 2
+Orice număr natural $a$ se divide cu el însuși:  
+   $$
+   a \mid a
+   $$
+:::
+
+:::info Observatia 3
+Numerele $1$ și $a$ sunt **divizori improprii** ai lui $a$.  
+   Toți ceilalți divizori sunt **divizori proprii**.
+:::
+
+:::info Observatia 4
+Numărul $0$ se divide cu orice număr natural:  
+   $$
+   0 \mid a, \quad a \in \mathbb{N}
+   $$
+:::
+
+---
+
+# Aplicații
+
+## Divizori ai unui număr
+
+**1.** Scrieți toți divizorii numărului $18$.
+
+:::tip
+$18 = 2 \cdot 9 = 3 \cdot 6$  
+Divizorii sunt: $1, 2, 3, 6, 9, 18$.
+:::
+
+**2.** Scrieți toți divizorii numărului $50$.
+
+Divizorii sunt: $1, 2, 5, 10, 25, 50$.
+
+---
+
+## Multiplul unui număr
+
+**3.** Scrieți primii 5 multipli ai lui $7$.
+
+Multiplii sunt: $0, 7, 14, 21, 28$.
+
+**4.** Scrieți toți multiplii lui $3$ cuprinși între $20$ și $40$.
+
+Multiplii sunt: $21, 24, 27, 30, 33, 36, 39$.
+
+---
+
+## Verificarea multiplicității
+
+**5.** Stabiliți dacă numerele $781$, $225$, $1000$ sunt multipli ai lui $9$.
+
+Calculăm:
+
+- $781 : 9 = 86$ rest $7 \Rightarrow$ nu este multiplu.  
+- $225 : 9 = 25$ rest $0 \Rightarrow 225 = 9 \cdot 25 \Rightarrow$ este multiplu.  
+- $1000 : 9 = 111$ rest $1 \Rightarrow$ nu este multiplu.
+
+---
+
+# Alte aplicații
+
+**6.** Scrieți toți divizorii proprii ai lui $24$.
+
+Răspuns: $2, 3, 4, 6, 8, 12$.
+
+**7.** Scrieți 5 exemple de numere naturale care au exact 2 divizori.
+
+Răspuns: $2, 7, 11, 17, 23$ (numere prime).
+
+**8.** Scrieți 5 exemple de numere naturale care au exact 3 divizori.
+
+Răspuns: $4, 9, 25, 49, 121$.  
+(acestea sunt pătratele numerelor prime)
+
+**9.** Scrieți 5 exemple de numere naturale care au exact 4 divizori.
+
+Răspuns: $6, 10, 15, 14, 21$.
+
+---

@@ -1,0 +1,145 @@
+---
+sidebar_position: 14
+slug: /c7/modul-1/7
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+
+
+# G3 - Unghiul. Clasificare și măsurarea unghiurilor
+---
+## Definiție
+
+:::tip Definiție
+Unghiul este figura geometrică formată din două semidrepte care au aceeași origine. Cele două semidrepte se numesc **laturile unghiului**, iar originea comună se numește **vârful unghiului**.
+:::
+ **Fig. 1** - Desenarea unui unghi
+<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'left' }}>
+<svg width="500" height="300" viewBox="100 50 300 100">
+  <g stroke="black" strokeWidth="2">
+    <line x1="150" y1="150" x2="250" y2="150" />
+    <line x1="150" y1="150" x2="200" y2="50" />
+  </g>
+  <circle cx="150" cy="150" r="3" fill="red" />
+  <text x="130" y="145" fontSize="14">O</text>
+  <text x="260" y="155" fontSize="14">B</text>
+  <text x="200" y="40" fontSize="14">A</text>
+</svg>
+</div>
+
+### Notații
+<div style={{ display: 'flex' }}>
+- <Katex>{String.raw`\measuredangle AOB, A\widehat O B,\measuredangle O, \widehat O`}</Katex>
+</div>
+- Laturile: [OA), [OB)
+- Vârful: O
+
+---
+
+## Construcția imaginii unui punct prin rotație
+
+- **O** – centrul cercului  
+- **OP** – raza cercului  
+
+Pentru a construi imaginea punctului **P** prin rotația de centru **O** și de unghi de **60°**, urmăm pașii:
+
+1. Trasăm cercul **(c)** cu centru în **O** și rază **OP**.
+2. Plasăm pe cercul **(c)** punctul **P** și ducem raza, astfel încât unghiul **POP'** = **60°** și deplasarea de la **P'** la **P** se face **invers sensului acelor de ceasornic** (de la stânga la dreapta).
+
+
+<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+<svg width="300" height="300" viewBox="0 0 300 300">
+<g stroke="red" strokeWidth="2" stroke-dasharray="5,5">
+    <line x1="150" y1="52" x2="150" y2="250" />
+    <line x1="50" y1="150" x2="250" y2="150" />
+    <line x1="200" y1="62" x2="200" y2="150" stroke="black"/>
+  </g>
+  <g stroke="black" strokeWidth="2">
+    <circle cx="150" cy="150" r="100" fill="none" />
+    <circle cx="150" cy="150" r="5" fill="black" />
+    <line x1="150" y1="150" x2="200" y2="150" />
+    <line x1="150" y1="150" x2="200" y2="62" />
+  </g>
+  
+  <text x="135" y="145" fontWeight={'bold'} fontSize="14">O</text>
+  <text x="200" y="175" fontSize="14">P'</text>
+  <text x="200" y="40" fontSize="14">P</text>
+</svg>
+<p><strong>Fig. 2</strong> - Rotația unui punct P în jurul lui O</p>
+</div>
+---
+
+## Interiorul unui unghi
+
+Interiorul unghiului ∡**AOB** reprezintă intersecția dintre:
+
+- semiplanul deschis determinat de dreapta **OA**, care conține punctul **B**, și  
+- semiplanul deschis determinat de dreapta **OB**, care conține punctul **A**.
+
+*Interiorul este **partea hașurată** din unghiul ∡**AOB**.*
+
+:::danger De Reținut
+<Katex>{String.raw`\text{Interiorul }\measuredangle AOB \text{ se notează: int }(\measuredangle AOB)`}</Katex>
+:::
+ **Fig. 3** - Interiorul unghiului
+<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'left' }}>
+  <svg width="500" height="300" viewBox="100 50 300 100">
+    <g stroke="red" strokeWidth="1">
+      {
+        Array.from({ length: 50 }, (_, i) => {
+          const angle = 0 + (Math.PI / 2) * (i / 50); // între 0° și 90°
+          const x1 = 150 + 30 * Math.cos(angle);
+          const y1 = 150 - 30 * Math.sin(angle);
+          const x2 = 150 + 100 * Math.cos(angle);
+          const y2 = 150 - 100 * Math.sin(angle);
+          return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} />;
+        })
+      }
+    </g>
+
+    <g stroke="black" strokeWidth="2">
+      <line x1="150" y1="150" x2="250" y2="150" />
+      <line x1="150" y1="150" x2="150" y2="50" />
+    </g>
+
+    <circle cx="150" cy="150" r="3" fill="red" />
+    <text x="130" y="145" fontSize="14">O</text>
+    <text x="260" y="155" fontSize="14">B</text>
+    <text x="140" y="40" fontSize="14">A</text>
+  </svg>
+</div>
+
+---
+
+
+## Clasificarea unghiurilor
+
+:::info Clasificare
+- **Unghi impropriu**: unghiul alungit sau nul.
+- **Unghi alungit**: măsura de 180°.
+- **Unghi nul**: măsura de 0°.
+- **Unghi propriu**: măsura între 0° și 180°.
+- **Unghi drept**: măsura de 90°.
+- **Unghi obtuz**: măsura mai mare de 90°.
+:::
+
+### Unghiuri congruente
+
+:::danger De Reținut
+Două sau mai multe unghiuri cu măsuri egale se numesc **unghiuri congruente**.
+:::
+
+### Unghiuri suplementare
+
+:::danger De Reținut
+Dacă suma măsurilor a două unghiuri este egală cu 180 de grade, atunci cele două unghiuri se numesc **UNGHIURI SUPLEMENTARE**.
+:::
+
+### Unghiuri complementare
+
+:::danger De Reținut
+Dacă suma măsurilor a două unghiuri este egală cu 90 de grade, atunci cele două unghiuri se numesc **UNGHIURI COMPLEMENTARE**.
+:::
+
+

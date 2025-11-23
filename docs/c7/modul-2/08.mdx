@@ -1,0 +1,152 @@
+---
+sidebar_position: 13
+slug: /c7/modul-2/8
+description: ""
+---
+
+# C14 - Operații cu numere reale (recapitulare)
+
+---
+
+## Proprietăți de bază
+
+:::note
+Pentru orice număr real $a$:
+:::
+
+1. $$\sqrt{a^2} = |a|$$
+
+2. $$m\sqrt{a} + n\sqrt{a} = (m+n)\sqrt{a}, \quad \text{unde } a \ge 0,\; m,n\in\mathbb{R}$$
+
+3. $$m\sqrt{a} - n\sqrt{a} = (m-n)\sqrt{a}, \quad \text{unde } a \ge 0,\; m,n\in\mathbb{R}$$
+
+4. $$\sqrt{a}\cdot\sqrt{b} = \sqrt{ab}, \quad \text{unde } a,b \ge 0$$
+
+5. $$\frac{\sqrt{a}}{\sqrt{b}} = \sqrt{\frac{a}{b}},\quad \text{unde } a \ge 0,\; b>0$$
+
+6. $$m\sqrt{a}\cdot n\sqrt{a} = mn\cdot \sqrt{a^2} = mn\cdot |a|$$
+
+7. Pentru $a\ge0,\; b>0$:
+   $$
+   \frac{\sqrt{a}}{b} = \sqrt{\frac{a}{b^2}}
+   $$
+
+---
+
+## Introducerea și scoaterea factorilor de sub radical
+
+### Introducerea factorilor sub radical
+
+Pentru $a\ge0$, $b\ge0$:
+
+- Dacă $a \ge 0$ și $b \ge 0$:
+  $$
+  a\sqrt{b} = \sqrt{a^2 b}
+  $$
+
+- Dacă $a < 0$ și $b \ge 0$:
+  $$
+  a\sqrt{b} = -\sqrt{a^2 b}
+  $$
+
+### Scoaterea factorilor de sub radical
+
+Pentru orice număr real $a$ și $b \ge 0$:
+$$
+\sqrt{a^2 \cdot b} = |a|\sqrt{b}
+$$
+
+---
+
+## Ordinea efectuării operațiilor
+
+Într-un exercițiu de calcul cu radicali sau alte numere reale, se respectă următoarea ordine:
+
+1. **Ridicările la putere și extragerea rădăcinii**, în ordinea apariției.
+2. **Înmulțirile și împărțirile**, în ordinea apariției.
+3. **Adunările și scăderile**, în ordinea apariției.
+
+---
+
+## Paranteze
+
+Dacă exercițiul conține paranteze, se efectuează în această ordine:
+
+1. Paranteze rotunde $(\;)$
+2. Paranteze drepte $[\;]$
+3. Acolade $\{\;\}$
+
+:::tip
+Dacă parantezele conțin radicali care **nu se pot reduce** (nu sunt radicali asemenea), atunci parantezele se elimină folosind **proprietatea de distributivitate**:
+$$
+a(b+c) = ab + ac
+$$
+:::
+
+---
+
+## Operații cu modulul unui număr real
+
+Modulul unui număr real $a$, notat prin $|a|$, reprezintă distanța de la numărul $a$ la originea axei reale.
+
+:::tip Definiție
+Pentru orice număr real $a$:
+
+$$
+|a| =
+\begin{cases}
+a, & \text{dacă } a \ge 0 \\
+-a, & \text{dacă } a < 0
+\end{cases}
+$$
+:::
+
+### Proprietăți importante ale modulului
+
+### **Modulul unui produs**
+
+$$
+|a \cdot b| = |a| \cdot |b|
+$$
+
+### **Modulul unui cât**
+
+$$
+\left|\frac{a}{b}\right| = \frac{|a|}{|b|}, \quad b \ne 0
+$$
+
+### **Ridicarea la putere a modulului**
+
+Pentru orice exponent par (de exemplu $2, 4, 6,\dots$):
+
+$$
+|a|^2 = a^2
+$$
+
+**Relația dintre modul și rădăcina pătrată**
+
+$$
+\sqrt{a^2} = |a|
+$$
+
+:::info
+Această relație este esențială în calculul cu radicali și apare frecvent în exerciții de simplificare.
+:::
+
+### Proprietatea triunghiului
+
+Pentru orice numere reale $a$ și $b$:
+
+$$
+|a + b| \le |a| + |b|
+$$
+
+### Proprietatea triunghiului invers
+
+Pentru orice numere reale $a$ și $b$:
+
+$$
+|a - b| \ge \bigl|\,|a| - |b|\,\bigr|
+$$
+
+---
