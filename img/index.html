@@ -1,0 +1,544 @@
+<!-- Infografic de Vizualizare a Planului de Implementare a Aplicației de Curierat (React Native) -->
+<!-- Paleta de Culori Aleasă: Energetic & Playful (#FF3366, #FF9900, #33CCCC, #6633FF) -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    'vibrant-pink': '#FF3366',
+                    'bright-cyan': '#33CCCC',
+                    'deep-orange': '#FF9900',
+                    'deep-purple': '#6633FF',
+                    'light-gray': '#f9fafb',
+                },
+                fontFamily: {
+                    sans: ['Inter', 'sans-serif'],
+                },
+            }
+        }
+    }
+</script>
+<style>
+    /* CSS Încapsulat pentru a asigura controlul asupra canvasului Chart.js și timeline-ului */
+    .chart-container {
+        position: relative;
+        width: 100%;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+        height: 350px;
+        max-height: 400px;
+    }
+    @media (min-width: 768px) {
+        .chart-container {
+            height: 400px;
+        }
+    }
+
+    .timeline-line {
+        position: absolute;
+        width: 4px;
+        top: 0;
+        bottom: 0;
+        background-color: #e5e7eb;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    /* Asigură că tabelul se aliniază corect în blocurile de conținut din timeline */
+    .timeline-item:nth-child(even) .timeline-content {
+        justify-content: flex-start;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-content {
+        justify-content: flex-end;
+    }
+
+    /* Asigură textul descriere care include tabelul este aliniat corect */
+    .timeline-item:nth-child(odd) .timeline-description {
+        text-align: right;
+    }
+
+    .timeline-item:nth-child(even) .timeline-description {
+        text-align: left;
+    }
+</style>
+<!-- NOTĂ CRITICĂ: Nu a fost folosit NICIUN SVG și NICIUN Mermaid JS. Vizualizările sunt create cu Chart.js (Canvas) și HTML/CSS structurat. -->
+<div class="min-h-screen bg-light-gray font-sans text-gray-800">
+
+    <!-- Header & Introducere -->
+    <header class="bg-deep-purple text-white p-8 md:p-12 shadow-lg">
+        <div class="max-w-7xl mx-auto">
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-2">Grafic de Implementare Integrat</h1>
+            <p class="text-vibrant-pink text-xl font-medium">Aplicație Curierat Full-Feature (Estimat 4-6 LUNI)</p>
+            <p class="mt-4 text-gray-200">
+                Această infografică vizualizează calendarul intens, cu o durată țintă de 5 luni (20 de săptămâni), încadrat în estimarea de 4-6 luni pentru dezvoltarea completă a aplicației de curierat, de la planificare la publicarea pe iOS, Android și Web.
+                <span class="font-semibold text-gray-100 block mt-2">Tehnologii Cheie: React Native, Node.js, Firestore/MongoDB, Google Maps/Mapbox.</span>
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto p-4 md:p-8">
+
+        <!-- Secțiune 1: Key Performance Indicators (KPIs) - Mărimi Cheie -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-deep-purple mb-6 border-b-2 border-vibrant-pink pb-2">Metrice de Proiect</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                <!-- KPI 1: Durată Totală -->
+                <div class="bg-white rounded-xl shadow-lg p-6 text-center border-t-4 border-vibrant-pink transform hover:scale-[1.02] transition">
+                    <p class="text-5xl font-extrabold text-vibrant-pink">4-6 LUNI</p>
+                    <p class="text-lg text-gray-600 mt-2">Durată Estimată Totală</p>
+                </div>
+                <!-- KPI 2: Platforme -->
+                <div class="bg-white rounded-xl shadow-lg p-6 text-center border-t-4 border-bright-cyan transform hover:scale-[1.02] transition">
+                    <p class="text-5xl font-extrabold text-bright-cyan">3x</p>
+                    <p class="text-lg text-gray-600 mt-2">Livrabile (iOS, Android, Web)</p>
+                </div>
+                <!-- KPI 3: Echipe de Dezvoltare -->
+                <div class="bg-white rounded-xl shadow-lg p-6 text-center border-t-4 border-deep-orange transform hover:scale-[1.02] transition">
+                    <p class="text-5xl font-extrabold text-deep-orange">6 ROLURI</p>
+                    <p class="text-lg text-gray-600 mt-2">Echipa de Bază</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Secțiune 2: Vizualizare Timeline Detaliată (Organize - Timeline via HTML/CSS) -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-deep-purple mb-8 border-b-2 border-vibrant-pink pb-2">Structura pe Faze (Plan Etapizat Detaliat)</h2>
+            <p class="mb-8 text-gray-600">
+                Planul de dezvoltare este împărțit în cinci faze distincte. Fiecare fază include activitățile, termenele și livrabilele cheie necesare pentru a atinge obiectivul unei aplicații complete.
+            </p>
+
+            <div class="relative max-w-4xl mx-auto py-8">
+                <div class="timeline-line"></div>
+                
+                <!-- Faza 1: Concept și Planificare Detaliată (Săptămânile 1-4) -->
+                <div class="timeline-item flex mb-12">
+                    <div class="timeline-content w-1/2 pr-6 flex items-start justify-end text-right">
+                        <div class="timeline-description">
+                            <span class="text-sm font-semibold text-deep-purple uppercase">Săptămânile 1-4</span>
+                            <h3 class="text-xl font-bold text-vibrant-pink">Faza 1: Concept & Planificare Detaliată</h3>
+                            <p class="text-gray-700 mt-1 mb-3">Obiectiv: Definirea arhitecturii finale, a designului complet (nu doar MVP) și a tuturor funcționalităților avansate.</p>
+
+                            <!-- Tabel Faza 1 -->
+                            <div class="mt-2 bg-white p-3 rounded-lg shadow-xl overflow-x-auto border-l-4 border-vibrant-pink">
+                                <table class="min-w-full text-xs md:text-sm">
+                                    <thead>
+                                        <tr class="bg-vibrant-pink text-white">
+                                            <th class="p-2 text-left font-semibold">Activitate</th>
+                                            <th class="p-2 text-left font-semibold hidden sm:table-cell">Descriere</th>
+                                            <th class="p-2 text-center font-semibold">Termen</th>
+                                            <th class="p-2 text-center font-semibold hidden md:table-cell">Livrabile</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="border-b border-gray-200 hover:bg-light-gray">
+                                            <td class="p-2 font-medium">1.1. Specificații Complete</td>
+                                            <td class="p-2 hidden sm:table-cell">Definirea user-stories pentru Expeditor, Curier și Admin.</td>
+                                            <td class="p-2 text-center">1 Săpt.</td>
+                                            <td class="p-2 text-center hidden md:table-cell">Document Specificații Finale (FSD)</td>
+                                        </tr>
+                                        <tr class="border-b border-gray-200 hover:bg-light-gray">
+                                            <td class="p-2 font-medium">1.2. Design UX/UI Final</td>
+                                            <td class="p-2 hidden sm:table-cell">Crearea designului complet (eroare, feedback, profiluri).</td>
+                                            <td class="p-2 text-center">2 Săpt.</td>
+                                            <td class="p-2 text-center hidden md:table-cell">Mockup-uri High-Fidelity Aprobate</td>
+                                        </tr>
+                                        <tr class="border-b border-gray-200 hover:bg-light-gray">
+                                            <td class="p-2 font-medium">1.3. Arhitectură & DB</td>
+                                            <td class="p-2 hidden sm:table-cell">Stabilirea arhitecturii microservicii și schemei complete de DB.</td>
+                                            <td class="p-2 text-center">1 Săpt.</td>
+                                            <td class="p-2 text-center hidden md:table-cell">Diagrama Arhitecturii & Schema DB</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="z-10 flex items-center justify-center w-10 h-10 bg-vibrant-pink rounded-full ring-8 ring-vibrant-pink/30 shadow-xl absolute left-1/2 transform -translate-x-1/2">
+                        <span class="font-bold text-white text-lg">1</span>
+                    </div>
+                    <div class="w-1/2 pl-10"></div>
+                </div>
+
+                <!-- Faza 2: Dezvoltarea Core (Săptămânile 5-12) -->
+                <div class="timeline-item flex mb-12">
+                    <div class="w-1/2 pr-10"></div>
+                    <div class="z-10 flex items-center justify-center w-10 h-10 bg-bright-cyan rounded-full ring-8 ring-bright-cyan/30 shadow-xl absolute left-1/2 transform -translate-x-1/2">
+                        <span class="font-bold text-white text-lg">2</span>
+                    </div>
+                    <div class="timeline-content w-1/2 pl-6 flex items-start justify-start text-left">
+                        <div class="timeline-description">
+                            <span class="text-sm font-semibold text-deep-purple uppercase">Săptămânile 5-12</span>
+                            <h3 class="text-xl font-bold text-bright-cyan">Faza 2: Dezvoltarea Core (8 Săptămâni)</h3>
+                            <p class="text-gray-700 mt-1 mb-3">Obiectiv: Implementarea integrală a aplicațiilor mobile (Client și Curier), inclusiv funcțiile critice de alocare și geo-localizare.</p>
+                            
+                            <!-- Tabel Faza 2 -->
+                            <div class="mt-2 bg-white p-3 rounded-lg shadow-xl overflow-x-auto border-l-4 border-bright-cyan">
+                                <table class="min-w-full text-xs md:text-sm">
+                                    <thead>
+                                        <tr class="bg-bright-cyan/90 text-white">
+                                            <th class="p-2 text-left font-semibold">Activitate</th>
+                                            <th class="p-2 text-left font-semibold hidden sm:table-cell">Termen</th>
+                                            <th class="p-2 text-center font-semibold">Responsabil</th>
+                                            <th class="p-2 text-center font-semibold hidden md:table-cell">Livrabile</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="border-b border-gray-200 hover:bg-light-gray">
+                                            <td class="p-2 font-medium">2.1. Autentificare & Profiluri</td>
+                                            <td class="p-2 hidden sm:table-cell">2 Săpt.</td>
+                                            <td class="p-2 text-center">Dev Full Stack</td>
+                                            <td class="p-2 text-center hidden md:table-cell">Autentificare complete funcționale</td>
+                                        </tr>
+                                        <tr class="border-b border-gray-200 hover:bg-light-gray">
+                                            <td class="p-2 font-medium">2.2. Fluxul de Comandă Complet</td>
+                                            <td class="p-2 hidden sm:table-cell">3 Săpt.</td>
+                                            <td class="p-2 text-center">Dev Front-end</td>
+                                            <td class="p-2 text-center hidden md:table-cell">Aplicație Client cu preț dinamic</td>
+                                        </tr>
+                                        <tr class="border-b border-gray-200 hover:bg-light-gray">
+                                            <td class="p-2 font-medium">2.3. Modulul Curier Avansat</td>
+                                            <td class="p-2 hidden sm:table-cell">3 Săpt.</td>
+                                            <td class="p-2 text-center">Dev Front-end</td>
+                                            <td class="p-2 text-center hidden md:table-cell">Aplicație Curier funcționalități complete</td>
+                                        </tr>
+                                        <tr class="border-b border-gray-200 hover:bg-light-gray">
+                                            <td class="p-2 font-medium">2.4. Alocare Inteligentă & GPS</td>
+                                            <td class="p-2 hidden sm:table-cell">4 Săpt.</td>
+                                            <td class="p-2 text-center">Dev Backend</td>
+                                            <td class="p-2 text-center hidden md:table-cell">API-uri stabile și Logică de Alocare finalizată</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Faza 3: Platforma Web (Admin), Extensii și Testare Alpha (Săptămânile 13-16) -->
+                <div class="timeline-item flex mb-12">
+                    <div class="timeline-content w-1/2 pr-6 flex items-start justify-end text-right">
+                        <div class="timeline-description">
+                            <span class="text-sm font-semibold text-deep-purple uppercase">Săptămânile 13-16</span>
+                            <h3 class="text-xl font-bold text-deep-orange">Faza 3: Platforma Web & Extensii</h3>
+                            <p class="text-gray-700 mt-1 mb-3">Obiectiv: Finalizarea panoului de administrare, integrarea plăților și a funcțiilor de feedback/rating.</p>
+
+                            <!-- Tabel Faza 3 -->
+                            <div class="mt-2 bg-white p-3 rounded-lg shadow-xl overflow-x-auto border-l-4 border-deep-orange">
+                                <table class="min-w-full text-xs md:text-sm">
+                                    <thead>
+                                        <tr class="bg-deep-orange/90 text-white">
+                                            <th class="p-2 text-left font-semibold">Activitate</th>
+                                            <th class="p-2 text-left font-semibold hidden sm:table-cell">Termen</th>
+                                            <th class="p-2 text-center font-semibold">Responsabil</th>
+                                            <th class="p-2 text-center font-semibold hidden md:table-cell">Livrabile</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="border-b border-gray-200 hover:bg-light-gray">
+                                            <td class="p-2 font-medium">3.1. Panoul de Administrare (Full)</td>
+                                            <td class="p-2 hidden sm:table-cell">3 Săpt.</td>
+                                            <td class="p-2 text-center">Dev Full Stack</td>
+                                            <td class="p-2 text-center hidden md:table-cell">Dashboard Admin Full-Featured</td>
+                                        </tr>
+                                        <tr class="border-b border-gray-200 hover:bg-light-gray">
+                                            <td class="p-2 font-medium">3.2. Integrarea Plăților & Facturare</td>
+                                            <td class="p-2 hidden sm:table-cell">1 Săpt.</td>
+                                            <td class="p-2 text-center">Dev Backend</td>
+                                            <td class="p-2 text-center hidden md:table-cell">Plăți și modul de facturare funcționale</td>
+                                        </tr>
+                                        <tr class="border-b border-gray-200 hover:bg-light-gray">
+                                            <td class="p-2 font-medium">3.3. Sistem de Rating și Notificări</td>
+                                            <td class="p-2 hidden sm:table-cell">1 Săpt.</td>
+                                            <td class="p-2 text-center">Dev Front & Backend</td>
+                                            <td class="p-2 text-center hidden md:table-cell">Sistem Rating și Notificări active</td>
+                                        </tr>
+                                        <tr class="border-b border-gray-200 hover:bg-light-gray">
+                                            <td class="p-2 font-medium">3.4. Testare Alpha & Optimizare</td>
+                                            <td class="p-2 hidden sm:table-cell">2 Săpt.</td>
+                                            <td class="p-2 text-center">QA/Echipa Dev</td>
+                                            <td class="p-2 text-center hidden md:table-cell">Raport QA Alpha și Cod Optimizat</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="z-10 flex items-center justify-center w-10 h-10 bg-deep-orange rounded-full ring-8 ring-deep-orange/30 shadow-xl absolute left-1/2 transform -translate-x-1/2">
+                        <span class="font-bold text-white text-lg">3</span>
+                    </div>
+                    <div class="w-1/2 pl-10"></div>
+                </div>
+
+                <!-- Faza 4: Pregătirea pentru Lansare și Testare Beta (Săptămânile 17-18) -->
+                <div class="timeline-item flex mb-12">
+                    <div class="w-1/2 pr-10"></div>
+                    <div class="z-10 flex items-center justify-center w-10 h-10 bg-deep-purple rounded-full ring-8 ring-deep-purple/30 shadow-xl absolute left-1/2 transform -translate-x-1/2">
+                        <span class="font-bold text-white text-lg">4</span>
+                    </div>
+                    <div class="timeline-content w-1/2 pl-6 flex items-start justify-start text-left">
+                        <div class="timeline-description">
+                            <span class="text-sm font-semibold text-deep-purple uppercase">Săptămânile 17-18</span>
+                            <h3 class="text-xl font-bold text-deep-purple">Faza 4: Pregătire & Testare Beta</h3>
+                            <p class="text-gray-700 mt-1 mb-3">Obiectiv: Finalizarea tuturor aspectelor non-tehnice și pregătirea finală a build-urilor.</p>
+
+                             <!-- Tabel Faza 4 -->
+                            <div class="mt-2 bg-white p-3 rounded-lg shadow-xl overflow-x-auto border-l-4 border-deep-purple">
+                                <table class="min-w-full text-xs md:text-sm">
+                                    <thead>
+                                        <tr class="bg-deep-purple/90 text-white">
+                                            <th class="p-2 text-left font-semibold">Activitate</th>
+                                            <th class="p-2 text-left font-semibold hidden sm:table-cell">Termen</th>
+                                            <th class="p-2 text-center font-semibold">Responsabil</th>
+                                            <th class="p-2 text-center font-semibold hidden md:table-cell">Livrabile</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="border-b border-gray-200 hover:bg-light-gray">
+                                            <td class="p-2 font-medium">4.1. Testare Beta (Publică/Extinsă)</td>
+                                            <td class="p-2 hidden sm:table-cell">1 Săpt.</td>
+                                            <td class="p-2 text-center">QA/PM</td>
+                                            <td class="p-2 text-center hidden md:table-cell">Raport Feedback Beta Final</td>
+                                        </tr>
+                                        <tr class="border-b border-gray-200 hover:bg-light-gray">
+                                            <td class="p-2 font-medium">4.2. Documentație și Legal</td>
+                                            <td class="p-2 hidden sm:table-cell">1 Săpt.</td>
+                                            <td class="p-2 text-center">PM/Legal</td>
+                                            <td class="p-2 text-center hidden md:table-cell">Documente Legale și Tehnice</td>
+                                        </tr>
+                                        <tr class="border-b border-gray-200 hover:bg-light-gray">
+                                            <td class="p-2 font-medium">4.3. Assets Lansare (ASO)</td>
+                                            <td class="p-2 hidden sm:table-cell">0.5 Săpt.</td>
+                                            <td class="p-2 text-center">Marketing</td>
+                                            <td class="p-2 text-center hidden md:table-cell">Assets Aprobate</td>
+                                        </tr>
+                                        <tr class="border-b border-gray-200 hover:bg-light-gray">
+                                            <td class="p-2 font-medium">4.4. Configurarea Magazinelor</td>
+                                            <td class="p-2 hidden sm:table-cell">0.5 Săpt.</td>
+                                            <td class="p-2 text-center">Dev Lead</td>
+                                            <td class="p-2 text-center hidden md:table-cell">Aplicații trimise spre revizuire</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Faza 5: Lansare și Suport Post-Lansare (Săptămânile 19-20) -->
+                <div class="timeline-item flex mb-12">
+                    <div class="timeline-content w-1/2 pr-6 flex items-start justify-end text-right">
+                        <div class="timeline-description">
+                            <span class="text-sm font-semibold text-deep-purple uppercase">Săptămânile 19-20</span>
+                            <h3 class="text-xl font-bold text-vibrant-pink">Faza 5: Lansare & Post-Lansare</h3>
+                            <p class="text-gray-700 mt-1 mb-3">Obiectiv: Publicarea aplicației, monitorizarea performanței și planificarea îmbunătățirilor viitoare.</p>
+
+                            <!-- Tabel Faza 5 -->
+                            <div class="mt-2 bg-white p-3 rounded-lg shadow-xl overflow-x-auto border-l-4 border-vibrant-pink">
+                                <table class="min-w-full text-xs md:text-sm">
+                                    <thead>
+                                        <tr class="bg-vibrant-pink text-white">
+                                            <th class="p-2 text-left font-semibold">Activitate</th>
+                                            <th class="p-2 text-left font-semibold hidden sm:table-cell">Termen</th>
+                                            <th class="p-2 text-center font-semibold">Responsabil</th>
+                                            <th class="p-2 text-center font-semibold hidden md:table-cell">Livrabile</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="border-b border-gray-200 hover:bg-light-gray">
+                                            <td class="p-2 font-medium">5.1. Lansare (Go-Live)</td>
+                                            <td class="p-2 hidden sm:table-cell">Imediat</td>
+                                            <td class="p-2 text-center">Dev Lead</td>
+                                            <td class="p-2 text-center hidden md:table-cell">Aplicație Live pe toate platformele</td>
+                                        </tr>
+                                        <tr class="border-b border-gray-200 hover:bg-light-gray">
+                                            <td class="p-2 font-medium">5.2. Monitorizare 24/7 și Hotfixes</td>
+                                            <td class="p-2 hidden sm:table-cell">1 Săpt.</td>
+                                            <td class="p-2 text-center">QA/Echipa Dev</td>
+                                            <td class="p-2 text-center hidden md:table-cell">Raport de Stabilitate 1.0.1</td>
+                                        </tr>
+                                        <tr class="border-b border-gray-200 hover:bg-light-gray">
+                                            <td class="p-2 font-medium">5.3. Planificare Feature-uri Suplimentare</td>
+                                            <td class="p-2 hidden sm:table-cell">1 Săpt.</td>
+                                            <td class="p-2 text-center">PM</td>
+                                            <td class="p-2 text-center hidden md:table-cell">Backlog Faza 2</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="z-10 flex items-center justify-center w-10 h-10 bg-vibrant-pink rounded-full ring-8 ring-vibrant-pink/30 shadow-xl absolute left-1/2 transform -translate-x-1/2">
+                        <span class="font-bold text-white text-lg">5</span>
+                    </div>
+                    <div class="w-1/2 pl-10"></div>
+                </div>
+                
+            </div>
+        </section>
+
+        <!-- Secțiune 3: Distribuția Efortului (Compare - Bar Chart via Chart.js) -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-deep-purple mb-8 border-b-2 border-vibrant-pink pb-2">Distribuția Efortului pe Faze (Săptămâni)</h2>
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-10">
+                <p class="text-gray-600 mb-6">
+                    Graficul cu bare orizontale evidențiază alocarea săptămânală a resurselor pe parcursul proiectului. Faza de Dezvoltare Core (Faza 2) consumă exact 40% din timpul total (8 din 20 de săptămâni), subliniind complexitatea implementării funcțiilor de geo-localizare și alocare.
+                </p>
+                <div class="chart-container">
+                    <canvas id="effortChart"></canvas>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Secțiune 4: Resurse Umane (Tabel Dedicat) -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-deep-purple mb-8 border-b-2 border-vibrant-pink pb-2">Resurse Umane (Echipa Ideală)</h2>
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-10 overflow-x-auto border-t-4 border-deep-orange">
+                <table class="min-w-full text-sm">
+                    <thead>
+                        <tr class="bg-deep-orange/90 text-white">
+                            <th class="p-3 text-left font-semibold">Rol</th>
+                            <th class="p-3 text-left font-semibold">Dedicare</th>
+                            <th class="p-3 text-left font-semibold">Rol Principal în Proiect</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b border-gray-200 hover:bg-light-gray">
+                            <td class="p-3 font-medium text-deep-purple">Project Manager (PM)</td>
+                            <td class="p-3">50%</td>
+                            <td class="p-3">Managementul proiectului, comunicare, gestionarea riscurilor.</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 hover:bg-light-gray">
+                            <td class="p-3 font-medium text-bright-cyan">Designer UX/UI</td>
+                            <td class="p-3">100% (Săpt. 1-4)</td>
+                            <td class="p-3">Wireframes, Mockup-uri, Assets vizuale.</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 hover:bg-light-gray">
+                            <td class="p-3 font-medium text-vibrant-pink">Dev Lead / Arhitect</td>
+                            <td class="p-3">100%</td>
+                            <td class="p-3">Configurare, decizii de arhitectură, revizuire cod.</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 hover:bg-light-gray">
+                            <td class="p-3 font-medium text-deep-purple">Dezvoltator React Native (2)</td>
+                            <td class="p-3">100%</td>
+                            <td class="p-3">Implementare Front-end (Client/Curier/Web Admin).</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 hover:bg-light-gray">
+                            <td class="p-3 font-medium text-vibrant-pink">Dezvoltator Backend (1)</td>
+                            <td class="p-3">100%</td>
+                            <td class="p-3">API, Logică de alocare, Bază de date, Plăți.</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 hover:bg-light-gray">
+                            <td class="p-3 font-medium text-bright-cyan">Inginer QA (Tester)</td>
+                            <td class="p-3">100% (Săpt. 12-20)</td>
+                            <td class="p-3">Testare funcțională, de securitate, de performanță.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-100 p-6 text-center text-gray-500 text-sm border-t">
+        <p>© 2025 Analiză Proiect Dezvoltare Mobilă (React Native)</p>
+    </footer>
+</div>
+
+<script>
+    function initializeCharts() {
+        const ctx = document.getElementById('effortChart').getContext('2d');
+        
+        // Datele pentru graficul de distribuție a efortului (săptămâni)
+        const data = {
+            labels: [
+                'Faza 5: Lansare', 
+                'Faza 4: Pregătire', 
+                'Faza 3: Web & Extensii', 
+                'Faza 2: Dezvoltare Core', 
+                'Faza 1: Planificare'
+            ],
+            datasets: [{
+                label: 'Săptămâni Alocate',
+                data: [2, 2, 4, 8, 4], 
+                backgroundColor: [
+                    '#FF3366', // Faza 5: Pink
+                    '#6633FF', // Faza 4: Purple
+                    '#FF9900', // Faza 3: Orange
+                    '#33CCCC', // Faza 2: Cyan
+                    '#FF3366'  // Faza 1: Pink
+                ],
+                borderColor: 'rgba(255, 255, 255, 0.8)',
+                borderWidth: 1
+            }]
+        };
+
+        const effortChart = new Chart(ctx, {
+            type: 'bar',
+            data: data,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y', // Grafic cu bare orizontale
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Număr de Săptămâni',
+                            color: '#6633FF'
+                        },
+                        ticks: {
+                            color: '#4b5563'
+                        },
+                        grid: {
+                             color: 'rgba(51, 204, 204, 0.1)'
+                        }
+                    },
+                    y: {
+                         ticks: {
+                            color: '#4b5563'
+                        },
+                        grid: {
+                             color: 'rgba(51, 204, 204, 0.1)'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    title: {
+                        display: true,
+                        text: 'Alocarea Timpului pe Faze de Dezvoltare (Total 20 Săptămâni)',
+                        color: '#6633FF',
+                        font: {
+                            size: 16
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: function(tooltipItems) {
+                                const item = tooltipItems[0];
+                                let label = item.chart.data.labels[item.dataIndex];
+                                if (Array.isArray(label)) {
+                                  return label.join(' ');
+                                } else {
+                                  return label;
+                                }
+                            },
+                            label: function(context) {
+                                return `Săptămâni: ${context.raw}`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    window.onload = initializeCharts;
+</script>
