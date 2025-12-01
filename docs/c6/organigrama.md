@@ -10,6 +10,23 @@ import React, { useState } from 'react';
 
 export default function LectiiTreeView() {
   const saptamani = [
+      {
+      titlu: 'Săptămâna 13: 08.12 - 12.12 | FINAL MODUL 2',
+      note: '',
+      lectii: [
+        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
+      ],
+    },
+      {
+      titlu: 'Săptămâna 12: 02.12 - 05.12',
+      note: '1 decembrie liber',
+      lectii: [
+        { titlu: 'C13 - Puterea cu exponent număr natural a unui număr întreg nenul', zi: '03.12 (ora 1)', tip: 'Algebra', link: 'c5/modul-2/8', pdf: '' },
+        { titlu: 'LP - Puterea cu exponent număr natural a unui număr întreg nenul', zi: '03.12 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'LP - Puterea cu exponent număr natural a unui număr întreg nenul', zi: '04.12 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'C14 - Reguli de calcul cu puteri', zi: '04.12 (ora 2)', tip: 'Algebra', link: 'c5/modul-2/9', pdf: '' },
+      ],
+    },
     {
       titlu: 'Săptămâna 11: 24.11 - 28.11',
       note: 'Materiale încarcate',

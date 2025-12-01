@@ -30,10 +30,10 @@ export default function DocItemFooter() {
           fontSize: '0.75rem',
           fontWeight: 'bold',
           textAlign: 'left',
-          opacity: 0.2, // opacitate scazuta ca watermark
+          opacity: 0.5, // opacitate scazuta ca watermark
           letterSpacing: '0.10em', // litere mai departate
         }}>
-        © Proprietate intelectuala Edumat58
+        prof. ing. BRIȘAN Andrei-Sebastian
       </div>
     </footer>
   );

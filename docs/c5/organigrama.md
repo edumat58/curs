@@ -12,12 +12,29 @@ export default function LectiiTreeView() {
 
   const saptamani = [
       {
+      titlu: 'Săptămâna 13: 08.12 - 12.12 | FINAL MODUL 2',
+      note: '',
+      lectii: [
+        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
+      ],
+    },
+      {
+      titlu: 'Săptămâna 12: 02.12 - 05.12',
+      note: '1 decembrie liber',
+      lectii: [
+        { titlu: 'C17 - Criterii de divizibilitate', zi: '02.12 (ora 1)', tip: 'Algebra', link: 'c5/modul-2/9', pdf: '' },
+        { titlu: 'LP - Criterii de divizibilitate', zi: '02.12 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'RECAPITULARE TEST', zi: '03.12', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'TEST 4.12 [NOTA 3]: C15.1 - C16 și G1 - G2', zi: '04.12', tip: 'EVALUARE SUMATIVA', link: '', pdf: '' },
+      ],
+    },
+      {
       titlu: 'Săptămâna 11: 24.11 - 28.11',
       note: 'TEST 4.12 [NOTA 3]: C15.1 - C16 și G1 - G2',
       lectii: [
         { titlu: 'G2 - Semiplan, semidreaptă și segment', zi: '24.11', tip: 'Geometrie', link: 'c5/modul-2/6', pdf: '' },
         { titlu: 'LP - Semiplan, semidreaptă și segment', zi: '25.11 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
-        { titlu: 'C15.5 - Metoda falsei ipoteze', zi: '25.11 (ora 2)', tip: 'Algebra', link: '', pdf: 'c5/modul-2/7' },
+        { titlu: 'C15.5 - Metoda falsei ipoteze', zi: '25.11 (ora 2)', tip: 'Algebra', link: 'c5/modul-2/7', pdf: '' },
         { titlu: 'LP - Metoda falsei ipoteze', zi: '26.11 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
         { titlu: 'C16 - Divizori și multiplii.', zi: '27.11', tip: 'Algebra', link: 'c5/modul-2/8', pdf: '' },
       ],

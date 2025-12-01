@@ -1,0 +1,302 @@
+---
+sidebar_position: 13
+slug: /c7/modul-1/8
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+
+
+# C13 - Puterea cu exponent număr natural a unui număr întreg nenul
+
+---
+
+# 1. Definiție
+
+Puterea a *n*-a a unui număr întreg nenul **a** este numărul:
+
+$$a^n = \underbrace{a \cdot a \cdot a \cdots a}\_{n\ \text{factori}},$$
+
+unde  
+- **a** = baza,  
+- **n** = exponent, **n ∈ ℕ**.
+
+:::note
+Se notează cu $a^n$ produsul dintre $n$ factori egali cu $a$.
+:::
+
+### Exemple
+
+- $ (+6)^2 = (+6)\cdot(+6) = +36 $
+- $ (-2)^3 = (-2)\cdot(-2)\cdot(-2) = -8 $
+- $ (-3)^4 = (-3)\cdot(-3)\cdot(-3)\cdot(-3) = +81 $
+
+---
+
+# 2. Observații importante
+
+- $a^0 = 1$, pentru orice $a \in \mathbb{Z},\ a\neq 0$  
+  *Exemplu:* $(-5)^0 = 1$
+
+- $1^n = 1$, pentru orice $n \in \mathbb{N}$
+
+- $a^1 = a$  
+  *Exemplu:* $(-80)^1 = -80$
+
+- $0^n = 0$, pentru orice $n \in \mathbb{N}$  
+  *Exemplu:* $0^{72} = 0$
+
+- $0^0$ **nu are sens**
+
+---
+
+# 3. Semnul unei puteri
+
+## 3.1. Dacă baza este pozitivă
+:::tip
+Orice putere a unui număr pozitiv este pozitivă.
+:::
+
+Exemplu:  
+$ (+3)^2 = +9 $
+
+## 3.2. Dacă baza este negativă
+
+- Dacă exponentul este **par**, rezultatul este **pozitiv**  
+  *Exemplu:* $(-4)^2 = +16$
+
+- Dacă exponentul este **impar**, rezultatul este **negativ**  
+  *Exemplu:* $(-2)^5 = -32$
+
+## 3.3. Atenție la notații!
+
+:::note
+$(-a)^2 \neq -a^2$
+:::
+
+- $(-a)^2 = (+a^2)$  
+- $-a^2 = -(a^2)$
+
+Exemplu:  
+$(-5)^2 = +25$  
+$-5^2 = -25$
+
+### Cazuri speciale pentru $(-1)^n$
+- $(-1)^n = 1$, dacă $n$ este par  
+- $(-1)^n = -1$, dacă $n$ este impar
+
+---
+
+# 4. Reguli de calcul cu puteri
+
+## 4.1. Înmulțirea puterilor cu aceeași bază
+$$a^n \cdot a^m = a^{n+m}$$
+
+Exemplu:  
+$(-3)^2 \cdot (-3)^4 = (-3)^6 = 729$
+
+---
+
+## 4.2. Împărțirea puterilor cu aceeași bază
+$$a^n : a^m = a^{n-m},\quad n\ge m$$
+
+Exemplu:  
+$(-2)^{15} : (-2)^{10} = (-2)^5 = -32$
+
+---
+
+## 4.3. Puterea unei puteri
+$$(a^n)^m = a^{n\cdot m}$$
+
+Exemplu:  
+$\left[(-2)^3\right]^2 = (-2)^6 = 64$
+
+---
+
+## 4.4. Puterea unui produs
+$$(a\cdot b)^n = a^n \cdot b^n$$
+
+Exemplu:  
+$\left[(-2)\cdot(+5)\right]^7 = (-2)^7 \cdot (+5)^7$
+
+---
+
+## 4.5. Puterea unui cât
+$$(a:b)^n = \frac{a^n}{b^n}$$
+
+Exemplu:  
+$\left[(-10):(+2)\right]^8 = \dfrac{(-10)^8}{(+2)^8}$
+
+---
+
+# 5. Exemple rezolvate
+
+### Exemplul 1
+Calculează:
+$(-2)^3 + 5^2 - (-1)^8$
+
+Rezolvare:
+- $(-2)^3 = -8$  
+- $5^2 = 25$  
+- $(-1)^8 = 1$
+
+$$-8 + 25 - 1 = 16$$
+
+---
+
+### Exemplul 2
+$(-3)^5 \cdot 3^4 \cdot (-3)^6$
+
+Aducem la aceeași bază *3*:
+
+$$(-3)^5 \cdot 3^4 \cdot (-3)^6 = -3^{5+4+6} = -3^{15}$$
+
+---
+
+### Exemplul 3
+$[3\cdot(-6)]^2 = (-18)^2 = 324$
+
+---
+
+### Exemplul 4
+$(-16)^3 : (-4)^3 = [(-16):(-4)]^3 = 4^3 = 64$
+
+---
+
+# 6. Compararea puterilor
+
+Fără a calcula rezultatele:
+
+### a) $(-3)^{13}$ și $(-3)^9$
+
+$3^{13} > 3^9$, deci  
+$$(-3)^{13} < (-3)^9 \quad \text{(ambele negative)}$$
+
+### b) $(-7)^5$ și $(-7)^4$
+
+$(-7)^5 < 0$,  
+$(-7)^4 > 0$  
+
+Deci  
+$$(-7)^5 < (-7)^4$$
+
+### c) $(-5)^5$ și $(-6)^5$
+
+Comparam bazele:  
+$-5 > -6$ → deci  
+$$(-5)^5 > (-6)^5$$
+
+### d) $(-11)^3$ și $9^3$
+
+Un număr negativ vs. unul pozitiv:  
+$$(-11)^3 < 9^3$$
+
+---
+
+# 7. Fișă de lucru
+
+## 1. Scrieți produsul ca putere și identificați baza și exponentul
+
+a) $(-2)\cdot(-2)$  
+b) $(+4)\cdot(+4)\cdot(+4)\cdot(+4)\cdot(+4)$  
+c) $(-3)\cdot(-3)\cdot(-3)$  
+d) $-8$  
+e) $(-1)\cdot(-1)\cdot(-1)\cdot(-1)$  
+f) $(-10)\cdot(-10)\cdots(-10)$ (2021 factori)
+
+---
+
+## 2. Calculați
+
+a) $(+4)^2$  
+b) $(-1)^3$  
+c) $(-2)^4$  
+d) $(+5)^2$  
+e) $(-3)^3$  
+f) $-8^2$  
+g) $(-6)^4$  
+h) $-7^3$  
+i) $(-2)^0$  
+j) $(-1)^{2021}$  
+
+---
+
+## 3. Completați tabelul
+
+| a  | n | aⁿ | –aⁿ | (–a)ⁿ |
+|----|---|----|------|--------|
+| –3 | 2 |    |      |        |
+| –3 | 3 |    |      |        |
+| +2 | 4 |    |      |        |
+| +2 | 5 |    |      |        |
+| –1 | 6 |    |      |        |
+| –1 | 7 |    |      |        |
+
+---
+
+## 4. Scrieți
+
+a) Numărul 4 ca putere cu baza –2  
+b) Numărul –8 ca putere cu baza –2  
+c) Numărul +16 ca putere cu exponentul +2  
+d) Numărul –64 ca putere cu exponentul +3  
+e) Numărul –1 ca putere cu exponent mai mare de 100  
+
+---
+
+## 5. Scrieți rezultatele ca puteri
+
+I.  
+a) $(-3)^2 \cdot (-3)^4$  
+b) $(-2)^3 \cdot (-2)^5 \cdot (-2)$  
+c) $5^0 \cdot 5 \cdot 5^3 \cdot 5^2$
+
+II.  
+a) $(-8)^{12} : (-8)^{10}$  
+b) $(-4)^7 : (-4)^6$  
+c) $(-2)^{15} : (-2) : (-2)^8$
+
+III.  
+a) $[(-3)^2]^4$  
+b) $[(-5)^3]^5$  
+c) $\{[(-7)^8]^{10}\}^0$
+
+IV.  
+a) $(-3)^2 \cdot (-5)^2$  
+b) $3^4 \cdot 25^2 \cdot 4^2$  
+c) $(-12)^8 : (+4)^8$
+
+---
+
+## 6. Asociați calculele cu rezultatele (săgeți)
+
+a) $(-2)^2 \cdot (-2)^3$  
+b) $(-3)^8 : (-3)^2$  
+c) $(4^3)^5$  
+d) $[-2\cdot(-3)^2]^3$
+
+(Rezultatele: valori de forma $(-2)^{2+3}$, $(-3)^{8-2}$ etc.)
+
+---
+
+## 7. Determinați numerele întregi n pentru care
+
+$$\frac{n^7}{n^5} = 25$$
+
+---
+
+## 8. Efectuați și exprimați rezultatele ca puteri
+
+a) $[5^5\cdot(-5)^2]^3 : 5^{20}$  
+b) $[9\cdot(-3)^3]^2 : 3^8$  
+c) $(-2)^{35} : (-2)^{33} + (-2)^{21} : (-2)^{20}$  
+
+---
+
+## 9. Comparați puterile fără a calcula rezultatele
+
+a) $(-4)^5$ și $(-4)^6$  
+b) $(-2)^{71}$ și $(-3)^{71}$  
+c) $(-2)^{40}$ și $(-16)^{10}$  
+d) $(-3)^{75}$ și $(-2)^{125}$  
+
