@@ -10,6 +10,24 @@ import React, { useState } from 'react';
 
 export default function LectiiTreeView() {
   const saptamani = [
+          {
+      titlu: 'Săptămâna 13: 08.12 - 12.12 | FINAL MODUL 2',
+      note: 'Materiale încarcate',
+      lectii: [
+
+      ],
+    },
+      {
+      titlu: 'Săptămâna 12: 02.12 - 05.12',
+      note: 'Materiale încarcate | 1 decembrie liber',
+      lectii: [
+        { titlu: 'LP - REZOLVARE SIMULARE Subiect 1 + 2', zi: '03.12 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'LP - REZOLVARE SIMULARE Subiect 3', zi: '03.12 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'C12 - Mărimi și unități de măsură', zi: '04.12 (ora 1)', tip: 'Algebra', link: 'c8/modul-2/09.mdx', pdf: '' },
+        { titlu: 'LP - Mărimi și unități de măsură', zi: '04.12 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
+
+      ],
+    },
       {
       titlu: 'Săptămâna 11: 24.11 - 28.11',
       note: 'Materiale încarcate',

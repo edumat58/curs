@@ -1,123 +1,46 @@
 ---
-slug: /c6/modul-2/10
 sidebar_position: 11
+slug: /c6/modul-2/10
 description: ""
 ---
 
-import Math from '/src/theme/Math';
+import Katex from '@site/src/components/Katex';
 
-# C15 - Mărimi și unități de măsură
----
-## Mărimi compuse
 
-**Def.:** O mărime NU este un număr, dar este măsura unui număr care se exprimă începând de la o mărime exprimată ca o unitate.
-
-- Lungimea, masa, durata sunt mărimi.
-- Lungimea se exprimă în metri (m), masa în kilograme (kg), durata în secunde (s).
-
-<Math display={true}>{String.raw`<m>_{x} = kg`}</Math>
+# C15 - Reguli de calcul cu puteri
 
 ---
 
-## Mărimi compuse – 2 unități asociate
+## 1.1. Regula 1
 
-- Mărimile compuse sunt între două mărimi, și mărimile lor, exprimate cu 2 unități asociate.
-- Calculul care implică 2 unități asociate se efectuează păstrând unitățile respective.
+$$a^m \cdot a^n = a^{m+n}$$
 
----
+### Exemple
 
-## Mărimi produs
-
-**Energia electrică (E)** consumată de un dispozitiv cu putere (P) într-o perioadă de timp (t) se calculează cu formula:
-
-<Math display={true}>{String.raw`E = P \cdot t`}</Math>
-
-- <Math>{String.raw`<P> = W \text{ (watt)}`}</Math>
-- <Math>{String.raw`<t> = s \text{ (secunde)}`}</Math>
-- <Math>{String.raw`<E> = J \text{ (joule)}`}</Math>
-
-> Joule-ul este o unitate de măsură foarte mică. Se preferă utilizarea Wh sau kWh.
-
-<Math display={true}>{String.raw`1Wh = 3600J \quad \text{ | } \quad 1kWh = 1000Wh = 1000 \cdot 3600J`}</Math>
-
-### Exemplu
-
-Un cuptor electric cu o putere de 2500 W funcționează timp de 2 ore. Care este energia consumată?
-
-<Math display={true}>{String.raw`E = 2500 \cdot 2 = 5000Wh = 5kWh = 5 \cdot 3600J = 18000J`}</Math>
+- $2^3 \cdot 2^4 = 2^{3+4} = 2^7 = 128$
+- $3^5 \cdot 3^2 = 3^{5+2} = 3^7 = 2187$
 
 ---
 
-## Volumul unui paralelipiped
+## 1.2. Regula 2
 
-<Math display={true}>{String.raw`V = B \cdot h \quad \text{unde B = bază, h = înălțime}`}</Math>
+$$\frac{a^m}{a^n} = a^{m-n}$$
 
-Unități:
-- Bază în m²
-- Înălțime în m
-- Volum în m³
+### Exemple
 
-### Exemplu:
-Un cilindru cu baza de 2,5 m² și înălțimea de 4 m:
-
-<Math display={true}>{String.raw`V = 2.5 \cdot 4 = 10 m^3`}</Math>
+- $\frac{2^5}{2^2} = 2^{5-2} = 2^3 = 8$
+- $\frac{3^7}{3^3} = 3^{7-3} = 3^4 = 81$
 
 ---
 
-## Mărimi fracționale – Viteză medie
+## 1.3. Regula 3
 
-Viteza medie (v) a unui vehicul care parcurge o distanță (d) într-un timp (t):
+$$(a^m)^n = a^{m \cdot n}$$
 
-<Math display={true}>{String.raw`v = \frac{d}{t}`}</Math>
+### Exemple
 
-Unități:
-<Math>{String.raw`[v] = \frac{m}{s} \quad sau \quad 1m/s`}</Math>
-
-### Exemplu:
-Un atlet parcurge 400 m în 50 s. Viteza medie este:
-
-<Math display={true}>{String.raw`v = \frac{400}{50} = 8 \text{ m/s} = 0.008 \text{ km/s} = 0.048 \text{ km/h}`}</Math>
+- $(2^3)^4 = 2^{3 \cdot 4} = 2^{12} = 4096$
+- $(3
 
 ---
 
-## Debit (Q) – Volum în timp
-
-Debit = volumul (V) livrat într-un timp (t):
-
-<Math display={true}>{String.raw`Q = \frac{V}{t}`}</Math>
-
-<Math>{String.raw`[Q] = \frac{m^3}{s} = \frac{l}{min}`}</Math>
-
-### Atenție!
-<Math display={true}>{String.raw`1m^3 = 1000l`}</Math>
-
-### Exemplu:
-Un bazin de apă lasă să curgă 100m³ în 5h. Ce debit are?
-
-<Math display={true}>{String.raw`Q = \frac{100}{5} = 20 \text{ m}^3/\text{h}`}</Math>
-
----
-
-## Volum de masă (densitate)
-
-Densitatea <Math>{String.raw`\rho`}</Math> a unui corp este raportul dintre masa și volumul său:
-
-<Math display={true}>{String.raw`\rho = \frac{m}{V}`}</Math>
-
-Exemplu: un bloc de oțel are 4050 kg și volumul 1.5m³:
-
-<Math display={true}>{String.raw`\rho = \frac{4050}{1.5} = 2700 \text{ kg/m}^3`}</Math>
-
-Conversii:
-<Math>{String.raw`1m^3 = 1000 dm^3`}</Math>
-
----
-
-## Densitatea populației
-
-Este exprimată în număr de persoane pe km²:
-
-### Exemplu:
-În 2015, în regiunea Alpi – Coasta de Azur, erau 4.990.000 de locuitori pe o suprafață de 31.400 km². Care este densitatea populației?
-
-<Math display={true}>{String.raw`\text{Densitatea} = \frac{4990000}{31400} \approx 158 \text{ loc/km}^2`}</Math>

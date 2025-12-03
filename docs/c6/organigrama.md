@@ -12,19 +12,24 @@ export default function LectiiTreeView() {
   const saptamani = [
       {
       titlu: 'Săptămâna 13: 08.12 - 12.12 | FINAL MODUL 2',
-      note: '',
+      note: 'Materiale încarcate',
       lectii: [
-        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
+        { titlu: 'C15 - Reguli de calcul cu puteri', zi: '10.12 (ora 1)', tip: 'Algebra', link: 'c6/modul-2/10', pdf: '' },
+        { titlu: 'LP - Calcul cu puteri', zi: '10.12 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'LP - Calcul cu puteri', zi: '11.12 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'LP - Calcul cu puteri', zi: '11.12 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'LP - Calcul cu puteri', zi: '12.12', tip: 'Algebra', link: '', pdf: '' },
       ],
     },
       {
       titlu: 'Săptămâna 12: 02.12 - 05.12',
-      note: '1 decembrie liber',
+      note: 'Materiale încarcate | 1 decembrie liber',
       lectii: [
-        { titlu: 'C13 - Puterea cu exponent număr natural a unui număr întreg nenul', zi: '03.12 (ora 1)', tip: 'Algebra', link: 'c5/modul-2/8', pdf: '' },
-        { titlu: 'LP - Puterea cu exponent număr natural a unui număr întreg nenul', zi: '03.12 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
-        { titlu: 'LP - Puterea cu exponent număr natural a unui număr întreg nenul', zi: '04.12 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
-        { titlu: 'C14 - Reguli de calcul cu puteri', zi: '04.12 (ora 2)', tip: 'Algebra', link: 'c5/modul-2/9', pdf: '' },
+        { titlu: 'C13 - Mărimi și unități de măsură (1)', zi: '03.12 (ora 1)', tip: 'Algebra', link: 'c6/modul-2/8', pdf: '' },
+        { titlu: 'C13 - Mărimi și unități de măsură (2)', zi: '03.12 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'LP - Mărimi și unități de măsură', zi: '04.12 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'LP - Mărimi și unități de măsură', zi: '04.12 (ora 2)', link: '', pdf: '' },
+        { titlu: 'C14 - Puterea cu exponent număr natural a unui număr întreg nenul', zi: '05.12',link: 'c6/modul-2/9', pdf: '' },
       ],
     },
     {
