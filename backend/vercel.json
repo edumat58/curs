@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "email-server.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "email-server.js"
+    }
+  ],
+  "functions": {
+    "email-server.js": {
+      "maxDuration": 10
+    }
+  }
+}
