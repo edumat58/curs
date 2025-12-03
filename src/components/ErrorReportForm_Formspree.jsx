@@ -260,7 +260,7 @@ Instrucțiuni pentru trimitere:
     <Overlay onClick={handleOverlayClick}>
       <FormContainer onClick={(e) => e.stopPropagation()}>
         <CloseButton onClick={onClose} disabled={isLoading}>&times;</CloseButton>
-        <Title>Raportează o eroare în pagină</Title>
+        <Title>Raportează o eroare în curs</Title>
         
         
         {isSuccess && (

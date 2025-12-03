@@ -222,11 +222,11 @@ const ErrorReportForm = ({ isOpen, onClose }) => {
     <Overlay onClick={handleOverlayClick}>
       <FormContainer onClick={(e) => e.stopPropagation()}>
         <CloseButton onClick={onClose} disabled={isLoading}>&times;</CloseButton>
-        <Title>Raportează o eroare în pagină</Title>
+        <Title>Raportează o eroare în curs</Title>
         
         {isSuccess && (
           <StatusMessage className="success">
-            ✅ Raportul a fost trimis automat cu succes! Se închide automat...
+            Raportul a fost trimis automat cu succes! Se închide automat...
           </StatusMessage>
         )}
         
