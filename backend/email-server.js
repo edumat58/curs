@@ -4,7 +4,11 @@ const cors = require('cors');
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: ['https://edumat58.github.io', 'http://localhost:3000', 'http://localhost:3001', 'http://localhost:3002'],
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(express.json());
 
 // Create transporter with Gmail SMTP

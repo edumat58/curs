@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 // Backend endpoint configuration
-const EMAIL_BACKEND_URL = 'https://backend-rjo5ckj5g-deussebyum11724s-projects.vercel.app/send-error-report';
+const EMAIL_BACKEND_URL = 'https://backend-nmxw515k4-deussebyum11724s-projects.vercel.app/send-error-report';
 
 const Overlay = styled.div`
   position: fixed;
@@ -235,12 +235,6 @@ const ErrorReportForm = ({ isOpen, onClose }) => {
             ❌ {error}
           </StatusMessage>
         )}
-        
-        <InfoBox>
-          <strong>📧 Email Automat:</strong><br/>
-          Email-ul va fi trimis automat de la <strong>eduprof.uruguay@gmail.com</strong> către <strong>asbri.sebastian@gmail.com</strong> cu toate informațiile raportului.
-          <br/><em>Utilizează backend cu nodemailer pentru trimitere reală</em>
-        </InfoBox>
         
         <Form onSubmit={handleSubmit}>
           <Field>

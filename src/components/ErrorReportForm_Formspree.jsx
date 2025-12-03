@@ -262,13 +262,6 @@ Instrucțiuni pentru trimitere:
         <CloseButton onClick={onClose} disabled={isLoading}>&times;</CloseButton>
         <Title>Raportează o eroare în pagină</Title>
         
-        <SetupInfo>
-          <strong>📧 Configurare Email Automat:</strong><br/>
-          Pentru trimitere automată, configurați Formspree.io gratuit:
-          <br/>1. Creați cont pe formspree.io
-          <br/>2. Obțineți endpoint-ul pentru email forwarding  
-          <br/>3. Înlocuiți FORMSPREE_ENDPOINT în cod
-        </SetupInfo>
         
         {isSuccess && (
           <StatusMessage className="success">

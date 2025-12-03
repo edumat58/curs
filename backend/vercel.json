@@ -11,10 +11,5 @@
       "src": "/(.*)",
       "dest": "email-server.js"
     }
-  ],
-  "functions": {
-    "email-server.js": {
-      "maxDuration": 10
-    }
-  }
+  ]
 }
