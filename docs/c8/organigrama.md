@@ -14,7 +14,11 @@ export default function LectiiTreeView() {
       titlu: 'Săptămâna 13: 08.12 - 12.12 | FINAL MODUL 2',
       note: 'Materiale încarcate',
       lectii: [
-
+        { titlu: 'LP - Ecuatia de gradul 2 si expresii algebrice', zi: '08.12', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'LP - RECAPITULARE TEST', zi: '10.12 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'TEST (nota 4) | C10.1 - C12 & G4.1 - G5.2', zi: '10.12 (ora 2)', tip: 'EVALUARE SUMATIVA', link: '', pdf: '' },
+        { titlu: 'REZOLVARE TEST', zi: '11.12 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'LP - SUBIECT MODEL EN (ALGEBRA)', zi: '11.1 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
       ],
     },
       {
@@ -23,7 +27,7 @@ export default function LectiiTreeView() {
       lectii: [
         { titlu: 'LP - REZOLVARE SIMULARE Subiect 1 + 2', zi: '03.12 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
         { titlu: 'LP - REZOLVARE SIMULARE Subiect 3', zi: '03.12 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
-        { titlu: 'C12 - Mărimi și unități de măsură', zi: '04.12 (ora 1)', tip: 'Algebra', link: 'c8/modul-2/09.mdx', pdf: '' },
+        { titlu: 'C12 - Mărimi și unități de măsură', zi: '04.12 (ora 1)', tip: 'Algebra', link: 'c8/modul-2/09', pdf: '' },
         { titlu: 'LP - Mărimi și unități de măsură', zi: '04.12 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
 
       ],
@@ -32,7 +36,7 @@ export default function LectiiTreeView() {
       titlu: 'Săptămâna 11: 24.11 - 28.11',
       note: 'Materiale încarcate',
       lectii: [
-        { titlu: 'G5.2 - Cilindrul circular drept (arii și volum)', zi: '24.11', tip: 'Geometrie', link: 'c7/modul-2/8', pdf: '' },
+        { titlu: 'G5.2 - Cilindrul circular drept (arii și volum)', zi: '24.11', tip: 'Geometrie', link: 'c8/modul-2/8', pdf: '' },
         { titlu: 'LP - Cilindrul circular drept', zi: '26.11 (ora 1)', tip: 'Geometrie', link: '', pdf: '' },
         { titlu: 'LP - RECAPITULARE SIMULARE EN', zi: '26.11 (ora 2)', tip: 'Recapitulare', link: '', pdf: '' },
         { titlu: 'Simulare EN | PARTEA I (Algebra)', zi: '27.11 (ora 1)', tip: 'Evaluare Sumativa', link: '', pdf: '' },
@@ -45,20 +49,20 @@ export default function LectiiTreeView() {
       titlu: 'Săptămâna 10: 17.11 - 21.11',
       note: 'Simulare EN 27.11 (ora 1 și ora 2) [50 % NOTA 4]',
       lectii: [
-        { titlu: 'G4.2 - Prisma dreaptă (arii și volum)', zi: '17.11', tip: 'Geometrie', link: 'c7/modul-2/6', pdf: '' },
+        { titlu: 'G4.2 - Prisma dreaptă (arii și volum)', zi: '17.11', tip: 'Geometrie', link: 'c8/modul-2/6', pdf: '' },
         { titlu: 'LP - Prisma dreaptă', zi: '19.11 (ora 1)', tip: 'Geometrie', link: '', pdf: '' },
         { titlu: 'LP - Prisma dreaptă', zi: '19.11 (ora 2)', tip: 'Geometrie', link: '', pdf: '' },
-        { titlu: 'G5.1 - Cilindrul circular drept (1)', zi: '20.11', tip: 'Geometrie', link: 'c7/modul-2/7', pdf: '' },
+        { titlu: 'G5.1 - Cilindrul circular drept (1)', zi: '20.11', tip: 'Geometrie', link: 'c8/modul-2/7', pdf: '' },
       ],
     },
     {
       titlu: 'Săptămâna 9: 10.11 - 14.11',
       note: 'Materiale încarcate',
       lectii: [
-        { titlu: 'C11 - Ecuația de gradul al doilea', zi: '10.11', tip: 'Algebra', link: 'c7/modul-2/4', pdf: '' },
+        { titlu: 'C11 - Ecuația de gradul al doilea', zi: '10.11', tip: 'Algebra', link: 'c8/modul-2/4', pdf: '' },
         { titlu: 'LP - Ecuația de gradul al doilea', zi: '12.11 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
         { titlu: 'LP - Ecuația de gradul al doilea', zi: '12.11 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
-        { titlu: 'G4.1 - Prisma dreaptă', zi: '13.11 (ora 1)', tip: 'Geometrie', link: 'c7/modul-2/5', pdf: '' },
+        { titlu: 'G4.1 - Prisma dreaptă', zi: '13.11 (ora 1)', tip: 'Geometrie', link: 'c8/modul-2/5', pdf: '' },
         { titlu: 'LP - Prisma dreaptă', zi: '13.11 (ora 2)', tip: 'Geometrie', link: '', pdf: '' },
       ],
     },

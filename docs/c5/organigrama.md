@@ -15,7 +15,11 @@ export default function LectiiTreeView() {
       titlu: 'Săptămâna 13: 08.12 - 12.12 | FINAL MODUL 2',
       note: '',
       lectii: [
-        { titlu: '', zi: '', tip: '', link: '', pdf: '' },
+        { titlu: 'LP - REZOLVARE TEST', zi: '08.12', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'C18 - Numar prim si numar compus (1)', zi: '09.12 (ora 1)', tip: 'Algebra', link: 'c5/modul-2/10', pdf: '' },
+        { titlu: 'C18 - Numar prim si numar compus (2)', zi: '09.12 (ora 2)', tip: 'Algebra', link: 'c5/modul-2/10', pdf: '' },
+        { titlu: 'LP - Numar prim si numar compus', zi: '10.12', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'LP - Numar prim si numar compus', zi: '11.12', tip: 'Algebra', link: '', pdf: '' },
       ],
     },
       {

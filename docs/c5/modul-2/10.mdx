@@ -1,0 +1,132 @@
+---
+sidebar_position: 11
+slug: /c5/modul-2/10
+description: ""
+---
+
+# C18 - Număr prim, număr compus
+
+---
+
+## Numere prime
+
+:::tip Defintie
+
+Oricare număr natural $a$, diferit de 1, are cel puțin divizorii 1 și $a$. Un număr natural mai mare decât 1, care are exact doi divizori (pe 1 și pe el însuși), se numește număr prim. 
+
+:::
+
+:::danger De Retinut!
+
+Singurul număr par prim este 2.
+
+Numerele naturale 0 și 1 nu sunt nici prime, nici compuse. Numărul
+natural 0 are o infinitate de divizori, toate numerele naturale nenule, iar numărul
+natural 1 are un singur divizor, el însuși.
+
+:::
+
+---
+
+### Ciurul lui Eratostene
+
+:::tip Algoritm 1
+**Ciurul lui Eratostene** este un algoritm simplu și vechi de descoperire a
+tuturor numerelor prime până la un număr specificat.
+:::
+
+**Pașii algoritmului:**
+1. Scriem o listă cu toate numerele naturale de la 2 până la un număr $n$.
+2. Se taie toți multiplii lui 2 din lista. Rezultă o listă cu numere tăiate și
+numere netăiate.
+3. Următorul număr netăiat este 3. Se taie toți multiplii lui 3 din listă.
+4. Se continuă acest proces cu următorul număr netăiat (5, 7, 11, ...).
+5. Se repetă pasul de mai sus până când noua listă nu mai conține numere
+netăiate.
+
+> În lista finală toate numerele netăiate sunt **prime**.
+
+|<s>1</s>|**2**|**3**|<s>4</s>|**5**|<s>6</s>|**7**|<s>8</s>|<s>9</s>|<s>10</s>|
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+|**11**|<s>12</s>|**13**|<s>14</s>|<s>15</s>|<s>16</s>|**17**|<s>18</s>|**19**|<s>20</s>|
+|<s>21</s>|<s>22</s>|**23**|<s>24</s>|<s>25</s>|<s>26</s>|<s>27</s>|<s>28</s>|**29**|<s>30</s>|
+|**31**|<s>32</s>|<s>33</s>|<s>34</s>|<s>35</s>|<s>36</s>|**37**|<s>38</s>|<s>39</s>|<s>40</s>|
+|**41**|<s>42</s>|<s>43</s>|<s>44</s>|<s>45</s>|<s>46</s>|**47**|<s>48</s>|<s>49</s>|<s>50</s>|
+|<s>51</s>|<s>52</s>|**53**|<s>54</s>|<s>55</s>|<s>56</s>|<s>57</s>|<s>58</s>|**59**|<s>60</s>|
+|**61**|<s>62</s>|<s>63</s>|<s>64</s>|<s>65</s>|<s>66</s>|**67**|<s>68</s>|<s>69</s>|<s>70</s>|
+|**71**|<s>72</s>|<s>73</s>|<s>74</s>|<s>75</s>|<s>76</s>|<s>77</s>|<s>78</s>|**79**|<s>80</s>|
+|<s>81</s>|<s>82</s>|**83**|<s>84</s>|<s>85</s>|<s>86</s>|<s>87</s>|<s>88</s>|**89**|<s>90</s>|
+|<s>91</s>|<s>92</s>|<s>93</s>|<s>94</s>|<s>95</s>|<s>96</s>|**97**|<s>98</s>|<s>99</s>|<s>100</s>|
+
+
+> Numerele prime mai mici decât 100 sunt:
+
+> 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97.
+
+---
+### Descompunerea în factori primi
+
+:::tip Algoritm 2
+Orice număr natural mai mare decât 1 poate fi scris ca produs de numere prime. Acest proces se numește **descompunerea în factori primi**.
+:::
+
+**Pașii algoritmului:**
+1. Se împarte numărul la cel mai mic număr prim (2) și se notează câtul și restul.
+2. Dacă restul este 0, se continuă împărțirea câtului la 2 până când restul nu mai este 0.
+3. Când restul nu mai este 0, se trece la următorul număr prim (3) și se repetă pașii 1 și 2.
+4. Se continuă acest proces cu următoarele numere prime (5, 7, 11, ...) până când câtul devine 1.
+
+:::danger Atentie!
+Daca un număr este prim, descompunerea sa în factori primi este el însuși.
+
+Când vrem sa demonstrăm că un număr este prim, încercăm să împărțim numărul dat succesiv la toate numerele naturale prime, luate în
+ordine crescătoare, până când obținem câtul mai mic decât împărțitorul
+:::
+
+**Exemplu: Descompunerea numărului 60 în factori primi**
+1. 60 este par, deci îl împărțim la 2:  
+   $60 : 2 = 30$ rest $0$
+2. 30 este par, deci îl împărțim la 2:  
+   $30 : 2 = 15$ rest $0$
+3. 15 nu este par, deci îl împărțim la 3:  
+   $15 : 3 = 5$ rest $0$
+4. 5 este prim, deci îl împărțim la 5:  
+   $5 : 5 = 1$ rest $0$
+
+>Am ajuns la 1, deci procesul se oprește.
+
+**Exemplu 2: Descompunerea numărului 83 în factori primi**
+1. 83 nu este par, deci îl împărțim la 3:  
+   $83 : 3 = 27$ rest $2$
+
+83 nu este divizibil cu 5:  
+   $83 : 5 = 16$ rest $3$
+
+83 nu este divizibil cu 7:  
+   $83 : 7 = 11$ rest $6$
+
+83 nu este divizibil cu 11:
+    $83 : 11 = 7$ rest $6$
+
+> $7<11$, deci ne oprim aici.
+
+> Am încercat toți divizorii primi mai mici sau egali cu 41 (jumătate din 83) și niciunul nu divide 83, deci 83 este prim.
+
+---
+
+## Numere compuse
+:::tip Defintie
+Oricare număr natural $a$, diferit de 1, care are cel puțin trei divizori, se numește **număr compus**.
+:::
+
+**Exemplu:**
+:::note Enunt
+Pentru a arăta că un număr este compus este suficient să găsim un
+divizor propriu al acestuia.
+:::
+
+a) 111 este număr compus deoarece 1+1+1=3 ⋮ 3.
+
+b)  707 este număr compus deoarece observăm ușor că 707 ⋮ 7
+
+c) 131313 este număr compus deoarece observăm ușor că 131313 ⋮ 13
