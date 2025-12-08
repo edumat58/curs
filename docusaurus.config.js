@@ -121,7 +121,7 @@ const config = {
           type: 'html',
           position: 'right',
           value: `
-            <span style="font-size: 0.9rem; opacity: 0.7;">Ultima actualizare: 07.12.2025, 14:29</span>
+            <span style="font-size: 0.9rem; opacity: 0.7;">Ultima actualizare: 08.12.2025, 12:56</span>
           `,
         },
         {
