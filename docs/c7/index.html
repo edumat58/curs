@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poster A4 - Vocea Ta Contează</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&family=Open+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <!-- Markdown Parser -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-blue': '#0f172a', 
+                        'brand-accent': '#f97316', 
+                        'brand-light': '#f8fafc',
+                    },
+                    fontFamily: {
+                        'head': ['Montserrat', 'sans-serif'],
+                        'body': ['Open Sans', 'sans-serif'],
+                    },
+                    screens: {
+                        'print': {'raw': 'print'},
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* A4 Specifications */
+        :root {
+            --a4-width: 210mm;
+            --a4-height: 297mm;
+        }
+
+        body {
+            background-color: #525659; /* Dark gray background like a PDF viewer */
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        /* The Sheet itself */
+        .page {
+            width: var(--a4-width);
+            height: var(--a4-height);
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            margin: 20px auto;
+            position: relative;
+            box-sizing: border-box;
+            overflow: hidden; /* Ensure nothing bleeds out */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .clip-diagonal {
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
+
+        /* PRINT STYLES - CRITICAL */
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 0;
+            }
+            body {
+                background: none;
+                margin: 0;
+                display: block;
+            }
+            .page {
+                margin: 0;
+                box-shadow: none;
+                width: 100%;
+                height: 100%;
+                border: none;
+            }
+            /* Hide UI elements specifically for print */
+            #chat-widget, 
+            .no-print, 
+            .ai-controls, 
+            .ai-response-area,
+            #print-btn-container {
+                display: none !important;
+            }
+            /* Ensure colors print correctly */
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+
+        /* Utilities */
+        .text-shadow {
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        /* Compact layout for grid items to fit A4 */
+        .topic-card-compact h4 {
+            font-size: 0.9rem;
+            line-height: 1.1;
+        }
+        .topic-card-compact p {
+            font-size: 0.75rem;
+            line-height: 1.1;
+            margin-bottom: 0;
+        }
+        .topic-icon {
+            font-size: 1rem;
+            width: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Print Button (Visible only on screen) -->
+    <div id="print-btn-container" class="w-full max-w-[210mm] mt-6 flex justify-between items-center px-4 text-white">
+        <div>
+            <h1 class="font-bold text-lg">Previzualizare A4</h1>
+            <p class="text-sm text-gray-300">Aceasta este dimensiunea exactă pentru printare.</p>
+        </div>
+        <button onclick="window.print()" class="bg-white text-brand-blue font-bold py-2 px-6 rounded-full shadow-lg hover:bg-brand-accent hover:text-white transition gap-2 flex items-center">
+            <i class="fas fa-print"></i> Printează Posterul
+        </button>
+    </div>
+
+    <!-- A4 CANVAS STARTS HERE -->
+    <div class="page bg-brand-blue text-white relative border-8 border-white">
+        
+        <!-- Background Decor -->
+        <div class="absolute top-0 right-0 w-64 h-64 bg-brand-accent opacity-10 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-80 h-80 bg-blue-600 opacity-10 rounded-full blur-3xl -ml-20 -mb-20 pointer-events-none"></div>
+
+        <!-- HEADER (Occupies approx 20% height) -->
+        <header class="relative bg-gradient-to-r from-blue-900 to-slate-900 pt-8 pb-10 px-8 text-center clip-diagonal z-10">
+            <h1 class="font-head font-black text-5xl text-white uppercase tracking-tight leading-none mb-1 text-shadow">
+                Vocea Ta <span class="text-brand-accent">Contează!</span>
+            </h1>
+            <div class="border-t border-blue-700 w-2/3 mx-auto mt-2 mb-2"></div>
+            <h2 class="font-head font-bold text-xl text-blue-200 uppercase tracking-wide">
+                Atelier de Dezbateri & Gândire Critică
+            </h2>
+            <h3 class="font-head text-xs font-bold text-blue-300 mt-1 uppercase tracking-wider">
+                prof. coordonatori: BRIȘAN Andrei-Sebastian, ARSENE Denisa
+            </h3>
+            
+            <div class="absolute top-6 right-6 transform rotate-12">
+                <div class="bg-brand-accent text-white px-4 py-1 rounded-full font-bold shadow-lg border-2 border-white text-sm">
+                    <i class="fas fa-star text-yellow-300"></i> SĂPTĂMÂNA ALTFEL
+                </div>
+            </div>
+        </header>
+
+        <!-- MAIN CONTENT (Flex grow to fill space) -->
+        <main class="flex-grow flex flex-col px-8 relative z-20 -mt-4">
+            
+            <!-- Hook Box -->
+            <div class="bg-white text-brand-blue p-4 rounded-xl shadow-xl border-l-8 border-brand-accent mb-6 relative">
+                <div class="flex items-center gap-3">
+                    <i class="fas fa-quote-left text-brand-accent text-3xl opacity-30"></i>
+                    <div>
+                        <p class="font-head font-extrabold text-lg leading-tight">Crezi că ai mereu dreptate?</p>
+                        <p class="text-sm text-gray-600 leading-tight mt-1">
+                            Vino să ne demonstrezi! Descoperă puterea argumentelor într-un mediu prietenos.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Topics Grid (Compact for A4) -->
+            <div class="mb-4">
+                <h3 class="font-head font-bold text-lg text-center mb-3 flex items-center justify-center gap-2">
+                    <span class="bg-brand-accent w-2 h-6 rounded"></span>
+                    <span class="text-brand-accent">TEME DE DISCUȚIE</span> 
+                </h3>
+
+                <!-- Grid Layout strictly for A4 fitting -->
+                <div class="grid grid-cols-2 gap-3" id="topics-container">
+                    
+                    <!-- Topic 1 -->
+                    <div class="topic-card bg-slate-800/60 rounded-lg border border-slate-700 p-2 flex items-center gap-3">
+                        <div class="bg-blue-600 w-10 h-10 flex items-center justify-center rounded-lg text-white shrink-0">
+                            <i class="fas fa-mobile-alt text-lg"></i>
+                        </div>
+                        <div class="topic-card-compact">
+                            <h4 class="font-bold text-brand-accent">Telefoanele la școală</h4>
+                            <p class="text-gray-300">Util sau distragere?</p>
+                            <!-- AI Button (Hidden in Print) -->
+                            <button onclick="toggleAiPanel(this)" class="no-print mt-1 text-[10px] bg-slate-700 hover:bg-brand-accent text-white px-2 py-0.5 rounded transition">
+                                <i class="fas fa-sparkles text-yellow-400"></i> AI Argumente
+                            </button>
+                        </div>
+                        <!-- Hidden AI Panel -->
+                        <div class="ai-panel hidden absolute z-50 bg-slate-900 border border-brand-accent p-3 rounded-lg w-64 shadow-2xl ml-10">
+                            <p class="text-xs text-gray-300 mb-2">Generează argumente:</p>
+                            <div class="flex gap-2">
+                                <button onclick="generateContent(this, 'PRO', 'Telefoanele la școală')" class="text-xs bg-green-600 px-2 py-1 rounded">PRO</button>
+                                <button onclick="generateContent(this, 'CONTRA', 'Telefoanele la școală')" class="text-xs bg-red-600 px-2 py-1 rounded">CONTRA</button>
+                            </div>
+                            <div class="ai-result text-[10px] text-white mt-2"></div>
+                        </div>
+                    </div>
+
+                    <!-- Topic 2 -->
+                    <div class="topic-card bg-slate-800/60 rounded-lg border border-slate-700 p-2 flex items-center gap-3">
+                        <div class="bg-blue-600 w-10 h-10 flex items-center justify-center rounded-lg text-white shrink-0">
+                            <i class="fas fa-user-tie text-lg"></i>
+                        </div>
+                        <div class="topic-card-compact">
+                            <h4 class="font-bold text-brand-accent">Uniformele școlare</h4>
+                            <p class="text-gray-300">Egalitate sau nu?</p>
+                            <button onclick="toggleAiPanel(this)" class="no-print mt-1 text-[10px] bg-slate-700 hover:bg-brand-accent text-white px-2 py-0.5 rounded transition">
+                                <i class="fas fa-sparkles text-yellow-400"></i> AI Argumente
+                            </button>
+                        </div>
+                        <div class="ai-panel hidden absolute z-50 bg-slate-900 border border-brand-accent p-3 rounded-lg w-64 shadow-2xl ml-10">
+                            <div class="flex gap-2 mb-2">
+                                <button onclick="generateContent(this, 'PRO', 'Uniforme')" class="text-xs bg-green-600 px-2 py-1 rounded">PRO</button>
+                                <button onclick="generateContent(this, 'CONTRA', 'Uniforme')" class="text-xs bg-red-600 px-2 py-1 rounded">CONTRA</button>
+                            </div>
+                            <div class="ai-result text-[10px] text-white mt-2"></div>
+                        </div>
+                    </div>
+
+                    <!-- Topic 3 -->
+                    <div class="topic-card bg-slate-800/60 rounded-lg border border-slate-700 p-2 flex items-center gap-3">
+                        <div class="bg-blue-600 w-10 h-10 flex items-center justify-center rounded-lg text-white shrink-0">
+                            <i class="fas fa-robot text-lg"></i>
+                        </div>
+                        <div class="topic-card-compact">
+                            <h4 class="font-bold text-brand-accent">Teme cu AI</h4>
+                            <p class="text-gray-300">Ajutor sau trișat?</p>
+                            <button onclick="toggleAiPanel(this)" class="no-print mt-1 text-[10px] bg-slate-700 hover:bg-brand-accent text-white px-2 py-0.5 rounded transition">
+                                <i class="fas fa-sparkles text-yellow-400"></i> AI Argumente
+                            </button>
+                        </div>
+                        <div class="ai-panel hidden absolute z-50 bg-slate-900 border border-brand-accent p-3 rounded-lg w-64 shadow-2xl ml-10">
+                            <div class="flex gap-2 mb-2">
+                                <button onclick="generateContent(this, 'PRO', 'Teme AI')" class="text-xs bg-green-600 px-2 py-1 rounded">PRO</button>
+                                <button onclick="generateContent(this, 'CONTRA', 'Teme AI')" class="text-xs bg-red-600 px-2 py-1 rounded">CONTRA</button>
+                            </div>
+                            <div class="ai-result text-[10px] text-white mt-2"></div>
+                        </div>
+                    </div>
+
+                    <!-- Topic 4 -->
+                    <div class="topic-card bg-slate-800/60 rounded-lg border border-slate-700 p-2 flex items-center gap-3">
+                        <div class="bg-blue-600 w-10 h-10 flex items-center justify-center rounded-lg text-white shrink-0">
+                            <i class="fas fa-gamepad text-lg"></i>
+                        </div>
+                        <div class="topic-card-compact">
+                            <h4 class="font-bold text-brand-accent">Jocuri video</h4>
+                            <p class="text-gray-300">Strategie vs timp pierdut</p>
+                            <button onclick="toggleAiPanel(this)" class="no-print mt-1 text-[10px] bg-slate-700 hover:bg-brand-accent text-white px-2 py-0.5 rounded transition">
+                                <i class="fas fa-sparkles text-yellow-400"></i> AI Argumente
+                            </button>
+                        </div>
+                        <div class="ai-panel hidden absolute z-50 bg-slate-900 border border-brand-accent p-3 rounded-lg w-64 shadow-2xl ml-10">
+                            <div class="flex gap-2 mb-2">
+                                <button onclick="generateContent(this, 'PRO', 'Jocuri Video')" class="text-xs bg-green-600 px-2 py-1 rounded">PRO</button>
+                                <button onclick="generateContent(this, 'CONTRA', 'Jocuri Video')" class="text-xs bg-red-600 px-2 py-1 rounded">CONTRA</button>
+                            </div>
+                            <div class="ai-result text-[10px] text-white mt-2"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Topic 5 (Spans 2 cols to balance) -->
+                    <div class="topic-card col-span-2 bg-slate-800/60 rounded-lg border border-slate-700 p-2 flex items-center gap-3">
+                        <div class="bg-blue-600 w-10 h-10 flex items-center justify-center rounded-lg text-white shrink-0">
+                            <i class="fas fa-tree text-lg"></i>
+                        </div>
+                        <div class="topic-card-compact flex-grow flex justify-between items-center pr-2">
+                            <div>
+                                <h4 class="font-bold text-brand-accent">Protejarea mediului</h4>
+                                <p class="text-gray-300">Responsabilitatea tinerilor?</p>
+                            </div>
+                            <button onclick="toggleAiPanel(this)" class="no-print mt-1 text-[10px] bg-slate-700 hover:bg-brand-accent text-white px-2 py-0.5 rounded transition">
+                                <i class="fas fa-sparkles text-yellow-400"></i> AI Argumente
+                            </button>
+                        </div>
+                        <div class="ai-panel hidden absolute z-50 bg-slate-900 border border-brand-accent p-3 rounded-lg w-64 shadow-2xl ml-10 mt-10">
+                            <div class="flex gap-2 mb-2">
+                                <button onclick="generateContent(this, 'PRO', 'Mediu')" class="text-xs bg-green-600 px-2 py-1 rounded">PRO</button>
+                                <button onclick="generateContent(this, 'CONTRA', 'Mediu')" class="text-xs bg-red-600 px-2 py-1 rounded">CONTRA</button>
+                            </div>
+                            <div class="ai-result text-[10px] text-white mt-2"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Schedule Box -->
+            <div class="mt-auto mb-6 bg-gradient-to-r from-orange-500 to-orange-700 rounded-xl p-4 shadow-lg text-white relative overflow-hidden">
+                <i class="fas fa-calendar-alt absolute right-2 bottom-[-10px] text-8xl text-white opacity-20"></i>
+                <h3 class="font-head font-black text-xl uppercase mb-3 border-b border-orange-400 pb-1 inline-block">
+                    📅 Programul Activităților
+                </h3>
+                <div class="flex justify-between gap-4 relative z-10">
+                    <div class="bg-black/20 p-3 rounded-lg flex-1 text-center">
+                        <div class="font-bold text-lg">LUNI</div>
+                        <div class="text-2xl font-black">11:00 - 12:00</div>
+                        <div class="text-xs mt-1 bg-white text-orange-700 inline-block px-2 py-0.5 rounded font-bold">Clasele 7A și 7B</div>
+                    </div>
+                    <div class="bg-black/20 p-3 rounded-lg flex-1 text-center">
+                        <div class="font-bold text-lg">MIERCURI</div>
+                        <div class="text-2xl font-black">13:00 - 14:00</div>
+                        <div class="text-xs mt-1 bg-white text-orange-700 inline-block px-2 py-0.5 rounded font-bold">Clasele 6A și 6B</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="bg-white text-brand-blue py-4 text-center border-t-8 border-brand-accent h-[120px] flex flex-col justify-center">
+            <h2 class="font-head font-extrabold text-2xl uppercase leading-none">
+                🔥 Vino cu idei, pleacă cu argumente!
+            </h2>
+            <p class="font-medium mt-1 text-gray-600 text-sm">Te așteptăm în Sala Festivă</p>
+            <!-- QR Code Placeholder -->
+            <div class="absolute bottom-4 right-4 opacity-50">
+                 <i class="fas fa-qrcode text-4xl"></i>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Chat Widget (Floating - Hidden on Print) -->
+    <div id="chat-widget" class="fixed bottom-6 right-6 z-50 no-print">
+        <button onclick="toggleChat()" class="bg-brand-accent hover:bg-orange-600 text-white p-4 rounded-full shadow-2xl flex items-center justify-center w-14 h-14 border-4 border-white transition transform hover:scale-110">
+            <i class="fas fa-comment-dots text-xl"></i>
+        </button>
+        <!-- Chat Window -->
+        <div id="chat-window" class="hidden absolute bottom-16 right-0 w-80 bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden flex flex-col h-96">
+            <div class="bg-brand-blue text-white p-3 flex justify-between items-center">
+                <span class="font-bold text-sm"><i class="fas fa-robot mr-2"></i>Coach Dezbateri</span>
+                <button onclick="toggleChat()"><i class="fas fa-times"></i></button>
+            </div>
+            <div id="chat-messages" class="flex-grow p-3 overflow-y-auto bg-slate-50 text-xs space-y-2">
+                <div class="bg-blue-100 p-2 rounded-lg text-brand-blue">Salut! Ce părere ai despre temele de mai sus? Scrie-mi și te ajut să găsești argumente!</div>
+            </div>
+            <div class="p-2 border-t flex gap-2">
+                <input id="chat-input" type="text" placeholder="Scrie aici..." class="flex-grow border rounded-full px-3 py-1 text-xs outline-none">
+                <button onclick="sendMessage()" class="bg-brand-blue text-white rounded-full w-8 h-8 flex items-center justify-center"><i class="fas fa-paper-plane text-xs"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const apiKey = ""; // System provides this
+
+        // UI Functions
+        function toggleAiPanel(btn) {
+            // Close others
+            document.querySelectorAll('.ai-panel').forEach(el => el.classList.add('hidden'));
+            const panel = btn.parentElement.nextElementSibling; // Adjust selector based on DOM
+            if(panel) panel.classList.toggle('hidden');
+        }
+
+        function toggleChat() {
+            document.getElementById('chat-window').classList.toggle('hidden');
+        }
+
+        // --- AI Logic ---
+        async function callGemini(promptText) {
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ contents: [{ parts: [{ text: promptText }] }] })
+                });
+                const data = await response.json();
+                return data.candidates[0].content.parts[0].text;
+            } catch (e) { return "Eroare conexiune."; }
+        }
+
+        async function generateContent(btn, side, topic) {
+            const resultDiv = btn.closest('.ai-panel').querySelector('.ai-result');
+            resultDiv.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Gândesc...';
+            const prompt = `Argument foarte scurt (1 frază) ${side} despre "${topic}" pentru elevi.`;
+            const text = await callGemini(prompt);
+            resultDiv.innerHTML = marked.parse(text);
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const msgs = document.getElementById('chat-messages');
+            const txt = input.value.trim();
+            if(!txt) return;
+            
+            msgs.innerHTML += `<div class="text-right"><span class="bg-brand-accent text-white p-2 rounded-lg inline-block">${txt}</span></div>`;
+            input.value = '';
+            
+            // Simple AI response for chat
+            const prompt = `Ești coach de dezbateri. Răspunde scurt (max 15 cuvinte) la: "${txt}"`;
+            const reply = await callGemini(prompt);
+            msgs.innerHTML += `<div class="text-left"><span class="bg-blue-100 text-brand-blue p-2 rounded-lg inline-block">${marked.parse(reply)}</span></div>`;
+            msgs.scrollTop = msgs.scrollHeight;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+---
+slug: /c8/modul-2/11
+sidebar_position: 10
+description: ""
+---
+
+import Math from '/src/theme/Math';
+import GeometryDraw from '@site/src/components/GeometryDraw';
+
+# 16 - Triunghiul dreptunghic. Teorema lui Pitagora
+---
+:::tip
+Un triunghi `dreptunghic` are un unghi drept ($90^\circ$), unde latura (cateta) opusă unghiului de $90^\circ$ se numește **ipotenuză**.
+:::
+
+---
+ 
+## Proprietăți
+
+- Un triunghi este dreptunghic dacă unghiurile ascuțite sunt `complementare`.
+> două unghiuri sunt complementare dacă suma lor este $90^\circ$
+
+- Dacă un triunghi este dreptunghic, diametrul cercului circumscris este `egal` cu ipotenuza.
+> Un cerc de centru `O` are o rază `r` trasată din centru până la un punct de pe marginea acestuia; `DIAMETRUL = 2 * r`
+<br />
+
+<GeometryDraw code={`
+align: left
+[
+AB;BC;AC
+A(5,25){hide}
+B(5,8){hide}
+C(30,8){hide}
+label{'Cateta 2';(15,6)}
+label{'Cateta 1';(0.3,15)}
+label{'Ipotenuza';(15,20)}
+label{'A';(4,26)}
+label{'B';(4,6)}
+label{'C';(30,6)}
+circ{d30;c(17.5,16.5)}
+]
+[
+AO{dash};OB
+A(5,10)
+O(16,16)
+B(27,22)
+label{'O';(16,14.5)}
+label{'A';(3.5,9)}
+label{'B';(28,22)}
+label{'r = AO = OB și D = 2*r = AB';(1,1)}
+circ{d25;c(16,16)}
+]
+
+`} />
+
+---
+
+## Teorema lui Pitagora
+
+:::danger De reținut
+Dacă un triunghi este dreptunghic, atunci pătratul ipotenuzei este `egal` cu suma pătratelor catetelor.
+
+$$
+a^2 + b^2 = c^2
+$$
+unde:
+
+$\begin{cases}
+a = \text{cateta 1} = [AB] \\
+b = \text{cateta 2} = [BC]\\
+c = \text{ipotenuza} = [AC]
+\end{cases}$ 
+:::
+
+---
+
+## Recunoașterea unui triunghi dreptunghic
+
+:::info Important
+- Dacă un triunghi are `un unghi drept`, atunci este dreptunghic.
+- Dacă un triunghi are `două unghiuri complementare`, atunci este dreptunghic.
+- Dacă suma pătratelor `două laturi` este `egală` cu pătratul celei de-a treia laturi, atunci triunghiul este dreptunghic.
+:::
+<br />
+
+### Exemplu curs
+
+:::note
+Se dă următorul triunghi  $\triangle ABC$ cu laturile $AB = 24mm$, $BC = 4cm$ si $AC = 32mm$. Verificați dacă triunghiul este dreptunghic.
+:::
+
+<GeometryDraw code={`
+align: left
+[
+AB;BC;AC
+A(5,25){hide}
+B(5,8){hide}
+C(30,8){hide}
+label{'32mm';(15,6)}
+label{'24mm';(0.5,15)}
+label{'4cm';(15,20)}
+label{'B';(4,26)}
+label{'A';(4,6)}
+label{'C';(30,6)}
+]
+
+`} />
+
+> Transformăm toate unitățile de măsură în mm: $\bf4cm = 40mm$
+
+$\Rightarrow 
+\begin{cases} 
+AC = 32mm\\ 
+AB = 24mm\\
+BC = 40mm 
+\end{cases}$
+> Verificăm dacă: $AB^2 + AC^2 = BC^2$
+
+$BC^2 = 40^2 = 1600mm\\[5pt]$
+$AB^2 + AC^2 = 24^2 + 32^2 = 576 + 1024 = 1600mm$
+
+**$\Rightarrow$ Cum cele două expresii sunt egale, triunghiul este dreptunghic.**
