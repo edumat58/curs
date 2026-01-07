@@ -6,7 +6,7 @@ import {
   SkipToContentFallbackId,
   ThemeClassNames,
 } from '@docusaurus/theme-common';
-import {useKeyboardNavigation} from '@docusaurus/theme-common/internal';
+import { useKeyboardNavigation } from '@docusaurus/theme-common/internal';
 import SkipToContent from '@theme/SkipToContent';
 import AnnouncementBar from '@theme/AnnouncementBar';
 import Navbar from '@theme/Navbar';
@@ -14,6 +14,8 @@ import Footer from '@theme/Footer';
 import LayoutProvider from '@theme/Layout/Provider';
 import ErrorPageContent from '@theme/ErrorPageContent';
 import styles from './styles.module.css';
+import Dock from '@site/src/components/Dock';
+
 export default function Layout(props) {
   const {
     children,
@@ -47,6 +49,8 @@ export default function Layout(props) {
       </div>
 
       {!noFooter && <Footer />}
+
+      <Dock />
     </LayoutProvider>
   );
 }

@@ -1,0 +1,10 @@
+---
+sidebar_position: 10
+slug: /c8/modul-3/11
+description: ""
+
+---
+
+# G9 - Secțiuni paralele cu baza în corpurile geometrice studiate
+
+## Trunchiul de piramidă și trunchiul de con circular drept (descriere și reprezentare)

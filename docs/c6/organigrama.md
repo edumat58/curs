@@ -10,6 +10,45 @@ import React, { useState } from 'react';
 
 export default function LectiiTreeView() {
   const saptamani = [
+    {
+      hide: true,
+      titlu: 'Săptămâna 18: 09.02 - 13.02 | FINAL MODUL 3',
+      note: '',
+      lectii: [
+
+      ],
+    },
+    {
+      hide: true,
+      titlu: 'Săptămâna 17: 02.02 - 06.02',
+      note: '',
+      lectii: [
+
+      ],
+    },
+    {
+      hide: true,
+      titlu: 'Săptămâna 16: 26.01 - 30.01',
+      note: '',
+      lectii: [
+        
+      ],
+    },
+    {
+      hide: true,
+      titlu: 'Săptămâna 15: 19.01 - 23.01',
+      note: '',
+      lectii: [
+
+      ],
+    },
+  {
+      titlu: 'Săptămâna 14: 12.01 - 16.01',
+      note: 'Modulul 3: 08.01.2026 -> 13.02.2026',
+      lectii: [
+
+      ],
+    },
       {
       titlu: 'Săptămâna 13: 08.12 - 12.12 | FINAL MODUL 2',
       note: 'Materiale încarcate',
@@ -25,11 +64,11 @@ export default function LectiiTreeView() {
       titlu: 'Săptămâna 12: 02.12 - 05.12',
       note: 'Materiale încarcate | 1 decembrie liber',
       lectii: [
-        { titlu: 'C13 - Mărimi și unități de măsură (1)', zi: '03.12 (ora 1)', tip: 'Algebra', link: 'c6/modul-2/8', pdf: '' },
+        { titlu: 'C13 - Mărimi și unități de măsură (1)', zi: '03.12 (ora 1)', tip: 'Algebra', link: 'c6/modul-2/08', pdf: '' },
         { titlu: 'C13 - Mărimi și unități de măsură (2)', zi: '03.12 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
         { titlu: 'LP - Mărimi și unități de măsură', zi: '04.12 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
         { titlu: 'LP - Mărimi și unități de măsură', zi: '04.12 (ora 2)', link: '', pdf: '' },
-        { titlu: 'C14 - Puterea cu exponent număr natural a unui număr întreg nenul', zi: '05.12',link: 'c6/modul-2/9', pdf: '' },
+        { titlu: 'C14 - Puterea cu exponent număr natural a unui număr întreg nenul', zi: '05.12',link: 'c6/modul-2/09', pdf: '' },
       ],
     },
     {
@@ -40,7 +79,7 @@ export default function LectiiTreeView() {
         { titlu: 'LP - RECAPITULARE TEST', zi: '26.11 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
         { titlu: 'TEST 3 (C10 - C12.2 și G1 - G2) | 100% NOTA 3', zi: '26.11 (ora 2)', tip: 'Evaluare Sumativa', link: '', pdf: '' },
         { titlu: 'LP - Rezolvare test', zi: '27.11 (ora 1)', tip: '-', link: '', pdf: '' },
-        { titlu: 'G3 - Unghiul. Clasificare și măsurarea unghiurilor', zi: '27.11 (ora 2)', tip: 'Geometrie', link: 'c6/modul-2/7', pdf: '' },
+        { titlu: 'G3 - Unghiul. Clasificare și măsurarea unghiurilor', zi: '27.11 (ora 2)', tip: 'Geometrie', link: 'c6/modul-2/07', pdf: '' },
         { titlu: 'LP - Unghiul. Clasificare și măsurarea unghiurilor', zi: '28.11 (ora 1)', tip: 'Geometrie', link: '', pdf: '' },
       ],
     },
@@ -48,19 +87,19 @@ export default function LectiiTreeView() {
       titlu: 'Săptămâna 10: 17.11 - 21.11',
       note: 'TEST 26.11 (ora 2) [NOTA 3]: C10 - C12.2 și G1 - G2',
       lectii: [
-        { titlu: 'G1 - Unghiuri adiacente și bisectoarea unui unghi', zi: '19.11 (ora 1)', tip: 'Geometrie', link: 'c6/modul-2/5', pdf: '' },
+        { titlu: 'G1 - Unghiuri adiacente și bisectoarea unui unghi', zi: '19.11 (ora 1)', tip: 'Geometrie', link: 'c6/modul-2/05', pdf: '' },
         { titlu: 'LP - Unghiuri adiacente și bisectoarea unui unghi', zi: '19.11 (ora 2)', tip: 'Geometrie', link: '', pdf: '' },
         { titlu: 'LP - Unghiuri adiacente și bisectoarea unui unghi', zi: '20.11 (ora 1)', tip: 'Geometrie', link: '', pdf: '' },
-        { titlu: 'G2 - Unghiuri opuse la vârf și unghiuri formate în jurul unui punct', zi: '20.11 (ora 2)', tip: 'Geometrie', link: 'c6/modul-2/6', pdf: '' },
+        { titlu: 'G2 - Unghiuri opuse la vârf și unghiuri formate în jurul unui punct', zi: '20.11 (ora 2)', tip: 'Geometrie', link: 'c6/modul-2/06', pdf: '' },
       ],
     },
     {
       titlu: 'Săptămâna 9: 10.11 - 14.11',
       note: 'Materiale încarcate',
       lectii: [
-        { titlu: 'C12.1 - Adunarea și scăderea numerelor întregi', zi: '12.11 (ora 1)', tip: 'Algebra', link: 'c6/modul-2/3', pdf: '' },
+        { titlu: 'C12.1 - Adunarea și scăderea numerelor întregi', zi: '12.11 (ora 1)', tip: 'Algebra', link: 'c6/modul-2/03', pdf: '' },
         { titlu: 'LP - Adunarea și scăderea numerelor întregi', zi: '12.11 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
-        { titlu: 'C12.2 - Înmulțirea și împărțirea numerelor întregi', zi: '13.11', tip: 'Algebra', link: 'c6/modul-2/4', pdf: '' },
+        { titlu: 'C12.2 - Înmulțirea și împărțirea numerelor întregi', zi: '13.11', tip: 'Algebra', link: 'c6/modul-2/04', pdf: '' },
         { titlu: 'LP - Înmulțirea și împărțirea numerelor întregi', zi: '14.11', tip: 'Algebra', link: '', pdf: '' },
       ],
     },
@@ -69,9 +108,9 @@ export default function LectiiTreeView() {
       note: 'Modulul 2: 03.11.2025 -> 19.12.2025',
       lectii: [
         { titlu: 'DISCUTII TEST SI REFACERE TEST', zi: '05.11 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
-        { titlu: 'C10 - Modulul unui numar intreg (valoarea absoluta)', zi: '05.11 (ora 2)', tip: 'Algebra', link: 'c6/modul-2/1', pdf: '' },
+        { titlu: 'C10 - Modulul unui numar intreg (valoarea absoluta)', zi: '05.11 (ora 2)', tip: 'Algebra', link: 'c6/modul-2/01', pdf: '' },
         { titlu: 'LP - Modulul unui numar intreg (valoarea absoluta)', zi: '06.11 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
-        { titlu: 'C11 - Compararea si ordonarea nr. intregi', zi: '06.11 (ora 2)', tip: 'Algebra', link: 'c6/modul-2/2', pdf: '' },
+        { titlu: 'C11 - Compararea si ordonarea nr. intregi', zi: '06.11 (ora 2)', tip: 'Algebra', link: 'c6/modul-2/02', pdf: '' },
         { titlu: 'LP - Compararea si ordonarea nr. intregi', zi: '07.11', tip: 'Algebra', link: '', pdf: '' },
       ],
     },
@@ -176,7 +215,7 @@ export default function LectiiTreeView() {
       return matchesQuery && matchesTip;
     });
     return { ...s, lectii: lectiiFiltrate, idx };
-  }).filter((s) => s.lectii.length > 0 || s.note);
+  }).filter((s) => (s.lectii.length > 0 || s.note) && !s.hide);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>

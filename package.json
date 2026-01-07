@@ -17,11 +17,12 @@
     "predeploy": "node update-deploy-date.js && npm run update-sidebar"
   },
   "dependencies": {
-    "@docusaurus/core": "3.7.0",
-    "@docusaurus/preset-classic": "3.7.0",
+    "@docusaurus/core": "^3.7.0",
+    "@docusaurus/preset-classic": "^3.7.0",
     "@emailjs/browser": "^4.4.1",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
+    "@gsap/react": "^2.1.2",
     "@matejmazur/react-katex": "^3.1.3",
     "@mdx-js/react": "^3.0.0",
     "@mui/icons-material": "^7.0.2",
@@ -35,8 +36,12 @@
     "cors": "^2.8.5",
     "date-fns": "^4.1.0",
     "express": "^5.2.1",
+    "framer-motion": "^12.23.26",
+    "gl-matrix": "^3.4.4",
+    "gsap": "^3.14.2",
     "install": "^0.13.0",
     "katex": "^0.16.22",
+    "lucide-react": "^0.562.0",
     "mathjs": "^14.4.0",
     "micromark-extension-mdxjs": "^3.0.0",
     "nodemailer": "^7.0.11",
@@ -49,7 +54,8 @@
     "react-katex": "^3.1.0",
     "rehype-katex": "^7.0.1",
     "remark-math": "^6.0.0",
-    "styled-components": "^6.1.19"
+    "styled-components": "^6.1.19",
+    "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "3.7.0",

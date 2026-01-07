@@ -1,0 +1,166 @@
+---
+sidebar_position: 13
+slug: /c8/modul-3/08
+description: ""
+---
+
+# G7 - Conul circular drept
+
+---
+
+## Definiție
+
+:::tip Definiție
+* **Conul circular drept** este un corp geometric.
+:::
+
+### Elementele unui con circular drept:
+
+* **Baza conului.** Este un cerc.
+* **Vârful conului.** Este un punct ($V$) nesituat în planul în care se află baza conului și formează cu orice coardă a bazei un triunghi isoscel.
+* **Raza bazei.** Este lungimea razei bazei conului. De exemplu, $OA$ sau $OG$, unde $O$ este centrul cercului de la baza conului.
+* **Suprafața conică.** Un con nu are fețe laterale. Are o singură față numită suprafață conică.
+* **Generatoarea conului.** Este un segment care unește vârful conului cu un punct situat pe cercul de la baza conului. De exemplu, $VA$ sau $VG$.
+
+<div style={{ display: 'flex', justifyContent: 'center', margin: '20px 0' }}>
+  <svg width="300" height="350" viewBox="0 0 300 350">
+    {/* Baza elipsă (perspectivă) */}
+    <ellipse cx="150" cy="280" rx="80" ry="30" fill="#e1b1bc" fillOpacity="0.6" stroke="#d63384" strokeWidth="1.5" />
+    {/* Axul conului */}
+    <line x1="150" y1="50" x2="150" y2="280" stroke="#2c7bb6" strokeWidth="1" strokeDasharray="4,4" />
+    {/* Generatoarele */}
+    <line x1="150" y1="50" x2="70" y2="280" stroke="#2c7bb6" strokeWidth="1.5" />
+    <line x1="150" y1="50" x2="230" y2="280" stroke="#2c7bb6" strokeWidth="1.5" />
+    <line x1="150" y1="50" x2="195" y2="305" stroke="#2c7bb6" strokeWidth="1.5" />
+    {/* Raza bazei */}
+    <line x1="150" y1="280" x2="195" y2="305" stroke="black" strokeWidth="1.5" />
+    {/* Puncte */}
+    <circle cx="150" cy="50" r="3" fill="#abd9e9" stroke="#2c7bb6" /> {/* V */}
+    <circle cx="150" cy="280" r="3" fill="#abd9e9" stroke="#2c7bb6" /> {/* O */}
+    <circle cx="70" cy="280" r="3" fill="#abd9e9" stroke="#2c7bb6" /> {/* A */}
+    <circle cx="230" cy="280" r="3" fill="#abd9e9" stroke="#2c7bb6" /> {/* B */}
+    <circle cx="195" cy="305" r="3" fill="#abd9e9" stroke="#2c7bb6" /> {/* G */}
+    {/* Etichete */}
+    <text x="145" y="40" style={{ fontSize: '18px', fontWeight: 'bold' }}>V</text>
+    <text x="142" y="275" style={{ fontSize: '18px', fontWeight: 'bold' }}>O</text>
+    <text x="50" y="285" style={{ fontSize: '18px' }}>A</text>
+    <text x="235" y="285" style={{ fontSize: '18px' }}>B</text>
+    <text x="195" y="325" style={{ fontSize: '18px' }}>G</text>
+  </svg>
+</div>
+
+:::tip Proprietate
+* Toate generatoarele unui con circular drept sunt congruente.
+:::
+
+:::important Desfășurarea conului
+* **A desfășura un con circular drept** înseamnă a reprezenta în același plan baza și suprafața conică astfel încât după decupare, prin pliere, să obținem conul inițial.
+:::
+
+---
+
+### Desfășurarea unui con circular drept:
+
+<div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', flexWrap: 'wrap', marginTop: '30px' }}>
+  
+  {/* Conul 3D */}
+  <svg width="250" height="300" viewBox="0 0 250 300">
+    <ellipse cx="125" cy="250" rx="70" ry="25" fill="#e1b1bc" fillOpacity="0.6" stroke="#d63384" strokeWidth="1.5" />
+    <line x1="125" y1="50" x2="125" y2="250" stroke="#2c7bb6" strokeDasharray="4,4" />
+    <line x1="125" y1="50" x2="55" y2="250" stroke="#2c7bb6" strokeWidth="1.5" />
+    <line x1="125" y1="50" x2="195" y2="250" stroke="#2c7bb6" strokeWidth="1.5" />
+    <line x1="125" y1="250" x2="165" y2="270" stroke="black" />
+    <circle cx="125" cy="50" r="3" fill="#abd9e9" stroke="#2c7bb6" />
+    <circle cx="125" cy="250" r="3" fill="#abd9e9" stroke="#2c7bb6" />
+    <text x="120" y="40" style={{ fontSize: '16px' }}>V</text>
+    <text x="120" y="245" style={{ fontSize: '16px' }}>O</text>
+    <text x="40" y="255" style={{ fontSize: '16px' }}>A</text>
+    <text x="200" y="255" style={{ fontSize: '16px' }}>B</text>
+    <text x="165" y="285" style={{ fontSize: '16px' }}>G</text>
+  </svg>
+
+  {/* Desfășurarea în plan */}
+  <svg width="350" height="350" viewBox="0 0 350 350">
+    {/* Sectorul circular (Suprafața laterală) */}
+    <path d="M50,120 A180,180 0 0,0 280,180 L180,30 Z" fill="none" stroke="black" strokeWidth="1.2" />
+    <path d="M50,120 A180,180 0 0,0 280,180" fill="none" stroke="#d63384" strokeWidth="1.5" />
+    {/* Cercul bazei */}
+    <circle cx="135" cy="265" r="55" fill="#e1b1bc" fillOpacity="0.6" stroke="#d63384" strokeWidth="1.5" />
+    {/* Puncte și Etichete */}
+    <circle cx="180" cy="30" r="3" fill="white" stroke="black" />
+    <text x="175" y="20" style={{ fontSize: '16px' }}>V</text>
+    <circle cx="50" cy="120" r="3" fill="white" stroke="black" />
+    <text x="30" y="125" style={{ fontSize: '16px' }}>$B_2$</text>
+    <circle cx="280" cy="180" r="3" fill="white" stroke="black" />
+    <text x="290" y="185" style={{ fontSize: '16px' }}>$B_1$</text>
+    <circle cx="135" cy="265" r="3" fill="#abd9e9" stroke="#2c7bb6" />
+    <text x="140" y="280" style={{ fontSize: '16px' }}>O</text>
+    <circle cx="160" cy="216" r="3" fill="white" stroke="black" />
+    <text x="165" y="215" style={{ fontSize: '16px' }}>A</text>
+    <circle cx="105" cy="311" r="3" fill="white" stroke="black" />
+    <text x="90" y="335" style={{ fontSize: '16px' }}>B</text>
+  </svg>
+
+</div>
+
+---
+
+## Formule esențiale
+
+
+:::tip
+Formulele pentru determinarea ariei și volumului unui con circular drept le putem stabili prin analogie cu o piramidă regulată.
+:::
+
+<div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '40px', margin: '40px 0' }}>
+  {/* Piramida Regulată */}
+  <svg width="220" height="220" viewBox="0 0 250 250">
+    <path d="M125,20 L50,180 L100,220 L180,220 L220,180 L125,20" fill="none" stroke="black" strokeWidth="1" />
+    <line x1="50" y1="180" x2="220" y2="180" stroke="red" strokeDasharray="4,4" />
+    <line x1="125" y1="20" x2="100" y2="220" stroke="black" />
+    <line x1="125" y1="20" x2="180" y2="220" stroke="black" />
+    <path d="M50,180 L100,220 L180,220 L220,180" fill="none" stroke="red" strokeWidth="1.5" />
+    <line x1="125" y1="20" x2="135" y2="180" stroke="black" strokeDasharray="3,3" />
+    <circle cx="125" cy="20" r="3" fill="#abd9e9" stroke="black" />
+    <text x="120" y="15" fontSize="16">V</text>
+    <text x="35" y="185" fontSize="14">B</text>
+    <text x="90" y="235" fontSize="14">C</text>
+    <text x="185" y="235" fontSize="14">D</text>
+    <text x="225" y="185" fontSize="14">E</text>
+  </svg>
+
+  <div style={{ fontSize: '30px' }}>→</div>
+
+  {/* Conul Circular Drept */}
+  <svg width="220" height="220" viewBox="0 0 250 250">
+    <ellipse cx="125" cy="180" rx="80" ry="30" fill="none" stroke="red" strokeWidth="1.5" strokeDasharray="180,360" />
+    <path d="M45,180 A80,30 0 0,0 205,180" fill="none" stroke="red" strokeWidth="1.5" />
+    <line x1="125" y1="20" x2="45" y2="180" stroke="black" strokeWidth="1.2" />
+    <line x1="125" y1="20" x2="205" y2="180" stroke="black" strokeWidth="1.2" />
+    <line x1="125" y1="20" x2="125" y2="180" stroke="black" strokeDasharray="4,4" />
+    <line x1="45" y1="180" x2="205" y2="180" stroke="grey" strokeDasharray="2,2" />
+    <circle cx="125" cy="20" r="3" fill="#abd9e9" stroke="black" />
+    <circle cx="125" cy="180" r="2" fill="grey" />
+    <text x="120" y="15" fontSize="16">V</text>
+    <text x="30" y="185" fontSize="14">A</text>
+    <text x="210" y="185" fontSize="14">B</text>
+    <text x="122" y="195" fontSize="14">O</text>
+  </svg>
+</div>
+
+{/* Formule Matematice */}
+<div style={{ fontSize: '1.1em', lineHeight: '2' }}>
+  $$ \mathcal{A}_{\text{lat. piramidă}} = \frac{P \cdot a_p}{2} \rightarrow \color{red}{\mathcal{A}_{\text{lat. con}} = \pi RG} $$
+  
+  pentru că perimetrul ($P$) a devenit lungimea cercului ($2\pi R$), iar apotema piramidei ($a_p$) a devenit generatoarea ($G$).
+
+  $$ \mathcal{A}_{\text{tot. piramidă}} = \mathcal{A}_{\text{lat. piramidă}} + \mathcal{A}_b \rightarrow \color{red}{\mathcal{A}_{\text{tot. con}} = \pi RG + \pi R^2 = \pi R(G + R)} $$
+  
+  pentru că aria bazei ($\mathcal{A}_b$) a devenit aria discului ($\pi R^2$).
+
+  $$ V_{\text{piramidă}} = \frac{\mathcal{A}_b \cdot h}{3} \rightarrow \color{red}{V_{\text{con circular drept}} = \frac{\pi R^2 h}{3}} $$
+  
+  pentru că aria bazei ($\mathcal{A}_b$) a devenit aria discului ($\pi R^2$).
+</div>
+
+---

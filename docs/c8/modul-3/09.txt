@@ -1,0 +1,89 @@
+---
+sidebar_position: 12
+slug: /c8/modul-3/09
+description: ""
+---
+
+# G8.1 - Trunchi de piramidă regulată
+
+---
+
+## Observație
+
+:::note
+În *Figura 18* este desenat un trunchi de piramidă regulată cu baza triunghi echilateral.
+    * a) Dacă aria laterală a piramidei din care provine trunchiul este egală cu $100\text{ cm}^2$ și aria laterală a piramidei care se elimină este egală cu $20\text{ cm}^2$, determină aria laterală a trunchiului de piramidă.
+    * b) Dacă volumul piramidei din care provine trunchiul este egal cu $100\text{ cm}^3$ și volumul piramidei care se elimină este egal cu $20\text{ cm}^3$, determină volumul trunchiului de piramidă.
+:::
+<div style={{ display: 'flex', justifyContent: 'center', margin: '20px 0' }}>
+  <svg width="300" height="350" viewBox="0 0 300 350">
+    {/* Baza mare */}
+    <path d="M50,250 L250,250 L150,330 Z" fill="none" stroke="black" strokeWidth="1.5" />
+    {/* Baza mică */}
+    <path d="M100,150 L200,150 L150,190 Z" fill="none" stroke="black" strokeWidth="1.5" />
+    {/* Muchii laterale */}
+    <line x1="50" y1="250" x2="100" y2="150" stroke="black" strokeWidth="1.5" />
+    <line x1="250" y1="250" x2="200" y2="150" stroke="black" strokeWidth="1.5" />
+    <line x1="150" y1="330" x2="150" y2="190" stroke="black" strokeWidth="1.5" />
+    {/* Vârful piramidei inițiale (D) */}
+    <line x1="150" y1="30" x2="100" y2="150" stroke="grey" strokeDasharray="4,4" />
+    <line x1="150" y1="30" x2="200" y2="150" stroke="grey" strokeDasharray="4,4" />
+    <line x1="150" y1="30" x2="150" y2="190" stroke="grey" strokeDasharray="4,4" />
+    {/* Puncte */}
+    <circle cx="150" cy="30" r="3" fill="#abd9e9" stroke="black" />
+    <text x="145" y="25" style={{ fontSize: '16px' }}>D</text>
+    <text x="35" y="255" style={{ fontSize: '16px' }}>A</text>
+    <text x="255" y="255" style={{ fontSize: '16px' }}>B</text>
+    <text x="145" y="345" style={{ fontSize: '16px' }}>C</text>
+    <text x="85" y="155" style={{ fontSize: '16px' }}>A'</text>
+    <text x="205" y="155" style={{ fontSize: '16px' }}>B'</text>
+    <text x="155" y="195" style={{ fontSize: '16px' }}>C'</text>
+  </svg>
+</div>
+
+---
+
+### Important
+
+:::important
+* **Aria laterală** a unui trunchi de piramidă regulată se poate determina ca diferență între **aria laterală a piramidei mari** și **aria laterală a piramidei mici**.
+    * $\mathcal{A}_{\text{lat.tr.de pir.}} = \color{red}{\mathcal{A}_{\text{lat.P}}} - \color{blue}{\mathcal{A}_{\text{lat.p}}}$
+:::
+
+:::important
+* **Aria laterală** a unui trunchi de piramidă se poate determina și cu ajutorul formulei:
+    * $\mathcal{A}_{\text{lat.tr.de pir.}} = \frac{(\color{red}{P_B} + \color{blue}{P_b}) \cdot \color{green}{a_{tr}}}{2}$
+    * unde $P_B$ este **perimetrul bazei mari**, $P_b$ este **perimetrul bazei mici**, iar $a_{tr}$ **apotema trunchiului de piramidă**.
+:::
+
+> **Apotema trunchiului de piramidă regulată** este înălțimea unei fețe laterale a trunchiului de piramidă.
+
+<div style={{ display: 'flex'}}>
+<div style={{width: '50%'}}>
+![Apotema trunchiului de piramidă regulată](/img/apotema_trunchiului_1.png)
+</div>
+<div style={{width: '50%'}}>
+![Apotema trunchiului de piramidă regulată](/img/apotema_trunchiului_2.png)
+</div>
+</div>
+
+:::important
+* **Aria totală** a trunchiului de piramidă regulată este suma dintre aria laterală a trunchiului de piramidă și ariile celor două baze.
+    * $\mathcal{A}_{\text{tot.tr.de pir.}} = \mathcal{A}_{\text{lat.tr.de pir.}} + \color{red}{\mathcal{A}_B} + \color{blue}{\mathcal{A}_b}$
+    * unde $\mathcal{A}_B$ este **aria bazei mari** și $\mathcal{A}_b$ este **aria bazei mici**.
+:::
+
+:::important
+* **Volumul** unui trunchi de piramidă regulată se poate determina ca diferență între volumul piramidei mari și volumul piramidei mici.
+    * $V_{\text{tr.de pir.}} = \color{red}{V_P} - \color{blue}{V_p}$
+    * unde $V_P$ este **volumul piramidei mari** și $V_p$ este **volumul piramidei mici**.
+:::
+
+:::important
+* **Volumul** unui trunchi de piramidă se poate determina și cu formula:
+    * $V_{\text{tr.de pir.}} = \frac{h}{3}(\color{red}{\mathcal{A}_B} + \color{blue}{\mathcal{A}_b} + \sqrt{\color{red}{\mathcal{A}_B} \cdot \color{blue}{\mathcal{A}_b}})$
+    * unde $\mathcal{A}_B$ este **aria bazei mari**, $\mathcal{A}_b$ este **aria bazei mici**, iar $h$ este **înălțimea trunchiului de piramidă**.
+:::
+
+
+---

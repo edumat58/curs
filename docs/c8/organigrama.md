@@ -10,6 +10,54 @@ import React, { useState } from 'react';
 
 export default function LectiiTreeView() {
   const saptamani = [
+    {
+      hide: true,
+      titlu: 'Săptămâna 17: 02.02 - 06.02',
+      note: 'TEST (50% NOTA 6) | C14.1 - C14.3 & G6.1 - G7',
+      lectii: [
+        { titlu: 'G7 - Conul circular drept', zi: '02.02', tip: 'Geometrie', link: 'c8/modul-3/08', pdf: '' },
+        { titlu: 'LP - RECAPITULARE TEST', zi: '04.02 (ora 1)', tip: 'Recapitulare', link: '', pdf: '' },
+        { titlu: 'TEST (50% NOTA 6) | C14.1 - C14.3 & G6.1 - G7', zi: '04.02 (ora 2)', tip: 'Evaluare Sumativa', link: '', pdf: '' },
+        { titlu: 'LP - REZOLVARE TEST', zi: '05.02 (ora 1)', tip: 'Rezolvare Test', link: '', pdf: '' },
+        { titlu: 'LP - Conul circular drept', zi: '05.02 (ora 2)', tip: 'Geometrie', link: '', pdf: '' },
+      ],
+    },
+    {
+      hide: true,
+      titlu: 'Săptămâna 16: 26.01 - 30.01',
+      note: 'Simulare EN 2 | 29.01 (ora 1 și ora 2) [50 % NOTA 5]',
+      lectii: [
+        { titlu: 'G6.2 - Dreapta paralelă cu planul ', zi: '26.01', tip: 'Geometrie', link: 'c8/modul-3/07', pdf: '' },
+        { titlu: 'LP - Dreapta paralelă cu planul ', zi: '28.01 (ora 1)', tip: 'Geometrie', link: '', pdf: '' },
+        { titlu: 'LP - Dreapta paralelă cu planul ', zi: '28.01 (ora 2)', tip: 'Geometrie', link: '', pdf: '' },
+        { titlu: 'Simulare EN 2 | PARTEA I (Algebra)', zi: '29.01 (ora 1)', tip: 'Simulare EN 2', link: '', pdf: '' },
+        { titlu: 'Simulare EN 2 | PARTEA II (Geometrie)', zi: '29.01 (ora 2)', tip: 'Simulare EN 2', link: '', pdf: '' },
+        
+      ],
+    },
+    {
+      hide: true,
+      titlu: 'Săptămâna 15: 19.01 - 23.01',
+      note: 'PROIECT - Modelare matematică în 3D',
+      lectii: [
+        { titlu: 'C14.3 - Descompuneri în factori utilizând reguli de calcul în ℝ (grupare de termeni)', zi: '19.01', tip: 'Algebra', link: 'c8/modul-3/04', pdf: '' },
+        { titlu: 'PROIECT - Modelare matematică în 3D', zi: '21.01 (ora 1)', tip: 'Algebra', link: 'c8/modul-3/05', pdf: '' },
+        { titlu: 'PROIECT - Modelare matematică în 3D', zi: '21.01 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'G6.1 - Paralelism: drepte paralele; unghiul a două drepte', zi: '22.01 (ora 1)', tip: 'Geometrie', link: 'c8/modul-3/06', pdf: '' },
+        { titlu: 'LP - Paralelism: drepte paralele; unghiul a două drepte', zi: '22.01 (ora 2)', tip: 'Geometrie', link: '', pdf: '' },
+      ],
+    },
+  {
+      titlu: 'Săptămâna 14: 12.01 - 16.01',
+      note: 'Modulul 3: 08.01.2026 -> 13.02.2026',
+      lectii: [
+        { titlu: 'C14.1 - Descompuneri în factori utilizând reguli de calcul în ℝ (factor comun)', zi: '12.01', tip: 'Algebra', link: 'c8/modul-3/02', pdf: '' },
+        { titlu: 'C14.2 - Descompuneri în factori utilizând reguli de calcul în ℝ (formule de calcul prescurtat)', zi: '14.01 (ora 1)', tip: 'Algebra', link: 'c8/modul-3/03', pdf: '' },
+        { titlu: 'LP - Descompuneri în factori utilizând reguli de calcul în ℝ', zi: '14.01 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'LP - Descompuneri în factori utilizând reguli de calcul în ℝ', zi: '15.01 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'LP - Descompuneri în factori utilizând reguli de calcul în ℝ', zi: '15.01 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
+      ],
+    },
           {
       titlu: 'Săptămâna 13: 08.12 - 12.12 | FINAL MODUL 2',
       note: 'Materiale încarcate',
@@ -177,7 +225,7 @@ export default function LectiiTreeView() {
       return matchesQuery && matchesTip;
     });
     return { ...s, lectii: lectiiFiltrate, idx };
-  }).filter((s) => s.lectii.length > 0 || s.note);
+  }).filter((s) => (s.lectii.length > 0 || s.note) && !s.hide);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
@@ -197,6 +245,10 @@ export default function LectiiTreeView() {
             <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Nota 6</th>
             <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Nota 7</th>
             <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Nota 8</th>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Nota 9</th>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Nota 10</th>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Nota 11</th>
+            
           </tr>
         </thead>
         <tbody>
@@ -206,6 +258,9 @@ export default function LectiiTreeView() {
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>X</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>X</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>27.11</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>21.01</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>04.02</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
@@ -217,6 +272,9 @@ export default function LectiiTreeView() {
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>09.10</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>22.10</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>10.12</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>29.01</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>12.02</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
@@ -224,15 +282,24 @@ export default function LectiiTreeView() {
           </tr>
         </tbody>
       </table>
-          <h2>
-      Simulari pentru EN:
+      <h2>
+      Proiecte
       </h2>
       <ul>
-      <li>27.11 (50% nota 4) - Simulare EN 1</li>
+      <li>21.01 (50% nota 5) - Modelare matematică în 3D</li>
+      <li>13.03 - Portofoliu (partea I)</li>
+      </ul>
+          <h2>
+      Simulări pentru EN:
+      </h2>
+      <ul>
+      <li>27.11 (50% nota 4) - Simulare EN 1 (la cerere)</li>
+      <li>29.01 (50% nota 5) - Simulare EN 2 (la cerere)</li>
+      <li>12.02 (50% nota 6) - Simulare EN 3 (la cerere)</li>
       </ul>
       <hr />
       <h2>
-      Orar - 5 ore/saptamana
+      Orar - 5 ore/săptămână
       </h2>
       <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '1rem' }}>
         <thead>

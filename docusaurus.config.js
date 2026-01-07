@@ -4,7 +4,7 @@
 // There are various equivalent ways to declare your Docusaurus config.
 // See: https://docusaurus.io/docs/api/docusaurus-config
 
-import {themes as prismThemes} from 'prism-react-renderer';
+import { themes as prismThemes } from 'prism-react-renderer';
 const math = require('remark-math');
 const katex = require('rehype-katex');
 
@@ -13,7 +13,7 @@ const katex = require('rehype-katex');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Edumat58',
-  tagline: 'Platforma digitala de matematica pentru clasele V - VIII',
+  tagline: 'Platforma digitală de matematică dedicată claselor V - VIII',
   favicon: 'img/logo.jpg',
 
   // Set the production url of your site here
@@ -49,6 +49,29 @@ const config = {
           remarkPlugins: [math],
           rehypePlugins: [katex],
           sidebarPath: './sidebars.js',
+          // Custom sidebar generator to hide docs with hide: true
+          sidebarItemsGenerator: async function ({
+            defaultSidebarItemsGenerator,
+            ...args
+          }) {
+            const sidebarItems = await defaultSidebarItemsGenerator(args);
+            const filterHidden = (items) => {
+              return items.filter((item) => {
+                if (item.type === 'category') {
+                  item.items = filterHidden(item.items);
+                  // If category becomes empty after filtering, you might want to hide it too
+                  // return item.items.length > 0;
+                  return true;
+                }
+                if (item.type === 'doc') {
+                  const doc = args.docs.find((d) => d.id === item.id);
+                  return !doc?.frontMatter?.hide;
+                }
+                return true;
+              });
+            };
+            return filterHidden(sidebarItems);
+          },
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
         },
@@ -79,6 +102,10 @@ const config = {
       type: 'text/css',
       crossorigin: 'anonymous',
     },
+    {
+      href: 'https://fonts.googleapis.com/icon?family=Material+Icons',
+      type: 'text/css',
+    },
   ],
   scripts: [
     '/status.js',
@@ -97,6 +124,12 @@ const config = {
         src: 'img/logo.png',
       },
       items: [
+        {
+          label: 'Meniu',
+          to: '/navigation',
+          position: 'left',
+          className: 'desktop-menu-link', // Custom class for styling/hiding
+        },
         {
           position: 'left',
           label: 'Curs V',
@@ -121,7 +154,7 @@ const config = {
           type: 'html',
           position: 'right',
           value: `
-            <span style="font-size: 0.9rem; opacity: 0.7;">Ultima actualizare: 08.12.2025, 12:56</span>
+            <span style="font-size: 0.9rem; opacity: 0.7;">Ultima actualizare: 07.01.2026, 02:29</span>
           `,
         },
         {
@@ -166,23 +199,61 @@ const config = {
         //   </svg>
         //   <span style="font-weight: 600;">Mod Stabil</span>
         // </div>
-        
+
       ],
     },
     footer: {
-      style: 'dark',
+      style: 'light',
       links: [
         {
-          title: 'Mai multe',
+          title: 'Cursuri',
+          items: [
+            {
+              label: 'Clasa a V-a',
+              to: '/docs/category/curs-v',
+            },
+            {
+              label: 'Clasa a VI-a',
+              to: '/docs/category/curs-vi',
+            },
+            {
+              label: 'Clasa a VII-a',
+              to: '/docs/category/curs-vii',
+            },
+            {
+              label: 'Clasa a VIII-a',
+              to: '/docs/category/curs-viii',
+            },
+          ],
+        },
+        {
+          title: 'Platformă',
+          items: [
+            {
+              label: 'Acasă',
+              to: '/',
+            },
+            {
+              label: 'Stare Sistem',
+              to: '/docs/status',
+            }
+          ],
+        },
+        {
+          title: 'Comunitate',
           items: [
             {
               label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
+              href: 'https://github.com/edumat58/curs',
+            },
+            {
+              label: 'Raportează o problemă',
+              href: 'https://github.com/edumat58/curs/issues',
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Edumat58`,
+      copyright: `Copyright © ${new Date().getFullYear()} Edumat58.`,
     },
     prism: {
       theme: prismThemes.github,

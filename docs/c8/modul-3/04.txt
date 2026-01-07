@@ -1,0 +1,86 @@
+---
+sidebar_position: 17
+slug: /c8/modul-3/04
+description: ""
+---
+
+# C14.3 - Descompuneri în factori utilizând reguli de calcul în ℝ (grupare de termeni)
+
+---
+
+## Observație
+
+<div style={{ display: 'flex', justifyContent: 'center', margin: '20px 0' }}>
+  <div style={{ 
+    backgroundColor: '#1e3d2f', 
+    color: '#ffffff', 
+    padding: '20px', 
+    borderRadius: '8px', 
+    border: '8px solid #a67c52',
+    fontFamily: 'serif',
+    textAlign: 'left'
+  }}>
+    $23 \cdot 47 + 43 \cdot 51 + 23 \cdot 53 - 43 \cdot 41 =$  
+    $23 \cdot (47 + 53) + 43 \cdot (51 - 41) =$  
+    $23 \cdot 100 + 43 \cdot 10 = 2\,300 + 430 = 2\,730$
+  </div>
+</div>
+*Figura 1 - Exercițiu pe tablă*
+
+:::note
+Urmărește cu atenție exercițiul de pe tabla din *Figura 1* și apoi efectuează, cât mai rapid, următoarele calcule:
+:::
+    * a) $39 \cdot 104 - 39 \cdot 4 + 27 \cdot 63 + 27 \cdot 37$;
+    * b) $57^2 + 57 \cdot 43 + 29 \cdot 79 - 29 \cdot 69$;
+    * c) $17^2 - 2 \cdot 17 \cdot 7 + 7^2 + 20$;
+    * d) $20^2 + 19^2 + 2 \cdot 19 \cdot 21 + 21^2$.
+
+:::important
+O metodă de descompunere în factori este **utilizarea grupării termenilor**. Această metodă poate fi utilizată în mai multe moduri.
+:::
+
+---
+
+### Exemplul 1: Grupare prin factor comun parțial
+**Exemplu:** Descompune în factori expresia $E(x,y) = x^2 + xy + 2x + 2y$, unde $x$ și $y$ sunt numere reale.
+
+**Soluție:**
+
+> **Cum gândesc: Pas 1.** Observ că nu există un factor comun pentru toți termenii expresiei. Dar, dacă privesc numai primii doi termeni pot scoate factor comun pe $x$, iar în paranteză obțin $x + y$. Dacă privesc cei doi termeni care rămân pot scoate factor comun pe $2$, iar în paranteză obțin tot $x + y$.
+
+**Cum scriu:** $E(x,y) = x^2 + xy + 2x + 2y = x\color{red}{(x + y)} + 2\color{red}{(x + y)}$
+
+> **Pas 2.** Acum, paranteza $x + y$ poate fi scoasă factor comun.
+
+$$
+E(x,y) = x^2 + xy + 2x + 2y = x\color{red}{(x + y)} + 2\color{red}{(x + y)} = \color{red}{(x + y)}(x + 2)
+$$
+
+**În concluzie, $E(x,y) = (x + y)(x + 2)$.**
+
+---
+
+### Exemplul 2: Grupare folosind formule de calcul prescurtat
+**Exemplu:** Descompune în factori expresia $E(x,y) = x^2 - y^2 - 2x + 1$, unde $x$ și $y$ sunt numere reale.
+
+**Soluție:**
+
+> **Cum gândesc: Pas 1.** Observ că nu există un factor comun nici în cazul în care aș dori să grupez termenii. Termenii $x^2$, $-2x$ și $1$ îmi sugerează formula $(a - b)^2$. Rescriu expresia, ordonând altfel termenii.
+
+**Cum scriu:** $E(x,y) = \color{blue}{x^2 - 2x + 1} - y^2$
+
+> **Pas 2.** Din primii trei termeni obțin $(x - 1)^2$.
+
+$$
+E(x,y) = x^2 - 2x + 1 - y^2 = \color{red}{(x - 1)^2} - y^2
+$$
+
+> **Pas 3.** Forma obținută mă trimite cu gândul la o diferență de pătrate în care $a$ este paranteza $x - 1$, iar $b$ este $y$.
+
+$$
+E(x,y) = \color{red}{(x - 1)^2} - y^2 = (\color{red}{x - 1} + y)(\color{red}{x - 1} - y)
+$$
+
+**În concluzie, $E(x,y) = (x + y - 1)(x - y - 1)$.**
+
+---

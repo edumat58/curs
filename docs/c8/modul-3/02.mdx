@@ -1,0 +1,105 @@
+---
+sidebar_position: 19
+slug: /c8/modul-3/02
+description: ""
+---
+
+# C14.1 - Descompuneri în factori utilizând reguli de calcul în ℝ (factor comun)
+
+---
+
+:::tip Descompunerea în factori
+* **Descompunerea în factori** a unei expresii algebrice înseamnă scrierea acelei expresii ca produs între două sau mai multe expresii algebrice.
+* O metodă de descompunere în factori este **utilizarea factorului comun**. Această metodă se bazează pe distributivitatea înmulțirii față de adunare și scădere.
+
+Egalitatea $a \cdot (b + c) = a \cdot b + a \cdot c$ se poate scrie $a \cdot b + a \cdot c = a \cdot (b + c)$.
+:::
+
+*Exemplu: Descompune în factori expresia algebraică:* $E(x,y,z) = 9x^2y^3z + 15x^3y^2 - 21x^2y$
+
+### Metoda de rezolvare
+
+:::note Cum gândesc
+**Există un număr, diferit de 1, la care să se împartă exact toți coeficienții?** În cazul nostru răspunsul este **DA**; numărul căutat este **3**. El va **face parte din factorul comun**.
+
+**Există litere care apar în fiecare dintre termeni?** **DA**; $x$ și $y$. Aceste litere, **cu cel mai mic exponent la care apar, fac parte din factorul comun**. În concluzie, un factor comun este $3x^2y$
+:::
+
+### Redactare
+
+$$9x^2y^3z + 15x^3y^2 - 21x^2y = 3x^2y(3y^2z + 5xy - 7)$$
+
+---
+
+**Explicația etapelor de calcul:**
+
+* $9x^2y^3z : (3x^2y) = 3y^2z$
+* $15x^3y^2 : (3x^2y) = 5xy$
+* $21x^2y : (3x^2y) = 7$
+
+---
+
+### Model de rezolvare
+
+:::note Exercițiul 1
+Scoaterea factorului comun, după model:
+> Model: $a(x + 1) + b(x + 1) = (x + 1)(a + b)$
+
+a) $(x + 2)(x - 3) + 4(x + 2)$
+
+b) $a(x + y) + b(x + y)$
+
+c) $(x + 3)^2 - (x + 3)$
+
+d) $(x - 2)^2 - (x - 2)^3$
+:::
+
+Rezolvare:
+a) Observăm că factorul comun este paranteza $(x + 2)$
+
+$(x + 2)(x - 3) + 4(x + 2) = (x + 2)[(x - 3) + 4] = (x + 2)(x + 1)$
+
+b) Factorul comun este paranteza $(x + y)$
+
+$a(x + y) + b(x + y) = (x + y)(a + b)$
+
+c) Factorul comun este $(x + 3)$. 
+
+Reținem că $(x + 3)^2 = (x + 3)(x + 3)$ și $(x + 3) = (x + 3) \cdot 1$
+
+$(x + 3)^2 - (x + 3) = (x + 3)[(x + 3) - 1] = (x + 3)(x + 2)$
+
+d) Factorul comun este $(x - 2)^2$
+
+$(x - 2)^2 - (x - 2)^3 = (x - 2)^2 [1 - (x - 2)] = (x - 2)^2 (1 - x + 2) = (x - 2)^2 (3 - x)$
+
+---
+
+:::note Exercițiul 2 
+Știind că $xy = -7$ și $x + y = 2$, calculează $3x^2y + 3xy^2$.
+
+:::
+
+Rezolvare: Identificăm factorul comun pentru expresia $3x^2y + 3xy^2$. Acesta este $3xy$.
+
+Scoaterea factorului comun:$3x^2y + 3xy^2 = 3xy(x + y)$
+
+Înlocuim valorile date în enunț ($xy = -7$ și $x + y = 2$):$3 \cdot (-7) \cdot 2 = -21 \cdot 2 = -42$
+
+**Rezultat final:** -42
+
+---
+
+### Exersează!
+
+1) Calculează, folosind factorul comun:
+
+    a) $157\cdot 79+21\cdot 157$
+
+    b) $478\cdot 132+478\cdot 18-50\cdot 478$
+
+2) Pentru care numere naturale nenule $x$ este adevărată relația $x(x-4)=0$?
+
+3) Pentru câte numere reale $x$ este adevărată relația $(x+1)(x-1)(x^2+1)=0$?
+
+---

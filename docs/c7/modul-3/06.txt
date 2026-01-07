@@ -1,0 +1,335 @@
+---
+sidebar_position: 5
+slug: /c7/modul-3/06
+description: ""
+---
+
+# G7.1 - Unghi înscris în cerc, coarde şi arce în cerc
+
+---
+
+:::note Exemplu 1
+Folosind *Figura 1*, asociază fiecărui număr din coloana **A** litera corespunzătoare din coloana **B**.
+:::
+
+| **A** | **B** |
+| :--- | :--- |
+| 1. $BC$ | a) Rază |
+| 2. $OA$ | b) Diametru |
+| 3. $DE$ | c) Coardă în cerc care nu este diametru |
+| 4. $\overset{\frown}{AE}$ | d) Tangentă la cerc |
+| 5. $\sphericalangle AOE$ | e) Arc de cerc |
+| | f) Unghi la centru |
+
+
+:::note Exemplu 2
+În *Figura 1*, măsura arcului de cerc $AE$ este de $40^\circ$. Ce măsură are unghiul $AOE$?
+:::
+
+:::note Exemplu 3
+Folosind *Figura 2*, răspunde la următoarele întrebări:
+* **a)** Cum se numește unghiul $AOB$ în raport cu triunghiul $AOC$?
+* **b)** Ce măsură are unghiul $AOB$ din această figură?
+* **c)** Ce măsură are arcul mic $AB$?
+:::
+
+:::note Exemplu 4
+Construiește un cerc cu raza de 3 cm și unghiul $BAC$ cu vârful pe cerc și laturile coarde în cerc.
+:::
+
+<div style={{display: 'flex', flexWrap: 'wrap', gap: '20px', justifyContent: 'center', margin: '20px 0'}}>
+  
+  {/* Figura 1 */}
+  <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+    <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      {/* Circle */}
+      <circle cx="100" cy="100" r="80" stroke="#333" strokeWidth="1.5" fill="none" />
+      <circle cx="100" cy="100" r="2" fill="#333" /> {/* O */}
+      <text x="100" y="115" fontSize="14" textAnchor="middle" fontFamily="serif">O</text>
+
+      {/* Diameter DE */}
+      <line x1="22" y1="110" x2="178" y2="90" stroke="#333" strokeWidth="1.5" />
+      <circle cx="22" cy="110" r="3" fill="#add8e6" stroke="#333" strokeWidth="1" /> {/* D */}
+      <text x="10" y="115" fontSize="14" fontFamily="serif">D</text>
+      <circle cx="178" cy="90" r="3" fill="#add8e6" stroke="#333" strokeWidth="1" /> {/* E */}
+      <text x="185" y="95" fontSize="14" fontFamily="serif">E</text>
+
+      {/* Point A */}
+      <line x1="100" y1="100" x2="170" y2="60" stroke="#333" strokeWidth="1" /> {/* OA - Radius */}
+      <circle cx="170" cy="60" r="3" fill="#add8e6" stroke="#333" strokeWidth="1" /> {/* A */}
+      <text x="175" y="55" fontSize="14" fontFamily="serif">A</text>
+
+      {/* Chord BC */}
+      <line x1="30" y1="60" x2="130" y2="25" stroke="#333" strokeWidth="1.5" />
+      <circle cx="30" cy="60" r="3" fill="#add8e6" stroke="#333" strokeWidth="1" /> {/* B */}
+      <text x="15" y="65" fontSize="14" fontFamily="serif">B</text>
+      <circle cx="130" cy="25" r="3" fill="#add8e6" stroke="#333" strokeWidth="1" /> {/* C */}
+      <text x="130" y="20" fontSize="14" fontFamily="serif">C</text>
+    </svg>
+    <div style={{marginTop: '5px'}}>Figura 1</div>
+  </div>
+
+  {/* Figura 2 */}
+  <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+    <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="100" cy="100" r="80" stroke="#333" strokeWidth="1.5" fill="none" />
+      <circle cx="100" cy="100" r="2" fill="#333" /> {/* O */}
+      <text x="100" y="115" fontSize="14" textAnchor="middle" fontFamily="serif">O</text>
+
+      {/* Points C, A, B */}
+      {/* C at 180 deg (left), A at ~40 deg, B at 0 deg */}
+      <circle cx="20" cy="100" r="3" fill="#add8e6" stroke="#333" strokeWidth="1" /> {/* C */}
+      <text x="5" y="105" fontSize="14" fontFamily="serif">C</text>
+
+      <circle cx="170" cy="60" r="3" fill="#add8e6" stroke="#333" strokeWidth="1" /> {/* A */}
+      <text x="175" y="50" fontSize="14" fontFamily="serif">A</text>
+      
+      <circle cx="180" cy="100" r="3" fill="#add8e6" stroke="#333" strokeWidth="1" /> {/* B */}
+      <text x="185" y="105" fontSize="14" fontFamily="serif">B</text>
+
+      {/* Lines */}
+      <line x1="20" y1="100" x2="170" y2="60" stroke="#333" strokeWidth="1.5" />
+      <line x1="20" y1="100" x2="180" y2="100" stroke="#333" strokeWidth="1.5" /> {/* Diameter/Line CB */}
+      <line x1="100" y1="100" x2="170" y2="60" stroke="#333" strokeWidth="1" /> {/* Radius OA */}
+
+      {/* Angles */}
+      <path d="M 40 100 A 20 20 0 0 1 38 95" fill="none" stroke="#666" /> 
+      <text x="45" y="95" fontSize="12" fill="#666">30°</text>
+
+      <path d="M 160 65 A 15 15 0 0 1 155 75" fill="none" stroke="#666" />
+      <text x="140" y="65" fontSize="12" fill="#666">30°</text>
+
+      {/* Green fill for triangle AOC */}
+      <path d="M 20 100 L 170 60 L 100 100 Z" fill="rgba(0, 128, 0, 0.05)" />
+    </svg>
+    <div style={{marginTop: '5px'}}>Figura 2</div>
+  </div>
+</div>
+
+---
+
+## Unghi înscris în cerc
+
+:::tip Definitie
+* Numim **unghi înscris în cerc** unghiul cu vârful pe cerc și ale cărui laturi conțin două coarde ale cercului.
+:::
+
+:::info[Exemplu]
+În *Figura 3* unghiul $BAC$ este un unghi înscris în cerc.
+:::
+
+* **Unghiul înscris în cerc are măsura egală cu jumătate din măsura arcului cuprins între laturi (vezi *Figura 1*).**
+    *Ipoteză:* $\sphericalangle BAC$ - unghi înscris în cerc
+    *Concluzie:* $\sphericalangle BAC = \dfrac{\text{m}(\overset{\frown}{BC})}{2}$
+    *Demonstrație:* Construim diametrul $AD$ și razele $OB$ și $OC$, atunci $\sphericalangle BAC = \sphericalangle BAD + \sphericalangle CAD$ (*).
+    Triunghiul $AOB$ este isoscel ($OA \equiv OB$), de unde $\sphericalangle BAO \equiv \sphericalangle ABO$.
+
+<div style={{float: 'right', marginLeft: '20px', marginBottom: '20px'}}>
+    <div style={{textAlign: 'center', marginTop: '5px'}}>Figura 3</div>
+    <svg width="250" height="230" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+    {/* Marcarea Unghiului BAC (Fundal colorat) */}
+    <path d="M 73 254 L 78 204 A 50 50 0 0 1 121 243 Z" fill="rgba(255, 235, 59, 0.4)" stroke="none" />
+
+    {/* Cercul Principal */}
+    <circle cx="150" cy="150" r="120" fill="none" stroke="#333" strokeWidth="1.5" />
+    
+    {/* Centrul O */}
+    <circle cx="150" cy="150" r="3" fill="#333" />
+    <text x="140" y="145" fontFamily="serif" fontSize="18" fill="#333">O</text>
+
+    {/* Linii Punctate (Construcția ajutătoare) */}
+    <line x1="73" y1="254" x2="227" y2="46" stroke="#555" strokeWidth="1.2" strokeDasharray="6,4" strokeLinecap="round" />
+    <line x1="150" y1="150" x2="90" y2="46" stroke="#555" strokeWidth="1.2" strokeDasharray="6,4" strokeLinecap="round" />
+    <line x1="150" y1="150" x2="263" y2="191" stroke="#555" strokeWidth="1.2" strokeDasharray="6,4" strokeLinecap="round" />
+
+    {/* Linii Solide (Laturile unghiului BAC) */}
+    <line x1="73" y1="254" x2="90" y2="46" stroke="#333" strokeWidth="1.5" strokeLinecap="round" />  {/* Coarda AB */}
+    <line x1="73" y1="254" x2="263" y2="191" stroke="#333" strokeWidth="1.5" strokeLinecap="round" /> {/* Coarda AC */}
+
+    {/* Punctele și Etichetele lor */}
+    <circle cx="73" cy="254" r="5" fill="#add8e6" stroke="#333" strokeWidth="1" />
+    <text x="50" y="270" fontFamily="serif" fontSize="18" fill="#333">A</text>
+
+    <circle cx="90" cy="46" r="5" fill="#add8e6" stroke="#333" strokeWidth="1" />
+    <text x="75" y="35" fontFamily="serif" fontSize="18" fill="#333">B</text>
+
+    <circle cx="263" cy="191" r="5" fill="#add8e6" stroke="#333" strokeWidth="1" />
+    <text x="275" y="200" fontFamily="serif" fontSize="18" fill="#333">C</text>
+
+    <circle cx="227" cy="46" r="5" fill="#add8e6" stroke="#333" strokeWidth="1" />
+    <text x="235" y="45" fontFamily="serif" fontSize="18" fill="#333">D</text>
+  </svg>
+</div>
+
+Pe de altă parte, unghiul $BOD$ este unghi exterior triunghiului $AOB$ și atunci $\sphericalangle BOD = \sphericalangle BAO + \sphericalangle ABO = 2 \cdot \sphericalangle BAD$, de unde $\sphericalangle BAD = \dfrac{\sphericalangle BOD}{2}$.
+Analog se arată că $\sphericalangle CAD = \dfrac{\sphericalangle COD}{2}$.
+
+Înlocuind în (*) obținem $\sphericalangle BAC = \dfrac{\sphericalangle BOD}{2} + \dfrac{\sphericalangle COD}{2} = \dfrac{\sphericalangle BOC}{2}$.
+
+Cum $\sphericalangle BOC$ este unghi la centru avem $\sphericalangle BOC = \text{m}(\overset{\frown}{BC})$ și atunci $\sphericalangle BAC = \dfrac{\text{m}(\overset{\frown}{BC})}{2}$.
+
+
+---
+
+:::info[Exemplu]
+Dacă arcul $BC$ are măsura de $100^\circ$, atunci măsura unghiului $BAC$ este egală cu $50^\circ$.
+:::
+
+* **Orice unghi drept se înscrie într-un semicerc.**
+    *Demonstrație:* Dacă unghiul înscris în cerc are măsura de $90^\circ$, atunci arcul cuprins între laturi are $180^\circ$, adică este un semicerc, iar arcul în care este înscris unghiul este celălalt semicerc.
+
+* **Într-un cerc sau în cercuri congruente (cercuri cu raze congruente), la arce congruente corespund coarde congruente (vezi *Figura 4*).**
+    *Ipoteză:* $\overset{\frown}{AB} \equiv \overset{\frown}{CD}$
+    *Concluzie:* $AB \equiv CD$
+    *Demonstrație:* Construim razele $OA, OB, OC$ și $OD$. În triunghiurile $AOB$ și $COD$ avem $OA \equiv OC$ și $OB \equiv OD$ (raze în cerc); $\sphericalangle AOB \equiv \sphericalangle COD$ (sunt unghiuri la centru și au măsura egală cu măsura arcului cuprins între laturi). Rezultă, conform cazului L.U.L. de congruență a triunghiurilor, că $\triangle AOB \equiv \triangle COD$, de unde $AB \equiv CD$.
+
+<div style={{display: 'flex', gap: '40px', justifyContent: 'center', margin: '20px 0'}}>
+  <div style={{textAlign: 'center'}}>
+    <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="100" cy="100" r="80" stroke="#333" strokeWidth="1.5" fill="none" />
+      <circle cx="100" cy="100" r="2" fill="#333" /> {/* O */}
+      <text x="85" y="105" fontSize="14" fontFamily="serif">O</text>
+
+      {/* Points A, B */}
+      <circle cx="160" cy="50" r="3" fill="#add8e6" stroke="#333" strokeWidth="1" />
+      <text x="160" y="45" fontSize="14" fontFamily="serif">A</text>
+      <circle cx="180" cy="100" r="3" fill="#add8e6" stroke="#333" strokeWidth="1" />
+      <text x="185" y="105" fontSize="14" fontFamily="serif">B</text>
+
+      {/* Points C, D */}
+      <circle cx="140" cy="170" r="3" fill="#add8e6" stroke="#333" strokeWidth="1" />
+      <text x="145" y="175" fontSize="14" fontFamily="serif">C</text>
+      <circle cx="60" cy="170" r="3" fill="#add8e6" stroke="#333" strokeWidth="1" />
+      <text x="50" y="175" fontSize="14" fontFamily="serif">D</text>
+
+      {/* Chords */}
+      <line x1="160" y1="50" x2="180" y2="100" stroke="#333" strokeWidth="1.5" />
+      <line x1="60" y1="170" x2="140" y2="170" stroke="#333" strokeWidth="1.5" />
+
+      {/* Radii (Dotted) */}
+      <line x1="100" y1="100" x2="160" y2="50" stroke="#666" strokeWidth="1" strokeDasharray="4,2" />
+      <line x1="100" y1="100" x2="180" y2="100" stroke="#666" strokeWidth="1" strokeDasharray="4,2" />
+      <line x1="100" y1="100" x2="140" y2="170" stroke="#666" strokeWidth="1" strokeDasharray="4,2" />
+      <line x1="100" y1="100" x2="60" y2="170" stroke="#666" strokeWidth="1" strokeDasharray="4,2" />
+    </svg>
+    <div>Figura 4</div>
+  </div>
+
+  <div style={{textAlign: 'center'}}>
+    <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="100" cy="100" r="80" stroke="#333" strokeWidth="1.5" fill="none" />
+      <circle cx="100" cy="100" r="2" fill="#333" /> {/* O */}
+      <text x="105" y="115" fontSize="14" fontFamily="serif">O</text>
+
+      {/* Diameter EF */}
+      <line x1="30" y1="140" x2="170" y2="60" stroke="#333" strokeWidth="1.5" />
+      <circle cx="30" cy="140" r="3" fill="#add8e6" stroke="#333" strokeWidth="1" />
+      <text x="20" y="150" fontSize="14" fontFamily="serif">E</text>
+      <circle cx="170" cy="60" r="3" fill="#add8e6" stroke="#333" strokeWidth="1" />
+      <text x="175" y="60" fontSize="14" fontFamily="serif">F</text>
+
+      {/* Chord AB */}
+      <line x1="140" y1="30" x2="180" y2="110" stroke="#333" strokeWidth="1.5" />
+      <circle cx="140" cy="30" r="3" fill="#add8e6" stroke="#333" strokeWidth="1" />
+      <text x="140" y="25" fontSize="14" fontFamily="serif">A</text>
+      <circle cx="180" cy="110" r="3" fill="#add8e6" stroke="#333" strokeWidth="1" />
+      <text x="185" y="115" fontSize="14" fontFamily="serif">B</text>
+
+      {/* Intersection M */}
+      <circle cx="157" cy="67" r="2" fill="#333" />
+      <text x="140" y="75" fontSize="14" fontFamily="serif">M</text>
+
+      {/* Radii OA, OB */}
+      <line x1="100" y1="100" x2="140" y2="30" stroke="#666" strokeWidth="1" strokeDasharray="4,2" />
+      <line x1="100" y1="100" x2="180" y2="110" stroke="#666" strokeWidth="1" strokeDasharray="4,2" />
+
+    </svg>
+    <div>Figura 5</div>
+  </div>
+</div>
+
+* **Într-un cerc sau în cercuri congruente (cercuri cu raze congruente), la coarde congruente corespund arce congruente.**
+    Justifică această afirmație, folosind modelul de mai sus!
+
+* **În oricare cerc, diametrul perpendicular pe o coardă trece prin mijlocul coardei și prin mijlocul arcului determinat de coardă (vezi *Figura 5*).**
+    *Ipoteză:* $EF$ - diametru; $EF \perp AB$
+    *Concluzie:* $AM \equiv BM$; $\overset{\frown}{AF} \equiv \overset{\frown}{BF}$
+    *Demonstrație:* Construim razele $OA$ și $OB$ și obținem triunghiul isoscel $AOB$ ($OA \equiv OB$). În acest triunghi $OM$ este înălțime ($EF \perp AB$) prin urmare este și mediană și bisectoare. Fiind mediană rezultă că $AM \equiv BM$. Fiind bisectoare $\sphericalangle AOF \equiv \sphericalangle BOF$, de unde $\overset{\frown}{AF} \equiv \overset{\frown}{BF}$ (unghiurile la centru au măsura egală cu măsura arcului cuprins între laturi).
+
+* **În oricare cerc, dacă un diametru trece prin mijlocul unei coarde, atunci el este perpendicular pe coardă.**
+    Justifică această afirmație, folosind modelul de mai sus!
+
+* **În oricare cerc, dacă un diametru trece prin mijlocul unui arc, atunci el este perpendicular pe coarda care subîntinde arcul.**
+    Justifică această afirmație, folosind modelul de pe pagina precedentă!
+
+* **În oricare cerc, coardele congruente sunt egal depărtate de centrul cercului (vezi *Figura 6*).**
+    *Ipoteză:* $AB \equiv CD$; $OE \perp AB$; $OF \perp CD$; $E \in AB$; $F \in CD$
+    *Concluzie:* $OE \equiv OF$
+    *Demonstrație:* Avem $AE = BE = \dfrac{AB}{2}$ ($OE$ face parte dintr-un diametru și este perpendicular pe coarda $AB$).
+    Analog $CF = DF = \dfrac{CD}{2}$. Rezultă $BE \equiv FD$.
+    Construim razele $OB$ și $OD$ și obținem triunghiurile dreptunghice $OEB$ și $OFD$ în care $BE \equiv FD$ (din demonstrație) și $OB \equiv OD$ (raze în cerc). Rezultă, conform cazului I.C. de congruență a triunghiurilor dreptunghice, că $\triangle OEB \equiv \triangle OFD$, de unde $OE \equiv OF$.
+
+<div style={{display: 'flex', gap: '40px', justifyContent: 'center', margin: '20px 0'}}>
+  <div style={{textAlign: 'center'}}>
+    <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="100" cy="100" r="80" stroke="#333" strokeWidth="1.5" fill="none" />
+      <circle cx="100" cy="100" r="2" fill="#333" /> {/* O */}
+      <text x="85" y="95" fontSize="14" fontFamily="serif">O</text>
+
+      {/* Chord AB */}
+      <line x1="140" y1="30" x2="180" y2="100" stroke="#333" strokeWidth="1.5" />
+      <circle cx="140" cy="30" r="3" fill="#add8e6" stroke="#333" strokeWidth="1" /> <text x="145" y="30" fontSize="14" fontFamily="serif">A</text>
+      <circle cx="180" cy="100" r="3" fill="#add8e6" stroke="#333" strokeWidth="1" /> <text x="185" y="105" fontSize="14" fontFamily="serif">B</text>
+
+      {/* Chord CD */}
+      <line x1="100" y1="180" x2="170" y2="140" stroke="#333" strokeWidth="1.5" />
+      <circle cx="100" cy="180" r="3" fill="#add8e6" stroke="#333" strokeWidth="1" /> <text x="95" y="195" fontSize="14" fontFamily="serif">C</text>
+      <circle cx="170" cy="140" r="3" fill="#add8e6" stroke="#333" strokeWidth="1" /> <text x="175" y="145" fontSize="14" fontFamily="serif">D</text>
+
+      {/* Perpendiculars OE, OF */}
+      <line x1="100" y1="100" x2="160" y2="65" stroke="#333" strokeWidth="1" />
+      <circle cx="160" cy="65" r="3" fill="#add8e6" stroke="#333" strokeWidth="1" /> <text x="150" y="60" fontSize="14" fontFamily="serif">E</text>
+      
+      <line x1="100" y1="100" x2="135" y2="160" stroke="#333" strokeWidth="1" />
+      <circle cx="135" cy="160" r="3" fill="#add8e6" stroke="#333" strokeWidth="1" /> <text x="120" y="155" fontSize="14" fontFamily="serif">F</text>
+
+      {/* Right angle markers */}
+      <rect x="0" y="0" width="10" height="10" transform="translate(160, 65) rotate(60)" fill="#b9f6ca" opacity="0.6" stroke="#333" strokeWidth="0.5"/>
+      <rect x="0" y="0" width="10" height="10" transform="translate(130, 152) rotate(-30)" fill="#b9f6ca" opacity="0.6" stroke="#333" strokeWidth="0.5"/>
+
+      {/* Radii dotted */}
+      <line x1="100" y1="100" x2="180" y2="100" stroke="#666" strokeWidth="1" strokeDasharray="4,2" />
+      <line x1="100" y1="100" x2="170" y2="140" stroke="#666" strokeWidth="1" strokeDasharray="4,2" />
+
+    </svg>
+    <div>Figura 6</div>
+  </div>
+
+  <div style={{textAlign: 'center'}}>
+    <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="100" cy="100" r="80" stroke="#333" strokeWidth="1.5" fill="none" />
+      <circle cx="100" cy="110" r="2" fill="#333" /> {/* O shifted visually */}
+      <text x="100" y="125" fontSize="14" fontFamily="serif">O</text>
+
+      {/* Chord AB */}
+      <line x1="22" y1="80" x2="160" y2="50" stroke="#333" strokeWidth="1.5" />
+      <circle cx="22" cy="80" r="3" fill="#add8e6" stroke="#333" strokeWidth="1" /> <text x="5" y="85" fontSize="14" fontFamily="serif">A</text>
+      <circle cx="160" cy="50" r="3" fill="#add8e6" stroke="#333" strokeWidth="1" /> <text x="165" y="50" fontSize="14" fontFamily="serif">B</text>
+
+      {/* Chord CD */}
+      <line x1="20" y1="110" x2="190" y2="90" stroke="#333" strokeWidth="1.5" />
+      <circle cx="20" cy="110" r="3" fill="#add8e6" stroke="#333" strokeWidth="1" /> <text x="5" y="115" fontSize="14" fontFamily="serif">C</text>
+      <circle cx="190" cy="90" r="3" fill="#add8e6" stroke="#333" strokeWidth="1" /> <text x="185" y="105" fontSize="14" fontFamily="serif">D</text>
+
+      {/* Transversal AD */}
+      <line x1="22" y1="80" x2="190" y2="90" stroke="#666" strokeWidth="1" />
+
+    </svg>
+    <div>Figura 7</div>
+  </div>
+</div>
+
+* **În oricare cerc, două coarde paralele determină două arce congruente (vezi *Figura 7*).**
+    *Demonstrație:* Unim punctul $A$ cu punctul $D$. Dacă $AB \parallel CD$ și $AD$ secantă, atunci $\sphericalangle BAD \equiv \sphericalangle CDA$. De aici, $\dfrac{\overset{\frown}{BD}}{2} = \dfrac{\overset{\frown}{AC}}{2}$, adică $\overset{\frown}{BD} \equiv \overset{\frown}{AC}$.
+
+---

@@ -1,0 +1,245 @@
+---
+sidebar_position: 9
+slug: /c7/modul-3/02
+description: ""
+---
+
+# C17.2 - Distanţa dintre două puncte din plan
+
+---
+
+## Introducere
+
+:::info Important
+Atunci când mergeți în vacanță cu mașina, folosiți diferite sisteme de navigație pentru a vă orienta. Toate aceste sisteme de navigație au în spate un sistem de axe ortogonale și multe calcule matematice.
+:::
+
+:::note Exemplu 1
+În *Figura 1*, folosind un sistem de axe ortogonale în plan, Sara a reprezentat punctele $A(4,3)$ și $B(-3,4)$.
+Determină lungimile segmentelor $OM, ON, OE$ și $OF$.
+Dacă lungimea segmentului $OF$ este de 4 unități, ce lungime are segmentul $BE$?
+Sara determină lungimea segmentului $OA$, utilizând teorema lui Pitagora, astfel: în triunghiul dreptunghic $MOA$, $OA^2 = OM^2 + AM^2$, adică $OA^2 = 4^2 + 3^2 = 16 + 9 = 25$, de unde $OA = 5$ unități.
+:::
+
+:::note Exemplu 2
+Determină, prin același procedeu, lungimea segmentului $OB$.
+:::
+
+<div style={{display: 'flex', justifyContent: 'center', margin: '20px 0'}}>
+  <svg width="350" height="250" viewBox="0 0 350 250" xmlns="http://www.w3.org/2000/svg" style={{backgroundColor: '#fff', border: '1px solid #eee'}}>
+    <defs>
+      <marker id="arrow8" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+        <path d="M0,0 L0,6 L9,3 z" fill="#666" />
+      </marker>
+    </defs>
+    
+    {/* Grid */}
+    <pattern id="grid8" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#e0f7fa" strokeWidth="1"/>
+    </pattern>
+    <rect width="350" height="250" fill="url(#grid8)" />
+
+    {/* Axes (Origin roughly at cx=150, cy=180 to fit points) */}
+    {/* Axis X */}
+    <line x1="10" y1="180" x2="340" y2="180" stroke="#666" strokeWidth="1.5" markerEnd="url(#arrow8)" />
+    <text x="335" y="170" fontFamily="serif" fill="#666">x</text>
+
+    {/* Axis Y */}
+    <line x1="180" y1="240" x2="180" y2="10" stroke="#666" strokeWidth="1.5" markerEnd="url(#arrow8)" />
+    <text x="190" y="20" fontFamily="serif" fill="#666">y</text>
+    <text x="185" y="195" fontFamily="serif" fill="#666">O</text>
+
+    {/* Unit u */}
+    <line x1="300" y1="30" x2="330" y2="30" stroke="#666" />
+    <line x1="300" y1="25" x2="300" y2="35" stroke="#666" />
+    <line x1="330" y1="25" x2="330" y2="35" stroke="#666" />
+    <text x="310" y="25" fontFamily="serif" fill="#666">u</text>
+
+    {/* Point A(4,3). 1 unit = 30px. x=4*30=120, y=3*30=90. Relative to O(180, 180) */}
+    {/* A is at (180+120, 180-90) = (300, 90) */}
+    <circle cx="300" cy="90" r="3" fill="#00bcd4" stroke="#00838f" />
+    <text x="290" y="80" fontFamily="serif" fill="#333">A(4, 3)</text>
+    
+    {/* Projection M on Ox (300, 180) */}
+    <line x1="300" y1="90" x2="300" y2="180" stroke="#999" strokeDasharray="4,2" />
+    <text x="295" y="195" fontFamily="serif" fill="#666">M</text>
+
+    {/* Projection N on Oy for A? Text mentions N. Usually N is projection on Oy. (180, 90) */}
+    <line x1="300" y1="90" x2="180" y2="90" stroke="#999" strokeDasharray="4,2" />
+    <text x="165" y="95" fontFamily="serif" fill="#666">N</text>
+
+    {/* Line OA */}
+    <line x1="180" y1="180" x2="300" y2="90" stroke="#e91e63" strokeWidth="1.5" />
+
+    {/* Point B(-3,4). x=-3*30=-90, y=4*30=120. Relative to O(180, 180) */}
+    {/* B is at (180-90, 180-120) = (90, 60) */}
+    <circle cx="90" cy="60" r="3" fill="#00bcd4" stroke="#00838f" />
+    <text x="50" y="50" fontFamily="serif" fill="#333">B(-3, 4)</text>
+
+    {/* Projection E on Ox (90, 180) */}
+    <line x1="90" y1="60" x2="90" y2="180" stroke="#999" strokeDasharray="4,2" />
+    <text x="85" y="195" fontFamily="serif" fill="#666">E</text>
+
+    {/* Projection F on Oy (180, 60) */}
+    <line x1="90" y1="60" x2="180" y2="60" stroke="#999" strokeDasharray="4,2" />
+    <text x="185" y="65" fontFamily="serif" fill="#666">F</text>
+
+    {/* Line OB */}
+    <line x1="180" y1="180" x2="90" y2="60" stroke="#e91e63" strokeWidth="1.5" />
+  </svg>
+</div>
+<div style={{textAlign: 'center', fontWeight: 'bold', marginBottom: '20px'}}>Figura 1: Puncte în plan</div>
+
+---
+
+## Formulă
+
+:::tip
+Dacă într-un sistem de axe ortogonale avem punctele $A(x_1, y_1)$ și $B(x_2, y_2)$ putem determina lungimea segmentului $AB$ folosind formula:
+$$AB = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$$
+:::
+
+**Demonstrația formulei:**
+$OA_1 = x_1$ unități, $OB_1 = x_2$ unități, de unde $A_1B_1 = x_2 - x_1$ și atunci $AC = x_2 - x_1$.
+$OA_2 = y_1$ unități, $OB_2 = y_2$ unități, de unde $A_2B_2 = y_2 - y_1$ și atunci $BC = y_2 - y_1$.
+Acum, cu teorema lui Pitagora în triunghiul dreptunghic $ABC$: $AB^2 = AC^2 + BC^2$, adică
+$AB^2 = (x_2 - x_1)^2 + (y_2 - y_1)^2$,
+de unde
+$$AB = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$$
+
+<div style={{display: 'flex', justifyContent: 'center', margin: '20px 0'}}>
+  <svg width="400" height="200" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" style={{backgroundColor: '#fff', border: '1px solid #eee'}}>
+    <defs>
+      <marker id="arrowImp" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+        <path d="M0,0 L0,6 L9,3 z" fill="#666" />
+      </marker>
+    </defs>
+    <pattern id="gridImp" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#e0f7fa" strokeWidth="1"/>
+    </pattern>
+    <rect width="400" height="200" fill="url(#gridImp)" />
+
+    {/* Axes */}
+    <line x1="20" y1="170" x2="380" y2="170" stroke="#666" strokeWidth="1.5" markerEnd="url(#arrowImp)" />
+    <text x="375" y="160" fontFamily="serif" fill="#666">x</text>
+    <line x1="50" y1="190" x2="50" y2="20" stroke="#666" strokeWidth="1.5" markerEnd="url(#arrowImp)" />
+    <text x="60" y="30" fontFamily="serif" fill="#666">y</text>
+    <text x="35" y="185" fontFamily="serif" fill="#666">O</text>
+
+    {/* Unit */}
+    <line x1="330" y1="30" x2="360" y2="30" stroke="#666" />
+    <text x="340" y="25" fontFamily="serif" fill="#666">u</text>
+
+    {/* Points setup */}
+    {/* A(x1, y1) approx at (150, 130) -> relative to origin (50, 170), x=100, y=40 */}
+    {/* B(x2, y2) approx at (270, 70) -> relative to origin, x=220, y=100 */}
+    
+    {/* Projections on Ox */}
+    <text x="145" y="185" fontFamily="serif" fill="#666">A<tspan baselineShift="sub" fontSize="10">1</tspan></text>
+    <line x1="150" y1="130" x2="150" y2="170" stroke="#999" strokeDasharray="2,2" />
+    
+    <text x="265" y="185" fontFamily="serif" fill="#666">B<tspan baselineShift="sub" fontSize="10">1</tspan></text>
+    <line x1="270" y1="70" x2="270" y2="170" stroke="#999" strokeDasharray="2,2" />
+
+    {/* Projections on Oy */}
+    <text x="30" y="135" fontFamily="serif" fill="#666">A<tspan baselineShift="sub" fontSize="10">2</tspan></text>
+    <line x1="150" y1="130" x2="50" y2="130" stroke="#999" strokeDasharray="2,2" />
+
+    <text x="30" y="75" fontFamily="serif" fill="#666">B<tspan baselineShift="sub" fontSize="10">2</tspan></text>
+    <line x1="270" y1="70" x2="50" y2="70" stroke="#999" strokeDasharray="2,2" />
+
+    {/* Triangle Points */}
+    <circle cx="150" cy="130" r="3" fill="#00bcd4" /> {/* A */}
+    <text x="155" y="145" fontFamily="serif" fill="#333">A(x<tspan baselineShift="sub" fontSize="10">1</tspan>,y<tspan baselineShift="sub" fontSize="10">1</tspan>)</text>
+
+    <circle cx="270" cy="70" r="3" fill="#00bcd4" /> {/* B */}
+    <text x="270" y="60" fontFamily="serif" fill="#333">B(x<tspan baselineShift="sub" fontSize="10">2</tspan>,y<tspan baselineShift="sub" fontSize="10">2</tspan>)</text>
+
+    <circle cx="270" cy="130" r="3" fill="#00bcd4" /> {/* C */}
+    <text x="275" y="145" fontFamily="serif" fill="#333">C</text>
+
+    {/* Triangle Lines */}
+    <line x1="150" y1="130" x2="270" y2="70" stroke="#333" strokeWidth="1.5" /> {/* Hypotenuse AB */}
+    <line x1="150" y1="130" x2="270" y2="130" stroke="#e91e63" strokeWidth="1.5" /> {/* AC */}
+    <line x1="270" y1="130" x2="270" y2="70" stroke="#e91e63" strokeWidth="1.5" /> {/* BC */}
+
+  </svg>
+</div>
+
+---
+
+## Exersează
+
+### PROBLEMĂ REZOLVATĂ
+
+:::note
+Se consideră punctele $A(2,1)$, $B(-3,1)$, $C(1,3)$ și $D(4,-1)$. Reprezintă punctele într-un sistem de axe ortogonale și calculează distanțele $AB$ și $CD$.
+:::
+
+**Rezolvare:** În *Figura 2* sunt reprezentate cele patru puncte.
+Observăm, în reprezentarea punctelor în sistemul de axe ortogonale, că $AB = AN + BN$. Cum $AN = 2$ (unități) și $BN = 3$ (unități) rezultă $AB = 5$ (unități).
+
+Avem, conform formulei,
+$$CD = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2},$$
+unde $x_2 = 4, x_1 = 1, y_2 = -1, y_1 = 3$.
+Înlocuim și obținem
+$$CD = \sqrt{(4 - 1)^2 + (-1 - 3)^2} = \sqrt{(3)^2 + (-4)^2} = \sqrt{9 + 16} = \sqrt{25} = 5 \text{ (unități)}.$$
+
+<div style={{display: 'flex', justifyContent: 'center', margin: '20px 0'}}>
+  <svg width="450" height="250" viewBox="0 0 450 250" xmlns="http://www.w3.org/2000/svg" style={{backgroundColor: '#fff', border: '1px solid #eee'}}>
+    <defs>
+      <marker id="arrow9" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+        <path d="M0,0 L0,6 L9,3 z" fill="#666" />
+      </marker>
+    </defs>
+    <pattern id="grid9" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#e0f7fa" strokeWidth="1"/>
+    </pattern>
+    <rect width="450" height="250" fill="url(#grid9)" />
+
+    {/* Axes - Origin at (200, 150) approx */}
+    <line x1="20" y1="150" x2="430" y2="150" stroke="#666" strokeWidth="1.5" markerEnd="url(#arrow9)" />
+    <text x="425" y="140" fontFamily="serif" fill="#666">x</text>
+
+    <line x1="200" y1="230" x2="200" y2="20" stroke="#666" strokeWidth="1.5" markerEnd="url(#arrow9)" />
+    <text x="210" y="30" fontFamily="serif" fill="#666">y</text>
+    <text x="205" y="165" fontFamily="serif" fill="#666">O</text>
+
+     {/* Unit */}
+    <line x1="380" y1="30" x2="410" y2="30" stroke="#666" />
+    <line x1="380" y1="25" x2="380" y2="35" stroke="#666" />
+    <line x1="410" y1="25" x2="410" y2="35" stroke="#666" />
+    <text x="390" y="25" fontFamily="serif" fill="#666">u</text>
+
+    {/* Points. 1 unit = 30px. O(200, 150) */}
+    {/* A(2, 1) -> (200 + 60, 150 - 30) = (260, 120) */}
+    <circle cx="260" cy="120" r="3" fill="#00bcd4" stroke="#00838f"/>
+    <text x="250" y="140" fontFamily="serif" fill="#333">A(2, 1)</text>
+
+    {/* B(-3, 1) -> (200 - 90, 150 - 30) = (110, 120) */}
+    <circle cx="110" cy="120" r="3" fill="#00bcd4" stroke="#00838f"/>
+    <text x="90" y="140" fontFamily="serif" fill="#333">B(-3, 1)</text>
+
+    {/* Line AB */}
+    <line x1="110" y1="120" x2="260" y2="120" stroke="#e91e63" strokeWidth="1.5" />
+    
+    {/* Point N on Oy (Intersection of AB with Oy) -> (0, 1) -> (200, 120) */}
+    <circle cx="200" cy="120" r="3" fill="#add8e6" stroke="#555" />
+    <text x="190" y="115" fontFamily="serif" fill="#666">N</text>
+
+    {/* C(1, 3) -> (200 + 30, 150 - 90) = (230, 60) */}
+    <circle cx="230" cy="60" r="3" fill="#00bcd4" stroke="#00838f"/>
+    <text x="230" y="50" fontFamily="serif" fill="#333">C(1, 3)</text>
+
+    {/* D(4, -1) -> (200 + 120, 150 + 30) = (320, 180) */}
+    <circle cx="320" cy="180" r="3" fill="#00bcd4" stroke="#00838f"/>
+    <text x="310" y="200" fontFamily="serif" fill="#333">D(4, -1)</text>
+
+    {/* Line CD */}
+    <line x1="230" y1="60" x2="320" y2="180" stroke="#333" strokeWidth="1.5" />
+
+  </svg>
+</div>
+<div style={{textAlign: 'center', fontWeight: 'bold', marginBottom: '20px'}}>Figura 2: Puncte în plan</div>
+
+---

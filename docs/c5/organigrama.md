@@ -11,6 +11,45 @@ import React, { useState } from 'react';
 export default function LectiiTreeView() {
 
   const saptamani = [
+    {
+      hide: true,
+      titlu: 'Săptămâna 18: 09.02 - 13.02 | FINAL MODUL 3',
+      note: '',
+      lectii: [
+
+      ],
+    },
+    {
+      hide: true,
+      titlu: 'Săptămâna 17: 02.02 - 06.02',
+      note: '',
+      lectii: [
+
+      ],
+    },
+    {
+      hide: true,
+      titlu: 'Săptămâna 16: 26.01 - 30.01',
+      note: '',
+      lectii: [
+        
+      ],
+    },
+    {
+      hide: true,
+      titlu: 'Săptămâna 15: 19.01 - 23.01',
+      note: '',
+      lectii: [
+
+      ],
+    },
+  {
+      titlu: 'Săptămâna 14: 12.01 - 16.01',
+      note: 'Modulul 3: 08.01.2026 -> 13.02.2026',
+      lectii: [
+
+      ],
+    },
       {
       titlu: 'Săptămâna 13: 08.12 - 12.12 | FINAL MODUL 2',
       note: '',
@@ -179,7 +218,7 @@ export default function LectiiTreeView() {
       return matchesQuery && matchesTip;
     });
     return { ...s, lectii: lectiiFiltrate, idx };
-  }).filter((s) => s.lectii.length > 0 || s.note);
+  }).filter((s) => (s.lectii.length > 0 || s.note) && !s.hide);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>

@@ -1,11 +1,75 @@
 .features {
   display: flex;
   align-items: center;
-  padding: 2rem 0;
+  padding: 4rem 1rem;
   width: 100%;
+  background-color: #fdfdfd;
+  /* Light background to contrast with cards */
+}
+
+/* Dark mode adjustment if needed */
+[data-theme='dark'] .features {
+  background-color: #1a1a1a;
+}
+
+.featureContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.featureCard {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 140, 0, 0.2);
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+[data-theme='dark'] .featureCard {
+  background: rgba(40, 40, 40, 0.7);
+  border-color: rgba(255, 140, 0, 0.3);
+}
+
+.featureCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(255, 140, 0, 0.25);
+  border-color: rgba(255, 140, 0, 0.6);
 }
 
 .featureSvg {
-  height: 200px;
-  width: 200px;
+  height: 150px;
+  width: 150px;
+  margin-bottom: 1.5rem;
+  filter: drop-shadow(0 0 8px rgba(255, 140, 0, 0.3));
+  transition: transform 0.3s ease;
+}
+
+.featureCard:hover .featureSvg {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 12px rgba(255, 140, 0, 0.5));
+}
+
+.featureTitle {
+  margin-bottom: 1rem;
+  color: var(--ifm-color-primary-darkest);
+}
+
+[data-theme='dark'] .featureTitle {
+  color: var(--ifm-color-primary-lightest);
+}
+
+.featureDescription {
+  color: inherit;
+  opacity: 0.8;
+  line-height: 1.6;
 }

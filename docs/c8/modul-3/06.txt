@@ -1,0 +1,239 @@
+---
+sidebar_position: 15
+slug: /c8/modul-3/06
+description: ""
+---
+
+# G6.1 - Paralelism: drepte paralele; unghiul a două drepte
+
+---
+
+## Drepte în spațiu
+
+:::important
+**În spațiu, două drepte pot fi:**
+
+- **concurente** – sunt două drepte coplanare, care au exact un punct comun;
+- **paralele** – sunt două drepte coplanare, care nu au niciun punct comun;
+- **necoplanare** – sunt drepte care nu au niciun punct comun și nu sunt situate în același plan.
+:::
+
+---
+
+## Proprietate
+
+:::important
+**În spațiu, două drepte paralele cu a treia dreaptă sunt paralele între ele.**
+:::
+
+Dacă:
+$$
+\begin{cases}
+a \parallel b \\
+b \parallel c
+\end{cases}
+$$
+
+atunci rezultă:
+$$
+a \parallel c
+$$
+
+---
+
+## Observă și descoperă!
+
+<div style={{ display: 'flex', gap: '40px', justifyContent: 'center', alignItems: 'flex-start', flexWrap: 'wrap', padding: '20px' }}>
+  
+  {/* Figura 1 */}
+  <div style={{ flex: '0 1 350px', textAlign: 'center' }}>
+    <svg viewBox="0 0 400 350" xmlns="http://www.w3.org/2000/svg">
+      {/* Planul colorat (spate-dreapta) */}
+      <polygon points="320,300 320,100 240,60 240,260" fill="#e5d5b8" fillOpacity="0.6" />
+      
+      {/* Muchii spate (punctate) */}
+      <line x1="20" y1="260" x2="240" y2="260" stroke="black" strokeWidth="1.5" strokeDasharray="5,5" />
+      <line x1="240" y1="260" x2="320" y2="300" stroke="black" strokeWidth="1.5" strokeDasharray="5,5" />
+      <line x1="240" y1="260" x2="240" y2="60" stroke="black" strokeWidth="1.5" strokeDasharray="5,5" />
+
+      {/* Diagonale roșii */}
+      <line x1="100" y1="300" x2="20" y2="60" stroke="#d9534f" strokeWidth="2" /> {/* AD' */}
+      <line x1="320" y1="100" x2="240" y2="260" stroke="#d9534f" strokeWidth="2" /> {/* B'C */}
+
+      {/* Muchii vizibile */}
+      <path d="M100,300 L320,300 L320,100 L100,100 Z" stroke="black" strokeWidth="1.5" fill="none" /> {/* Fața AB B'A' */}
+      <line x1="100" y1="100" x2="20" y2="60" stroke="black" strokeWidth="1.5" />  {/* A'D' */}
+      <line x1="320" y1="100" x2="240" y2="60" stroke="black" strokeWidth="1.5" /> {/* B'C' */}
+      <line x1="20" y1="60" x2="240" y2="60" stroke="black" strokeWidth="1.5" />   {/* D'C' */}
+      <line x1="20" y1="60" x2="20" y2="260" stroke="black" strokeWidth="1.5" />    {/* D'D */}
+      <line x1="20" y1="260" x2="100" y2="300" stroke="black" strokeWidth="1.5" />  {/* DA */}
+
+      {/* Puncte */}
+      {[ [100,300], [320,300], [240,260], [20,260], [100,100], [320,100], [240,60], [20,60] ].map(([cx, cy], i) => (
+        <circle key={i} cx={cx} cy={cy} r="3" fill="#5bc0de" stroke="black" />
+      ))}
+
+      {/* Etichete */}
+      <text x="90" y="325" style={{ fontStyle: 'italic', fontSize: '18px' }}>A</text>
+      <text x="325" y="325" style={{ fontStyle: 'italic', fontSize: '18px' }}>B</text>
+      <text x="215" y="270" style={{ fontStyle: 'italic', fontSize: '18px' }}>C</text>
+      <text x="5" y="270" style={{ fontStyle: 'italic', fontSize: '18px' }}>D</text>
+      <text x="105" y="95" style={{ fontStyle: 'italic', fontSize: '18px' }}>A'</text>
+      <text x="325" y="95" style={{ fontStyle: 'italic', fontSize: '18px' }}>B'</text>
+      <text x="245" y="55" style={{ fontStyle: 'italic', fontSize: '18px' }}>C'</text>
+      <text x="10" y="55" style={{ fontStyle: 'italic', fontSize: '18px' }}>D'</text>
+    </svg>
+    <p style={{ marginTop: '10px' }}><strong>Figura 1</strong></p>
+  </div>
+
+  {/* Figura 2 */}
+  <div style={{ flex: '0 1 350px', textAlign: 'center' }}>
+    <svg viewBox="0 0 400 350" xmlns="http://www.w3.org/2000/svg">
+      {/* Planul colorat (BC B'C') */}
+      <polygon points="320,260 320,60 100,60 100,260" fill="#e5d5b8" fillOpacity="0.6" />
+      
+      {/* Muchii spate punctate */}
+      <line x1="100" y1="260" x2="320" y2="260" stroke="black" strokeWidth="1.5" strokeDasharray="5,5" />
+      <line x1="320" y1="260" x2="320" y2="60" stroke="black" strokeWidth="1.5" strokeDasharray="5,5" />
+
+      {/* Diagonalele concurente vizual */}
+      <line x1="350" y1="300" x2="130" y2="100" stroke="#d9534f" strokeWidth="2" /> {/* AD' */}
+      <line x1="100" y1="260" x2="320" y2="60" stroke="#d9534f" strokeWidth="2" />  {/* CB' */}
+
+      {/* Muchii vizibile - Cubul are exact aceeași dimensiune ca în Figura 1 */}
+      <path d="M130,300 L350,300 L350,100 L130,100 Z" stroke="black" strokeWidth="1.5" fill="none" /> {/* Fața frontală */}
+      <line x1="350" y1="300" x2="320" y2="260" stroke="black" strokeWidth="1.5" /> {/* A - B */}
+      <line x1="350" y1="100" x2="320" y2="60" stroke="black" strokeWidth="1.5" />  {/* A' - B' */}
+      <line x1="130" y1="100" x2="100" y2="60" stroke="black" strokeWidth="1.5" />  {/* D' - C' */}
+      <line x1="130" y1="300" x2="100" y2="260" stroke="black" strokeWidth="1.5" /> {/* D - C */}
+      <line x1="100" y1="60" x2="100" y2="260" stroke="black" strokeWidth="1.5" />  {/* C' - C */}
+      <line x1="100" y1="60" x2="320" y2="60" stroke="black" strokeWidth="1.5" />
+
+
+      {/* Puncte */}
+      {[ [350,300], [320,260], [100,260], [130,300], [350,100], [320,60], [100,60], [130,100] ].map(([cx, cy], i) => (
+        <circle key={i} cx={cx} cy={cy} r="3" fill="#5bc0de" stroke="black" />
+      ))}
+
+      {/* Etichete */}
+      <text x="360" y="320" style={{ fontStyle: 'italic', fontSize: '18px'}}>A</text>
+      <text x="325" y="270" style={{ fontStyle: 'italic', fontSize: '18px' }}>B</text>
+      <text x="75" y="270" style={{ fontStyle: 'italic', fontSize: '18px' }}>C</text>
+      <text x="110" y="325" style={{ fontStyle: 'italic', fontSize: '18px' }}>D</text>
+      <text x="360" y="100" style={{ fontStyle: 'italic', fontSize: '18px' }}>A'</text>
+      <text x="310" y="55" style={{ fontStyle: 'italic', fontSize: '18px' }}>B'</text>
+      <text x="80" y="65" style={{ fontStyle: 'italic', fontSize: '18px' }}>C'</text>
+      <text x="115" y="95" style={{ fontStyle: 'italic', fontSize: '18px' }}>D'</text>
+    </svg>
+    <p style={{ marginTop: '10px' }}><strong>Figura 2</strong></p>
+  </div>
+</div>
+
+:::note
+În **Figura 1** și **Figura 2** este vorba de același corp reprezentat din perspective diferite.
+
+- Privind **Figura 1**, Ana va spune:  
+  „Dreptele $AD'$ și $B'C$ sunt drepte **necoplanare**.”
+
+- Privind **Figura 2**, Radu va spune:  
+  „Dreptele $AD'$ și $B'C$ sunt drepte **concurente**.”
+:::
+
+### Exercițiu
+
+a) Care dintre cei doi copii are dreptate?  
+b) De ce crezi că s-a înșelat unul dintre copii?
+
+:::danger Atenție!
+Un desen realizat în perspectivă poate crea impresia falsă că două drepte se intersectează, deși în spațiu ele nu sunt coplanare.
+:::
+
+---
+
+## Proprietăți ale dreptelor concurente
+
+:::important Proprietatea 1
+**Dreptele concurente sunt coplanare** (situate în același plan) și formează patru unghiuri, două câte două congruente.
+:::
+
+:::important Proprietatea 2
+**Măsura unghiului dintre două drepte concurente** este egală cu cea mai mică măsură a unghiurilor formate de cele două drepte.
+:::
+
+:::important Proprietatea 3
+Măsura unghiului dintre două drepte paralele este egală cu $0^\circ$.
+:::
+
+:::important Proprietatea 4
+Măsura unghiului dintre două **drepte necoplanare** este egală cu măsura unghiului format de paralelele duse printr-un punct oarecare (convenabil ales) la cele două drepte.
+:::
+
+<div style={{ flex: '1', textAlign: 'center', fontSize: '1.1em' }}>
+<br></br>
+    $$
+    \left.
+    \begin{aligned}
+    a' \parallel a \\
+    b' \parallel b \\
+    a' \cap b' = \{M\}
+    \end{aligned}
+    \right\} \Rightarrow \sphericalangle(a,b) = \sphericalangle(a',b')
+    $$
+    
+    <p style={{ fontSize: '0.9em', marginTop: '15px', color: '#444' }}>
+      Uneori, punctul $M$ se ia pe una dintre drepte și, prin el, se duce paralela la cealaltă dreaptă (vezi figura din dreapta).
+    </p>
+  </div>
+
+<div style={{ display: 'flex', gap: '40px', justifyContent: 'center', alignItems: 'flex-start', flexWrap: 'wrap', padding: '20px' }}>
+  
+  {/* Diagrama din Stânga */}
+  <div style={{ flex: '1' }}>
+    <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+      {/* Dreapta b (Albastră) */}
+      <line x1="20" y1="40" x2="220" y2="150" stroke="#2c7bb6" strokeWidth="1.5" />
+      <text x="50" y="55" style={{ fontSize: '16px', fontFamily: 'serif' }}>b</text>
+      
+      {/* Dreapta b' (Albastră punctată) */}
+      <line x1="20" y1="140" x2="220" y2="250" stroke="#2c7bb6" strokeWidth="1.5" strokeDasharray="5,5" />
+      <text x="40" y="140" style={{ fontSize: '16px', fontFamily: 'serif' }}>b'</text>
+      
+      {/* Dreapta a' (Roșie punctată) */}
+      <line x1="0" y1="300" x2="280" y2="300" stroke="#d7191c" strokeWidth="1.5" strokeDasharray="5,5" transform="translate(0, -90)" />
+      <text x="10" y="200" style={{ fontSize: '16px', fontFamily: 'serif' }}>a'</text>
+      
+      {/* Dreapta a (Roșie continuă jos) */}
+      <line x1="0" y1="310" x2="300" y2="310" stroke="#d7191c" strokeWidth="1" transform="translate(0, -20)" />
+      <text x="10" y="280" style={{ fontSize: '16px', fontFamily: 'serif' }}>a</text>
+      
+      {/* Punctul M */}
+      <circle cx="148" cy="210" r="3" fill="#abd9e9" stroke="#2c7bb6" />
+      <text x="150" y="200" style={{ fontSize: '16px', fontWeight: 'bold' }}>M</text>
+    </svg>
+  </div>
+
+
+  {/* Diagrama din Dreapta */}
+  <div style={{ flex: '1' }}>
+    <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+      {/* Dreapta b (Albastră) */}
+      <line x1="40" y1="40" x2="240" y2="150" stroke="#2c7bb6" strokeWidth="1.5" />
+      <text x="70" y="55" style={{ fontSize: '16px', fontFamily: 'serif' }}>b</text>
+      
+      {/* Dreapta b' (Albastră punctată prin M) */}
+      <line x1="40" y1="140" x2="240" y2="250" stroke="#2c7bb6" strokeWidth="1.5" strokeDasharray="5,5" />
+      <text x="55" y="140" style={{ fontSize: '16px', fontFamily: 'serif' }}>b'</text>
+      
+      {/* Dreapta a (Roșie continuă prin M) */}
+      <line x1="0" y1="210" x2="280" y2="210" stroke="#d7191c" strokeWidth="1.5" />
+      <text x="10" y="205" style={{ fontSize: '16px', fontFamily: 'serif' }}>a</text>
+      
+      {/* Punctul M */}
+      <circle cx="170" cy="210" r="3" fill="#abd9e9" stroke="#2c7bb6" />
+      <text x="172" y="200" style={{ fontSize: '16px', fontWeight: 'bold' }}>M</text>
+    </svg>
+  </div>
+
+</div>
+
+---

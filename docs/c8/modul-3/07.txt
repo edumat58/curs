@@ -1,0 +1,129 @@
+---
+sidebar_position: 14
+slug: /c8/modul-3/07
+description: ""
+---
+
+# G6.2 - Dreapta paralelă cu planul 
+
+---
+
+## Observă și descoperă!
+<div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start', marginBottom: '30px' }}>
+  <div style={{ width: '50%'}}>
+![Sosea sub pasarela](/img/sosea_pasarela.png)
+</div>
+<div style={{ width: '50%'}}>
+    <svg viewBox="0 0 300 180" xmlns="http://www.w3.org/2000/svg">
+      <line x1="80" y1="30" x2="250" y2="30" stroke="black" strokeWidth="1" />
+      <text x="230" y="25" style={{ fontSize: '16px', fontStyle: 'italic' }}>d</text>
+      <polygon points="40,140 240,140 280,80 80,80" fill="none" stroke="black" strokeWidth="1" />
+      <text x="50" y="135" style={{ fontSize: '16px', fontStyle: 'italic' }}>α</text>
+      <line x1="90" y1="110" x2="230" y2="110" stroke="black" strokeWidth="1.5" />
+      <text x="210" y="105" style={{ fontSize: '16px', fontStyle: 'italic' }}>a</text>
+    </svg>
+  </div>
+</div>
+
+:::note
+În figura din dreapta sus sunt reprezentate schițat șoseaua sub forma planului $\alpha$, pasarela sub forma dreptei $d$ și umbra pasarelei pe șosea sub forma dreptei $a$.
+:::
+
+    a) Cum sunt dreptele $d$ și $a$?
+
+    b) Dacă $\beta$ este planul determinat de dreptele $d$ și $a$, care este dreapta de intersecție a planelor $\alpha$ și $\beta$?
+
+    c) Dreapta $d$ și planul $\alpha$ au puncte comune?
+
+---
+
+:::important
+* O dreaptă este **paralelă** cu un plan dacă nu are niciun punct comun cu planul.
+:::
+
+<div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+    <svg viewBox="0 0 300 180" xmlns="http://www.w3.org/2000/svg">
+      <line x1="80" y1="30" x2="250" y2="30" stroke="black" strokeWidth="1" />
+      <text x="230" y="25" style={{ fontSize: '16px', fontStyle: 'italic' }}>d</text>
+      <polygon points="40,140 240,140 280,80 80,80" fill="none" stroke="black" strokeWidth="1" />
+      <text x="50" y="135" style={{ fontSize: '16px', fontStyle: 'italic' }}>α</text>
+      <line x1="90" y1="110" x2="230" y2="110" stroke="black" strokeWidth="1.5" />
+      <text x="210" y="105" style={{ fontSize: '16px', fontStyle: 'italic' }}>a</text>
+    </svg>
+</div>
+
+:::important
+* O dreaptă este **concurentă** cu un plan (înțeapă planul) dacă are exact un punct comun cu planul.
+:::
+
+<div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+  <p style={{ maxWidth: '60%' }}>Scriu: $d \cap \alpha = \{A\}$. Citesc: dreapta $d$ intersectează planul (înțeapă planul) $\alpha$ în punctul $A$.</p>
+  <svg width="200" height="150" viewBox="0 0 200 150">
+    <polygon points="10,140 160,140 190,90 40,90" fill="none" stroke="black" strokeWidth="1" />
+    <text x="20" y="135" style={{ fontSize: '16px', fontStyle: 'italic' }}>α</text>
+    <line x1="120" y1="20" x2="150" y2="105" stroke="black" strokeWidth="1" />
+    <line x1="150" y1="105" x2="165" y2="145" stroke="black" strokeWidth="1" strokeDasharray="3,3" />
+    <circle cx="150" cy="105" r="2.5" fill="#abd9e9" stroke="black" />
+    <text x="155" y="100" style={{ fontSize: '16px' }}>A</text>
+    <text x="105" y="25" style={{ fontSize: '16px', fontStyle: 'italic' }}>d</text>
+  </svg>
+</div>
+
+:::important
+* Dacă o dreaptă are două puncte comune cu un plan, atunci ea este conținută în plan. (Axioma includerii)
+:::
+
+---
+
+## Demonstrație
+
+:::tip Demonstrație
+**Cum dovedesc că o dreaptă este paralelă cu un plan?** Dacă o dreaptă $d$ **neinclusă în planul $\alpha$ este paralelă** cu **o dreaptă din planul $\alpha$**, atunci **este paralelă cu planul $\alpha$**.
+:::
+
+<div style={{ display: 'flex', alignItems: 'center', gap: '50px', marginBottom: '30px' }}>
+  <div style={{ fontSize: '1.3em' }}>
+    $$
+    \left.
+    \begin{aligned}
+    d \parallel a \\
+    a \subset \alpha
+    \end{aligned}
+    \right\} \Rightarrow d \parallel \alpha
+    $$
+  </div>
+
+</div>
+
+  <div style={{ flex: '1' }}>
+    <svg viewBox="0 0 400 160">
+      <line x1="50" y1="20" x2="180" y2="20" stroke="black" strokeWidth="1" />
+      <line x1="180" y1="20" x2="360" y2="130" stroke="black" strokeWidth="1" />
+      <circle cx="360" cy="130" r="3" fill="#abd9e9" stroke="black" />
+      <text x="365" y="145" style={{ fontSize: '16px' }}>M</text>
+      <text x="160" y="15" style={{ fontSize: '16px', fontStyle: 'italic' }}>d</text>
+      <polygon points="20,150 220,150 250,90 50,90" fill="none" stroke="black" strokeWidth="1" />
+      <text x="30" y="145" style={{ fontSize: '16px', fontStyle: 'italic' }}>α</text>
+      <line x1="70" y1="120" x2="200" y2="120" stroke="black" strokeWidth="1.5" />
+      <text x="180" y="115" style={{ fontSize: '16px', fontStyle: 'italic' }}>a</text>
+    </svg>
+    <br />
+    <br />
+    
+  </div>
+**Justificare:** Presupunem că $d \nparallel \alpha$. Atunci $d$ și $\alpha$ au puncte comune. Considerăm $M$ un punct comun.
+Pe de altă parte, $d \parallel a$ implică faptul că există un plan $\beta = (d, a)$.
+Deoarece $M \in d \cap \alpha$ obținem $M \in d \subset \beta$ și $M \in \alpha$, adică $M \in \alpha \cap \beta$. Cum $\alpha \cap \beta = a$ rezultă $M \in a$.
+
+Dar $M \in d$, deci dreptele $a$ și $d$ sunt concurente. Contradicție cu $d \parallel a$, prin urmare presupunerea făcută ($d \nparallel \alpha$) este falsă. Obținem că $d \parallel \alpha$.
+
+:::info Observație:
+
+Dacă o dreaptă este paralelă cu un plan, atunci este paralelă cu o infinitate de drepte din plan, dar nu cu oricare dreaptă din plan.
+
+:::
+*Exemplu: muchia notată cu **a** este paralelă cu fiecare dreaptă determinată de codul de bare, dar nu este paralelă cu dreapta de sub textul scris pe cutie.*
+
+![Exemplu](/img/cutie.png)
+
+---

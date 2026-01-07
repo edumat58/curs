@@ -10,11 +10,55 @@ import React, { useState } from 'react';
 
 export default function LectiiTreeView() {
   const saptamani = [
+    {
+      hide: true,
+      titlu: 'Săptămâna 18: 09.02 - 13.02 | FINAL MODUL 3',
+      note: '',
+      lectii: [
+
+      ],
+    },
+    {
+      hide: true,
+      titlu: 'Săptămâna 17: 02.02 - 06.02',
+      note: '',
+      lectii: [
+
+      ],
+    },
+    {
+      hide: true,
+      titlu: 'Săptămâna 16: 26.01 - 30.01',
+      note: '',
+      lectii: [
+        
+      ],
+    },
+    {
+      hide: true,
+      titlu: 'Săptămâna 15: 19.01 - 23.01',
+      note: '',
+      lectii: [
+
+      ],
+    },
+  {
+      titlu: 'Săptămâna 14: 12.01 - 16.01',
+      note: 'Modulul 3: 08.01.2026 -> 13.02.2026',
+      lectii: [
+        { titlu: 'C17.1 - Sistem de axe ortogonale în plan', zi: '12.01 (ora 1)', tip: 'Algebra', link: 'c7/modul-3/01', pdf: '' },
+        { titlu: 'LP - Sistem de axe ortogonale în plan', zi: '12.01 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'C17.2 - Distanţa dintre două puncte din plan', zi: '14.01', tip: 'Algebra', link: 'c7/modul-3/02', pdf: '' },
+        { titlu: 'LP - Distanţa dintre două puncte din plan', zi: '15.01', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'LP - Reprezentarea într-un sistem de axe ortogonale', zi: '16.01', tip: 'Algebra', link: 'c7/modul-3/03', pdf: '' },
+
+      ],
+    },
           {
       titlu: 'Săptămâna 13: 08.12 - 12.12 | FINAL MODUL 2',
       note: 'Materiale încarcate',
       lectii: [
-        { titlu: 'C15 - Operații cu mulțimi (2)', zi: '08.12 (ora 1)', tip: 'Algebra', link: 'c7/modul-2/9', pdf: '' },
+        { titlu: 'C15 - Operații cu mulțimi (2)', zi: '08.12 (ora 1)', tip: 'Algebra', link: 'c7/modul-2/09', pdf: '' },
         { titlu: 'LP - Operații cu mulțimi', zi: '08.12 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
         { titlu: 'LP - Operații cu mulțimi', zi: '10.12 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
         { titlu: 'C16 - Apartenența la o mulțime', zi: '11.12', tip: 'Algebra', link: 'c7/modul-2/10', pdf: '' },
@@ -27,7 +71,7 @@ export default function LectiiTreeView() {
       note: 'Materiale încarcate | 1 decembrie liber',
       lectii: [
         { titlu: 'LP - REZOLVARE TEST', zi: '03.12', tip: 'Algebra', link: '', pdf: '' },
-        { titlu: 'C15 - Operații cu mulțimi (1)', zi: '04.12', tip: 'Algebra', link: 'c7/modul-2/9', pdf: '' },
+        { titlu: 'C15 - Operații cu mulțimi (1)', zi: '04.12', tip: 'Algebra', link: 'c7/modul-2/09', pdf: '' },
         { titlu: 'LP - Operații cu mulțimi', zi: '05.12', tip: 'Algebra', link: '', pdf: '' },
 
       ],
@@ -39,7 +83,7 @@ export default function LectiiTreeView() {
         { titlu: 'LP - RECAPITULARE TEST | Geometrie', zi: '24.11 (ora 1)', tip: 'Geometrie', link: '', pdf: '' },
         { titlu: 'TEST 3 (C11 - C13.2 și G4 - G6) | 100% NOTA 3', zi: '24.11 (ora 2)', tip: 'Evaluare Sumativa', link: '', pdf: '' },
         { titlu: 'LP - Rezolvare test', zi: '26.11', tip: '-', link: '', pdf: '' },
-        {titlu: 'C14 - Operații cu numere reale (recapitulare)', zi: '27.11', tip: 'Algebra', link: 'c7/modul-2/8', pdf: '' },
+        {titlu: 'C14 - Operații cu numere reale (recapitulare)', zi: '27.11', tip: 'Algebra', link: 'c7/modul-2/08', pdf: '' },
         {titlu: 'LP - Operații cu numere reale (recapitulare)', zi: '28.11', tip: 'Algebra', link: '', pdf: '' },
       ],
     },
@@ -47,10 +91,10 @@ export default function LectiiTreeView() {
       titlu: 'Săptămâna 10: 17.11 - 21.11',
       note: 'TEST 24.11 (ora 2) [NOTA 3]: C11 - C13.2 și G4 - G6',
       lectii: [
-        { titlu: 'C13.2 - Probleme care se rezolvă cu ajutorul sistemelor de ecuații', zi: '17.11 (ora 1)', tip: 'Algebra', link: 'c7/modul-2/6', pdf: '' },
+        { titlu: 'C13.2 - Probleme care se rezolvă cu ajutorul sistemelor de ecuații', zi: '17.11 (ora 1)', tip: 'Algebra', link: 'c7/modul-2/06', pdf: '' },
         { titlu: 'LP - Sisteme de ecuații', zi: '17.11 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
         { titlu: 'LP - Sisteme de ecuații', zi: '19.11', tip: 'Algebra', link: '', pdf: '' },
-        { titlu: 'G6 - Centrul de greutate al unui triunghi', zi: '20.11', tip: 'Geometrie', link: 'c7/modul-2/7', pdf: '' },
+        { titlu: 'G6 - Centrul de greutate al unui triunghi', zi: '20.11', tip: 'Geometrie', link: 'c7/modul-2/07', pdf: '' },
         { titlu: 'LP - RECAPITULARE TEST | Algebră', zi: '21.11', tip: 'Algebra', link: '', pdf: '' },
         
       ],
@@ -59,9 +103,9 @@ export default function LectiiTreeView() {
       titlu: 'Săptămâna 9: 10.11 - 14.11',
       note: 'Materiale încarcate',
       lectii: [
-        { titlu: 'G5 - Linia mijlocie în triunghi', zi: '10.11 (ora 1)', tip: 'Geometrie', link: 'c7/modul-2/4', pdf: '' },
+        { titlu: 'G5 - Linia mijlocie în triunghi', zi: '10.11 (ora 1)', tip: 'Geometrie', link: 'c7/modul-2/04', pdf: '' },
         { titlu: 'LP - Linia mijlocie în triunghi', zi: '10.11 (ora 2)', tip: 'Geometrie', link: '', pdf: '' },
-        { titlu: 'C13.1 - Sisteme de ecuații (1)', zi: '12.11', tip: 'Algebra', link: 'c7/modul-2/5', pdf: '' },
+        { titlu: 'C13.1 - Sisteme de ecuații (1)', zi: '12.11', tip: 'Algebra', link: 'c7/modul-2/05', pdf: '' },
         { titlu: 'C13.1 - Sisteme de ecuații (2)', zi: '14.11', tip: 'Algebra', link: '', pdf: '' },
         
       ],
@@ -70,11 +114,11 @@ export default function LectiiTreeView() {
       titlu: 'Săptămâna 8: 03.11 - 07.11',
       note: 'Modulul 2: 03.11.2025 -> 19.12.2025',
       lectii: [
-        { titlu: 'G4 - Paralelogramul', zi: '03.11 (ora 1)', tip: 'Geometrie', link: 'c7/modul-2/1', pdf: '' },
+        { titlu: 'G4 - Paralelogramul', zi: '03.11 (ora 1)', tip: 'Geometrie', link: 'c7/modul-2/01', pdf: '' },
         { titlu: 'LP - Paralelogramul', zi: '03.11 (ora 2)', tip: 'Geometrie', link: '', pdf: '' },
-        { titlu: 'C11 - Relația de egalitate', zi: '05.11', tip: 'Algebra', link: 'c7/modul-2/2', pdf: '' },
+        { titlu: 'C11 - Relația de egalitate', zi: '05.11', tip: 'Algebra', link: 'c7/modul-2/02', pdf: '' },
         { titlu: 'LP - Relația de egalitate', zi: '06.11', tip: 'Algebra', link: '', pdf: '' },
-        { titlu: 'C12 - Ecuația ax+b=0', zi: '07.11', tip: 'Algebra', link: 'c7/modul-2/3', pdf: '' },
+        { titlu: 'C12 - Ecuația ax+b=0', zi: '07.11', tip: 'Algebra', link: 'c7/modul-2/03', pdf: '' },
       ],
     },
     {
@@ -179,7 +223,7 @@ export default function LectiiTreeView() {
       return matchesQuery && matchesTip;
     });
     return { ...s, lectii: lectiiFiltrate, idx };
-  }).filter((s) => s.lectii.length > 0 || s.note);
+  }).filter((s) => (s.lectii.length > 0 || s.note) && !s.hide);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
@@ -199,6 +243,10 @@ export default function LectiiTreeView() {
             <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Nota 6</th>
             <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Nota 7</th>
             <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Nota 8</th>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Nota 9</th>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Nota 10</th>
+            <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Nota 11</th>
+            
           </tr>
         </thead>
         <tbody>
@@ -207,6 +255,9 @@ export default function LectiiTreeView() {
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>X</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>X</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>X</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>X</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>X</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>30.01</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
@@ -218,6 +269,9 @@ export default function LectiiTreeView() {
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>06.10</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>24.10</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>24.11</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>26.01</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>12.02</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>13.02</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
@@ -226,6 +280,13 @@ export default function LectiiTreeView() {
           </tr>
         </tbody>
       </table>
+      <h2>
+      Proiecte
+      </h2>
+      <ul>
+      <li>PROIECT (partea I) - Elemente de organizare a datelor | 30.01 <b>(50% NOTA 6)</b></li>
+      <li>PROIECT (partea II) - Geometria cercului | 13.02 <b>(50% NOTA 6)</b></li>
+      </ul>
       <h2>
       Orar - 5 ore/saptamana
       </h2>

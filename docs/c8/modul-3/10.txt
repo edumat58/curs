@@ -1,0 +1,117 @@
+---
+sidebar_position: 11
+slug: /c8/modul-3/10
+description: ""
+---
+
+# G8.2 - Trunchi de con circular drept
+
+---
+
+:::important Aria laterală
+* **Aria laterală** a unui trunchi de con circular drept se poate determina ca diferență între **aria laterală a conului mare** și **aria laterală a conului mic**.
+  $$ \mathcal{A}_{lat.tr.de\ con} = \color{red}{\mathcal{A}_{lat.Con}} - \color{blue}{\mathcal{A}_{lat.con}} $$
+:::
+
+:::important Formula ariei laterale
+* **Aria laterală** a unui trunchi de con circular drept se poate determina și cu formula:
+  $$ \mathcal{A}_{lat.tr.de\ con} = \pi \color{green}{G}(\color{red}{R} + \color{blue}{r}) $$
+  unde $\color{red}{R}$ este **raza bazei mari**, $\color{blue}{r}$ este **raza bazei mici**, iar $\color{green}{G}$ este **generatoarea trunchiului de con**, $BB'$.
+:::
+
+<div style={{ display: 'flex', justifyContent: 'center', margin: '30px 0' }}>
+  <svg width="280" height="320" viewBox="0 0 280 320">
+    {/* Conul mare (linii de construcție) */}
+    <line x1="140" y1="20" x2="40" y2="260" stroke="#ccc" strokeDasharray="4,4" />
+    <line x1="140" y1="20" x2="240" y2="260" stroke="#ccc" strokeDasharray="4,4" />
+    
+    {/* Baza mică (elipsă) */}
+    <ellipse cx="140" cy="120" rx="45" ry="12" fill="none" stroke="black" strokeWidth="1.2" />
+    
+    {/* Baza mare (elipsă cu parte punctată) */}
+    <path d="M40,260 A100,25 0 0,0 240,260" fill="none" stroke="black" strokeWidth="1.5" />
+    <path d="M40,260 A100,25 0 0,1 240,260" fill="none" stroke="black" strokeWidth="1" strokeDasharray="5,5" />
+    
+    {/* Lateralele trunchiului */}
+    <line x1="95" y1="120" x2="40" y2="260" stroke="black" strokeWidth="1.5" />
+    <line x1="185" y1="120" x2="240" y2="260" stroke="black" strokeWidth="1.5" />
+    
+    {/* Elemente interioare */}
+    <line x1="140" y1="120" x2="140" y2="260" stroke="black" strokeDasharray="3,3" />
+    <line x1="140" y1="120" x2="185" y2="120" stroke="black" strokeWidth="1" />
+    <line x1="140" y1="260" x2="240" y2="260" stroke="black" strokeWidth="1" />
+    
+    {/* Puncte */}
+    <circle cx="140" cy="20" r="2.5" fill="#abd9e9" stroke="black" />
+    <circle cx="140" cy="120" r="2.5" fill="#abd9e9" stroke="black" />
+    <circle cx="140" cy="260" r="2.5" fill="#abd9e9" stroke="black" />
+    <circle cx="95" cy="120" r="2.5" fill="#abd9e9" stroke="black" />
+    <circle cx="185" cy="120" r="2.5" fill="#abd9e9" stroke="black" />
+    <circle cx="40" cy="260" r="2.5" fill="#abd9e9" stroke="black" />
+    <circle cx="240" cy="260" r="2.5" fill="#abd9e9" stroke="black" />
+    
+    {/* Etichete */}
+    <text x="135" y="15" fontSize="16">V</text>
+    <text x="135" y="115" fontSize="14">O'</text>
+    <text x="135" y="275" fontSize="14">O</text>
+    <text x="80" y="125" fontSize="14">A'</text>
+    <text x="190" y="125" fontSize="14">B'</text>
+    <text x="25" y="265" fontSize="14">A</text>
+    <text x="245" y="265" fontSize="14">B</text>
+  </svg>
+</div>
+
+:::important Aria totală
+* **Aria totală** a trunchiului de con circular drept este suma dintre aria laterală a trunchiului de con circular drept și ariile celor două baze.
+  $$ \mathcal{A}_{tot.tr.de\ con} = \pi \color{green}{G}(\color{red}{R} + \color{blue}{r}) + \pi \color{red}{R}^2 + \pi \color{blue}{r}^2 $$
+:::
+
+:::important Volumul
+* **Volumul** unui trunchi de con circular drept se poate determina ca diferență între **volumul conului mare** și **volumul conului mic**.
+  $$ V_{tr.de\ con} = \color{red}{V_{Con}} - \color{blue}{V_{con}} $$
+  unde $\color{red}{V_{Con}}$ este **volumul conului mare** și $\color{blue}{V_{con}}$ este **volumul conului mic**.
+:::
+
+:::important Formula volumului
+* **Volumul** unui trunchi de con circular drept se poate determina și cu formula:
+  $$ V_{tr.de\ con} = \frac{\pi \color{green}{h}}{3}(\color{red}{R}^2 + \color{blue}{r}^2 + \color{red}{R}\color{blue}{r}) $$
+  unde $\color{red}{R}$ este **raza bazei mari**, $\color{blue}{r}$ este **raza bazei mici**, iar $\color{green}{h}$ este **înălțimea trunchiului de con**.
+:::
+
+<div style={{ display: 'flex', justifyContent: 'center', margin: '30px 0' }}>
+  <svg width="280" height="320" viewBox="0 0 280 320">
+    <ellipse cx="140" cy="120" rx="45" ry="12" fill="none" stroke="black" strokeWidth="1.2" />
+    <path d="M40,260 A100,25 0 0,0 240,260" fill="none" stroke="black" strokeWidth="1.5" />
+    <path d="M40,260 A100,25 0 0,1 240,260" fill="none" stroke="black" strokeWidth="1" strokeDasharray="5,5" />
+    <line x1="95" y1="120" x2="40" y2="260" stroke="black" strokeWidth="1.2" />
+    <line x1="185" y1="120" x2="240" y2="260" stroke="black" strokeWidth="1.2" />
+    
+    {/* Înălțimea h evidențiată */}
+    <line x1="140" y1="120" x2="140" y2="260" stroke="#444" strokeWidth="1.5" strokeDasharray="5,3" />
+    <line x1="140" y1="20" x2="140" y2="120" stroke="#ccc" strokeDasharray="2,2" />
+    
+    {/* Puncte */}
+    <circle cx="140" cy="20" r="2" fill="none" stroke="#ccc" />
+    <circle cx="140" cy="120" r="2.5" fill="#abd9e9" stroke="black" />
+    <circle cx="140" cy="260" r="2.5" fill="#abd9e9" stroke="black" />
+    
+    {/* Etichete */}
+    <text x="135" y="15" fontSize="14" fill="#ccc">V</text>
+    <text x="145" y="115" fontSize="14">O'</text>
+    <text x="145" y="275" fontSize="14">O</text>
+    <text x="30" y="265" fontSize="14">A</text>
+    <text x="245" y="265" fontSize="14">B</text>
+  </svg>
+</div>
+
+---
+## **Notații**
+
+:::danger De Reținut
+* $R$ = raza bazei mari
+* $r$ = raza bazei mici
+* $G$ = generatoarea trunchiului
+* $h$ = înălțimea trunchiului
+:::
+
+---

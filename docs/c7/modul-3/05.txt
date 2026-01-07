@@ -1,0 +1,89 @@
+---
+sidebar_position: 6
+slug: /c7/modul-3/05
+description: ""
+---
+
+# PROIECT (partea I) - Elemente de organizare a datelor
+
+---
+
+:::warning Termen Limită
+Proiectele trebuie realizate până la data de **30 ianuarie 2026**. Ele sunt puse într-o mapă
+și trebuie să conțină informații despre contribuția fiecărui membru al echipei, bibliografie și o prefață.
+
+Utilizarea inteligenței artificiale pentru a căuta informații despre geometria cercului este **interzisă**.
+Dacă se identifică utilizarea inteligenței artificiale, proiectul va fi **depunctat cu 6 puncte din 10**.
+:::
+
+## <span style={{backgroundColor: '#e91e63', color: 'white', padding: '5px 15px', borderRadius: '5px'}}>Ce veți investiga?</span>
+Veți investiga dacă elevii din școală se informează din surse sigure.
+
+## <span style={{color: '#e91e63'}}>De ce veți investiga?</span>
+Veți investiga pentru a stabili care sunt sursele de informare de încredere și cum îi ajutăm pe colegi să le recunoască.
+
+## <span style={{color: '#e91e63'}}>Cum veți face investigația?</span>
+* Vă veți organiza în 5 grupe. Veți formula o problemă/o întrebare pentru care se caută răspuns prin intermediul investigației.
+* Veți formula ipotezele – posibile răspunsuri la problemă.
+* Veți experimenta/ testa ipotezele/ soluțiile propuse.
+* Fiecare grupă va elabora un chestionar de tip Google Forms cu 10 itemi potriviți cu tema investigației.
+  Veți organiza, prelucra și reprezenta, în format digital, datele culese prin intermediul chestionarului, sub formă de grafice, tabele și diagrame. Pentru colectarea, organizarea, prelucrarea colaborativă a datelor veți folosi minimum două dintre următoarele aplicații Google: Docs, Sheets, Forms, Slides.
+* Veți formula concluzia ca o generalizare/regulă care să confirme ipoteza/ipotezele.
+
+<div style={{float: 'right', margin: '0 0 20px 20px', width: '300px'}}>
+  {/* Ilustrație generică pentru investigație digitală */}
+  <svg viewBox="0 0 300 250" xmlns="http://www.w3.org/2000/svg">
+    <rect width="300" height="250" fill="#fce4ec" rx="15" />
+    
+    {/* Laptop base */}
+    <path d="M 50 180 L 250 180 L 260 190 L 40 190 Z" fill="#90a4ae" />
+    <rect x="60" y="100" width="180" height="80" fill="#cfd8dc" stroke="#546e7a" strokeWidth="2" />
+    <rect x="65" y="105" width="170" height="70" fill="#fff" />
+    
+    {/* Screen Content - Charts */}
+    <rect x="75" y="120" width="10" height="40" fill="#e91e63" opacity="0.8"/>
+    <rect x="90" y="130" width="10" height="30" fill="#ba68c8" opacity="0.8"/>
+    <rect x="105" y="110" width="10" height="50" fill="#2196f3" opacity="0.8"/>
+    <circle cx="160" cy="135" r="20" fill="none" stroke="#ff9800" strokeWidth="5" />
+    <path d="M 160 135 L 160 115" stroke="#ff9800" strokeWidth="2" />
+    <path d="M 160 135 L 175 145" stroke="#ff9800" strokeWidth="2" />
+
+    {/* Person abstract representation */}
+    <circle cx="150" cy="80" r="25" fill="#ffccbc" /> {/* Head */}
+    <path d="M 135 85 q 15 20 30 0" stroke="#333" fill="none" strokeWidth="2" /> {/* Smile */}
+    <circle cx="140" cy="75" r="3" fill="#333" />
+    <circle cx="160" cy="75" r="3" fill="#333" />
+    <path d="M 125 60 q 25 -10 50 0" stroke="#5d4037" fill="none" strokeWidth="8" strokeLinecap="round"/> {/* Hair */}
+    
+    {/* Body */}
+    <path d="M 110 110 Q 150 110 190 110 L 190 200 L 110 200 Z" fill="#1976d2" />
+    <path d="M 190 110 L 220 160" stroke="#ffccbc" strokeWidth="10" strokeLinecap="round" />
+    <path d="M 110 110 L 80 160" stroke="#ffccbc" strokeWidth="10" strokeLinecap="round" /> {/* Arm pointing */}
+  </svg>
+</div>
+
+## <span style={{color: '#e91e63'}}>Cum veți ști că ați reușit?</span>
+* Veți prezenta colegilor etapele investigației și concluzia.
+* Veți încărca în Padlet prezentările realizate.
+* Veți primi și veți oferi colegilor din celelalte grupe feedback privind investigația realizată.
+
+## <span style={{color: '#e91e63'}}>Sugestii:</span>
+* Observați exemplele de întrebări de mai jos. Scrieți și voi altele.
+
+**1.** De unde îți iei cele mai multe informații?
+    * a) de pe rețele sociale;
+    * b) de pe bloguri;
+    * c) altele (precizează care):
+
+**2.** Verifici dacă informațiile pe care le vezi sau citești pe internet sunt adevărate?
+    * a) rareori;
+    * b) deseori;
+    * c) niciodată.
+
+**3.** Ai considerat ca adevărate informații citite pe internet despre care ai aflat apoi că sunt false?
+    * a) Da;
+    * b) Nu.
+
+> Puteți organiza datele colectate astfel încât acestea să reflecte sursele pe grupe de elevi (fete-băieți), pe grupe de clase (clasa a V-a, clasa a VI-a, clasa a VII-a, clasa a VIII-a).
+
+---
