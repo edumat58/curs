@@ -137,9 +137,52 @@ function letterT() {
   return { w: 2 * R - 26 - 3, d: stem + ' ' + bar }
 }
 
+
+// Inel plin poziționat liber (pentru cifre: bolduri mai mici decât literele).
+function annulusAt(cx, cy, ro, ri, off = 0) {
+  const icx = cx + off
+  return (
+    `M ${fmt(cx - ro)} ${fmt(cy)} A ${ro} ${ro} 0 1 1 ${fmt(cx + ro)} ${fmt(cy)} A ${ro} ${ro} 0 1 1 ${fmt(cx - ro)} ${fmt(cy)} Z ` +
+    `M ${fmt(icx - ri)} ${fmt(cy)} A ${ri} ${ri} 0 1 0 ${fmt(icx + ri)} ${fmt(cy)} A ${ri} ${ri} 0 1 0 ${fmt(icx - ri)} ${fmt(cy)} Z`
+  )
+}
+
+// Bandă deschisă poziționată liber: inel cu pană scoasă între unghiurile a1..a2.
+function bandAt(cx, cy, ro, ri, off, a1, a2) {
+  const icx = cx + off
+  const o1 = [cx + ro * Math.cos(rad(a1)), cy + ro * Math.sin(rad(a1))]
+  const o2 = [cx + ro * Math.cos(rad(a2)), cy + ro * Math.sin(rad(a2))]
+  const i1 = [icx + ri * Math.cos(rad(a1)), cy + ri * Math.sin(rad(a1))]
+  const i2 = [icx + ri * Math.cos(rad(a2)), cy + ri * Math.sin(rad(a2))]
+  return (
+    `M ${M(o2)} A ${ro} ${ro} 0 1 1 ${M(o1)} ` +
+    `L ${M(i1)} A ${ri} ${ri} 0 1 0 ${M(i2)} Z`
+  )
+}
+
+// ---- cifrele: 5 și 8, la înălțimea literelor mici ---------------------------
+
+// 5: bară sus, tulpină pe stânga până la mijloc, bol jos deschis spre stânga-sus.
+function digit5() {
+  const w = 44
+  const bar = rect(0, X, w - 4, 11)
+  const stem = rect(0, X, STEM - 1, 32)
+  // bolul: centrat jos, deschiderea spre stânga-sus (unde intră tulpina)
+  const bowl = bandAt(22, 77, 23, 13, 3, 160, 265)
+  return { w, d: bar + ' ' + stem + ' ' + bowl }
+}
+
+// 8: două inele suprapuse — mic sus, mare jos, pereți groși pe stânga.
+function digit8() {
+  const w = 42
+  const top = annulusAt(21, 47, 17, 9, 3)
+  const bottom = annulusAt(21, 80, 21, 12, 4)
+  return { w, d: top + ' ' + bottom }
+}
+
 // -----------------------------------------------------------------------------
 
-const word = [letterE(), letterD(), letterU(), letterM(), letterA({ star: true }), letterT()]
+const word = [letterE(), letterD(), letterU(), letterM(), letterA({ star: true }), letterT(), digit5(), digit8()]
 
 let x = 12
 const groups = []
@@ -150,7 +193,7 @@ for (const L of word) {
 const W = x - GAP + 6
 
 console.log(
-  `<svg viewBox="0 0 ${W} 108" xmlns="http://www.w3.org/2000/svg" fill="currentColor" role="img" aria-label="edumat">
+  `<svg viewBox="0 0 ${W} 108" xmlns="http://www.w3.org/2000/svg" fill="currentColor" role="img" aria-label="edumat58">
 ${groups.join('\n')}
 </svg>`
 )
