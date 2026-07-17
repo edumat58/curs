@@ -325,7 +325,7 @@ export default function Hero() {
             <div className={clsx('container', styles.heroContent)}>
                 <h1 className={styles.heroTitle} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14 }}>
                     <span style={{ color: '#fff' }}>
-                        <EdumatWordmark width={420} />
+                        <EdumatWordmark width={420} style={{ width: 'min(420px, 86vw)' }} />
                     </span>
                     <span style={{ position: 'absolute', width: 1, height: 1, overflow: 'hidden', clip: 'rect(0 0 0 0)' }}>
                         {siteConfig.title}
