@@ -1,0 +1,293 @@
+---
+sidebar_position: 20
+slug: /c5/modul-5/03
+description: ""
+---
+
+# G7 - Tipuri de unghiuri. Măsura unghiurilor
+
+---
+
+## Ce este un unghi?
+
+:::tip Definiție
+Un **unghi** este figura geometrică formată din două semidrepte care au aceeași origine.
+:::
+
+Cele două semidrepte se numesc **laturile** unghiului, iar originea lor comună se numește **vârful** unghiului.
+
+<div style={{ display: "flex", justifyContent: "center", margin: "1.5rem 0" }}>
+<svg width="420" height="240" viewBox="0 0 420 240" xmlns="http://www.w3.org/2000/svg">
+  <!-- Laturile unghiului -->
+  <line x1="90" y1="190" x2="380" y2="190" stroke="black" strokeWidth="3" />
+  <line x1="90" y1="190" x2="350" y2="50" stroke="black" strokeWidth="3" />
+
+  <!-- Arc unghi -->
+  <path d="M 170 190 A 80 80 0 0 0 158 150" fill="none" stroke="red" strokeWidth="3" />
+
+  <!-- Varf si puncte -->
+  <circle cx="90" cy="190" r="4" fill="black" />
+  <circle cx="380" cy="190" r="4" fill="black" />
+  <circle cx="350" cy="50" r="4" fill="black" />
+
+  <!-- Etichete -->
+  <text x="70" y="215" fontSize="24" fontFamily="serif" fontWeight="bold">O</text>
+  <text x="385" y="200" fontSize="24" fontFamily="serif" fontWeight="bold">A</text>
+  <text x="355" y="45" fontSize="24" fontFamily="serif" fontWeight="bold">B</text>
+  <text x="185" y="175" fontSize="22" fontFamily="serif" fontWeight="bold" fill="red">α</text>
+</svg>
+</div>
+
+Unghiul din figură se notează în mai multe feluri:
+
+$$
+\angle AOB,\quad \angle BOA,\quad \angle O,\quad \alpha
+$$
+
+:::info Observație
+Când notăm un unghi cu trei litere, **litera din mijloc reprezintă întotdeauna vârful** unghiului.
+:::
+
+---
+
+## Măsura unghiurilor
+
+Măsura unui unghi se exprimă în **grade**, notate cu simbolul $^\circ$.
+
+:::danger De reținut
+Un unghi complet (o rotație întreagă) are măsura de $360^\circ$.
+
+$$
+\text{1 rotație completă} = 360^\circ
+$$
+:::
+
+Gradul se împarte la rândul lui în unități mai mici:
+
+$$
+1^\circ = 60' \quad (\text{minute})
+$$
+
+$$
+1' = 60'' \quad (\text{secunde})
+$$
+
+Așadar:
+
+$$
+1^\circ = 60' = 3600''
+$$
+
+---
+
+## Tipuri de unghiuri după măsură
+
+Clasificăm unghiurile în funcție de măsura lor astfel:
+
+<div style={{ display: "flex", justifyContent: "center", margin: "1.5rem 0" }}>
+<svg width="700" height="220" viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg">
+  <!-- Unghi nul -->
+  <line x1="40" y1="160" x2="180" y2="160" stroke="black" strokeWidth="3" />
+  <circle cx="40" cy="160" r="4" fill="black" />
+  <text x="70" y="195" fontSize="18" fontFamily="serif">nul (0°)</text>
+
+  <!-- Unghi ascutit -->
+  <line x1="240" y1="160" x2="380" y2="160" stroke="black" strokeWidth="3" />
+  <line x1="240" y1="160" x2="350" y2="80" stroke="black" strokeWidth="3" />
+  <path d="M 300 160 A 60 60 0 0 0 285 120" fill="none" stroke="red" strokeWidth="2.5" />
+  <circle cx="240" cy="160" r="4" fill="black" />
+  <text x="270" y="195" fontSize="18" fontFamily="serif">ascuțit</text>
+
+  <!-- Unghi drept -->
+  <line x1="460" y1="160" x2="600" y2="160" stroke="black" strokeWidth="3" />
+  <line x1="460" y1="160" x2="460" y2="60" stroke="black" strokeWidth="3" />
+  <rect x="460" y="135" width="25" height="25" fill="none" stroke="red" strokeWidth="2.5" />
+  <circle cx="460" cy="160" r="4" fill="black" />
+  <text x="495" y="195" fontSize="18" fontFamily="serif">drept (90°)</text>
+</svg>
+</div>
+
+<div style={{ display: "flex", justifyContent: "center", margin: "1.5rem 0" }}>
+<svg width="700" height="200" viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Unghi obtuz -->
+  <line x1="60" y1="140" x2="200" y2="140" stroke="black" strokeWidth="3" />
+  <line x1="60" y1="140" x2="20" y2="40" stroke="black" strokeWidth="3" />
+  <path d="M 120 140 A 60 60 0 0 0 86 86" fill="none" stroke="red" strokeWidth="2.5" />
+  <circle cx="60" cy="140" r="4" fill="black" />
+  <text x="85" y="175" fontSize="18" fontFamily="serif">obtuz</text>
+
+  <!-- Unghi alungit -->
+  <line x1="300" y1="140" x2="560" y2="140" stroke="black" strokeWidth="3" />
+  <path d="M 380 140 A 50 50 0 0 0 480 140" fill="none" stroke="red" strokeWidth="2.5" />
+  <circle cx="430" cy="140" r="4" fill="black" />
+  <text x="370" y="115" fontSize="18" fontFamily="serif">alungit (180°)</text>
+</svg>
+</div>
+
+Tabelul de mai jos rezumă clasificarea:
+
+| Tipul unghiului | Măsura |
+|---|---|
+| Unghi nul | $0^\circ$ |
+| Unghi ascuțit | $0^\circ < \alpha < 90^\circ$ |
+| Unghi drept | $\alpha = 90^\circ$ |
+| Unghi obtuz | $90^\circ < \alpha < 180^\circ$ |
+| Unghi alungit | $\alpha = 180^\circ$ |
+| Unghi complet | $\alpha = 360^\circ$ |
+
+:::info Observație
+Un unghi **drept** se marchează de obicei cu un mic pătrat în vârf, în loc de un arc.
+:::
+
+---
+
+## Perechi remarcabile de unghiuri
+
+### Unghiuri complementare
+
+:::tip Definiție
+Două unghiuri sunt **complementare** dacă suma măsurilor lor este $90^\circ$.
+:::
+
+$$
+\alpha + \beta = 90^\circ
+$$
+
+<div style={{ display: "flex", justifyContent: "center", margin: "1.5rem 0" }}>
+<svg width="320" height="220" viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
+  <!-- Latura orizontala -->
+  <line x1="80" y1="180" x2="230" y2="180" stroke="black" strokeWidth="3" />
+  <!-- Latura verticala -->
+  <line x1="80" y1="180" x2="80" y2="30" stroke="black" strokeWidth="3" />
+  <!-- Semidreapta interioara -->
+  <line x1="80" y1="180" x2="194" y2="91" stroke="blue" strokeWidth="3" />
+
+  <!-- Unghi drept marcat la varf intre cele doua laturi exterioare -->
+  <path d="M 90 145 A 35 35 0 0 0 80 145" fill="none" stroke="#999" strokeWidth="1.5" strokeDasharray="3,3" />
+
+  <!-- Arc alpha (intre orizontala si interioara) -->
+  <path d="M 135 180 A 55 55 0 0 0 123 146" fill="none" stroke="red" strokeWidth="2.5" />
+  <!-- Arc beta (intre interioara si verticala) -->
+  <path d="M 123 146 A 55 55 0 0 0 80 125" fill="none" stroke="green" strokeWidth="2.5" />
+
+  <circle cx="80" cy="180" r="4" fill="black" />
+
+  <text x="148" y="160" fontSize="22" fontFamily="serif" fontWeight="bold" fill="red">α</text>
+  <text x="102" y="112" fontSize="22" fontFamily="serif" fontWeight="bold" fill="green">β</text>
+</svg>
+</div>
+
+Fiecare dintre cele două unghiuri se numește **complementul** celuilalt.
+
+### Unghiuri suplementare
+
+:::tip Definiție
+Două unghiuri sunt **suplementare** dacă suma măsurilor lor este $180^\circ$.
+:::
+
+$$
+\alpha + \beta = 180^\circ
+$$
+
+<div style={{ display: "flex", justifyContent: "center", margin: "1.5rem 0" }}>
+<svg width="460" height="200" viewBox="0 0 460 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Dreapta orizontala -->
+  <line x1="90" y1="160" x2="370" y2="160" stroke="black" strokeWidth="3" />
+  <!-- Semidreapta interioara -->
+  <line x1="230" y1="160" x2="305" y2="54" stroke="blue" strokeWidth="3" />
+
+  <!-- Arc alpha (de la latura stanga pana la interioara) -->
+  <path d="M 180 160 A 50 50 0 0 1 259 119" fill="none" stroke="red" strokeWidth="2.5" />
+  <!-- Arc beta (de la interioara pana la latura dreapta) -->
+  <path d="M 259 119 A 50 50 0 0 1 280 160" fill="none" stroke="green" strokeWidth="2.5" />
+
+  <circle cx="230" cy="160" r="4" fill="black" />
+
+  <text x="178" y="128" fontSize="22" fontFamily="serif" fontWeight="bold" fill="red">α</text>
+  <text x="285" y="130" fontSize="22" fontFamily="serif" fontWeight="bold" fill="green">β</text>
+</svg>
+</div>
+
+Fiecare dintre cele două unghiuri se numește **suplementul** celuilalt.
+
+### Unghiuri opuse la vârf
+
+:::tip Definiție
+Două unghiuri sunt **opuse la vârf** dacă laturile unuia sunt prelungirile laturilor celuilalt.
+:::
+
+:::danger Proprietate
+Două unghiuri opuse la vârf sunt **congruente** (au aceeași măsură).
+:::
+
+<div style={{ display: "flex", justifyContent: "center", margin: "1.5rem 0" }}>
+<svg width="420" height="280" viewBox="0 0 420 280" xmlns="http://www.w3.org/2000/svg">
+  <!-- Doua drepte concurente -->
+  <line x1="60" y1="80" x2="360" y2="200" stroke="black" strokeWidth="3" />
+  <line x1="60" y1="200" x2="360" y2="80" stroke="black" strokeWidth="3" />
+
+  <circle cx="210" cy="140" r="4" fill="black" />
+
+  <!-- Etichete unghiuri -->
+  <text x="195" y="105" fontSize="22" fontFamily="serif" fontWeight="bold" fill="red">α</text>
+  <text x="195" y="190" fontSize="22" fontFamily="serif" fontWeight="bold" fill="red">α</text>
+  <text x="135" y="148" fontSize="22" fontFamily="serif" fontWeight="bold" fill="blue">β</text>
+  <text x="265" y="148" fontSize="22" fontFamily="serif" fontWeight="bold" fill="blue">β</text>
+</svg>
+</div>
+
+În figură, unghiurile notate cu $\alpha$ sunt opuse la vârf, deci sunt egale. La fel, cele notate cu $\beta$.
+
+---
+
+## Calcule cu unghiuri
+
+### Adunarea și scăderea măsurilor
+
+Când lucrăm cu grade, minute și secunde, ținem cont că:
+
+$$
+1^\circ = 60', \qquad 1' = 60''
+$$
+
+:::note Exemplu rezolvat
+Calculează:
+
+$$
+35^\circ 40' + 28^\circ 30'
+$$
+
+**Rezolvare:**
+
+Adunăm separat gradele și minutele:
+
+$$
+(35^\circ + 28^\circ) + (40' + 30') = 63^\circ + 70'
+$$
+
+Cum $70' = 60' + 10' = 1^\circ 10'$, transformăm:
+
+$$
+63^\circ + 1^\circ 10' = 64^\circ 10'
+$$
+:::
+
+### Aflarea complementului și a suplementului
+
+:::note Exemplu rezolvat
+Află complementul și suplementul unghiului de $35^\circ$.
+
+**Complement:**
+
+$$
+90^\circ - 35^\circ = 55^\circ
+$$
+
+**Suplement:**
+
+$$
+180^\circ - 35^\circ = 145^\circ
+$$
+:::
+
+---

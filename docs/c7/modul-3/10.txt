@@ -4,113 +4,94 @@ slug: /c7/modul-3/10
 description: ""
 ---
 
-# G7.4 - Lungimea cercului și aria discului
+# PROIECT (partea II) - Geometria cercului
 
 ---
 
-:::danger De Reținut
-Fără lungimea cercului nu am putea să știm ce distanță am parcurs cu mașina.
+:::warning Termen Limită
+Proiectele trebuie realizate până la data de **13 februarie 2026**. Ele sunt puse într-o mapă
+și trebuie să conțină informații despre contribuția fiecărui membru al echipei, bibliografie și o prefață.
+
+Utilizarea inteligenței artificiale pentru a căuta informații despre geometria cercului este **interzisă**.
+Dacă se identifică utilizarea inteligenței artificiale, proiectul va fi **depunctat cu 6 puncte din 10**.
 :::
 
-## <span style={{color: 'white', backgroundColor: '#6a1b9a', padding: '5px 10px'}}>Observă și descoperă!</span>
+## <span style={{color: '#e91e63'}}>Ce veți face?</span>
+Veți căuta informații despre istoria geometriei cercului.
 
-Observă dialogul dintre cei doi copii, apoi rezolvă sarcina de lucru propusă.
+## <span style={{color: '#e91e63'}}>De ce veți face?</span>
+Pentru a investiga cum a evoluat geometria cercului, de la grecii antici până în zilele noastre.
 
-> *Sara către Victor:* Se poate vorbi de perimetrul unui cerc?
->
-> *Victor:* Desigur, dar nu se mai numește perimetru; se numește lungimea cercului. Să-ți arăt!
+## <span style={{color: '#e91e63'}}>Cum veți face?</span>
+Veți căuta, în cărți sau pe Internet, date, imagini, informații despre evoluția geometriei cercului.
 
-*Victor a marcat cu vopsea un loc de pe roata din față a bicicletei sale și de fiecare dată când acesta ajunge pe asfalt lasă un semn, ca în Figura 26.*
-<svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg" style={{maxWidth: '100%', height: 'auto', border: '1px solid #eee', backgroundColor: '#fff'}}>
-  <defs>
-    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
-      <feOffset dx="2" dy="2" result="offsetblur"/>
-      <feComponentTransfer>
-        <feFuncA type="linear" slope="0.3"/>
-      </feComponentTransfer>
-      <feMerge>
-        <feMergeNode/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-  </defs>
+## <span style={{color: '#e91e63'}}>Cum veți ști că ați reușit?</span>
+* Veți analiza proiectul cu ajutorul grilei de autoevaluare de mai jos.
+* Veți prezenta proiectul, iar colegii din celelalte echipe și domnul/doamna profesoară vor face aprecieri și sugestii.
 
-  <rect x="20" y="250" width="760" height="15" rx="7.5" fill="#555" />
+---
 
-  <polygon points="60,250 70,235 80,250" fill="#fdd835" />
-  <polygon points="230,250 240,235 250,250" fill="#fdd835" />
-  <polygon points="400,250 410,235 420,250" fill="#fdd835" />
-  <polygon points="570,250 580,235 590,250" fill="#fdd835" />
-  <polygon points="740,250 750,235 760,250" fill="#fdd835" />
+## Sugestii
+* Organizați-vă în echipe și stabiliți-vă rolurile.
+* Folosiți imagini și informații relevante pentru a prezenta o etapă importantă în evoluția geometriei cercului.
 
-  <g transform="translate(160, 85)">
+:::note[Model de prezentare: Eratostene și geometria cercului]
+Eratostene, matematician grec, a trăit în Egipt în jurul anului 250 î.Hr. El s-a folosit de geometria cercului pentru a dovedi că Pământul este rotund.
+
+Eratostene a aflat că în ziua solstițiului de vară (21 iunie) există, undeva în sudul Egiptului un puț în care lumina Soarelui pătrunde până în punctul cel mai adânc al acestuia. În momentul în care razele pătrundeau până în acel punct, Eratostene a înfipt un băț vertical în sol, în Alexandria, măsurând unghiul format de băț și razele Soarelui. A obținut o valoare de $7,2^\circ$, adică fix a cincizecea parte dintr-un cerc ($360^\circ$).
+
+<div style={{display: 'flex', justifyContent: 'center', margin: '20px 0'}}>
+  <svg width="250" height="250" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="earthGrad" cx="50%" cy="50%" r="50%" fx="30%" fy="30%">
+        <stop offset="0%" style={{stopColor: '#4facfe', stopOpacity: 1}} />
+        <stop offset="100%" style={{stopColor: '#00f2fe', stopOpacity: 1}} />
+      </radialGradient>
+       <marker id="arrowSun" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+        <path d="M0,0 L0,6 L9,3 z" fill="#ffeb3b" />
+      </marker>
+    </defs>
+
+    {/* Earth Globe */}
+    <circle cx="125" cy="125" r="100" fill="url(#earthGrad)" stroke="#333" strokeWidth="1" />
     
-    <circle cx="0" cy="120" r="45" stroke="#333" stroke-width="8" fill="none" />
-    <circle cx="0" cy="120" r="40" stroke="#ddd" stroke-width="2" fill="none" />
-    <g stroke="#ccc" stroke-width="1">
-       <line x1="0" y1="80" x2="0" y2="160" />
-       <line x1="-35" y1="100" x2="35" y2="140" />
-       <line x1="-35" y1="140" x2="35" y2="100" />
-    </g>
-    <circle cx="0" cy="120" r="8" fill="#555" />
+    {/* Continents (Simplified Shapes) */}
+    <path d="M 80 80 Q 100 60 140 90 T 160 140 T 120 180 T 60 140 Z" fill="#66bb6a" opacity="0.6" />
 
-    <circle cx="150" cy="120" r="45" stroke="#333" stroke-width="8" fill="none" />
-    <circle cx="150" cy="120" r="40" stroke="#ddd" stroke-width="2" fill="none" />
-    <g stroke="#ccc" stroke-width="1">
-       <line x1="150" y1="80" x2="150" y2="160" />
-       <line x1="115" y1="100" x2="185" y2="140" />
-       <line x1="115" y1="140" x2="185" y2="100" />
-    </g>
-    <line x1="150" y1="120" x2="135" y2="60" stroke="#eee" stroke-width="6" stroke-linecap="round" />
+    {/* Center of Earth */}
+    <circle cx="125" cy="125" r="2" fill="red" />
 
-    <path d="M0,120 L50,50 L125,50 L135,60 L50,120 Z" fill="none" stroke="#2962ff" stroke-width="6" stroke-linejoin="round" />
-    <line x1="0" y1="120" x2="50" y2="120" stroke="#333" stroke-width="4" /> 
+    {/* Sun Rays (Parallel) - Yellow */}
+    <line x1="20" y1="20" x2="80" y2="80" stroke="#ffeb3b" strokeWidth="2" markerEnd="url(#arrowSun)" />
+    <line x1="50" y1="10" x2="125" y2="85" stroke="#ffeb3b" strokeWidth="2" markerEnd="url(#arrowSun)" />
+
+    {/* Locations */}
+    {/* Alexandria (Top ish) */}
+    <line x1="80" y1="80" x2="125" y2="125" stroke="red" strokeWidth="1" strokeDasharray="4,2" />
+    <line x1="80" y1="80" x2="70" y2="50" stroke="black" strokeWidth="2" /> {/* Stick/Obelisk */}
     
-    <circle cx="50" cy="120" r="10" fill="#333" />
-    <line x1="50" y1="120" x2="65" y2="140" stroke="#555" stroke-width="4" />
-    <rect x="60" y="138" width="15" height="6" fill="#333" transform="rotate(15 67 141)" />
+    {/* Syene (Where sun goes deep) */}
+    <line x1="125" y1="85" x2="125" y2="125" stroke="red" strokeWidth="1" strokeDasharray="4,2" />
+    <circle cx="125" cy="85" r="3" fill="#333" /> {/* Well */}
 
-    <path d="M130,50 L135,40 L115,40" fill="none" stroke="#333" stroke-width="4" stroke-linecap="round" />
+    {/* Angle Text */}
+    <text x="135" y="150" fontSize="24" fontWeight="bold" fill="red" style={{textShadow: '1px 1px 2px black'}}>7,2°</text>
 
-    <path d="M35,50 L30,40 L55,40 Z" fill="#333" />
-
-    <path d="M45,45 L40,80 L25,110" fill="none" stroke="#f8bbd0" stroke-width="12" stroke-linecap="round" /> <path d="M45,45 L40,80" fill="none" stroke="#4fc3f7" stroke-width="13" stroke-linecap="round" /> <path d="M25,110 L35,115" stroke="#334" stroke-width="12" stroke-linecap="round" /> <path d="M50,45 L70,90 L65,135" fill="none" stroke="#f8bbd0" stroke-width="12" stroke-linecap="round" />
-    <path d="M50,45 L70,90 L70,100" fill="none" stroke="#4fc3f7" stroke-width="13" stroke-linecap="round" /> <path d="M62,135 L75,140" stroke="#556" stroke-width="12" stroke-linecap="round" /> <path d="M40,50 L65,5 L85,20 L55,55 Z" fill="#b3e5fc" /> <path d="M40,50 L65,5" stroke="#b3e5fc" stroke-width="22" stroke-linecap="round" />
-
-    <path d="M75,15 L100,40 L130,40" fill="none" stroke="#f8bbd0" stroke-width="10" stroke-linecap="round" />
-    <path d="M75,15 L90,30" fill="none" stroke="#b3e5fc" stroke-width="12" stroke-linecap="round" /> <circle cx="75" cy="-5" r="14" fill="#f8bbd0" />
-    
-    <path d="M58,-10 A16,14 0 0,1 92,-10 L92,-5 L58,-5 Z" fill="#1565c0" />
-    <path d="M58,-5 L55,0" stroke="#333" stroke-width="2" /> <path d="M35,10 Q20,20 30,50 L50,40 Q45,20 35,10" fill="#283593" />
-  </g>
-</svg>
-
-<div style={{textAlign: 'center', fontFamily: 'serif', fontSize: '1.1em', marginTop: '10px'}}>
-  Urme de vopsea lăsate de o roată de bicicletă
+    {/* Geometry lines for angle */}
+    <path d="M 125 125 L 80 80" stroke="red" strokeWidth="1" strokeDasharray="2,2"/>
+    <path d="M 125 125 L 125 85" stroke="red" strokeWidth="1" strokeDasharray="2,2"/>
+  </svg>
 </div>
 
-Distanța dintre două astfel de semne reprezintă lungimea cercului. Știind că distanța dintre două semne consecutive este de 94 cm, ce distanță a parcurs Victor, dacă pe asfalt sunt 100 de semne?
-
----
-
-## Lungimea cercului
-
-* Lungimea cercului se determină cu formula $L_{cerc} = 2\pi R$, unde $R$ este raza cercului, iar $\pi$ este un număr irațional a cărui valoare aproximativă este $3,14$ și reprezintă raportul dintre lungimea cercului și diametrul acestuia.
-
-:::important
-  <strong>Exemplu:</strong> Lungimea unui cerc cu raza de 30 cm este $L_{cerc} = 2\pi \cdot 30 = 60\pi \approx 60 \cdot 3,14 = 188,4 \text{ cm}$. De regulă, lungimea cercului se dă sub forma $60\pi$, înlocuirea se face numai în cazuri speciale.
+* Prezentați proiectul într-un mod inedit.
+* Stabiliți, împreună cu profesoara/profesorul, un proiect câștigător.
 :::
 
----
-
-## Aria discului
-
-* Un disc este suprafața delimitată de un cerc.
-* Aria unui disc se determină cu formula $\mathcal{A}_{disc} = \pi R^2$, unde $R$ este raza cercului.
-
-:::important
-<strong>Exemplu:</strong> Aria unui disc cu raza de 30 cm este $\mathcal{A}_{disc} = \pi \cdot 30^2 = 900\pi \approx 900 \cdot 3,14 = 2826 \text{ cm}^2$. De regulă, aria discului se dă sub forma $900\pi$, înlocuirea se face numai în cazuri speciale.
-:::
-
----
+| Criterii de evaluare| În totalitate | Parțial | Deloc |
+| :--- | :---: | :---: | :---: |
+| Informațiile prezentate sunt corecte. | | | |
+| Informațiile prezentate sunt interesante și relevante. | | | |
+| Desenele/imaginile utilizate sunt atractive, ilustrative. | | | |
+| Sunt respectate regulile gramaticale și de exprimare. | | | |
+| Prezentarea proiectului este clară. | | | |
+| Membrii echipei s-au implicat în căutarea informațiilor. | | | |

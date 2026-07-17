@@ -42,4 +42,43 @@ window.addEventListener('DOMContentLoaded', () => {
   if (span) {
     span.textContent = style.label;
   }
+
+  // Check and apply UI hiding
+  applyUIHiding();
+  // Also apply after a short delay to catch React-rendered elements
+  setTimeout(applyUIHiding, 100);
+  setTimeout(applyUIHiding, 500);
+
+  // Use MutationObserver to watch for breadcrumbs
+  const observer = new MutationObserver(() => {
+    applyUIHiding();
+  });
+  observer.observe(document.body, { childList: true, subtree: true });
 });
+
+// Function to toggle hiding of dock and error button
+window.toggleUIHiding = function() {
+  const hideUI = localStorage.getItem('hideUI') === 'true';
+  localStorage.setItem('hideUI', !hideUI);
+  applyUIHiding();
+  // Dispatch custom event for React components
+  window.dispatchEvent(new CustomEvent('uiToggle'));
+};
+
+// Function to apply hiding based on localStorage
+function applyUIHiding() {
+  const hideUI = localStorage.getItem('hideUI') === 'true';
+  const dock = document.querySelector('.dock');
+  const errorButton = document.querySelector('.button'); // The error report button
+  const breadcrumbs = document.querySelector('ul.breadcrumbs'); // The breadcrumbs component
+
+  if (dock) {
+    dock.style.display = hideUI ? 'none' : '';
+  }
+  if (errorButton) {
+    errorButton.style.display = hideUI ? 'none' : '';
+  }
+  if (breadcrumbs) {
+    breadcrumbs.style.display = hideUI ? 'none' : '';
+  }
+}

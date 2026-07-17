@@ -1,0 +1,387 @@
+---
+sidebar_position: 21
+slug: /c5/modul-5/02
+description: ""
+---
+
+# G6 - Măsurarea volumului și a capacității
+
+---
+
+## Măsurarea volumului
+
+Pentru a măsura volumul unui corp, ne întrebăm **din câte cuburi mici de o anumită mărime este format** acel corp.
+
+:::tip Definiție
+**Volumul** unui corp este numărul care arată de câte ori se cuprinde o unitate de măsură (un cub unitate) în acel corp.
+:::
+
+Unitatea principală pentru măsurarea volumului este **metrul cub**, notat $m^3$. Un metru cub reprezintă volumul unui cub cu muchia de $1$ metru.
+
+<div style={{ display: "flex", justifyContent: "center", margin: "1.5rem 0" }}>
+<svg width="260" height="260" viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">
+  <rect x="50" y="95" width="120" height="120" fill="#cce5ff" stroke="black" strokeWidth="2.5"/>
+  <line x1="50" y1="95" x2="110" y2="45" stroke="black" strokeWidth="2.5"/>
+  <line x1="170" y1="95" x2="230" y2="45" stroke="black" strokeWidth="2.5"/>
+  <line x1="170" y1="215" x2="230" y2="165" stroke="black" strokeWidth="2.5"/>
+  <line x1="110" y1="45" x2="230" y2="45" stroke="black" strokeWidth="2.5"/>
+  <line x1="230" y1="45" x2="230" y2="165" stroke="black" strokeWidth="2.5"/>
+  <line x1="50" y1="215" x2="110" y2="165" stroke="black" strokeWidth="1" strokeDasharray="5,4"/>
+  <line x1="110" y1="165" x2="230" y2="165" stroke="black" strokeWidth="1" strokeDasharray="5,4"/>
+  <line x1="110" y1="165" x2="110" y2="45" stroke="black" strokeWidth="1" strokeDasharray="5,4"/>
+  <text x="100" y="240" fontSize="18" fontFamily="serif">1 m</text>
+  <text x="18" y="160" fontSize="18" fontFamily="serif">1 m</text>
+  <text x="178" y="78" fontSize="18" fontFamily="serif">1 m</text>
+</svg>
+</div>
+
+Multiplii și submultiplii metrului cub sunt:
+
+| Denumire | Notație | Relație cu $m^3$ |
+|---|---|---|
+| kilometru cub | $km^3$ | $1\,km^3 = 10^9\,m^3$ |
+| hectometru cub | $hm^3$ | $1\,hm^3 = 10^6\,m^3$ |
+| decametru cub | $dam^3$ | $1\,dam^3 = 1000\,m^3$ |
+| **metru cub** | $m^3$ | $1\,m^3$ |
+| decimetru cub | $dm^3$ | $1\,dm^3 = 0{,}001\,m^3$ |
+| centimetru cub | $cm^3$ | $1\,cm^3 = 0{,}000001\,m^3$ |
+| milimetru cub | $mm^3$ | $1\,mm^3 = 0{,}000000001\,m^3$ |
+
+### Schema transformărilor pentru volum
+
+:::danger Regulă de transformare
+La unitățile de **volum**, fiecare treaptă diferă de vecina ei prin **$1000$** (la lungime era $10$, la arie era $100$).
+
+- Pentru a transforma o unitate într-una **imediat inferioară** (mai mică), **înmulțim cu $1000$**.
+- Pentru a transforma o unitate într-una **imediat superioară** (mai mare), **împărțim la $1000$**.
+:::
+
+$$
+km^3 \;\xrightarrow{\;\times 1000\;}\; hm^3 \;\xrightarrow{\;\times 1000\;}\; dam^3 \;\xrightarrow{\;\times 1000\;}\; m^3 \;\xrightarrow{\;\times 1000\;}\; dm^3 \;\xrightarrow{\;\times 1000\;}\; cm^3 \;\xrightarrow{\;\times 1000\;}\; mm^3
+$$
+
+Pentru $n$ trepte parcurse, înmulțim sau împărțim cu $(10^3)^n = 1000^n$.
+
+:::info De ce 1000?
+La lungime trecem printr-o singură dimensiune ($\times 10$), la arie prin două dimensiuni ($\times 10^2 = 100$), iar la volum prin **trei dimensiuni**, deci $\times 10^3 = 1000$.
+:::
+
+:::note Exemplu rezolvat
+**1)** $25\,m^3 = \;?\;dm^3$ — coborâm o treaptă, deci înmulțim cu $1000$:
+
+$$
+25\,m^3 = 25 \cdot 1000 = 25\,000\,dm^3
+$$
+
+**2)** $126{,}5\,cm^3 = \;?\;dm^3$ — urcăm o treaptă, deci împărțim la $1000$:
+
+$$
+126{,}5\,cm^3 = 126{,}5 : 1000 = 0{,}1265\,dm^3
+$$
+
+**3)** $29{,}47\,dam^3 = \;?\;dm^3$ — coborâm două trepte, deci înmulțim cu $(10^3)^2 = 10^6$:
+
+$$
+29{,}47\,dam^3 = 29{,}47 \cdot 10^6 = 29\,470\,000\,dm^3
+$$
+:::
+
+---
+
+## Volumul cubului
+
+Să numărăm din câte cuburi unitate (cu muchia de $1\,cm$) este format un cub cu muchia de $3\,cm$. Avem $3$ cuburi pe lungime, $3$ pe lățime și $3$ pe înălțime:
+
+$$
+3 \cdot 3 \cdot 3 = 27 \;\text{cuburi unitate}
+$$
+
+Deci volumul lui este $V = 27\,cm^3$. Generalizând:
+
+<div style={{ display: "flex", justifyContent: "center", margin: "1.5rem 0" }}>
+<svg width="280" height="280" viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg">
+  <rect x="60" y="100" width="120" height="120" fill="#cce5ff" stroke="black" strokeWidth="2.5"/>
+  <line x1="60" y1="100" x2="120" y2="50" stroke="black" strokeWidth="2.5"/>
+  <line x1="180" y1="100" x2="240" y2="50" stroke="black" strokeWidth="2.5"/>
+  <line x1="180" y1="220" x2="240" y2="170" stroke="black" strokeWidth="2.5"/>
+  <line x1="120" y1="50" x2="240" y2="50" stroke="black" strokeWidth="2.5"/>
+  <line x1="240" y1="50" x2="240" y2="170" stroke="black" strokeWidth="2.5"/>
+  <line x1="60" y1="220" x2="120" y2="170" stroke="black" strokeWidth="1" strokeDasharray="5,4"/>
+  <line x1="120" y1="170" x2="240" y2="170" stroke="black" strokeWidth="1" strokeDasharray="5,4"/>
+  <line x1="120" y1="170" x2="120" y2="50" stroke="black" strokeWidth="1" strokeDasharray="5,4"/>
+  <text x="115" y="245" fontSize="20" fontFamily="serif" fill="red">l</text>
+  <text x="40" y="165" fontSize="20" fontFamily="serif" fill="red">l</text>
+  <text x="190" y="80" fontSize="20" fontFamily="serif" fill="red">l</text>
+</svg>
+</div>
+
+:::danger Formulă
+Volumul unui cub cu muchia de lungime $l$ este:
+
+$$
+V_{\text{cub}} = l \cdot l \cdot l = l^3
+$$
+:::
+
+:::note Exemplu rezolvat
+Un cubuleț al unui cub Rubik are muchia de $2\,cm$. Cât este volumul cubului Rubik?
+
+Cubul Rubik are $3$ cubulețe pe fiecare muchie, deci latura lui este:
+
+$$
+l = 3 \cdot 2 = 6\,cm
+$$
+
+Volumul:
+
+$$
+V = l^3 = 6^3 = 216\,cm^3
+$$
+:::
+
+---
+
+## Volumul paralelipipedului dreptunghic
+
+Paralelipipedul dreptunghic are trei dimensiuni: **lungimea** $L$, **lățimea** $l$ și **înălțimea** $h$.
+
+Dacă punem $4$ cuburi pe lungime, $3$ pe lățime și $2$ pe înălțime, obținem $4 \cdot 3 \cdot 2 = 24$ cuburi unitate. De aici:
+
+<div style={{ display: "flex", justifyContent: "center", margin: "1.5rem 0" }}>
+<svg width="340" height="260" viewBox="0 0 340 260" xmlns="http://www.w3.org/2000/svg">
+  <rect x="50" y="110" width="180" height="100" fill="#cce5ff" stroke="black" strokeWidth="2.5"/>
+  <line x1="50" y1="110" x2="110" y2="60" stroke="black" strokeWidth="2.5"/>
+  <line x1="230" y1="110" x2="290" y2="60" stroke="black" strokeWidth="2.5"/>
+  <line x1="230" y1="210" x2="290" y2="160" stroke="black" strokeWidth="2.5"/>
+  <line x1="110" y1="60" x2="290" y2="60" stroke="black" strokeWidth="2.5"/>
+  <line x1="290" y1="60" x2="290" y2="160" stroke="black" strokeWidth="2.5"/>
+  <line x1="50" y1="210" x2="110" y2="160" stroke="black" strokeWidth="1" strokeDasharray="5,4"/>
+  <line x1="110" y1="160" x2="290" y2="160" stroke="black" strokeWidth="1" strokeDasharray="5,4"/>
+  <line x1="110" y1="160" x2="110" y2="60" stroke="black" strokeWidth="1" strokeDasharray="5,4"/>
+  <text x="135" y="235" fontSize="20" fontFamily="serif" fill="red">L</text>
+  <text x="28" y="168" fontSize="20" fontFamily="serif" fill="green">h</text>
+  <text x="195" y="92" fontSize="20" fontFamily="serif" fill="blue">l</text>
+</svg>
+</div>
+
+:::danger Formulă
+Volumul unui paralelipiped dreptunghic cu dimensiunile $L$, $l$ și $h$ este:
+
+$$
+V_{\text{paralelipiped}} = L \cdot l \cdot h
+$$
+
+Toate dimensiunile trebuie exprimate în **aceeași unitate de măsură**.
+:::
+
+:::note Exemplu rezolvat
+Un container are forma unui paralelipiped dreptunghic cu dimensiunile $10\,m$, $6\,m$ și $5\,m$. Află volumul, exprimat în $dm^3$.
+
+$$
+V = L \cdot l \cdot h = 10 \cdot 6 \cdot 5 = 300\,m^3
+$$
+
+Transformăm în $dm^3$ (coborâm o treaptă, înmulțim cu $1000$):
+
+$$
+300\,m^3 = 300 \cdot 1000 = 300\,000\,dm^3
+$$
+:::
+
+---
+
+## Aria laterală și aria totală
+
+Pe lângă volum (cât „spațiu" ocupă un corp), ne poate interesa și **aria suprafeței** lui — de exemplu, cât carton ne trebuie pentru a confecționa o cutie, sau cât tapet pentru a îmbrăca un perete.
+
+:::tip Definiții
+- **Aria laterală** ($\mathcal{A}_\ell$) este suma ariilor **fețelor laterale** ale corpului (fețele „din jur", fără baza de sus și cea de jos).
+- **Aria totală** ($\mathcal{A}_t$) este suma ariilor **tuturor fețelor** corpului. Se obține adunând la aria laterală ariile celor două baze.
+
+$$
+\mathcal{A}_t = \mathcal{A}_\ell + 2 \cdot \mathcal{A}_{\text{bază}}
+$$
+:::
+
+Pentru a înțelege de unde vin formulele, ne imaginăm că **desfacem** corpul și îl întindem pe o masă (desfășurarea corpului).
+
+### Aria cubului
+
+Un cub are **6 fețe**, toate pătrate identice cu latura $l$. Aria unei fețe este $l^2$.
+
+Cele **4 fețe laterale** (fără baza de sus și cea de jos) dau aria laterală, iar toate **6 fețele** dau aria totală.
+
+:::danger Formule — cubul
+$$
+\mathcal{A}_{\ell\,(\text{cub})} = 4 \cdot l^2
+$$
+
+$$
+\mathcal{A}_{t\,(\text{cub})} = 6 \cdot l^2
+$$
+:::
+
+:::note Exemplu rezolvat
+Un cub are muchia $l = 5\,cm$. Calculează aria laterală și aria totală.
+
+Aria unei fețe:
+
+$$
+l^2 = 5^2 = 25\,cm^2
+$$
+
+Aria laterală (4 fețe):
+
+$$
+\mathcal{A}_\ell = 4 \cdot 25 = 100\,cm^2
+$$
+
+Aria totală (6 fețe):
+
+$$
+\mathcal{A}_t = 6 \cdot 25 = 150\,cm^2
+$$
+:::
+
+### Aria paralelipipedului dreptunghic
+
+Paralelipipedul dreptunghic are **6 fețe**, dreptunghiulare, egale două câte două (fețele opuse sunt identice):
+
+- două fețe cu dimensiunile $L \times l$ (baza de jos și cea de sus),
+- două fețe cu dimensiunile $L \times h$ (față și spate),
+- două fețe cu dimensiunile $l \times h$ (stânga și dreapta).
+
+**Aria laterală** este suma celor patru fețe „din jur" (toate în afară de cele două baze $L \times l$):
+
+$$
+\mathcal{A}_\ell = 2 \cdot (L \cdot h) + 2 \cdot (l \cdot h) = 2h \cdot (L + l)
+$$
+
+:::info Observație
+Expresia $L + l$ care apare aici este **semiperimetrul bazei**, iar $2(L+l)$ este chiar perimetrul bazei. Așadar aria laterală se poate scrie și ca:
+
+$$
+\mathcal{A}_\ell = P_{\text{bază}} \cdot h
+$$
+
+adică „perimetrul bazei înmulțit cu înălțimea" — un mod ușor de reținut.
+:::
+
+**Aria totală** adaugă cele două baze:
+
+:::danger Formule — paralelipipedul dreptunghic
+$$
+\mathcal{A}_{\ell} = 2h \cdot (L + l)
+$$
+
+$$
+\mathcal{A}_{t} = 2 \cdot (L \cdot l + L \cdot h + l \cdot h)
+$$
+:::
+
+:::note Exemplu rezolvat
+Un paralelipiped dreptunghic are $L = 6\,cm$, $l = 4\,cm$ și $h = 5\,cm$. Calculează aria laterală și aria totală.
+
+**Aria laterală:**
+
+$$
+\mathcal{A}_\ell = 2h \cdot (L + l) = 2 \cdot 5 \cdot (6 + 4) = 10 \cdot 10 = 100\,cm^2
+$$
+
+**Aria totală:**
+
+$$
+\mathcal{A}_t = 2 \cdot (L \cdot l + L \cdot h + l \cdot h)
+$$
+
+$$
+\mathcal{A}_t = 2 \cdot (6 \cdot 4 + 6 \cdot 5 + 4 \cdot 5) = 2 \cdot (24 + 30 + 20) = 2 \cdot 74 = 148\,cm^2
+$$
+:::
+
+:::info Nu confunda volumul cu aria!
+- **Volumul** măsoară cât spațiu ocupă corpul și se exprimă în $cm^3$, $m^3$ etc.
+- **Aria** (laterală sau totală) măsoară suprafața și se exprimă în $cm^2$, $m^2$ etc.
+:::
+
+---
+
+## Măsurarea capacității (volumul lichidelor)
+
+Capacitatea unui vas arată ce cantitate de lichid încape în el.
+
+:::tip Definiție
+Unitatea principală pentru măsurarea capacității este **litrul**, notat $l$. Legătura fundamentală cu volumul este:
+
+$$
+1\,l = 1\,dm^3
+$$
+:::
+
+Litrul are multipli și submultipli:
+
+| Multipli | | Submultipli | |
+|---|---|---|---|
+| kilolitru | $kl$ | decilitru | $dl$ |
+| hectolitru | $hl$ | centilitru | $cl$ |
+| decalitru | $dal$ | mililitru | $ml$ |
+
+Ca la lungime, fiecare treaptă diferă prin **$10$**:
+
+$$
+1\,kl = 10\,hl = 10^2\,dal = 10^3\,l = 10^4\,dl = 10^5\,cl = 10^6\,ml
+$$
+
+:::note Exemplu rezolvat
+Transformă:
+
+**a)** $0{,}0107\,kl = \;?\;l$ — coborâm trei trepte, înmulțim cu $10^3$:
+
+$$
+0{,}0107\,kl = 0{,}0107 \cdot 10^3 = 10{,}7\,l
+$$
+
+**b)** $603{,}5\,dl = \;?\;dal$ — urcăm două trepte, împărțim la $10^2$:
+
+$$
+603{,}5\,dl = 603{,}5 : 10^2 = 6{,}035\,dal
+$$
+
+**c)** $20\,hl = \;?\;cl$ — coborâm patru trepte, înmulțim cu $10^4$:
+
+$$
+20\,hl = 20 \cdot 10^4 = 200\,000\,cl
+$$
+:::
+
+### Legătura dintre volum și capacitate
+
+Folosind $1\,l = 1\,dm^3$, putem afla câți litri încap într-un vas calculându-i mai întâi volumul.
+
+:::note Exemplu rezolvat
+Află capacitatea, în litri, a unui bazin în formă de cub cu muchia de $10\,dm$.
+
+$$
+V = l^3 = 10^3 = 1000\,dm^3 = 1000\,l
+$$
+:::
+
+:::note Exemplu rezolvat
+Într-un vas cub cu muchia de $20\,cm$ se toarnă $4\,l$ de apă. La ce înălțime se ridică apa?
+
+**Pasul 1.** Transformăm muchia: $20\,cm = 2\,dm$. Cei $4\,l$ ocupă un volum de $4\,dm^3$.
+
+**Pasul 2.** Apa formează un paralelipiped cu baza pătrată $2\,dm \times 2\,dm$ și înălțimea necunoscută $h$:
+
+$$
+V = l \cdot l \cdot h \;\Rightarrow\; 4 = 2 \cdot 2 \cdot h = 4h
+$$
+
+$$
+h = 4 : 4 = 1\,dm
+$$
+
+Apa se ridică la înălțimea de $1\,dm$ (adică $10\,cm$).
+:::
+
+---

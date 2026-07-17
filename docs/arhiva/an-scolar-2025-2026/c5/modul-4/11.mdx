@@ -1,0 +1,187 @@
+---
+sidebar_position: 2
+slug: /c5/modul-3/11
+description: ""
+---
+
+# G4 - Mijlocul unui segment și simetricul unui punct
+față de un punct
+
+---
+
+## Mijlocul unui segment
+
+:::tip Definiție
+**Mijlocul** unui segment $[AB]$ este punctul $M$ situat pe segment, egal depărtat de capetele acestuia.
+:::
+
+Altfel spus, $M$ împarte segmentul $[AB]$ în două segmente egale:
+
+$$
+AM = MB
+$$
+
+<div style={{ display: "flex", justifyContent: "center", margin: "1.5rem 0" }}>
+<svg width="480" height="100" viewBox="0 0 480 100" xmlns="http://www.w3.org/2000/svg">
+  <line x1="50" y1="55" x2="430" y2="55" stroke="black" strokeWidth="3"/>
+  <circle cx="50" cy="55" r="5" fill="black"/>
+  <circle cx="240" cy="55" r="5" fill="red"/>
+  <circle cx="430" cy="55" r="5" fill="black"/>
+  <text x="40" y="38" fontSize="24" fontFamily="serif" fontWeight="bold">A</text>
+  <text x="232" y="38" fontSize="24" fontFamily="serif" fontWeight="bold" fill="red">M</text>
+  <text x="422" y="38" fontSize="24" fontFamily="serif" fontWeight="bold">B</text>
+  <line x1="140" y1="47" x2="150" y2="63" stroke="blue" strokeWidth="2"/>
+  <line x1="330" y1="47" x2="340" y2="63" stroke="blue" strokeWidth="2"/>
+</svg>
+</div>
+
+Liniuțele albastre marchează faptul că cele două jumătăți sunt **congruente** (au aceeași lungime).
+
+:::danger Proprietate fundamentală
+Dacă $M$ este mijlocul segmentului $[AB]$, atunci fiecare jumătate este egală cu **jumătatea** întregului segment:
+
+$$
+AM = MB = \frac{AB}{2}
+$$
+
+Reciproc, lungimea întregului segment este dublul unei jumătăți:
+
+$$
+AB = 2 \cdot AM = 2 \cdot MB
+$$
+:::
+
+:::info Observație
+Un segment are **un singur** mijloc. Mijlocul se află întotdeauna **între** cele două capete ale segmentului.
+:::
+
+:::note Exemplu rezolvat
+Punctul $M$ este mijlocul segmentului $[AB]$, iar $AB = 18\,cm$. Cât este $AM$?
+
+Mijlocul împarte segmentul în două părți egale, fiecare egală cu jumătatea lungimii:
+
+$$
+AM = \frac{AB}{2} = \frac{18}{2} = 9\,cm
+$$
+:::
+
+:::note Exemplu rezolvat
+Punctul $M$ este mijlocul segmentului $[AB]$ și $AM = 7\,cm$. Cât este $AB$?
+
+Lungimea întregului segment este dublul jumătății:
+
+$$
+AB = 2 \cdot AM = 2 \cdot 7 = 14\,cm
+$$
+:::
+
+---
+
+## Simetricul unui punct față de un punct
+
+Pornim de la o întrebare simplă: dat fiind un punct $A$ și un alt punct $O$, există un punct $A'$ astfel încât $O$ să fie exact la mijloc între $A$ și $A'$?
+
+:::tip Definiție
+**Simetricul** punctului $A$ față de punctul $O$ este punctul $A'$ pentru care $O$ este **mijlocul** segmentului $[AA']$.
+:::
+
+Punctul $O$ se numește **centru de simetrie**.
+
+<div style={{ display: "flex", justifyContent: "center", margin: "1.5rem 0" }}>
+<svg width="520" height="100" viewBox="0 0 520 100" xmlns="http://www.w3.org/2000/svg">
+  <line x1="60" y1="55" x2="460" y2="55" stroke="black" strokeWidth="3"/>
+  <circle cx="60" cy="55" r="5" fill="black"/>
+  <circle cx="260" cy="55" r="5" fill="red"/>
+  <circle cx="460" cy="55" r="5" fill="green"/>
+  <text x="50" y="38" fontSize="24" fontFamily="serif" fontWeight="bold">A</text>
+  <text x="252" y="38" fontSize="24" fontFamily="serif" fontWeight="bold" fill="red">O</text>
+  <text x="448" y="38" fontSize="24" fontFamily="serif" fontWeight="bold" fill="green">A'</text>
+  <line x1="150" y1="47" x2="160" y2="63" stroke="blue" strokeWidth="2"/>
+  <line x1="350" y1="47" x2="360" y2="63" stroke="blue" strokeWidth="2"/>
+</svg>
+</div>
+
+Din definiție rezultă imediat că:
+
+$$
+OA = OA'
+$$
+
+iar punctele $A$, $O$ și $A'$ sunt **coliniare** (se află pe aceeași dreaptă), cu $O$ între $A$ și $A'$.
+
+:::danger De reținut
+- $A'$ este simetricul lui $A$ față de $O$ $\;\Longleftrightarrow\;$ $O$ este mijlocul lui $[AA']$.
+- Relația este **reciprocă**: dacă $A'$ este simetricul lui $A$, atunci $A$ este simetricul lui $A'$ (față de același $O$).
+- Simetricul punctului $O$ față de el însuși este **chiar $O$**.
+:::
+
+:::info Cum construim simetricul?
+Pentru a construi simetricul lui $A$ față de $O$:
+1. Trasăm semidreapta $AO$ și o prelungim dincolo de $O$.
+2. Măsurăm distanța $OA$ și o reportăm de cealaltă parte a lui $O$.
+3. Punctul obținut, la aceeași distanță, este $A'$.
+:::
+
+:::note Exemplu rezolvat
+Punctul $O$ este mijlocul segmentului $[AA']$ și $OA = 5\,cm$. Cât este lungimea segmentului $[AA']$?
+
+Deoarece $O$ este mijloc, avem $OA = OA' = 5\,cm$, deci:
+
+$$
+AA' = OA + OA' = 5 + 5 = 2 \cdot 5 = 10\,cm
+$$
+:::
+
+---
+
+## Calcule cu mijloc și simetric
+
+Multe probleme combină mijlocul, simetricul și lungimile de segmente. Cheia este să reținem mereu cele două relații:
+
+$$
+\boxed{AM = MB = \dfrac{AB}{2}} \qquad \boxed{AB = 2 \cdot AM}
+$$
+
+:::note Exemplu rezolvat
+Pe o dreaptă se consideră punctele $A$, $O$, $B$ astfel încât $O$ este mijlocul lui $[AB]$. Știind că $AO = 2x + 1$ și $OB = x + 4$ (în centimetri), află $x$ și lungimea $AB$.
+
+Cum $O$ este mijloc, cele două jumătăți sunt egale:
+
+$$
+AO = OB \;\Rightarrow\; 2x + 1 = x + 4
+$$
+
+$$
+2x - x = 4 - 1 \;\Rightarrow\; x = 3
+$$
+
+Atunci $AO = 2 \cdot 3 + 1 = 7\,cm$, iar:
+
+$$
+AB = 2 \cdot AO = 2 \cdot 7 = 14\,cm
+$$
+:::
+
+:::note Exemplu rezolvat
+Punctul $C$ este simetricul lui $A$ față de $B$, iar $AB = 6\,cm$. Pe segment se mai ia mijlocul $M$ al lui $[AB]$. Calculează $MC$.
+
+Cum $C$ este simetricul lui $A$ față de $B$, $B$ este mijlocul lui $[AC]$, deci:
+
+$$
+BC = AB = 6\,cm \;\Rightarrow\; AC = 12\,cm
+$$
+
+$M$ este mijlocul lui $[AB]$, deci:
+
+$$
+MB = \frac{AB}{2} = \frac{6}{2} = 3\,cm
+$$
+
+Punctele sunt în ordinea $A,\, M,\, B,\, C$ pe dreaptă, deci:
+
+$$
+MC = MB + BC = 3 + 6 = 9\,cm
+$$
+:::
+
+---

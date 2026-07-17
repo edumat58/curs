@@ -6,6 +6,7 @@ import styles from "./styles.module.css";
 import Link from "@docusaurus/Link";
 import { useLocation } from "@docusaurus/router";
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
 
 // Icons 
 import { Home, BookOpen, GraduationCap, ChevronLeft, LayoutGrid, Calendar, ChevronRight, MoreHorizontal, XCircle } from "lucide-react";
@@ -33,6 +34,21 @@ export default function Dock({ items, className }: DockProps) {
     const mouseX = useMotionValue(Infinity);
     const location = useLocation();
     const { globalData } = useDocusaurusContext();
+
+    const [hideUI, setHideUI] = React.useState(() => ExecutionEnvironment.canUseDOM ? localStorage.getItem('hideUI') === 'true' : false);
+
+    React.useEffect(() => {
+        const handleStorageChange = () => {
+            setHideUI(localStorage.getItem('hideUI') === 'true');
+        };
+        window.addEventListener('storage', handleStorageChange);
+        // Also listen for custom event if needed
+        window.addEventListener('uiToggle', handleStorageChange);
+        return () => {
+            window.removeEventListener('storage', handleStorageChange);
+            window.removeEventListener('uiToggle', handleStorageChange);
+        };
+    }, []);
 
     const finalItems = React.useMemo(() => {
         if (items) return items;
@@ -499,7 +515,7 @@ export default function Dock({ items, className }: DockProps) {
         setMounted(true);
     }, []);
 
-    if (!mounted) return null;
+    if (!mounted || hideUI) return null;
 
     // Use Portal to render directly in body to avoid parent transforms/overflows
     // affecting position: fixed

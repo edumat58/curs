@@ -1,0 +1,180 @@
+---
+sidebar_position: 3
+slug: /c5/modul-3/10
+description: ""
+---
+
+# G3 - Distanţa dintre două puncte
+
+---
+
+## Ce este distanța dintre două puncte?
+
+:::tip Definiție
+**Distanța dintre două puncte** $A$ și $B$ este egală cu **lungimea segmentului** $[AB]$ care le unește.
+:::
+
+Distanța dintre $A$ și $B$ se notează la fel cu lungimea segmentului:
+
+$$
+AB \quad \text{sau} \quad d(A, B)
+$$
+
+<div style={{ display: "flex", justifyContent: "center", margin: "1.5rem 0" }}>
+<svg width="440" height="100" viewBox="0 0 440 100" xmlns="http://www.w3.org/2000/svg">
+  <line x1="60" y1="55" x2="380" y2="55" stroke="black" strokeWidth="3"/>
+  <circle cx="60" cy="55" r="5" fill="black"/>
+  <circle cx="380" cy="55" r="5" fill="black"/>
+  <text x="48" y="40" fontSize="24" fontFamily="serif" fontWeight="bold">A</text>
+  <text x="370" y="40" fontSize="24" fontFamily="serif" fontWeight="bold">B</text>
+  <text x="195" y="88" fontSize="20" fontFamily="serif" fill="red">AB</text>
+</svg>
+</div>
+
+:::info Observație
+- Distanța este întotdeauna un număr **pozitiv** (sau $0$).
+- Distanța de la un punct la el însuși este $0$: $\;d(A, A) = 0$.
+- Distanța nu depinde de ordinea punctelor: $\;AB = BA$.
+:::
+
+---
+
+## Măsurarea distanței cu rigla
+
+Pentru a măsura distanța dintre două puncte de pe o foaie, folosim **rigla gradată**:
+
+<div style={{ display: "flex", justifyContent: "center", margin: "1.5rem 0" }}>
+<svg width="500" height="130" viewBox="0 0 500 130" xmlns="http://www.w3.org/2000/svg">
+  <rect x="40" y="60" width="420" height="45" fill="#fff3cd" stroke="black" strokeWidth="2"/>
+  <line x1="60" y1="60" x2="60" y2="76" stroke="black" strokeWidth="1.5"/>
+  <text x="56" y="98" fontSize="13" fontFamily="sans-serif">0</text>
+  <line x1="100" y1="60" x2="100" y2="76" stroke="black" strokeWidth="1.5"/>
+  <text x="96" y="98" fontSize="13" fontFamily="sans-serif">1</text>
+  <line x1="140" y1="60" x2="140" y2="76" stroke="black" strokeWidth="1.5"/>
+  <text x="136" y="98" fontSize="13" fontFamily="sans-serif">2</text>
+  <line x1="180" y1="60" x2="180" y2="76" stroke="black" strokeWidth="1.5"/>
+  <text x="176" y="98" fontSize="13" fontFamily="sans-serif">3</text>
+  <line x1="220" y1="60" x2="220" y2="76" stroke="black" strokeWidth="1.5"/>
+  <text x="216" y="98" fontSize="13" fontFamily="sans-serif">4</text>
+  <line x1="260" y1="60" x2="260" y2="76" stroke="black" strokeWidth="1.5"/>
+  <text x="256" y="98" fontSize="13" fontFamily="sans-serif">5</text>
+  <line x1="300" y1="60" x2="300" y2="76" stroke="black" strokeWidth="1.5"/>
+  <text x="296" y="98" fontSize="13" fontFamily="sans-serif">6</text>
+  <line x1="340" y1="60" x2="340" y2="76" stroke="black" strokeWidth="1.5"/>
+  <text x="336" y="98" fontSize="13" fontFamily="sans-serif">7</text>
+  <line x1="380" y1="60" x2="380" y2="76" stroke="black" strokeWidth="1.5"/>
+  <text x="376" y="98" fontSize="13" fontFamily="sans-serif">8</text>
+  <circle cx="140" cy="45" r="5" fill="red"/>
+  <circle cx="340" cy="45" r="5" fill="red"/>
+  <text x="132" y="33" fontSize="20" fontFamily="serif" fontWeight="bold">A</text>
+  <text x="332" y="33" fontSize="20" fontFamily="serif" fontWeight="bold">B</text>
+  <line x1="140" y1="50" x2="140" y2="60" stroke="red" strokeWidth="1.5" strokeDasharray="3,3"/>
+  <line x1="340" y1="50" x2="340" y2="60" stroke="red" strokeWidth="1.5" strokeDasharray="3,3"/>
+</svg>
+</div>
+
+Așezăm rigla astfel încât punctul $A$ să fie în dreptul gradației $2$, iar punctul $B$ în dreptul gradației $7$. Distanța este diferența dintre cele două citiri:
+
+$$
+AB = 7 - 2 = 5\,cm
+$$
+
+:::info Sfat practic
+Putem așeza rigla și cu gradația $0$ exact în punctul $A$ — atunci distanța se citește direct în dreptul punctului $B$.
+:::
+
+---
+
+## Distanțe pe o dreaptă (puncte coliniare)
+
+Când trei puncte sunt **coliniare** (se află pe aceeași dreaptă), distanțele dintre ele se pot **aduna** sau **scădea**.
+
+Considerăm punctul $C$ situat **între** $A$ și $B$:
+
+<div style={{ display: "flex", justifyContent: "center", margin: "1.5rem 0" }}>
+<svg width="480" height="100" viewBox="0 0 480 100" xmlns="http://www.w3.org/2000/svg">
+  <line x1="40" y1="55" x2="440" y2="55" stroke="black" strokeWidth="3"/>
+  <circle cx="40" cy="55" r="5" fill="black"/>
+  <circle cx="220" cy="55" r="5" fill="red"/>
+  <circle cx="440" cy="55" r="5" fill="black"/>
+  <text x="30" y="40" fontSize="24" fontFamily="serif" fontWeight="bold">A</text>
+  <text x="212" y="40" fontSize="24" fontFamily="serif" fontWeight="bold" fill="red">C</text>
+  <text x="432" y="40" fontSize="24" fontFamily="serif" fontWeight="bold">B</text>
+  <text x="115" y="88" fontSize="18" fontFamily="serif" fill="blue">AC</text>
+  <text x="315" y="88" fontSize="18" fontFamily="serif" fill="green">CB</text>
+</svg>
+</div>
+
+:::danger Regula adunării distanțelor
+Dacă punctul $C$ se află **între** $A$ și $B$, atunci:
+
+$$
+AC + CB = AB
+$$
+:::
+
+De aici putem afla oricare dintre cele trei distanțe, dacă le cunoaștem pe celelalte două:
+
+$$
+AC = AB - CB \qquad CB = AB - AC
+$$
+
+:::note Exemplu rezolvat
+Punctele $A$, $C$, $B$ sunt coliniare, în această ordine, cu $AC = 4\,cm$ și $CB = 9\,cm$. Cât este $AB$?
+
+Cum $C$ este între $A$ și $B$:
+
+$$
+AB = AC + CB = 4 + 9 = 13\,cm
+$$
+:::
+
+:::note Exemplu rezolvat
+Punctele $A$, $C$, $B$ sunt coliniare, în această ordine, cu $AB = 20\,cm$ și $AC = 12\,cm$. Cât este $CB$?
+
+$$
+CB = AB - AC = 20 - 12 = 8\,cm
+$$
+:::
+
+:::info Atenție la ordinea punctelor!
+Regula $AC + CB = AB$ este valabilă **doar** dacă $C$ se află între $A$ și $B$. Dacă punctele sunt în altă ordine pe dreaptă, relația se schimbă.
+
+De exemplu, dacă ordinea este $A,\,B,\,C$ (deci $B$ este între $A$ și $C$), atunci $AB + BC = AC$.
+:::
+
+---
+
+## Calcule cu distanțe
+
+:::note Exemplu rezolvat
+Pe o dreaptă, în ordinea $A,\, M,\, B$, avem $AM = 2x$ și $MB = x + 5$ (în cm). Știind că $AB = 17\,cm$, află $x$.
+
+Cum $M$ este între $A$ și $B$:
+
+$$
+AM + MB = AB
+$$
+
+$$
+2x + (x + 5) = 17
+$$
+
+$$
+3x + 5 = 17 \;\Rightarrow\; 3x = 12 \;\Rightarrow\; x = 4
+$$
+
+Verificare: $AM = 2 \cdot 4 = 8\,cm$, $MB = 4 + 5 = 9\,cm$, iar $8 + 9 = 17\,cm$. ✓
+:::
+
+:::note Exemplu rezolvat
+Pe o dreaptă se află punctele $A$, $B$, $C$ în această ordine, cu $AB = 6\,cm$ și $BC = 10\,cm$. Cât este distanța $AC$?
+
+Cum $B$ este între $A$ și $C$:
+
+$$
+AC = AB + BC = 6 + 10 = 16\,cm
+$$
+:::
+
+---

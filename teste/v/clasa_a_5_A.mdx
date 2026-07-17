@@ -1,0 +1,428 @@
+---
+sidebar_position: 1
+slug: /c6/modul-3/100
+description: ""
+---
+
+# Test Clasa a VI-a
+**Nume: \
+_______________________** \
+**Prenume: \
+_______________________**
+
+- Toate subiectele sunt obligatorii
+- Timpul efectiv de lucru este de **50 de minute**
+- Utilizarea instrumentelor de geometrie este **permisă și recomandată**
+- Se acordă **20 puncte** din oficiu
+
+---
+
+:::warning Nu completați!
+Rubrica aceasta se completează **doar de profesorul evaluator**!
+
+**Testul începe de pe pagina următoare.**
+:::
+
+<div style={{display: 'flex'}}>
+<div style={{width: '50%'}}>
+## Grila de notare
+
+| Subiect | Punctaj total| Punctaj obținut |
+|---------|---------|------|
+| I | 25 |  |
+| II | 55 |  |
+| Total | 80 |  |
+| Oficiu | 20 | 20 |
+</div>
+
+<div style={{paddingLeft: '20px', width: '47%'}}>
+
+## Calificativ capitole incluse
+
+---
+
+*Organizarea datelor în tabele, grafice, diagrame*
+
+<input type="checkbox" value="N" /> N | 
+<input type="checkbox" value="S" /> S | 
+<input type="checkbox" value="B" /> B | 
+<input type="checkbox" value="E" /> E 
+
+*Unități de măsură*
+
+<input type="checkbox" value="N" /> N | 
+<input type="checkbox" value="S" /> S | 
+<input type="checkbox" value="B" /> B | 
+<input type="checkbox" value="E" /> E 
+</div>
+</div>
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+---
+
+## <span style={{backgroundColor: '#e65100', color: 'white', padding: '4px 8px', borderRadius: '4px'}}>Subiectul I - 25 puncte</span>
+
+### Exercițiul 1 **(5p)**
+
+:::note
+În tabelul de mai jos este reprezentat numărul de elevi din fiecare din clasele unei școli. Conform tabelului, numărul total al elevilor din clasele a VI-a este de  _____ elevi. 
+:::
+
+| Clasa | a V-a |a VI-a A | a VI-a B | a VII-a A | a VII-a B | a VIII-a A | a VIII-a B |
+|------|---------|---------|---------|---------|---------|---------|---------|
+| Nr. elevi | 25 | 26 | 30 | 28 | 24 | 26 | 30 | 
+
+
+### Exercițiul 2 **(2x5p = 10p)**
+
+:::note
+Mediile la matematică pe semestrul I ale elevilor unei clase sunt:
+
+7, 8, 5, 3, 9, 4, 6, 7, 8, 4, 5, 6, 9, 10, 8, 5, 5, 6, 6, 6, 9, 9, 10, 9, 5. 
+:::
+
+a) Reprezentați datele sub formă de tabel: 
+
+| Medie | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
+|-------|---|---|---|---|---|---|---|----|
+| Nr. elevi |   |   |   |   |   |   |
+
+b) Reprezentați datele sub forma unei diagrame cu bastonașe:
+<svg
+  width="900"
+  height="500"
+  viewBox="0 0 900 500"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  {/* Fundal */}
+  <rect width="900" height="500" fill="white" />
+
+  {/* Grilă */}
+  <g stroke="#d0d0d0" strokeWidth="1">
+    {/* Linii verticale */}
+    {Array.from({ length: 22 }).map((_, i) => (
+      <line
+        key={`v-${i}`}
+        x1={50 + i * 38}
+        y1="20"
+        x2={50 + i * 38}
+        y2="445"
+      />
+    ))}
+
+    {/* Linii orizontale */}
+    {Array.from({ length: 12 }).map((_, i) => (
+      <line
+        key={`h-${i}`}
+        x1="30"
+        y1={27 + i * 38}
+        x2="872"
+        y2={27 + i * 38}
+      />
+    ))}
+  </g>
+
+  {/* Axe */}
+  <g stroke="black" strokeWidth="3" strokeLinecap="round">
+    {/* Axa Oy */}
+    <line x1="88" y1="442" x2="88" y2="32" />
+
+    {/* Axa Ox */}
+    <line x1="50" y1="410" x2="850" y2="410" />
+  </g>
+
+  {/* Săgeți */}
+  <g fill="black">
+    {/* Săgeată sus pentru Oy */}
+    <polygon points="88,28 83,42 93,42" />
+
+    {/* Săgeată dreapta pentru Ox */}
+    <polygon points="854,410 840,405 840,415" />
+  </g>
+</svg>
+
+### Exercițiul 3 **(2x5p = 10p)**
+
+:::note
+În diagrama de mai jos sunt redate preferințele elevilor unei clase în ceea ce privește sportul. 
+:::
+
+<svg
+  width="380"
+  height="320"
+  viewBox="0 0 380 320"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <!-- titlu -->
+  <text
+    x="190"
+    y="36"
+    textAnchor="middle"
+    fontSize="20"
+    fontWeight="700"
+    fill="#555"
+    fontFamily="Arial, sans-serif"
+  >
+    sportul preferat
+  </text>
+
+  <!-- diagrama: centru (190,130), raza 78 -->
+
+  <!-- fotbal 40% -->
+  <path
+    d="M 190 130 L 190 52 A 78 78 0 0 1 235.8 193.1 Z"
+    fill="#d9853f"
+  />
+
+  <!-- tenis 25% -->
+  <path
+    d="M 190 130 L 235.8 193.1 A 78 78 0 0 1 172.6 206 Z"
+    fill="#f0c243"
+  />
+
+  <!-- handbal 20% -->
+  <path
+    d="M 190 130 L 172.6 206 A 78 78 0 0 1 115.8 105.9 Z"
+    fill="#84ad57"
+  />
+
+  <!-- volei 15% -->
+  <path
+    d="M 190 130 L 115.8 105.9 A 78 78 0 0 1 190 52 Z"
+    fill="#9a5521"
+  />
+
+  <!-- etichete sectoare -->
+  <text
+    x="240"
+    y="114"
+    textAnchor="middle"
+    fontSize="13"
+    fontWeight="700"
+    fill="white"
+    fontFamily="Arial, sans-serif"
+  >
+    <tspan x="240" dy="0">fotbal</tspan>
+    <tspan x="240" dy="18">40%</tspan>
+  </text>
+
+  <text
+    x="181"
+    y="175"
+    textAnchor="middle"
+    fontSize="13"
+    fontWeight="700"
+    fill="white"
+    fontFamily="Arial, sans-serif"
+  >
+    <tspan x="198" dy="0">volei</tspan>
+    <tspan x="201" dy="18"></tspan>
+  </text>
+
+  <text
+    x="145"
+    y="128"
+    textAnchor="middle"
+    fontSize="12"
+    fontWeight="700"
+    fill="white"
+    fontFamily="Arial, sans-serif"
+  >
+    <tspan x="145" dy="20">tenis</tspan>
+    <tspan x="145" dy="17">25%</tspan>
+  </text>
+
+  <text
+    x="165"
+    y="92"
+    textAnchor="middle"
+    fontSize="12"
+    fontWeight="700"
+    fill="white"
+    fontFamily="Arial, sans-serif"
+  >
+    <tspan x="165" dy="0">handbal</tspan>
+    <tspan x="165" dy="17">20%</tspan>
+  </text>
+
+  <!-- legendă -->
+  <g fontFamily="Arial, sans-serif" fontSize="11" fill="#666">
+    <rect x="45" y="265" width="12" height="12" fill="#d9853f" />
+    <text x="62" y="275">fotbal</text>
+
+    <rect x="115" y="265" width="12" height="12" fill="#f0c243" />
+    <text x="132" y="275">volei</text>
+
+    <rect x="180" y="265" width="12" height="12" fill="#84ad57" />
+    <text x="197" y="275">tenis</text>
+
+    <rect x="265" y="265" width="12" height="12" fill="#9a5521" />
+    <text x="282" y="275">handbal</text>
+  </g>
+</svg>
+
+a) Procentul elevilor care preferă voleiul este de _____ %
+
+<br />
+
+b) Dacă clasa are 20 elevi, numărul elevilor care preferă fotbalul este egal cu _____ elevi.
+
+---
+
+## <span style={{backgroundColor: '#e65100', color: 'white', padding: '4px 8px', borderRadius: '4px'}}>Subiectul al II-lea - 55 puncte</span>
+
+### Exercițiul 1 **(3x5p = 15p)**
+
+:::danger Atenție
+La acest exercițiu, răspundeți încercuind varianta corectă!
+:::
+
+#### 1.1 | Unitatea de măsură în sistemul internațional pentru lungime este: 
+
+a) litrul &emsp;&emsp;  b) metrul &emsp;&emsp; c) kilogramul &emsp;&emsp; d) kilometrul
+
+#### 1.2 | Unitatea de măsură în sistemul internațional pentru greutate este: 
+
+a) gramul &emsp;&emsp;  b) metrul &emsp;&emsp; c) kilogramul &emsp;&emsp; d) kilometrul
+
+#### 1.3 | Câte secunde sunt într-o oră?
+
+a) 3600 &emsp;&emsp;  b) 60 &emsp;&emsp; c) 6000 &emsp;&emsp; d) 36000
+
+
+### Exercițiul 2 **(6x3p = 18p)**
+
+:::note
+Efectuați următoarele transformări de unități de măsură:
+:::
+
+a) 3,5 km = _____ m
+
+b) 2500 g = _____ kg
+
+c) 1200 dam = _____ hm
+
+d) 2 decenii = _____ ani
+
+e) o zi = _____ min
+
+f) 2,5 h = _____ s
+
+### Exercițiul 3 **(3x4p = 12p)**
+
+:::note
+Efectuați următoarele transformări de unități de măsură:
+:::
+
+a) 34,451 km^2 = _____ dam^2
+
+b) 0,00025 m^3 = _____ cm^3
+
+c) 2345 cm^2 = _____ dm^2
+
+### Exercițiul 4 **(5p)**
+:::note
+Desenează un cub notat $ABCDA'B'C'D'$
+:::
+
+<svg
+  width="900"
+  height="500"
+  viewBox="0 0 900 500"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  {/* Fundal */}
+  <rect width="900" height="500" fill="white" />
+
+  {/* Grilă */}
+  <g stroke="#d0d0d0" strokeWidth="1">
+    {/* Linii verticale */}
+    {Array.from({ length: 22 }).map((_, i) => (
+      <line
+        key={`v-${i}`}
+        x1={50 + i * 38}
+        y1="20"
+        x2={50 + i * 38}
+        y2="445"
+      />
+    ))}
+
+    {/* Linii orizontale */}
+    {Array.from({ length: 12 }).map((_, i) => (
+      <line
+        key={`h-${i}`}
+        x1="30"
+        y1={27 + i * 38}
+        x2="872"
+        y2={27 + i * 38}
+      />
+    ))}
+  </g>
+
+</svg>
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+### Exercițiul 5 **(5p)**
+:::note
+Desenează un paralelipiped dreptunghic notat $ABCDEFGH$
+:::
+
+<svg
+  width="900"
+  height="500"
+  viewBox="0 0 900 500"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  {/* Fundal */}
+  <rect width="900" height="500" fill="white" />
+
+  {/* Grilă */}
+  <g stroke="#d0d0d0" strokeWidth="1">
+    {/* Linii verticale */}
+    {Array.from({ length: 22 }).map((_, i) => (
+      <line
+        key={`v-${i}`}
+        x1={50 + i * 38}
+        y1="20"
+        x2={50 + i * 38}
+        y2="445"
+      />
+    ))}
+
+    {/* Linii orizontale */}
+    {Array.from({ length: 12 }).map((_, i) => (
+      <line
+        key={`h-${i}`}
+        x1="30"
+        y1={27 + i * 38}
+        x2="872"
+        y2={27 + i * 38}
+      />
+    ))}
+  </g>
+
+</svg>
+
+---
+
+## <span style={{backgroundColor: '#e65100', color: 'white', padding: '4px 8px', borderRadius: '4px'}}>SFÂRȘIT TEST</span>

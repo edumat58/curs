@@ -1,0 +1,94 @@
+---
+sidebar_position: -3
+slug: /c5/modul-1/15
+description: ""
+---
+
+# C13 - Ordinea efectuării operațiilor
+
+---
+
+## Ordin de calcul
+
+:::tip Definitie
+Avem trei tipuri de operații:
+
+ - adunarea și scăderea sunt operații de **ordinul 1**
+
+ - înmulțirea și împărțirea sunt operații de **ordinul 2**
+
+ - ridicarea la putere și extragerea radicalului sunt operații de **ordinul 3**
+
+În exerciții putem întâlni și paranteze. Acestea sunt de trei feluri:
+
+ - paranteze mici sau rotunde $( ... )$
+
+ - paranteze drepte $[ ... ]$
+
+ - acolade $\{... \}$
+
+:::
+
+---
+
+## Reguli de calcul
+
+> În efectuarea operațiilor dintr-un exercițiu vom utiliza următoarele reguli:
+
+:::info PASI DE REZOLVARE
+1. Dacă un exercițiu conține numai operații de **același ordin**, acestea se efectuează în **ordinea în care sunt scrise**, de la **stânga la dreapta**.
+
+2. Dacă un exercițiu conține **operații de ordine diferite**, efectuăm:
+
+   - Mai întâi operațiile de **ordinul III** – ridicarea la putere  
+   - Apoi operațiile de **ordinul II** – înmulțirea și împărțirea  
+   - Apoi operațiile de **ordinul I** – adunarea și scăderea
+
+3. Dacă un exercițiu conține **mai multe tipuri de paranteze**, efectuăm mai întâi operațiile din **parantezele rotunde**;  
+   parantezele pătrate se transformă în paranteze rotunde, iar **acoladele se transformă în paranteze pătrate** ș.a.m.d.
+:::
+
+---
+
+## Exemple
+
+:::note Exemplul 1
+
+Efectuați:
+
+a) $81 : 3^2 + 57$
+
+**Rezolvare:**
+
+$$
+81 : 3^2 + 57 = 81 : 9 + 57 = 9 + 57 = 66
+$$
+
+b) $(72 + 35) \cdot 10$
+
+**Rezolvare:**
+
+$$
+(72 + 35) \cdot 10 = (49 + 35) \cdot 10 = 84 \cdot 10 = 840
+$$
+:::
+
+---
+
+:::note Exemplul 2
+
+Calculați:
+
+$$
+10^3 \cdot \left[ (5^{12} + 4 \cdot 5^{12}) : 25^5 - 1^{10} \right]
+$$
+
+**Rezolvare:**
+
+$
+10^3 \cdot \left[ (5^{12} + 4 \cdot 5^{12}) : 25^5 - 1 \right] = \\[10pt]
+10^3 \cdot \left\{ [5^{12} \cdot (1 + 4)] : (5^2)^5 - 1 \right\} = \\[10pt]
+10^3 \cdot \left[ (5^{12} \cdot 5) : 5^{10} - 1 \right] = \\[10pt]
+10^3 \cdot (5^3 - 1) = 10^3 \cdot 124 = 124000
+$
+:::

@@ -1,0 +1,233 @@
+---
+sidebar_position: 10
+slug: /c5/modul-3/03
+description: ""
+---
+
+# C19.3 - Compararea fracțiilor cu același numitor sau numărător
+
+---
+
+## Proprietăți ale fracțiilor
+
+* **Dintre două fracții care au același numitor, mai mare este fracția care are numărătorul mai mare.**
+
+  :::info[Exemplu]
+  $\dfrac{5}{7} > \dfrac{3}{7}$ pentru că $5 > 3$.
+  :::
+  
+  <div style={{display: 'flex', justifyContent: 'center', margin: '10px 0'}}>
+  <svg width="300" height="60" viewBox="0 0 300 60" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="280" height="20" fill="white" stroke="#e65100" strokeWidth="1" />
+      <rect x="0" y="0" width="200" height="20" fill="#ffcc80" /> {/* 5 parts of 40px each = 200px */}
+      {/* Grid lines */}
+      <line x1="40" y1="0" x2="40" y2="20" stroke="#e65100" strokeWidth="1" />
+      <line x1="80" y1="0" x2="80" y2="20" stroke="#e65100" strokeWidth="1" />
+      <line x1="120" y1="0" x2="120" y2="20" stroke="#e65100" strokeWidth="1" />
+      <line x1="160" y1="0" x2="160" y2="20" stroke="#e65100" strokeWidth="1" />
+      <line x1="200" y1="0" x2="200" y2="20" stroke="#e65100" strokeWidth="1" />
+      <line x1="240" y1="0" x2="240" y2="20" stroke="#e65100" strokeWidth="1" />
+    </g>
+    
+    <g transform="translate(0, 30)">
+      <rect x="0" y="0" width="280" height="20" fill="white" stroke="#e65100" strokeWidth="1" />
+      <rect x="0" y="0" width="120" height="20" fill="#ffcc80" /> {/* 3 parts of 40px each = 120px */}
+      {/* Grid lines */}
+      <line x1="40" y1="0" x2="40" y2="20" stroke="#e65100" strokeWidth="1" />
+      <line x1="80" y1="0" x2="80" y2="20" stroke="#e65100" strokeWidth="1" />
+      <line x1="120" y1="0" x2="120" y2="20" stroke="#e65100" strokeWidth="1" />
+      <line x1="160" y1="0" x2="160" y2="20" stroke="#e65100" strokeWidth="1" />
+      <line x1="200" y1="0" x2="200" y2="20" stroke="#e65100" strokeWidth="1" />
+      <line x1="240" y1="0" x2="240" y2="20" stroke="#e65100" strokeWidth="1" />
+    </g>
+  </svg>
+  </div>
+
+* **Dintre două fracții care au același numărător, mai mare este fracția care are numitorul mai mic.**
+
+  :::info[Exemplu]
+  $\dfrac{2}{5} > \dfrac{2}{7}$ pentru că $5 < 7$.
+  :::
+
+  <div style={{display: 'flex', justifyContent: 'center', margin: '10px 0'}}>
+  <svg width="300" height="60" viewBox="0 0 300 60" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="280" height="20" fill="white" stroke="#e65100" strokeWidth="1" />
+      <rect x="0" y="0" width="112" height="20" fill="#ffcc80" /> {/* 2 parts of 56px each = 112px */}
+      {/* Grid lines for 5 parts (280/5 = 56) */}
+      <line x1="56" y1="0" x2="56" y2="20" stroke="#e65100" strokeWidth="1" />
+      <line x1="112" y1="0" x2="112" y2="20" stroke="#e65100" strokeWidth="1" />
+      <line x1="168" y1="0" x2="168" y2="20" stroke="#e65100" strokeWidth="1" />
+      <line x1="224" y1="0" x2="224" y2="20" stroke="#e65100" strokeWidth="1" />
+    </g>
+
+    <g transform="translate(0, 30)">
+      <rect x="0" y="0" width="280" height="20" fill="white" stroke="#e65100" strokeWidth="1" />
+      <rect x="0" y="0" width="80" height="20" fill="#ffcc80" /> {/* 2 parts of 40px each = 80px */}
+      {/* Grid lines for 7 parts (280/7 = 40) */}
+      <line x1="40" y1="0" x2="40" y2="20" stroke="#e65100" strokeWidth="1" />
+      <line x1="80" y1="0" x2="80" y2="20" stroke="#e65100" strokeWidth="1" />
+      <line x1="120" y1="0" x2="120" y2="20" stroke="#e65100" strokeWidth="1" />
+      <line x1="160" y1="0" x2="160" y2="20" stroke="#e65100" strokeWidth="1" />
+      <line x1="200" y1="0" x2="200" y2="20" stroke="#e65100" strokeWidth="1" />
+      <line x1="240" y1="0" x2="240" y2="20" stroke="#e65100" strokeWidth="1" />
+    </g>
+  </svg>
+  </div>
+
+* **Orice fracție subunitară este cuprinsă între numerele naturale consecutive 0 și 1.**
+
+  :::info[Exemplu]
+  $0 < \dfrac{5}{9} < 1$
+  :::
+
+* **Fracțiile se pot reprezenta pe axa numerelor la fel ca numerele naturale. Pentru aceasta se ia mai întâi unitatea și se reprezintă apoi pe ea fracția.**
+
+  :::info[Exemplu]
+  <svg width="400" height="60" viewBox="0 0 400 60" xmlns="http://www.w3.org/2000/svg" style={{verticalAlign: 'middle'}}>
+    <defs>
+      <marker id="arrowNum" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+        <path d="M0,0 L0,6 L9,3 z" fill="#333" />
+      </marker>
+    </defs>
+    <line x1="10" y1="30" x2="380" y2="30" stroke="black" strokeWidth="1" markerEnd="url(#arrowNum)" />
+    
+    {/* 0 */}
+    <line x1="50" y1="25" x2="50" y2="35" stroke="black" strokeWidth="1" />
+    <text x="50" y="20" textAnchor="middle" fontSize="12">O</text>
+    <text x="50" y="45" textAnchor="middle" fontSize="12">0</text>
+    
+    {/* 1 */}
+    <line x1="200" y1="25" x2="200" y2="35" stroke="black" strokeWidth="1" />
+    <text x="200" y="20" textAnchor="middle" fontSize="12">A</text>
+    <text x="200" y="45" textAnchor="middle" fontSize="12">1</text>
+    <text x="125" y="15" textAnchor="middle" fontSize="10" fontStyle="italic">Unitatea de măsură</text>
+
+    {/* 2/3 Marker */}
+    <line x1="150" y1="25" x2="150" y2="35" stroke="black" strokeWidth="1" />
+    <text x="150" y="55" textAnchor="middle" fontSize="12">$\dfrac{2}{3}$</text>
+
+    {/* Small visual explanation box */}
+    <g transform="translate(50, 50)">
+        <rect x="0" y="0" width="150" height="15" fill="none" stroke="#ccc" />
+        <line x1="50" y1="0" x2="50" y2="15" stroke="#ccc" />
+        <line x1="100" y1="0" x2="100" y2="15" stroke="#ccc" />
+        <pattern id="hatch2" patternUnits="userSpaceOnUse" width="4" height="4"><path d="M-1,1 l2,-2 M0,4 l4,-4 M3,5 l2,-2" style={{stroke:'#e65100', strokeWidth:1}} /></pattern>
+        <rect x="0" y="0" width="100" height="15" fill="url(#hatch2)" opacity="0.5"/>
+    </g>
+  </svg>
+  :::
+
+---
+
+## Observație
+
+:::warning[Important]
+* **Dintre două fracții reprezentate pe axa numerelor este mai mare fracția din dreapta.**
+
+<div style={{display: 'flex', justifyContent: 'center', margin: '20px 0'}}>
+<svg width="500" height="150" viewBox="0 0 500 150" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+    <marker id="arrowRight" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+        <path d="M0,0 L0,6 L9,3 z" fill="#333" />
+    </marker>
+    </defs>
+
+    {/* Axa principala */}
+    <line x1="20" y1="50" x2="480" y2="50" stroke="black" strokeWidth="1.5" markerEnd="url(#arrowRight)" />
+    
+    {/* 0 */}
+    <line x1="50" y1="45" x2="50" y2="55" stroke="black" strokeWidth="1.5" />
+    <text x="50" y="40" textAnchor="middle" fontSize="14">O</text>
+    <text x="50" y="70" textAnchor="middle" fontSize="14">0</text>
+
+    {/* 1 */}
+    <line x1="150" y1="45" x2="150" y2="55" stroke="black" strokeWidth="1.5" />
+    <text x="150" y="40" textAnchor="middle" fontSize="14">A</text>
+    <text x="150" y="70" textAnchor="middle" fontSize="14">1</text>
+
+    {/* Fractia a/b */}
+    <line x1="220" y1="45" x2="220" y2="55" stroke="black" strokeWidth="1.5" />
+    {/* Construim fractia manual */}
+    <g transform="translate(220, 85)">
+        <text x="0" y="-5" textAnchor="middle" fontSize="16" fontFamily="serif" fontStyle="italic">a</text>
+        <line x1="-8" y1="0" x2="8" y2="0" stroke="black" strokeWidth="1" />
+        <text x="0" y="14" textAnchor="middle" fontSize="16" fontFamily="serif" fontStyle="italic">b</text>
+    </g>
+
+    {/* Fractia c/d */}
+    <line x1="300" y1="45" x2="300" y2="55" stroke="black" strokeWidth="1.5" />
+    {/* Construim fractia manual */}
+    <g transform="translate(300, 85)">
+        <text x="0" y="-5" textAnchor="middle" fontSize="16" fontFamily="serif" fontStyle="italic">c</text>
+        <line x1="-8" y1="0" x2="8" y2="0" stroke="black" strokeWidth="1" />
+        <text x="0" y="14" textAnchor="middle" fontSize="16" fontFamily="serif" fontStyle="italic">d</text>
+    </g>
+
+    {/* Comparison Box */}
+    {/* Am marit putin inaltimea SVG-ului si am mutat cutia mai jos pentru a incapea totul */}
+    <rect x="180" y="110" width="160" height="35" rx="5" fill="#fff3e0" stroke="#e65100" />
+    
+    {/* Continutul cutiei: a/b < c/d */}
+    <g transform="translate(260, 128)">
+        {/* a/b */}
+        <g transform="translate(-40, 0)">
+             <text x="0" y="-4" textAnchor="middle" fontSize="14" fontFamily="serif" fontStyle="italic" fontWeight="bold">a</text>
+             <line x1="-8" y1="0" x2="8" y2="0" stroke="black" strokeWidth="1" />
+             <text x="0" y="11" textAnchor="middle" fontSize="14" fontFamily="serif" fontStyle="italic" fontWeight="bold">b</text>
+        </g>
+        
+        {/* Semnul < */}
+        <text x="0" y="5" textAnchor="middle" fontSize="18" fontWeight="bold">&lt;</text>
+
+        {/* c/d */}
+        <g transform="translate(40, 0)">
+             <text x="0" y="-4" textAnchor="middle" fontSize="14" fontFamily="serif" fontStyle="italic" fontWeight="bold">c</text>
+             <line x1="-8" y1="0" x2="8" y2="0" stroke="black" strokeWidth="1" />
+             <text x="0" y="11" textAnchor="middle" fontSize="14" fontFamily="serif" fontStyle="italic" fontWeight="bold">d</text>
+        </g>
+    </g>
+</svg>
+</div>
+:::
+
+---
+
+## <span style={{backgroundColor: '#e65100', color: 'white', padding: '4px 8px', borderRadius: '4px'}}>Exersează!</span>
+
+:::note Exercițiul 1
+Copiază și completează casetele cu unul din semnele $<, >, =$, pentru a obține propoziții adevărate.
+:::
+
+* **a)** $\dfrac{2}{7} \ \square \ \dfrac{3}{7}$; &emsp;
+    **b)** $\dfrac{5}{11} \ \square \ \dfrac{4}{11}$; &emsp;
+    **c)** $\dfrac{1}{4} \ \square \ \dfrac{1}{5}$; &emsp;
+    **d)** $\dfrac{3}{5} \ \square \ \dfrac{3}{6}$; &emsp;
+    **e)** $\dfrac{3}{3} \ \square \ \dfrac{7}{7}$; &emsp;
+    **f)** $\dfrac{1}{6} \ \square \ \dfrac{1}{16}$; &emsp;
+    **g)** $\dfrac{4}{44} \ \square \ \dfrac{4}{444}$.
+:::
+
+:::note Exercițiul 2
+Scrie în ordine crescătoare fracțiile:
+:::
+
+* **a)** $\dfrac{3}{5}, \dfrac{2}{5}, \dfrac{4}{5}, \dfrac{7}{5}$; &emsp;
+    
+    **b)** $\dfrac{3}{2}, \dfrac{3}{7}, \dfrac{3}{5}, \dfrac{3}{10}$; &emsp;
+    
+    **c)** $\dfrac{1}{999}, \dfrac{1 \ 111}{999}, \dfrac{11 \ 111}{999}, \dfrac{11}{999}$; &emsp;
+    
+    **d)** $\dfrac{1 \ 000}{7}, \dfrac{1 \ 000}{11}, \dfrac{1 \ 000}{5}, \dfrac{1 \ 000}{13}$.
+
+:::note Exercițiul 3
+Determină numerele naturale nenule $n$ pentru care sunt adevărate inegalitățile:
+:::
+
+* **a)** $\dfrac{n}{6} < \dfrac{4}{6}$; &emsp;
+    **b)** $\dfrac{2}{n} \ge \dfrac{2}{4}$; &emsp;
+    **c)** $\dfrac{3}{14} < \dfrac{n}{14} < \dfrac{7}{14}$; &emsp;
+    **d)** $\dfrac{11}{4} > \dfrac{11}{n} \ge \dfrac{11}{8}$.
+
+---

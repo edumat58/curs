@@ -1,0 +1,293 @@
+---
+sidebar_position: 30
+slug: /c6/modul-5/02
+description: ""
+---
+
+# Suma măsurilor unghiurilor într-un triunghi
+
+---
+
+## 1) Suma măsurilor unghiurilor unui triunghi
+
+:::danger Teoremă
+**Suma măsurilor unghiurilor unui triunghi este egală cu $180^\circ$.**
+:::
+
+Cu alte cuvinte, dacă într-un triunghi $\triangle ABC$ avem unghiurile:
+
+$$
+\angle A,\quad \angle B,\quad \angle C
+$$
+
+atunci:
+
+$$
+m(\angle A)+m(\angle B)+m(\angle C)=180^\circ
+$$
+
+---
+
+## Demonstrația teoremei
+
+Această proprietate se poate demonstra ușor urmărind figura de mai jos.
+
+Considerăm triunghiul $\triangle ABC$ și paralela $DE$ dusă prin punctul $A$ la latura $BC$.
+
+$$
+DE \parallel BC
+$$
+
+<div style={{ display: "flex", justifyContent: "center", margin: "1.5rem 0" }}>
+<svg width="760" height="330" viewBox="0 0 760 330" xmlns="http://www.w3.org/2000/svg">
+  <!-- Paralela DE -->
+  <line x1="90" y1="75" x2="700" y2="75" stroke="black" strokeWidth="3" />
+
+  <!-- Puncte pe paralela -->
+  <circle cx="140" cy="75" r="4" fill="black" />
+  <circle cx="350" cy="75" r="4" fill="black" />
+  <circle cx="640" cy="75" r="4" fill="black" />
+
+  <!-- Triunghi ABC -->
+  <line x1="350" y1="75" x2="240" y2="260" stroke="red" strokeWidth="3" />
+  <line x1="350" y1="75" x2="675" y2="260" stroke="red" strokeWidth="3" />
+  <line x1="240" y1="260" x2="675" y2="260" stroke="red" strokeWidth="3" />
+
+  <!-- Puncte B C -->
+  <circle cx="240" cy="260" r="4" fill="black" />
+  <circle cx="675" cy="260" r="4" fill="black" />
+
+  <!-- Etichete puncte -->
+  <text x="132" y="55" fontSize="24" fontFamily="serif" fontWeight="bold">D</text>
+  <text x="342" y="52" fontSize="24" fontFamily="serif" fontWeight="bold">A</text>
+  <text x="632" y="55" fontSize="24" fontFamily="serif" fontWeight="bold">E</text>
+  <text x="215" y="280" fontSize="24" fontFamily="serif" fontWeight="bold">B</text>
+  <text x="682" y="280" fontSize="24" fontFamily="serif" fontWeight="bold">C</text>
+
+  <!-- Masuri unghiuri -->
+  <text x="340" y="118" fontSize="24" fontFamily="serif" fontWeight="bold">a°</text>
+  <text x="305" y="100" fontSize="22" fontFamily="serif" fontWeight="bold">b°</text>
+  <text x="405" y="100" fontSize="22" fontFamily="serif" fontWeight="bold">c°</text>
+
+  <text x="265" y="250" fontSize="22" fontFamily="serif" fontWeight="bold">b°</text>
+  <text x="608" y="250" fontSize="22" fontFamily="serif" fontWeight="bold">c°</text>
+</svg>
+</div>
+
+:::info Observație
+Deoarece $DE \parallel BC$, putem folosi proprietatea unghiurilor formate de două drepte paralele tăiate de o secantă.
+:::
+
+Aplicăm teorema paralelelor tăiate de o secantă și obținem:
+
+$$
+\angle DAB = \angle ABC
+$$
+
+Acestea sunt unghiuri **alterne interne**. Notăm măsura lor cu $b^\circ$.
+
+De asemenea:
+
+$$
+\angle EAC = \angle ACB
+$$
+
+Acestea sunt tot unghiuri **alterne interne**. Notăm măsura lor cu $c^\circ$.
+
+Notăm:
+
+$$
+m(\angle BAC)=a^\circ
+$$
+
+Unghiul $\angle DAE$ este un **unghi alungit**, deci are măsura de $180^\circ$.
+
+Dar unghiul $\angle DAE$ este format din trei unghiuri alăturate:
+
+$$
+\angle DAB,\quad \angle BAC,\quad \angle CAE
+$$
+
+Prin urmare:
+
+$$
+m(\angle DAE)=b^\circ+a^\circ+c^\circ
+$$
+
+Cum $\angle DAE$ este unghi alungit, rezultă:
+
+$$
+a^\circ+b^\circ+c^\circ=180^\circ
+$$
+
+:::danger Concluzie
+În orice triunghi, suma măsurilor celor trei unghiuri interioare este egală cu $180^\circ$.
+
+$$
+m(\angle A)+m(\angle B)+m(\angle C)=180^\circ
+$$
+:::
+
+---
+
+## 2) Unghi exterior triunghiului
+
+:::tip Definiție
+Un unghi adiacent și suplementar unuia dintre unghiurile unui triunghi se numește **unghi exterior al triunghiului**.
+:::
+
+Asta înseamnă că un unghi exterior se formează prin prelungirea unei laturi a triunghiului.
+
+Două unghiuri sunt **suplementare** dacă suma măsurilor lor este $180^\circ$.
+
+$$
+\alpha+\beta=180^\circ
+$$
+
+---
+
+## Numărul unghiurilor exterioare ale unui triunghi
+
+:::info Observație
+Un triunghi are **șase unghiuri exterioare**, două câte două congruente, opuse la vârf.
+:::
+
+În figura de mai jos, triunghiul $\triangle ABC$ are unghiurile exterioare numerotate cu:
+
+$$
+1,\;2,\;3,\;4,\;5,\;6
+$$
+
+<div style={{ display: "flex", justifyContent: "center", margin: "1.5rem 0" }}>
+<svg width="620" height="360" viewBox="0 0 620 360" xmlns="http://www.w3.org/2000/svg">
+  <!-- Coordonate principale -->
+  <!-- A(290,85), B(200,280), C(470,280) -->
+
+  <!-- Latura BC prelungita -->
+  <line x1="80" y1="280" x2="560" y2="280" stroke="black" strokeWidth="3" />
+
+  <!-- Dreapta AB prelungita -->
+  <line x1="155" y1="345" x2="330" y2="20" stroke="black" strokeWidth="3" />
+
+  <!-- Dreapta AC prelungita -->
+  <line x1="210" y1="20" x2="545" y2="345" stroke="black" strokeWidth="3" />
+
+
+  <!-- Etichete varfuri -->
+  <text x="278" y="70" fontSize="28" fontFamily="serif" fontWeight="bold">A</text>
+  <text x="150" y="305" fontSize="28" fontFamily="serif" fontWeight="bold">B</text>
+  <text x="510" y="305" fontSize="28" fontFamily="serif" fontWeight="bold">C</text>
+
+  <!-- Unghiuri exterioare numerotate -->
+  <text x="255" y="105" fontSize="24" fontFamily="serif" fontWeight="bold">1</text>
+  <text x="315" y="105" fontSize="24" fontFamily="serif" fontWeight="bold">2</text>
+
+  <text x="490" y="258" fontSize="24" fontFamily="serif" fontWeight="bold">3</text>
+  <text x="465" y="310" fontSize="24" fontFamily="serif" fontWeight="bold">4</text>
+
+  <text x="210" y="310" fontSize="24" fontFamily="serif" fontWeight="bold">5</text>
+  <text x="165" y="258" fontSize="24" fontFamily="serif" fontWeight="bold">6</text>
+</svg>
+</div>
+
+Unghiurile exterioare opuse la vârf sunt congruente:
+
+$$
+\angle 1 = \angle 2
+$$
+
+$$
+\angle 3 = \angle 4
+$$
+
+$$
+\angle 5 = \angle 6
+$$
+
+---
+
+## 3) Teorema unghiului exterior
+
+:::danger Teorema unghiului exterior
+Măsura unui unghi exterior unui triunghi este egală cu suma măsurilor unghiurilor triunghiului neadiacente lui.
+:::
+
+Cu alte cuvinte, un unghi exterior este egal cu suma celor două unghiuri interioare ale triunghiului care **nu sunt lângă el**.
+
+Folosind figura de mai sus, avem:
+
+$$
+m(\angle 1)=m(\angle 2)=m(\angle B)+m(\angle C)
+$$
+
+$$
+m(\angle 3)=m(\angle 4)=m(\angle A)+m(\angle B)
+$$
+
+$$
+m(\angle 5)=m(\angle 6)=m(\angle A)+m(\angle C)
+$$
+
+:::info Observație
+Pentru fiecare unghi exterior, unghiul interior de lângă el nu se adună în formulă.
+
+Se adună doar cele două unghiuri interioare **neadiacente**.
+:::
+
+---
+
+## Exerciții
+
+:::note Exercițiul 1
+Într-un triunghi, două unghiuri au măsurile $40^\circ$ și $75^\circ$. Măsura celui de-al treilea unghi este:
+
+A. $55^\circ$  
+B. $65^\circ$  
+C. $75^\circ$  
+D. $105^\circ$
+:::
+
+:::note Exercițiul 2
+Într-un triunghi $\triangle ABC$, avem:
+
+$$
+m(\angle A)=50^\circ,\quad m(\angle B)=60^\circ
+$$
+
+Măsura unghiului exterior din vârful $C$ este:
+
+A. $70^\circ$  
+B. $100^\circ$  
+C. $110^\circ$  
+D. $120^\circ$
+:::
+
+:::note Exercițiul 3
+Un unghi exterior al unui triunghi este egal cu suma măsurilor:
+
+A. tuturor unghiurilor triunghiului  
+B. celor două unghiuri interioare adiacente lui  
+C. celor două unghiuri interioare neadiacente lui  
+D. unghiului interior alăturat lui și a unui unghi exterior
+:::
+
+<details>
+<summary>Răspunsuri</summary>
+
+1. B. $65^\circ$
+
+$$
+180^\circ-(40^\circ+75^\circ)=65^\circ
+$$
+
+2. C. $110^\circ$
+
+Unghiul exterior din vârful $C$ este egal cu:
+
+$$
+m(\angle A)+m(\angle B)=50^\circ+60^\circ=110^\circ
+$$
+
+3. C. celor două unghiuri interioare neadiacente lui
+
+</details>

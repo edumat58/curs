@@ -12,33 +12,86 @@ export default function LectiiTreeView() {
   const saptamani = [
     {
       hide: true,
+      titlu: 'Săptămâna 22: 16.03 - 20.03',
+      note: 'Materiale incarcate',
+      lectii: [
+      ],
+    },
+    {
+      titlu: 'Săptămâna 21: 09.03 - 13.03',
+      note: 'Materiale incarcate',
+      lectii: [
+        {titlu: 'C18.2 - Funcții trigonometrice (proprietăți) (1)', zi: '09.03 (ora 1)', tip: 'Algebra', link: 'c7/modul-4/03', pdf: ''},
+        {titlu: 'C18.2 - Funcții trigonometrice (proprietăți) (2)', zi: '09.03 (ora 2)', tip: 'Algebra', link: 'c7/modul-4/03', pdf: ''},
+      ],
+    },
+    {
+      titlu: 'Săptămâna 20: 02.03 - 06.03',
+      note: 'Materiale incarcate',
+      lectii: [
+        {titlu: 'LP - Calcul algebric in multimea nr. reale', zi: '02.03 (ora 1)', tip: 'Algebra', link: '', pdf: ''},
+        {titlu: 'LP - Calcul algebric in multimea nr. reale', zi: '02.03 (ora 2)', tip: 'Algebra', link: '', pdf: ''},
+        {titlu: 'RECAPITULARE - Modulul unui nr. rational', zi: '04.03', tip: 'Algebra', link: 'c7/modul-4/01', pdf: ''},
+        {titlu: 'LP - Modulul unui nr. rational', zi: '05.03', tip: 'Algebra', link: '', pdf: ''},
+        {titlu: 'C18.1 - Funcții trigonometrice (demonstrații)', zi: '06.03', tip: 'Algebra', link: 'c7/modul-4/02', pdf: ''},
+      ],
+    },
+    {
+      titlu: 'Săptămâna 19: 23.02 - 27.02',
+      note: 'Modulul 4: 23.02 -> 03.04',
+      lectii: [
+        {titlu: 'RECAPITULARE - Calcul algebric in multimea nr. reale', zi: '23.02 (ora 1)', tip: 'Algebra', link: 'c7/modul-2/08', pdf: ''},
+        {titlu: 'LP - Calcul algebric in multimea nr. reale', zi: '23.02 (ora 2)', tip: 'Algebra', link: '', pdf: ''},
+        {titlu: 'LP - Calcul algebric in multimea nr. reale', zi: '25.02', tip: 'Algebra', link: '', pdf: ''},
+        {titlu: 'LP - Calcul algebric in multimea nr. reale', zi: '26.02', tip: 'Algebra', link: '', pdf: ''},
+        {titlu: 'LP - Calcul algebric in multimea nr. reale', zi: '27.02', tip: 'Algebra', link: '', pdf: ''},
+      ],
+    },
+    {
       titlu: 'Săptămâna 18: 09.02 - 13.02 | FINAL MODUL 3',
       note: '',
       lectii: [
-
-      ],
-    },
-    {
-      hide: true,
-      titlu: 'Săptămâna 17: 02.02 - 06.02',
-      note: '',
-      lectii: [
-
-      ],
-    },
-    {
-      hide: true,
-      titlu: 'Săptămâna 16: 26.01 - 30.01',
-      note: '',
-      lectii: [
+        {titlu: 'LP - Poligoane regulate înscrise în cerc', zi: '09.02 (ora 1)', tip: 'Geometrie', link: '', pdf: ''},
+        {titlu: 'G7.4 - Lungimea cercului și aria discului', zi: '09.02 (ora 2)', tip: 'Geometrie', link: 'c7/modul-3/09', pdf: ''},
+        {titlu: 'LP - Lungimea cercului și aria discului', zi: '11.02', tip: 'Geometrie', link: '', pdf: ''},
+        {titlu: 'LP - Lungimea cercului și aria discului', zi: '12.02', tip: 'Geometrie', link: '', pdf: ''},
+        {titlu: 'PREZENTARE PROIECT (partea II)', zi: '13.02', tip: 'Proiect', link: '', pdf: ''},
         
       ],
     },
     {
-      hide: true,
-      titlu: 'Săptămâna 15: 19.01 - 23.01',
-      note: '',
+      titlu: 'Săptămâna 17: 02.02 - 06.02',
+      note: 'PROIECT (partea II) | 06.02 -> 13.02',
       lectii: [
+        {titlu: 'LP - Unghi înscris în cerc, coarde şi arce în cerc', zi: '02.02 (ora 1)', tip: 'Proiect', link: '', pdf: ''},
+        {titlu: 'G7.2 - Tangente dintr-un punct exterior la un cerc', zi: '02.02 (ora 2)', tip: 'Geometrie', link: 'c7/modul-3/07', pdf: ''},
+        {titlu: 'LP - Tangente dintr-un punct exterior la un cerc', zi: '04.02', tip: 'Geometrie', link: '', pdf: ''},
+        {titlu: 'G7.3 - Poligoane regulate înscrise în cerc', zi: '05.02', tip: 'Geometrie', link: 'c7/modul-3/08', pdf: ''},
+        {titlu: 'LP - Poligoane regulate înscrise în cerc', zi: '06.02', tip: 'Geometrie', link: '', pdf: ''},
+        {titlu: 'PROIECT (partea II)', zi: '06.02', tip: 'Proiect', link: 'c7/modul-3/10', pdf: ''},
+      ],
+    },
+    {
+      titlu: 'Săptămâna 16: 26.01 - 30.01',
+      note: 'TEST 26.01 (ora 2) 100% NOTA 5 | C17.1 - C17.4',
+      lectii: [
+        {titlu: 'LP - RECAPITULARE TEST', zi: '26.01 (ora 1)', tip: 'Recapitulare', link: '', pdf: ''},
+        {titlu: 'TEST 26.01 (ora 2) 100% NOTA 5', zi: '26.01 (ora 2)', tip: 'Evaluare Sumativa', link: '', pdf: ''},
+        {titlu: 'G7.1 - Unghi înscris în cerc, coarde şi arce în cerc (partea 1)', zi: '28.01', tip: 'Geometrie', link: 'c7/modul-3/06', pdf: ''},
+        {titlu: 'G7.1 - Unghi înscris în cerc, coarde şi arce în cerc (partea 2)', zi: '29.01', tip: 'Geometrie', link: 'c7/modul-3/06', pdf: ''},
+        {titlu: 'PREZENTARE PROIECT (partea I)', zi: '30.01', tip: 'Proiect', link: '', pdf: ''},
+      ],
+    },
+    {
+      titlu: 'Săptămâna 15: 19.01 - 23.01',
+      note: 'PROIECT (partea I) | 23.01 -> 30.01',
+      lectii: [
+        {titlu: 'C17.3 - Reprezentarea şi interpretarea unor dependenţe funcţionale prin tabele, diagrame şi grafice', zi: '19.01 (ora 1)', tip: 'Algebra', link: 'c7/modul-3/03', pdf: ''},
+        {titlu: 'LP - Reprezentarea şi interpretarea unor dependenţe funcţionale prin tabele, diagrame şi grafice', zi: '19.01 (ora 2)', tip: 'Algebra', link: '', pdf: ''},
+        {titlu: 'LP - Reprezentarea şi interpretarea unor dependenţe funcţionale prin tabele, diagrame şi grafice', zi: '21.01', tip: 'Algebra', link: '', pdf: ''},
+        {titlu: 'C17.4 - Poligonul frecvenţelor', zi: '22.01', tip: 'Algebra', link: 'c7/modul-3/04', pdf: ''},
+        {titlu: 'LP - Poligonul frecvenţelor', zi: '23.01', tip: 'Algebra', link: '', pdf: ''},
+        {titlu: 'PROIECT (partea I)', zi: '23.01', tip: 'Proiect', link: 'c7/modul-3/05', pdf: ''},
 
       ],
     },
@@ -269,8 +322,8 @@ export default function LectiiTreeView() {
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>06.10</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>24.10</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>24.11</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>11.12</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>26.01</td>
-            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>12.02</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>13.02</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>

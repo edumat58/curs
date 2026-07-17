@@ -1,0 +1,96 @@
+---
+sidebar_position: 5
+slug: /c5/modul-3/08
+description: ""
+---
+
+# C21.1 - Cel mai mic multiplu comun a două numere naturale
+
+---
+
+:::tip Definitie
+
+Cel mai mic multiplu comun al două sau mai multe numere naturale (c.m.m.m.c.) este acel **multiplu comun al lor, nenul**, care divide toți ceilalți multipli comuni ai numerelor date.
+
+Pentru $a$ și $b$ notăm **c.m.m.m.c.** al lor cu:
+
+$$
+[a, b]
+$$
+
+:::
+
+
+
+$M_{15} = \{0, 15, 30, 45, 60, 75, \ldots\}$ – mulțimea multiplilor lui 15.  
+$M_{10} = \{0, 10, 20, 30, 40, 50, 60, \ldots\}$ – mulțimea multiplilor lui 10.  
+
+$M_{10} \cap M_{15} = \{0, 30, 60, 90, \ldots\}$ – mulțimea multiplilor comuni.
+
+> Cel mai mic, nenul, cu proprietatea că îi divide pe ceilalți este **30**.
+
+
+---
+
+## Algoritmul de determinare
+
+:::danger De Retinut
+
+Pentru a determina cel mai mic multiplu comun pentru două sau mai multe numere naturale procedăm astfel:
+
+1. Descompunem numerele date în produs de puteri de numere prime.  
+2. Cel mai mic multiplu comun (**c.m.m.m.c.**) va fi egal cu **produsul factorilor comuni și necomuni**, luați o singură dată, cu **exponentul cel mai mare**.
+
+:::
+---
+
+Reluăm exemplul de mai sus:
+
+$$
+10 = 2 \cdot 5, \quad 15 = 3 \cdot 5
+$$
+
+Factorii comuni și necomuni sunt $2$, $3$ și $5$.  
+La fiecare luăm în considerare exponentul cel mai mare, adică $1$.  
+
+Rezultă:
+
+$$
+[10, 15] = 2 \cdot 3 \cdot 5 = 30
+$$
+
+---
+
+## <span style={{backgroundColor: '#e65100', color: 'white', padding: '4px 8px', borderRadius: '4px'}}>Amintește-ți!</span>
+
+:::note
+Completează tabelul. Primul rând este completat ca model.
+:::
+
+| $a$ | $b$ | Primii șase multipli nenuli ai lui $a$ | Primii șase multipli nenuli ai lui $b$ | Multiplii care apar și la $a$ și la $b$ (multipli comuni ai lui $a$ și $b$) | Cel mai mic dintre multiplii comuni | Trei multipli ai celui mai mic multiplu comun |
+| :---: | :---: | :--- | :--- | :---: | :---: | :--- |
+| 6 | 4 | 6, 12, 18, 24, 30, 36 | 4, 8, 12, 16, 20, 24 | 12, 24 | 12 | 12, 24, 36 |
+| 2 | 3 | | | | | |
+| 3 | 9 | | | | | |
+| 5 | 10 | | | | | |
+| 8 | 3 | | | | | |
+
+* Ce observi la numerele din coloanele 5 și 6? Dar la numerele din coloanele 6 și 7?
+
+:::info[Important]
+* Oricare două numere naturale nenule au cel puțin un multiplu comun. Acesta este produsul numerelor.
+* Dintre toți multiplii comuni, diferiți de 0, a două numere naturale nenule, există un multiplu care este divizor pentru toți ceilalți multipli comuni. Acesta se numește **cel mai mic multiplu comun**.
+* Cel mai mic multiplu comun al numerelor naturale nenule $a$ și $b$ se notează **c.m.m.m.c.** al numerelor $a$ și $b$ sau $[a, b]$.
+:::
+
+---
+
+## <span style={{backgroundColor: '#e65100', color: 'white', padding: '4px 8px', borderRadius: '4px'}}>Exersează!</span>
+
+:::note
+Adu la un numitor comun fracțiile:
+:::
+
+**a)** $\dfrac{1}{2}$ și $\dfrac{2}{3}$; &emsp; **b)** $\dfrac{1}{3}$ și $\dfrac{4}{5}$; &emsp; **c)** $\dfrac{2}{9}$ și $\dfrac{5}{4}$; &emsp; **d)** $\dfrac{5}{8}$ și $\dfrac{1}{4}$; &emsp; **e)** $\dfrac{1}{6}$ și $\dfrac{2}{3}$
+
+**f)** $\dfrac{2}{3}$ și $\dfrac{5}{12}$; &emsp; **g)** $\dfrac{1}{25}$ și $\dfrac{1}{20}$; &emsp; **h)** $\dfrac{1}{143}$ și $\dfrac{1}{91}$; &emsp; **i)** $\dfrac{1}{1001}$ și $\dfrac{1}{143}$.

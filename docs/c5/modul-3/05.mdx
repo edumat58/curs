@@ -1,0 +1,272 @@
+---
+sidebar_position: 8
+slug: /c5/modul-3/05
+description: ""
+---
+
+# C19.5 - Introducerea și scoaterea întregilor dintr-o fracție
+
+---
+
+## Introducere
+
+:::note
+Reprodu tabelul de mai jos, apoi completează spațiile libere.
+:::
+
+| Fracția | Reprezentarea prin desen | Numărul întregilor folosiți integral | Fracția luată din ultimul întreg | Câtul împărțirii numărătorului la numitor | Restul împărțirii numărătorului la numitor |
+| :---: | :--- | :---: | :---: | :---: | :---: |
+| $\dfrac{5}{3}$ | <svg width="180" height="40" viewBox="0 0 180 40" style={{verticalAlign: 'middle', overflow: 'visible'}}><line x1="10" y1="20" x2="170" y2="20" stroke="black" strokeWidth="1" /><line x1="10" y1="15" x2="10" y2="25" stroke="black" strokeWidth="1" /><line x1="60" y1="15" x2="60" y2="25" stroke="black" strokeWidth="2" /><line x1="110" y1="15" x2="110" y2="25" stroke="black" strokeWidth="2" /><line x1="160" y1="15" x2="160" y2="25" stroke="black" strokeWidth="1" /><line x1="26" y1="18" x2="26" y2="22" stroke="black" strokeWidth="1" /><line x1="43" y1="18" x2="43" y2="22" stroke="black" strokeWidth="1" /><line x1="76" y1="18" x2="76" y2="22" stroke="black" strokeWidth="1" /><line x1="93" y1="18" x2="93" y2="22" stroke="black" strokeWidth="1" /><path d="M 10 20 L 93 20" stroke="#e65100" strokeWidth="3" opacity="0.5" /><pattern id="hatch" patternUnits="userSpaceOnUse" width="4" height="4"><path d="M-1,1 l2,-2 M0,4 l4,-4 M3,5 l2,-2" style={{stroke:'#e65100', strokeWidth:1}} /></pattern><rect x="10" y="16" width="83" height="8" fill="url(#hatch)" opacity="0.5" /></svg> | 1 | $\dfrac{2}{3}$ | 1 | 2 |
+| $\dfrac{8}{5}$ | | | | | |
+| $\dfrac{11}{3}$ | | | | | |
+| $\dfrac{7}{4}$ | | | | | |
+| $\dfrac{5}{2}$ | | | | | |
+
+---
+
+## Definiție
+
+:::warning[Reține!]
+* **O fracție supraunitară** se poate scrie punând în evidență numărul întregilor folosiți integral și fracția luată din ultimul întreg. Spunem că **am scos întregii din fracție**.
+
+<div style={{display: 'flex', justifyContent: 'center', margin: '30px 0'}}>
+<svg width="600" height="150" viewBox="0 0 600 150" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrowOrange" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#e65100" />
+    </marker>
+  </defs>
+
+  <text x="20" y="80" fontFamily="sans-serif" fontSize="16" fill="#e65100" fontStyle="italic">Exemplu:</text>
+
+  <g transform="translate(100, 50)">
+    <text x="15" y="20" fontFamily="serif" fontSize="28" fontWeight="bold" textAnchor="middle">5</text>
+    <line x1="0" y1="30" x2="30" y2="30" stroke="black" strokeWidth="2" />
+    <text x="15" y="55" fontFamily="serif" fontSize="28" fontWeight="bold" textAnchor="middle">3</text>
+  </g>
+
+  <text x="150" y="88" fontFamily="sans-serif" fontSize="28" fontWeight="bold">=</text>
+
+  <g transform="translate(180, 50)">
+    <text x="0" y="45" fontFamily="serif" fontSize="36" fontWeight="bold">1</text>
+    <g transform="translate(25, 0)">
+      <text x="15" y="20" fontFamily="serif" fontSize="24" fontWeight="bold" textAnchor="middle">2</text>
+      <line x1="0" y1="28" x2="30" y2="28" stroke="black" strokeWidth="2" />
+      <text x="15" y="50" fontFamily="serif" fontSize="24" fontWeight="bold" textAnchor="middle">3</text>
+    </g>
+  </g>
+
+  <path d="M 225 55 L 260 25" stroke="#999" strokeWidth="1" fill="none" />
+  <rect x="260" y="5" width="200" height="30" rx="5" fill="white" stroke="#e65100" />
+  <text x="270" y="25" fontFamily="sans-serif" fontSize="14" fill="#333">Restul împărțirii lui 5 la 3</text>
+
+  <path d="M 190 95 L 190 115 L 210 115" stroke="#999" strokeWidth="1" fill="none" />
+  <rect x="210" y="100" width="180" height="30" rx="5" fill="white" stroke="#999" />
+  <text x="220" y="120" fontFamily="sans-serif" fontSize="14" fill="#333">Câtul împărțirii lui 5 la 3</text>
+
+  <text x="300" y="80" fontFamily="sans-serif" fontSize="16" fill="#333">Citesc: „Un întreg și două treimi”</text>
+</svg>
+</div>
+
+* Se poate efectua și operația inversă. Spunem că **am introdus întregii în fracție**.
+* Prin urmare, dacă $a, b$ și $c$ sunt numere naturale, cu $c \neq 0$, avem:
+  $$a \dfrac{b}{c} = \dfrac{a \cdot c + b}{c}$$
+
+<div style={{display: 'flex', justifyContent: 'center', margin: '30px 0'}}>
+<svg width="500" height="150" viewBox="0 0 500 150" xmlns="http://www.w3.org/2000/svg">
+  <text x="20" y="80" fontFamily="sans-serif" fontSize="16" fill="#e65100" fontStyle="italic">Exemplu:</text>
+
+  <g transform="translate(180, 50)">
+    <rect x="-80" y="-30" width="100" height="25" rx="5" fill="white" stroke="#999" />
+    <text x="-70" y="-13" fontFamily="sans-serif" fontSize="12" fill="#333">Adun 1 · 3 + 2</text>
+
+    <rect x="70" y="-25" width="50" height="20" rx="5" fill="white" stroke="#999" />
+    <text x="78" y="-11" fontFamily="sans-serif" fontSize="12" fill="#333">Scriu</text>
+    <line x1="95" y1="-3" x2="95" y2="15" stroke="#999" strokeWidth="1" markerEnd="url(#arrowOrange)" />
+
+    <text x="15" y="45" fontFamily="serif" fontSize="36" fontWeight="bold">1</text>
+    <g transform="translate(40, 0)">
+      <text x="15" y="20" fontFamily="serif" fontSize="24" fontWeight="bold" textAnchor="middle">2</text>
+      <line x1="0" y1="28" x2="30" y2="28" stroke="black" strokeWidth="2" />
+      <text x="15" y="50" fontFamily="serif" fontSize="24" fontWeight="bold" textAnchor="middle">3</text>
+    </g>
+
+    <text x="85" y="40" fontFamily="sans-serif" fontSize="28" fontWeight="bold">=</text>
+
+    <g transform="translate(110, 0)">
+      <text x="15" y="20" fontFamily="serif" fontSize="24" fontWeight="bold" textAnchor="middle">5</text>
+      <line x1="0" y1="28" x2="30" y2="28" stroke="black" strokeWidth="2" />
+      <text x="15" y="50" fontFamily="serif" fontSize="24" fontWeight="bold" textAnchor="middle">3</text>
+    </g>
+    <rect x="-30" y="70" width="110" height="25" rx="5" fill="white" stroke="#999" />
+    <text x="-20" y="87" fontFamily="sans-serif" fontSize="12" fill="#333">Înmulțesc 1 · 3</text>
+  </g>
+</svg>
+</div>
+:::
+
+---
+
+## <span style={{backgroundColor: '#e65100', color: 'white', padding: '4px 8px', borderRadius: '4px'}}>Exersează!</span>
+
+:::note
+Asociază fiecărei etichete discul corespunzător:
+:::
+
+<svg width="700" height="220" viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="2" stdDeviation="2" floodOpacity="0.3"/>
+    </filter>
+  </defs>
+
+  <g transform="translate(10, 50)">
+    
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="60" height="60" rx="12" fill="white" stroke="#e65100" strokeWidth="1" filter="url(#shadow)" />
+      <circle cx="10" cy="10" r="10" fill="#999" />
+      <text x="10" y="14" textAnchor="middle" fill="white" fontSize="12" fontWeight="bold" fontFamily="sans-serif">A</text>
+      
+      <g transform="translate(30, 30)">
+        <text x="0" y="-5" textAnchor="middle" fontSize="20" fontFamily="serif" fontWeight="bold">9</text>
+        <line x1="-10" y1="0" x2="10" y2="0" stroke="black" strokeWidth="1.5" />
+        <text x="0" y="20" textAnchor="middle" fontSize="20" fontFamily="serif" fontWeight="bold">4</text>
+      </g>
+    </g>
+
+    <g transform="translate(80, 0)">
+      <rect x="0" y="0" width="60" height="60" rx="12" fill="white" stroke="#e65100" strokeWidth="1" filter="url(#shadow)" />
+      <circle cx="10" cy="10" r="10" fill="#e65100" />
+      <text x="10" y="14" textAnchor="middle" fill="white" fontSize="12" fontWeight="bold" fontFamily="sans-serif">B</text>
+      
+      <g transform="translate(30, 30)">
+        <text x="0" y="-5" textAnchor="middle" fontSize="20" fontFamily="serif" fontWeight="bold">15</text>
+        <line x1="-12" y1="0" x2="12" y2="0" stroke="black" strokeWidth="1.5" />
+        <text x="0" y="20" textAnchor="middle" fontSize="20" fontFamily="serif" fontWeight="bold">6</text>
+      </g>
+    </g>
+
+    <g transform="translate(160, 0)">
+      <rect x="0" y="0" width="60" height="60" rx="12" fill="white" stroke="#e65100" strokeWidth="1" filter="url(#shadow)" />
+      <circle cx="10" cy="10" r="10" fill="#e65100" />
+      <text x="10" y="14" textAnchor="middle" fill="white" fontSize="12" fontWeight="bold" fontFamily="sans-serif">C</text>
+      
+      <g transform="translate(30, 30)">
+        <text x="0" y="-5" textAnchor="middle" fontSize="20" fontFamily="serif" fontWeight="bold">17</text>
+        <line x1="-12" y1="0" x2="12" y2="0" stroke="black" strokeWidth="1.5" />
+        <text x="0" y="20" textAnchor="middle" fontSize="20" fontFamily="serif" fontWeight="bold">3</text>
+      </g>
+    </g>
+
+    <g transform="translate(240, 0)">
+      <rect x="0" y="0" width="60" height="60" rx="12" fill="white" stroke="#e65100" strokeWidth="1" filter="url(#shadow)" />
+      <circle cx="10" cy="10" r="10" fill="#e65100" />
+      <text x="10" y="14" textAnchor="middle" fill="white" fontSize="12" fontWeight="bold" fontFamily="sans-serif">D</text>
+      
+      <g transform="translate(20, 30)">
+        <text x="0" y="10" textAnchor="middle" fontSize="24" fontFamily="serif" fontWeight="bold">4</text>
+        <g transform="translate(20, 0)">
+            <text x="0" y="-5" textAnchor="middle" fontSize="16" fontFamily="serif" fontWeight="bold">3</text>
+            <line x1="-8" y1="0" x2="8" y2="0" stroke="black" strokeWidth="1.5" />
+            <text x="0" y="15" textAnchor="middle" fontSize="16" fontFamily="serif" fontWeight="bold">7</text>
+        </g>
+      </g>
+    </g>
+
+    <g transform="translate(320, 0)">
+      <rect x="0" y="0" width="60" height="60" rx="12" fill="white" stroke="#e65100" strokeWidth="1" filter="url(#shadow)" />
+      <circle cx="10" cy="10" r="10" fill="#e65100" />
+      <text x="10" y="14" textAnchor="middle" fill="white" fontSize="12" fontWeight="bold" fontFamily="sans-serif">E</text>
+      
+      <g transform="translate(20, 30)">
+        <text x="0" y="10" textAnchor="middle" fontSize="24" fontFamily="serif" fontWeight="bold">1</text>
+        <g transform="translate(20, 0)">
+            <text x="0" y="-5" textAnchor="middle" fontSize="16" fontFamily="serif" fontWeight="bold">1</text>
+            <line x1="-8" y1="0" x2="8" y2="0" stroke="black" strokeWidth="1.5" />
+            <text x="0" y="15" textAnchor="middle" fontSize="16" fontFamily="serif" fontWeight="bold">9</text>
+        </g>
+      </g>
+    </g>
+  </g>
+
+  <g transform="translate(420, 10)">
+    
+    <g transform="translate(20, 0)">
+        <circle cx="30" cy="30" r="30" fill="#ffe0b2" filter="url(#shadow)" />
+        <circle cx="10" cy="15" r="8" fill="#e65100" />
+        <text x="10" y="19" textAnchor="middle" fill="white" fontSize="10" fontWeight="bold" fontFamily="sans-serif">a</text>
+        
+        <g transform="translate(25, 30)">
+            <text x="-10" y="5" textAnchor="middle" fontSize="20" fontFamily="serif">2</text>
+            <text x="10" y="-5" textAnchor="middle" fontSize="14" fontFamily="serif">3</text>
+            <line x1="2" y1="0" x2="18" y2="0" stroke="black" strokeWidth="1" />
+            <text x="10" y="14" textAnchor="middle" fontSize="14" fontFamily="serif">6</text>
+        </g>
+    </g>
+
+    <g transform="translate(100, 0)">
+        <circle cx="30" cy="30" r="30" fill="#ffe0b2" filter="url(#shadow)" />
+        <circle cx="10" cy="15" r="8" fill="#e65100" />
+        <text x="10" y="19" textAnchor="middle" fill="white" fontSize="10" fontWeight="bold" fontFamily="sans-serif">c</text>
+        
+        <g transform="translate(30, 30)">
+            <text x="0" y="-5" textAnchor="middle" fontSize="18" fontFamily="serif">31</text>
+            <line x1="-12" y1="0" x2="12" y2="0" stroke="black" strokeWidth="1" />
+            <text x="0" y="15" textAnchor="middle" fontSize="18" fontFamily="serif">7</text>
+        </g>
+    </g>
+    
+    <g transform="translate(180, 0)">
+        <circle cx="30" cy="30" r="30" fill="#ffe0b2" filter="url(#shadow)" />
+        <circle cx="10" cy="15" r="8" fill="#e65100" />
+        <text x="10" y="19" textAnchor="middle" fill="white" fontSize="10" fontWeight="bold" fontFamily="sans-serif">e</text>
+        
+        <g transform="translate(30, 30)">
+            <text x="0" y="-5" textAnchor="middle" fontSize="18" fontFamily="serif">25</text>
+            <line x1="-12" y1="0" x2="12" y2="0" stroke="black" strokeWidth="1" />
+            <text x="0" y="15" textAnchor="middle" fontSize="18" fontFamily="serif">7</text>
+        </g>
+    </g>
+
+    <g transform="translate(60, 80)">
+        <circle cx="30" cy="30" r="30" fill="#ffe0b2" filter="url(#shadow)" />
+        <circle cx="10" cy="15" r="8" fill="#999" />
+        <text x="10" y="19" textAnchor="middle" fill="white" fontSize="10" fontWeight="bold" fontFamily="sans-serif">b</text>
+        
+        <g transform="translate(30, 30)">
+            <text x="0" y="-5" textAnchor="middle" fontSize="18" fontFamily="serif">10</text>
+            <line x1="-12" y1="0" x2="12" y2="0" stroke="black" strokeWidth="1" />
+            <text x="0" y="15" textAnchor="middle" fontSize="18" fontFamily="serif">9</text>
+        </g>
+    </g>
+
+    <g transform="translate(140, 80)">
+        <circle cx="30" cy="30" r="30" fill="#ffe0b2" filter="url(#shadow)" />
+        <circle cx="10" cy="15" r="8" fill="#e65100" />
+        <text x="10" y="19" textAnchor="middle" fill="white" fontSize="10" fontWeight="bold" fontFamily="sans-serif">d</text>
+        
+        <g transform="translate(25, 30)">
+            <text x="-10" y="5" textAnchor="middle" fontSize="20" fontFamily="serif">2</text>
+            <text x="10" y="-5" textAnchor="middle" fontSize="14" fontFamily="serif">1</text>
+            <line x1="2" y1="0" x2="18" y2="0" stroke="black" strokeWidth="1" />
+            <text x="10" y="14" textAnchor="middle" fontSize="14" fontFamily="serif">4</text>
+        </g>
+    </g>
+
+    <g transform="translate(220, 80)">
+        <circle cx="30" cy="30" r="30" fill="#ffe0b2" filter="url(#shadow)" />
+        <circle cx="10" cy="15" r="8" fill="#e65100" />
+        <text x="10" y="19" textAnchor="middle" fill="white" fontSize="10" fontWeight="bold" fontFamily="sans-serif">f</text>
+        
+        <g transform="translate(25, 30)">
+            <text x="-10" y="5" textAnchor="middle" fontSize="20" fontFamily="serif">5</text>
+            <text x="10" y="-5" textAnchor="middle" fontSize="14" fontFamily="serif">2</text>
+            <line x1="2" y1="0" x2="18" y2="0" stroke="black" strokeWidth="1" />
+            <text x="10" y="14" textAnchor="middle" fontSize="14" fontFamily="serif">3</text>
+        </g>
+    </g>
+
+  </g>
+</svg>
+
+---

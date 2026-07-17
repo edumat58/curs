@@ -1,0 +1,260 @@
+---
+sidebar_position: -2
+slug: /c6/modul-1/14
+description: ""
+---
+import * as React from 'react';
+import Stack from '@mui/material/Stack';
+import { LineChart } from '@mui/x-charts/LineChart';
+
+# C6.3 - Regula de trei simplă
+
+---
+## Reprezentarea grafică a dependenței d.p.
+
+:::tip Definiție D.P.
+
+Între două mulțimi ordonate $(a_1, a_2, a_3, ..., a_n)$ și $(b_1, b_2, b_3,..., b_n)$ există o **proporționalitate directă** dacă:
+
+$$
+\frac{a_1}{b_1} = \frac{a_2}{b_2} = \frac{a_3}{b_3} = \dots = \frac{a_n}{b_n} = k,
+$$
+
+unde $k$ se numește **coeficientul de proporționalitate**, $k \ne 0$.
+:::
+
+:::note Exemple
+
+Mulțimea ordonată: (1, 2, 7) și (4, 8, 28) sunt în proporționalitate directă deoarece:
+
+$$
+\frac{1}{4} = \frac{2}{8} = \frac{7}{28}.
+$$
+
+Mulțimea (2, 5, 7) și (6, 15, 20) nu sunt în proporționalitate directă deoarece:
+
+$$
+\frac{5}{15} \ne \frac{7}{20}.
+$$
+
+Mărimile ale căror valori sunt trecute în tabelul următor sunt direct proporționale:
+
+| a | 2 | 2,3 | 4 | 5,2 |
+|---|---|-----|---|-----|
+| b | 10 | 11,5 | 20 | 26 |
+
+deoarece:
+
+$$
+\frac{2}{10} = \frac{2,3}{11,5} = \frac{4}{20} = \frac{5,2}{26} = 0,2.
+$$
+:::
+
+Lungimea laturii unui pătrat și perimetrul acestuia sunt în proporționalitate directă.
+
+| Latura pătratului (cm) | 1 | 2 | 3,5 | 5 |
+|-------------------------|---|---|-----|---|
+| Perimetrul pătratului (cm) | 4 | 8 | 14 | 20 |
+
+> Observăm că mărind latura pătratului de un număr de ori, s-a mărit și perimetrul acestuia exact de același număr de ori.
+
+> Într-un sistem de axe de coordonate punctele cu coordonate reprezentate de perechi de numere corespunzătoare unei relații de proporționalitate directă sunt coliniare.
+
+<LineChart
+  series={[
+    { curve: "linear", data: [1, 4, 8, 12, 16, 20 ] },
+  ]}
+/>
+
+---
+
+## Regula de trei simplă pentru direct proporționalitate
+
+:::tip Definitie 1
+Regula de trei simplă este procedeul folosit pentru a calcula o valoare a unei mărimi fizice în cazul în care mărimea fizică respectivă este în proporționalitate directă sau inversă cu o altă mărime fizică.  
+
+> cu alte cuvinte, o folosim pentru a determina numărul necunoscut dintr-o mulțime de 2 elemente, dacă între acea mulțime și o altă mulțime ale cărei elemente sunt cunoscute există o relație de proporționalitate.
+:::
+
+:::danger De retinut
+Procedăm astfel:
+- identificăm relația de proporționalitate (directă / inversă);
+- calculăm termenul necunoscut după modelul de mai jos.
+:::
+
+### Exemple
+:::note
+2 kg de portocale costă 14 lei. Cât costă 7 kg de portocale de aceeași calitate?
+:::
+
+```
+
+2 kg de portocale .......................................... 14 lei
+7 kg de portocale .......................................... x lei
+
+```
+
+$$
+x = \frac{7 \cdot 14}{2} = 49
+$$
+
+**Răspuns:** 7 kg de portocale costă 49 de lei.
+
+> Cantitatea de portocale și prețul acesteia sunt în proporționalitate directă, deci folosim metoda proporției astfel:
+
+$$
+\frac{2}{7} = \frac{14}{x} \Rightarrow x = \frac{7 \cdot 14}{2} = 49~\text{lei}.
+$$
+
+---
+:::note
+Din 10 m de stofă se confecționează 4 costume identice. Câte costume de același fel se pot confecționa din 22,5 m de stofă?
+:::
+```
+
+10 m de stofă ............................................. 4 costume
+22,5 m de stofă ............................................. x costume
+
+```
+
+$$
+x = \frac{4 \cdot 22,5}{10} = 9
+$$
+
+**Răspuns:** Din 22,5 m de stofă se pot confecționa 9 costume de același fel.
+
+>Cantitatea de stofă și numărul de costume confecționate din ea sunt în proporționalitate directă. Scriem proporția:
+
+$$
+\frac{10}{4} = \frac{22,5}{x} \Rightarrow x = \frac{4 \cdot 22,5}{10} = 9~\text{costume.}
+$$
+
+---
+## Reprezentarea grafică a dependenței i.p.
+
+:::tip Definitie i.p.
+
+Între două mulțimi finite de numere se stabilește o **proporționalitate inversă** dacă, cu elementele celor două mulțimi, se poate forma un șir de produse egale.
+
+Mulțimea ordonată $(a_1, a_2, a_3, … , a_n)$ este invers proporțională cu mulțimea ordonată $(b_1, b_2, b_3, … , b_n)$ dacă:
+
+$$
+a_1 \cdot b_1 = a_2 \cdot b_2 = \dots = a_n \cdot b_n.
+$$
+
+:::
+
+:::note Exemple
+
+- Mulțimea {3, 4, 6} este invers proporțională cu {4, 3, 2} deoarece  
+$$ 2 \cdot 6 = 3 \cdot 4 = 4 \cdot 3. $$
+
+- Mulțimea {2, 3, 6} nu este invers proporțională cu {9, 6, 2} deoarece  
+$$ 2 \cdot 9 \ne 3 \cdot 6 \ne 6 \cdot 2. $$
+
+- Mulțimile {1, 2, 3, 4} și {24, 12, 8, 6} din exemplul anterior sunt invers proporționale deoarece  
+$$ 1 \cdot 24 = 2 \cdot 12 = 3 \cdot 8 = 4 \cdot 6 = 24. $$
+
+:::
+
+:::info Exemple de mărimi invers proporționale
+
+- Numărul de muncitori și intervalul de timp necesar pentru realizarea unui anumit număr de piese de același fel.  
+- Numărul robinetelor (cu același debit) și timpul de umplere a unui bazin.  
+- Viteza și timpul necesar parcurgerii unei anumite distanțe.
+
+:::
+
+---
+
+Dacă pentru realizarea unei lucrări unui muncitor i-ar trebui 24 de zile, atunci aceeași lucrare ar putea fi realizată de 2 muncitori în 12 zile, de 3 muncitori în 8 zile sau de 4 muncitori în 6 zile.
+
+| Nr. muncitori | 1 | 2 | 3 | 4 |
+|----------------|---|---|---|---|
+| Nr. zile       | 24 | 12 | 8 | 6 |
+
+> Se observă că dacă numărul de muncitori crește, atunci numărul de zile necesare pentru realizarea lucrării scade de același număr de ori.
+
+> Datele din acest tabel ar putea fi reprezentate grafic într-un sistem de axe ortogonale.
+
+<LineChart
+  series={[
+    { curve: "linear", data: [24, 12, 8, 6] },
+  ]}
+/>
+
+---
+
+## Regula de trei simplă pentru invers proporționalitate
+
+:::tip Definitie 2
+Regula de trei simplă se aplică și în cazul mărimilor invers proporționale. Dacă una dintre mărimi crește, cealaltă scade proporțional.
+:::
+
+### Exemple 
+:::note
+Trei robinete cu același debit umplu un rezervor în 12 ore. În cât timp pot umple același rezervor 4 robinete?
+:::
+
+```
+
+i.p.
+3 robinete .......................... 12 ore
+4 robinete .......................... x ore
+
+```
+
+$$
+\frac{3}{4} = \frac{x}{12} \Rightarrow x = \frac{3 \cdot 12}{4} = 9
+$$
+
+**R:** 9 ore
+
+---
+
+:::note
+15 muncitori termină o lucrare în 10 zile. În câte zile pot termina aceeași lucrare 6 muncitori?
+:::
+
+```
+
+i.p.
+15 muncitori .......................... 10 zile
+6 muncitori ........................... x zile
+
+```
+
+$$
+\frac{15}{6} = \frac{x}{10} \Rightarrow x = \frac{15 \cdot 10}{6} = 25
+$$
+
+**R:** 25 zile
+
+---
+:::note
+
+6 tractoare pot ara o suprafață în 15 ore. După 3 ore mai vin încă două tractoare. În cât timp va fi arată întreaga suprafață?
+:::
+
+> Cele 6 tractoare au lucrat 3 ore până când au venit celelalte două tractoare. Pentru suprafața rămasă de arat, celor 6 tractoare le-ar mai trebui 12 ore (15 – 3 = 12). După venirea celor două tractoare, numărul acestora ajunge la 8. Datele problemei le vom aranja astfel:
+
+```
+
+i.p.
+6 tractoare .......................... 12 ore
+8 tractoare .......................... x ore
+
+```
+
+$$
+\frac{6}{8} = \frac{x}{12} \Rightarrow x = \frac{6 \cdot 12}{8} = 9
+$$
+
+Timpul total în care va fi arată întreaga suprafață este:
+$$
+3 + 9 = 12~\text{ore}
+$$
+
+**R:** 12 ore
+
+---

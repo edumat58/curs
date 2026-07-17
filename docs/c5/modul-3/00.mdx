@@ -1,0 +1,302 @@
+---
+sidebar_position: 13
+slug: /c5/modul-3/00
+description: ""
+---
+
+# PROIECT 
+
+:::warning Termen Limită
+Proiectele trebuie realizate până la data de **10 februarie 2026**. Ele sunt puse într-o mapă
+și trebuie să conțină informații despre contribuția fiecărui membru al echipei, bibliografie și o prefață.
+
+Utilizarea inteligenței artificiale pentru a căuta informații este **interzisă**.
+Dacă se identifică utilizarea inteligenței artificiale, proiectul va fi **depunctat cu 6 puncte din 10**.
+:::
+
+---
+
+## Partea I - Numere de ieri şi de azi...
+
+### <span style={{color: '#e65100', fontWeight: 'bold'}}>Ce vei face?</span>
+Vei căuta informații despre cum se scriau numerele odinioară și cum se scriu acum.
+
+### <span style={{color: '#e65100', fontWeight: 'bold'}}>De ce vei face?</span>
+Pentru a observa cum a evoluat reprezentarea grafică a numerelor de la semne la cifre.
+
+### <span style={{color: '#e65100', fontWeight: 'bold'}}>Cum vei face?</span>
+Vei căuta în cărți sau pe Internet date, imagini, informații despre scrierea numerelor.
+
+### <span style={{color: '#e65100', fontWeight: 'bold'}}>Cum vei ști că ai reușit?</span>
+Vei expune lucrarea în clasă. Vei împărtăși impresiile tale colegilor.
+
+---
+
+### <span style={{backgroundColor: '#ffe0b2', padding: '5px 10px', borderRadius: '5px'}}>Sugestie</span>
+
+<div style={{backgroundColor: '#fff3e0', padding: '20px', borderRadius: '8px', border: '1px solid #ffe0b2', margin: '20px 0'}}>
+  <p style={{marginBottom: '20px'}}>
+    Nevoile economice, în dezvoltare, ale omului l-au determinat să facă unele progrese în folosirea numerelor.<br/>
+    De exemplu, sumerienii, care foloseau numerația zecimală, aplicau și sistemul pozițional, la exprimarea grafică a numerelor. Semnele scrisului lor aveau forma de cuie, de unde și numele de scriere cuneiformă.
+  </p>
+
+  <div style={{display: 'flex', justifyContent: 'center'}}>
+    <svg width="500" height="140" viewBox="0 0 500 140" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        {/* Simbolul pentru 1 (Cui vertical) */}
+        <g id="cunei1">
+           <path d="M 0 0 L -4 -10 L 4 -10 Z" fill="#e65100" />
+           <line x1="0" y1="0" x2="0" y2="15" stroke="#e65100" strokeWidth="2" strokeLinecap="round" />
+        </g>
+
+        {/* Simbolul pentru 10 (Cui orizontal/unghiular) */}
+        <g id="cunei10">
+           <path d="M 0 0 L 10 -4 L 10 4 Z" fill="#e65100" />
+           <line x1="0" y1="0" x2="-15" y2="0" stroke="#e65100" strokeWidth="2" strokeLinecap="round" />
+        </g>
+      </defs>
+
+      {/* Rândul 1 */}
+      {/* 1 */}
+      <g transform="translate(50, 40)">
+        <use href="#cunei1" />
+        <text x="0" y="35" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#333">1</text>
+      </g>
+
+      {/* 2 */}
+      <g transform="translate(120, 40)">
+        <use href="#cunei1" x="-6" />
+        <use href="#cunei1" x="6" />
+        <text x="0" y="35" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#333">2</text>
+      </g>
+
+      {/* 3 */}
+      <g transform="translate(190, 40)">
+        <use href="#cunei1" x="-12" />
+        <use href="#cunei1" x="0" />
+        <use href="#cunei1" x="12" />
+        <text x="0" y="35" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#333">3</text>
+      </g>
+
+      {/* 4 */}
+      <g transform="translate(260, 40)">
+        <use href="#cunei1" x="0" y="12" />
+        <use href="#cunei1" x="-10" y="-8" />
+        <use href="#cunei1" x="0" y="-8" />
+        <use href="#cunei1" x="10" y="-8" />
+        <text x="0" y="35" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#333">4</text>
+      </g>
+      
+      {/* 9 */}
+      <g transform="translate(350, 40)">
+         <g transform="translate(0, -8)">
+            <use href="#cunei1" x="-10" />
+            <use href="#cunei1" x="0" />
+            <use href="#cunei1" x="10" />
+         </g>
+         <g transform="translate(0, 8)">
+            <use href="#cunei1" x="-10" />
+            <use href="#cunei1" x="0" />
+            <use href="#cunei1" x="10" />
+         </g>
+         <g transform="translate(0, 24)">
+            <use href="#cunei1" x="-10" />
+            <use href="#cunei1" x="0" />
+            <use href="#cunei1" x="10" />
+         </g>
+         <text x="0" y="45" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#333">9</text>
+      </g>
+
+      {/* Linie separatoare punctată */}
+      <line x1="30" y1="90" x2="470" y2="90" stroke="#999" strokeWidth="1" strokeDasharray="4, 4" />
+
+      {/* Rândul 2 */}
+      {/* 10 */}
+      <g transform="translate(50, 110)">
+        <use href="#cunei10" />
+        <text x="0" y="25" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#333">10</text>
+      </g>
+
+      {/* 43 */}
+      <g transform="translate(130, 110)">
+        <g transform="translate(-15, 0)">
+            <use href="#cunei10" x="-10" y="-5" />
+            <use href="#cunei10" x="0" y="-5" />
+            <use href="#cunei10" x="-10" y="5" />
+            <use href="#cunei10" x="0" y="5" />
+        </g>
+        <g transform="translate(20, -5)">
+            <use href="#cunei1" x="-6" />
+            <use href="#cunei1" x="0" />
+            <use href="#cunei1" x="6" />
+        </g>
+        <text x="0" y="25" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#333">43</text>
+      </g>
+
+      {/* 100 */}
+      <g transform="translate(220, 110)">
+         <use href="#cunei1" />
+         <path d="M 5 0 L 12 -3 L 12 3 Z" fill="#e65100" />
+         <text x="0" y="25" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#333">100</text>
+      </g>
+
+      {/* 1000 */}
+      <g transform="translate(300, 110)">
+         <path d="M -15 0 L -8 -3 L -8 3 Z" fill="#e65100" />
+         <use href="#cunei1" />
+         <text x="0" y="25" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#333">1 000</text>
+      </g>
+
+      {/* 10 000 */}
+      <g transform="translate(390, 110)">
+         <path d="M -22 0 L -15 -3 L -15 3 Z" fill="#e65100" />
+         <path d="M -12 0 L -5 -3 L -5 3 Z" fill="#e65100" />
+         <use href="#cunei1" />
+         <text x="0" y="25" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#333">10 000</text>
+      </g>
+
+    </svg>
+  </div>
+</div>
+
+### <span style={{color: '#e65100', fontWeight: 'bold'}}>Ce se evaluează?</span>
+* <span style={{color: '#e65100'}}>•</span> redactarea corectă a informațiilor;
+* <span style={{color: '#e65100'}}>•</span> prezența imaginilor/desenelor atractive;
+* <span style={{color: '#e65100'}}>•</span> prezentarea clară a proiectului.
+
+---
+
+## Partea II - Dăruieşte un meniu sănătos
+
+### <span style={{color: '#e65100', fontWeight: 'bold'}}>Ce veți face?</span>
+Veți scrie lista de cumpărături și veți calcula suma necesară pentru donarea unui coș cu alimente sănătoase.
+
+### <span style={{color: '#e65100', fontWeight: 'bold'}}>De ce veți face?</span>
+Veți învăța să alegeți produse pentru un meniu sănătos, respectând un buget dat.
+
+### <span style={{color: '#e65100', fontWeight: 'bold'}}>Cum veți face?</span>
+1. Veți consulta pliante de prezentare a produselor necesare.
+2. Veți stabili, împreună, produsele de care au nevoie 7 persoane, știind că suma de care dispuneți este de 250 lei.
+3. Veți scrie lista de cumpărături și veți face desene potrivite.
+4. Veți calcula cât costă cumpărăturile și veți compara cu suma de 250 lei în care vă veți încadra.
+5. Veți modifica și definitiva lista de cumpărături, astfel încât să cheltuiți cel mult 250 lei.
+
+### <span style={{color: '#e65100', fontWeight: 'bold'}}>Cum veți ști că ați reușit?</span>
+Veți prezenta lista și calculele voastre, iar colegii din celelalte grupe vor face aprecieri și sugestii.
+
+---
+
+### <span style={{backgroundColor: '#ffe0b2', padding: '5px 10px', borderRadius: '5px'}}>Sugestie</span>
+
+* Organizați-vă în grupuri și stabiliți-vă rolurile.
+* Folosiți pliante de la supermarket pentru a vedea prețurile unor alimente sănătoase care pot fi achiziționate.
+
+<div style={{display: 'flex', justifyContent: 'center', margin: '20px 0'}}>
+<svg width="350" height="200" viewBox="0 0 350 200" xmlns="http://www.w3.org/2000/svg">
+  
+  {/* ROSII */}
+  <g transform="translate(10, 10)">
+    <circle cx="20" cy="20" r="15" fill="#ef5350" />
+    <circle cx="35" cy="25" r="12" fill="#ef5350" />
+    <rect x="55" y="5" width="50" height="15" fill="#ffcc80" rx="5" />
+    <text x="80" y="16" fontFamily="sans-serif" fontWeight="bold" fill="white" fontSize="10" textAnchor="middle">ROȘII</text>
+    <text x="60" y="35" fontFamily="sans-serif" fontWeight="bold" fill="#e65100" fontSize="14">8</text>
+    <text x="70" y="28" fontFamily="sans-serif" fill="#e65100" fontSize="8">25</text>
+    <line x1="70" y1="30" x2="85" y2="30" stroke="#e65100" strokeWidth="1"/>
+    <text x="75" y="38" fontFamily="sans-serif" fill="#e65100" fontSize="10">lei/kg</text>
+  </g>
+
+  {/* CASTRAVETI */}
+  <g transform="translate(180, 10)">
+    <rect x="0" y="15" width="40" height="12" rx="5" fill="#0c5613ff" transform="rotate(-10)" />
+    <rect x="50" y="5" width="70" height="15" fill="#ffcc80" rx="5" />
+    <text x="85" y="16" fontFamily="sans-serif" fontWeight="bold" fill="white" fontSize="10" textAnchor="middle">CASTRAVETE</text>
+    <text x="60" y="35" fontFamily="sans-serif" fontWeight="bold" fill="#e65100" fontSize="14">2</text>
+    <text x="70" y="28" fontFamily="sans-serif" fill="#e65100" fontSize="8">40</text>
+    <line x1="70" y1="30" x2="85" y2="30" stroke="#e65100" strokeWidth="1"/>
+    <text x="75" y="38" fontFamily="sans-serif" fill="#e65100" fontSize="10">lei/kg</text>
+  </g>
+
+  {/* ARDEI */}
+  <g transform="translate(10, 60)">
+    <path d="M 10 10 Q 25 5 40 10 Q 45 25 40 40 Q 25 45 10 40 Q 5 25 10 10" fill="#ffa726" />
+    <rect x="55" y="5" width="50" height="15" fill="#ffcc80" rx="5" />
+    <text x="80" y="16" fontFamily="sans-serif" fontWeight="bold" fill="white" fontSize="10" textAnchor="middle">ARDEI</text>
+    <text x="60" y="35" fontFamily="sans-serif" fontWeight="bold" fill="#e65100" fontSize="14">1</text>
+    <text x="70" y="28" fontFamily="sans-serif" fill="#e65100" fontSize="8">45</text>
+    <line x1="70" y1="30" x2="85" y2="30" stroke="#e65100" strokeWidth="1"/>
+    <text x="75" y="38" fontFamily="sans-serif" fill="#e65100" fontSize="10">lei/buc.</text>
+  </g>
+
+  {/* VINETE */}
+  <g transform="translate(180, 60)">
+    <path d="M 10 10 Q 40 10 40 40 Q 25 45 10 40 Q 5 25 10 10" fill="#7e57c2" transform="rotate(20)" />
+    <rect x="55" y="5" width="50" height="15" fill="#ffcc80" rx="5" />
+    <text x="80" y="16" fontFamily="sans-serif" fontWeight="bold" fill="white" fontSize="10" textAnchor="middle">VINETE</text>
+    <text x="60" y="35" fontFamily="sans-serif" fontWeight="bold" fill="#e65100" fontSize="14">7</text>
+    <text x="70" y="28" fontFamily="sans-serif" fill="#e65100" fontSize="8">99</text>
+    <line x1="70" y1="30" x2="85" y2="30" stroke="#e65100" strokeWidth="1"/>
+    <text x="75" y="38" fontFamily="sans-serif" fill="#e65100" fontSize="10">lei/kg</text>
+  </g>
+
+  {/* MERE */}
+  <g transform="translate(10, 110)">
+    <circle cx="20" cy="25" r="12" fill="#ff7043" />
+    <rect x="55" y="5" width="50" height="15" fill="#ffcc80" rx="5" />
+    <text x="80" y="16" fontFamily="sans-serif" fontWeight="bold" fill="white" fontSize="10" textAnchor="middle">MERE</text>
+    <text x="60" y="35" fontFamily="sans-serif" fontWeight="bold" fill="#e65100" fontSize="14">4</text>
+    <text x="70" y="28" fontFamily="sans-serif" fill="#e65100" fontSize="8">99</text>
+    <line x1="70" y1="30" x2="85" y2="30" stroke="#e65100" strokeWidth="1"/>
+    <text x="75" y="38" fontFamily="sans-serif" fill="#e65100" fontSize="10">lei/kg</text>
+  </g>
+
+  {/* STRUGURI */}
+  <g transform="translate(180, 110)">
+    <path d="M 20 10 L 10 30 L 30 30 Z" fill="#bcaaa4" />
+    <circle cx="15" cy="20" r="3" fill="#ef5350" />
+    <circle cx="20" cy="25" r="3" fill="#ef5350" />
+    <rect x="55" y="5" width="60" height="15" fill="#ffcc80" rx="5" />
+    <text x="85" y="16" fontFamily="sans-serif" fontWeight="bold" fill="white" fontSize="10" textAnchor="middle">STRUGURI</text>
+    <text x="60" y="35" fontFamily="sans-serif" fontWeight="bold" fill="#e65100" fontSize="14">10</text>
+    <text x="80" y="28" fontFamily="sans-serif" fill="#e65100" fontSize="8">50</text>
+    <line x1="80" y1="30" x2="95" y2="30" stroke="#e65100" strokeWidth="1"/>
+    <text x="85" y="38" fontFamily="sans-serif" fill="#e65100" fontSize="10">lei/kg</text>
+  </g>
+
+   {/* CHIFLA */}
+  <g transform="translate(10, 160)">
+    <ellipse cx="25" cy="25" rx="15" ry="10" fill="#ffe0b2" stroke="#e65100" strokeWidth="1" />
+    <rect x="55" y="5" width="50" height="15" fill="#ffcc80" rx="5" />
+    <text x="80" y="16" fontFamily="sans-serif" fontWeight="bold" fill="white" fontSize="10" textAnchor="middle">CHIFLĂ</text>
+    <text x="60" y="35" fontFamily="sans-serif" fontWeight="bold" fill="#e65100" fontSize="14">1</text>
+    <text x="70" y="28" fontFamily="sans-serif" fill="#e65100" fontSize="8">50</text>
+    <line x1="70" y1="30" x2="85" y2="30" stroke="#e65100" strokeWidth="1"/>
+    <text x="75" y="38" fontFamily="sans-serif" fill="#e65100" fontSize="10">lei/buc.</text>
+  </g>
+
+  {/* CURCAN */}
+  <g transform="translate(180, 160)">
+    <rect x="10" y="20" width="30" height="15" fill="#f8bbd0" transform="rotate(-10)" />
+    <rect x="55" y="5" width="60" height="15" fill="#ffcc80" rx="5" />
+    <text x="85" y="16" fontFamily="sans-serif" fontWeight="bold" fill="white" fontSize="10" textAnchor="middle">CURCAN</text>
+    <text x="60" y="35" fontFamily="sans-serif" fontWeight="bold" fill="#e65100" fontSize="14">20</text>
+    <text x="80" y="28" fontFamily="sans-serif" fill="#e65100" fontSize="8">18</text>
+    <line x1="80" y1="30" x2="95" y2="30" stroke="#e65100" strokeWidth="1"/>
+    <text x="85" y="38" fontFamily="sans-serif" fill="#e65100" fontSize="10">lei/pachet</text>
+  </g>
+
+</svg>
+</div>
+
+* Prezentați lista de cumpărături într-un mod inedit.
+
+---
+
+### <span style={{color: '#e65100', fontWeight: 'bold'}}>Ce se evaluează?</span>
+* utilizarea informațiilor din pliante;
+* participarea tuturor membrilor grupului la alegerea produselor;
+* forma atractivă a desenelor;
+* încadrarea în bugetul alocat;
+* prezentarea clară a proiectului.
+
+---

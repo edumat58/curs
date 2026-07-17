@@ -10,41 +10,92 @@ import React, { useState } from 'react';
 
 export default function LectiiTreeView() {
   const saptamani = [
-    {
+        {
       hide: true,
-      titlu: 'Săptămâna 17: 02.02 - 06.02',
-      note: 'TEST (50% NOTA 6) | C14.1 - C14.3 & G6.1 - G7',
+      titlu: 'Săptămâna 22: 16.03 - 20.03',
+      note: 'Materiale incarcate',
       lectii: [
-        { titlu: 'G7 - Conul circular drept', zi: '02.02', tip: 'Geometrie', link: 'c8/modul-3/08', pdf: '' },
-        { titlu: 'LP - RECAPITULARE TEST', zi: '04.02 (ora 1)', tip: 'Recapitulare', link: '', pdf: '' },
-        { titlu: 'TEST (50% NOTA 6) | C14.1 - C14.3 & G6.1 - G7', zi: '04.02 (ora 2)', tip: 'Evaluare Sumativa', link: '', pdf: '' },
-        { titlu: 'LP - REZOLVARE TEST', zi: '05.02 (ora 1)', tip: 'Rezolvare Test', link: '', pdf: '' },
+      ],
+    },
+    {
+      titlu: 'Săptămâna 21: 09.03 - 13.03',
+      note: 'Materiale incarcate',
+      lectii: [
+        {titlu: 'LP - Funcția de gradul I', zi: '09.03', tip: 'Algebra', link: '', pdf: ''},
+        {titlu: 'C17 - Elemente de statistică: indicatorii tendinței centrale (frecvență, medie, mediană, mod și amplitudine a unui set de date) ', zi: '11.03 (ora 1)', tip: 'Algebra', link: 'c8/modul-4/04', pdf: ''},
+        {titlu: 'LP - Elemente de statistică: indicatorii tendinței centrale', zi: '11.03 (ora 1)', tip: 'Algebra', link: '', pdf: ''},
+        {titlu: 'PREZENTARE PORTOFOLIU', zi: '12.03 (ora 1)', tip: 'PORTOFOLIU', link: '', pdf: ''},
+        {titlu: 'RECAPITULARE SIMULARE NAȚIONALǍ', zi: '11.03 (ora 2)', tip: 'Algebra', link: '', pdf: ''},
+      ],
+    },
+    {
+      titlu: 'Săptămâna 20: 02.03 - 06.03',
+      note: 'Materiale incarcate',
+      lectii: [
+        {titlu: 'LP - Funcția de gradul I', zi: '02.03', tip: 'Algebra', link: '', pdf: ''},
+        {titlu: 'C16.1 - Funcții trigonometrice (demonstrații)', zi: '04.03 (ora 1)', tip: 'Algebra', link: 'c8/modul-4/02', pdf: ''},
+        {titlu: 'C16.2 - Funcții trigonometrice (proprietăți)', zi: '04.03 (ora 2)', tip: 'Algebra', link: 'c8/modul-4/03', pdf: ''},
+        {titlu: 'LP - Simulare | Subiectul I+II EN', zi: '05.03 (ora 1)', tip: 'Algebra', link: '', pdf: ''},
+        {titlu: 'LP - Simulare | Subiectul III EN', zi: '05.03 (ora 2)', tip: 'Geometrie', link: '', pdf: ''},
+
+      ],
+    },
+    {
+      titlu: 'Săptămâna 19: 23.02 - 27.02',
+      note: 'Modulul 4: 23.02 -> 03.04',
+      lectii: [
+        {titlu: 'C15 - Funcția de gradul I', zi: '23.02', tip: 'Algebra', link: 'c8/modul-4/00', pdf: ''},
+        {titlu: 'LP - Funcția de gradul I', zi: '25.02 (ora 1)', tip: 'Algebra', link: '', pdf: ''},
+        {titlu: 'LP - Funcția de gradul I', zi: '25.02 (ora 2)', tip: 'Algebra', link: '', pdf: ''},
+        {titlu: 'LP - Simulare | Subiectul I+II EN', zi: '26.02 (ora 1)', tip: 'Algebra', link: '', pdf: ''},
+        {titlu: 'LP - Simulare | Subiectul III EN', zi: '26.02 (ora 2)', tip: 'Geometrie', link: '', pdf: ''},
+
+      ],
+    },
+    {
+      titlu: 'Săptămâna 18: 09.02 - 13.02',
+      note: 'Materiale incarcate',
+      lectii: [
+        { titlu: 'G8.1 - Trunchi de piramidă regulată', zi: '02.02', tip: 'Geometrie', link: 'c8/modul-3/09', pdf: '' },
+        { titlu: 'LP - Trunchi de piramidă regulată', zi: '04.02 (ora 1)', tip: 'Geometrie', link: '', pdf: '' },
+        { titlu: 'G8.2 - Trunchi de con circular drept', zi: '04.02 (ora 2)', tip: 'Geometrie', link: 'c8/modul-3/10', pdf: '' },
+        { titlu: 'Simulare EN (S1+2)', zi: '05.02 (ora 1)', tip: 'Simulare EN', link: '', pdf: '' },
+        { titlu: 'Simulare EN (S3)', zi: '05.02 (ora 2)', tip: 'Simulare EN', link: '', pdf: '' },
+      ],
+    },
+    {
+      titlu: 'Săptămâna 17: 02.02 - 06.02',
+      note: 'Materiale incarcate',
+      lectii: [
+        { titlu: 'TEST (50% NOTA 6) | C14.1 - C14.3 & G6.1 - G7', zi: '02.02', tip: 'Evaluare Sumativa', link: '', pdf: '' },
+        { titlu: 'G7 - Conul circular drept', zi: '04.02 (ora 1)', tip: 'Geometrie', link: 'c8/modul-3/08', pdf: '' },
+        { titlu: 'LP - REZOLVARE TEST', zi: '04.02 (ora 2)', tip: 'Recapitulare', link: '', pdf: '' },
+        { titlu: 'LP - Conul circular drept', zi: '05.02 (ora 1)', tip: 'Rezolvare Test', link: '', pdf: '' },
         { titlu: 'LP - Conul circular drept', zi: '05.02 (ora 2)', tip: 'Geometrie', link: '', pdf: '' },
       ],
     },
     {
-      hide: true,
       titlu: 'Săptămâna 16: 26.01 - 30.01',
-      note: 'Simulare EN 2 | 29.01 (ora 1 și ora 2) [50 % NOTA 5]',
+      note: 'Materiae incarcate',
       lectii: [
-        { titlu: 'G6.2 - Dreapta paralelă cu planul ', zi: '26.01', tip: 'Geometrie', link: 'c8/modul-3/07', pdf: '' },
-        { titlu: 'LP - Dreapta paralelă cu planul ', zi: '28.01 (ora 1)', tip: 'Geometrie', link: '', pdf: '' },
-        { titlu: 'LP - Dreapta paralelă cu planul ', zi: '28.01 (ora 2)', tip: 'Geometrie', link: '', pdf: '' },
-        { titlu: 'Simulare EN 2 | PARTEA I (Algebra)', zi: '29.01 (ora 1)', tip: 'Simulare EN 2', link: '', pdf: '' },
-        { titlu: 'Simulare EN 2 | PARTEA II (Geometrie)', zi: '29.01 (ora 2)', tip: 'Simulare EN 2', link: '', pdf: '' },
-        
+        { titlu: 'G6.2 - Dreapta paralelă cu planul', zi: '26.01', tip: 'Geometrie', link: 'c8/modul-3/06', pdf: '' },
+        { titlu: 'Simulare EN 2 | PARTEA I (Algebra)', zi: '28.01 (ora 1)', tip: 'Simulare EN 2', link: '', pdf: '' },
+        { titlu: 'Simulare EN 2 | PARTEA II (Geometrie)', zi: '28.01 (ora 2)', tip: 'Simulare EN 2', link: '', pdf: '' },
+        { titlu: 'RECUPERAT 20.01 (ora 1)', zi: '29.01 (ora 1)', tip: '-', link: '', pdf: '' },
+        { titlu: 'LP - Dreapta paralelă cu planul ', zi: '29.01 (ora 2)', tip: 'Geometrie', link: '', pdf: '' },
       ],
     },
     {
-      hide: true,
       titlu: 'Săptămâna 15: 19.01 - 23.01',
       note: 'PROIECT - Modelare matematică în 3D',
       lectii: [
         { titlu: 'C14.3 - Descompuneri în factori utilizând reguli de calcul în ℝ (grupare de termeni)', zi: '19.01', tip: 'Algebra', link: 'c8/modul-3/04', pdf: '' },
-        { titlu: 'PROIECT - Modelare matematică în 3D', zi: '21.01 (ora 1)', tip: 'Algebra', link: 'c8/modul-3/05', pdf: '' },
-        { titlu: 'PROIECT - Modelare matematică în 3D', zi: '21.01 (ora 2)', tip: 'Algebra', link: '', pdf: '' },
-        { titlu: 'G6.1 - Paralelism: drepte paralele; unghiul a două drepte', zi: '22.01 (ora 1)', tip: 'Geometrie', link: 'c8/modul-3/06', pdf: '' },
-        { titlu: 'LP - Paralelism: drepte paralele; unghiul a două drepte', zi: '22.01 (ora 2)', tip: 'Geometrie', link: '', pdf: '' },
+        { titlu: 'LP - Descompuneri în factori utilizând reguli de calcul în ℝ (grupare de termeni)', zi: '20.01 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'PROIECT - Modelare matematică în 3D', zi: '20.01 (ora 2)', tip: 'Algebra', link: 'c8/modul-3/05', pdf: '' },
+        { titlu: 'PROIECT - Modelare matematică în 3D', zi: '21.01 (ora 1)', tip: 'Algebra', link: '', pdf: '' },
+        { titlu: 'G6.1 - Paralelism: drepte paralele; unghiul a două drepte', zi: '21.01 (ora 2)', tip: 'Geometrie', link: 'c8/modul-3/06', pdf: '' },
+        { titlu: 'LP - Paralelism: drepte paralele; unghiul a două drepte', zi: '22.01 (ora 1)', tip: 'Geometrie', link: '', pdf: '' },
+        { titlu: 'LP - Paralelism: drepte paralele; unghiul a două drepte', zi: '22.01 (ora 1)', tip: 'Geometrie', link: '', pdf: '' },
       ],
     },
   {
@@ -248,7 +299,7 @@ export default function LectiiTreeView() {
             <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Nota 9</th>
             <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Nota 10</th>
             <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Nota 11</th>
-            
+
           </tr>
         </thead>
         <tbody>
@@ -258,8 +309,8 @@ export default function LectiiTreeView() {
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>X</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>X</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>27.11</td>
-            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>21.01</td>
-            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>04.02</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>X</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>28.01</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
@@ -272,7 +323,7 @@ export default function LectiiTreeView() {
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>09.10</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>22.10</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>10.12</td>
-            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>29.01</td>
+            <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>21.01</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>12.02</td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
             <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}></td>
@@ -286,7 +337,7 @@ export default function LectiiTreeView() {
       Proiecte
       </h2>
       <ul>
-      <li>21.01 (50% nota 5) - Modelare matematică în 3D</li>
+      <li>21.01 - Modelare matematică în 3D</li>
       <li>13.03 - Portofoliu (partea I)</li>
       </ul>
           <h2>
@@ -294,8 +345,7 @@ export default function LectiiTreeView() {
       </h2>
       <ul>
       <li>27.11 (50% nota 4) - Simulare EN 1 (la cerere)</li>
-      <li>29.01 (50% nota 5) - Simulare EN 2 (la cerere)</li>
-      <li>12.02 (50% nota 6) - Simulare EN 3 (la cerere)</li>
+      <li>12.02 (50% nota 6) - Simulare EN 2 (la cerere)</li>
       </ul>
       <hr />
       <h2>

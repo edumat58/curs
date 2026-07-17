@@ -1,0 +1,291 @@
+---
+sidebar_position: 16
+slug: /c8/modul-3/012
+description: ""
+---
+
+# FIȘA DE LABORATOR - Modelare matematică în 3D
+
+---
+
+## Scopul laboratorului
+
+În această fișă vei învăța:
+- ce este **Wolfram Language**
+- cum se instalează **Wolfram Engine Community** (gratuit)
+- cum rulezi comenzi simple
+- cum desenezi grafice de funcții
+- ce înseamnă comenzile și opțiunile (ex: `Mesh`)
+
+:::note
+Nu este nevoie să cumperi nimic. Tot ce folosim este **gratuit**.
+:::
+
+---
+
+## Ce este Wolfram Engine Community?
+
+**:contentReference[oaicite:1]{index=1}** este „motorul” care:
+- calculează
+- desenează grafice
+- înțelege formule matematice
+
+Este folosit și de **Mathematica**, dar aici îl folosim **gratuit**, fără interfață grafică.
+
+---
+
+## Instalarea pe Windows (pas cu pas)
+
+### Pasul 1. Descarcă programul
+- Caută pe internet: **Wolfram Engine Community Edition**
+- Alege versiunea pentru **Windows**
+- Descarcă fișierul de instalare
+
+### Pasul 2. Instalează
+- Dublu-click pe fișier
+- `Next → Next → Install`
+- Așteaptă finalizarea
+
+### Pasul 3. Creează cont (gratuit)
+La prima pornire:
+- ți se cere **logare**
+- creezi un cont Wolfram (email + parolă)
+
+:::tip
+Acest cont este necesar doar pentru activarea licenței gratuite.
+:::
+
+---
+
+## Pornirea programului (wolframscript)
+
+### Pasul 1. Deschide terminalul
+- Apasă **Win + R**
+- Scrie `cmd`
+- Apasă **Enter**
+
+### Pasul 2. Pornește Wolfram Engine
+În fereastra neagră scrie:
+
+```text
+wolframscript
+````
+
+Apasă **Enter**.
+
+Dacă vezi un cursor care așteaptă comenzi, totul este OK.
+
+---
+
+## Prima comandă – calcule simple
+
+Scrie:
+
+```wl
+2 + 3
+```
+
+Apasă **Enter**.
+
+Rezultat:
+
+```text
+5
+```
+
+---
+
+## Ce este o funcție (explicație simplă)
+
+O **funcție** este ca o **mașină**:
+
+* intră un număr
+* iese un rezultat
+
+Exemplu matematic:
+$$
+f(x) = x^2
+$$
+
+---
+
+## Scrierea unei funcții în sintaxa Wolfram
+
+```wl
+f[x_] := x^2
+```
+
+### Ce înseamnă fiecare parte?
+
+| Scriere | Explicație        |
+| ------- | ----------------- |
+| `f`     | numele funcției   |
+| `x_`    | „orice valoare”   |
+| `:=`    | „este definit ca” |
+| `x^2`   | x la pătrat       |
+
+Test:
+
+```wl
+f[3]
+```
+
+Rezultat:
+
+```text
+9
+```
+
+---
+
+## Reprezentarea grafică a unei funcții (2D)
+
+### Exemplu
+
+$$
+f(x)=x^2
+$$
+
+```wl
+Plot[f[x], {x, -5, 5}]
+```
+
+### Ce înseamnă comanda?
+
+| Parte        | Explicație          |
+| ------------ | ------------------- |
+| `Plot`       | desenează un grafic |
+| `f[x]`       | funcția             |
+| `{x, -5, 5}` | valorile lui x      |
+
+---
+
+## Reprezentarea unei funcții cu două variabile (3D)
+
+Exemplu:
+$$
+z = x^2 + y^2
+$$
+
+```wl
+Plot3D[x^2 + y^2, {x, -3, 3}, {y, -3, 3}]
+```
+
+Obții o **suprafață** (ca un bol).
+
+---
+
+## Opțiuni importante (explicate pe înțelesul elevilor)
+
+### `Mesh`
+
+```wl
+Mesh -> None
+```
+
+* `Mesh` = liniile de pe suprafață
+* `None` = fără linii
+* `Mesh -> 10` = câteva linii
+
+Exemplu:
+
+```wl
+Plot3D[x^2 + y^2, {x, -3, 3}, {y, -3, 3}, Mesh -> 10]
+```
+
+---
+
+### `PlotRange`
+
+```wl
+PlotRange -> All
+```
+
+arată **toată** funcția, fără să taie vârfurile
+
+---
+
+### `AxesLabel`
+
+```wl
+AxesLabel -> {"x", "y", "z"}
+```
+
+scrie numele axelor
+
+---
+
+## Funcții cu trei variabile (forme în spațiu)
+
+Exemplu:
+$$
+x^2 + y^2 + z^2 = 1
+$$
+
+Aceasta este o **sferă**.
+
+```wl
+ContourPlot3D[
+  x^2 + y^2 + z^2 == 1,
+  {x, -1.5, 1.5},
+  {y, -1.5, 1.5},
+  {z, -1.5, 1.5},
+  Mesh -> None
+]
+```
+
+### Ce face `ContourPlot3D`?
+
+* caută punctele unde **egalitatea este adevărată**
+* desenează **forma 3D**
+
+---
+
+## Reprezentarea oricărei funcții – rețetă generală
+
+### Pasul 1. Scrie funcția
+
+```wl
+f[x_, y_] := x^2 - y^2
+```
+
+### Pasul 2. Alege tipul de grafic
+
+* `Plot` → o variabilă
+* `Plot3D` → două variabile
+* `ContourPlot3D` → trei variabile
+
+### Pasul 3. Alege intervalele
+
+```wl
+Plot3D[f[x, y], {x, -3, 3}, {y, -3, 3}]
+```
+
+---
+
+## Exemple
+
+### Exemplul 1
+
+Reprezintă grafic funcția:
+$$
+f(x)=x^3
+$$
+
+### Exemplul 2
+
+Reprezintă suprafața:
+$$
+z=x^2-y^2
+$$
+
+### Exemplul 3
+
+Reprezintă forma:
+$$
+x^2+y^2+z^2=4
+$$
+
+---
+
+

@@ -1,0 +1,375 @@
+---
+sidebar_position: 22
+slug: /c5/modul-5/01
+description: ""
+---
+
+# G5 - Unități de măsură. Perimetre și arii
+
+---
+
+## Măsurarea lungimii
+
+În Sistemul Internațional de unități de măsură, unitatea principală pentru lungime este **metrul**, notat cu $m$.
+
+:::tip Definiție
+**Metrul** este unitatea principală de măsură pentru lungime. El are atât **multipli** (unități mai mari), cât și **submultipli** (unități mai mici).
+:::
+
+Multiplii și submultiplii metrului sunt:
+
+| Denumire | Notație | Relație cu metrul |
+|---|---|---|
+| kilometru | $km$ | $1\,km = 1000\,m$ |
+| hectometru | $hm$ | $1\,hm = 100\,m$ |
+| decametru | $dam$ | $1\,dam = 10\,m$ |
+| **metru** | $m$ | $1\,m$ |
+| decimetru | $dm$ | $1\,dm = 0{,}1\,m$ |
+| centimetru | $cm$ | $1\,cm = 0{,}01\,m$ |
+| milimetru | $mm$ | $1\,mm = 0{,}001\,m$ |
+
+### Schema transformărilor
+
+Pe scara unităților de lungime, fiecare treaptă este de **10 ori** mai mare decât cea de sub ea:
+
+$$
+km \;\xrightarrow{\;\times 10\;}\; hm \;\xrightarrow{\;\times 10\;}\; dam \;\xrightarrow{\;\times 10\;}\; m \;\xrightarrow{\;\times 10\;}\; dm \;\xrightarrow{\;\times 10\;}\; cm \;\xrightarrow{\;\times 10\;}\; mm
+$$
+
+:::danger Regulă de transformare
+- Când trecem de la o unitate **mai mare** la una **mai mică**, **înmulțim** cu $10$ la fiecare treaptă coborâtă.
+- Când trecem de la o unitate **mai mică** la una **mai mare**, **împărțim** la $10$ la fiecare treaptă urcată.
+:::
+
+Relațiile principale:
+
+$$
+1\,km = 10\,hm = 100\,dam = 1000\,m
+$$
+
+$$
+1\,m = 10\,dm = 100\,cm = 1000\,mm
+$$
+
+:::note Exemplu rezolvat
+Transformă în metri:
+
+**a)** $3{,}5\,dam$ — coborâm o treaptă (dam → m), deci înmulțim cu $10$:
+
+$$
+3{,}5\,dam = 3{,}5 \cdot 10 = 35\,m
+$$
+
+**b)** $1700\,cm$ — urcăm două trepte (cm → m), deci împărțim la $100$:
+
+$$
+1700\,cm = 1700 : 100 = 17\,m
+$$
+
+**c)** $6{,}29\,hm$ — coborâm două trepte (hm → m), deci înmulțim cu $100$:
+
+$$
+6{,}29\,hm = 6{,}29 \cdot 100 = 629\,m
+$$
+:::
+
+:::note Exemplu rezolvat
+Calculează, exprimând rezultatul în $dm$:
+
+$$
+0{,}00023\,km + 685\,mm
+$$
+
+Transformăm fiecare termen în $dm$:
+
+$$
+0{,}00023\,km = 0{,}00023 \cdot 10^4\,dm = 2{,}3\,dm
+$$
+
+$$
+685\,mm = 685 : 10^2\,dm = 6{,}85\,dm
+$$
+
+Adunăm:
+
+$$
+2{,}3\,dm + 6{,}85\,dm = 9{,}15\,dm
+$$
+:::
+
+---
+
+## Perimetrul unui poligon
+
+:::tip Definiție
+**Perimetrul** unui poligon este egal cu suma lungimilor laturilor sale. Se notează cu $P$.
+:::
+
+### Perimetrul pătratului
+
+Pătratul are toate cele patru laturi egale, de lungime $l$.
+
+<div style={{ display: "flex", justifyContent: "center", margin: "1.5rem 0" }}>
+<svg width="240" height="240" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+  <rect x="50" y="45" width="140" height="140" fill="none" stroke="black" strokeWidth="3"/>
+  <text x="113" y="35" fontSize="22" fontFamily="serif" fill="red">l</text>
+  <text x="113" y="208" fontSize="22" fontFamily="serif" fill="red">l</text>
+  <text x="30" y="120" fontSize="22" fontFamily="serif" fill="red">l</text>
+  <text x="200" y="120" fontSize="22" fontFamily="serif" fill="red">l</text>
+</svg>
+</div>
+
+$$
+P_{\text{pătrat}} = l + l + l + l = 4 \cdot l
+$$
+
+### Perimetrul dreptunghiului
+
+Dreptunghiul are laturile opuse egale: lungimea $L$ și lățimea $l$.
+
+<div style={{ display: "flex", justifyContent: "center", margin: "1.5rem 0" }}>
+<svg width="320" height="200" viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
+  <rect x="50" y="55" width="210" height="100" fill="none" stroke="black" strokeWidth="3"/>
+  <text x="150" y="45" fontSize="22" fontFamily="serif" fill="red">L</text>
+  <text x="150" y="178" fontSize="22" fontFamily="serif" fill="red">L</text>
+  <text x="30" y="112" fontSize="22" fontFamily="serif" fill="green">l</text>
+  <text x="270" y="112" fontSize="22" fontFamily="serif" fill="green">l</text>
+</svg>
+</div>
+
+$$
+P_{\text{dreptunghi}} = 2 \cdot L + 2 \cdot l = 2 \cdot (L + l)
+$$
+
+### Perimetrul triunghiului
+
+Dacă laturile triunghiului au lungimile $a$, $b$ și $c$:
+
+<div style={{ display: "flex", justifyContent: "center", margin: "1.5rem 0" }}>
+<svg width="300" height="240" viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg">
+  <polygon points="150,35 55,195 260,195" fill="none" stroke="black" strokeWidth="3"/>
+  <text x="88" y="110" fontSize="22" fontFamily="serif" fill="red">a</text>
+  <text x="215" y="110" fontSize="22" fontFamily="serif" fill="green">b</text>
+  <text x="152" y="220" fontSize="22" fontFamily="serif" fill="blue">c</text>
+</svg>
+</div>
+
+$$
+P_{\text{triunghi}} = a + b + c
+$$
+
+:::note Exemplu rezolvat
+Triunghiul $\triangle ABC$ are laturile $AB = 24\,cm$, $AC = 100\,mm$ și $BC = 2{,}6\,dm$. Calculează perimetrul.
+
+**Pasul 1.** Aducem toate lungimile la aceeași unitate de măsură ($cm$):
+
+$$
+AC = 100\,mm = 10\,cm,\qquad BC = 2{,}6\,dm = 26\,cm
+$$
+
+**Pasul 2.** Calculăm perimetrul:
+
+$$
+P = AB + AC + BC = 24\,cm + 10\,cm + 26\,cm = 60\,cm
+$$
+:::
+
+:::info Observație importantă
+Înainte de a aduna lungimi exprimate în unități diferite, transformăm **întotdeauna** toate valorile în aceeași unitate de măsură.
+:::
+
+---
+
+## Măsurarea ariei
+
+**Aria** unei suprafețe arată cât de mare este suprafața respectivă. Pentru a o măsura, ne întrebăm câte pătrate de o anumită mărime încap în interiorul ei.
+
+În figura de mai jos, un pătrat cu latura de $3\,cm$ poate fi acoperit cu exact **9 pătrate** mici, fiecare cu latura de $1\,cm$. Spunem că aria lui este de $9\,cm^2$.
+
+<div style={{ display: "flex", justifyContent: "center", margin: "1.5rem 0" }}>
+<svg width="220" height="220" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+  <rect x="35" y="35" width="150" height="150" fill="#cce5ff" stroke="black" strokeWidth="3"/>
+  <line x1="85" y1="35" x2="85" y2="185" stroke="black" strokeWidth="1"/>
+  <line x1="135" y1="35" x2="135" y2="185" stroke="black" strokeWidth="1"/>
+  <line x1="35" y1="85" x2="185" y2="85" stroke="black" strokeWidth="1"/>
+  <line x1="35" y1="135" x2="185" y2="135" stroke="black" strokeWidth="1"/>
+</svg>
+</div>
+
+:::tip Definiție
+Unitatea principală de măsură pentru arie este **metrul pătrat**, notat $m^2$. Acesta reprezintă aria unui pătrat cu latura de $1$ metru.
+:::
+
+Ca și la lungime, metrul pătrat are multipli și submultipli:
+
+| Denumire | Notație | Relație cu $m^2$ |
+|---|---|---|
+| kilometru pătrat | $km^2$ | $1\,km^2 = 1\,000\,000\,m^2$ |
+| hectometru pătrat | $hm^2$ | $1\,hm^2 = 10\,000\,m^2$ |
+| decametru pătrat | $dam^2$ | $1\,dam^2 = 100\,m^2$ |
+| **metru pătrat** | $m^2$ | $1\,m^2$ |
+| decimetru pătrat | $dm^2$ | $1\,dm^2 = 0{,}01\,m^2$ |
+| centimetru pătrat | $cm^2$ | $1\,cm^2 = 0{,}0001\,m^2$ |
+| milimetru pătrat | $mm^2$ | $1\,mm^2 = 0{,}000001\,m^2$ |
+
+### Schema transformărilor pentru arie
+
+:::danger Regulă de transformare
+La unitățile de **arie**, fiecare treaptă diferă de vecina ei prin **$100$** (nu prin $10$, ca la lungime).
+
+- Pentru a transforma o unitate într-una **imediat inferioară** (mai mică), **înmulțim cu $100$**.
+- Pentru a transforma o unitate într-una **imediat superioară** (mai mare), **împărțim la $100$**.
+:::
+
+$$
+km^2 \;\xrightarrow{\;\times 100\;}\; hm^2 \;\xrightarrow{\;\times 100\;}\; dam^2 \;\xrightarrow{\;\times 100\;}\; m^2 \;\xrightarrow{\;\times 100\;}\; dm^2 \;\xrightarrow{\;\times 100\;}\; cm^2 \;\xrightarrow{\;\times 100\;}\; mm^2
+$$
+
+Pentru $n$ trepte parcurse, înmulțim sau împărțim cu $(10^2)^n = 100^n$.
+
+:::note Exemplu rezolvat
+Completează:
+
+**a)** $12\,cm^2 = \;?\;dm^2$ — urcăm o treaptă, deci împărțim la $10^2$:
+
+$$
+12\,cm^2 = 12 : 10^2 = 0{,}12\,dm^2
+$$
+
+**b)** $7\,dam^2 = \;?\;dm^2$ — coborâm două trepte, deci înmulțim cu $10^4$:
+
+$$
+7\,dam^2 = 7 \cdot 10^4 = 70\,000\,dm^2
+$$
+
+**c)** $80\,m^2 = \;?\;dm^2$ — coborâm o treaptă, deci înmulțim cu $100$:
+
+$$
+80\,m^2 = 80 \cdot 100 = 8000\,dm^2
+$$
+:::
+
+:::note Exemplu rezolvat
+Compară $5{,}42\,cm^2$ cu $54{,}2\,mm^2$.
+
+Aducem la aceeași unitate ($mm^2$), coborând o treaptă:
+
+$$
+5{,}42\,cm^2 = 5{,}42 \cdot 10^2 = 542\,mm^2
+$$
+
+Cum $542\,mm^2 > 54{,}2\,mm^2$, rezultă:
+
+$$
+5{,}42\,cm^2 > 54{,}2\,mm^2
+$$
+:::
+
+### Unități de măsură agricole
+
+Pentru suprafețe de teren se folosesc unități speciale:
+
+$$
+1\,\text{ar} = 1\,dam^2 = 100\,m^2
+$$
+
+$$
+1\,\text{hectar (ha)} = 1\,hm^2 = 10\,000\,m^2
+$$
+
+:::note Exemplu rezolvat
+Transformă:
+
+**a)** $5{,}6\,km^2 = \;?\;\text{ari}$
+
+$$
+5{,}6\,km^2 = 5{,}6 \cdot 10^4\,dam^2 = 56\,000\,dam^2 = 56\,000\;\text{ari}
+$$
+
+**b)** $1{,}8\,km^2 = \;?\;ha$
+
+$$
+1{,}8\,km^2 = 1{,}8 \cdot 10^2\,hm^2 = 180\,hm^2 = 180\;ha
+$$
+:::
+
+---
+
+## Aria pătratului și a dreptunghiului
+
+### Aria pătratului
+
+:::danger Formulă
+Aria unui pătrat cu latura de lungime $l$ este:
+
+$$
+A_{\text{pătrat}} = l \cdot l = l^2
+$$
+:::
+
+<div style={{ display: "flex", justifyContent: "center", margin: "1.5rem 0" }}>
+<svg width="220" height="220" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+  <rect x="45" y="40" width="130" height="130" fill="#fff3cd" stroke="black" strokeWidth="3"/>
+  <text x="103" y="32" fontSize="22" fontFamily="serif" fill="red">l</text>
+  <text x="28" y="112" fontSize="22" fontFamily="serif" fill="red">l</text>
+  <text x="92" y="118" fontSize="22" fontFamily="serif" fontStyle="italic">A = l²</text>
+</svg>
+</div>
+
+### Aria dreptunghiului
+
+:::danger Formulă
+Aria unui dreptunghi cu lungimea $L$ și lățimea $l$ este:
+
+$$
+A_{\text{dreptunghi}} = L \cdot l
+$$
+:::
+
+<div style={{ display: "flex", justifyContent: "center", margin: "1.5rem 0" }}>
+<svg width="320" height="200" viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
+  <rect x="50" y="50" width="210" height="100" fill="#fff3cd" stroke="black" strokeWidth="3"/>
+  <text x="150" y="40" fontSize="22" fontFamily="serif" fill="red">L</text>
+  <text x="30" y="107" fontSize="22" fontFamily="serif" fill="green">l</text>
+  <text x="120" y="107" fontSize="22" fontFamily="serif" fontStyle="italic">A = L · l</text>
+</svg>
+</div>
+
+:::note Exemplu rezolvat
+Calculează aria unui pătrat cu latura $l = 5\,cm$:
+
+$$
+A = l^2 = 5^2 = 25\,cm^2
+$$
+:::
+
+:::note Exemplu rezolvat
+O bucată dreptunghiulară de gresie are dimensiunile $L = 60\,cm$ și $l = 30\,cm$. Află suprafața plăcii:
+
+$$
+A = L \cdot l = 60\,cm \cdot 30\,cm = 1800\,cm^2
+$$
+:::
+
+:::note Exemplu rezolvat
+Calculează aria unui pătrat care are perimetrul egal cu $20\,cm$.
+
+**Pasul 1.** Aflăm latura din perimetru:
+
+$$
+P = 4l \;\Rightarrow\; 20 = 4l \;\Rightarrow\; l = 20 : 4 = 5\,cm
+$$
+
+**Pasul 2.** Calculăm aria:
+
+$$
+A = l^2 = 5^2 = 25\,cm^2
+$$
+:::
+
+:::info Atenție la unități!
+- **Perimetrul** se măsoară în unități de **lungime** ($cm$, $m$, $km$...).
+- **Aria** se măsoară în unități de **arie** ($cm^2$, $m^2$, $km^2$...).
+:::
+
+---

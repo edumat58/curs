@@ -1,0 +1,244 @@
+---
+sidebar_position: 30
+slug: /c7/modul-4/02
+description: ""
+---
+
+# C18.1 - Funcții trigonometrice (demonstrații)
+
+---
+
+<iframe
+    width="100%"
+    height="600"
+    style={{ border: 0 }}
+    src="https://www.geogebra.org/m/dsM6pubs"
+></iframe>
+
+---
+
+:::danger Foarte Important
+În cercul trigonometric, **raza are lungimea 1**. Raza reprezintă ipotenuza triunghiului dreptunghic format de un punct de pe cerc, originea și proiecția punctului pe axa OX. Astfel, funcțiile trigonometrice pot fi interpretate ca raporturi între laturile acestui triunghi.
+
+După cum știm:
+
+- $\sin \alpha = \dfrac{\text{cateta opusă}}{\text{ipotenuză}}$
+
+- $\cos \alpha = \dfrac{\text{cateta alăturată}}{\text{ipotenuză}}$
+
+- $\tg \alpha = \dfrac{\text{cateta opusă}}{\text{cateta alăturată}}$
+
+- $\ctg \alpha = \dfrac{\text{cateta alăturată}}{\text{cateta opusă}}$
+
+Și deoarece ipotenuza are lungimea 1, rezultă că:
+
+- $\sin \alpha = \text{cateta opusă}$
+
+- $\cos \alpha = \text{cateta alăturată}$
+
+- $\tg \alpha = \dfrac{\text{cateta opusă}}{\text{cateta alăturată}}$
+
+- $\ctg \alpha = \dfrac{\text{cateta alăturată}}{\text{cateta opusă}}$
+:::
+
+---
+
+## Demonstrații
+
+### Demonstrația identității fundamentale
+Știm că într-un triunghi dreptunghic, conform teoremei lui Pitagora, suma pătratelor catetelor este egală cu pătratul ipotenuzei. Astfel, pentru un unghi $\alpha$:
+
+Cum:
+- $\sin \alpha = \text{cateta opusă}$
+
+- $\cos \alpha = \text{cateta alăturată}$
+
+- raza (ipotenuza) = 1
+
+:::tip Identitatea fundamentală
+
+$$
+\sin^2 \alpha + \cos^2 \alpha = 1
+$$
+:::
+
+### Demonstrația sinusului și cosinusului de 30 de grade
+Pentru a înțelege de ce $\sin 30^\circ = \dfrac{1}{2}$, trebuie să vedem triunghiul echilateral întreg "oglindit" peste axa $OX$.
+
+> Triunghiul echilateral $AOB$ este compus din două triunghiuri dreptunghice identice, fiecare având un unghi de 30 de grade și unul de 60 de grade.
+
+Cum raza cercului trigonometric este 1, atunci toate laturile triunghiului echilateral $AOB$ sunt egale cu 1. Asta înseamnă că:
+$$
+AB = 2 \cdot AP = 1 \implies AP = \text{cateta opusă} = \frac{1}{2}
+\\[10pt]
+\text{Cum cateta opusă} = \sin \alpha \implies \sin 30^\circ = \frac{1}{2}
+\\[10pt]
+\text{Din Teorema lui Pitagora:} \quad OA^2 = OP^2 + AP^2 
+\\[10pt]
+\implies 1 = OP^2 + \left(\frac{1}{2}\right)^2 
+\\[10pt]
+\implies OP^2 = 1 - \frac{1}{4} = \frac{3}{4} 
+\\[10pt]
+\implies OP = \text{cateta alăturată} = \frac{\sqrt{3}}{2}
+\\[10pt]
+\text{Cum cateta alăturată} = \cos \alpha \implies \cos 30^\circ = \frac{\sqrt{3}}{2}
+$$
+
+<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" style={{ backgroundColor: 'transparent', width: '100%', height: 'auto' }}>
+  {/* Axele de coordonate */}
+  <g stroke="currentColor" strokeWidth="1" opacity="0.3">
+    <line x1="20" y1="200" x2="380" y2="200" /> {/* Axa X */}
+    <line x1="200" y1="20" x2="200" y2="380" />  {/* Axa Y */}
+  </g>
+  <text x="370" y="215" fontSize="12" fill="currentColor" opacity="0.5">cos</text>
+  <text x="205" y="35" fontSize="12" fill="currentColor" opacity="0.5">sin</text>
+
+  {/* Cercul Trigonometric */}
+  <circle cx="200" cy="200" r="160" fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="4,4" opacity="0.2" />
+
+  {/* TRIUNGHIUL ECHILATERAL COMPLET (A-B-C) */}
+  {/* A = (200, 200) -> Originea */}
+  {/* B = 200 + 160*cos(30), 200 - 160*sin(30) */}
+  {/* C = 200 + 160*cos(-30), 200 - 160*sin(-30) */}
+  
+  {/* Latura 1 (Raza de sus) */}
+  <line x1="200" y1="200" x2="338.56" y2="120" stroke="#3578e5" strokeWidth="3" />
+  {/* Latura 2 (Raza de jos) */}
+  <line x1="200" y1="200" x2="338.56" y2="280" stroke="#20365b" strokeWidth="3" />
+  {/* Latura 3 (Latura opusă - baza triunghiului echilateral rotit) */}
+  <line x1="338.56" y1="120" x2="338.56" y2="280" stroke="#e53535" strokeWidth="3" />
+
+  {/* Marcaj unghi total de 60 grade la centru */}
+  <path d="M 240 177 A 45 45 0 0 1 240 223" fill="none" stroke="currentColor" strokeWidth="1" />
+  <text x="248" y="205" fontSize="14" fill="currentColor" fontWeight="bold">60°</text>
+
+  {/* Triunghiul dreptunghic de lucru (hașurat ușor) */}
+  <path d="M 200 200 L 338.56 120 L 338.56 200 Z" fill="rgba(53, 120, 229, 0.1)" stroke="none" />
+  
+  <text x="250" y="115" fontSize="11" fill="#21e2df">cos</text>
+  <text x="345" y="165" fontSize="11" fill="#e53535">sin</text>
+  <line x1="342" y1="120" x2="342" y2="200" stroke="#e53535" strokeWidth="2" strokeDasharray="2,2" />
+  <line x1="201" y1="120" x2="342" y2="120" stroke="#21e2df" strokeWidth="2" strokeDasharray="2,2" />
+
+  {/* Unghiul de 30 grade */}
+  <text x="220" y="198" fontSize="11" fill="currentColor">30°</text>
+
+  <text x="190" y="198" fontSize="11" fill="currentColor">O</text>
+  <text x="345" y="198" fontSize="11" fill="currentColor">P</text>
+  <text x="340" y="118" fontSize="11" fill="currentColor">A</text>
+  <text x="340" y="288" fontSize="11" fill="currentColor">B</text>
+
+
+</svg>
+
+---
+
+### Demonstrația sinusului și cosinusului de 45 de grade
+
+Pentru un unghi de 45 de grade, se formează un triunghi isoscel dreptunghic, unde cele două catete sunt egale.
+
+$$
+\text{Cateta opusă} = \text{Cateta alăturată} = x = \sin 45^\circ = \cos 45^\circ
+$$
+
+Dacă ipotenuza este 1, atunci conform Teoremei lui Pitagora avem:
+
+$$
+x^2 + x^2 = 1^2 \implies 2x^2 = 1 \implies x^2 = \frac{1}{2} \implies x = \frac{\sqrt{2}}{2}
+$$
+
+<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" style={{ backgroundColor: 'transparent', width: '100%', height: 'auto' }}>
+  {/* Axele de coordonate */}
+  <g stroke="currentColor" strokeWidth="1" opacity="0.3">
+    <line x1="20" y1="200" x2="380" y2="200" /> {/* Axa X */}
+    <line x1="200" y1="20" x2="200" y2="380" />  {/* Axa Y */}
+  </g>
+  <text x="370" y="215" fontSize="12" fill="currentColor" opacity="0.5">cos</text>
+  <text x="205" y="35" fontSize="12" fill="currentColor" opacity="0.5">sin</text>
+
+  {/* Cercul Trigonometric */}
+  <circle cx="200" cy="200" r="160" fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="4,4" opacity="0.2" />
+
+  {/* Coordonate pentru 45 grade: 200 + 160*cos(45) si 200 - 160*sin(45) */}
+  {/* cos(45) = sin(45) = 0.707. 160 * 0.707 = 113.12 */}
+
+  {/* Ipotenuza (Raza OA) */}
+  <line x1="200" y1="200" x2="313.12" y2="86.88" stroke="#3578e5" strokeWidth="3" />
+  
+  {/* Cateta opusă (AB - Sinus) */}
+  <line x1="313.12" y1="86.88" x2="313.12" y2="200" stroke="#e53535" strokeWidth="3" />
+
+  {/* Triunghiul dreptunghic isoscel (hașurat) */}
+  <path d="M 200 200 L 313.12 86.88 L 313.12 200 Z" fill="rgba(53, 120, 229, 0.1)" stroke="none" />
+  
+  {/* Etichete și proiecții */}
+  <text x="245" y="80" fontSize="11" fill="#21e2df">cos 45°</text>
+  <text x="320" y="150" fontSize="11" fill="#e53535">sin 45°</text>
+  
+  {/* Linii de proiecție punctate */}
+  <line x1="317.12" y1="86.88" x2="317.12" y2="200" stroke="#e53535" strokeWidth="2" strokeDasharray="2,2" />
+  <line x1="200" y1="86.88" x2="313.12" y2="86.88" stroke="#21e2df" strokeWidth="2" strokeDasharray="2,2" />
+
+  {/* Unghiul de 45 grade */}
+  <text x="225" y="195" fontSize="11" fill="currentColor">45°</text>
+
+  {/* Marcaje puncte */}
+  <text x="185" y="215" fontSize="11" fill="currentColor">O</text>
+  <text x="313" y="215" fontSize="11" fill="currentColor">B</text>
+  <text x="318" y="82" fontSize="11" fill="currentColor">A</text>
+  
+  {/* Punctul A pe cerc */}
+  <circle cx="313.12" cy="86.88" r="4" fill="#3578e5" />
+</svg>
+
+---
+
+### Demonstrația sinusului și cosinusului de 60 de grade
+
+
+<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" style={{ backgroundColor: 'transparent', width: '100%', height: 'auto' }}>
+  {/* Axele de coordonate */}
+  <g stroke="currentColor" strokeWidth="1" opacity="0.3">
+    <line x1="20" y1="200" x2="380" y2="200" /> {/* Axa X */}
+    <line x1="200" y1="20" x2="200" y2="380" />  {/* Axa Y */}
+  </g>
+  <text x="370" y="215" fontSize="12" fill="currentColor" opacity="0.5">cos</text>
+  <text x="205" y="35" fontSize="12" fill="currentColor" opacity="0.5">sin</text>
+
+  {/* Cercul Trigonometric */}
+  <circle cx="200" cy="200" r="160" fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="4,4" opacity="0.2" />
+
+  {/* Coordonate pentru 60 grade: 
+      x = 200 + 160 * cos(60°) = 200 + 160 * 0.5 = 280
+      y = 200 - 160 * sin(60°) = 200 - 160 * 0.866 = 61.44
+  */}
+
+  {/* Ipotenuza (Raza OA) */}
+  <line x1="200" y1="200" x2="280" y2="61.44" stroke="#3578e5" strokeWidth="3" />
+  <line x1="360" y1="200" x2="280" y2="61.44" stroke="#51582d" strokeWidth="3" />
+  
+  {/* Cateta opusă (AB - Sinus) */}
+  <line x1="280" y1="61.44" x2="280" y2="200" stroke="#e53535" strokeWidth="3" />
+
+  {/* Triunghiul dreptunghic (hașurat) */}
+  <path d="M 200 200 L 280 61.44 L 280 200 Z" fill="rgba(53, 120, 229, 0.1)" stroke="none" />
+  
+  {/* Etichete și proiecții */}
+  <text x="210" y="55" fontSize="11" fill="#21e2df">cos 60°</text>
+  <text x="290" y="160" fontSize="11" fill="#e53535">sin 60°</text>
+  
+  {/* Linii de proiecție punctate */}
+  <line x1="285" y1="61.44" x2="285" y2="200" stroke="#e53535" strokeWidth="2" strokeDasharray="2,2" />
+  <line x1="200" y1="61.44" x2="280" y2="61.44" stroke="#21e2df" strokeWidth="2" strokeDasharray="2,2" />
+
+  {/* Unghiul de 60 grade */}
+  <text x="210" y="195" fontSize="11" fill="currentColor">60°</text>
+
+  {/* Marcaje puncte */}
+  <text x="185" y="215" fontSize="11" fill="currentColor">O</text>
+  <text x="275" y="215" fontSize="11" fill="currentColor">B</text>
+  <text x="275" y="55" fontSize="11" fill="currentColor">A</text>
+  
+  {/* Punctul A pe cerc */}
+  <circle cx="280" cy="61.44" r="4" fill="#3578e5" />
+</svg>

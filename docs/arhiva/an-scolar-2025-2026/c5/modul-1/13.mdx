@@ -1,0 +1,147 @@
+---
+sidebar_position: -1
+slug: /c5/modul-1/13
+description: ""
+---
+
+# C11 - Compararea nr. ridicate la o putere și pătratul perfect
+---
+:::danger De retinut
+Numărul natural $a$ se numește **baza puterii**, iar numărul natural $n$ se numește **exponentul**.
+:::
+
+### Exemple
+
+$$
+2^3 = 2 \cdot 2 \cdot 2 = 8
+$$
+
+$$
+3^4 = 3 \cdot 3 \cdot 3 \cdot 3 = 81
+$$
+
+Dacă $a \ne 0$, atunci:
+
+$$
+a^0 = 1 \quad \text{și} \quad a^1 = a
+$$
+
+Exemple:
+
+$$
+5^0 = 1, \quad 5^1 = 5
+$$
+
+:::danger De retinut
+**Observație:** Operația $0^0$ nu este definită.
+:::
+
+:::info Proprietati
+Operația prin care calculăm o putere se numește **ridicare la putere** sau **exponentiere**.
+
+Ridicarea la putere este o **operație de ordinul al treilea**, de aceea se efectuează **înaintea** adunărilor, scăderilor, înmulțirilor și împărțirilor.
+
+Dacă în exercițiu apar paranteze, se efectuează mai întâi operațiile din **parantezele rotunde**, apoi cele din **parantezele pătrate**, iar la final cele din **parantezele acolade**.
+:::
+### Exemple
+
+$1)$  
+
+$
+6^2 : 3 - 9^0 + 2^5 = 
+$
+
+Se efectuează ridicările la putere:  
+$6^2 = 6 \cdot 6 = 36$, $9^0 = 1$, $2^5 = 2 \cdot 2 \cdot 2 \cdot 2 \cdot 2 = 32$
+
+Înlocuim rezultatele în exercițiu:  
+$36 : 3 - 1 + 32 = 12 - 1 + 32 = 43$
+
+---
+
+$2)$ 
+
+$
+[(3^2 + 3^0)^3 - 125 \cdot 2^3] \cdot 12^3 =
+$
+
+Se efectuează operațiile din parantezele rotunde:  
+$3^2 + 3^0 = 9 + 1 = 10$
+
+Deci:
+$$
+[10^3 - 125 \cdot 2^3] \cdot 12^3 = [1000 - 125 \cdot 8] \cdot 12^3 = [1000 - 1000] \cdot 12^3 = 0 \cdot 12^3 = 0
+$$
+
+---
+
+## Compararea puterilor
+
+### Puteri cu aceeași bază
+
+:::info Proprietate
+Dintre două puteri cu aceeași bază, este mai mare cea cu **exponentul mai mare**. 
+:::
+
+**Exemplu:**  
+$5^{10} < 5^{12}$, deoarece $10 < 12$.
+
+---
+
+### Puteri cu același exponent
+
+:::info Proprietate
+Dintre două puteri cu același exponent, este mai mare cea cu **baza mai mare**.  
+:::
+
+**Exemplu:**  
+$3^{18} > 3^{10}$, deoarece $18 > 10$.
+
+---
+
+### Puteri cu baze și exponenți diferiți
+
+:::info Proprietate
+Dacă bazele și exponenții sunt diferiți, se încearcă aducerea lor la aceeași bază sau la același exponent (folosind regulile de calcul), apoi se compară.
+:::
+
+**Exemplu:**
+
+$32^4 > 16^{3}$, deoarece $16^{3} = (2^4)^{3} = 2^{12}$ și $32^4 = (2^5)^4 = 2^{20}$; iar $2^{20} > 2^{12}$.
+
+
+:::info Observație
+
+Pentru numere mai mici, se pot calcula efectiv puterile și apoi compara rezultatele.
+
+:::
+
+---
+
+## Pătrat perfect
+
+:::tip Definitie
+Un număr natural $p$ se numește **număr pătrat** sau **pătrat perfect**, dacă se poate scrie sub forma:
+
+$$
+p = a^2
+$$
+
+:::
+
+**Exemple:**  
+$36$ este un număr pătrat, deoarece se poate scrie $36 = 6^2$.  
+$100$ este un număr pătrat, deoarece se poate scrie $100 = 10^2$.
+
+:::danger De reținut
+Numerele pătrate până la 100 sunt:  
+
+$$
+0, 1, 4, 9, 16, 25, 36, 49, 64, 81, 100
+$$
+
+**Observație:**  
+Ultima cifră a unui număr pătrat poate fi doar 0, 1, 4, 5, 6 sau 9.
+:::
+
+---

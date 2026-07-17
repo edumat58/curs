@@ -1,0 +1,190 @@
+---
+sidebar_position: 7
+slug: /c5/modul-3/06
+description: ""
+---
+
+# C20.1 - Cel mai mare divizor comun a două numere naturale
+
+---
+
+:::tip Definitie
+Cel mai mare divizor comun pentru două sau mai multe numere naturale reprezintă **cel mai mare număr natural care divide numerele date** și care este divizibil cu toți ceilalți divizori comuni.  
+
+Pentru numerele $a$ și $b$ se notează cel mai mare divizor comun al lor cu:
+
+$$
+(a, b)
+$$
+
+:::
+
+$D_{12} = \{1, 2, 3, 4, 6, 12\}$ – mulțimea divizorilor lui 12  
+$D_{18} = \{1, 2, 3, 6, 9, 18\}$ – mulțimea divizorilor lui 18  
+
+$$
+D_{12} \cap D_{18} = \{1, 2, 3, 6\}
+$$
+
+Cel mai mare este 6, deci:
+
+$$
+(12, 18) = 6
+$$
+
+> Observăm că 6 este divizibil cu ceilalți divizori comuni.
+
+
+---
+
+## Algoritmul de determinare
+
+:::danger De retinut
+Pentru a determina **cel mai mare divizor comun** pentru două sau mai multe numere naturale procedăm astfel:
+
+1. Descompunem numerele date în produs de puteri de numere prime.  
+2. Cel mai mare divizor comun (**c.m.m.d.c.**) va fi egal cu **produsul factorilor comuni**, luați o singură dată, cu **exponentul cel mai mic**.
+:::
+
+Reluăm exemplul de mai sus:
+
+$$
+12 = 2^2 \cdot 3, \quad 18 = 2 \cdot 3^2
+$$
+
+Factorii comuni sunt $2$ și $3$.  
+La fiecare luăm în considerare exponentul cel mai mic, deci:
+
+$$
+(12, 18) = 2 \cdot 3 = 6
+$$
+
+
+---
+
+## <span style={{backgroundColor: '#ff9800', color: 'white', padding: '4px 8px', borderRadius: '4px'}}>Observă și descoperă!</span>
+
+:::note Exercițiul 1
+Lucrați în perechi. Reproduceți tabelul, apoi completați-l.
+:::
+
+| $a$ | $b$ | Divizorii lui $a$ | Divizorii lui $b$ | Divizorii care apar și la $a$ și la $b$ (divizorii comuni ai lui $a$ și $b$) | Cel mai mare dintre divizorii comuni | Divizorii celui mai mare divizor comun |
+| :---: | :---: | :--- | :--- | :--- | :--- | :--- |
+| 12 | 18 | 1, 2, 3, 4, 6, 12 | 1, 2, 3, 6, 9, 18 | 1, 2, 3, 6 | 6 | 1, 2, 3, 6 |
+| 16 | 24 | | | | | |
+| 20 | 30 | | | | | |
+| 14 | 27 | | | | | |
+
+* Ce observați la numerele din coloanele 5 și 6? Dar la numerele din coloanele 5 și 7?
+
+:::warning[Important]
+* Oricare două numere naturale nenule au cel puțin un divizor comun. Acesta este 1.
+* Dintre toți divizorii comuni ai unor numere naturale nenule, există un divizor care se divide cu toți ceilalți divizori comuni. Acesta se numește **cel mai mare divizor comun**.
+* Cel mai mare divizor comun al numerelor naturale nenule $a$ și $b$ se notează **c.m.m.d.c.** al numerelor $a$ și $b$ sau $(a, b)$.
+* Două numere naturale nenule care au ca divizor comun numai pe 1 se numesc **numere prime între ele** sau **numere relativ prime**.
+:::
+
+## <span style={{backgroundColor: '#e65100', color: 'white', padding: '4px 8px', borderRadius: '4px'}}>Exersează!</span>
+
+**2.** Determină cel mai mare divizor comun al numerelor:
+a) 4 și 6; &nbsp; b) 15 și 9; &nbsp; c) 8 și 20; &nbsp; d) 30 și 45; &nbsp; e) 18 și 27.
+
+**3.** Stabilește dacă numerele următoare sunt prime între ele:
+a) 4 și 9; &nbsp; b) 15 și 28; &nbsp; c) 24 și 25; &nbsp; d) 14 și 15.
+
+**4.** Pentru fracțiile $\frac{1}{8}, \frac{5}{4}$ și $\frac{2}{7}$, completează un tabel asemănător celui de mai jos.
+
+| $\frac{a}{b}$ | $c = a \cdot 3$ | $d = b \cdot 3$ | $\frac{c}{d}$ | Stabilește dacă fracțiile din coloanele 1 și 4 sunt echivalente |
+| :---: | :---: | :---: | :---: | :---: |
+| $\frac{2}{5}$ | 6 | 15 | $\frac{6}{15}$ | $\frac{2}{5} = \frac{6}{15}$ |
+
+**5.**
+**a)** Completează, pe caiet, casetele cu numerele potrivite.
+
+<svg width="600" height="120" viewBox="0 0 600 120" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#e65100" />
+    </marker>
+  </defs>
+
+  <g transform="translate(0, 20)">
+    <text x="10" y="25" fontSize="20" fontFamily="serif" fill="black">3</text>
+    <line x1="5" y1="35" x2="25" y2="35" stroke="black" strokeWidth="1" />
+    <text x="10" y="55" fontSize="20" fontFamily="serif" fill="black">5</text>
+
+    <line x1="35" y1="20" x2="75" y2="20" stroke="#e65100" strokeWidth="1.5" markerEnd="url(#arrow)" />
+    <text x="45" y="15" fontSize="12" fill="black">· 2</text>
+    
+    <line x1="35" y1="50" x2="75" y2="50" stroke="#e65100" strokeWidth="1.5" markerEnd="url(#arrow)" />
+    <text x="45" y="65" fontSize="12" fill="black">· 2</text>
+
+    <rect x="85" y="5" width="25" height="25" fill="#ffe0b2" stroke="#e65100" />
+    <line x1="80" y1="35" x2="115" y2="35" stroke="black" strokeWidth="1" />
+    <rect x="85" y="40" width="25" height="25" fill="#ffe0b2" stroke="#e65100" />
+  </g>
+
+  <g transform="translate(200, 20)">
+    <text x="10" y="25" fontSize="20" fontFamily="serif" fill="black">3</text>
+    <line x1="5" y1="35" x2="25" y2="35" stroke="black" strokeWidth="1" />
+    <text x="10" y="55" fontSize="20" fontFamily="serif" fill="black">5</text>
+
+    <line x1="35" y1="20" x2="75" y2="20" stroke="#e65100" strokeWidth="1.5" markerEnd="url(#arrow)" />
+    <text x="45" y="15" fontSize="12" fill="black">· 4</text>
+    
+    <line x1="35" y1="50" x2="75" y2="50" stroke="#e65100" strokeWidth="1.5" markerEnd="url(#arrow)" />
+    <text x="45" y="65" fontSize="12" fill="black">· 4</text>
+
+    <rect x="85" y="5" width="25" height="25" fill="#ffe0b2" stroke="#e65100" />
+    <line x1="80" y1="35" x2="115" y2="35" stroke="black" strokeWidth="1" />
+    <rect x="85" y="40" width="25" height="25" fill="#ffe0b2" stroke="#e65100" />
+  </g>
+
+  <g transform="translate(400, 20)">
+    <text x="10" y="25" fontSize="20" fontFamily="serif" fill="black">3</text>
+    <line x1="5" y1="35" x2="25" y2="35" stroke="black" strokeWidth="1" />
+    <text x="10" y="55" fontSize="20" fontFamily="serif" fill="black">5</text>
+
+    <line x1="35" y1="20" x2="75" y2="20" stroke="#e65100" strokeWidth="1.5" markerEnd="url(#arrow)" />
+    <text x="45" y="15" fontSize="12" fill="black">· 5</text>
+    
+    <line x1="35" y1="50" x2="75" y2="50" stroke="#e65100" strokeWidth="1.5" markerEnd="url(#arrow)" />
+    <text x="45" y="65" fontSize="12" fill="black">· 5</text>
+
+    <rect x="85" y="5" width="25" height="25" fill="#ffe0b2" stroke="#e65100" />
+    <line x1="80" y1="35" x2="115" y2="35" stroke="black" strokeWidth="1" />
+    <rect x="85" y="40" width="25" height="25" fill="#ffe0b2" stroke="#e65100" />
+  </g>
+</svg>
+
+**b)** Stabilește care dintre fracțiile obținute mai sus sunt echivalente cu fracția $\frac{3}{5}$.
+
+**6.**
+**a)** Completează, pe caiet, casetele cu numerele potrivite.
+**b)** Verifică dacă fracția obținută este echivalentă cu fracția $\frac{2}{7}$.
+
+<svg width="200" height="100" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow2" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#e65100" />
+    </marker>
+  </defs>
+
+  <g transform="translate(0, 20)">
+    <text x="10" y="25" fontSize="20" fontFamily="serif" fill="black">2</text>
+    <line x1="5" y1="35" x2="25" y2="35" stroke="black" strokeWidth="1" />
+    <text x="10" y="55" fontSize="20" fontFamily="serif" fill="black">7</text>
+
+    <line x1="35" y1="20" x2="75" y2="20" stroke="#e65100" strokeWidth="1.5" markerEnd="url(#arrow2)" />
+    <text x="45" y="15" fontSize="12" fill="black">+ 3</text>
+    
+    <line x1="35" y1="50" x2="75" y2="50" stroke="#e65100" strokeWidth="1.5" markerEnd="url(#arrow2)" />
+    <text x="45" y="65" fontSize="12" fill="black">+ 3</text>
+
+    <rect x="85" y="5" width="25" height="25" fill="#ffe0b2" stroke="#e65100" />
+    <line x1="80" y1="35" x2="115" y2="35" stroke="black" strokeWidth="1" />
+    <rect x="85" y="40" width="25" height="25" fill="#ffe0b2" stroke="#e65100" />
+  </g>
+</svg>
+
+---
