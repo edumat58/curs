@@ -710,27 +710,25 @@ main {
   color: inherit;
 }
 /* ============================================================
-   EDUMAT v2 — identitatea familiei Kulturosfera, axată pe portocaliu.
-   Crom întunecat (navbar/footer), conținutul lecțiilor pe hârtie caldă —
-   lecțiile NU se ating; stratul de mai jos schimbă doar cromul.
+   EDUMAT v2 — identitatea Kulturosfera pe portocaliu, LIGHT MODE peste tot.
+   Crem-alb cald în loc de alb pur; conținutul lecțiilor rămâne neatins.
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap');
 
 :root {
-  /* tokenii familiei */
-  --km-bg0: #0c0e10;
-  --km-bg1: #14171a;
-  --km-raised: #edece7;
-  --km-ink: #f4f4f2;
-  --km-ink2: #a8aeb2;
-  --km-ink3: #666d72;
-  --km-line: rgba(25, 27, 29, 0.14);
-  --km-line-dark: rgba(244, 244, 242, 0.12);
+  /* tokenii familiei — varianta pe hârtie crem */
+  --km-cream: #f9f5ec;      /* fundalul paginii */
+  --km-cream-2: #fffcf5;    /* suprafețe ridicate (navbar, card, bară) */
+  --km-cream-3: #f1ecdf;    /* apăsat / hover */
+  --km-ink: #1c1a16;
+  --km-ink2: #4f4b43;
+  --km-ink3: #8b857a;
+  --km-line: rgba(28, 26, 22, 0.14);
   --km-orange: #e8590c;
   --km-orange-deep: #c2540a;
+  --km-raised: var(--km-cream-3);
 
-  /* portocaliul edumat, recalibrat pe accentul familiei */
   --ifm-color-primary: #c2540a;
   --ifm-color-primary-dark: #ae4b09;
   --ifm-color-primary-darker: #a44708;
@@ -739,54 +737,75 @@ main {
   --ifm-color-primary-lighter: #e8590c;
   --ifm-color-primary-lightest: #f06d24;
 
-  /* hârtia caldă a lecțiilor (ca în educode) */
-  --ifm-background-color: #f7f6f2;
-  --ifm-background-surface-color: #ffffff;
-  --ifm-font-color-base: #191b1d;
+  --ifm-background-color: var(--km-cream);
+  --ifm-background-surface-color: var(--km-cream-2);
+  --ifm-font-color-base: var(--km-ink);
   --ifm-heading-font-family: 'Space Grotesk', system-ui, sans-serif;
-  --ifm-navbar-background-color: var(--km-bg0);
+  --ifm-navbar-background-color: var(--km-cream-2);
   --ifm-navbar-link-color: var(--km-ink);
   --ifm-navbar-height: 4.25rem;
-  --ifm-footer-background-color: var(--km-bg0);
+  --ifm-footer-background-color: var(--km-cream-3);
   --ifm-footer-color: var(--km-ink2);
   --ifm-footer-link-color: var(--km-ink2);
   --ifm-footer-title-color: var(--km-ink);
 }
 
-/* --- navbar: crom întunecat cu hairline --- */
+/* --- navbar: bară plină crem, hairline, fără pastilă --- */
 .navbar {
-  border-bottom: 1px solid var(--km-line-dark);
+  position: sticky;
+  top: 0;
+  left: 0;
+  transform: none;
+  width: 100%;
+  max-width: none;
+  border-radius: 0;
+  padding: 0 1.25rem;
+  background: var(--km-cream-2);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   box-shadow: none;
-  color: var(--km-ink);
+  border-bottom: 1px solid var(--km-line);
+  min-height: var(--ifm-navbar-height);
+  height: var(--ifm-navbar-height);
 }
-.navbar .navbar__link {
+.navbar__item {
   font-family: 'Space Grotesk', system-ui, sans-serif;
   font-weight: 500;
+  color: var(--km-ink2);
+  border-radius: 8px;
 }
-.navbar .navbar__link:hover,
-.navbar .navbar__link--active {
-  color: var(--km-orange);
+.navbar__item:hover,
+.navbar__link:hover {
+  color: var(--km-ink);
+  background-color: rgba(28, 26, 22, 0.05);
 }
-.navbar .navbar__toggle,
+.navbar__link--active {
+  color: var(--km-orange-deep) !important;
+  background-color: rgba(232, 89, 12, 0.1);
+}
+.navbar__toggle,
 .navbar .clean-btn {
   color: var(--km-ink);
 }
+.navbar__title {
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-weight: 700;
+  color: var(--km-ink);
+  letter-spacing: -0.01em;
+}
 .navbar-sidebar {
-  background: var(--km-bg0);
-}
-.navbar-sidebar .menu__link {
-  color: var(--km-ink2);
+  background: var(--km-cream-2);
 }
 
-/* --- footer --- */
+/* --- footer: crem, text cald --- */
 .footer {
-  border-top: 1px solid var(--km-line-dark);
+  border-top: 1px solid var(--km-line);
 }
 
-/* --- sidebar docs: hârtie, accent portocaliu --- */
+/* --- sidebar docs --- */
 .theme-doc-sidebar-container {
   border-right: 1px solid var(--km-line) !important;
-  background: #f2f1ec;
+  background: var(--km-cream);
 }
 .menu__link {
   font-size: 0.86rem;
@@ -794,14 +813,14 @@ main {
 }
 .menu__link--active {
   color: var(--km-orange-deep);
-  background: rgba(232, 89, 12, 0.08);
+  background: rgba(232, 89, 12, 0.09);
   font-weight: 700;
 }
 .menu__link--active:hover {
   color: var(--km-orange-deep);
 }
 
-/* --- conținut: titluri Space Grotesk, ritm calm --- */
+/* --- conținut --- */
 .markdown h1,
 .markdown h2,
 .markdown h3 {
@@ -812,17 +831,14 @@ main {
   color: var(--km-orange-deep);
 }
 
-/* --- paginarea implicită dispare: o înlocuiește bara de jos --- */
+/* paginarea implicită dispare: o înlocuiește bara de jos */
 .pagination-nav {
   display: none;
 }
-
-/* loc pentru bara fixă de lecții */
 .theme-doc-markdown {
   padding-bottom: 4.5rem;
 }
 
-/* --- butoane: portocaliu plat, fără umbre lucioase --- */
 .button--primary {
   background: var(--km-orange);
   border-color: var(--km-orange);
@@ -832,55 +848,7 @@ main {
   border-color: var(--km-orange-deep);
 }
 
-/* --- navbar v2: bară plină, întunecată, cu hairline (înlocuiește pastila) --- */
-.navbar {
-  position: sticky;
-  top: 0;
-  left: 0;
-  transform: none;
-  width: 100%;
-  max-width: none;
-  border-radius: 0;
-  padding: 0 1.25rem;
-  background: var(--km-bg0);
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-  box-shadow: none;
-  border-bottom: 1px solid var(--km-line-dark);
-  min-height: var(--ifm-navbar-height);
-  height: var(--ifm-navbar-height);
-}
-.navbar__item {
-  color: var(--km-ink2);
-  border-radius: 8px;
-}
-.navbar__item:hover,
-.navbar__link:hover {
-  color: var(--km-ink);
-  background-color: rgba(244, 244, 242, 0.06);
-}
-.navbar__link--active {
-  color: var(--km-orange) !important;
-  background-color: rgba(232, 89, 12, 0.14);
-}
-.navbar__toggle {
-  color: var(--km-ink);
-}
-/* lockup-ul: text alb cald pe cromul întunecat */
-.navbar__brand,
-.navbar__brand:hover {
-  color: var(--km-ink);
-}
 /* fără compensările pastilei plutitoare */
-.main-wrapper,
-main {
-  padding-top: 0 !important;
-}
-article {
-  padding-top: 1rem !important;
-}
-
-/* --- v2: anulează pastila și compensările și pe mobil --- */
 @media (max-width: 996px) {
   .navbar {
     top: 0;
@@ -889,7 +857,7 @@ article {
     width: 100%;
     max-width: none;
     border-radius: 0;
-    background: var(--km-bg0);
+    background: var(--km-cream-2);
     box-shadow: none;
   }
   main {
@@ -898,4 +866,7 @@ article {
 }
 main {
   padding-top: 0 !important;
+}
+article {
+  padding-top: 1rem !important;
 }

@@ -121,7 +121,11 @@ function letterM() {
 function letterA({ star = false } = {}) {
   const stem = rect(2 * R - STEM, X, STEM, B - X)
   let d = annulus(R) + ' ' + stem
-  if (star) d += ' ' + star4(R + OFF, CY, 14, 9)
+  if (star) {
+    // steluțele Kulturosfera: brațe zvelte (talie mică) — scânteie, nu shuriken
+    d += ' ' + star4(R + OFF, CY + 2, 15, 4.5)
+    d += ' ' + star4(R + OFF + 11, CY - 12, 6, 1.8)
+  }
   return { w: 2 * R, d }
 }
 

@@ -128,7 +128,7 @@ const config = {
       },
     },
     navbar: {
-      title: '',
+      title: 'Edumat58',
       logo: {
         alt: 'My Site Logo',
         src: 'img/logo.png',
