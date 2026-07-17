@@ -936,3 +936,13 @@ html.docs-doc-page[class*='docs-doc-id'] .main-wrapper {
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
 }
+
+/* formulele display ($$...$$) din titluri stau inline în cuprins */
+.table-of-contents .katex-display {
+  display: inline;
+  margin: 0;
+}
+.table-of-contents .katex-display > .katex {
+  display: inline;
+  white-space: normal;
+}

@@ -2,60 +2,37 @@
  * Reparații de crom la runtime:
  *
  * 1. KaTeX în cuprins — Docusaurus extrage textul titlurilor ÎNAINTE de
- *    rehype-katex, așa că formulele ajung în TOC ca sursă brută
- *    („\dfrac{2}{5}"). Randăm aici fragmentele LaTeX din linkurile de
- *    cuprins, fără să atingem conținutul lecției.
+ *    rehype-katex, așa că formulele ajung în TOC ca text brut (cu sau fără
+ *    backslash: „\\dfrac{2}{5}", „(-3)^{13}", „2:3:7"). În loc să ghicim
+ *    delimitatorii pierduți, copiem în linkul de cuprins chiar HTML-ul
+ *    titlului deja randat din pagină (ancora #... a linkului duce fix la el).
+ *    Conținutul lecției nu e atins.
  * 2. Butonul-ochi din navbar (ascunde bara de navigație) — ținem atributul
  *    data-hidden sincron cu localStorage, ca iconița să reflecte starea.
  */
 
-import katex from 'katex';
 import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
-
-const LATEX_FRAGMENT = /\\[a-zA-Z]+(?:\s*\{[^{}]*\})*/g;
 
 function renderTocMath() {
   document.querySelectorAll('.table-of-contents__link').forEach((link) => {
-    if (link.dataset.mathRendered === 'true') return;
-    if (!link.textContent.includes('\\')) return;
-
-    const walker = document.createTreeWalker(link, NodeFilter.SHOW_TEXT);
-    const textNodes = [];
-    while (walker.nextNode()) {
-      if (walker.currentNode.nodeValue.includes('\\')) {
-        textNodes.push(walker.currentNode);
-      }
+    const href = link.getAttribute('href') || '';
+    const hashIndex = href.indexOf('#');
+    if (hashIndex === -1) return;
+    let id = href.slice(hashIndex + 1);
+    try {
+      id = decodeURIComponent(id);
+    } catch {
+      // id-ul rămâne cum e
     }
+    const heading = document.getElementById(id);
+    if (!heading || !heading.querySelector('.katex')) return;
 
-    textNodes.forEach((node) => {
-      const text = node.nodeValue;
-      LATEX_FRAGMENT.lastIndex = 0;
-      if (!LATEX_FRAGMENT.test(text)) return;
-      LATEX_FRAGMENT.lastIndex = 0;
-
-      const frag = document.createDocumentFragment();
-      let last = 0;
-      let m;
-      while ((m = LATEX_FRAGMENT.exec(text)) !== null) {
-        if (m.index > last) {
-          frag.appendChild(document.createTextNode(text.slice(last, m.index)));
-        }
-        const span = document.createElement('span');
-        try {
-          katex.render(m[0], span, { throwOnError: true });
-          frag.appendChild(span);
-        } catch (e) {
-          frag.appendChild(document.createTextNode(m[0]));
-        }
-        last = m.index + m[0].length;
-      }
-      if (last < text.length) {
-        frag.appendChild(document.createTextNode(text.slice(last)));
-      }
-      node.parentNode.replaceChild(frag, node);
-    });
-
-    link.dataset.mathRendered = 'true';
+    const clone = heading.cloneNode(true);
+    clone.querySelectorAll('a, button').forEach((el) => el.remove());
+    const html = clone.innerHTML.trim();
+    if (!html || link.dataset.mathHtml === html) return;
+    link.innerHTML = html;
+    link.dataset.mathHtml = html;
   });
 }
 
