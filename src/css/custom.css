@@ -652,3 +652,250 @@ main {
     display: none !important;
   }
 }
+
+/* ============================================
+   CUSTOM ADMONITION: EDUMAT
+   ============================================ */
+
+/* Target the class Docusaurus actually adds: theme-admonition-edumat */
+.theme-admonition-edumat {
+  /* Reset default alert properties (overriding alert--info) */
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  margin-bottom: 1rem;
+  padding: 0 !important;
+}
+
+/* 
+   User wants the title to look like:
+   <span style={{backgroundColor: '#e65100', color: 'white', padding: '4px 8px', borderRadius: '4px'}}>Text</span>
+*/
+
+/* Target the heading container. Using specific selector for theme-admonition-edumat */
+.theme-admonition-edumat [class*="admonitionHeading"] {
+  display: inline-block !important;
+  background-color: #e65100 !important;
+  color: white !important;
+  padding: 4px 8px !important;
+  border-radius: 4px !important;
+  font-size: 0.9em;
+  font-weight: 600;
+  margin-bottom: 5px;
+  line-height: normal;
+}
+
+/* Ensure the heading text itself inherits the white color */
+.theme-admonition-edumat [class*="admonitionHeading"] * {
+  color: white !important;
+  margin: 0;
+}
+
+/* Hide default icon if present in the heading */
+.theme-admonition-edumat [class*="admonitionHeading"] svg {
+  display: none !important;
+}
+
+/* Remove any generated content borders/backgrounds */
+.theme-admonition-edumat::before,
+.theme-admonition-edumat::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* Content styling */
+.theme-admonition-edumat [class*="admonitionContent"] {
+  padding: 0 !important;
+  margin-top: 4px;
+  color: inherit;
+}
+/* ============================================================
+   EDUMAT v2 — identitatea familiei Kulturosfera, axată pe portocaliu.
+   Crom întunecat (navbar/footer), conținutul lecțiilor pe hârtie caldă —
+   lecțiile NU se ating; stratul de mai jos schimbă doar cromul.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap');
+
+:root {
+  /* tokenii familiei */
+  --km-bg0: #0c0e10;
+  --km-bg1: #14171a;
+  --km-raised: #edece7;
+  --km-ink: #f4f4f2;
+  --km-ink2: #a8aeb2;
+  --km-ink3: #666d72;
+  --km-line: rgba(25, 27, 29, 0.14);
+  --km-line-dark: rgba(244, 244, 242, 0.12);
+  --km-orange: #e8590c;
+  --km-orange-deep: #c2540a;
+
+  /* portocaliul edumat, recalibrat pe accentul familiei */
+  --ifm-color-primary: #c2540a;
+  --ifm-color-primary-dark: #ae4b09;
+  --ifm-color-primary-darker: #a44708;
+  --ifm-color-primary-darkest: #873a07;
+  --ifm-color-primary-light: #d75d0b;
+  --ifm-color-primary-lighter: #e8590c;
+  --ifm-color-primary-lightest: #f06d24;
+
+  /* hârtia caldă a lecțiilor (ca în educode) */
+  --ifm-background-color: #f7f6f2;
+  --ifm-background-surface-color: #ffffff;
+  --ifm-font-color-base: #191b1d;
+  --ifm-heading-font-family: 'Space Grotesk', system-ui, sans-serif;
+  --ifm-navbar-background-color: var(--km-bg0);
+  --ifm-navbar-link-color: var(--km-ink);
+  --ifm-navbar-height: 4.25rem;
+  --ifm-footer-background-color: var(--km-bg0);
+  --ifm-footer-color: var(--km-ink2);
+  --ifm-footer-link-color: var(--km-ink2);
+  --ifm-footer-title-color: var(--km-ink);
+}
+
+/* --- navbar: crom întunecat cu hairline --- */
+.navbar {
+  border-bottom: 1px solid var(--km-line-dark);
+  box-shadow: none;
+  color: var(--km-ink);
+}
+.navbar .navbar__link {
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-weight: 500;
+}
+.navbar .navbar__link:hover,
+.navbar .navbar__link--active {
+  color: var(--km-orange);
+}
+.navbar .navbar__toggle,
+.navbar .clean-btn {
+  color: var(--km-ink);
+}
+.navbar-sidebar {
+  background: var(--km-bg0);
+}
+.navbar-sidebar .menu__link {
+  color: var(--km-ink2);
+}
+
+/* --- footer --- */
+.footer {
+  border-top: 1px solid var(--km-line-dark);
+}
+
+/* --- sidebar docs: hârtie, accent portocaliu --- */
+.theme-doc-sidebar-container {
+  border-right: 1px solid var(--km-line) !important;
+  background: #f2f1ec;
+}
+.menu__link {
+  font-size: 0.86rem;
+  border-radius: 8px;
+}
+.menu__link--active {
+  color: var(--km-orange-deep);
+  background: rgba(232, 89, 12, 0.08);
+  font-weight: 700;
+}
+.menu__link--active:hover {
+  color: var(--km-orange-deep);
+}
+
+/* --- conținut: titluri Space Grotesk, ritm calm --- */
+.markdown h1,
+.markdown h2,
+.markdown h3 {
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  letter-spacing: -0.01em;
+}
+.markdown a {
+  color: var(--km-orange-deep);
+}
+
+/* --- paginarea implicită dispare: o înlocuiește bara de jos --- */
+.pagination-nav {
+  display: none;
+}
+
+/* loc pentru bara fixă de lecții */
+.theme-doc-markdown {
+  padding-bottom: 4.5rem;
+}
+
+/* --- butoane: portocaliu plat, fără umbre lucioase --- */
+.button--primary {
+  background: var(--km-orange);
+  border-color: var(--km-orange);
+}
+.button--primary:hover {
+  background: var(--km-orange-deep);
+  border-color: var(--km-orange-deep);
+}
+
+/* --- navbar v2: bară plină, întunecată, cu hairline (înlocuiește pastila) --- */
+.navbar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  transform: none;
+  width: 100%;
+  max-width: none;
+  border-radius: 0;
+  padding: 0 1.25rem;
+  background: var(--km-bg0);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: none;
+  border-bottom: 1px solid var(--km-line-dark);
+  min-height: var(--ifm-navbar-height);
+  height: var(--ifm-navbar-height);
+}
+.navbar__item {
+  color: var(--km-ink2);
+  border-radius: 8px;
+}
+.navbar__item:hover,
+.navbar__link:hover {
+  color: var(--km-ink);
+  background-color: rgba(244, 244, 242, 0.06);
+}
+.navbar__link--active {
+  color: var(--km-orange) !important;
+  background-color: rgba(232, 89, 12, 0.14);
+}
+.navbar__toggle {
+  color: var(--km-ink);
+}
+/* lockup-ul: text alb cald pe cromul întunecat */
+.navbar__brand,
+.navbar__brand:hover {
+  color: var(--km-ink);
+}
+/* fără compensările pastilei plutitoare */
+.main-wrapper,
+main {
+  padding-top: 0 !important;
+}
+article {
+  padding-top: 1rem !important;
+}
+
+/* --- v2: anulează pastila și compensările și pe mobil --- */
+@media (max-width: 996px) {
+  .navbar {
+    top: 0;
+    left: 0;
+    transform: none;
+    width: 100%;
+    max-width: none;
+    border-radius: 0;
+    background: var(--km-bg0);
+    box-shadow: none;
+  }
+  main {
+    padding-top: 0 !important;
+  }
+}
+main {
+  padding-top: 0 !important;
+}

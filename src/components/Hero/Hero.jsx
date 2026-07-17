@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import clsx from 'clsx';
+import { EdumatWordmark, KulturosferaLine } from '@site/src/components/Brand';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './Hero.module.css';
@@ -80,8 +81,25 @@ export default function Hero() {
             <canvas ref={canvasRef} className={styles.canvasBackground} />
             <div className={styles.heroOverlay}></div>
             <div className={clsx('container', styles.heroContent)}>
-                <h1 className={styles.heroTitle}>
-                    {siteConfig.title}
+                <h1 className={styles.heroTitle} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 }}>
+                    <span
+                        style={{
+                            fontFamily: "'Space Grotesk', system-ui, sans-serif",
+                            fontWeight: 700,
+                            fontSize: '0.85rem',
+                            letterSpacing: '0.22em',
+                            color: '#fff',
+                        }}
+                    >
+                        KULTUROSFERA
+                    </span>
+                    <KulturosferaLine width={110} />
+                    <span style={{ color: '#fff', marginTop: 6 }}>
+                        <EdumatWordmark width={340} />
+                    </span>
+                    <span style={{ position: 'absolute', width: 1, height: 1, overflow: 'hidden', clip: 'rect(0 0 0 0)' }}>
+                        {siteConfig.title}
+                    </span>
                 </h1>
                 <SplitText
                     text={siteConfig.tagline}

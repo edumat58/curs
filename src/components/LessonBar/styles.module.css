@@ -1,0 +1,99 @@
+/* Bara de lecții — limbajul educode: suprafețe plate, hairline, portocaliu. */
+
+.bar {
+  position: fixed;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 190;
+  background: var(--ifm-background-surface-color, #fff);
+  border-top: 1px solid var(--km-line);
+  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.inner {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: flex;
+  align-items: stretch;
+  gap: 0.5rem;
+  padding: 0.6rem 0.75rem;
+}
+
+.navBtn {
+  flex: 1 1 0;
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.55rem 0.8rem;
+  border-radius: 10px;
+  border: 1px solid var(--km-line);
+  background: var(--km-raised);
+  color: var(--ifm-font-color-base);
+  font-weight: 700;
+  font-size: 0.82rem;
+  text-decoration: none;
+}
+
+.navBtn:hover {
+  text-decoration: none;
+  color: var(--ifm-font-color-base);
+  border-color: var(--km-orange);
+}
+
+.navRight {
+  justify-content: flex-end;
+}
+
+.disabled {
+  opacity: 0.35;
+}
+
+.arrow {
+  flex-shrink: 0;
+  font-size: 0.95rem;
+}
+
+.btnTitle {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.btnShort {
+  display: none;
+}
+
+.cuprinsBtn {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.55rem 0.9rem;
+  border-radius: 10px;
+  background: var(--km-orange);
+  border: 1px solid var(--km-orange);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.82rem;
+  text-decoration: none;
+}
+
+.cuprinsBtn:hover {
+  color: #fff;
+  text-decoration: none;
+  filter: brightness(1.08);
+}
+
+.layersIcon {
+  display: inline-flex;
+}
+
+@media (max-width: 640px) {
+  .btnTitle {
+    display: none;
+  }
+  .btnShort {
+    display: inline;
+  }
+}

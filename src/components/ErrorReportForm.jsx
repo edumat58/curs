@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 // Backend endpoint configuration
-const EMAIL_BACKEND_URL = 'https://backend-nmxw515k4-deussebyum11724s-projects.vercel.app/send-error-report';
+// Aliasul STABIL al proiectului (nu URL de deployment — acela îngheață env-urile vechi).
+const EMAIL_BACKEND_URL = 'https://backend-deussebyum11724s-projects.vercel.app/send-error-report';
 
 const Overlay = styled.div`
   position: fixed;

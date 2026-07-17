@@ -48,6 +48,10 @@ const config = {
         docs: {
           remarkPlugins: [math],
           rehypePlugins: [katex],
+          admonitions: {
+            keywords: ['edumat'],
+            extendDefaults: true,
+          },
           sidebarPath: './sidebars.js',
           // Custom sidebar generator to hide docs with hide: true
           sidebarItemsGenerator: async function ({
@@ -112,13 +116,19 @@ const config = {
   ],
   themeConfig: ({
     image: 'img/logo.png',
+    colorMode: {
+      defaultMode: 'light',
+      disableSwitch: true,
+      respectPrefersColorScheme: false,
+    },
     admonitions: {
       customTypes: {
         def: 'tip',
+        edumat: 'edumat',
       },
     },
     navbar: {
-      title: 'Edumat58',
+      title: '',
       logo: {
         alt: 'My Site Logo',
         src: 'img/logo.png',
@@ -154,7 +164,35 @@ const config = {
           type: 'html',
           position: 'right',
           value: `
-            <span style="font-size: 0.9rem; opacity: 0.7;">Ultima actualizare: 07.01.2026, 02:29</span>
+            <button id="ui-toggle-btn" title="Ascunde/Afișează UI" style="
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              width: 36px;
+              height: 36px;
+              padding: 6px;
+              border: 1px solid #ccc;
+              border-radius: 6px;
+              background-color: #f8f9fa;
+              color: #333;
+              font-family: sans-serif;
+              cursor: pointer;
+              transition: background-color 0.2s;
+            " onclick="if (window.toggleUIHiding) { window.toggleUIHiding(); } else { const hideUI = localStorage.getItem('hideUI') === 'true'; localStorage.setItem('hideUI', !hideUI); window.dispatchEvent(new CustomEvent('uiToggle')); }"
+            onmouseover="this.style.backgroundColor='#e9ecef'"
+            onmouseout="this.style.backgroundColor='#f8f9fa'">
+              <svg viewBox="0 0 24 24" width="20" height="20" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </button>
+          `,
+        },
+        {
+          type: 'html',
+          position: 'right',
+          value: `
+            <span style="font-size: 0.9rem; opacity: 0.7;">Ultima actualizare: 25.05.2026, 13:51</span>
           `,
         },
         {

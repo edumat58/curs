@@ -5,6 +5,8 @@ import {ThemeClassNames} from '@docusaurus/theme-common';
 import {useDoc} from '@docusaurus/plugin-content-docs/client';
 import TagsListInline from '@theme/TagsListInline';
 import ErrorReportForm from '../../../components/ErrorReportForm';
+import LessonBar from '../../../components/LessonBar';
+import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
 
 const StyledWrapper = styled.div`
   display: inline-flex;
@@ -35,8 +37,8 @@ const StyledWrapper = styled.div`
 
     transition: transform var(--transtion);
     
-    background: linear-gradient(45deg, #1a1a1a, #2d2d2d) padding-box,
-                linear-gradient(45deg, #8b5cf6, #06b6d4, #8b5cf6) border-box;
+    background: linear-gradient(45deg, #14171a, #1c2024) padding-box,
+                linear-gradient(45deg, #e8590c, #c2540a, #e8590c) border-box;
     animation: borderGradient 3s linear infinite;
   }
 
@@ -88,19 +90,19 @@ const StyledWrapper = styled.div`
   @keyframes borderGradient {
     0% {
       background: linear-gradient(45deg, #1a1a1a, #2d2d2d) padding-box,
-                  linear-gradient(45deg, #8b5cf6, #06b6d4, #8b5cf6) border-box;
+                  linear-gradient(45deg, #e8590c, #c2540a, #e8590c) border-box;
     }
     33% {
       background: linear-gradient(45deg, #1a1a1a, #2d2d2d) padding-box,
-                  linear-gradient(45deg, #06b6d4, #8b5cf6, #06b6d4) border-box;
+                  linear-gradient(45deg, #c2540a, #e8590c, #c2540a) border-box;
     }
     66% {
       background: linear-gradient(45deg, #1a1a1a, #2d2d2d) padding-box,
-                  linear-gradient(45deg, #8b5cf6, #06b6d4, #8b5cf6) border-box;
+                  linear-gradient(45deg, #e8590c, #c2540a, #e8590c) border-box;
     }
     100% {
       background: linear-gradient(45deg, #1a1a1a, #2d2d2d) padding-box,
-                  linear-gradient(45deg, #06b6d4, #8b5cf6, #06b6d4) border-box;
+                  linear-gradient(45deg, #c2540a, #e8590c, #c2540a) border-box;
     }
   }
 
@@ -220,6 +222,22 @@ const StyledWrapper = styled.div`
 `;
 
 const Button = ({ onShowForm }) => {
+  const [hideUI, setHideUI] = React.useState(() => ExecutionEnvironment.canUseDOM ? localStorage.getItem('hideUI') === 'true' : false);
+
+  React.useEffect(() => {
+    const handleStorageChange = () => {
+      setHideUI(localStorage.getItem('hideUI') === 'true');
+    };
+    window.addEventListener('storage', handleStorageChange);
+    window.addEventListener('uiToggle', handleStorageChange);
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('uiToggle', handleStorageChange);
+    };
+  }, []);
+
+  if (hideUI) return null;
+
   return (
     <StyledWrapper>
       <button className="button" onClick={onShowForm}>
@@ -279,6 +297,9 @@ export default function DocItemFooter() {
         isOpen={showErrorForm} 
         onClose={() => setShowErrorForm(false)} 
       />
+
+      {/* Bara permanentă de navigare între lecții (mecanica educode). */}
+      <LessonBar prev={metadata.previous} next={metadata.next} />
     </footer>
   );
 }
