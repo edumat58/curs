@@ -201,11 +201,9 @@ main {
 
 /* Sidebar Container */
 .navbar-sidebar {
-  background: rgba(255, 255, 255, 0.95) !important;
-  backdrop-filter: blur(16px) !important;
-  -webkit-backdrop-filter: blur(16px) !important;
-  border-right: 1px solid rgba(0, 0, 0, 0.08) !important;
-  box-shadow: 2px 0 20px rgba(0, 0, 0, 0.08);
+  background: var(--km-cream) !important;
+  border-right: 1px solid var(--km-line) !important;
+  box-shadow: 2px 0 20px rgba(28, 26, 22, 0.08);
   animation: slideIn 0.3s ease-out;
 
   /* Fix height constraint */
@@ -217,14 +215,6 @@ main {
   bottom: 0 !important;
   overflow-y: auto !important;
   padding-bottom: 8rem !important;
-
-  /* Scroll Fade Effect */
-  mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
-
-  /* Rounded top corners to match navbar */
-  border-top-right-radius: 24px !important;
-  border-top-left-radius: 24px !important;
 }
 
 @keyframes slideIn {
@@ -718,23 +708,14 @@ article {
    Sidebar aerisit și lizibil; cuprinsul din dreapta pe crem.
    ============================================================ */
 
-/* pagina de lecție rămâne pe crem (coala albă e articolul) */
+/* paginile de docs stau pe crem… */
 html.docs-doc-page .main-wrapper {
   background: var(--km-cream);
 }
-
-/* COALA ALBĂ: doar conținutul lecției */
-html.docs-doc-page article {
+/* …dar LECȚIILE au tot câmpul de conținut ALB, din sidebar până în marginea
+   dreaptă, sus și jos — fără chenare crem; la Cmd+P pagina iese albă. */
+html.docs-doc-page[class*='docs-doc-id'] .main-wrapper {
   background: #ffffff;
-  border: 1px solid var(--km-line);
-  border-radius: 14px;
-  padding: 1.5rem 1.25rem !important;
-  box-shadow: 0 1px 3px rgba(28, 26, 22, 0.05);
-}
-@media (min-width: 997px) {
-  html.docs-doc-page article {
-    padding: 2.25rem 2.5rem !important;
-  }
 }
 
 /* --- SIDEBARUL: fără golul de sus, aerisit, lizibil ------------- */
@@ -853,17 +834,6 @@ html.docs-doc-page article {
    butonul-ochi în limbajul temei, KaTeX în cuprins.
    ============================================================ */
 
-/* Paginile de categorie (Cuprins) nu sunt conținut de lecție:
-   fără coală albă — pagina rămâne crem, cardurile albe ies în relief.
-   Le deosebim de lecții prin lipsa clasei docs-doc-id-*. */
-html.docs-doc-page:not([class*='docs-doc-id']) article {
-  background: transparent;
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-  padding: 0 !important;
-}
-
 /* spațiu între lockup-ul edumat58 și linkurile de meniu */
 .navbar__brand {
   margin-right: 1.75rem;
@@ -907,4 +877,24 @@ html.docs-doc-page:not([class*='docs-doc-id']) article {
 /* formulele KaTeX randate în cuprins stau cuminți în rândul de text */
 .table-of-contents .katex {
   font-size: 1.05em;
+}
+
+/* ============================================================
+   PRINT (Cmd+P): doar conținutul lecției, pe alb complet.
+   ============================================================ */
+@media print {
+  html,
+  body,
+  .main-wrapper,
+  html.docs-doc-page .main-wrapper {
+    background: #ffffff !important;
+  }
+  .navbar,
+  .theme-doc-sidebar-container,
+  .theme-doc-toc-desktop,
+  .theme-doc-toc-mobile,
+  .footer,
+  nav[aria-label='Navigare între lecții'] {
+    display: none !important;
+  }
 }

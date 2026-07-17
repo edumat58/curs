@@ -12,13 +12,13 @@ export default function NavbarLogo() {
       to="/"
       className="navbar__brand"
       aria-label="Edumat58 — acasă"
-      style={{ display: 'inline-flex', alignItems: 'center', gap: 7, color: 'var(--km-ink)' }}
+      style={{ display: 'inline-flex', alignItems: 'center', gap: 7, color: 'var(--km-ink)', flexShrink: 0 }}
     >
       <img
         src="/curs/img/logo.png"
         alt=""
         aria-hidden="true"
-        style={{ height: '2.1rem', width: 'auto', display: 'block' }}
+        style={{ height: '2.1rem', width: 'auto', display: 'block', flexShrink: 0 }}
       />
       <EdumatWordmark width={150} />
     </Link>
