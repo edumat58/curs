@@ -22,6 +22,23 @@ const fs = require('fs');
 const jwt = require('jsonwebtoken');
 const { MongoClient } = require('mongodb');
 
+// La rulare locală, env-urile vin din backend/.env.local (gitignored) — pe
+// Vercel sunt setate pe proiect, iar fișierul nici nu ajunge acolo. Astfel
+// validarea locală e identică cu cea din producție (aceeași bază educonnect).
+try {
+  const envPath = path.join(__dirname, '.env.local');
+  if (fs.existsSync(envPath)) {
+    for (const line of fs.readFileSync(envPath, 'utf8').split('\n')) {
+      const m = line.match(/^([A-Za-z_][A-Za-z0-9_]*)=(.*)$/);
+      if (m && process.env[m[1]] === undefined) {
+        process.env[m[1]] = m[2].replace(/^["']|["']$/g, '');
+      }
+    }
+  }
+} catch {
+  // fără .env.local — mergem doar pe env-urile procesului
+}
+
 const app = express();
 
 app.use(cors({
@@ -239,6 +256,14 @@ app.get('/admin/lesson', requireAdmin, async (req, res) => {
       if (!abs.startsWith(path.resolve(LOCAL_DOCS_DIR) + path.sep)) return res.status(400).json({ error: 'Cale de lecție nevalidă.' });
       if (!fs.existsSync(abs)) return res.status(404).json({ error: 'Lecția nu există.' });
       return res.json({ raw: fs.readFileSync(abs, 'utf8'), sha: 'local' });
+    }
+
+    // fără token putem totuși CITI dintr-un repo public, prin raw.githubusercontent
+    if (!process.env.GITHUB_TOKEN) {
+      const r = await fetch(`https://raw.githubusercontent.com/${REPO}/${BRANCH}/${encodeURI(p)}`);
+      if (r.status === 404) return res.status(404).json({ error: 'Lecția nu există.' });
+      if (!r.ok) return res.status(502).json({ error: `GitHub a răspuns cu ${r.status}.` });
+      return res.json({ raw: await r.text(), sha: null });
     }
 
     const data = await github('GET', `/repos/${REPO}/contents/${encodeURI(p)}?ref=${BRANCH}`);

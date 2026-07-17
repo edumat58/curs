@@ -18,11 +18,25 @@ import styles from './admin.module.css';
 const TOKEN_KEY = 'edumat-admin-token';
 const NAME_KEY = 'edumat-admin-name';
 
-function backendBase() {
-  if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
-    return 'http://localhost:3002';
+const PROD_BACKEND = 'https://backend-deussebyum11724s-projects.vercel.app';
+
+// Pe localhost preferăm backend-ul local (scrie direct în fișierele repo-ului);
+// dacă nu rulează, cădem automat pe backend-ul din producție — validarea
+// EduConnect+ e aceeași (educonnect.users + scrypt) în ambele.
+async function resolveApiBase() {
+  if (typeof window === 'undefined' || window.location.hostname !== 'localhost') {
+    return PROD_BACKEND;
   }
-  return 'https://backend-deussebyum11724s-projects.vercel.app';
+  try {
+    const ctl = new AbortController();
+    const timer = setTimeout(() => ctl.abort(), 1200);
+    const r = await fetch('http://localhost:3002/health', { signal: ctl.signal });
+    clearTimeout(timer);
+    if (r.ok) return 'http://localhost:3002';
+  } catch {
+    // backend-ul local nu rulează
+  }
+  return PROD_BACKEND;
 }
 
 // ---- iconițe stroke (regula Kulturosfera: fără emoji) ----------------------
@@ -108,7 +122,7 @@ function EduConnectBadge() {
 
 // ---- autentificare ---------------------------------------------------------
 
-function LoginCard({ onLogin }) {
+function LoginCard({ onLogin, apiBase }) {
   const [open, setOpen] = React.useState(false);
   const [password, setPassword] = React.useState('');
   const [identifier, setIdentifier] = React.useState('');
@@ -120,7 +134,7 @@ function LoginCard({ onLogin }) {
     setBusy(true);
     setError('');
     try {
-      const r = await fetch(`${backendBase()}/admin/login`, {
+      const r = await fetch(`${apiBase}/admin/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: identifier.trim(), password }),
@@ -234,7 +248,7 @@ function removeHide(raw) {
   return raw.replace(/^hide:\s*true\s*\r?\n/m, '');
 }
 
-function LessonManager({ token, name, onLogout }) {
+function LessonManager({ token, name, onLogout, apiBase }) {
   const manifestUrl = useBaseUrl('/admin-manifest.json');
   const docsBase = useBaseUrl('/docs/');
   const [lessons, setLessons] = React.useState(null);
@@ -256,7 +270,7 @@ function LessonManager({ token, name, onLogout }) {
   const authFetch = React.useCallback(
     (input, init = {}) =>
       fetch(input, { ...init, headers: { ...(init.headers || {}), Authorization: `Bearer ${token}` } }),
-    [token],
+    [token, apiBase],
   );
 
   const load = React.useCallback(async () => {
@@ -272,7 +286,7 @@ function LessonManager({ token, name, onLogout }) {
 
   React.useEffect(() => {
     void load();
-    authFetch(`${backendBase()}/admin/config`)
+    authFetch(`${apiBase}/admin/config`)
       .then((r) => (r.ok ? r.json() : null))
       .then(setConfig)
       .catch(() => setConfig(null));
@@ -356,7 +370,7 @@ function LessonManager({ token, name, onLogout }) {
       const changes = [];
       for (let i = 0; i < targets.length; i++) {
         setNotice(`Se pregătesc lecțiile… ${i + 1}/${targets.length}`);
-        const r = await authFetch(`${backendBase()}/admin/lesson?path=${encodeURIComponent(targets[i].path)}`);
+        const r = await authFetch(`${apiBase}/admin/lesson?path=${encodeURIComponent(targets[i].path)}`);
         const data = await r.json().catch(() => ({}));
         if (!r.ok) {
           setNotice(`M-am oprit la ${targets[i].id}: ${data.error || 'nu am putut citi lecția.'}`);
@@ -372,7 +386,7 @@ function LessonManager({ token, name, onLogout }) {
         return;
       }
       setNotice(`Se salvează ${changes.length} lecții…`);
-      const r = await authFetch(`${backendBase()}/admin/lessons/bulk`, {
+      const r = await authFetch(`${apiBase}/admin/lessons/bulk`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -410,7 +424,7 @@ function LessonManager({ token, name, onLogout }) {
     setError('');
     const p = pathFor(idOrPath);
     try {
-      const r = await authFetch(`${backendBase()}/admin/lesson?path=${encodeURIComponent(p)}`);
+      const r = await authFetch(`${apiBase}/admin/lesson?path=${encodeURIComponent(p)}`);
       const data = await r.json().catch(() => ({}));
       if (r.status === 401 || r.status === 403) {
         onLogout();
@@ -433,7 +447,7 @@ function LessonManager({ token, name, onLogout }) {
     setSaving(true);
     setNotice('');
     try {
-      const r = await authFetch(`${backendBase()}/admin/lesson`, {
+      const r = await authFetch(`${apiBase}/admin/lesson`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ path: p, raw: content, sha: currentSha }),
@@ -465,7 +479,7 @@ function LessonManager({ token, name, onLogout }) {
   async function toggleHidden(l) {
     setNotice('');
     try {
-      const r = await authFetch(`${backendBase()}/admin/lesson?path=${encodeURIComponent(l.path)}`);
+      const r = await authFetch(`${apiBase}/admin/lesson?path=${encodeURIComponent(l.path)}`);
       const data = await r.json().catch(() => ({}));
       if (!r.ok) {
         setNotice(data.error || 'Nu am putut deschide lecția.');
@@ -492,9 +506,9 @@ function LessonManager({ token, name, onLogout }) {
     if (!window.confirm(`Ștergi lecția „${l.title}" (${l.id})? Fișierul se șterge din repo, iar site-ul se republică fără el.`)) return;
     setNotice('');
     try {
-      const cur = await authFetch(`${backendBase()}/admin/lesson?path=${encodeURIComponent(l.path)}`);
+      const cur = await authFetch(`${apiBase}/admin/lesson?path=${encodeURIComponent(l.path)}`);
       const curData = await cur.json().catch(() => ({}));
-      const r = await authFetch(`${backendBase()}/admin/lesson`, {
+      const r = await authFetch(`${apiBase}/admin/lesson`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ path: l.path, sha: curData.sha }),
@@ -811,6 +825,7 @@ function CreateForm({ lessons, onCreate }) {
 export default function AdminPage() {
   const [session, setSession] = React.useState(null);
   const [mounted, setMounted] = React.useState(false);
+  const [apiBase, setApiBase] = React.useState(null);
 
   React.useEffect(() => {
     setMounted(true);
@@ -818,6 +833,7 @@ export default function AdminPage() {
     if (token) {
       setSession({ token, name: localStorage.getItem(NAME_KEY) || 'Admin' });
     }
+    void resolveApiBase().then(setApiBase);
   }, []);
 
   function logout() {
@@ -829,11 +845,11 @@ export default function AdminPage() {
   return (
     <Layout title="Administrare" description="Panoul de administrare Edumat58" noFooter>
       <div className={styles.root}>
-        {!mounted ? null : session ? (
-          <LessonManager token={session.token} name={session.name} onLogout={logout} />
+        {!mounted || !apiBase ? null : session ? (
+          <LessonManager token={session.token} name={session.name} onLogout={logout} apiBase={apiBase} />
         ) : (
           <div className={styles.center}>
-            <LoginCard onLogin={(data) => setSession({ token: data.token, name: data.name || data.email })} />
+            <LoginCard apiBase={apiBase} onLogin={(data) => setSession({ token: data.token, name: data.name || data.email })} />
           </div>
         )}
       </div>
