@@ -714,65 +714,86 @@ article {
 }
 
 /* ============================================================
-   v3 — paginile DE LECȚII pe alb pur; sidebarul refăcut.
-   Doar rutele de docs (html.docs-doc-page) devin albe; restul
-   site-ului rămâne pe crem.
+   v3.1 — totul pe crem; DOAR conținutul lecției e o coală albă.
+   Sidebar aerisit și lizibil; cuprinsul din dreapta pe crem.
    ============================================================ */
 
-html.docs-doc-page {
-  --ifm-background-color: #ffffff;
-}
+/* pagina de lecție rămâne pe crem (coala albă e articolul) */
 html.docs-doc-page .main-wrapper {
-  background: #ffffff;
+  background: var(--km-cream);
 }
 
-/* --- SIDEBARUL DE LECȚII, refăcut ------------------------------- */
+/* COALA ALBĂ: doar conținutul lecției */
+html.docs-doc-page article {
+  background: #ffffff;
+  border: 1px solid var(--km-line);
+  border-radius: 14px;
+  padding: 1.5rem 1.25rem !important;
+  box-shadow: 0 1px 3px rgba(28, 26, 22, 0.05);
+}
+@media (min-width: 997px) {
+  html.docs-doc-page article {
+    padding: 2.25rem 2.5rem !important;
+  }
+}
+
+/* --- SIDEBARUL: fără golul de sus, aerisit, lizibil ------------- */
 .theme-doc-sidebar-container {
   border-right: 1px solid var(--km-line) !important;
-  background: #f7f4eb; /* rail crem distinct de hârtia albă a lecției */
+  background: var(--km-cream);
+  margin-top: 0 !important;
 }
+/* compensarea internă Docusaurus (padding-top = înălțimea navbarului)
+   dublează offsetul și lasă golul mare de sus — o anulăm */
+.theme-doc-sidebar-container [class*='sidebar_'] {
+  padding-top: 0.75rem !important;
+}
+
 .menu {
-  padding: 1rem 0.7rem 2rem;
+  padding: 0.5rem 0.85rem 2rem;
   scrollbar-width: thin;
   scrollbar-color: rgba(28, 26, 22, 0.18) transparent;
 }
 .menu::-webkit-scrollbar { width: 6px; }
 .menu::-webkit-scrollbar-thumb { background: rgba(28, 26, 22, 0.15); border-radius: 3px; }
 
-/* linkurile de lecție: compacte, calde */
+/* linkuri de lecție: mai mari, respirabile */
 .menu__link {
-  font-size: 0.84rem;
-  line-height: 1.35;
-  padding: 0.34rem 0.6rem;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  padding: 0.5rem 0.75rem;
   border-radius: 8px;
   color: var(--km-ink2);
+}
+.menu__list-item {
+  margin: 2px 0;
 }
 .menu__link:hover {
   background: rgba(28, 26, 22, 0.05);
   color: var(--km-ink);
 }
 
-/* categoriile (curs, modul): titluri clare, cu spațiu de secțiune */
+/* categoriile (curs, modul) */
 .menu__list-item-collapsible > .menu__link {
   font-family: 'Space Grotesk', system-ui, sans-serif;
   font-weight: 700;
-  font-size: 0.82rem;
+  font-size: 0.95rem;
   color: var(--km-ink);
 }
 .menu__list-item-collapsible:hover {
   background: rgba(28, 26, 22, 0.04);
   border-radius: 8px;
 }
-/* nivelul 1 = secțiuni majore: eyebrow cu separator deasupra */
+/* nivelul 1 = secțiuni majore: eyebrow cu separator */
 .theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible > .menu__link {
   text-transform: uppercase;
-  font-size: 0.7rem;
-  letter-spacing: 0.09em;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
   color: var(--km-ink3);
 }
 .theme-doc-sidebar-item-category-level-1 {
-  margin-top: 0.9rem;
-  padding-top: 0.9rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
   border-top: 1px solid var(--km-line);
 }
 .theme-doc-sidebar-item-category-level-1:first-child {
@@ -781,32 +802,48 @@ html.docs-doc-page .main-wrapper {
   border-top: none;
 }
 
-/* lecția activă: semnul portocaliu al familiei */
+/* lecția activă */
 .menu__link--active:not(.menu__link--sublist) {
   color: var(--km-orange-deep);
   background: rgba(232, 89, 12, 0.1);
   font-weight: 700;
   border-left: 3px solid var(--km-orange);
   border-radius: 0 8px 8px 0;
-  padding-left: calc(0.6rem - 3px);
+  padding-left: calc(0.75rem - 3px);
 }
 .menu__link--active:not(.menu__link--sublist):hover {
   color: var(--km-orange-deep);
   background: rgba(232, 89, 12, 0.14);
 }
-/* categoria care conține lecția activă */
 .menu__link--sublist.menu__link--active {
   color: var(--km-orange-deep);
   background: transparent;
 }
 
-/* caretele de pliere: discrete, animate */
 .menu__caret,
-.menu__link--sublist-caret::after,
-.menu__caret::before {
+.menu__link--sublist-caret::after {
   opacity: 0.55;
 }
-.menu__list-item--collapsed .menu__caret,
-.menu__list-item--collapsed .menu__link--sublist-caret::after {
-  transform: rotate(90deg);
+
+/* --- CUPRINSUL din dreapta (TOC): pe crem, în limbaj comun ------ */
+.theme-doc-toc-desktop {
+  background: transparent;
+}
+.table-of-contents {
+  font-size: 0.86rem;
+  line-height: 1.5;
+  border-left: 1px solid var(--km-line);
+  padding: 0.25rem 0 0.25rem 0;
+}
+.table-of-contents__link {
+  color: var(--km-ink2);
+  padding: 0.15rem 0;
+  display: inline-block;
+}
+.table-of-contents__link:hover {
+  color: var(--km-ink);
+}
+.table-of-contents__link--active {
+  color: var(--km-orange-deep);
+  font-weight: 700;
 }
