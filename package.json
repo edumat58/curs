@@ -14,7 +14,8 @@
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
     "update-sidebar": "node update-sidebar.js",
-    "predeploy": "node update-deploy-date.js && npm run update-sidebar"
+    "predeploy": "node update-deploy-date.js && npm run update-sidebar",
+    "prebuild": "node scripts/build-admin-manifest.mjs"
   },
   "dependencies": {
     "@docusaurus/core": "^3.7.0",
@@ -33,6 +34,7 @@
     "@mui/x-data-grid-pro": "^8.2.0",
     "@mui/x-tree-view": "^8.2.0",
     "clsx": "^2.0.0",
+    "cobe": "^0.6.5",
     "cors": "^2.8.5",
     "date-fns": "^4.1.0",
     "express": "^5.2.1",

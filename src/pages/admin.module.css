@@ -1,0 +1,298 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@800&display=swap');
+
+/* Panoul de admin — structura educode, pe tema light Edumat58.
+   Accentele sunt strict semantice: portocaliu = acțiune, turquoise = info,
+   verde = corect, burgundy = eroare. Zero albastru, zero emoji. */
+
+.root {
+  --a-turq: #0197b0;
+  --a-green: #2f9e77;
+  --a-burg: #8c2f39;
+  width: 100%;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 2rem 1rem 4rem;
+  color: var(--km-ink);
+}
+
+.brandType {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-weight: 800;
+}
+
+.center {
+  min-height: calc(100dvh - 4.25rem - 8rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  background: #ffffff;
+  border: 1px solid var(--km-line);
+  border-radius: 16px;
+  box-shadow: 0 12px 32px rgba(28, 26, 22, 0.1);
+  padding: 1.75rem;
+}
+
+.loginCard {
+  composes: card;
+  width: 100%;
+  max-width: 28rem;
+}
+
+.eyebrow {
+  font-size: 0.66rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--km-ink3);
+}
+
+.display {
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.input {
+  background: var(--km-cream-2);
+  border: 1px solid var(--km-line);
+  border-radius: 10px;
+  color: var(--km-ink);
+  padding: 0.62rem 0.85rem;
+  font-size: 0.9rem;
+  font-family: inherit;
+  outline: none;
+  width: 100%;
+}
+.input:focus {
+  border-color: var(--a-turq);
+}
+
+.fieldLabel {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--km-ink2);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: var(--km-orange);
+  color: #fff;
+  font-weight: 650;
+  letter-spacing: 0.01em;
+  border: none;
+  border-radius: 10px;
+  padding: 0.6rem 1.25rem;
+  font-size: 0.9rem;
+  font-family: inherit;
+  cursor: pointer;
+  user-select: none;
+}
+.btn:hover { filter: brightness(1.08); }
+.btn:active { transform: translateY(1px); filter: brightness(0.92); }
+.btn:disabled { opacity: 0.38; cursor: default; }
+
+.btnGhost {
+  composes: btn;
+  background: transparent;
+  color: var(--km-ink);
+  font-weight: 600;
+  border: 1px solid var(--km-line);
+}
+.btnGhost:hover { filter: none; background: rgba(28, 26, 22, 0.05); }
+
+/* butonul alb EduConnect+ — originalul */
+.educonnectBtn {
+  display: inline-flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  background: #ffffff;
+  color: #111315;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 1rem;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition: filter 0.15s ease, transform 0.05s ease;
+  box-shadow: 0 1px 3px rgba(28, 26, 22, 0.08);
+}
+.educonnectBtn:hover { filter: brightness(0.95); }
+.educonnectBtn:active { transform: translateY(1px); }
+.educonnectBtn:disabled { opacity: 0.4; cursor: default; }
+
+.toggle {
+  display: flex;
+  overflow: hidden;
+  border-radius: 10px;
+  border: 1px solid var(--km-line);
+  font-size: 0.75rem;
+}
+.toggleBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.38rem 0.75rem;
+  font-weight: 700;
+  font-family: inherit;
+  border: none;
+  background: transparent;
+  color: var(--km-ink2);
+  cursor: pointer;
+}
+.toggleBtnActive {
+  composes: toggleBtn;
+  background: var(--km-orange);
+  color: #fff;
+}
+.toggleBtnDisabled {
+  composes: toggleBtn;
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.error { color: var(--a-burg); font-size: 0.875rem; }
+.success { color: var(--a-green); font-size: 0.875rem; }
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  border: 1px solid var(--km-line);
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 0.5rem 0.75rem;
+}
+
+.rowMain {
+  flex: 1;
+  min-width: 220px;
+  text-align: left;
+  border: none;
+  background: transparent;
+  padding: 0;
+  font-family: inherit;
+  cursor: pointer;
+}
+.rowTitle { display: block; font-size: 0.9rem; font-weight: 700; color: var(--km-ink); }
+.rowTitleBad { composes: rowTitle; color: var(--a-burg); }
+.rowId {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--km-ink3);
+  font-variant-numeric: tabular-nums;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border-radius: 999px;
+  padding: 0.25rem 0.65rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  font-family: inherit;
+  background: transparent;
+  cursor: pointer;
+}
+.pillOn { composes: pill; border: 1px solid var(--a-green); color: var(--a-green); }
+.pillOff { composes: pill; border: 1px solid var(--km-line); color: var(--km-ink3); }
+
+.iconBtn {
+  border: none;
+  background: transparent;
+  color: var(--km-ink3);
+  cursor: pointer;
+  padding: 0.25rem;
+  display: inline-flex;
+}
+.iconBtn:hover { color: var(--a-burg); }
+
+.editorTextarea {
+  composes: input;
+  margin-top: 0.75rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  min-height: 70vh;
+  resize: vertical;
+  background: #ffffff;
+}
+
+.badge {
+  border-radius: 999px;
+  padding: 0.15rem 0.55rem;
+  font-size: 0.66rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.badgeCloud { composes: badge; background: var(--a-turq); color: #fff; }
+.badgeFile { composes: badge; border: 1px solid var(--km-line); color: var(--km-ink3); }
+
+.linkQuiet {
+  color: var(--km-ink3);
+  font-size: 0.875rem;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  background: none;
+  border: none;
+  font-family: inherit;
+  cursor: pointer;
+  padding: 0;
+}
+.linkInfo { composes: linkQuiet; color: var(--a-turq); }
+
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--km-ink2);
+  background: none;
+  border: none;
+  font-family: inherit;
+  cursor: pointer;
+  padding: 0;
+}
+
+.createForm {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.5rem;
+  border: 1px solid var(--km-line);
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 0.75rem;
+  margin-top: 1rem;
+}
+.createLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--km-ink2);
+}
+
+.sessionChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--km-ink2);
+}

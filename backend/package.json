@@ -1,7 +1,7 @@
 {
   "name": "email-backend",
-  "version": "1.0.0",
-  "description": "Backend server for sending error report emails using nodemailer",
+  "version": "2.0.0",
+  "description": "Backend Edumat58: rapoarte de eroare pe email + panoul de admin (login EduConnect+, lecții prin GitHub API)",
   "main": "email-server.js",
   "scripts": {
     "start": "node email-server.js",
@@ -10,7 +10,9 @@
   "dependencies": {
     "express": "^4.18.2",
     "nodemailer": "^6.9.7",
-    "cors": "^2.8.5"
+    "cors": "^2.8.5",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.8.0"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
