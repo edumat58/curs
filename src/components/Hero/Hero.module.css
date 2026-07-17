@@ -8,7 +8,7 @@
   justify-content: center;
   overflow: hidden;
   /* Golden Orange Gradient */
-  background: linear-gradient(135deg, #FFB75E 0%, #ED8F03 100%);
+  background: linear-gradient(135deg, #d9761c 0%, #b35410 55%, #9c4a0e 100%);
   color: #fff;
 }
 
