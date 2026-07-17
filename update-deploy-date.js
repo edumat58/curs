@@ -13,10 +13,10 @@ const formatDate = now.toLocaleString('ro-RO', {
 const configPath = path.resolve(__dirname, 'docusaurus.config.js');
 let configContent = fs.readFileSync(configPath, 'utf-8');
 
-// Înlocuiește linia cu data veche (caută `Ultima actualizare:`)
-const newDateHtml = `<span style="font-size: 0.9rem; opacity: 0.7;">Ultima actualizare: ${formatDate}</span>`;
+// Înlocuiește data veche (markup-ul compact: <span class="nav-update-date">…</span>)
+const newDateHtml = `<span class="nav-update-date">${formatDate}</span>`;
 configContent = configContent.replace(
-  /<span style="[^"]*">Ultima actualizare: .*?<\/span>/,
+  /<span class="nav-update-date">[^<]*<\/span>/,
   newDateHtml
 );
 

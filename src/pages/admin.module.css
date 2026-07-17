@@ -296,3 +296,64 @@
   font-size: 0.8rem;
   color: var(--km-ink2);
 }
+
+/* --- ierarhia pe foldere ---------------------------------------- */
+
+.groupRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  border: 1px solid var(--km-line);
+  background: var(--km-cream-2);
+  border-radius: 12px;
+  padding: 0.45rem 0.75rem;
+}
+
+.groupMain {
+  flex: 1;
+  min-width: 200px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: left;
+  border: none;
+  background: transparent;
+  padding: 0;
+  font-family: inherit;
+  cursor: pointer;
+  color: var(--km-ink);
+}
+
+.chev {
+  display: inline-flex;
+  color: var(--km-ink3);
+  transition: transform 0.15s ease;
+}
+
+.groupLabel {
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.groupCount {
+  font-size: 0.75rem;
+  color: var(--km-ink3);
+  font-variant-numeric: tabular-nums;
+}
+
+.bulkOn {
+  composes: pill;
+  border: 1px solid var(--a-green);
+  color: var(--a-green);
+}
+.bulkOff {
+  composes: pill;
+  border: 1px solid var(--km-line);
+  color: var(--km-ink3);
+}
+.bulkOn:disabled,
+.bulkOff:disabled {
+  opacity: 0.45;
+  cursor: default;
+}

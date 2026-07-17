@@ -73,6 +73,16 @@ const IconArrowLeft = ({ size = 24 }) => (
     <polyline points="12 19 5 12 12 5" />
   </svg>
 );
+const IconFolder = ({ size = 24 }) => (
+  <svg {...iconProps(size)}>
+    <path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+  </svg>
+);
+const IconChevronRight = ({ size = 24 }) => (
+  <svg {...iconProps(size)}>
+    <polyline points="9 6 15 12 9 18" />
+  </svg>
+);
 
 // ---- brand EduConnect+ -----------------------------------------------------
 
@@ -240,6 +250,8 @@ function LessonManager({ token, name, onLogout }) {
   const [sha, setSha] = React.useState(null);
   const [dirty, setDirty] = React.useState(false);
   const [saving, setSaving] = React.useState(false);
+  const [expanded, setExpanded] = React.useState(() => new Set());
+  const [bulkBusy, setBulkBusy] = React.useState(null);
 
   const authFetch = React.useCallback(
     (input, init = {}) =>
@@ -288,6 +300,104 @@ function LessonManager({ token, name, onLogout }) {
       return `${l.id} ${l.title}`.toLowerCase().includes(needle);
     });
   }, [lessons, filter, course]);
+
+  const searching = filter.trim().length > 0;
+
+  // ierarhia pe foldere: curs → modul (calea completă a folderului) → lecții
+  const tree = React.useMemo(() => {
+    const byCourse = new Map();
+    for (const l of visible) {
+      const courseKey = l.course || 'pagini-generale';
+      const courseLabel = l.course || 'Pagini generale';
+      if (!byCourse.has(courseKey)) {
+        byCourse.set(courseKey, { key: courseKey, label: courseLabel, direct: [], modules: new Map(), all: [] });
+      }
+      const node = byCourse.get(courseKey);
+      node.all.push(l);
+      const segments = l.id.split('/');
+      const moduleDir = segments.length > 2 ? segments.slice(1, -1).join('/') : '';
+      if (!moduleDir) {
+        node.direct.push(l);
+      } else {
+        const moduleKey = `${courseKey}/${moduleDir}`;
+        if (!node.modules.has(moduleKey)) {
+          node.modules.set(moduleKey, { key: moduleKey, label: moduleDir, lessons: [] });
+        }
+        node.modules.get(moduleKey).lessons.push(l);
+      }
+    }
+    return Array.from(byCourse.values()).map((node) => ({
+      ...node,
+      modules: Array.from(node.modules.values()),
+      hiddenCount: node.all.filter((l) => l.hidden).length,
+    }));
+  }, [visible]);
+
+  function toggleExpand(key) {
+    setExpanded((prev) => {
+      const next = new Set(prev);
+      if (next.has(key)) next.delete(key);
+      else next.add(key);
+      return next;
+    });
+  }
+
+  // delistare/publicare în bulk: un singur commit pentru tot grupul
+  async function bulkSetHidden(groupKey, groupLabel, groupLessons, hidden) {
+    const targets = groupLessons.filter((l) => l.hidden !== hidden);
+    if (!targets.length) {
+      setNotice(`Toate lecțiile din „${groupLabel}" sunt deja ${hidden ? 'ascunse' : 'publicate'}.`);
+      return;
+    }
+    if (!window.confirm(`${hidden ? 'Ascunzi' : 'Publici'} toate cele ${targets.length} lecții din „${groupLabel}"?`)) return;
+    setBulkBusy(groupKey);
+    setNotice('');
+    try {
+      const changes = [];
+      for (let i = 0; i < targets.length; i++) {
+        setNotice(`Se pregătesc lecțiile… ${i + 1}/${targets.length}`);
+        const r = await authFetch(`${backendBase()}/admin/lesson?path=${encodeURIComponent(targets[i].path)}`);
+        const data = await r.json().catch(() => ({}));
+        if (!r.ok) {
+          setNotice(`M-am oprit la ${targets[i].id}: ${data.error || 'nu am putut citi lecția.'}`);
+          return;
+        }
+        const isHidden = /^hide:\s*true\s*$/m.test(data.raw);
+        if (isHidden === hidden) continue;
+        const next = hidden ? insertHide(data.raw) : removeHide(data.raw);
+        if (next !== data.raw) changes.push({ path: targets[i].path, raw: next });
+      }
+      if (!changes.length) {
+        setNotice(`Toate lecțiile din „${groupLabel}" sunt deja ${hidden ? 'ascunse' : 'publicate'}.`);
+        return;
+      }
+      setNotice(`Se salvează ${changes.length} lecții…`);
+      const r = await authFetch(`${backendBase()}/admin/lessons/bulk`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          changes,
+          message: `Admin: ${hidden ? 'ascunde' : 'publică'} ${changes.length} lecții din ${groupLabel}`,
+        }),
+      });
+      const data = await r.json().catch(() => ({}));
+      if (!r.ok) {
+        setNotice(data.error || 'Salvarea în bulk nu a mers.');
+        return;
+      }
+      const changedPaths = new Set(changes.map((c) => c.path));
+      setLessons((ls) => (ls || []).map((x) => (changedPaths.has(x.path) ? { ...x, hidden } : x)));
+      setNotice(
+        data.savedTo === 'github'
+          ? `${changes.length} lecții ${hidden ? 'ascunse' : 'publicate'} în „${groupLabel}" — un singur commit; site-ul se republică în câteva minute.`
+          : `${changes.length} lecții ${hidden ? 'ascunse' : 'publicate'} în „${groupLabel}".`,
+      );
+    } catch {
+      setNotice('Backend-ul nu a răspuns — verifică conexiunea.');
+    } finally {
+      setBulkBusy(null);
+    }
+  }
 
   function pathFor(idOrPath) {
     if (idOrPath.startsWith('docs/')) return idOrPath;
@@ -541,26 +651,103 @@ function LessonManager({ token, name, onLogout }) {
         {lessons === null && !error ? (
           <p style={{ fontSize: '0.875rem', color: 'var(--km-ink3)' }}>Se încarcă…</p>
         ) : null}
-        {visible.map((l) => (
-          <div key={l.id} className={styles.row}>
-            <button className={styles.rowMain} onClick={() => void openEditor(l.id)}>
-              <span className={l.frontmatterOk ? styles.rowTitle : styles.rowTitleBad}>{l.title}</span>
-              <span className={styles.rowId}>{l.id}</span>
-            </button>
-            <button
-              className={l.hidden ? styles.pillOff : styles.pillOn}
-              onClick={() => void toggleHidden(l)}
-              title={l.hidden ? 'Ascunsă din sidebar — apasă pentru a o publica' : 'Publicată — apasă pentru a o ascunde din sidebar'}
-            >
-              {l.hidden ? null : <IconCheck size={12} />}
-              {l.hidden ? 'Ascunsă' : 'Publicată'}
-            </button>
-            <button className={styles.iconBtn} onClick={() => void remove(l)} aria-label={`Șterge ${l.title}`} title="Șterge lecția">
-              <IconX size={16} />
-            </button>
-          </div>
-        ))}
+        {tree.map((courseNode) => {
+          const courseOpen = searching || expanded.has(courseNode.key);
+          return (
+            <React.Fragment key={courseNode.key}>
+              <GroupRow
+                depth={0}
+                open={courseOpen}
+                label={courseNode.label}
+                count={courseNode.all.length}
+                hiddenCount={courseNode.hiddenCount}
+                busy={bulkBusy === courseNode.key}
+                onToggle={() => toggleExpand(courseNode.key)}
+                onBulk={(hidden) => void bulkSetHidden(courseNode.key, courseNode.label, courseNode.all, hidden)}
+              />
+              {courseOpen
+                ? courseNode.direct.map((l) => (
+                    <LessonRow key={l.id} lesson={l} depth={1} onOpen={openEditor} onToggleHidden={toggleHidden} onRemove={remove} />
+                  ))
+                : null}
+              {courseOpen
+                ? courseNode.modules.map((mod) => {
+                    const modOpen = searching || expanded.has(mod.key);
+                    const modHidden = mod.lessons.filter((l) => l.hidden).length;
+                    return (
+                      <React.Fragment key={mod.key}>
+                        <GroupRow
+                          depth={1}
+                          open={modOpen}
+                          label={mod.label}
+                          count={mod.lessons.length}
+                          hiddenCount={modHidden}
+                          busy={bulkBusy === mod.key}
+                          onToggle={() => toggleExpand(mod.key)}
+                          onBulk={(hidden) => void bulkSetHidden(mod.key, `${courseNode.label}/${mod.label}`, mod.lessons, hidden)}
+                        />
+                        {modOpen
+                          ? mod.lessons.map((l) => (
+                              <LessonRow key={l.id} lesson={l} depth={2} onOpen={openEditor} onToggleHidden={toggleHidden} onRemove={remove} />
+                            ))
+                          : null}
+                      </React.Fragment>
+                    );
+                  })
+                : null}
+            </React.Fragment>
+          );
+        })}
       </div>
+    </div>
+  );
+}
+
+function GroupRow({ depth, open, label, count, hiddenCount, busy, onToggle, onBulk }) {
+  return (
+    <div className={styles.groupRow} style={{ marginLeft: depth * 22 }}>
+      <button className={styles.groupMain} onClick={onToggle} aria-expanded={open}>
+        <span className={styles.chev} style={{ transform: open ? 'rotate(90deg)' : 'none' }}>
+          <IconChevronRight size={14} />
+        </span>
+        <span style={{ display: 'inline-flex', color: 'var(--km-orange-deep)' }}>
+          <IconFolder size={16} />
+        </span>
+        <span className={styles.groupLabel}>{label}</span>
+        <span className={styles.groupCount}>
+          {count} lecții{hiddenCount ? ` · ${hiddenCount} ascunse` : ''}
+        </span>
+      </button>
+      <div style={{ display: 'flex', gap: '0.35rem' }}>
+        <button className={styles.bulkOn} disabled={busy} onClick={() => onBulk(false)} title={`Publică toate lecțiile din ${label}`}>
+          Publică tot
+        </button>
+        <button className={styles.bulkOff} disabled={busy} onClick={() => onBulk(true)} title={`Ascunde toate lecțiile din ${label} (delistare)`}>
+          {busy ? 'Se aplică…' : 'Ascunde tot'}
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function LessonRow({ lesson: l, depth, onOpen, onToggleHidden, onRemove }) {
+  return (
+    <div className={styles.row} style={{ marginLeft: depth * 22 }}>
+      <button className={styles.rowMain} onClick={() => void onOpen(l.id)}>
+        <span className={l.frontmatterOk ? styles.rowTitle : styles.rowTitleBad}>{l.title}</span>
+        <span className={styles.rowId}>{l.id}</span>
+      </button>
+      <button
+        className={l.hidden ? styles.pillOff : styles.pillOn}
+        onClick={() => void onToggleHidden(l)}
+        title={l.hidden ? 'Ascunsă din sidebar — apasă pentru a o publica' : 'Publicată — apasă pentru a o ascunde din sidebar'}
+      >
+        {l.hidden ? null : <IconCheck size={12} />}
+        {l.hidden ? 'Ascunsă' : 'Publicată'}
+      </button>
+      <button className={styles.iconBtn} onClick={() => void onRemove(l)} aria-label={`Șterge ${l.title}`} title="Șterge lecția">
+        <IconX size={16} />
+      </button>
     </div>
   );
 }

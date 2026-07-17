@@ -309,6 +309,52 @@ app.delete('/admin/lesson', requireAdmin, async (req, res) => {
   }
 });
 
+// POST /admin/lessons/bulk { changes: [{path, raw}], message? } — un singur
+// commit pentru toate fișierele (Git Data API), ca republicarea să ruleze o dată.
+app.post('/admin/lessons/bulk', requireAdmin, async (req, res) => {
+  try {
+    const { changes, message } = req.body || {};
+    if (!Array.isArray(changes) || changes.length === 0 || changes.length > 300) {
+      return res.status(400).json({ error: 'Lista de modificări trebuie să aibă între 1 și 300 de lecții.' });
+    }
+    for (const c of changes) {
+      if (!c || !validLessonPath(c.path)) return res.status(400).json({ error: `Cale de lecție nevalidă: ${c && c.path}` });
+      if (typeof c.raw !== 'string' || !c.raw.trim()) return res.status(400).json({ error: `Conținut lipsă pentru ${c.path}.` });
+      if (!/^---\r?\n[\s\S]*?\r?\n---/.test(c.raw)) return res.status(400).json({ error: `Frontmatter lipsă în ${c.path}.` });
+    }
+
+    if (LOCAL_DOCS_DIR) {
+      for (const c of changes) {
+        const abs = path.resolve(LOCAL_DOCS_DIR, c.path);
+        if (!abs.startsWith(path.resolve(LOCAL_DOCS_DIR) + path.sep)) return res.status(400).json({ error: 'Cale de lecție nevalidă.' });
+        fs.mkdirSync(path.dirname(abs), { recursive: true });
+        fs.writeFileSync(abs, c.raw, 'utf8');
+      }
+      return res.json({ ok: true, savedTo: 'local', count: changes.length });
+    }
+
+    const committer = { name: 'Panou admin Edumat58', email: req.admin.email || 'admin@edumat58' };
+    const ref = await github('GET', `/repos/${REPO}/git/ref/heads/${BRANCH}`);
+    const headSha = ref.object.sha;
+    const headCommit = await github('GET', `/repos/${REPO}/git/commits/${headSha}`);
+    const tree = await github('POST', `/repos/${REPO}/git/trees`, {
+      base_tree: headCommit.tree.sha,
+      tree: changes.map((c) => ({ path: c.path, mode: '100644', type: 'blob', content: c.raw })),
+    });
+    const commit = await github('POST', `/repos/${REPO}/git/commits`, {
+      message: message || `Admin: actualizare în bulk (${changes.length} lecții)`,
+      tree: tree.sha,
+      parents: [headSha],
+      author: committer,
+      committer,
+    });
+    await github('PATCH', `/repos/${REPO}/git/refs/heads/${BRANCH}`, { sha: commit.sha });
+    res.json({ ok: true, savedTo: 'github', count: changes.length, commit: commit.sha });
+  } catch (error) {
+    res.status(error.status || 500).json({ error: error.message });
+  }
+});
+
 const PORT = process.env.PORT || 3002;
 if (require.main === module) {
   app.listen(PORT, () => {

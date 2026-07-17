@@ -185,7 +185,20 @@ const config = {
           type: 'html',
           position: 'right',
           value: `
-            <span style="font-size: 0.9rem; opacity: 0.7;">Ultima actualizare: 25.05.2026, 13:51</span>
+            <a class="educonnect-nav-btn" href="/curs/admin" title="Administrare — autentificare EduConnect+">EduConnect+</a>
+          `,
+        },
+        {
+          type: 'html',
+          position: 'right',
+          value: `
+            <span class="nav-update" title="Ultima actualizare">
+              <svg viewBox="0 0 24 24" width="13" height="13" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="9"></circle>
+                <polyline points="12 7 12 12 15.5 14"></polyline>
+              </svg>
+              <span class="nav-update-date">18.07.2026, 01:04</span>
+            </span>
           `,
         },
         {
