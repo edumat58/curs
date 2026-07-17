@@ -11,7 +11,7 @@ export default function NavbarLogo() {
     <Link
       to="/"
       aria-label="Edumat58 — acasă"
-      style={{ display: 'inline-flex', alignItems: 'center', gap: 12, color: 'var(--km-ink)' }}
+      style={{ display: 'inline-flex', alignItems: 'center', gap: 7, color: 'var(--km-ink)' }}
     >
       <img
         src="/curs/img/logo.png"
@@ -19,7 +19,7 @@ export default function NavbarLogo() {
         aria-hidden="true"
         style={{ height: '2.1rem', width: 'auto', display: 'block' }}
       />
-      <EdumatWordmark width={128} />
+      <EdumatWordmark width={150} />
     </Link>
   );
 }
