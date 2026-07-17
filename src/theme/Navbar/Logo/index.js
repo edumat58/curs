@@ -10,6 +10,7 @@ export default function NavbarLogo() {
   return (
     <Link
       to="/"
+      className="navbar__brand"
       aria-label="Edumat58 — acasă"
       style={{ display: 'inline-flex', alignItems: 'center', gap: 7, color: 'var(--km-ink)' }}
     >

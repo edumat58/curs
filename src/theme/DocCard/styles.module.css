@@ -1,0 +1,46 @@
+/* Cardurile din Cuprins: albe pe pagina crem, hairline, accent portocaliu. */
+
+.cardContainer {
+  --ifm-link-color: var(--ifm-font-color-base);
+  --ifm-link-hover-color: var(--ifm-font-color-base);
+  --ifm-link-hover-decoration: none;
+
+  background: #ffffff;
+  border: 1px solid var(--km-line);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(28, 26, 22, 0.05);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.cardContainer:hover {
+  border-color: var(--km-orange);
+  box-shadow: 0 4px 14px rgba(28, 26, 22, 0.1);
+}
+
+.cardContainer *:last-child {
+  margin-bottom: 0;
+}
+
+.cardTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.05rem;
+}
+
+.cardIcon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  color: var(--km-orange-deep);
+  background: rgba(232, 89, 12, 0.09);
+}
+
+.cardDescription {
+  font-size: 0.82rem;
+  color: var(--km-ink3);
+}

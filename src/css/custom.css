@@ -847,3 +847,64 @@ html.docs-doc-page article {
   color: var(--km-orange-deep);
   font-weight: 700;
 }
+
+/* ============================================================
+   v3.2 — carduri de Cuprins pe crem, navbar respirabil,
+   butonul-ochi în limbajul temei, KaTeX în cuprins.
+   ============================================================ */
+
+/* Paginile de categorie (Cuprins) nu sunt conținut de lecție:
+   fără coală albă — pagina rămâne crem, cardurile albe ies în relief.
+   Le deosebim de lecții prin lipsa clasei docs-doc-id-*. */
+html.docs-doc-page:not([class*='docs-doc-id']) article {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0 !important;
+}
+
+/* spațiu între lockup-ul edumat58 și linkurile de meniu */
+.navbar__brand {
+  margin-right: 1.75rem;
+}
+
+/* butonul-ochi (mod proiecție): hairline pe crem, portocaliu când e activ */
+.ui-eye-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 1px solid var(--km-line);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--km-ink2);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+.ui-eye-btn:hover {
+  border-color: var(--km-orange);
+  color: var(--km-orange-deep);
+  background: rgba(232, 89, 12, 0.07);
+}
+.ui-eye-btn .ui-eye-off {
+  display: none;
+}
+.ui-eye-btn[data-hidden='true'] {
+  background: var(--km-orange);
+  border-color: var(--km-orange);
+  color: #fff;
+}
+.ui-eye-btn[data-hidden='true'] .ui-eye-on {
+  display: none;
+}
+.ui-eye-btn[data-hidden='true'] .ui-eye-off {
+  display: block;
+}
+
+/* formulele KaTeX randate în cuprins stau cuminți în rândul de text */
+.table-of-contents .katex {
+  font-size: 1.05em;
+}

@@ -32,6 +32,8 @@ const config = {
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
 
+  clientModules: [require.resolve('./src/clientModules/uiFixes.js')],
+
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
@@ -164,26 +166,17 @@ const config = {
           type: 'html',
           position: 'right',
           value: `
-            <button id="ui-toggle-btn" title="Ascunde/Afișează UI" style="
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              width: 36px;
-              height: 36px;
-              padding: 6px;
-              border: 1px solid #ccc;
-              border-radius: 6px;
-              background-color: #f8f9fa;
-              color: #333;
-              font-family: sans-serif;
-              cursor: pointer;
-              transition: background-color 0.2s;
-            " onclick="if (window.toggleUIHiding) { window.toggleUIHiding(); } else { const hideUI = localStorage.getItem('hideUI') === 'true'; localStorage.setItem('hideUI', !hideUI); window.dispatchEvent(new CustomEvent('uiToggle')); }"
-            onmouseover="this.style.backgroundColor='#e9ecef'"
-            onmouseout="this.style.backgroundColor='#f8f9fa'">
-              <svg viewBox="0 0 24 24" width="20" height="20" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+            <button id="ui-toggle-btn" class="ui-eye-btn" title="Mod proiecție: ascunde bara de navigație" aria-label="Mod proiecție: ascunde bara de navigație"
+              onclick="if (window.toggleUIHiding) { window.toggleUIHiding(); } else { const hideUI = localStorage.getItem('hideUI') === 'true'; localStorage.setItem('hideUI', !hideUI); window.dispatchEvent(new CustomEvent('uiToggle')); } this.dataset.hidden = String(localStorage.getItem('hideUI') === 'true');">
+              <svg class="ui-eye-on" viewBox="0 0 24 24" width="19" height="19" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M2.06 12.35a1 1 0 0 1 0-.7C3.42 8.1 7.22 5 12 5s8.58 3.1 9.94 6.65a1 1 0 0 1 0 .7C20.58 15.9 16.78 19 12 19s-8.58-3.1-9.94-6.65z"></path>
                 <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+              <svg class="ui-eye-off" viewBox="0 0 24 24" width="19" height="19" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M10.73 5.08A10.4 10.4 0 0 1 12 5c4.78 0 8.58 3.1 9.94 6.65a1 1 0 0 1 0 .7 13.2 13.2 0 0 1-1.67 2.68"></path>
+                <path d="M6.61 6.61A13.5 13.5 0 0 0 2.06 11.65a1 1 0 0 0 0 .7C3.42 15.9 7.22 19 12 19c1.34 0 2.6-.24 3.77-.66"></path>
+                <path d="M10 10a3 3 0 0 0 4.13 4.13"></path>
+                <line x1="3" y1="3" x2="21" y2="21"></line>
               </svg>
             </button>
           `,
