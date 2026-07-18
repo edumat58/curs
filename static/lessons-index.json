@@ -1,0 +1,1721 @@
+{
+ "generatedAt": "2026-07-18T00:46:40.584Z",
+ "lessons": [
+  {
+   "title": "C4 - Împărțirea Euclidiană. Împărțirea nr. zecimale",
+   "url": "/curs/docs/c5/06",
+   "course": "c5",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C1 - Scrierea sub forma zecimala",
+   "url": "/curs/docs/c5/modul-1/01",
+   "course": "c5",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C2 - Adunarea și scăderea nr. zecimale",
+   "url": "/curs/docs/c5/modul-1/02",
+   "course": "c5",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C3 - Înmulțirea nr. zecimale",
+   "url": "/curs/docs/c5/modul-1/03",
+   "course": "c5",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C5 - Semidreapta gradată",
+   "url": "/curs/docs/c5/modul-1/05",
+   "course": "c5",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C6.1 - Mulțimi. Mulțimea nr. naturale",
+   "url": "/curs/docs/c5/modul-1/06",
+   "course": "c5",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C6.2 - Scrierea si citirea nr. naturale",
+   "url": "/curs/docs/c5/modul-1/07",
+   "course": "c5",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C7.1 - Ilustrarea fracţiilor echiunitare, subunitare și supraunitare",
+   "url": "/curs/docs/c5/modul-1/08",
+   "course": "c5",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C7.2 - Fracții și scrierea procentuală",
+   "url": "/curs/docs/c5/modul-1/09",
+   "course": "c5",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C8 - Proprietăți ale înmulțirii",
+   "url": "/curs/docs/c5/modul-1/10",
+   "course": "c5",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C9 - Proprietăți puteri cu exponent natural",
+   "url": "/curs/docs/c5/modul-1/11",
+   "course": "c5",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C10 - Factor comun",
+   "url": "/curs/docs/c5/modul-1/12",
+   "course": "c5",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C11 - Compararea nr. ridicate la o putere și pătratul perfect",
+   "url": "/curs/docs/c5/modul-1/13",
+   "course": "c5",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C12 - Scrierea în baza 10 și baza 2",
+   "url": "/curs/docs/c5/modul-1/14",
+   "course": "c5",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C13 - Ordinea efectuării operațiilor",
+   "url": "/curs/docs/c5/modul-1/15",
+   "course": "c5",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C14 - Media aritmetică",
+   "url": "/curs/docs/c5/modul-1/16",
+   "course": "c5",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C15.1 - Metoda reducerii la unitate",
+   "url": "/curs/docs/c5/modul-2/01",
+   "course": "c5",
+   "module": "modul-2",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 2"
+   ]
+  },
+  {
+   "title": "C15.2 - Metoda comparației",
+   "url": "/curs/docs/c5/modul-2/02",
+   "course": "c5",
+   "module": "modul-2",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 2"
+   ]
+  },
+  {
+   "title": "C15.3 - Metoda figurativă",
+   "url": "/curs/docs/c5/modul-2/03",
+   "course": "c5",
+   "module": "modul-2",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 2"
+   ]
+  },
+  {
+   "title": "C15.4 - Metoda mersului invers",
+   "url": "/curs/docs/c5/modul-2/04",
+   "course": "c5",
+   "module": "modul-2",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 2"
+   ]
+  },
+  {
+   "title": "G1 - Punct, dreaptă și plan",
+   "url": "/curs/docs/c5/modul-2/05",
+   "course": "c5",
+   "module": "modul-2",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 2"
+   ]
+  },
+  {
+   "title": "G2 - Semiplan, semidreaptă și segment",
+   "url": "/curs/docs/c5/modul-2/06",
+   "course": "c5",
+   "module": "modul-2",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 2"
+   ]
+  },
+  {
+   "title": "C15.5 - Metoda falsei ipoteze",
+   "url": "/curs/docs/c5/modul-2/07",
+   "course": "c5",
+   "module": "modul-2",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 2"
+   ]
+  },
+  {
+   "title": "C16 - Divizori și multiplii",
+   "url": "/curs/docs/c5/modul-2/08",
+   "course": "c5",
+   "module": "modul-2",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 2"
+   ]
+  },
+  {
+   "title": "C17 - Criterii de divizibilitate",
+   "url": "/curs/docs/c5/modul-2/09",
+   "course": "c5",
+   "module": "modul-2",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 2"
+   ]
+  },
+  {
+   "title": "C18 - Număr prim, număr compus",
+   "url": "/curs/docs/c5/modul-2/10",
+   "course": "c5",
+   "module": "modul-2",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 2"
+   ]
+  },
+  {
+   "title": "PROIECT",
+   "url": "/curs/docs/c5/modul-3/00",
+   "course": "c5",
+   "module": "modul-3",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 3"
+   ]
+  },
+  {
+   "title": "C19.1 - Fracții subunitare, echiunitare şi supraunitare",
+   "url": "/curs/docs/c5/modul-3/01",
+   "course": "c5",
+   "module": "modul-3",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 3"
+   ]
+  },
+  {
+   "title": "C19.2 - Procente şi fracții echivalente",
+   "url": "/curs/docs/c5/modul-3/02",
+   "course": "c5",
+   "module": "modul-3",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 3"
+   ]
+  },
+  {
+   "title": "C19.3 - Compararea fracțiilor cu același numitor sau numărător",
+   "url": "/curs/docs/c5/modul-3/03",
+   "course": "c5",
+   "module": "modul-3",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 3"
+   ]
+  },
+  {
+   "title": "C19.4 - Reprezentarea pe axa numerelor a unei fracții ordinare",
+   "url": "/curs/docs/c5/modul-3/04",
+   "course": "c5",
+   "module": "modul-3",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 3"
+   ]
+  },
+  {
+   "title": "C19.5 - Introducerea și scoaterea întregilor dintr-o fracție",
+   "url": "/curs/docs/c5/modul-3/05",
+   "course": "c5",
+   "module": "modul-3",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 3"
+   ]
+  },
+  {
+   "title": "C20.1 - Cel mai mare divizor comun a două numere naturale",
+   "url": "/curs/docs/c5/modul-3/06",
+   "course": "c5",
+   "module": "modul-3",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 3"
+   ]
+  },
+  {
+   "title": "C20.2 - Amplificarea și simplificarea fracțiilor",
+   "url": "/curs/docs/c5/modul-3/07",
+   "course": "c5",
+   "module": "modul-3",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 3"
+   ]
+  },
+  {
+   "title": "C21.1 - Cel mai mic multiplu comun a două numere naturale",
+   "url": "/curs/docs/c5/modul-3/08",
+   "course": "c5",
+   "module": "modul-3",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 3"
+   ]
+  },
+  {
+   "title": "C21.2 - Aducerea fracțiilor la un numitor comun",
+   "url": "/curs/docs/c5/modul-3/09",
+   "course": "c5",
+   "module": "modul-3",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 3"
+   ]
+  },
+  {
+   "title": "G3 - Distanţa dintre două puncte",
+   "url": "/curs/docs/c5/modul-3/10",
+   "course": "c5",
+   "module": "modul-4",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 4"
+   ]
+  },
+  {
+   "title": "G4 - Mijlocul unui segment și simetricul unui punct",
+   "url": "/curs/docs/c5/modul-3/11",
+   "course": "c5",
+   "module": "modul-4",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 4"
+   ]
+  },
+  {
+   "title": "C22 - Adunarea și scăderea fracțiilor ordinare",
+   "url": "/curs/docs/c5/modul-4/00",
+   "course": "c5",
+   "module": "modul-4",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 4"
+   ]
+  },
+  {
+   "title": "C23.1 - Înumlțirea fracțiilor ordinare",
+   "url": "/curs/docs/c5/modul-4/01",
+   "course": "c5",
+   "module": "modul-4",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 4"
+   ]
+  },
+  {
+   "title": "C23.2 - Împarțirea fracțiilor ordinare",
+   "url": "/curs/docs/c5/modul-4/02",
+   "course": "c5",
+   "module": "modul-4",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 4"
+   ]
+  },
+  {
+   "title": "C24 - Ridicarea la putere a fracțiilor ordinare",
+   "url": "/curs/docs/c5/modul-4/03",
+   "course": "c5",
+   "module": "modul-4",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 4"
+   ]
+  },
+  {
+   "title": "C25 - Scrierea numerelor zecimale neperiodice sub formă de fracții ordinare",
+   "url": "/curs/docs/c5/modul-4/04",
+   "course": "c5",
+   "module": "modul-4",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 4"
+   ]
+  },
+  {
+   "title": "Test Clasa a V-a REFACERE",
+   "url": "/curs/docs/c5/modul-4/10",
+   "course": "c5",
+   "module": "modul-5",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 5"
+   ]
+  },
+  {
+   "title": "PROIECT - „Locuința mea – camera personală\"",
+   "url": "/curs/docs/c5/modul-5/00",
+   "course": "c5",
+   "module": "modul-5",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 5"
+   ]
+  },
+  {
+   "title": "G5 - Unități de măsură. Perimetre și arii",
+   "url": "/curs/docs/c5/modul-5/01",
+   "course": "c5",
+   "module": "modul-5",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 5"
+   ]
+  },
+  {
+   "title": "G6 - Măsurarea volumului și a capacității",
+   "url": "/curs/docs/c5/modul-5/02",
+   "course": "c5",
+   "module": "modul-5",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 5"
+   ]
+  },
+  {
+   "title": "G7 - Tipuri de unghiuri. Măsura unghiurilor",
+   "url": "/curs/docs/c5/modul-5/03",
+   "course": "c5",
+   "module": "modul-5",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 5"
+   ]
+  },
+  {
+   "title": "Test Clasa a V-a — Unghiuri",
+   "url": "/curs/docs/c5/modul-5/test-g7",
+   "course": "c5",
+   "module": "modul-5",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 5"
+   ]
+  },
+  {
+   "title": "Organigramă",
+   "url": "/curs/docs/c5/organigrama",
+   "course": "c5",
+   "module": "",
+   "keywords": [
+    "clasa 5 a cincea V"
+   ]
+  },
+  {
+   "title": "C1 - Multiplii si divizori",
+   "url": "/curs/docs/c6/modul-1/01",
+   "course": "c6",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 6 a sasea VI",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C2 - Numere prime. Descompunerea in factori primi",
+   "url": "/curs/docs/c6/modul-1/02",
+   "course": "c6",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 6 a sasea VI",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C3 - Mulțimi. Mulțimea numerelor naturale N",
+   "url": "/curs/docs/c6/modul-1/03",
+   "course": "c6",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 6 a sasea VI",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C4 - Multimea nr. intregi Z",
+   "url": "/curs/docs/c6/modul-1/04",
+   "course": "c6",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 6 a sasea VI",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C5.1 – Diagrame în bastoane și histograme",
+   "url": "/curs/docs/c6/modul-1/05",
+   "course": "c6",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 6 a sasea VI",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C5.2 - Diagrame circulare",
+   "url": "/curs/docs/c6/modul-1/06",
+   "course": "c6",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 6 a sasea VI",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C5.3 - Procente. Calcul procentual",
+   "url": "/curs/docs/c6/modul-1/07",
+   "course": "c6",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 6 a sasea VI",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C5.4 – Procente de mărire și micșorare",
+   "url": "/curs/docs/c6/modul-1/08",
+   "course": "c6",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 6 a sasea VI",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C5.5 - Rapoarte",
+   "url": "/curs/docs/c6/modul-1/09",
+   "course": "c6",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 6 a sasea VI",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C5.6 - Scara numerică",
+   "url": "/curs/docs/c6/modul-1/10",
+   "course": "c6",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 6 a sasea VI",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C5.7 - Proporții",
+   "url": "/curs/docs/c6/modul-1/11",
+   "course": "c6",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 6 a sasea VI",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C6.1 - Mărimi direct proporționale",
+   "url": "/curs/docs/c6/modul-1/12",
+   "course": "c6",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 6 a sasea VI",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C6.2 - Mărimi invers proporționale",
+   "url": "/curs/docs/c6/modul-1/13",
+   "course": "c6",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 6 a sasea VI",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C6.3 - Regula de trei simplă",
+   "url": "/curs/docs/c6/modul-1/14",
+   "course": "c6",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 6 a sasea VI",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C7 - Probabilități",
+   "url": "/curs/docs/c6/modul-1/15",
+   "course": "c6",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 6 a sasea VI",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C8.1 - Cel mai mare divizor comun",
+   "url": "/curs/docs/c6/modul-1/16",
+   "course": "c6",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 6 a sasea VI",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C8.2 - Cel mai mic multiplu comun",
+   "url": "/curs/docs/c6/modul-1/17",
+   "course": "c6",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 6 a sasea VI",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C9 - Relații și operații între mulțimi",
+   "url": "/curs/docs/c6/modul-1/18",
+   "course": "c6",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 6 a sasea VI",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C10 - Modulul unui număr întreg (valoarea absolută)",
+   "url": "/curs/docs/c6/modul-2/01",
+   "course": "c6",
+   "module": "modul-2",
+   "keywords": [
+    "clasa 6 a sasea VI",
+    "modul 2"
+   ]
+  },
+  {
+   "title": "C11 - Compararea și ordonarea numerelor întregi",
+   "url": "/curs/docs/c6/modul-2/02",
+   "course": "c6",
+   "module": "modul-2",
+   "keywords": [
+    "clasa 6 a sasea VI",
+    "modul 2"
+   ]
+  },
+  {
+   "title": "C12.1 - Adunarea și scăderea numerelor întregi",
+   "url": "/curs/docs/c6/modul-2/03",
+   "course": "c6",
+   "module": "modul-2",
+   "keywords": [
+    "clasa 6 a sasea VI",
+    "modul 2"
+   ]
+  },
+  {
+   "title": "C12.2 - Înmulțirea și împărțirea numerelor întregi",
+   "url": "/curs/docs/c6/modul-2/04",
+   "course": "c6",
+   "module": "modul-2",
+   "keywords": [
+    "clasa 6 a sasea VI",
+    "modul 2"
+   ]
+  },
+  {
+   "title": "G1 - Unghiuri adiacente și bisectoarea unui unghi",
+   "url": "/curs/docs/c6/modul-2/05",
+   "course": "c6",
+   "module": "modul-2",
+   "keywords": [
+    "clasa 6 a sasea VI",
+    "modul 2"
+   ]
+  },
+  {
+   "title": "G2 - Unghiuri opuse la vârf și unghiuri formate în jurul unui punct",
+   "url": "/curs/docs/c6/modul-2/06",
+   "course": "c6",
+   "module": "modul-2",
+   "keywords": [
+    "clasa 6 a sasea VI",
+    "modul 2"
+   ]
+  },
+  {
+   "title": "G3 - Unghiul. Clasificare și măsurarea unghiurilor",
+   "url": "/curs/docs/c6/modul-2/07",
+   "course": "c6",
+   "module": "modul-2",
+   "keywords": [
+    "clasa 6 a sasea VI",
+    "modul 2"
+   ]
+  },
+  {
+   "title": "C13 - Mărimi și unități de măsură",
+   "url": "/curs/docs/c6/modul-2/08",
+   "course": "c6",
+   "module": "modul-2",
+   "keywords": [
+    "clasa 6 a sasea VI",
+    "modul 2"
+   ]
+  },
+  {
+   "title": "C14 - Puterea cu exponent număr natural a unui număr întreg nenul",
+   "url": "/curs/docs/c6/modul-2/09",
+   "course": "c6",
+   "module": "modul-2",
+   "keywords": [
+    "clasa 6 a sasea VI",
+    "modul 2"
+   ]
+  },
+  {
+   "title": "C15 - Reguli de calcul cu puteri",
+   "url": "/curs/docs/c6/modul-2/10",
+   "course": "c6",
+   "module": "modul-2",
+   "keywords": [
+    "clasa 6 a sasea VI",
+    "modul 2"
+   ]
+  },
+  {
+   "title": "C16 - Ecuații în mulțimea numerelor întregi",
+   "url": "/curs/docs/c6/modul-3/01",
+   "course": "c6",
+   "module": "modul-3",
+   "keywords": [
+    "clasa 6 a sasea VI",
+    "modul 3"
+   ]
+  },
+  {
+   "title": "C17 - Inecuații în mulțimea numerelor întregi",
+   "url": "/curs/docs/c6/modul-3/02",
+   "course": "c6",
+   "module": "modul-3",
+   "keywords": [
+    "clasa 6 a sasea VI",
+    "modul 3"
+   ]
+  },
+  {
+   "title": "C18.1 - Mulțimea numerelor raționale",
+   "url": "/curs/docs/c6/modul-3/03",
+   "course": "c6",
+   "module": "modul-3",
+   "keywords": [
+    "clasa 6 a sasea VI",
+    "modul 3"
+   ]
+  },
+  {
+   "title": "C18.2 - Opusul, modulul și compararea numerelor raționale",
+   "url": "/curs/docs/c6/modul-3/04",
+   "course": "c6",
+   "module": "modul-3",
+   "keywords": [
+    "clasa 6 a sasea VI",
+    "modul 3"
+   ]
+  },
+  {
+   "title": "C19.1 - Adunarea și scăderea numerelor raționale",
+   "url": "/curs/docs/c6/modul-3/05",
+   "course": "c6",
+   "module": "modul-3",
+   "keywords": [
+    "clasa 6 a sasea VI",
+    "modul 3"
+   ]
+  },
+  {
+   "title": "C19.2 - Inmulțirea și împărțirea numerelor raționale",
+   "url": "/curs/docs/c6/modul-3/06",
+   "course": "c6",
+   "module": "modul-3",
+   "keywords": [
+    "clasa 6 a sasea VI",
+    "modul 3"
+   ]
+  },
+  {
+   "title": "C19.3 - Ridicarea la putere a numerelor raționale",
+   "url": "/curs/docs/c6/modul-3/07",
+   "course": "c6",
+   "module": "modul-3",
+   "keywords": [
+    "clasa 6 a sasea VI",
+    "modul 3"
+   ]
+  },
+  {
+   "title": "G4 - Drepte paralele",
+   "url": "/curs/docs/c6/modul-3/08",
+   "course": "c6",
+   "module": "modul-3",
+   "keywords": [
+    "clasa 6 a sasea VI",
+    "modul 3"
+   ]
+  },
+  {
+   "title": "G5 - Drepte perpendiculare și drepte oblice",
+   "url": "/curs/docs/c6/modul-3/09",
+   "course": "c6",
+   "module": "modul-3",
+   "keywords": [
+    "clasa 6 a sasea VI",
+    "modul 3"
+   ]
+  },
+  {
+   "title": "PROIECT",
+   "url": "/curs/docs/c6/modul-3/10",
+   "course": "c6",
+   "module": "modul-3",
+   "keywords": [
+    "clasa 6 a sasea VI",
+    "modul 3"
+   ]
+  },
+  {
+   "title": "Rezolvare Test FINAL Geometrie – Clasa a VIII-a",
+   "url": "/curs/docs/c6/modul-3/100",
+   "course": "c6",
+   "module": "modul-3",
+   "keywords": [
+    "clasa 6 a sasea VI",
+    "modul 3"
+   ]
+  },
+  {
+   "title": "Triunghiul - clasificare și proprietăți",
+   "url": "/curs/docs/c6/modul-5/01",
+   "course": "c6",
+   "module": "modul-5",
+   "keywords": [
+    "clasa 6 a sasea VI",
+    "modul 5"
+   ]
+  },
+  {
+   "title": "Suma măsurilor unghiurilor într-un triunghi",
+   "url": "/curs/docs/c6/modul-5/02",
+   "course": "c6",
+   "module": "modul-5",
+   "keywords": [
+    "clasa 6 a sasea VI",
+    "modul 5"
+   ]
+  },
+  {
+   "title": "Organigramă",
+   "url": "/curs/docs/c6/organigrama",
+   "course": "c6",
+   "module": "",
+   "keywords": [
+    "clasa 6 a sasea VI"
+   ]
+  },
+  {
+   "title": "C1 – Definiția și utilizarea puterilor",
+   "url": "/curs/docs/c7/modul-1/01",
+   "course": "c7",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 7 a saptea VII",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C2 – Reguli de calcul cu puteri",
+   "url": "/curs/docs/c7/modul-1/02",
+   "course": "c7",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 7 a saptea VII",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C3 – Calcul cu radicali și proprietăți",
+   "url": "/curs/docs/c7/modul-1/03",
+   "course": "c7",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 7 a saptea VII",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C4.1 – Notația științifică și simplificarea puterilor",
+   "url": "/curs/docs/c7/modul-1/04",
+   "course": "c7",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 7 a saptea VII",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C4.2 – Puteri: prioritatea operațiilor și notația științifică",
+   "url": "/curs/docs/c7/modul-1/05",
+   "course": "c7",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 7 a saptea VII",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C5 - Mulțimea nr. reale (1)",
+   "url": "/curs/docs/c7/modul-1/06",
+   "course": "c7",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 7 a saptea VII",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C5 - Mulțimea nr. reale (2)",
+   "url": "/curs/docs/c7/modul-1/07",
+   "course": "c7",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 7 a saptea VII",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C6 – Modulul, compararea și ordonarea numerelor reale",
+   "url": "/curs/docs/c7/modul-1/08",
+   "course": "c7",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 7 a saptea VII",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C7 – Raționalizarea numitorului de forma a√b",
+   "url": "/curs/docs/c7/modul-1/09",
+   "course": "c7",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 7 a saptea VII",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C8.1 – Media aritmetică",
+   "url": "/curs/docs/c7/modul-1/10",
+   "course": "c7",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 7 a saptea VII",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C8.2 – Media geometrică",
+   "url": "/curs/docs/c7/modul-1/11",
+   "course": "c7",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 7 a saptea VII",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "G1 - Punct, dreaptă și plan",
+   "url": "/curs/docs/c7/modul-1/12",
+   "course": "c7",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 7 a saptea VII",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "G2 - Unghiul. Clasificare și măsurarea unghiurilor",
+   "url": "/curs/docs/c7/modul-1/13",
+   "course": "c7",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 7 a saptea VII",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C9 - Ecuația x² = a",
+   "url": "/curs/docs/c7/modul-1/14",
+   "course": "c7",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 7 a saptea VII",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "G3 - Patrulaterul convex",
+   "url": "/curs/docs/c7/modul-1/15",
+   "course": "c7",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 7 a saptea VII",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C10 - Aproximări ale numerelor iraționale",
+   "url": "/curs/docs/c7/modul-1/17",
+   "course": "c7",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 7 a saptea VII",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "G4 - Paralelogramul",
+   "url": "/curs/docs/c7/modul-2/01",
+   "course": "c7",
+   "module": "modul-2",
+   "keywords": [
+    "clasa 7 a saptea VII",
+    "modul 2"
+   ]
+  },
+  {
+   "title": "C11 - Relația de egalitate",
+   "url": "/curs/docs/c7/modul-2/02",
+   "course": "c7",
+   "module": "modul-2",
+   "keywords": [
+    "clasa 7 a saptea VII",
+    "modul 2"
+   ]
+  },
+  {
+   "title": "C12 - Ecuația ax+b=0",
+   "url": "/curs/docs/c7/modul-2/03",
+   "course": "c7",
+   "module": "modul-2",
+   "keywords": [
+    "clasa 7 a saptea VII",
+    "modul 2"
+   ]
+  },
+  {
+   "title": "G5 - Linia mijlocie în triunghi",
+   "url": "/curs/docs/c7/modul-2/04",
+   "course": "c7",
+   "module": "modul-2",
+   "keywords": [
+    "clasa 7 a saptea VII",
+    "modul 2"
+   ]
+  },
+  {
+   "title": "C13.1 - Sisteme de ecuații",
+   "url": "/curs/docs/c7/modul-2/05",
+   "course": "c7",
+   "module": "modul-2",
+   "keywords": [
+    "clasa 7 a saptea VII",
+    "modul 2"
+   ]
+  },
+  {
+   "title": "C13.2 - Probleme care se rezolvă cu ajutorul sistemelor de ecuații",
+   "url": "/curs/docs/c7/modul-2/06",
+   "course": "c7",
+   "module": "modul-2",
+   "keywords": [
+    "clasa 7 a saptea VII",
+    "modul 2"
+   ]
+  },
+  {
+   "title": "G6 - Centrul de greutate al unui triunghi",
+   "url": "/curs/docs/c7/modul-2/07",
+   "course": "c7",
+   "module": "modul-2",
+   "keywords": [
+    "clasa 7 a saptea VII",
+    "modul 2"
+   ]
+  },
+  {
+   "title": "C14 - Operații cu numere reale (recapitulare)",
+   "url": "/curs/docs/c7/modul-2/08",
+   "course": "c7",
+   "module": "modul-2",
+   "keywords": [
+    "clasa 7 a saptea VII",
+    "modul 2"
+   ]
+  },
+  {
+   "title": "C15 - Operații cu mulțimi (recapitulare)",
+   "url": "/curs/docs/c7/modul-2/09",
+   "course": "c7",
+   "module": "modul-2",
+   "keywords": [
+    "clasa 7 a saptea VII",
+    "modul 2"
+   ]
+  },
+  {
+   "title": "C16 - Apartenența la o mulțime",
+   "url": "/curs/docs/c7/modul-2/10",
+   "course": "c7",
+   "module": "modul-2",
+   "keywords": [
+    "clasa 7 a saptea VII",
+    "modul 2"
+   ]
+  },
+  {
+   "title": "C17.1 - Sistem de axe ortogonale în plan",
+   "url": "/curs/docs/c7/modul-3/01",
+   "course": "c7",
+   "module": "modul-3",
+   "keywords": [
+    "clasa 7 a saptea VII",
+    "modul 3"
+   ]
+  },
+  {
+   "title": "C17.2 - Distanţa dintre două puncte din plan",
+   "url": "/curs/docs/c7/modul-3/02",
+   "course": "c7",
+   "module": "modul-3",
+   "keywords": [
+    "clasa 7 a saptea VII",
+    "modul 3"
+   ]
+  },
+  {
+   "title": "C17.3 - Reprezentarea şi interpretarea unor dependenţe funcţionale prin tabele, diagrame şi grafice",
+   "url": "/curs/docs/c7/modul-3/03",
+   "course": "c7",
+   "module": "modul-3",
+   "keywords": [
+    "clasa 7 a saptea VII",
+    "modul 3"
+   ]
+  },
+  {
+   "title": "C17.4 - Poligonul frecvenţelor",
+   "url": "/curs/docs/c7/modul-3/04",
+   "course": "c7",
+   "module": "modul-3",
+   "keywords": [
+    "clasa 7 a saptea VII",
+    "modul 3"
+   ]
+  },
+  {
+   "title": "PROIECT (partea I) - Elemente de organizare a datelor",
+   "url": "/curs/docs/c7/modul-3/05",
+   "course": "c7",
+   "module": "modul-3",
+   "keywords": [
+    "clasa 7 a saptea VII",
+    "modul 3"
+   ]
+  },
+  {
+   "title": "G7.1 - Unghi înscris în cerc, coarde şi arce în cerc",
+   "url": "/curs/docs/c7/modul-3/06",
+   "course": "c7",
+   "module": "modul-3",
+   "keywords": [
+    "clasa 7 a saptea VII",
+    "modul 3"
+   ]
+  },
+  {
+   "title": "G7.2 - Tangente dintr-un punct exterior la un cerc",
+   "url": "/curs/docs/c7/modul-3/07",
+   "course": "c7",
+   "module": "modul-3",
+   "keywords": [
+    "clasa 7 a saptea VII",
+    "modul 3"
+   ]
+  },
+  {
+   "title": "G7.3 - Poligoane regulate înscrise în cerc",
+   "url": "/curs/docs/c7/modul-3/08",
+   "course": "c7",
+   "module": "modul-3",
+   "keywords": [
+    "clasa 7 a saptea VII",
+    "modul 3"
+   ]
+  },
+  {
+   "title": "G7.4 - Lungimea cercului și aria discului",
+   "url": "/curs/docs/c7/modul-3/09",
+   "course": "c7",
+   "module": "modul-3",
+   "keywords": [
+    "clasa 7 a saptea VII",
+    "modul 3"
+   ]
+  },
+  {
+   "title": "C18.1 - Funcții trigonometrice (demonstrații)",
+   "url": "/curs/docs/c7/modul-4/02",
+   "course": "c7",
+   "module": "modul-4",
+   "keywords": [
+    "clasa 7 a saptea VII",
+    "modul 4"
+   ]
+  },
+  {
+   "title": "C18.2 - Funcții trigonometrice (proprietăți)",
+   "url": "/curs/docs/c7/modul-4/03",
+   "course": "c7",
+   "module": "modul-4",
+   "keywords": [
+    "clasa 7 a saptea VII",
+    "modul 4"
+   ]
+  },
+  {
+   "title": "Organigramă",
+   "url": "/curs/docs/c7/organigrama",
+   "course": "c7",
+   "module": "",
+   "keywords": [
+    "clasa 7 a saptea VII"
+   ]
+  },
+  {
+   "title": "C1 - Notații și simboluri matematice",
+   "url": "/curs/docs/c8/modul-1/01",
+   "course": "c8",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 8 a opta VIII",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C2 - Mulțimea nr. reale R",
+   "url": "/curs/docs/c8/modul-1/02",
+   "course": "c8",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 8 a opta VIII",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C3.1 – Egalitatea expresiilor literale. Distributivitate simplă",
+   "url": "/curs/docs/c8/modul-1/03",
+   "course": "c8",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 8 a opta VIII",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C3.2 – Dezvoltarea și simplificarea expresiilor literale",
+   "url": "/curs/docs/c8/modul-1/04",
+   "course": "c8",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 8 a opta VIII",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C3.3 - Dublă distributivitate și identitate remarcabilă",
+   "url": "/curs/docs/c8/modul-1/05",
+   "course": "c8",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 8 a opta VIII",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C4 - Intervale si comparatii in multimea nr. reale",
+   "url": "/curs/docs/c8/modul-1/06",
+   "course": "c8",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 8 a opta VIII",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C5 - Inecuatii de forma ax + b",
+   "url": "/curs/docs/c8/modul-1/07",
+   "course": "c8",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 8 a opta VIII",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C6 – Raționalizarea numitorului folosind conjugata",
+   "url": "/curs/docs/c8/modul-1/08",
+   "course": "c8",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 8 a opta VIII",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C7 - Fracții: amplificarea și simplificarea",
+   "url": "/curs/docs/c8/modul-1/09",
+   "course": "c8",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 8 a opta VIII",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C8.1 - Calcul literar: expresii algebrice",
+   "url": "/curs/docs/c8/modul-1/10",
+   "course": "c8",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 8 a opta VIII",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C8.2 - Calcul literar: descompuneri în factori",
+   "url": "/curs/docs/c8/modul-1/11",
+   "course": "c8",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 8 a opta VIII",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "G1 - Punct, dreaptă și plan",
+   "url": "/curs/docs/c8/modul-1/12",
+   "course": "c8",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 8 a opta VIII",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "G2 - Relații între puncte, drepte și plane",
+   "url": "/curs/docs/c8/modul-1/13",
+   "course": "c8",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 8 a opta VIII",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C9 - Existența, amplificarea și simplificarea fracțiilor algebrice",
+   "url": "/curs/docs/c8/modul-1/14",
+   "course": "c8",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 8 a opta VIII",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "G3 - Piramida",
+   "url": "/curs/docs/c8/modul-1/15",
+   "course": "c8",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 8 a opta VIII",
+    "modul 1"
+   ]
+  },
+  {
+   "title": "C10.1 - Adunarea și scăderea fracțiilor algebrice",
+   "url": "/curs/docs/c8/modul-2/01",
+   "course": "c8",
+   "module": "modul-2",
+   "keywords": [
+    "clasa 8 a opta VIII",
+    "modul 2"
+   ]
+  },
+  {
+   "title": "C10.2 - Înmulțirea, împărțirea și ridicarea la putere a fracțiilor algebrice",
+   "url": "/curs/docs/c8/modul-2/02",
+   "course": "c8",
+   "module": "modul-2",
+   "keywords": [
+    "clasa 8 a opta VIII",
+    "modul 2"
+   ]
+  },
+  {
+   "title": "C10.3 - Ordinea efectuării operațiilor a fracțiilor algebrice",
+   "url": "/curs/docs/c8/modul-2/03",
+   "course": "c8",
+   "module": "modul-2",
+   "keywords": [
+    "clasa 8 a opta VIII",
+    "modul 2"
+   ]
+  },
+  {
+   "title": "C11 - Ecuația de gradul al doilea",
+   "url": "/curs/docs/c8/modul-2/04",
+   "course": "c8",
+   "module": "modul-2",
+   "keywords": [
+    "clasa 8 a opta VIII",
+    "modul 2"
+   ]
+  },
+  {
+   "title": "G4.1 - Prisma dreaptă",
+   "url": "/curs/docs/c8/modul-2/05",
+   "course": "c8",
+   "module": "modul-2",
+   "keywords": [
+    "clasa 8 a opta VIII",
+    "modul 2"
+   ]
+  },
+  {
+   "title": "G4.2 - Prisma regulată (arii și volum)",
+   "url": "/curs/docs/c8/modul-2/06",
+   "course": "c8",
+   "module": "modul-2",
+   "keywords": [
+    "clasa 8 a opta VIII",
+    "modul 2"
+   ]
+  },
+  {
+   "title": "G5.1 - Cilindrul circular drept",
+   "url": "/curs/docs/c8/modul-2/07",
+   "course": "c8",
+   "module": "modul-2",
+   "keywords": [
+    "clasa 8 a opta VIII",
+    "modul 2"
+   ]
+  },
+  {
+   "title": "G5.2 - Cilindrul circular drept (arii și volum)",
+   "url": "/curs/docs/c8/modul-2/08",
+   "course": "c8",
+   "module": "modul-2",
+   "keywords": [
+    "clasa 8 a opta VIII",
+    "modul 2"
+   ]
+  },
+  {
+   "title": "C13 - Mărimi și unități de măsură",
+   "url": "/curs/docs/c8/modul-2/09",
+   "course": "c8",
+   "module": "modul-2",
+   "keywords": [
+    "clasa 8 a opta VIII",
+    "modul 2"
+   ]
+  },
+  {
+   "title": "C1* | EXTRA - Triunghiuri asemenea (recapitulare)",
+   "url": "/curs/docs/c8/modul-2/10",
+   "course": "c8",
+   "module": "modul-2",
+   "keywords": [
+    "clasa 8 a opta VIII",
+    "modul 2"
+   ]
+  },
+  {
+   "title": "C2* | EXTRA - Triunghiul dreptunghic. Teorema lui Pitagora",
+   "url": "/curs/docs/c8/modul-2/11",
+   "course": "c8",
+   "module": "modul-2",
+   "keywords": [
+    "clasa 8 a opta VIII",
+    "modul 2"
+   ]
+  },
+  {
+   "title": "Portofoliu (partea I)",
+   "url": "/curs/docs/c8/modul-3/01",
+   "course": "c8",
+   "module": "modul-3",
+   "keywords": [
+    "clasa 8 a opta VIII",
+    "modul 3"
+   ]
+  },
+  {
+   "title": "FIȘA DE LABORATOR - Modelare matematică în 3D",
+   "url": "/curs/docs/c8/modul-3/012",
+   "course": "c8",
+   "module": "modul-3",
+   "keywords": [
+    "clasa 8 a opta VIII",
+    "modul 3"
+   ]
+  },
+  {
+   "title": "C14.1 - Descompuneri în factori utilizând reguli de calcul în ℝ (factor comun)",
+   "url": "/curs/docs/c8/modul-3/02",
+   "course": "c8",
+   "module": "modul-3",
+   "keywords": [
+    "clasa 8 a opta VIII",
+    "modul 3"
+   ]
+  },
+  {
+   "title": "C14.2 - Descompuneri în factori utilizând reguli de calcul în ℝ (formule de calcul prescurtat)",
+   "url": "/curs/docs/c8/modul-3/03",
+   "course": "c8",
+   "module": "modul-3",
+   "keywords": [
+    "clasa 8 a opta VIII",
+    "modul 3"
+   ]
+  },
+  {
+   "title": "C14.3 - Descompuneri în factori utilizând reguli de calcul în ℝ (grupare de termeni)",
+   "url": "/curs/docs/c8/modul-3/04",
+   "course": "c8",
+   "module": "modul-3",
+   "keywords": [
+    "clasa 8 a opta VIII",
+    "modul 3"
+   ]
+  },
+  {
+   "title": "PROIECT - Modelare matematică în 3D",
+   "url": "/curs/docs/c8/modul-3/05",
+   "course": "c8",
+   "module": "modul-3",
+   "keywords": [
+    "clasa 8 a opta VIII",
+    "modul 3"
+   ]
+  },
+  {
+   "title": "G6.1 - Paralelism: drepte paralele; unghiul a două drepte",
+   "url": "/curs/docs/c8/modul-3/06",
+   "course": "c8",
+   "module": "modul-3",
+   "keywords": [
+    "clasa 8 a opta VIII",
+    "modul 3"
+   ]
+  },
+  {
+   "title": "G6.2 - Dreapta paralelă cu planul",
+   "url": "/curs/docs/c8/modul-3/07",
+   "course": "c8",
+   "module": "modul-3",
+   "keywords": [
+    "clasa 8 a opta VIII",
+    "modul 3"
+   ]
+  },
+  {
+   "title": "G7 - Conul circular drept",
+   "url": "/curs/docs/c8/modul-3/08",
+   "course": "c8",
+   "module": "modul-3",
+   "keywords": [
+    "clasa 8 a opta VIII",
+    "modul 3"
+   ]
+  },
+  {
+   "title": "G8.1 - Trunchi de piramidă regulată",
+   "url": "/curs/docs/c8/modul-3/09",
+   "course": "c8",
+   "module": "modul-3",
+   "keywords": [
+    "clasa 8 a opta VIII",
+    "modul 3"
+   ]
+  },
+  {
+   "title": "G8.2 - Trunchi de con circular drept",
+   "url": "/curs/docs/c8/modul-3/10",
+   "course": "c8",
+   "module": "modul-3",
+   "keywords": [
+    "clasa 8 a opta VIII",
+    "modul 3"
+   ]
+  },
+  {
+   "title": "C15 - Funcția de gradul I și graficul acesteia",
+   "url": "/curs/docs/c8/modul-4/00",
+   "course": "c8",
+   "module": "modul-4",
+   "keywords": [
+    "clasa 8 a opta VIII",
+    "modul 4"
+   ]
+  },
+  {
+   "title": "C16.1 - Funcții trigonometrice (demonstrații)",
+   "url": "/curs/docs/c8/modul-4/02",
+   "course": "c8",
+   "module": "modul-4",
+   "keywords": [
+    "clasa 8 a opta VIII",
+    "modul 4"
+   ]
+  },
+  {
+   "title": "C16.2 - Funcții trigonometrice (proprietăți)",
+   "url": "/curs/docs/c8/modul-4/03",
+   "course": "c8",
+   "module": "modul-4",
+   "keywords": [
+    "clasa 8 a opta VIII",
+    "modul 4"
+   ]
+  },
+  {
+   "title": "C17 - Elemente de statistică: indicatorii tendinței centrale (frecvență, medie, mediană, mod și amplitudine a unui set de date)",
+   "url": "/curs/docs/c8/modul-4/04",
+   "course": "c8",
+   "module": "modul-4",
+   "keywords": [
+    "clasa 8 a opta VIII",
+    "modul 4"
+   ]
+  },
+  {
+   "title": "Organigramă",
+   "url": "/curs/docs/c8/organigrama",
+   "course": "c8",
+   "module": "",
+   "keywords": [
+    "clasa 8 a opta VIII"
+   ]
+  }
+ ]
+}
