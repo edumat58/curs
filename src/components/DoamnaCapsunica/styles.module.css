@@ -43,7 +43,10 @@
   bottom: 5.5rem;
   z-index: 196;
   width: min(384px, 92vw);
-  height: min(560px, 72vh);
+  /* dvh = înălțimea vizibilă reală (pe iOS, vh e viewport-ul mare cu bara URL
+     ascunsă → panoul ieșea cu antetul/X-ul deasupra ecranului). */
+  height: min(560px, 72dvh);
+  max-height: calc(100dvh - 96px);
   background: #f6f4ef;
   border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 18px;
@@ -259,6 +262,7 @@
     left: 0.5rem;
     width: auto;
     bottom: 4.75rem;
-    height: 72vh;
+    height: 68dvh;
+    max-height: calc(100dvh - 96px);
   }
 }
