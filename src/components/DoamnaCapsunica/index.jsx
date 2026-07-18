@@ -7,11 +7,13 @@ import styles from './styles.module.css';
 // cu tutorele Kulturosfera prin ruta publică /api/tutore (CORS + rate-limit).
 // Randează matematică KaTeX și linkuri apăsabile. Respectă modul de proiecție (hideUI).
 
-// Pe localhost lovim preview-ul local al site-ului principal; în producție, kulturosfera.com.
+// Pe localhost lovim preview-ul local al site-ului principal; în producție,
+// www.kulturosfera.com (host-ul canonic — apex-ul face 307 spre www, iar
+// preflight-ul CORS NU urmărește redirect-uri, deci lovim direct www).
 const API =
   typeof window !== 'undefined' && /^(localhost|127\.)/.test(window.location.hostname)
     ? 'http://localhost:3001/api/tutore'
-    : 'https://kulturosfera.com/api/tutore';
+    : 'https://www.kulturosfera.com/api/tutore';
 
 const AVATAR = '/curs/img/doamna-capsunica.png';
 
