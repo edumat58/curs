@@ -262,7 +262,7 @@
     left: 0.5rem;
     width: auto;
     bottom: 4.75rem;
-    height: 68dvh;
-    max-height: calc(100dvh - 96px);
+    height: 60dvh;
+    max-height: calc(100dvh - 120px);
   }
 }
