@@ -47,6 +47,25 @@ function firstH1(raw) {
   return m ? m[1].trim() : '';
 }
 
+// Extrage textul CURAT al lecției pentru RAG (ce citește tutorele): păstrează
+// proza, definițiile, exemplele și formulele LaTeX; scoate frontmatter, importuri,
+// diagramele SVG, marcajele de admoniție și tag-urile JSX/HTML.
+const MAX_TEXT = 4000;
+function extractText(raw) {
+  let b = raw.replace(/^---[\s\S]*?---/, ''); // frontmatter
+  b = b.replace(/^\s*import\s.+$/gm, ''); // linii import
+  b = b.replace(/<svg[\s\S]*?<\/svg>/gi, ' [figură] '); // diagrame SVG
+  // blocuri KaTeX → păstrează LaTeX-ul ca $$...$$
+  b = b.replace(/<Katex>\s*\{\s*(?:String\.raw)?\s*`([\s\S]*?)`\s*\}\s*<\/Katex>/g, (_, t) => ` $$${t.trim()}$$ `);
+  b = b.replace(/<Katex>([\s\S]*?)<\/Katex>/g, (_, t) =>
+    ` $$${t.replace(/^\s*\{\s*(?:String\.raw)?\s*`/, '').replace(/`\s*\}\s*$/, '').trim()}$$ `
+  );
+  b = b.replace(/:::\s*\w+[^\n]*/g, '').replace(/:::/g, ''); // marcaje admoniție
+  b = b.replace(/<\/?[a-zA-Z][^>]*>/g, ' '); // tag-uri JSX/HTML rămase (păstrează textul din interior)
+  b = b.replace(/\r/g, '').replace(/[ \t]+/g, ' ').replace(/\n{3,}/g, '\n\n').trim();
+  return b.slice(0, MAX_TEXT);
+}
+
 const lessons = [];
 
 function walk(dir) {
@@ -80,6 +99,7 @@ function walk(dir) {
       course,
       module: moduleSeg,
       keywords: [CLASS_LABEL[course] || '', moduleSeg.replace('-', ' ')].filter(Boolean),
+      text: extractText(raw), // conținutul lecției pentru RAG
     });
   }
 }
