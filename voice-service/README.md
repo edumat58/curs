@@ -133,39 +133,62 @@ elev → https://voce.asbrihome.synology.me   (cert valid, reverse proxy DSM)
             └── Tailscale ──→ PC:8099  (Docker: Node + Piper + opus-tools)
 ```
 
-Pe PC, o singură dată:
+### Pe o gazdă Linux sau macOS
+
+`docker compose up -d --build`, și gata. Fișierul `docker-compose.yml` fixează
+`VOICE_PUBLIC_URL` și repornirea automată.
+
+### Pe Windows Server: nativ, fără Docker
+
+**Docker nu e o opțiune aici**, și merită spus de ce, ca să nu se piardă o oră
+căutând comutatorul: pe Windows Server, Docker rulează containere Windows
+(`docker info` → `OSType=windows`), iar imaginea noastră pornește de la
+`node:22-bookworm-slim`, care e Linux. Containerele Linux ar cere Docker Desktop
+(nesuportat pe Server) sau WSL2 cu o distribuție instalată. Instalarea nativă
+are, oricum, mai puțini pași.
+
+De care avem nevoie: **Node 20+**, **Python 3.12**, `piper-tts` din pip, vocile,
+și `ffmpeg` sau `opusenc` pentru compresie. Totul se poate pune pe alt disc
+decât `C:`, iar în cazul de față chiar trebuie.
 
 ```powershell
-cd $HOME
-git clone https://github.com/edumat58/curs.git
-cd curs\voice-service
-copy "$HOME\Downloads\edupasi-voice.env" .env
-docker compose up -d --build
-curl.exe -s http://127.0.0.1:8099/health
+D:\Python312\python.exe -m venv D:\edupasi\.voice-venv
+D:\edupasi\.voice-venv\Scripts\python.exe -m pip install piper-tts
 ```
 
-Portul trebuie deschis pentru tailnet (o singură dată, PowerShell ca
-administrator):
+Vocile se descarcă de la aceleași adrese ca în `Dockerfile`, în
+`D:\edupasi\.voice-models`. În `.env`, căile se scriu cu **bară oblică
+normală** (`D:/edupasi/...`) — Node le acceptă pe Windows, iar backslash-ul e o
+sursă inepuizabilă de scăpări de tip escape la orice pas care trece printr-un
+shell.
+
+Serviciul se înregistrează ca **sarcină planificată**, nu se pornește de mână:
+un proces lansat dintr-o sesiune SSH sau RDP moare odată cu sesiunea.
 
 ```powershell
-New-NetFirewallRule -DisplayName "EduPASI voce" -Direction Inbound `
-  -LocalPort 8099 -Protocol TCP -Action Allow
+$act = New-ScheduledTaskAction -Execute 'C:\Program Files\nodejs\node.exe' -Argument '--env-file=.env src/server.mjs' -WorkingDirectory 'D:\edupasi\voice-service'
+$prn = New-ScheduledTaskPrincipal -UserId 'SYSTEM' -LogonType ServiceAccount -RunLevel Highest
+Register-ScheduledTask -TaskName 'EduPASI Voce' -Action $act -Trigger (New-ScheduledTaskTrigger -AtStartup) -Principal $prn
 ```
 
-Apoi, în DSM → Panou de control → Portal de conectare → Avansat →
-Proxy invers, la intrarea `voce.asbrihome.synology.me` se schimbă destinația din
-`localhost:8099` în adresa de tailnet a PC-ului, portul 8099. Site-ul nu se
-atinge: adresa publică și certificatul rămân aceleași.
+Rulează ca `SYSTEM` intenționat: pornește la boot fără ca cineva să fie logat și
+fără să ceară o parolă de cont.
 
-Două lucruri care opresc serviciul fără să pară o defecțiune: PC-ul care intră
-în somn și Docker Desktop care nu pornește la logare. Ambele se rezolvă din
-setările Windows, iar `restart: unless-stopped` din compose acoperă restul.
-
-La fiecare actualizare a codului, tot pe PC:
+Portul se deschide o singură dată, din PowerShell ca administrator:
 
 ```powershell
-cd $HOME\curs && git pull && cd voice-service && docker compose up -d --build
+New-NetFirewallRule -DisplayName 'EduPASI voce' -Direction Inbound -LocalPort 8099 -Protocol TCP -Action Allow
 ```
+
+### Comutarea adresei publice
+
+În DSM → Panou de control → Portal de conectare → Avansat → Proxy invers, la
+intrarea `voce.asbrihome.synology.me` se schimbă destinația din `localhost:8099`
+în adresa de tailnet a PC-ului, portul 8099. Site-ul nu se atinge: adresa
+publică și certificatul rămân aceleași.
+
+Ce oprește serviciul fără să pară o defecțiune: PC-ul care intră în somn. Merită
+dezactivat din setările de alimentare.
 
 ## Instalare pe Oracle Cloud Always Free (24/7, gratuit)
 
