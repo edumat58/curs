@@ -44,7 +44,7 @@ export async function createStore(env = process.env) {
      * Rezervă generarea pentru un hash. Inserția e atomică: dacă doi elevi dau
      * click simultan pe aceeași secțiune, doar unul generează, celălalt așteaptă.
      */
-    async claim(sectionHash, meta, { staleMs = 5 * 60 * 1000 } = {}) {
+    async claim(sectionHash, meta, { staleMs = 20 * 60 * 1000 } = {}) {
       const now = new Date();
 
       // Repreluăm o încercare eșuată sau o rezervare abandonată (proces căzut,
@@ -116,7 +116,12 @@ export async function createStore(env = process.env) {
             models: meta,
             updatedAt: new Date(),
           },
-        }
+          $setOnInsert: { sectionHash, createdAt: new Date() },
+        },
+        // `upsert` pentru că rezervarea poate să nu mai existe: la o generare
+        // lungă, curățenia periodică sau o repornire o pot fi șters între timp.
+        // Fără el, munca de câteva minute se pierdea în tăcere.
+        { upsert: true }
       );
       return col.findOne({ sectionHash });
     },
@@ -135,8 +140,14 @@ export async function createStore(env = process.env) {
       );
     },
 
-    /** Eliberează rezervările vechi rămase agățate (proces căzut, deploy etc.). */
-    async releaseStale(maxAgeMs = 5 * 60 * 1000) {
+    /**
+     * Eliberează rezervările vechi rămase agățate (proces căzut, deploy etc.).
+     *
+     * Pragul e generos intenționat: o secțiune mare se generează în minute, nu
+     * în secunde. Cu 5 minute, curățenia ștergea rezervarea unui job ÎNCĂ ÎN
+     * LUCRU, iar rezultatul lui se pierdea la salvare.
+     */
+    async releaseStale(maxAgeMs = 20 * 60 * 1000) {
       const cutoff = new Date(Date.now() - maxAgeMs);
       const res = await col.deleteMany({ status: 'pending', createdAt: { $lt: cutoff } });
       return res.deletedCount;

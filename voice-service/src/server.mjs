@@ -109,8 +109,7 @@ export async function createServer(env = process.env) {
 
       // 2. Deduplicare în proces: mai mulți elevi, aceeași secțiune, o generare.
       if (inFlight.has(sectionHash)) {
-        const doc = await inFlight.get(sectionHash);
-        res.json({ ...publicView(doc, baseUrl), cached: false, deduped: true });
+        res.status(202).json({ status: 'pending', sectionHash, deduped: true });
         return;
       }
 
@@ -122,16 +121,9 @@ export async function createServer(env = process.env) {
           headingLevel: section.level || null,
           lessonTitle: section.lessonTitle || null,
         });
-        if (!claimed) {
-          // Alt proces generează deja; așteptăm scurt rezultatul lui.
-          for (let i = 0; i < 40; i += 1) {
-            await new Promise((r) => setTimeout(r, 750));
-            const doc = await store.findByHash(sectionHash);
-            if (doc && doc.status === 'ready') return doc;
-            if (doc && doc.status === 'error') throw new Error('Generare eșuată în alt proces.');
-          }
-          throw new Error('Timp expirat așteptând generarea.');
-        }
+        // Dacă rezervarea e la altcineva, nu așteptăm: clientul întreabă oricum
+        // periodic de starea hash-ului și va vedea rezultatul când apare.
+        if (!claimed) return null;
 
         try {
           const result = await explainSection(section, llm, { analysisLlm });
@@ -167,24 +159,69 @@ export async function createServer(env = process.env) {
       // Dacă nimeni nu o tratează, Node oprește procesul (unhandled rejection)
       // — exact așa murea serviciul la prima limită de rată, iar apoi nici
       // explicațiile din cache nu mai puteau fi servite. Înghițim eroarea aici;
-      // cererea o tratează separat, mai jos.
-      work.catch(() => {}).finally(() => inFlight.delete(sectionHash));
+      // starea reală rămâne în baza de date, de unde o citește clientul.
+      work
+        .catch((err) => console.error(`[voice] ${sectionHash.slice(0, 8)} a eșuat:`, err.message))
+        .finally(() => inFlight.delete(sectionHash));
 
-      const doc = await work;
-      res.json({ ...publicView(doc, baseUrl), cached: false });
+      // NU așteptăm terminarea. O explicație completă pentru o secțiune mare
+      // poate dura minute, iar reverse proxy-ul închide conexiunea la 180 de
+      // secunde — munca era aruncată exact când era aproape gata. Răspundem
+      // imediat, iar clientul întreabă periodic dacă e gata.
+      res.status(202).json({ status: 'pending', sectionHash });
     } catch (err) {
+      res.status(502).json({
+        error: String(err.message).slice(0, 300),
+        code: 'generation_failed',
+      });
+    }
+  });
+
+  /**
+   * Starea unei generări pornite. Clientul o interoghează până primește `ready`.
+   * Separând pornirea de așteptare, durata generării nu mai e limitată de
+   * niciun timeout de rețea.
+   */
+  app.get('/voice/section/:hash', async (req, res) => {
+    const hash = String(req.params.hash);
+    if (!/^[a-f0-9]{64}$/.test(hash)) {
+      res.status(400).json({ error: 'hash invalid' });
+      return;
+    }
+    const baseUrl = env.VOICE_PUBLIC_URL || `${req.protocol}://${req.get('host')}`;
+    const doc = await store.findByHash(hash);
+
+    if (!doc) {
+      res.status(404).json({ status: 'unknown', sectionHash: hash });
+      return;
+    }
+    if (doc.status === 'ready') {
+      res.json({ ...publicView(doc, baseUrl), cached: true });
+      return;
+    }
+    if (doc.status === 'error') {
       // Limita de rată nu e o defecțiune: e o așteptare. Clientul trebuie să
       // afle asta ca să propună „încearcă din nou", nu „serviciul e picat".
-      const rateLimited = err && (err.status === 429 || /rate limit/i.test(String(err.message)));
-      const waitMatch = /try again in ([\d.]+)s/i.exec(String(err.message));
+      const message = String(doc.error || '');
+      const rateLimited = /rate limit|429/i.test(message);
+      const waitMatch = /try again in ([\d.]+)s/i.exec(message);
       res.status(rateLimited ? 429 : 502).json({
+        status: 'error',
         error: rateLimited
           ? 'Prea multe explicații cerute în același timp.'
-          : String(err.message).slice(0, 300),
+          : message.slice(0, 300),
         code: rateLimited ? 'rate_limited' : 'generation_failed',
         retryAfterSec: waitMatch ? Math.ceil(parseFloat(waitMatch[1])) : undefined,
       });
+      return;
     }
+
+    res.status(202).json({
+      status: 'pending',
+      sectionHash: hash,
+      startedAt: doc.createdAt,
+      elapsedSec: doc.createdAt ? Math.round((Date.now() - new Date(doc.createdAt)) / 1000) : null,
+    });
   });
 
   /** Redare audio, cu Range pentru derulare (seek) și cache lung în browser. */

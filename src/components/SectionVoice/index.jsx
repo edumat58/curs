@@ -37,9 +37,38 @@ function serviceUrl() {
  */
 const ETAPE = [
   { after: 0, text: 'Citesc secțiunea…' },
-  { after: 5000, text: 'Pregătesc explicația…' },
-  { after: 14000, text: 'Înregistrez vocea…' },
+  { after: 6000, text: 'Pregătesc explicația…' },
+  { after: 20000, text: 'Înregistrez vocea…' },
+  { after: 90000, text: 'Secțiunea e lungă — o explic în întregime…' },
 ];
+
+/**
+ * Așteaptă terminarea unei generări pornite pe server.
+ *
+ * Serverul răspunde imediat cu 202 și lucrează mai departe, pentru că o
+ * explicație completă pentru o secțiune mare poate dura minute, iar reverse
+ * proxy-ul din fața lui închide conexiunile la 180 de secunde. Aici doar
+ * întrebăm periodic dacă e gata — fără limită de timp impusă de rețea.
+ */
+async function waitForReady(hash, signal) {
+  const started = Date.now();
+  const LIMITA_MS = 15 * 60 * 1000;
+
+  while (Date.now() - started < LIMITA_MS) {
+    await new Promise((r) => setTimeout(r, 3000));
+    if (signal.aborted) throw Object.assign(new Error('anulat'), { name: 'AbortError' });
+
+    const res = await fetch(`${serviceUrl()}/voice/section/${hash}`, { signal });
+    if (res.status === 202) continue;
+    if (res.status === 429) throw new Error('rate');
+    if (res.ok) return res.json();
+
+    // 404 înseamnă că rezervarea a dispărut (repornire de serviciu); orice
+    // altceva e o eroare reală de generare. În ambele cazuri, oprire.
+    throw new Error(res.status === 404 ? 'reluare' : `Serviciul a răspuns ${res.status}`);
+  }
+  throw new Error('Generarea durează neobișnuit de mult.');
+}
 
 function useProgressMessage(active) {
   const [text, setText] = useState(ETAPE[0].text);
@@ -151,29 +180,23 @@ function SectionButton({ section, route, headingElement }) {
         sectionId: section.id,
         section: { ...payload, canonical: canonicalSection(section) },
       });
-      const post = () =>
-        fetch(`${serviceUrl()}/voice/section`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body,
-          signal: abortRef.current.signal,
-        });
+      const res = await fetch(`${serviceUrl()}/voice/section`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body,
+        signal: abortRef.current.signal,
+      });
 
-      let res = await post();
-
-      if (res.status === 429) {
-        // Limita gratuită e pe tokeni/minut. Nu e o eroare a elevului și nici
-        // o defecțiune: așteptăm exact cât cere serviciul și reîncercăm o dată.
-        const info = await res.json().catch(() => ({}));
-        const wait = Math.min(30, Number(info.retryAfterSec) || 12);
-        await new Promise((r) => setTimeout(r, wait * 1000));
-        res = await post();
-        if (!res.ok) throw new Error('rate');
+      // 200 = era deja în cache. 202 = a pornit generarea; durata ei nu mai
+      // trece printr-o conexiune deschisă, deci întrebăm din când în când.
+      let json = res.ok ? await res.json() : null;
+      if (res.status === 202) {
+        json = await waitForReady(hash, abortRef.current.signal);
+      } else if (!res.ok) {
+        throw new Error(`Serviciul a răspuns ${res.status}`);
       }
 
-      if (!res.ok) throw new Error(`Serviciul a răspuns ${res.status}`);
-      const json = await res.json();
-      if (!json.audioUrl) throw new Error('Nu am primit audio.');
+      if (!json || !json.audioUrl) throw new Error('Nu am primit audio.');
       setData(json);
       setState('ready');
     } catch (err) {
@@ -182,7 +205,9 @@ function SectionButton({ section, route, headingElement }) {
       setError(
         err.message === 'rate'
           ? 'Prea multe explicații cerute odată. Așteaptă un minut și apasă din nou.'
-          : 'Nu am putut pregăti explicația. Apasă din nou pentru a reîncerca.'
+          : err.message === 'reluare'
+            ? 'Pregătirea a fost întreruptă. Apasă din nou ca să reia.'
+            : 'Nu am putut pregăti explicația. Apasă din nou pentru a reîncerca.'
       );
     }
   }, [section, route, state]);
@@ -231,7 +256,7 @@ function SectionButton({ section, route, headingElement }) {
                 <span className={styles.waitingText}>
                   {progress}
                   <span className={styles.waitingHint}>
-                    Prima dată durează puțin. Apoi pornește instant.
+                    Prima dată se pregătește de la zero. Apoi pornește instant.
                   </span>
                 </span>
               </div>
@@ -247,7 +272,12 @@ function SectionButton({ section, route, headingElement }) {
             )}
 
             {state === 'ready' && data && (
-              <AudioPlayer src={data.audioUrl} autoPlay onClose={() => setState('idle')} />
+              <AudioPlayer
+                src={data.audioUrl}
+                knownDuration={Number(data.durationSec) || 0}
+                autoPlay
+                onClose={() => setState('idle')}
+              />
             )}
           </>,
           panel

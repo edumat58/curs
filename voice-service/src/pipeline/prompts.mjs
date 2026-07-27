@@ -160,11 +160,11 @@ export function speechBudget(section) {
     (section.contentText || '').length
     + (section.latex || []).length * 100
     + (section.visuals || []).length * 90;
-  // Plafonul de 450 de cuvinte (~3 minute) nu e ales estetic: peste el, o
-  // singură secțiune consumă tot bugetul gratuit de tokeni pe minut al
-  // furnizorului și blochează generarea următoarelor. Sunt și trei minute de
-  // ascultare continuă — mult pentru un elev care are nevoie de sprijin.
-  const words = Math.round(Math.min(450, Math.max(60, weighted / 2.6)));
+  // Plafonul nu e o alegere pedagogică — o secțiune are dreptul să fie explicată
+  // integral, oricât ar dura. E doar limita tehnică sub care cererea încape în
+  // bugetul gratuit de 8000 de tokeni pe minut al furnizorului; peste ea,
+  // generarea ar fi respinsă și elevul nu ar primi nimic.
+  const words = Math.round(Math.min(800, Math.max(60, weighted / 2.6)));
   return { words, seconds: Math.round((words / 150) * 60) };
 }
 

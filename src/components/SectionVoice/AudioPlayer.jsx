@@ -16,11 +16,14 @@ const SPEEDS = [0.75, 1, 1.25, 1.5, 2];
  * Aceleași controale pe desktop și pe mobil — fără versiune „redusă" pe telefon,
  * pentru că exact acolo sunt elevii.
  */
-export default function AudioPlayer({ src, autoPlay = false, onClose }) {
+export default function AudioPlayer({ src, autoPlay = false, onClose, knownDuration = 0 }) {
   const audioRef = useRef(null);
   const [playing, setPlaying] = useState(false);
   const [current, setCurrent] = useState(0);
-  const [duration, setDuration] = useState(0);
+  // Durata vine de la server odată cu explicația. Nu așteptăm ca browserul să
+  // citească metadatele fișierului: pe conexiuni lente asta durează, iar până
+  // atunci bara de derulare are lungime zero și elevul nu poate sări nicăieri.
+  const [duration, setDuration] = useState(knownDuration || 0);
   const [speed, setSpeed] = useState(1);
   const [buffering, setBuffering] = useState(true);
 
@@ -29,7 +32,9 @@ export default function AudioPlayer({ src, autoPlay = false, onClose }) {
     if (!el) return undefined;
     const onTime = () => setCurrent(el.currentTime);
     const onMeta = () => {
-      setDuration(Number.isFinite(el.duration) ? el.duration : 0);
+      // Metadatele reale au prioritate; valoarea de la server e doar punctul
+      // de plecare, ca bara să fie utilizabilă din prima secundă.
+      if (Number.isFinite(el.duration) && el.duration > 0) setDuration(el.duration);
       setBuffering(false);
     };
     const onEnd = () => setPlaying(false);

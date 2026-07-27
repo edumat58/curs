@@ -3,17 +3,20 @@
  * voce feminină românească.
  *
  * Prosodia contează la fel de mult ca modelul: un profesor face pauză după o
- * definiție și înainte de o concluzie. Piper nu acceptă SSML, dar respectă
- * pauzele dintre propoziții atunci când sintetizăm frază cu frază și inserăm
- * liniște controlată — de aceea segmentăm noi textul, nu îl trimitem în bloc.
+ * definiție și înainte de o concluzie. Piper nu acceptă SSML, dar are
+ * `--sentence-silence`, care inserează liniște după fiecare propoziție.
+ *
+ * Am sintetizat inițial frază cu frază, ca să controlăm pauza pe tipul de
+ * punctuație. Măsurat pe NAS (AMD R1600), asta costa ~2 secunde de încărcare a
+ * modelului la FIECARE propoziție: 27 s în loc de 19 s pentru cinci fraze.
+ * Pentru o explicație de douăzeci de fraze însemna peste o jumătate de minut
+ * pierdut degeaba. Un singur apel, cu pauza lăsată pe seama lui Piper, sună la
+ * fel și e considerabil mai rapid.
  */
 import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
-
-/** Pauze (ms) după semnele de punctuație — ritmul unui profesor, nu al unui robot. */
-const PAUSE_AFTER = { '.': 420, '!': 420, '?': 460, ':': 340, ';': 300, ',': 0 };
 
 /** Împarte în propoziții, păstrând semnul de punctuație. */
 export function splitSentences(text) {
@@ -42,10 +45,6 @@ function wavHeader(dataLength, sampleRate) {
   return buf;
 }
 
-function silence(ms, sampleRate) {
-  return Buffer.alloc(Math.round((sampleRate * ms) / 1000) * 2);
-}
-
 /** Extrage datele PCM dintr-un WAV (sare peste chunk-urile din antet). */
 function pcmFromWav(buffer) {
   let offset = 12;
@@ -63,12 +62,17 @@ export function createPiperTts(env = process.env) {
   const modelPath = env.PIPER_MODEL || path.join(process.cwd(), '.voice-models/ro_RO-raluca-high.onnx');
   const voiceName = path.basename(String(modelPath)).replace(/\.onnx$/, '');
   const lengthScale = Number(env.PIPER_LENGTH_SCALE || 1.0);
+  const sentenceSilence = Number(env.PIPER_SENTENCE_SILENCE || 0.4);
 
   /** Sintetizează un fragment și întoarce PCM brut. */
   function synthChunk(text, sampleRateRef) {
     return new Promise((resolve, reject) => {
       const out = path.join(os.tmpdir(), `piper-${process.pid}-${Math.random().toString(36).slice(2)}.wav`);
-      const args = ['-m', 'piper', '-m', modelPath, '-f', out, '--length-scale', String(lengthScale)];
+      const args = [
+        '-m', 'piper', '-m', modelPath, '-f', out,
+        '--length-scale', String(lengthScale),
+        '--sentence-silence', String(sentenceSilence),
+      ];
       const proc = spawn(python, args, { stdio: ['pipe', 'ignore', 'pipe'] });
       let stderr = '';
       proc.stderr.on('data', (d) => { stderr += d.toString(); });
@@ -100,26 +104,13 @@ export function createPiperTts(env = process.env) {
      * @returns {{wav: Buffer, durationSec: number, sampleRate: number, voice: string}}
      */
     async synthesize(text, { onProgress } = {}) {
-      const sentences = splitSentences(text);
-      if (!sentences.length) throw new Error('Text gol pentru sinteză.');
+      const clean = String(text).trim();
+      if (!clean) throw new Error('Text gol pentru sinteză.');
 
       const sampleRateRef = { value: 22050 };
-      const parts = [];
+      const data = await synthChunk(clean, sampleRateRef);
+      if (onProgress) onProgress({ index: 0, total: 1 });
 
-      for (let i = 0; i < sentences.length; i += 1) {
-        const sentence = sentences[i];
-        const pcm = await synthChunk(sentence, sampleRateRef);
-        parts.push(pcm);
-
-        const lastChar = sentence.slice(-1);
-        const pause = PAUSE_AFTER[lastChar] ?? 260;
-        if (pause && i < sentences.length - 1) {
-          parts.push(silence(pause, sampleRateRef.value));
-        }
-        if (onProgress) onProgress({ index: i, total: sentences.length });
-      }
-
-      const data = Buffer.concat(parts);
       const wav = Buffer.concat([wavHeader(data.length, sampleRateRef.value), data]);
       return {
         wav,
