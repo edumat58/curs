@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkedumat_58=self.webpackChunkedumat_58||[]).push([[7557],{17250:a=>{a.exports=JSON.parse('{"categoryGeneratedIndex":{"title":"Automatisme de Matematic\u0103","slug":"/automatisme","permalink":"/curs/docs/automatisme","sidebar":"tutorialSidebar","navigation":{"next":{"title":"Clasa a V-a","permalink":"/curs/docs/automatisme/clasa-5"}}}}')}}]);
