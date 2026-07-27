@@ -114,8 +114,11 @@ export default function Automatism({ id, generator, title, subtitle }) {
           {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
         </div>
         <div className={styles.scoreBox} aria-live="polite">
+          <span className={styles.streak} title="Răspunsuri corecte la rând">
+            🔥 {score.streak}
+          </span>
           <span className={styles.tally}>
-            {score.ok} corecte/{score.total} încercări
+            {score.ok}/{score.total}
           </span>
         </div>
       </header>
@@ -150,7 +153,6 @@ export default function Automatism({ id, generator, title, subtitle }) {
           <div className={styles.blanks}>
             {q.blanks.map((b, i) => (
               <label className={styles.blank} key={i}>
-                {b.label && <span className={styles.blankLabel}>{b.label}</span>}
                 <input
                   ref={i === 0 ? firstInput : null}
                   className={

@@ -308,7 +308,7 @@ export function distributeSimple() {
   return {
     prompt: {
       text: 'Dezvoltă expresia:',
-      latex: `${k}(${inside})`,
+      latex: `${k}(${inside}) = \\square\\,x \\;\\square`,
     },
     blanks: [
       { answer: k, kind: 'int', label: 'coeficientul lui x' },
@@ -428,7 +428,7 @@ export function doubleDistribute() {
   return {
     prompt: {
       text: 'Dezvoltă și reduce:',
-      latex: `(x ${signed(a)})(x ${signed(b)})`,
+      latex: `(x ${signed(a)})(x ${signed(b)}) = x^2 \\;\\square\\,x \\;\\square`,
     },
     blanks: [
       { answer: a + b, kind: 'int', label: 'coeficientul lui x (cu semn)' },
@@ -584,10 +584,10 @@ export function coordinates() {
   const x = nz(-4, 4);
   const y = nz(-4, 4);
   return {
-    prompt: { text: 'Citește coordonatele punctului $P$ din reper:', svg: gridSVG([{ x, y, label: 'P' }]) },
+    prompt: { text: 'Citește coordonatele punctului $P$ din reper:', latex: 'P(\\square\\,;\\,\\square)', svg: gridSVG([{ x, y, label: 'P' }]) },
     blanks: [
-      { answer: x, kind: 'int', label: 'abscisa (x)' },
-      { answer: y, kind: 'int', label: 'ordonata (y)' },
+      { answer: x, kind: 'int' },
+      { answer: y, kind: 'int' },
     ],
     solutionLatex: `P(${x}\\,;\\,${y})`,
   };
@@ -644,11 +644,12 @@ export function pointTranslation() {
   return {
     prompt: {
       text: `Punctul $A(${ax}\\,;\\,${ay})$ este translatat cu vectorul $\\vec{u}(${vx}\\,;\\,${vy})$. Ce coordonate are imaginea $A'$?`,
+      latex: "A'(\\square\\,;\\,\\square)",
       svg: gridSVG([{ x: ax, y: ay, label: 'A' }]),
     },
     blanks: [
-      { answer: ax + vx, kind: 'int', label: "abscisa lui A'" },
-      { answer: ay + vy, kind: 'int', label: "ordonata lui A'" },
+      { answer: ax + vx, kind: 'int' },
+      { answer: ay + vy, kind: 'int' },
     ],
     solutionLatex: `A'(${ax} ${signed(vx)}\\,;\\, ${ay} ${signed(vy)}) = A'(${ax + vx}\\,;\\,${ay + vy})`,
   };
@@ -680,6 +681,189 @@ export function boxVolume() {
     prompt: { text: `Paralelipipedul dreptunghic are dimensiunile $${L}$, $${l}$ și $${h}$. Cât este volumul?`, svg: boxSVG(L, l, h) },
     blanks: [{ answer: L * l * h, kind: 'int', label: 'volumul' }],
     solutionLatex: `V = ${L}\\times ${l}\\times ${h} = ${L * l * h}`,
+  };
+}
+
+/* ============================================================
+   GEOMETRIE / ALGEBRĂ suplimentară — Thales, trigonometrie,
+   volume, puteri, scriere științifică, antecedent, simetrie.
+   Tipuri din programa oficială de colegiu + documentul MEN.
+   ============================================================ */
+function thalesSVG() {
+  return `<svg viewBox="0 0 210 150" width="210" height="150" role="img" aria-label="configurația Thales">
+  <polygon points="100,25 30,130 185,130" fill="none" stroke="currentColor" stroke-width="2.2"/>
+  <line x1="69" y1="72" x2="138" y2="72" stroke="currentColor" stroke-width="2.2"/>
+  <text x="97" y="18" font-size="13" fill="currentColor">A</text>
+  <text x="16" y="136" font-size="13" fill="currentColor">B</text>
+  <text x="190" y="136" font-size="13" fill="currentColor">C</text>
+  <text x="52" y="70" font-size="13" fill="currentColor">M</text>
+  <text x="143" y="70" font-size="13" fill="currentColor">N</text>
+</svg>`;
+}
+function trigTriSVG(a, b, c) {
+  return `<svg viewBox="0 0 200 150" width="200" height="150" role="img" aria-label="triunghi dreptunghic">
+  <polygon points="40,120 160,120 40,40" fill="none" stroke="currentColor" stroke-width="2.2"/>
+  <rect x="40" y="106" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"/>
+  <path d="M138,120 A22,22 0 0,1 146,102" fill="none" stroke="currentColor" stroke-width="1.6"/>
+  <text x="31" y="134" font-size="13" fill="currentColor">A</text>
+  <text x="163" y="134" font-size="13" fill="currentColor">B</text>
+  <text x="29" y="40" font-size="13" fill="currentColor">C</text>
+  <text x="98" y="136" font-size="12" fill="currentColor">${a}</text>
+  <text x="24" y="84" font-size="12" fill="currentColor">${b}</text>
+  <text x="110" y="76" font-size="12" fill="currentColor">${c}</text>
+</svg>`;
+}
+function cylinderSVG(r, h) {
+  return `<svg viewBox="0 0 170 180" width="150" height="170" role="img" aria-label="cilindru">
+  <ellipse cx="80" cy="35" rx="45" ry="15" fill="none" stroke="currentColor" stroke-width="2.2"/>
+  <path d="M35,35 V140 A45,15 0 0,0 125,140 V35" fill="none" stroke="currentColor" stroke-width="2.2"/>
+  <path d="M35,140 A45,15 0 0,1 125,140" fill="none" stroke="currentColor" stroke-width="1.3" stroke-dasharray="4 3" opacity="0.7"/>
+  <line x1="80" y1="35" x2="125" y2="35" stroke="currentColor" stroke-width="1.6"/>
+  <text x="98" y="30" font-size="12" fill="currentColor">${r}</text>
+  <line x1="134" y1="35" x2="134" y2="140" stroke="currentColor" stroke-width="1.4"/>
+  <text x="140" y="92" font-size="12" fill="currentColor">${h}</text>
+</svg>`;
+}
+
+// VII — Teorema lui Thales (calcul de lungime)
+export function thales() {
+  const AM = ri(2, 6);
+  const r = ri(2, 4);
+  const AB = AM * r;
+  const AN = ri(2, 6);
+  const AC = AN * r;
+  return {
+    prompt: {
+      text: `În figură, $(MN) \\parallel (BC)$. Se dau $AM = ${AM}$, $AB = ${AB}$ și $AN = ${AN}$. Cât este $AC$?`,
+      svg: thalesSVG(),
+    },
+    blanks: [{ answer: AC, kind: 'dec', label: 'AC' }],
+    solutionLatex: `\\dfrac{AC}{AN} = \\dfrac{AB}{AM} = ${r} \\;\\Rightarrow\\; AC = ${AN}\\times ${r} = ${AC}`,
+  };
+}
+
+// VIII — Trigonometrie: cos / sin / tan într-un triunghi dreptunghic
+export function trigRatio() {
+  const [a, b, c] = pick([
+    [3, 4, 5],
+    [5, 12, 13],
+    [8, 15, 17],
+    [7, 24, 25],
+    [20, 21, 29],
+    [9, 40, 41],
+  ]);
+  // dreptunghic în A: AB = a (alăturată lui B), AC = b (opusă lui B), BC = c (ipotenuza)
+  const fn = pick(['\\cos', '\\sin', '\\tan']);
+  let num, den;
+  if (fn === '\\cos') {
+    num = a;
+    den = c;
+  } else if (fn === '\\sin') {
+    num = b;
+    den = c;
+  } else {
+    num = b;
+    den = a;
+  }
+  return {
+    prompt: {
+      text: `Triunghiul $ABC$ este dreptunghic în $A$. Cât este $${fn} B$? (scrie ca fracție)`,
+      svg: trigTriSVG(a, b, c),
+    },
+    blanks: [{ answer: num / den, kind: 'fraction', placeholder: 'a/b' }],
+    solutionLatex: `${fn} B = \\dfrac{${num}}{${den}}`,
+  };
+}
+
+// VIII — Volumul cilindrului (spațiu, cu π)
+export function cylinderVolume() {
+  const r = ri(2, 6);
+  const h = ri(2, 8);
+  return {
+    prompt: {
+      text: `Cilindrul are raza $r = ${r}$ și înălțimea $h = ${h}$. Volumul se scrie sub forma $\\square \\times \\pi$. Cât este $\\square$?`,
+      svg: cylinderSVG(r, h),
+    },
+    blanks: [{ answer: r * r * h, kind: 'int', label: 'coeficientul lui π' }],
+    solutionLatex: `V = \\pi r^2 h = \\pi\\times ${r}^2\\times ${h} = ${r * r * h}\\pi`,
+  };
+}
+
+// VII — Puteri
+export function powerOf() {
+  const base = ri(2, 9);
+  const exp = pick([2, 2, 3]);
+  return {
+    prompt: { latex: `${base}^${exp} = \\square` },
+    blanks: [{ answer: Math.pow(base, exp), kind: 'int' }],
+    solutionLatex: `${base}^${exp} = ${Math.pow(base, exp)}`,
+  };
+}
+
+// VIII — Scriere științifică / puteri ale lui 10
+export function scientificNotation() {
+  const a = ri(1, 9);
+  const n = ri(2, 5);
+  const N = a * Math.pow(10, n);
+  if (pick(['calc', 'exp']) === 'calc') {
+    return {
+      prompt: { latex: `${a}\\times 10^${n} = \\square` },
+      blanks: [{ answer: N, kind: 'int' }],
+      solutionLatex: `${a}\\times 10^${n} = ${N}`,
+    };
+  }
+  return {
+    prompt: { latex: `${N} = ${a}\\times 10^{\\square}` },
+    blanks: [{ answer: n, kind: 'int', label: 'exponentul' }],
+    solutionLatex: `${N} = ${a}\\times 10^${n}`,
+  };
+}
+
+// VIII — Funcții: antecedentul (rezolvarea f(x) = y)
+export function antecedent() {
+  const a = nz(2, 6);
+  const b = nz(-9, 9);
+  const x = nz(-6, 6);
+  const y = a * x + b;
+  return {
+    prompt: {
+      text: `Fie $f(x) = ${coefTerm(a)} ${signed(b)}$. Pentru ce valoare a lui $x$ avem $f(x) = ${y}$?`,
+    },
+    blanks: [{ answer: x, kind: 'dec' }],
+    solutionLatex: `${a}x ${signed(b)} = ${y} \\;\\Rightarrow\\; x = ${x}`,
+  };
+}
+
+// VI — Simetria unui punct (centrală față de O sau axială față de Ox/Oy)
+export function centralSymmetry() {
+  const x = nz(-4, 4);
+  const y = nz(-4, 4);
+  const mode = pick(['O', 'Ox', 'Oy']);
+  let bx, by, desc;
+  if (mode === 'O') {
+    bx = -x;
+    by = -y;
+    desc = 'față de originea $O$';
+  } else if (mode === 'Ox') {
+    bx = x;
+    by = -y;
+    desc = 'față de axa $Ox$';
+  } else {
+    bx = -x;
+    by = y;
+    desc = 'față de axa $Oy$';
+  }
+  return {
+    prompt: {
+      text: `Simetricul punctului $A(${x}\\,;\\,${y})$ ${desc}. Ce coordonate are $A'$?`,
+      latex: "A'(\\square\\,;\\,\\square)",
+      svg: gridSVG([{ x, y, label: 'A' }]),
+    },
+    blanks: [
+      { answer: bx, kind: 'int' },
+      { answer: by, kind: 'int' },
+    ],
+    solutionLatex: `A'(${bx}\\,;\\,${by})`,
   };
 }
 
@@ -721,12 +905,19 @@ export const REGISTRY = {
   pointTranslation: { title: 'Translația unui punct', fn: pointTranslation },
   diskPi: { title: 'Cercul: arie și lungime (cu π)', fn: diskPi },
   boxVolume: { title: 'Volumul paralelipipedului', fn: boxVolume },
+  centralSymmetry: { title: 'Simetria unui punct', fn: centralSymmetry },
+  thales: { title: 'Teorema lui Thales', fn: thales },
+  powerOf: { title: 'Puteri', fn: powerOf },
+  trigRatio: { title: 'Trigonometrie (cos, sin, tan)', fn: trigRatio },
+  cylinderVolume: { title: 'Volumul cilindrului', fn: cylinderVolume },
+  scientificNotation: { title: 'Scriere științifică și puteri ale lui 10', fn: scientificNotation },
+  antecedent: { title: 'Funcții — antecedentul', fn: antecedent },
 };
 
 // Progresia pe clase (ordinea A1, A2, …)
 export const LEVELS = {
   c5: ['multTable', 'orderOfOps', 'missingNumber', 'powersOfTen', 'decimalAddSub', 'coordinates', 'rectanglePerimeterArea'],
-  c6: ['intAddSub', 'intMult', 'fracAdd', 'fracMult', 'fourthProportional', 'percentage', 'triangleArea', 'angleSum'],
-  c7: ['distributeSimple', 'reduceLikeTerms', 'evalExpression', 'linearEqSimple', 'pythagoras', 'speed', 'pointTranslation', 'diskPi'],
-  c8: ['functionEval', 'doubleDistribute', 'diffOfSquaresFactor', 'linearEqDouble', 'boxVolume'],
+  c6: ['intAddSub', 'intMult', 'fracAdd', 'fracMult', 'fourthProportional', 'percentage', 'triangleArea', 'angleSum', 'centralSymmetry'],
+  c7: ['distributeSimple', 'reduceLikeTerms', 'evalExpression', 'linearEqSimple', 'pythagoras', 'speed', 'pointTranslation', 'diskPi', 'thales', 'powerOf'],
+  c8: ['functionEval', 'doubleDistribute', 'diffOfSquaresFactor', 'linearEqDouble', 'boxVolume', 'trigRatio', 'cylinderVolume', 'scientificNotation', 'antecedent'],
 };
