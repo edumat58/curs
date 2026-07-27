@@ -8,12 +8,21 @@ import styles from './styles.module.css';
 
 const PROMPT_VERSION = 1;
 
+/**
+ * Adresa serviciului de voce.
+ *
+ * Implicit rulează pe NAS-ul propriu (Synology, container Docker, pornit non-stop),
+ * expus prin reverse proxy DSM cu certificat wildcard. Se poate suprascrie oricând
+ * din `window.EDUPASI_VOICE_API`, fără recompilare.
+ */
+const DEFAULT_VOICE_API = 'https://voce.asbrihome.synology.me';
+
 function serviceUrl() {
   if (typeof window === 'undefined') return '';
   const configured = window.EDUPASI_VOICE_API;
   if (configured) return String(configured).replace(/\/$/, '');
   if (/^(localhost|127\.)/.test(window.location.hostname)) return 'http://localhost:8099';
-  return 'https://voice.kulturosfera.com';
+  return DEFAULT_VOICE_API;
 }
 
 /**
