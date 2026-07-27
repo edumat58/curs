@@ -20,10 +20,15 @@ POST /voice/section  { sectionHash, section }
         └── lipsă → 202 „pending", iar generarea pornește pe server:
               1. ÎNȚELEGERE  (LLM, JSON structurat, evidence cu surse din enum,
                               inventar explicit al exemplelor din material)
+                 desenele SVG intră aici ca geometrie citită din markup —
+                 puncte, segmente, egalități, unghiuri drepte — nu ca markup
               2. NARAȚIUNE   (LLM, text de rostit, listă de acoperire punct cu punct)
-              3. FidelityGuard → dacă apar valori inexistente în sursă, cere rescrierea
-              4. Piper TTS, un singur apel, cu pauze între propoziții
-              5. Opus 28 kbps → GridFS; metadate → MongoDB
+              3. FidelityGuard → valori inexistente în sursă SAU formulări
+                 despre material („figura arată", „nu explică în detaliu")
+                 → cere rescrierea
+              4. Stratul de rostire → text pe care espeak-ng chiar îl poate citi
+              5. Piper TTS, un singur apel, cu pauze între propoziții
+              6. Opus 28 kbps → GridFS; metadate → MongoDB
         │
         ▼
 GET /voice/section/:hash   202 cât timp lucrează, 200 când e gata
@@ -39,6 +44,29 @@ limita de timp a rețelei din ecuație.
 De ce extrage clientul și nu serverul: în HTML-ul static **nu există KaTeX**
 (se randează în browser). Doar clientul vede lecția așa cum o vede elevul, deci
 doar el poate produce un hash care corespunde conținutului real.
+
+## Cele două straturi care țin explicația onestă
+
+**FidelityGuard** (`fidelity.mjs`) verifică programatic ce a ieșit din model.
+Prinde două lucruri, și amândouă cer rescrierea:
+
+- **valori care nu există în material** — un exemplu numeric inventat;
+- **vorbitul despre lecție în loc de predarea ei** — „figura arată…",
+  „formula din material…", „am parcurs…", și mai ales evaluarea materialului:
+  „imaginea de mai jos nu este foarte bine făcută" nu are ce căuta într-o
+  explicație pentru un elev.
+
+Tiparele sunt scrise cu `\p{L}`, nu cu `\b`: în JavaScript `\b` cunoaște doar
+literele ASCII, deci „închei" nu are graniță de cuvânt la început. Distincția
+între termen de manual și referire la suport se păstrează — „figură geometrică"
+trece, „figura de mai jos" nu.
+
+**Stratul de rostire** (`speakable.mjs`) e ultimul dinaintea sintezei. Piper nu
+citește litere, ci foneme produse de espeak-ng; ce espeak nu recunoaște e tăiat
+în tăcere, citit în engleză sau rupt în bucăți. Cazul care a pornit fișierul:
+modelul scrie separatorul de mii cu **spațiu îngust** (U+202F), iar espeak
+citea atunci `1 000` ca „unu zero zero zero" în loc de „o mie". Fiecare regulă
+de acolo are în comentariu măsurătoarea care o justifică.
 
 ## Instalare locală
 
@@ -73,8 +101,13 @@ brew install opus-tools   # compresie audio (fără el, se servește WAV)
 | `PIPER_PYTHON` / `PIPER_MODEL` | calea către venv și vocea `.onnx` |
 | `PIPER_LENGTH_SCALE` | 1.0 normal; >1 mai rar, <1 mai rapid |
 | `VOICE_ALLOWED_ORIGINS` | listă separată prin virgulă; gol = permite tot |
-| `VOICE_PUBLIC_URL` | URL-ul public, folosit în `audioUrl` |
+| `VOICE_PUBLIC_URL` | URL-ul public, folosit în `audioUrl`. **Obligatoriu în spatele unui reverse proxy** |
 | `VOICE_MAX_REPAIRS` | câte rescrieri la încălcarea fidelității (implicit 2) |
+
+`VOICE_PUBLIC_URL` nu e opțional când în față stă un proxy. Fără el, `audioUrl`
+se construiește din antetul `Host` primit, iar DSM îl rescrie către destinație:
+clientul ar primi o adresă de tailnet, pe `http`, pe care browserul nici nu o
+poate deschide, nici nu ar accepta-o dintr-o pagină `https`.
 
 ## Legarea în site
 
@@ -85,6 +118,54 @@ window.EDUPASI_VOICE_API = 'https://voce.exemplu.ro';
 ```
 
 Fără această setare, clientul folosește `http://localhost:8099` în dezvoltare.
+
+## Instalare pe PC, cu adresa publică păstrată
+
+Sinteza e singura parte care rulează local și e legată direct de procesor.
+Pe NAS ea durează **mai mult decât audio-ul rezultat**, deci fiecare explicație
+nouă costă dublu cât ține. Pe un PC obișnuit merge de câteva ori mai repede
+decât timpul real. Mutăm doar serviciul; Groq, MongoDB, site-ul și adresa
+publică rămân neatinse.
+
+```
+elev → https://voce.asbrihome.synology.me   (cert valid, reverse proxy DSM)
+            │
+            └── Tailscale ──→ PC:8099  (Docker: Node + Piper + opus-tools)
+```
+
+Pe PC, o singură dată:
+
+```powershell
+cd $HOME
+git clone https://github.com/edumat58/curs.git
+cd curs\voice-service
+copy "$HOME\Downloads\edupasi-voice.env" .env
+docker compose up -d --build
+curl.exe -s http://127.0.0.1:8099/health
+```
+
+Portul trebuie deschis pentru tailnet (o singură dată, PowerShell ca
+administrator):
+
+```powershell
+New-NetFirewallRule -DisplayName "EduPASI voce" -Direction Inbound `
+  -LocalPort 8099 -Protocol TCP -Action Allow
+```
+
+Apoi, în DSM → Panou de control → Portal de conectare → Avansat →
+Proxy invers, la intrarea `voce.asbrihome.synology.me` se schimbă destinația din
+`localhost:8099` în adresa de tailnet a PC-ului, portul 8099. Site-ul nu se
+atinge: adresa publică și certificatul rămân aceleași.
+
+Două lucruri care opresc serviciul fără să pară o defecțiune: PC-ul care intră
+în somn și Docker Desktop care nu pornește la logare. Ambele se rezolvă din
+setările Windows, iar `restart: unless-stopped` din compose acoperă restul.
+
+La fiecare actualizare a codului, tot pe PC:
+
+```powershell
+cd $HOME\curs && git pull && cd voice-service && docker compose up -d --build
+```
 
 ## Instalare pe Oracle Cloud Always Free (24/7, gratuit)
 
@@ -140,7 +221,7 @@ sudo systemctl enable --now edupasi-voice && systemctl status edupasi-voice
 
 ## Cifre măsurate
 
-Pe NAS (Synology DS923+, AMD R1600), unde rulează în producție:
+Pe NAS (Synology DS923+, AMD R1600):
 
 | | |
 |---|---|
@@ -151,11 +232,26 @@ Pe NAS (Synology DS923+, AMD R1600), unde rulează în producție:
 | Audio (Opus 28 kbps) | ~3,5 KB/secundă |
 | Limită Groq gratuit | 8 000 tokeni/minut (respectată automat prin `retry-after`) |
 
+Aceeași sinteză, același text, pe un procesor de PC (MacBook Pro M4 Pro,
+14 nuclee): **30,6 s de audio în 3,9 s** — 0,13 s de calcul pentru 1 s de audio,
+adică de nouă ori mai repede decât pe NAS. Consumul a fost de 23 s de CPU în
+3,9 s de ceas, deci câștigul vine din numărul de nuclee, nu din frecvență.
+
 Sinteza domină timpul, iar vocea `high` e cea mai lentă. Vocile `medium`
 disponibile în același depozit (`ro_RO-lili-medium`, `ro_RO-sanda-medium`) sunt
 de ~3 ori mai rapide la o calitate ceva mai joasă; se schimbă din `PIPER_MODEL`,
 fără cod nou. Prima generare a unei secțiuni e singura care așteaptă — după ea,
 oricine deschide lecția primește audio instant.
+
+## Teste
+
+```bash
+node --test voice-service/src/pipeline/*.test.mjs
+```
+
+Verifică stratul de rostire și garda de fidelitate. Cazurile nu sunt inventate:
+citatele din teste sunt luate din explicații generate real, iar fiecare regulă
+de rostire a fost întâi măsurată direct pe espeak-ng cu vocea românească.
 
 ## Licențe
 

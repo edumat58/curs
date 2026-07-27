@@ -7,7 +7,7 @@ import AudioPlayer from './AudioPlayer';
 import styles from './styles.module.css';
 
 /** Trebuie să coincidă cu PROMPT_VERSION din serviciu: intră în hash-ul secțiunii. */
-const PROMPT_VERSION = 2;
+const PROMPT_VERSION = 3;
 
 /**
  * Adresa serviciului de voce.
@@ -165,7 +165,12 @@ function SectionButton({ section, route, headingElement }) {
                 type: 'svg',
                 label: v.label,
                 description: v.description,
-                markup: String(v.markup || '').slice(0, 4000),
+                // Markup-ul nu mai ajunge la model: serviciul citește din el
+                // geometria (puncte, segmente, unghiuri drepte) și trimite mai
+                // departe doar faptele. Fiind gratuit în tokeni, limita poate
+                // fi generoasă — un desen tăiat în două pierde exact laturile
+                // care dau sensul figurii.
+                markup: String(v.markup || '').slice(0, 12000),
               }
         ),
         context: section.context,

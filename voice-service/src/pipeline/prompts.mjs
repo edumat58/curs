@@ -10,13 +10,20 @@
  * definițiile, formulele și figurile, narațiunea se sprijină pe fapte extrase,
  * nu pe asociații.
  */
+import { describeFigure } from './figure.mjs';
 
 /**
  * v2: analiza inventariază explicit exemplele din material, bugetul de vorbire
  * e mai larg, iar narațiunea are reguli de acoperire. Versiunea intră în hash,
  * deci explicațiile generate cu v1 (incomplete) se regenerează automat.
+ *
+ * v3: figurile SVG ajung la model ca geometrie citită din desen, nu ca markup
+ * trunchiat; lista de acoperire nu mai numește „figura", pentru că exact ea
+ * împingea modelul să vorbească despre desen în loc să spună ce arată; iar
+ * evaluarea materialului („figura nu explică în detaliu") e interzisă explicit
+ * și verificată după generare.
  */
-export const PROMPT_VERSION = 2;
+export const PROMPT_VERSION = 3;
 
 /** Terminologia școlară românească — nu traducem din engleză. */
 const GLOSAR = `
@@ -29,27 +36,47 @@ const GLOSAR = `
 - „paralelipiped dreptunghic" (nu „cutie"), „poligon", „vârf", „latură"
 `.trim();
 
+/**
+ * Cum ajunge o figură la model.
+ *
+ * NU trimitem markup. Coordonatele nu spun nimic unui model de limbaj, iar
+ * trunchiate la câteva sute de caractere spun și mai puțin — de acolo veneau
+ * formulările goale despre „reprezentarea grafică". Trimitem geometria deja
+ * citită: ce puncte există, ce segmente le unesc, ce e egal, unde e unghi drept.
+ */
 function renderVisual(visual, index) {
   if (visual.type === 'image') {
-    return `visuals[${index}] (imagine): src="${visual.src}" alt="${visual.alt || '(fără alt)'}" ${visual.label || ''}`.trim();
+    const alt = visual.alt || visual.label || '';
+    return alt
+      ? `visuals[${index}] (imagine): ${alt}`
+      : `visuals[${index}] (imagine fără descriere — NU ai ce spune despre ea)`;
   }
-  const labels = (visual.labels || []).join(', ');
-  const shapes = Object.entries(visual.shapes || {})
-    .map(([k, v]) => `${k}×${v}`)
-    .join(', ');
-  return [
-    `visuals[${index}] (figură SVG):`,
-    visual.label ? `  titlu: ${visual.label}` : '',
-    visual.description ? `  descriere: ${visual.description}` : '',
-    labels ? `  etichete în figură: ${labels}` : '',
-    shapes ? `  elemente geometrice: ${shapes}` : '',
-    // Markup-ul e trunchiat agresiv: informația didactică stă în etichete și în
-    // inventarul de forme, nu în coordonate. Reduce mult consumul de tokeni
-    // (relevant pe tieruri gratuite cu limită pe tokeni/minut).
-    visual.markup ? `  markup: ${String(visual.markup).slice(0, 400)}` : '',
-  ]
-    .filter(Boolean)
-    .join('\n');
+
+  const figure = describeFigure(visual.markup);
+  const lines = [`visuals[${index}] (desen geometric):`];
+  if (visual.label) lines.push(`  titlu: ${visual.label}`);
+  if (visual.description) lines.push(`  descriere: ${visual.description}`);
+  if (figure.meaningful) {
+    lines.push('  ce se vede în desen:');
+    figure.facts.forEach((fact) => lines.push(`    - ${fact}`));
+  } else {
+    lines.push('  desen fără conținut didactic (decorativ) — se ignoră complet.');
+  }
+  return lines.join('\n');
+}
+
+/**
+ * Forma citită a unei formule, curățată de o silabisire inutilă.
+ *
+ * Convertorul de LaTeX desface orice zecimală în cuvinte („12 virgulă 4"),
+ * pentru că el servește și cititorul de ecran, unde asta e corect. Modelul
+ * copia însă forma aceea în explicație, iar transcriptul ieșea plin de
+ * „12 virgulă 4 plus 3 virgulă 9" — greu de citit și de verificat. Sinteza
+ * rostește oricum „12,4" ca „doisprezece virgulă patru", deci scrierea cu cifre
+ * sună identic și se citește ca un număr.
+ */
+function spokenHint(text) {
+  return String(text).replace(/(\d+)\s+virgulă\s+(\d+)/gi, '$1,$2');
 }
 
 /** Materialul sursă, identic pentru ambele treceri — singura realitate permisă. */
@@ -70,7 +97,7 @@ export function renderSource(section) {
     lines.push('');
     lines.push('mathLatex (formulele exacte din secțiune):');
     section.latex.forEach((item, i) => {
-      const spoken = item.spoken ? `\n    citit în română: ${item.spoken}` : '';
+      const spoken = item.spoken ? `\n    citit în română: ${spokenHint(item.spoken)}` : '';
       lines.push(`  mathLatex[${i}]: ${item.source}${spoken}`);
     });
   }
@@ -129,6 +156,10 @@ Sursele pe care ai voie să le citezi (exact aceste șiruri): ${sources.join(', 
 
 La "examples": inventariază TOATE exemplele, calculele rezolvate și cazurile concrete care EXISTĂ în material, cu valorile lor exacte, în ordinea în care apar. Sunt partea din lecție pe care elevul o urmărește cel mai atent, deci niciunul nu are voie să lipsească din listă. Dacă materialul nu conține niciun exemplu, lista rămâne goală — nu inventezi.
 
+La "figures": completezi DOAR dacă materialul conține efectiv un element „visuals". Un bloc de formule nu este o figură. Dacă lista de figuri din material e goală, "figures" rămâne goală. La "teaches" scrii informația pe care o transmite desenul („unghiul din O este drept"), nu faptul că există un desen.
+
+Nu evaluezi materialul. Nu notezi dacă e bine sau prost făcut, clar sau neclar, complet sau incomplet. Ce lipsește se marchează „uncertain" la "checks" și atât — mai departe nu se rostește.
+
 Dacă o categorie nu se aplică, pune listă goală. Nu inventa intrări ca să umpli structura.
 
 --- MATERIAL SURSĂ ---
@@ -169,7 +200,24 @@ export function speechBudget(section) {
 }
 
 /** Narațiunea primește doar fapte CONFIRMATE — incertitudinile nu se rostesc. */
-function narratableAnalysis(analysis) {
+function narratableAnalysis(analysis, section) {
+  /**
+   * Figurile se verifică față de figurile care CHIAR există în secțiune.
+   *
+   * Într-o secțiune fără niciun desen, analiza a raportat totuși o „figură" —
+   * confundase blocul de formule cu una — iar narațiunea a rostit cuminte
+   * „Figura arată o reprezentare grafică…". O referință care nu trimite la un
+   * `visuals[i]` real nu are ce căuta mai departe.
+   */
+  const existing = (section && section.visuals) || [];
+  const figures = existing.length
+    ? (analysis.figures || []).filter((f) => {
+      if (!f || !f.teaches) return false;
+      const index = /visuals\[(\d+)\]/.exec(String(f.ref || ''));
+      return index ? Number(index[1]) < existing.length : false;
+    })
+    : [];
+
   return {
     sectionType: analysis.sectionType,
     mainIdea: analysis.mainIdea,
@@ -182,7 +230,7 @@ function narratableAnalysis(analysis) {
     examples: (analysis.examples || []).filter(
       (e) => e && (e.shows || (e.values && e.values.length))
     ),
-    figures: (analysis.figures || []).filter((f) => f && f.teaches),
+    figures,
     order: analysis.order || [],
     confirmedFacts: (analysis.checks || [])
       .filter((c) => c && c.status === 'confirmed')
@@ -190,7 +238,14 @@ function narratableAnalysis(analysis) {
   };
 }
 
-/** Lista de acoperire — ce anume trebuie să apară în explicație, punct cu punct. */
+/**
+ * Lista de acoperire — ce anume trebuie să apară în explicație, punct cu punct.
+ *
+ * Punctele numesc INFORMAȚIA, niciodată locul din care vine. Formularea veche,
+ * „ce arată figura: …", cerea explicit modelului să vorbească despre figură,
+ * chiar în timp ce promptul îi interzicea asta două paragrafe mai sus. Modelul
+ * a ascultat lista, nu regula — pe bună dreptate: lista era mai concretă.
+ */
 function coverageChecklist(narratable) {
   const items = [];
   (narratable.definitions || []).forEach((d) => d && d.term && items.push(`definiția: ${d.term}`));
@@ -199,13 +254,13 @@ function coverageChecklist(narratable) {
     const values = (e.values || []).join(', ');
     items.push(`exemplul ${i + 1}: ${e.shows || 'din material'}${values ? ` (${values})` : ''}`);
   });
-  (narratable.figures || []).forEach((f) => items.push(`ce arată figura: ${f.teaches}`));
+  (narratable.figures || []).forEach((f) => items.push(`de spus ca fapt, direct: ${f.teaches}`));
   return items;
 }
 
 export function buildNarrationPrompt(section, analysis) {
   const budget = speechBudget(section);
-  const narratable = narratableAnalysis(analysis);
+  const narratable = narratableAnalysis(analysis, section);
   const checklist = coverageChecklist(narratable);
   return {
     system: `Ești profesor de matematică într-o școală din România. Vorbești unui elev de gimnaziu care are nevoie de sprijin. Textul tău va fi CITIT CU VOCE TARE — deci scrii vorbire, nu articol.
@@ -240,9 +295,16 @@ Acoperire — a doua regulă ca importanță:
 - Termini ce ai început. Ultima idee se spune la fel de complet ca prima, iar textul se încheie cu o frază terminată — niciodată la mijlocul unui gând.
 
 Nu comenta materialul, predă-l:
-- NU vorbi despre lecție ca obiect: fără „definiția spune", „materialul arată", „noi vorbim despre ce scrie".
-- NU menționa că există figuri, desene sau imagini. Dacă o figură transmite ceva, spune direct informația, nu figura.
+- NU vorbi despre lecție ca obiect: fără „definiția spune", „materialul arată", „formula din material", „noi vorbim despre ce scrie".
+- NU menționa că există figuri, desene, imagini sau formule. Dacă un desen transmite ceva, spui direct informația: „unghiul din O este drept", nu „figura arată un unghi drept".
+- NU EVALUA materialul. Nu spui că ceva e bine sau prost făcut, clar sau neclar, complet sau incomplet, că lipsește ceva sau că nu se explică în detaliu. Nu ești corector, ești profesor: elevul are nevoie de conținut, nu de părerea ta despre lecție. Dacă ceva chiar lipsește din material, pur și simplu nu vorbești despre acel lucru.
+- NU te povesti pe tine: fără „am parcurs", „am explicat", „închei cu speranța că", „sper că e clar", „în cele ce urmează". Ultima frază spune ultimul lucru de spus, apoi te oprești.
 - NU repeta aceeași idee cu alte cuvinte. Spui lucrul o dată, clar, și mergi mai departe.
+
+Cum scrii numerele (textul tău e trimis mai departe la sinteza vocală):
+- Cu cifre și virgulă zecimală: „12,4", nu „12 virgulă 4" și nu „doisprezece virgulă patru".
+- Fără separator de mii: „37540", „1000" — nu „37 540" și nu „1 000".
+- Fără simboluri matematice: scrii „înmulțit cu", „împărțit la", „minus", „la pătrat", nu „×", „÷", „−", „²".
 
 Explici, nu recitești:
 - NU relua definiția cuvânt cu cuvânt. Desfă-o în pași: ce este, din ce e alcătuită, cum recunoști, la ce folosește — dar numai cu informația din material.

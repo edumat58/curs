@@ -1,0 +1,40 @@
+# AI Voice Teacher — rulare pe PC (Windows cu Docker Desktop, Linux, macOS).
+#
+# De ce a plecat de pe NAS: sinteza vocală e singura parte care rulează local
+# (modelul de limbaj stă la Groq), și e legată direct de procesor. Măsurat, cu
+# aceeași voce `raluca-high` și același text:
+#
+#   Synology DS923+ (AMD R1600, 4 nuclee)  1,2 s de calcul pentru 1 s de audio
+#   MacBook Pro M4 Pro (14 nuclee)         0,13 s — 30,6 s de audio în 3,9 s
+#
+# Sinteza folosește toate nucleele (23 s de CPU în 3,9 s de ceas), deci câștigul
+# vine din numărul lor, nu doar din frecvență. Pe un i5 de generația a 12-a
+# așteptarea rezonabilă e undeva la mijloc — oricum, de câteva ori mai repede
+# decât timpul real, în loc de mai lent decât el, ca pe NAS.
+#
+# Restul arhitecturii nu se schimbă: adresa publică rămâne aceeași, reverse
+# proxy-ul de pe NAS trimite mai departe.
+#
+#   docker compose up -d --build
+#   curl http://127.0.0.1:8099/health
+
+services:
+  voice:
+    build: .
+    image: edupasi-voice:pc
+    container_name: edupasi-voice
+    # Serviciul trebuie să fie sus și după o repornire a calculatorului: elevul
+    # nu are de unde ști că PC-ul din spate s-a restartat.
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      # Obligatoriu în spatele unui reverse proxy. Fără el, `audioUrl` se
+      # construiește din antetul Host primit — iar DSM îl rescrie către
+      # destinație, deci clientul ar primi o adresă de tailnet, pe http, pe
+      # care browserul nici nu o poate deschide, nici nu ar accepta-o dintr-o
+      # pagină https.
+      VOICE_PUBLIC_URL: https://voce.asbrihome.synology.me
+    ports:
+      # Ascultă pe toate interfețele: reverse proxy-ul de pe NAS ajunge aici
+      # prin Tailscale, nu prin localhost.
+      - '8099:8099'

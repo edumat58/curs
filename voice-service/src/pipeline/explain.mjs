@@ -4,6 +4,7 @@
  */
 import { buildAnalysisPrompt, buildNarrationPrompt, speechBudget, PROMPT_VERSION } from './prompts.mjs';
 import { checkFidelity } from './fidelity.mjs';
+import { toSpeakable } from './speakable.mjs';
 
 /** Modelele mai adaugă uneori ```json în jurul răspunsului. */
 function parseJsonLoose(raw) {
@@ -108,25 +109,16 @@ export function trimToCompleteSentence(text) {
 }
 
 /**
- * Semnul minus scris („rezultă -5") nu are echivalent fonetic: sintetizatorul
- * fie îl ignoră și rostește „cinci" — care e altceva — fie îl citește ca pauză.
- * Îl scriem în cuvinte. Nu atingem cratima din interiorul cuvintelor.
+ * Curăță textul înainte de sinteză.
+ *
+ * Legăturile Markdown se desfac aici, pentru că sunt o chestiune de format al
+ * răspunsului. Tot restul — spații exotice, liniuțe tipografice, simboluri
+ * matematice, unități — ține de ce poate rosti espeak-ng și stă în
+ * `speakable.mjs`, împreună cu măsurătorile care justifică fiecare regulă.
  */
-function spokenMinus(text) {
-  return String(text).replace(/(^|[\s(„"])[-−–]\s?(?=\d)/g, '$1minus ');
-}
-
-/** Curăță textul înainte de sinteză: fără marcaje, fără spații duble. */
 export function cleanForSpeech(text) {
   return fixRomanianArticles(
-    spokenMinus(fixDiacritics(text))
-      .replace(/```[\s\S]*?```/g, ' ')
-      .replace(/[*_#`>]+/g, ' ')
-      .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
-      .replace(/[ \t]+/g, ' ')
-      .replace(/\s*\n\s*/g, '\n')
-      .replace(/\n{3,}/g, '\n\n')
-      .trim()
+    toSpeakable(fixDiacritics(text).replace(/\[([^\]]*)\]\([^)]*\)/g, '$1'))
   );
 }
 
@@ -209,12 +201,26 @@ export async function explainSection(section, llm, { signal, analysisLlm } = {})
 
   /**
    * Buclă de reparare. Promptul singur nu e suficient: modelele inventează
-   * exemple numerice tocmai pentru că e pedagogic tentant. Aici le arătăm
-   * exact ce au inventat și cerem rescrierea. Verificarea e obiectivă, deci
-   * bucla se termină: ori dispar valorile străine, ori marcăm needsReview.
+   * exemple numerice tocmai pentru că e pedagogic tentant, și tot ele alunecă
+   * în a comenta lecția în loc să o predea. Aici le arătăm exact ce au greșit
+   * și cerem rescrierea. Verificările sunt obiective, deci bucla se termină:
+   * ori dispar abaterile, ori rămâne `needsReview` pentru profesor.
+   *
+   * Ambele abateri intră în aceeași buclă. Cât timp comentariile despre
+   * material erau doar o notă în raport, nu declanșau nimic — de aceea o frază
+   * ca „figura nu explică în detaliu" ajungea nestingherită în audio.
    */
   const maxRepairs = Number(process.env.VOICE_MAX_REPAIRS ?? 2);
-  while (fidelity.needsReview && fidelity.unsupportedNumbers.length && repairs < maxRepairs) {
+  while (fidelity.needsReview && repairs < maxRepairs) {
+    const complaints = [];
+    if (fidelity.unsupportedNumbers.length) {
+      complaints.push(`Ai introdus valori care NU există în materialul sursă: ${fidelity.unsupportedNumbers.join(', ')}. Rescrie fără niciun exemplu numeric inventat. Dacă materialul nu conține exemple cu numere, explici regula în cuvinte. Exemplele care EXISTĂ în material rămân, cu valorile lor exacte — se elimină doar cele inventate.`);
+    }
+    if (fidelity.metaPhrases.length) {
+      complaints.push(`Ai vorbit despre lecție în loc să o predai: ${fidelity.metaPhrases.join('; ')}. Scoate complet aceste formulări. Nu pomenești figuri, imagini, formule sau „materialul", nu spui dacă lecția e bine sau prost făcută, completă sau incompletă, și nu îți povestești propria explicație. Informația pe care o transmitea desenul o spui direct, ca fapt.`);
+    }
+    if (!complaints.length) break;
+
     repairs += 1;
     const repairRes = await llm.chat(
       [
@@ -223,11 +229,9 @@ export async function explainSection(section, llm, { signal, analysisLlm } = {})
         { role: 'assistant', content: transcript },
         {
           role: 'user',
-          content: `Ai introdus valori care NU există în materialul sursă: ${fidelity.unsupportedNumbers.join(', ')}.
+          content: `${complaints.join('\n\n')}
 
-Acesta este exact lucrul interzis. Rescrie explicația fără niciun exemplu numeric inventat.
-
-Dacă materialul nu conține exemple cu numere, explică regula în cuvinte, fără să ilustrezi cu valori proprii. Exemplele care EXISTĂ în material rămân în explicație, cu valorile lor exacte — se elimină doar cele inventate. Păstrează același ton și aceeași lungime, și acoperă în continuare toate punctele din lista de acoperire. Răspunde doar cu textul rescris.`,
+Păstrează același ton și aceeași lungime, și acoperă în continuare toate punctele din lista de acoperire. Răspunde doar cu textul rescris.`,
         },
       ],
       // Același plafon ca la generarea inițială: o rescriere trunchiată e la fel
