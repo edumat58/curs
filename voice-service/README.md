@@ -15,17 +15,26 @@ Clientul (browser) extrage secțiunea din DOM-ul RANDAT  ← aici KaTeX e desena
         ▼
 POST /voice/section  { sectionHash, section }
         │
-        ├── hash găsit în MongoDB → răspuns în ~40 ms
+        ├── hash găsit în MongoDB → 200, răspuns în ~100 ms
         │
-        └── lipsă → generare:
-              1. ÎNȚELEGERE  (LLM, JSON structurat, evidence cu surse din enum)
-              2. NARAȚIUNE   (LLM, text de rostit, buget de lungime)
+        └── lipsă → 202 „pending", iar generarea pornește pe server:
+              1. ÎNȚELEGERE  (LLM, JSON structurat, evidence cu surse din enum,
+                              inventar explicit al exemplelor din material)
+              2. NARAȚIUNE   (LLM, text de rostit, listă de acoperire punct cu punct)
               3. FidelityGuard → dacă apar valori inexistente în sursă, cere rescrierea
-              4. Piper TTS, frază cu frază, cu pauze naturale
+              4. Piper TTS, un singur apel, cu pauze între propoziții
               5. Opus 28 kbps → GridFS; metadate → MongoDB
+        │
         ▼
-GET /voice/audio/:hash   (suportă Range → derulare)
+GET /voice/section/:hash   202 cât timp lucrează, 200 când e gata
+        ▼
+GET /voice/audio/:hash     (suportă Range → derulare)
 ```
+
+Generarea nu așteaptă pe conexiune. O secțiune mare se explică integral în
+câteva minute, iar reverse proxy-ul din față închide conexiunile la 180 de
+secunde — răspunsul imediat cu 202 și interogarea periodică scot complet
+limita de timp a rețelei din ecuație.
 
 De ce extrage clientul și nu serverul: în HTML-ul static **nu există KaTeX**
 (se randează în browser). Doar clientul vede lecția așa cum o vede elevul, deci
@@ -129,15 +138,24 @@ WantedBy=multi-user.target
 sudo systemctl enable --now edupasi-voice && systemctl status edupasi-voice
 ```
 
-## Cifre măsurate (M4 Pro, Groq gratuit)
+## Cifre măsurate
+
+Pe NAS (Synology DS923+, AMD R1600), unde rulează în producție:
 
 | | |
 |---|---|
-| Primul click (generare completă) | **5,8 s** |
-| Click-uri următoare (cache) | **43 ms** |
-| Sinteză vocală | **5,2× timp real** |
+| Secțiune mare (1670 caractere) — generare completă | **176 s**, pentru 118 s de audio |
+| Secțiune mică (125 caractere) | ~60 s |
+| Click-uri următoare (cache) | **113 ms** |
+| Sinteză vocală (`raluca-high`) | ~1,2 s de calcul pentru 1 s de audio |
 | Audio (Opus 28 kbps) | ~3,5 KB/secundă |
 | Limită Groq gratuit | 8 000 tokeni/minut (respectată automat prin `retry-after`) |
+
+Sinteza domină timpul, iar vocea `high` e cea mai lentă. Vocile `medium`
+disponibile în același depozit (`ro_RO-lili-medium`, `ro_RO-sanda-medium`) sunt
+de ~3 ori mai rapide la o calitate ceva mai joasă; se schimbă din `PIPER_MODEL`,
+fără cod nou. Prima generare a unei secțiuni e singura care așteaptă — după ea,
+oricine deschide lecția primește audio instant.
 
 ## Licențe
 
