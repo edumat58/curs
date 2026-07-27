@@ -44,15 +44,31 @@ export async function createStore(env = process.env) {
      * Rezervă generarea pentru un hash. Inserția e atomică: dacă doi elevi dau
      * click simultan pe aceeași secțiune, doar unul generează, celălalt așteaptă.
      */
-    async claim(sectionHash, meta) {
-      try {
-        const doc = {
+    async claim(sectionHash, meta, { staleMs = 5 * 60 * 1000 } = {}) {
+      const now = new Date();
+
+      // Repreluăm o încercare eșuată sau o rezervare abandonată (proces căzut,
+      // repornire). Fără asta, o singură eroare — de exemplu o limită de rată —
+      // lăsa secțiunea blocată definitiv: `insertOne` dădea duplicat, cererea
+      // intra pe ramura „așteaptă alt proces" și expira, la nesfârșit.
+      const retaken = await col.findOneAndUpdate(
+        {
           sectionHash,
-          status: 'pending',
-          ...meta,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        };
+          $or: [
+            { status: 'error' },
+            { status: 'pending', createdAt: { $lt: new Date(Date.now() - staleMs) } },
+          ],
+        },
+        {
+          $set: { status: 'pending', ...meta, createdAt: now, updatedAt: now },
+          $unset: { error: '' },
+        },
+        { returnDocument: 'after' }
+      );
+      if (retaken) return { claimed: true, doc: retaken, retaken: true };
+
+      try {
+        const doc = { sectionHash, status: 'pending', ...meta, createdAt: now, updatedAt: now };
         await col.insertOne(doc);
         return { claimed: true, doc };
       } catch (err) {

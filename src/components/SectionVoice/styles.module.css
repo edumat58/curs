@@ -11,7 +11,7 @@
 .speaker,
 .speakerOn,
 .speakerBusy {
-  --voice-accent: var(--ifm-color-primary, #005340);
+  --voice-accent: var(--ifm-color-primary, #003058);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -49,8 +49,8 @@
 .spinner {
   width: 14px;
   height: 14px;
-  border: 2px solid color-mix(in srgb, var(--ifm-color-primary, #005340) 30%, transparent);
-  border-top-color: var(--ifm-color-primary, #005340);
+  border: 2px solid color-mix(in srgb, var(--ifm-color-primary, #003058) 30%, transparent);
+  border-top-color: var(--ifm-color-primary, #003058);
   border-radius: 50%;
   animation: voice-spin 700ms linear infinite;
 }
@@ -104,7 +104,7 @@
   width: 52px;
   height: 52px;
   color: #fff;
-  background: var(--ifm-color-primary, #005340);
+  background: var(--ifm-color-primary, #003058);
   border: 0;
   border-radius: 50%;
   cursor: pointer;
@@ -157,7 +157,7 @@
 .seek {
   flex: 1;
   height: 24px;
-  accent-color: var(--ifm-color-primary, #005340);
+  accent-color: var(--ifm-color-primary, #003058);
   cursor: pointer;
 }
 
@@ -192,8 +192,8 @@
 
 .speedOn {
   color: #fff;
-  background: var(--ifm-color-primary, #005340);
-  border-color: var(--ifm-color-primary, #005340);
+  background: var(--ifm-color-primary, #003058);
+  border-color: var(--ifm-color-primary, #003058);
 }
 
 .hint {

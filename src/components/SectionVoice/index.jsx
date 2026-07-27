@@ -19,9 +19,12 @@ const DEFAULT_VOICE_API = 'https://voce.asbrihome.synology.me';
 
 function serviceUrl() {
   if (typeof window === 'undefined') return '';
+  // Și în dezvoltare lovim tot NAS-ul: are repornire automată, iar CORS-ul
+  // permite explicit localhost. Altfel, testând din localhost, ajungeai la un
+  // serviciu local care putea să nici nu ruleze — sau, mai rău, care murise.
+  // Pentru lucru offline pe serviciu, se pune window.EDUPASI_VOICE_API.
   const configured = window.EDUPASI_VOICE_API;
   if (configured) return String(configured).replace(/\/$/, '');
-  if (/^(localhost|127\.)/.test(window.location.hostname)) return 'http://localhost:8099';
   return DEFAULT_VOICE_API;
 }
 
@@ -93,6 +96,27 @@ function SectionButton({ section, route }) {
         signal: abortRef.current.signal,
       });
 
+      if (res.status === 429) {
+        // Limita gratuită e pe tokeni/minut. Nu e o eroare a elevului și nici
+        // o defecțiune: așteptăm exact cât cere serviciul și reîncercăm o dată.
+        const info = await res.json().catch(() => ({}));
+        const wait = Math.min(30, Number(info.retryAfterSec) || 12);
+        setMessage(`Se pregătesc mai multe explicații deodată. Reîncerc în ${wait} secunde…`);
+        await new Promise((r) => setTimeout(r, wait * 1000));
+        const retry = await fetch(`${serviceUrl()}/voice/section`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ sectionHash: hash, route, sectionId: section.id, section: { ...payload, canonical: canonicalSection(section) } }),
+          signal: abortRef.current.signal,
+        });
+        if (!retry.ok) throw new Error('rate');
+        const rjson = await retry.json();
+        if (!rjson.audioUrl) throw new Error('Nu am primit audio.');
+        setData(rjson);
+        setState('ready');
+        return;
+      }
+
       if (!res.ok) throw new Error(`Serviciul a răspuns ${res.status}`);
       const json = await res.json();
       if (!json.audioUrl) throw new Error('Nu am primit audio.');
@@ -102,7 +126,9 @@ function SectionButton({ section, route }) {
       if (err.name === 'AbortError') return;
       setState('error');
       setMessage(
-        'Explicația audio nu e disponibilă acum. Încearcă din nou în câteva momente.'
+        err.message === 'rate'
+          ? 'Prea multe explicații cerute odată. Așteaptă un minut și apasă din nou.'
+          : 'Nu am putut pregăti explicația. Apasă din nou pentru a reîncerca.'
       );
     }
   }, [section, route, state]);

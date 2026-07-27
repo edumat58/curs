@@ -65,6 +65,11 @@ function publicView(doc, baseUrl) {
 export async function createServer(env = process.env) {
   const store = await createStore(env);
   const llm = createLlm(env);
+  // Model separat pentru trecerea de înțelegere (buget de tokeni propriu).
+  const analysisLlm = createLlm({
+    ...env,
+    VOICE_LLM_MODEL: env.VOICE_LLM_MODEL_ANALYSIS || 'llama-3.3-70b-versatile',
+  });
   const tts = createPiperTts(env);
 
   const app = express();
@@ -129,7 +134,7 @@ export async function createServer(env = process.env) {
         }
 
         try {
-          const result = await explainSection(section, llm);
+          const result = await explainSection(section, llm, { analysisLlm });
           const audio = await tts.synthesize(result.transcript);
           const encoded = await encodeOpus(audio.wav);
           return await store.complete(sectionHash, {
@@ -158,12 +163,27 @@ export async function createServer(env = process.env) {
       })();
 
       inFlight.set(sectionHash, work);
-      work.finally(() => inFlight.delete(sectionHash));
+      // ATENȚIE: `.finally()` întoarce o promisiune NOUĂ care respinge la fel.
+      // Dacă nimeni nu o tratează, Node oprește procesul (unhandled rejection)
+      // — exact așa murea serviciul la prima limită de rată, iar apoi nici
+      // explicațiile din cache nu mai puteau fi servite. Înghițim eroarea aici;
+      // cererea o tratează separat, mai jos.
+      work.catch(() => {}).finally(() => inFlight.delete(sectionHash));
 
       const doc = await work;
       res.json({ ...publicView(doc, baseUrl), cached: false });
     } catch (err) {
-      res.status(502).json({ error: String(err.message).slice(0, 300) });
+      // Limita de rată nu e o defecțiune: e o așteptare. Clientul trebuie să
+      // afle asta ca să propună „încearcă din nou", nu „serviciul e picat".
+      const rateLimited = err && (err.status === 429 || /rate limit/i.test(String(err.message)));
+      const waitMatch = /try again in ([\d.]+)s/i.exec(String(err.message));
+      res.status(rateLimited ? 429 : 502).json({
+        error: rateLimited
+          ? 'Prea multe explicații cerute în același timp.'
+          : String(err.message).slice(0, 300),
+        code: rateLimited ? 'rate_limited' : 'generation_failed',
+        retryAfterSec: waitMatch ? Math.ceil(parseFloat(waitMatch[1])) : undefined,
+      });
     }
   });
 
@@ -211,6 +231,16 @@ export async function createServer(env = process.env) {
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
+  // Plasă de siguranță: un serviciu educațional nu are voie să dispară în
+  // tăcere. Orice eroare scăpată se loghează, dar procesul rămâne în picioare
+  // ca să servească în continuare explicațiile deja generate din cache.
+  process.on('unhandledRejection', (reason) => {
+    console.error('[voice] respingere netratată:', reason);
+  });
+  process.on('uncaughtException', (err) => {
+    console.error('[voice] excepție netratată:', err);
+  });
+
   const app = await createServer();
   app.listen(PORT, () => {
     console.log(`AI Voice Teacher ascultă pe :${PORT}`);

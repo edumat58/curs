@@ -45,11 +45,16 @@ export function cleanForSpeech(text) {
  * Generează explicația unei secțiuni.
  * @returns {{transcript, analysis, fidelity, meta}}
  */
-export async function explainSection(section, llm, { signal } = {}) {
+export async function explainSection(section, llm, { signal, analysisLlm } = {}) {
   const startedAt = Date.now();
+  // Trecerea de înțelegere este extragere structurată, nu pedagogie: o poate
+  // face un model mai mic. Rulând-o pe alt model câștigăm și un buget separat
+  // de tokeni pe minut (limitele furnizorului sunt per model), ceea ce dublează
+  // practic câte secțiuni pot fi generate într-un minut.
+  const analyst = analysisLlm || llm;
 
   const a = buildAnalysisPrompt(section);
-  const analysisRes = await llm.chat(
+  const analysisRes = await analyst.chat(
     [
       { role: 'system', content: a.system },
       { role: 'user', content: a.user },
