@@ -20,12 +20,21 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN python3 -m venv /opt/piper-venv \
     && /opt/piper-venv/bin/pip install --no-cache-dir piper-tts
 
-# Vocea feminină românească (CC-BY-NC — proiect educațional necomercial).
+# Vocile feminine românești (CC-BY-NC — proiect educațional necomercial).
+#
+# Toate trei intră în imagine, ca schimbarea vocii să fie o variabilă de mediu,
+# nu o reconstruire. Diferența nu e estetică: măsurat pe un NAS Synology
+# (AMD R1600), vocea `high` cere ~2 secunde de calcul pentru fiecare secundă de
+# audio, iar modelele `medium` — jumătate ca dimensiune — sunt de circa trei ori
+# mai rapide. Pe un procesor slab, asta e diferența dintre trei minute și unul.
+ARG VOICE_BASE=https://huggingface.co/eduardem/piper-tts-romanian/resolve/main/voices
 RUN mkdir -p /opt/piper-voices && cd /opt/piper-voices \
-    && curl -fsSL -o ro_RO-raluca-high.onnx \
-       https://huggingface.co/eduardem/piper-tts-romanian/resolve/main/voices/raluca/ro_RO-raluca-high.onnx \
-    && curl -fsSL -o ro_RO-raluca-high.onnx.json \
-       https://huggingface.co/eduardem/piper-tts-romanian/resolve/main/voices/raluca/ro_RO-raluca-high.onnx.json
+    && for v in raluca/ro_RO-raluca-high lili/ro_RO-lili-medium sanda/ro_RO-sanda-medium; do \
+         n="${v##*/}"; \
+         curl -fsSL -o "$n.onnx"      "$VOICE_BASE/$v.onnx" \
+         && curl -fsSL -o "$n.onnx.json" "$VOICE_BASE/$v.onnx.json"; \
+       done \
+    && ls -1 /opt/piper-voices
 
 WORKDIR /app
 COPY package.json package-lock.json* ./
