@@ -1,0 +1,229 @@
+/* Butonul de secțiune + playerul.
+   Discret lângă heading: prezent, dar fără să concureze cu titlul lecției. */
+
+.slot {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 0.5rem;
+  vertical-align: middle;
+}
+
+.speaker,
+.speakerOn,
+.speakerBusy {
+  --voice-accent: var(--ifm-color-primary, #005340);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  color: var(--voice-accent);
+  background: transparent;
+  border: 1.5px solid var(--ifm-color-emphasis-300, #d7e5e0);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 140ms ease, border-color 140ms ease, transform 80ms ease;
+}
+
+.speaker:hover,
+.speakerBusy:hover {
+  background: color-mix(in srgb, var(--voice-accent) 12%, transparent);
+  border-color: var(--voice-accent);
+}
+
+.speaker:active {
+  transform: scale(0.94);
+}
+
+.speakerOn {
+  color: #fff;
+  background: var(--voice-accent);
+  border-color: var(--voice-accent);
+}
+
+.speakerBusy {
+  cursor: progress;
+}
+
+.spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid color-mix(in srgb, var(--ifm-color-primary, #005340) 30%, transparent);
+  border-top-color: var(--ifm-color-primary, #005340);
+  border-radius: 50%;
+  animation: voice-spin 700ms linear infinite;
+}
+
+@keyframes voice-spin {
+  to { transform: rotate(360deg); }
+}
+
+.status,
+.statusError {
+  display: inline-block;
+  margin-left: 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  vertical-align: middle;
+}
+
+.status {
+  color: var(--ifm-color-emphasis-600, #5b5b5b);
+}
+
+.statusError {
+  color: #c0392b;
+}
+
+/* --- player --- */
+.player {
+  display: block;
+  margin: 0.75rem 0 1rem;
+  padding: 0.85rem 1rem;
+  background: var(--ifm-background-surface-color, #fff);
+  border: 1.5px solid var(--ifm-color-emphasis-300, #d7e5e0);
+  border-radius: 14px;
+  font-size: 0.9rem;
+  /* headingul are font mare; playerul revine la normal */
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.transport {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.playBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  color: #fff;
+  background: var(--ifm-color-primary, #005340);
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.playBtn:hover {
+  filter: brightness(0.94);
+}
+
+.iconBtn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  color: var(--ifm-font-color-base, #161616);
+  background: transparent;
+  border: 1.5px solid var(--ifm-color-emphasis-300, #d7e5e0);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.iconBtn:hover {
+  background: var(--ifm-color-emphasis-100, #f2f5f4);
+}
+
+.iconLabel {
+  position: absolute;
+  bottom: 5px;
+  font-size: 0.55rem;
+  font-weight: 800;
+}
+
+.progressRow {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.7rem;
+}
+
+.time {
+  min-width: 3.1rem;
+  color: var(--ifm-color-emphasis-700, #444);
+  font-size: 0.78rem;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+.seek {
+  flex: 1;
+  height: 24px;
+  accent-color: var(--ifm-color-primary, #005340);
+  cursor: pointer;
+}
+
+.bottomRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.55rem;
+}
+
+.speeds {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.speed,
+.speedOn {
+  min-width: 44px;
+  min-height: 34px;
+  padding: 0.25rem 0.45rem;
+  border: 1.5px solid var(--ifm-color-emphasis-300, #d7e5e0);
+  border-radius: 9px;
+  cursor: pointer;
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.speed {
+  color: var(--ifm-font-color-base, #161616);
+  background: transparent;
+}
+
+.speedOn {
+  color: #fff;
+  background: var(--ifm-color-primary, #005340);
+  border-color: var(--ifm-color-primary, #005340);
+}
+
+.hint {
+  color: var(--ifm-color-emphasis-600, #5b5b5b);
+  font-size: 0.76rem;
+}
+
+.close {
+  margin-left: auto;
+  min-width: 34px;
+  min-height: 34px;
+  color: var(--ifm-color-emphasis-700, #444);
+  background: transparent;
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.close:hover {
+  background: var(--ifm-color-emphasis-100, #f2f5f4);
+}
+
+@media (max-width: 600px) {
+  .playBtn { width: 56px; height: 56px; }
+  .iconBtn { width: 46px; height: 46px; }
+  .speeds { flex-wrap: wrap; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner { animation-duration: 2s; }
+  .speaker, .speakerOn, .speakerBusy { transition: none; }
+}

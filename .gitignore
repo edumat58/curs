@@ -21,3 +21,11 @@ yarn-error.log*
 static/admin-manifest.json
 backend/node_modules/
 backend/.tts-cache/
+
+# AI Voice Teacher — artefacte locale (nu se comit)
+.voice-venv/
+.voice-models/
+.voice-sections.json
+_voice-sample-*.wav
+voice-service/.env
+voice-service/node_modules/

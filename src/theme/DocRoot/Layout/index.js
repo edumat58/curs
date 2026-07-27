@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import ReactDOM from 'react-dom';
 import Link from '@docusaurus/Link';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 import useBaseUrl from '@docusaurus/useBaseUrl';
@@ -685,7 +686,67 @@ function EduPasiAccessibilityTools() {
           return <EduPasiAccessibility />;
         }}
       </BrowserOnly>
+      {/* Butoanele de explicație audio se montează pe headinguri doar în client:
+          au nevoie de DOM-ul randat complet, cu KaTeX deja desenat. */}
+      <BrowserOnly>
+        {() => {
+          const SectionVoice = require('@site/src/components/SectionVoice').default;
+          return <SectionVoice />;
+        }}
+      </BrowserOnly>
     </>
+  );
+}
+
+function NormalLessonNavbarIndicator() {
+  const [targetEl, setTargetEl] = useState(null);
+  const [lessonTitle, setLessonTitle] = useState('');
+
+  useEffect(() => {
+    const brand = document.querySelector('.navbar__brand');
+    if (!brand) return undefined;
+
+    let container = document.getElementById('normal-lesson-navbar-indicator-root');
+    if (!container || container.parentNode !== brand) {
+      if (container && container.parentNode) {
+        container.parentNode.removeChild(container);
+      }
+      container = document.createElement('div');
+      container.id = 'normal-lesson-navbar-indicator-root';
+      brand.appendChild(container);
+    }
+    setTargetEl(container);
+
+    const updateTitle = () => {
+      const h1 = document.querySelector('article h1, .markdown h1, h1');
+      const raw = (h1?.textContent || document.title || '').trim();
+      const title = raw.replace(/\s*\|.*/, '').replace(/^EduMat58\s*[-–—:]\s*/i, '').trim();
+      setLessonTitle(title);
+    };
+
+    updateTitle();
+    const timer = setTimeout(updateTitle, 150);
+    const observer = new MutationObserver(updateTitle);
+    const main = document.querySelector('main') || document.body;
+    observer.observe(main, { childList: true, subtree: true });
+
+    return () => {
+      clearTimeout(timer);
+      observer.disconnect();
+      if (container && container.parentNode) {
+        container.parentNode.removeChild(container);
+      }
+    };
+  }, []);
+
+  if (!targetEl || !lessonTitle) return null;
+
+  return ReactDOM.createPortal(
+    <div className="normalLessonNavbarIndicator" aria-live="polite" title={`Lecția curentă: ${lessonTitle}`}>
+      <span>Lecția curentă</span>
+      <strong>{lessonTitle}</strong>
+    </div>,
+    targetEl
   );
 }
 
@@ -714,6 +775,7 @@ export default function DocRootLayout({ children }) {
   if (!isEduPasi) {
     return (
       <>
+        <NormalLessonNavbarIndicator />
         <OriginalDocRootLayout>{children}</OriginalDocRootLayout>
         <EduPasiAccessibilityTools />
       </>

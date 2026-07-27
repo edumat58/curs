@@ -1,0 +1,21 @@
+{
+  "name": "edupasi-voice-service",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "AI Voice Teacher pentru EduPASI: explicații pedagogice generate și rostite, cu cache permanent în MongoDB.",
+  "main": "src/server.mjs",
+  "scripts": {
+    "start": "node --env-file=.env src/server.mjs",
+    "dev": "node --env-file=.env --watch src/server.mjs",
+    "health": "curl -s localhost:8099/health"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "mongodb": "^6.8.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
