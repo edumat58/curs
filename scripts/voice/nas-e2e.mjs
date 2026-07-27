@@ -1,6 +1,10 @@
 /**
  * Test end-to-end pe serviciul deja pornit: trimite o secțiune reală exact cum
- * o trimite browserul (hash cu PROMPT_VERSION 2) și verifică ce se întoarce.
+ * o trimite browserul și verifică ce se întoarce.
+ *
+ * `PROMPT_VERSION` se importă din serviciu, nu se scrie aici. Cât era copiat, a
+ * rămas la 2 după ce serviciul trecuse la 3, iar testul cerea alt hash decât
+ * cel real: raporta o generare nouă acolo unde site-ul lovea cache-ul.
  *   node scripts/voice/nas-e2e.mjs [--i=8] [--api=https://voce.asbrihome.synology.me]
  */
 import fs from 'node:fs';
@@ -8,6 +12,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { canonicalSection, sectionHash } from '../../src/lib/voice/canonical.mjs';
 import { latexToRomanian } from '../../src/components/EduPasiAccessibility/speech.mjs';
+import { PROMPT_VERSION } from '../../voice-service/src/pipeline/prompts.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const args = Object.fromEntries(
@@ -17,7 +22,6 @@ const args = Object.fromEntries(
   })
 );
 const API = String(args.api || 'https://voce.asbrihome.synology.me').replace(/\/$/, '');
-const PROMPT_VERSION = 2;
 
 const all = JSON.parse(fs.readFileSync(path.join(ROOT, '.voice-sections.json'), 'utf8'));
 const entry = all[Number(args.i ?? 8)];
@@ -35,7 +39,7 @@ const latex = (section.latex || []).map((item) => ({
 }));
 
 const hash = await sectionHash(section, PROMPT_VERSION);
-console.log(`secțiune: ${section.heading}\nhash v2: ${hash}\napi: ${API}`);
+console.log(`secțiune: ${section.heading}\nhash v${PROMPT_VERSION}: ${hash}\napi: ${API}`);
 
 const t0 = Date.now();
 let res = await fetch(`${API}/voice/section`, {

@@ -12,6 +12,7 @@
  */
 import express from 'express';
 import cors from 'cors';
+import { pathToFileURL } from 'node:url';
 import { createLlm } from './providers/llm.mjs';
 import { createPiperTts } from './providers/tts.mjs';
 import { explainSection } from './pipeline/explain.mjs';
@@ -267,7 +268,17 @@ export async function createServer(env = process.env) {
   return app;
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+/**
+ * „Am fost pornit direct, sau doar importat?"
+ *
+ * Comparația se face cu `pathToFileURL`, nu lipind `file://` în fața căii.
+ * Pe Linux cele două arată la fel; pe Windows nu coincid niciodată —
+ * `file://D:\cale\server.mjs` față de `file:///D:/cale/server.mjs`. Serviciul
+ * pornea, nu asculta pe niciun port și ieșea fără nicio eroare, ceea ce e
+ * exact felul de defect care te trimite să cauți în rețea, în firewall și în
+ * baza de date, adică peste tot în afară de locul potrivit.
+ */
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   // Plasă de siguranță: un serviciu educațional nu are voie să dispară în
   // tăcere. Orice eroare scăpată se loghează, dar procesul rămâne în picioare
   // ca să servească în continuare explicațiile deja generate din cache.

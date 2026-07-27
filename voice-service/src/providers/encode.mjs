@@ -5,8 +5,15 @@
  * 28 kbps aduce vocea la ~3,4 KB/secundă (măsurat: 158 s → 543 KB WAV vs
  * 543 KB... adică de 12× mai mic), fără pierdere audibilă pentru vorbire.
  *
- * Dacă `opusenc` lipsește pe mașină, ne întoarcem la WAV în loc să eșuăm:
- * mai bine audio mare decât deloc.
+ * Comprimă cine e instalat: `opusenc` (opus-tools) sau `ffmpeg`. Rezultatul e
+ * identic — același codec, același bitrate — dar disponibilitatea nu e deloc
+ * identică. Pe Linux, `opus-tools` vine dintr-un `apt install`; pe Windows,
+ * Xiph publică doar surse, în timp ce ffmpeg se ia dintr-o singură comandă. Un
+ * serviciu care merge pe NAS și nu merge pe PC din cauza asta ar fi o piedică
+ * inventată de noi.
+ *
+ * Dacă lipsesc amândouă, ne întoarcem la WAV în loc să eșuăm: mai bine audio
+ * mare decât deloc.
  */
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
@@ -16,21 +23,47 @@ import os from 'node:os';
 
 const run = promisify(execFile);
 
-let opusAvailable = null;
+/** Comprimatoarele știute, în ordinea preferinței. */
+const ENCODERS = [
+  {
+    name: 'opusenc',
+    probe: ['--version'],
+    args: (input, output, bitrateKbps) => [
+      '--bitrate', String(bitrateKbps), '--quiet', input, output,
+    ],
+  },
+  {
+    name: 'ffmpeg',
+    probe: ['-version'],
+    args: (input, output, bitrateKbps) => [
+      '-loglevel', 'error', '-y', '-i', input,
+      '-c:a', 'libopus', '-b:a', `${bitrateKbps}k`,
+      // Vorbire, nu muzică: `voip` alocă biții unde contează pentru inteligibilitate.
+      '-application', 'voip', output,
+    ],
+  },
+];
 
-async function hasOpusenc() {
-  if (opusAvailable !== null) return opusAvailable;
-  try {
-    await run('opusenc', ['--version']);
-    opusAvailable = true;
-  } catch {
-    opusAvailable = false;
+let chosen;
+
+async function pickEncoder() {
+  if (chosen !== undefined) return chosen;
+  for (const encoder of ENCODERS) {
+    try {
+      await run(encoder.name, encoder.probe);
+      chosen = encoder;
+      return chosen;
+    } catch {
+      // Lipsește sau nu răspunde — încercăm următorul.
+    }
   }
-  return opusAvailable;
+  chosen = null;
+  return chosen;
 }
 
 export async function encodeOpus(wavBuffer, { bitrateKbps = 28 } = {}) {
-  if (!(await hasOpusenc())) {
+  const encoder = await pickEncoder();
+  if (!encoder) {
     return {
       buffer: wavBuffer,
       codec: 'wav',
@@ -43,12 +76,7 @@ export async function encodeOpus(wavBuffer, { bitrateKbps = 28 } = {}) {
   const opusPath = path.join(dir, 'out.opus');
   try {
     await fs.writeFile(wavPath, wavBuffer);
-    await run('opusenc', [
-      '--bitrate', String(bitrateKbps),
-      '--quiet',
-      wavPath,
-      opusPath,
-    ]);
+    await run(encoder.name, encoder.args(wavPath, opusPath, bitrateKbps));
     const buffer = await fs.readFile(opusPath);
     return { buffer, codec: 'opus', contentType: 'audio/ogg' };
   } finally {
