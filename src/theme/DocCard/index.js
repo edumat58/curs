@@ -8,13 +8,11 @@ import {
 import { usePluralForm } from '@docusaurus/theme-common';
 import isInternalUrl from '@docusaurus/isInternalUrl';
 import { translate } from '@docusaurus/Translate';
-import Heading from '@theme/Heading';
 import styles from './styles.module.css';
 
 /**
- * DocCard fără emoji — regula Kulturosfera: doar iconițe SVG stroke.
- * Modulele (categorii) primesc straturile din limbajul butonului „Cuprins";
- * paginile primesc documentul, linkurile externe săgeata.
+ * DocCard compactizat — stil EduPAȘI cu accent portocaliu.
+ * Grid: [iconiță/număr] [titlu + descriere] [CTA →]
  */
 
 const iconProps = {
@@ -59,6 +57,17 @@ function ExternalIcon() {
   );
 }
 
+function ArrowIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"
+      strokeLinejoin="round" aria-hidden="true">
+      <line x1="5" y1="12" x2="19" y2="12" />
+      <polyline points="12 5 19 12 12 19" />
+    </svg>
+  );
+}
+
 function useCategoryItemsPlural() {
   const { selectMessage } = usePluralForm();
   return (count) =>
@@ -76,27 +85,22 @@ function useCategoryItemsPlural() {
     );
 }
 
-function CardContainer({ href, children }) {
-  return (
-    <Link href={href} className={clsx('card padding--lg', styles.cardContainer)}>
-      {children}
-    </Link>
-  );
-}
-
 function CardLayout({ href, icon, title, description }) {
   return (
-    <CardContainer href={href}>
-      <Heading as="h2" className={clsx('text--truncate', styles.cardTitle)} title={title}>
-        <span className={styles.cardIcon}>{icon}</span>
-        {title}
-      </Heading>
-      {description && (
-        <p className={clsx('text--truncate', styles.cardDescription)} title={description}>
-          {description}
-        </p>
-      )}
-    </CardContainer>
+    <Link href={href} className={styles.cardContainer}>
+      <span className={styles.cardIcon}>{icon}</span>
+      <div className={styles.cardCopy}>
+        <strong className={styles.cardTitle} title={title}>{title}</strong>
+        {description && (
+          <small className={styles.cardDescription} title={description}>
+            {description}
+          </small>
+        )}
+      </div>
+      <span className={styles.cardCta}>
+        Deschide <ArrowIcon />
+      </span>
+    </Link>
   );
 }
 

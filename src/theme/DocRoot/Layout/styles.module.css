@@ -1,0 +1,1253 @@
+/* ============================================================
+   EduPAȘI — shell-ul lecțiilor
+   Tokenii --edupasi-* sunt definiți doar când e activă o paletă
+   de accesibilitate (safe/contrast). În paleta standard rămân
+   nedefiniți, de aceea fiecare token are aici o valoare de rezervă.
+   ============================================================ */
+.edupasiShell {
+  --edupasi-shell-accent: var(--edupasi-accent, #005340);
+  --edupasi-shell-accent-strong: var(--edupasi-accent-strong, #003f31);
+  --edupasi-shell-on-accent: var(--edupasi-on-accent, #ffffff);
+  --edupasi-shell-border: var(--edupasi-border-subtle, #c6dcd4);
+  --edupasi-shell-border-strong: var(--edupasi-border, #8dbbb0);
+  --edupasi-shell-page: var(--edupasi-page, #ffffff);
+  --edupasi-shell-surface: var(--edupasi-surface, #ffffff);
+  --edupasi-shell-surface-alt: var(--edupasi-surface-alt, #eef3f1);
+  --edupasi-shell-warm: var(--edupasi-surface-warm, #fffcf5);
+  --edupasi-shell-text: var(--edupasi-text, #161616);
+  --edupasi-shell-muted: var(--edupasi-text-secondary, #3a3a3a);
+  --edupasi-shell-muted-2: var(--edupasi-text-muted, #5b5b5b);
+  --edupasi-shell-soft: var(--edupasi-accent-soft, #e2eeea);
+  --edupasi-shell-focus: var(--edupasi-focus, #0197b0);
+  --edupasi-shell-gold: var(--edupasi-decoration-gold, #9a7415);
+
+  display: flex;
+  min-width: 0;
+  flex: 1 0 auto;
+  flex-direction: column;
+  color: var(--edupasi-shell-text);
+  background: var(--edupasi-shell-page);
+}
+
+/* ------------------------------------------------------------
+   Bara de context (marca + lecția curentă)
+   ------------------------------------------------------------ */
+.contextBar {
+  position: fixed !important;
+  top: var(--ifm-navbar-height, 4.25rem) !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  height: 68px !important;
+  min-height: 68px !important;
+  z-index: 190 !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(0.75rem, 1.6vw, 1.25rem);
+  padding: 0.75rem clamp(0.85rem, 2.2vw, 1.75rem) 0.35rem;
+  color: var(--edupasi-shell-text);
+  background: var(--edupasi-shell-page);
+  border-bottom: 1px solid var(--edupasi-shell-border);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.contextLeft {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.5rem, 1.2vw, 0.85rem);
+}
+
+.contextAccessibilityBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.45rem 0.85rem 0.45rem 0.45rem;
+  min-height: 40px;
+  background: var(--edupasi-accent, #005340);
+  border: none;
+  border-radius: 999px;
+  color: var(--edupasi-on-accent, #ffffff);
+  font-size: 0.88rem;
+  font-weight: 750;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.contextAccessibilityBtn:hover {
+  background: var(--edupasi-accent-strong, #003f31);
+  transform: translateY(-1px);
+}
+
+.accessibilityIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--edupasi-surface, #ffffff);
+  color: var(--edupasi-focus, #0197b0);
+  font-weight: 900;
+  font-size: 0.82rem;
+  flex-shrink: 0;
+}
+
+.wordmark {
+  display: inline-flex;
+  min-height: 40px;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.25rem;
+  color: var(--edupasi-shell-text) !important;
+  border-radius: 8px;
+  font-size: 1.12rem;
+  font-weight: 900;
+  letter-spacing: -0.015em;
+  line-height: 1;
+  text-decoration: none !important;
+}
+
+.wordmark:hover {
+  background: var(--edupasi-shell-soft);
+}
+
+.wordmark strong {
+  color: var(--edupasi-shell-accent);
+}
+
+.homeBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.65rem;
+  color: var(--edupasi-shell-text);
+  background: var(--edupasi-shell-soft);
+  border: 1px solid var(--edupasi-shell-border);
+  border-radius: 8px;
+  font-size: 0.76rem;
+  font-weight: 800;
+  text-decoration: none !important;
+  white-space: nowrap;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.homeBtn:hover {
+  background: var(--edupasi-shell-surface-alt);
+  border-color: var(--edupasi-shell-accent);
+  color: var(--edupasi-shell-accent-strong);
+}
+
+@media (max-width: 640px) {
+  .homeBtnText {
+    display: none;
+  }
+  .homeBtn {
+    padding: 0.4rem;
+    border-radius: 50%;
+  }
+}
+
+.brandMark {
+  display: block;
+  flex: 0 0 auto;
+}
+
+.contextLesson {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.contextLesson span {
+  color: var(--edupasi-shell-muted-2);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.contextLesson strong {
+  overflow: hidden;
+  color: var(--edupasi-shell-text);
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------------------
+   Grila de lucru: navigator + lecția
+   ------------------------------------------------------------ */
+.learningWorkspace {
+  display: grid;
+  min-width: 0;
+  flex: 1;
+  grid-template-columns: minmax(270px, 330px) minmax(0, 1fr);
+  align-items: start;
+  margin-top: 68px !important;
+}
+
+/* ============================================================
+   NAVIGATORUL EduPAȘI (pentru copii cu CES)
+   Compact și calm: „Ești aici” → „Continuă” → lista lecțiilor
+   grupate pe module (fără „Pasul 1/2/3”). Iconițe + text, un
+   singur drum, componente mici.
+   ============================================================ */
+.navigator {
+  position: sticky;
+  top: calc(var(--ifm-navbar-height, 4.25rem) + 68px);
+  z-index: 10;
+  max-height: calc(100vh - var(--ifm-navbar-height, 4.25rem) - 68px);
+  align-self: start;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0.8rem;
+  color: var(--edupasi-shell-text);
+  background:
+    linear-gradient(180deg, var(--edupasi-shell-soft), transparent 11rem),
+    var(--edupasi-shell-surface-alt);
+  border-right: 2px solid var(--edupasi-shell-border);
+  scrollbar-color: var(--edupasi-shell-accent) transparent;
+  scrollbar-width: thin;
+}
+
+.navHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  margin-bottom: 0.7rem;
+}
+
+.navTitleWrap {
+  min-width: 0;
+}
+
+.navEyebrow {
+  display: block;
+  margin-bottom: 0.05rem;
+  color: var(--edupasi-shell-accent-strong);
+  font-size: 0.64rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.navTitle {
+  margin: 0;
+  color: var(--edupasi-shell-text);
+  font-size: 1.05rem;
+  font-weight: 900;
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+}
+
+.navToggle {
+  display: inline-flex;
+  min-width: 74px;
+  min-height: 40px;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem 0.6rem;
+  color: var(--edupasi-shell-accent-strong);
+  background: var(--edupasi-shell-page);
+  border: 1.5px solid var(--edupasi-shell-border);
+  border-radius: 10px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.navToggle:hover {
+  background: var(--edupasi-shell-soft);
+  border-color: var(--edupasi-shell-accent);
+}
+
+.navBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.navBody[hidden] {
+  display: none;
+}
+
+/* ---- Cardul „Ești aici” — ancora navigatorului (compact) ---- */
+.hereCard {
+  padding: 0.7rem 0.75rem;
+  background: var(--edupasi-shell-page);
+  border: 1.5px solid var(--edupasi-shell-accent);
+  border-radius: 14px;
+  box-shadow: 0 3px 0 color-mix(in srgb, var(--edupasi-shell-accent) 13%, transparent);
+}
+
+.hereTop {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.3rem;
+}
+
+.herePin {
+  display: inline-grid;
+  width: 26px;
+  height: 26px;
+  flex: 0 0 auto;
+  place-items: center;
+  color: var(--edupasi-shell-on-accent);
+  background: var(--edupasi-shell-accent);
+  border-radius: 50%;
+}
+
+.herePin svg {
+  width: 15px;
+  height: 15px;
+}
+
+.hereLabel {
+  color: var(--edupasi-shell-accent-strong);
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.hereLesson {
+  margin: 0;
+  color: var(--edupasi-shell-text);
+  font-size: 1rem;
+  font-weight: 900;
+  line-height: 1.28;
+}
+
+.hereMeta {
+  margin: 0.25rem 0 0;
+  color: var(--edupasi-shell-muted);
+  font-size: 0.76rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+/* ---- Bara de progres (slim) ---- */
+.progress {
+  margin-top: 0.65rem;
+}
+
+.progressHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.6rem;
+  margin-bottom: 0.3rem;
+  color: var(--edupasi-shell-muted);
+  font-size: 0.74rem;
+}
+
+.progressHead span {
+  font-weight: 700;
+}
+
+.progressHead strong {
+  flex: 0 0 auto;
+  color: var(--edupasi-shell-accent-strong);
+  font-size: 0.82rem;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+}
+
+.progressTrack {
+  height: 10px;
+  overflow: hidden;
+  background: var(--edupasi-shell-soft);
+  border: 1px solid var(--edupasi-shell-border);
+  border-radius: 999px;
+}
+
+.progressFill {
+  display: block;
+  height: 100%;
+  min-width: 0.7rem;
+  background: linear-gradient(
+    90deg,
+    var(--edupasi-shell-accent),
+    var(--edupasi-shell-accent-strong)
+  );
+  border-radius: inherit;
+  transition: width 240ms ease;
+}
+
+/* ---- Butonul „Continuă” + „Înapoi” (compacte) ---- */
+.stepActions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-top: 0.65rem;
+}
+
+.nextButton {
+  display: flex;
+  min-height: 52px;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0.6rem;
+  color: var(--edupasi-shell-on-accent) !important;
+  background: var(--edupasi-shell-accent);
+  border: 1.5px solid var(--edupasi-shell-accent-strong);
+  border-radius: 13px;
+  text-decoration: none !important;
+  box-shadow: 0 3px 0 color-mix(in srgb, var(--edupasi-shell-accent-strong) 50%, transparent);
+  transition: transform 140ms ease, background 140ms ease;
+}
+
+.nextButton:hover {
+  background: var(--edupasi-shell-accent-strong);
+  transform: translateY(-1px);
+}
+
+.nextButton:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--edupasi-shell-accent-strong) 50%, transparent);
+}
+
+.nextTexts {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+}
+
+.nextTexts small {
+  color: color-mix(in srgb, var(--edupasi-shell-on-accent) 82%, transparent);
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.nextTexts strong {
+  overflow: hidden;
+  font-size: 0.9rem;
+  font-weight: 900;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.nextArrow {
+  display: inline-grid;
+  width: 30px;
+  height: 30px;
+  flex: 0 0 auto;
+  place-items: center;
+  color: var(--edupasi-shell-accent);
+  background: var(--edupasi-shell-on-accent);
+  border-radius: 50%;
+}
+
+.nextArrow svg {
+  width: 17px;
+  height: 17px;
+}
+
+.prevButton {
+  display: flex;
+  min-height: 40px;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.4rem 0.6rem;
+  color: var(--edupasi-shell-accent-strong) !important;
+  background: var(--edupasi-shell-page);
+  border: 1.5px solid var(--edupasi-shell-border);
+  border-radius: 11px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-decoration: none !important;
+}
+
+.prevButton:hover {
+  background: var(--edupasi-shell-soft);
+  border-color: var(--edupasi-shell-accent);
+}
+
+.prevArrow {
+  display: inline-flex;
+}
+
+.prevArrow svg {
+  width: 16px;
+  height: 16px;
+  transform: rotate(180deg);
+}
+
+.finishNote {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.65rem;
+  color: var(--edupasi-shell-gold);
+  background: color-mix(in srgb, var(--edupasi-shell-gold) 12%, var(--edupasi-shell-page));
+  border: 1.5px solid color-mix(in srgb, var(--edupasi-shell-gold) 42%, transparent);
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.finishIcon {
+  display: inline-flex;
+  flex: 0 0 auto;
+}
+
+.finishIcon svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ============================================================
+   Lista lecțiilor, grupate pe module (fără numerotare de pași)
+   ============================================================ */
+.map {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.step {
+  overflow: hidden;
+  background: var(--edupasi-shell-page);
+  border: 1.5px solid var(--edupasi-shell-border);
+  border-radius: 13px;
+}
+
+.stepCurrent {
+  border-color: var(--edupasi-shell-accent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--edupasi-shell-accent) 16%, transparent);
+}
+
+.stepDone {
+  background: color-mix(in srgb, var(--edupasi-shell-soft) 40%, var(--edupasi-shell-page));
+}
+
+.stepUpcoming {
+  background: var(--edupasi-shell-page);
+}
+
+.stepHeadingReset {
+  margin: 0;
+  font: inherit;
+}
+
+.stepHeader {
+  display: flex;
+  width: 100%;
+  min-height: 46px;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.5rem 0.6rem;
+  color: var(--edupasi-shell-text);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+
+.stepHeader:hover {
+  background: var(--edupasi-shell-soft);
+}
+
+/* Indicator mic de stare al modulului (nu un număr de pas). */
+.stepMark {
+  display: inline-grid;
+  width: 22px;
+  height: 22px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 50%;
+}
+
+.stepMark svg {
+  width: 13px;
+  height: 13px;
+}
+
+.stepMark[data-state='upcoming'] {
+  background: var(--edupasi-shell-page);
+  border: 2px solid var(--edupasi-shell-border-strong);
+}
+
+.stepMark[data-state='current'] {
+  background: var(--edupasi-shell-accent);
+  border: 2px solid var(--edupasi-shell-accent-strong);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--edupasi-shell-accent) 22%, transparent);
+}
+
+.stepMark[data-state='done'] {
+  color: var(--edupasi-shell-on-accent);
+  background: var(--edupasi-shell-accent-strong);
+  border: 2px solid var(--edupasi-shell-accent-strong);
+}
+
+.stepInfo {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.03rem;
+}
+
+.stepKicker {
+  color: var(--edupasi-shell-muted-2);
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.stepName {
+  color: var(--edupasi-shell-text);
+  font-size: 0.88rem;
+  font-weight: 850;
+  line-height: 1.22;
+}
+
+.stepCount {
+  color: var(--edupasi-shell-muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.stepChevron {
+  width: 0.55rem;
+  height: 0.55rem;
+  flex: 0 0 auto;
+  margin-right: 0.15rem;
+  border-right: 2.5px solid var(--edupasi-shell-muted);
+  border-bottom: 2.5px solid var(--edupasi-shell-muted);
+  border-radius: 0 0 2px 0;
+  transform: rotate(45deg) translate(-1px, -1px);
+  transition: transform 160ms ease;
+}
+
+.stepChevronOpen {
+  transform: rotate(225deg) translate(-1px, -1px);
+}
+
+.stepPanel {
+  padding: 0.1rem 0.6rem 0.6rem;
+}
+
+.stepPanel[hidden] {
+  display: none;
+}
+
+.stepOverview {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  margin-bottom: 0.3rem;
+  padding: 0.3rem 0.55rem;
+  color: var(--edupasi-shell-accent-strong) !important;
+  background: var(--edupasi-shell-soft);
+  border-radius: 9px;
+  font-size: 0.74rem;
+  font-weight: 800;
+  text-decoration: none !important;
+}
+
+.stepOverview:hover {
+  background: color-mix(in srgb, var(--edupasi-shell-accent) 20%, var(--edupasi-shell-page));
+}
+
+/* ---- Lecțiile, cu „traseul” vertical subțire ---- */
+.lessonList {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lessonItem {
+  position: relative;
+}
+
+.lessonItem::before,
+.lessonItem::after {
+  content: '';
+  position: absolute;
+  left: 20px;
+  width: 2px;
+  background: var(--edupasi-shell-border-strong);
+  transform: translateX(-50%);
+  z-index: 0;
+}
+
+.lessonItem::before {
+  top: 0;
+  height: 50%;
+}
+
+.lessonItem::after {
+  top: 50%;
+  bottom: 0;
+}
+
+.lessonItem:first-child::before {
+  display: none;
+}
+
+.lessonItem:last-child::after {
+  display: none;
+}
+
+.lessonItemDone::before,
+.lessonItemCurrent::before,
+.lessonItemDone::after {
+  background: var(--edupasi-shell-accent);
+}
+
+.lesson {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.4rem 0.5rem;
+  color: var(--edupasi-shell-text) !important;
+  border: 1.5px solid transparent;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1.3;
+  text-decoration: none !important;
+}
+
+.lesson:hover {
+  background: var(--edupasi-shell-soft);
+}
+
+.lessonDot {
+  display: inline-grid;
+  width: 24px;
+  height: 24px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 50%;
+}
+
+.lessonDot svg {
+  width: 13px;
+  height: 13px;
+}
+
+.lessonDot[data-state='upcoming'] {
+  background: var(--edupasi-shell-page);
+  border: 2px solid var(--edupasi-shell-border-strong);
+}
+
+.lessonDot[data-state='done'] {
+  color: var(--edupasi-shell-on-accent);
+  background: var(--edupasi-shell-accent);
+  border: 2px solid var(--edupasi-shell-accent);
+}
+
+.lessonDot[data-state='current'] {
+  color: var(--edupasi-shell-on-accent);
+  background: var(--edupasi-shell-accent);
+  border: 2px solid var(--edupasi-shell-page);
+  box-shadow: 0 0 0 2px var(--edupasi-shell-accent);
+}
+
+.lessonText {
+  flex: 1;
+  min-width: 0;
+}
+
+.lessonDone .lessonText {
+  color: var(--edupasi-shell-muted);
+}
+
+.lessonNow {
+  flex: 0 0 auto;
+  padding: 0.14rem 0.42rem;
+  color: var(--edupasi-shell-on-accent);
+  background: var(--edupasi-shell-accent);
+  border-radius: 999px;
+  font-size: 0.62rem;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.lessonCurrent {
+  background: var(--edupasi-shell-soft);
+  border-color: var(--edupasi-shell-accent);
+  font-weight: 800;
+}
+
+.lessonCurrent:hover {
+  background: var(--edupasi-shell-soft);
+}
+
+/* ============================================================
+   Zona lecției (Docusaurus original)
+   ============================================================ */
+.lessonCanvas {
+  min-width: 0;
+  background: var(--edupasi-shell-page);
+  outline: none;
+}
+
+.lessonCanvas :global([class*='docMainContainer_']) {
+  max-width: 100% !important;
+}
+
+.lessonCanvas :global([class*='docItemCol_']) {
+  min-width: 0;
+  max-width: none;
+  flex: 1 1 0;
+}
+
+.lessonCanvas :global(.container) {
+  width: 100%;
+  max-width: 100%;
+  padding-left: clamp(0.4rem, 1.5vw, 1rem) !important;
+  padding-right: clamp(0.4rem, 1.5vw, 1rem) !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  text-align: left !important;
+}
+
+.lessonCanvas :global([class*='docItemContainer_']) {
+  max-width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+  text-align: left;
+}
+
+.lessonCanvas :global(.container > .row) {
+  width: 100%;
+  margin-right: 0;
+  margin-left: 0;
+}
+
+@media (max-width: 996px) {
+  .lessonCanvas :global(.container),
+  .lessonCanvas :global([class*='docItemContainer_']) {
+    padding-left: 0.4rem !important;
+    padding-right: 0.4rem !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    text-align: left !important;
+  }
+}
+
+/* Docusaurus rezervă implicit 25% din pagină pentru cuprins. Pe ecrane late
+   asta produce o zonă goală enormă și îngustează artificial lecția. Păstrăm
+   cuprinsul, dar îi dăm o coloană stabilă lipită de marginea dreaptă. */
+.lessonCanvas :global([class*='docItemCol_'] + .col) {
+  width: clamp(250px, 16vw, 330px);
+  max-width: clamp(250px, 16vw, 330px);
+  flex: 0 0 clamp(250px, 16vw, 330px);
+  margin-left: auto;
+  padding-right: clamp(0.75rem, 1.5vw, 1.5rem);
+  padding-left: clamp(0.9rem, 1.5vw, 1.5rem);
+  border-left: 1px solid var(--edupasi-shell-border);
+}
+
+.lessonCanvas :global(.theme-doc-toc-desktop) {
+  width: 100%;
+}
+
+/* EduPAȘI are propriul navigator cognitiv; meniul standard, îndesat, al
+   documentației este scos intenționat, ca elevul să nu vadă două hărți
+   care se contrazic. */
+.lessonCanvas :global(.theme-doc-sidebar-container) {
+  display: none !important;
+}
+
+.lessonCanvas :global(.theme-doc-markdown) {
+  color: var(--edupasi-shell-text);
+}
+
+.lessonCanvas :global(.breadcrumbs__link) {
+  color: var(--edupasi-shell-accent-strong);
+}
+
+.lessonCanvas :global(.pagination-nav__link) {
+  min-height: 72px;
+  border-width: 2px;
+  border-color: var(--edupasi-shell-border);
+  border-radius: 14px;
+}
+
+.lessonCanvas :global(.pagination-nav__link:hover) {
+  background: var(--edupasi-shell-soft);
+  border-color: var(--edupasi-shell-accent);
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Focus vizibil, gros, pentru navigare la tastatură. */
+.edupasiShell :where(a, button, summary):focus-visible {
+  outline: 4px solid var(--edupasi-shell-focus);
+  outline-offset: 3px;
+}
+
+/* ------------------------------------------------------------
+   „Text ușor de urmărit” (data-edupasi-easy-text)
+   ------------------------------------------------------------ */
+:global(html[data-edupasi-easy-text='true']) .navigator {
+  font-family: Verdana, Tahoma, Arial, sans-serif;
+}
+
+:global(html[data-edupasi-easy-text='true']) .lesson,
+:global(html[data-edupasi-easy-text='true']) .stepName,
+:global(html[data-edupasi-easy-text='true']) .hereLesson,
+:global(html[data-edupasi-easy-text='true']) .nextTexts strong,
+:global(html[data-edupasi-easy-text='true']) .stepOverview,
+:global(html[data-edupasi-easy-text='true']) .prevButton {
+  line-height: 1.6;
+  letter-spacing: 0.025em;
+  word-spacing: 0.06em;
+}
+
+/* ------------------------------------------------------------
+   Mod de concentrare (data-edupasi-focus)
+   Navigatorul e ascuns global prin [data-edupasi-secondary],
+   dar mai golim și coloana rezervată lui.
+   ------------------------------------------------------------ */
+:global(html[data-edupasi-focus='true']) .learningWorkspace {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+:global(html[data-edupasi-focus='true']) .navigator,
+:global(html[data-edupasi-focus='true']) .contextBar {
+  display: none;
+}
+
+/* ------------------------------------------------------------
+   Responsiv
+   ------------------------------------------------------------ */
+@media (max-width: 1100px) {
+  .learningWorkspace {
+    grid-template-columns: minmax(260px, 300px) minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 996px) {
+  .contextBar {
+    position: fixed !important;
+    top: var(--ifm-navbar-height, 4.25rem) !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    height: 68px !important;
+    min-height: 68px !important;
+    z-index: 190 !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    box-sizing: border-box !important;
+    background: var(--edupasi-shell-page);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  }
+
+  .learningWorkspace {
+    display: block;
+    margin-top: 68px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .navigator {
+    position: sticky !important;
+    top: calc(var(--ifm-navbar-height, 4.25rem) + 68px) !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    z-index: 90 !important;
+    max-height: calc(100dvh - var(--ifm-navbar-height, 4.25rem) - 68px) !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain;
+    padding: 0.8rem clamp(0.75rem, 3vw, 1.15rem);
+    border-right: 0;
+    border-radius: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    border-bottom: 2px solid var(--edupasi-shell-border);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+    box-sizing: border-box !important;
+  }
+
+  /* Pe mobil navigatorul e o bandă lată sus; componentele stau una sub
+     alta, fiecare pe toată lățimea (nu înghesuite pe două coloane). */
+  .navBody {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+
+  .navBody[hidden] {
+    display: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .contextBar {
+    min-height: 58px;
+    gap: 0.55rem;
+    padding: 0.4rem 0.75rem;
+  }
+
+  .wordmark {
+    font-size: 1.04rem;
+  }
+
+  .contextLesson {
+    display: none;
+  }
+
+  .navBody {
+    display: flex;
+  }
+
+  .navBody[hidden] {
+    display: none;
+  }
+
+  .navTitle {
+    font-size: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stepChevron,
+  .progressFill,
+  .nextButton {
+    transition: none;
+  }
+}
+
+@keyframes edupasiSlideUpFromBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .tocOverlay {
+    align-items: flex-end !important;
+    padding: 0 !important;
+  }
+
+  .tocModal {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin: 0 !important;
+    max-height: 75dvh !important;
+    border-radius: 22px 22px 0 0 !important;
+    border-bottom: none !important;
+    animation: edupasiSlideUpFromBottom 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.35) !important;
+  }
+}
+
+/* ------------------------------------------------------------
+   Culori forțate / contrast maxim de sistem
+   ------------------------------------------------------------ */
+@media (forced-colors: active) {
+  .contextBar,
+  .navigator,
+  .hereCard,
+  .step,
+  .stepMark,
+  .lesson,
+  .lessonDot,
+  .prevButton,
+  .nextButton,
+  .finishNote,
+  .progressTrack {
+    border-color: CanvasText;
+  }
+
+  .stepMark[data-state='current'],
+  .stepMark[data-state='done'],
+  .lessonDot[data-state='done'],
+  .lessonDot[data-state='current'],
+  .nextButton,
+  .herePin {
+    forced-color-adjust: none;
+    color: HighlightText;
+    background: Highlight;
+  }
+
+  .lessonCurrent,
+  .lessonNow {
+    color: HighlightText;
+    background: Highlight;
+  }
+
+  .progressFill {
+    background: Highlight;
+  }
+}
+
+/* ============================================================
+   EduPAȘI — cuprinsul real al lecției (modal)
+   ============================================================ */
+.tocOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(4px);
+}
+
+.tocModal {
+  position: relative;
+  width: min(520px, 94vw);
+  max-height: min(640px, 82dvh);
+  display: flex;
+  flex-direction: column;
+  background: var(--edupasi-surface, #ffffff);
+  border: 2px solid var(--edupasi-accent, #005340);
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.tocHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 1.2rem 1.4rem 1rem;
+  background: var(--edupasi-accent-soft, #e2eeea);
+  border-bottom: 1px solid var(--edupasi-border-subtle, #c6dcd4);
+}
+
+.tocSubtitle {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--edupasi-accent-strong, #003f31);
+}
+
+.tocTitle {
+  margin: 0.2rem 0 0;
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: var(--edupasi-text, #161616);
+  line-height: 1.3;
+}
+
+.tocClose {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--edupasi-border-subtle, #c6dcd4);
+  border-radius: 50%;
+  background: var(--edupasi-surface, #ffffff);
+  color: var(--edupasi-text, #161616);
+  font-size: 1.3rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.tocClose:hover {
+  background: var(--edupasi-accent, #005340);
+  color: #ffffff;
+}
+
+.tocBody {
+  padding: 1rem 1.25rem 1.25rem;
+  overflow-y: auto;
+}
+
+.tocList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.tocItem {
+  margin: 0;
+}
+
+.tocSubItem {
+  margin: 0 0 0 1.25rem;
+}
+
+.tocButton {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  min-height: 48px;
+  background: var(--edupasi-surface-alt, #f6f9f8);
+  border: 1.5px solid var(--edupasi-border-subtle, #d2e4de);
+  border-radius: 12px;
+  color: var(--edupasi-text, #161616);
+  font-size: 0.95rem;
+  font-weight: 750;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.tocButton:hover {
+  background: var(--edupasi-accent-soft, #e2eeea);
+  border-color: var(--edupasi-accent, #005340);
+  color: var(--edupasi-accent-strong, #003f31);
+}
+
+.tocNumber {
+  font-weight: 900;
+  color: var(--edupasi-accent, #005340);
+  font-size: 0.9rem;
+}
+
+.tocEmpty {
+  padding: 1.5rem 1rem;
+  text-align: center;
+  color: var(--edupasi-text-muted, #555555);
+  font-size: 0.95rem;
+}

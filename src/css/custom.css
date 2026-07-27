@@ -563,7 +563,7 @@ main {
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 :root {
   /* tokenii familiei — varianta pe hârtie crem */
@@ -601,11 +601,13 @@ main {
 
 /* --- navbar: bară plină crem, hairline, fără pastilă --- */
 .navbar {
-  position: sticky;
-  top: 0;
-  left: 0;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
   transform: none;
-  width: 100%;
+  width: 100% !important;
+  z-index: var(--ifm-z-index-fixed, 100) !important;
   max-width: none;
   border-radius: 0;
   padding: 0 1.25rem;
@@ -615,7 +617,11 @@ main {
   box-shadow: none;
   border-bottom: 1px solid var(--km-line);
   min-height: var(--ifm-navbar-height);
-  height: var(--ifm-navbar-height);
+  height: auto;
+}
+
+.main-wrapper {
+  padding-top: var(--ifm-navbar-height, 4.25rem) !important;
 }
 .navbar__item {
   font-family: 'Space Grotesk', system-ui, sans-serif;
@@ -644,6 +650,69 @@ main {
 }
 .navbar-sidebar {
   background: var(--km-cream-2);
+}
+
+/* ============================================================
+   Navbar pe DOUĂ RÂNDURI (desktop): bara era prea înghesuită —
+   6 linkuri + ochi + EduConnect+ + dată + status pe un singur rând.
+   Rândul 1 = marca + linkurile de curs; rândul 2 = utilitarele.
+   Pe mobil rămâne pe un singur rând (linkurile intră în hamburger).
+   ============================================================ */
+@media (min-width: 997px) {
+  :root {
+    /* Ține offset-ul sticky (inclusiv navigatorul EduPAȘI) sincron cu
+       înălțimea reală, mai mare, a barei pe două rânduri. */
+    --ifm-navbar-height: 6.5rem;
+  }
+
+  .navbar {
+    padding-top: 0.35rem;
+    padding-bottom: 0.35rem;
+  }
+
+  .navbar__inner {
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: center;
+    justify-content: flex-start;
+    row-gap: 0.25rem;
+  }
+
+  /* Dizolvăm grupul din stânga: logo-ul și linkurile devin elemente
+     independente, ca să poată sta pe rânduri diferite (altfel sunt
+     lipite în același container și nu pot fi separate). */
+  .navbar__inner > .navbar__items:not(.navbar__items--right) {
+    display: contents;
+  }
+
+  /* RÂNDUL 1, stânga: logo-ul edumat. */
+  .navbar__brand {
+    order: 1;
+  }
+
+  /* RÂNDUL 1, dreapta: banda de utilitare (ochi, EduConnect+, dată, status). */
+  .navbar__inner > .navbar__items--right {
+    order: 2;
+    margin-left: auto;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  /* Linie fină pe toată lățimea: separă rândurile ȘI împinge linkurile
+     pe rândul al doilea. */
+  .navbar__inner::after {
+    content: '';
+    order: 3;
+    width: 100%;
+    height: 0;
+    border-top: 1px solid var(--km-line);
+  }
+
+  /* RÂNDUL 2: linkurile principale (Meniu, EduPAȘI, Curs V–VIII). */
+  .navbar__items:not(.navbar__items--right) .navbar__item {
+    order: 4;
+  }
 }
 
 /* --- footer: crem, text cald --- */
@@ -945,4 +1014,597 @@ html.docs-doc-page[class*='docs-doc-id'] .main-wrapper {
 .table-of-contents .katex-display > .katex {
   display: inline;
   white-space: normal;
+}
+
+/* ============================================================
+   EduPASI — preferințe de acces aplicate numai în rubrică.
+   Culoarea nu este folosită singură: linkurile rămân subliniate,
+   focusul are contur, iar stările păstrează etichete text.
+   ============================================================ */
+
+.edupasi-nav-link {
+  color: #005340 !important;
+  font-weight: 700;
+}
+
+.edupasi-nav-link:hover,
+.edupasi-nav-link.navbar__link--active {
+  color: #00402f !important;
+  background: rgba(0, 83, 64, 0.1);
+}
+
+.sidebar-card--edupasi > .menu__link,
+.sidebar-card--edupasi .menu__link {
+  border: 1px solid rgba(0, 83, 64, 0.32);
+  color: #005340;
+  font-weight: 700;
+}
+
+html[data-edupasi-palette] {
+  color-scheme: light;
+  --edupasi-page: #ffffff;
+  --edupasi-surface: #ffffff;
+  --edupasi-surface-alt: #eef3f1;
+  --edupasi-surface-warm: #fffcf5;
+  --edupasi-text: #161616;
+  --edupasi-text-secondary: #3a3a3a;
+  --edupasi-text-muted: #5b5b5b;
+  --edupasi-accent: #005340;
+  --edupasi-accent-strong: #003f31;
+  --edupasi-on-accent: #ffffff;
+  --edupasi-accent-soft: #e2eeea;
+  --edupasi-border: #8dbbb0;
+  --edupasi-border-subtle: #d7e5e0;
+  --edupasi-focus: #0197b0;
+  --edupasi-decoration-red: #b73528;
+  --edupasi-decoration-gold: #9a7415;
+
+  /* Shell-ul Docusaurus al lecțiilor preia identitatea EduPASI chiar și în
+     paleta standard; celelalte două palete remapează aceiași tokeni mai jos. */
+  --km-cream: var(--edupasi-surface-alt);
+  --km-cream-2: var(--edupasi-surface);
+  --km-cream-3: var(--edupasi-accent-soft);
+  --km-ink: var(--edupasi-text);
+  --km-ink2: var(--edupasi-text-secondary);
+  --km-ink3: var(--edupasi-text-muted);
+  --km-line: var(--edupasi-border-subtle);
+  --km-orange: var(--edupasi-accent);
+  --km-orange-deep: var(--edupasi-accent-strong);
+  --ifm-color-primary: var(--edupasi-accent);
+  --ifm-color-primary-dark: var(--edupasi-accent-strong);
+  --ifm-color-primary-darker: var(--edupasi-accent-strong);
+  --ifm-color-primary-darkest: var(--edupasi-accent-strong);
+  --ifm-color-primary-light: var(--edupasi-accent);
+  --ifm-color-primary-lighter: var(--edupasi-accent);
+  --ifm-color-primary-lightest: var(--edupasi-accent-soft);
+  --ifm-background-color: var(--edupasi-page);
+  --ifm-background-surface-color: var(--edupasi-surface);
+  --ifm-font-color-base: var(--edupasi-text);
+}
+
+html[data-edupasi-palette] :where(
+  a,
+  button,
+  input,
+  select,
+  textarea,
+  summary,
+  [tabindex]:not([tabindex='-1'])
+):focus-visible {
+  outline: 3px solid var(--edupasi-focus);
+  outline-offset: 3px;
+}
+
+html[data-edupasi-palette] .theme-doc-markdown a {
+  text-decoration: underline;
+  text-decoration-thickness: 0.11em;
+  text-underline-offset: 0.16em;
+}
+
+html[data-edupasi-palette] .navbar__link--active,
+html[data-edupasi-palette] .menu__link--active:not(.menu__link--sublist) {
+  color: var(--edupasi-accent-strong) !important;
+  background: var(--edupasi-accent-soft);
+}
+
+html[data-edupasi-palette] .menu__link--active:not(.menu__link--sublist) {
+  border-left-color: var(--edupasi-accent);
+}
+
+/* Paletă Okabe–Ito adaptată pentru deficiențe de percepție a culorilor.
+   Suprafețele, textul, accentul și bordurile se schimbă împreună, nu doar linkurile. */
+html[data-edupasi-palette='safe'] {
+  --edupasi-page: #f6fbff;
+  --edupasi-surface: #ffffff;
+  --edupasi-surface-alt: #e6f2fa;
+  --edupasi-surface-warm: #fff3d1;
+  --edupasi-text: #111827;
+  --edupasi-text-secondary: #26384a;
+  --edupasi-text-muted: #40566b;
+  --edupasi-accent: #005a91;
+  --edupasi-accent-strong: #00436d;
+  --edupasi-on-accent: #ffffff;
+  --edupasi-accent-soft: #d9edf9;
+  --edupasi-border: #40566b;
+  --edupasi-border-subtle: #9cb3c7;
+  --edupasi-focus: #a63d00;
+  --edupasi-decoration-red: #a63d00;
+  --edupasi-decoration-gold: #8a6200;
+
+  --km-cream: var(--edupasi-page);
+  --km-cream-2: var(--edupasi-surface);
+  --km-cream-3: var(--edupasi-surface-alt);
+  --km-ink: var(--edupasi-text);
+  --km-ink2: var(--edupasi-text-secondary);
+  --km-ink3: var(--edupasi-text-muted);
+  --km-line: var(--edupasi-border-subtle);
+  --km-orange: #a63d00;
+  --km-orange-deep: #873100;
+  --ifm-color-primary: #005a91;
+  --ifm-color-primary-dark: #004f7f;
+  --ifm-color-primary-darker: #004874;
+  --ifm-color-primary-darkest: #003754;
+  --ifm-color-primary-light: #0b6da8;
+  --ifm-color-primary-lighter: #1678b3;
+  --ifm-color-primary-lightest: #4b99c6;
+  --ifm-background-color: var(--edupasi-page);
+  --ifm-background-surface-color: var(--edupasi-surface);
+  --ifm-font-color-base: var(--edupasi-text);
+}
+
+html[data-edupasi-palette='safe'] :where(body, .main-wrapper) {
+  color: var(--edupasi-text);
+  background: var(--edupasi-page);
+}
+
+html.docs-doc-page[data-edupasi-palette='safe'][class*='docs-doc-id'] .main-wrapper {
+  background: var(--edupasi-page) !important;
+}
+
+html[data-edupasi-palette='safe'] .menu__link--active:not(.menu__link--sublist) {
+  color: var(--edupasi-accent);
+  background: var(--edupasi-accent-soft);
+  border-left-color: var(--edupasi-decoration-red);
+}
+
+html[data-edupasi-palette='safe'] :where(
+  .alert,
+  .theme-admonition,
+  [data-edupasi-transcript]
+) {
+  color: var(--edupasi-text);
+  background: var(--edupasi-surface);
+  border: 2px solid var(--edupasi-border);
+}
+
+/* Contrast mare: fundal închis, text alb și accent galben. Diferența este
+   deliberat evidentă și toate combinațiile principale depășesc WCAG AA. */
+html[data-edupasi-palette='contrast'] {
+  color-scheme: dark;
+  --edupasi-page: #000000;
+  --edupasi-surface: #000000;
+  --edupasi-surface-alt: #171717;
+  --edupasi-surface-warm: #101010;
+  --edupasi-text: #ffffff;
+  --edupasi-text-secondary: #ffffff;
+  --edupasi-text-muted: #e6e6e6;
+  --edupasi-accent: #ffdf00;
+  --edupasi-accent-strong: #fff176;
+  --edupasi-on-accent: #000000;
+  --edupasi-accent-soft: #2d2900;
+  --edupasi-border: #ffffff;
+  --edupasi-border-subtle: #bfbfbf;
+  --edupasi-focus: #00ffff;
+  --edupasi-decoration-red: #ff8a80;
+  --edupasi-decoration-gold: #ffdf00;
+
+  --km-cream: var(--edupasi-page);
+  --km-cream-2: var(--edupasi-surface);
+  --km-cream-3: var(--edupasi-surface-alt);
+  --km-ink: var(--edupasi-text);
+  --km-ink2: var(--edupasi-text-secondary);
+  --km-ink3: var(--edupasi-text-muted);
+  --km-line: var(--edupasi-border);
+  --km-orange: var(--edupasi-accent);
+  --km-orange-deep: var(--edupasi-accent);
+  --ifm-color-primary: #ffdf00;
+  --ifm-color-primary-dark: #e6c900;
+  --ifm-color-primary-darker: #d6bc00;
+  --ifm-color-primary-darkest: #ad9800;
+  --ifm-color-primary-light: #ffe52e;
+  --ifm-color-primary-lighter: #ffe947;
+  --ifm-color-primary-lightest: #fff28c;
+  --ifm-background-color: var(--edupasi-page);
+  --ifm-background-surface-color: var(--edupasi-surface);
+  --ifm-font-color-base: var(--edupasi-text);
+}
+
+html[data-edupasi-palette='contrast'] :where(
+  body,
+  .main-wrapper,
+  .navbar,
+  .navbar-sidebar,
+  .footer,
+  .theme-doc-sidebar-container
+) {
+  color: var(--edupasi-text) !important;
+  background: var(--edupasi-page) !important;
+  box-shadow: none !important;
+  border-color: var(--edupasi-border) !important;
+}
+
+html.docs-doc-page[data-edupasi-palette='contrast'][class*='docs-doc-id'] .main-wrapper {
+  background: var(--edupasi-page) !important;
+}
+
+html[data-edupasi-palette='contrast'] .theme-doc-markdown,
+html[data-edupasi-palette='contrast'] .theme-doc-markdown :where(
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  li,
+  dt,
+  dd,
+  label,
+  figcaption,
+  th,
+  td
+) {
+  color: var(--edupasi-text) !important;
+  background-color: transparent;
+}
+
+html[data-edupasi-palette='contrast'] :where(
+  .theme-doc-markdown pre,
+  .theme-doc-markdown table,
+  .theme-doc-markdown blockquote,
+  .alert,
+  .theme-admonition,
+  [data-edupasi-transcript]
+) {
+  color: var(--edupasi-text) !important;
+  background: var(--edupasi-surface-alt) !important;
+  border: 2px solid var(--edupasi-border) !important;
+  box-shadow: none !important;
+}
+
+html[data-edupasi-palette='contrast'] :where(
+  .theme-doc-markdown a,
+  .table-of-contents__link,
+  .menu__link,
+  .breadcrumbs__link
+) {
+  color: var(--edupasi-accent) !important;
+}
+
+html[data-edupasi-palette='contrast'] .menu__link--active:not(.menu__link--sublist) {
+  color: var(--edupasi-on-accent) !important;
+  background: var(--edupasi-accent) !important;
+  border-left-color: var(--edupasi-border);
+}
+
+html[data-edupasi-palette='contrast'] :where(
+  a,
+  button,
+  input,
+  select,
+  textarea,
+  summary
+):focus-visible {
+  outline: 4px solid var(--edupasi-focus);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 2px #000000, 0 0 0 6px #ffffff;
+}
+
+html[data-edupasi-text='115'] {
+  font-size: 115%;
+}
+
+html[data-edupasi-text='130'] {
+  font-size: 130%;
+}
+
+/* „Text ușor de urmărit”. Panoul de accesibilitate scrie atributul
+   data-edupasi-easy-text (nu -readable), de aceea regulile nu se aplicau. */
+html[data-edupasi-easy-text='true'] main,
+html[data-edupasi-easy-text='true'] main :where(
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  li,
+  dt,
+  dd,
+  label,
+  button,
+  input,
+  select,
+  textarea,
+  summary,
+  figcaption
+) {
+  font-family: Verdana, Arial, system-ui, sans-serif;
+}
+
+html[data-edupasi-easy-text='true'] main :where(p, li, dt, dd) {
+  line-height: 1.9;
+  letter-spacing: 0.03em;
+  word-spacing: 0.09em;
+  max-width: 66ch;
+}
+
+html[data-edupasi-easy-text='true'] main :where(h1, h2, h3, h4, h5, h6) {
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+}
+
+html[data-edupasi-easy-text='true'] main em {
+  font-style: normal;
+  font-weight: 650;
+}
+
+html[data-edupasi-focus='true'] .navbar,
+html[data-edupasi-focus='true'] .theme-doc-sidebar-container,
+html[data-edupasi-focus='true'] .theme-doc-toc-desktop,
+html[data-edupasi-focus='true'] .theme-doc-toc-mobile,
+html[data-edupasi-focus='true'] .footer,
+html[data-edupasi-focus='true'] [data-edupasi-secondary] {
+  display: none !important;
+}
+
+html[data-edupasi-focus='true'] [class*='docItemCol_'] {
+  flex: 0 1 56rem;
+  max-width: 56rem;
+  margin-inline: auto;
+}
+
+html[data-edupasi-motion='reduced'] {
+  scroll-behavior: auto !important;
+}
+
+html[data-edupasi-motion='reduced'] *,
+html[data-edupasi-motion='reduced'] *::before,
+html[data-edupasi-motion='reduced'] *::after {
+  scroll-behavior: auto !important;
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (forced-colors: active) {
+  html[data-edupasi-palette] :where(a, button, input, select, textarea, summary) {
+    forced-color-adjust: auto;
+  }
+}
+
+/* ============================================================
+   EduPAȘI — full-width content area, wider sidebar, TOC to edge
+   ============================================================ */
+
+html[data-edupasi-palette] .main-wrapper .container {
+  max-width: 100% !important;
+  padding: 0 !important;
+}
+
+/* Left sidebar — 1.5× wider on desktop (default ~250px → 375px) */
+@media (min-width: 997px) {
+  html[data-edupasi-palette] .theme-doc-sidebar-container {
+    width: 375px !important;
+    min-width: 375px !important;
+  }
+
+  /* Right TOC — extend to edge, remove wasted space */
+  html[data-edupasi-palette] .theme-doc-toc-desktop {
+    width: 280px !important;
+    padding-right: 0.75rem !important;
+    margin-right: 0 !important;
+  }
+
+  /* Article content fills available space */
+  html[data-edupasi-palette] article {
+    max-width: none !important;
+  }
+
+  /* Doc item column takes full remaining width */
+  html[data-edupasi-palette] [class*='docItemCol_'] {
+    max-width: 100% !important;
+    flex: 1 1 0 !important;
+    padding: 0 1.5rem !important;
+  }
+
+  /* Row stretches full width */
+  html[data-edupasi-palette] .row {
+    margin: 0 !important;
+  }
+}
+
+/* ============================================================
+   Ascunde rubrica „On this page” / „Pe această pagină” de pe mobil,
+   deoarece cuprinsul real complet este integrat în butonul „Cuprins”.
+   ============================================================ */
+[class*='tocMobile_'],
+.theme-doc-toc-mobile,
+[class*='tocCollapsible_'] {
+  display: none !important;
+}
+
+/* ============================================================
+   EduPAȘI & Global — Protecție împotriva spargerii de layout (Math/Table Overflow)
+   Împiedică spargerea întregii pagini / navbar-urilor pe orizontală
+   când ecuațiile matematice (KaTeX) sau tabelele depășesc lățimea.
+   ============================================================ */
+
+/* 1. Blocarea scurgerii pe orizontală doar în zona de conținut a lecției */
+.theme-doc-markdown,
+.lessonCanvas,
+article {
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+/* 2. Textul și paragrafele se frâng curat la marginea ecranului */
+.theme-doc-markdown p,
+.theme-doc-markdown li,
+.theme-doc-markdown h1,
+.theme-doc-markdown h2,
+.theme-doc-markdown h3,
+.theme-doc-markdown h4,
+.theme-doc-markdown h5,
+.theme-doc-markdown h6 {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* 3. Formulele matematice KaTeX, tabelele și blocurile de cod au scroll punctual dedicat */
+.katex-display,
+.theme-doc-markdown .katex-display,
+.theme-doc-markdown table,
+.theme-doc-markdown pre,
+[class*='codeBlockContainer_'] {
+  max-width: 100% !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 0.35rem;
+}
+
+/* 4. Formulele inline KaTeX previn spargerea containerului pe mobil */
+.katex {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  vertical-align: middle;
+}
+
+/* 5. Fundalul alb al zonei de lecție rămâne 100% alb pe toată lățimea disponibilă */
+html[data-edupasi-palette] .main-wrapper,
+html[data-edupasi-palette] .lessonCanvas,
+html[data-edupasi-palette] article {
+  background-color: var(--edupasi-shell-page, #ffffff);
+}
+
+/* 6. Aliniere la stânga (left justified) cu margini simetrice pe mobil */
+.theme-doc-markdown,
+article,
+.generatedIndexPage {
+  text-align: left !important;
+}
+
+/* Fix aliniere simetrică pe paginile de categorie (Curs V, Curs VI, etc.) */
+.generatedIndexPage .row,
+.generatedIndexPage [class*='row'] {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  width: 100% !important;
+}
+
+.generatedIndexPage [class*='col'] {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* Cardurile din paginile de categorie cu borduri gri laterale complete și vizibile */
+.generatedIndexPage .card,
+.generatedIndexPage [class*='card_'],
+.card,
+[class*='card_'] {
+  border: 1px solid var(--ifm-color-emphasis-300, #d7d7d7) !important;
+  border-radius: 14px !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04) !important;
+  box-sizing: border-box !important;
+}
+
+@media (max-width: 996px) {
+  /* Toate lecțiile și paginile de categorie au margini simetrice stânga-dreapta (0.6rem / 10px) pe mobil */
+  .main-wrapper .container,
+  .container,
+  [class*='docItemContainer_'],
+  [class*='docItemCol_'],
+  .generatedIndexPage,
+  article {
+    padding-left: 0.6rem !important;
+    padding-right: 0.6rem !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    text-align: left !important;
+  }
+
+  /* Cardurile din paginile de categorie aliniate simetric la stânga cu borduri gri vizibile */
+  .card,
+  [class*='card_'] {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    border: 1px solid var(--ifm-color-emphasis-300, #d7d7d7) !important;
+    box-sizing: border-box !important;
+    text-align: left !important;
+  }
+}
+
+/* 7. Pe mobil în EduPAȘI ascundem butonul de meniu hamburguer / sidebar Docusaurus (.navbar__toggle),
+      deoarece EduPAȘI folosește propriul său Navigator dedicat (.navigator) */
+html[data-edupasi-page='true'] .navbar__toggle {
+  display: none !important;
+}
+
+/* 8. Fundal 100% alb curat (#ffffff) pe toate paginile și wrapperele de lecții (atât normale cât și EduPAȘI),
+      eliminând definitiv orice dungă sau margine crem în dreapta ecranului pe mobil */
+html,
+body,
+#___docusaurus,
+.main-wrapper,
+[class*='docPage_'],
+[class*='docMainContainer_'],
+[class*='docItemCol_'],
+[class*='docItemContainer_'],
+article {
+  background-color: #ffffff !important;
+}
+
+/* 9. Înlocuire iconiță casă din breadcrumb cu un SVG modern, aerisit (outline) */
+.breadcrumbs__link--home svg {
+  display: none !important;
+}
+.breadcrumbs__link--home::before {
+  content: '';
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  vertical-align: middle;
+  background: currentColor;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8'/%3E%3Cpath d='M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8'/%3E%3Cpath d='M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z'/%3E%3C/svg%3E");
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
 }

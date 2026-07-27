@@ -5,6 +5,7 @@
   "homepage": "https://edumat58.github.io/curs",
   "scripts": {
     "docusaurus": "docusaurus",
+    "prestart": "node scripts/build-lessons-index.mjs",
     "start": "docusaurus start",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",

@@ -1,0 +1,58 @@
+.highlight {
+  text-decoration-line: underline;
+  text-decoration-thickness: 0.12em;
+  text-underline-offset: 0.16em;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.regular {
+  font-weight: 400;
+}
+
+.red {
+  color: #b42318;
+  text-decoration-style: solid;
+}
+
+.teal {
+  color: #006b67;
+  text-decoration-style: double;
+}
+
+.orange {
+  color: #934500;
+  text-decoration-style: dashed;
+}
+
+.purple {
+  color: #6842a0;
+  text-decoration-style: dotted;
+}
+
+.blue {
+  color: #005a91;
+  text-decoration-style: wavy;
+}
+
+.green {
+  color: #267326;
+  text-decoration-style: solid;
+  text-decoration-thickness: 0.18em;
+}
+
+:global(html[data-edupasi-palette='safe']) .highlight {
+  color: var(--edupasi-accent);
+}
+
+:global(html[data-edupasi-palette='safe']) .red,
+:global(html[data-edupasi-palette='safe']) .orange {
+  color: var(--edupasi-decoration-red);
+}
+
+:global(html[data-edupasi-palette='contrast']) .highlight {
+  color: var(--edupasi-accent);
+  text-decoration-color: currentColor;
+}

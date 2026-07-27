@@ -1,9 +1,166 @@
 {
- "generatedAt": "2026-07-18T13:12:01.802Z",
+ "schemaVersion": 1,
  "lessons": [
+  {
+   "title": "G3 - Distanţa dintre două puncte",
+   "url": "/curs/docs/arhiva/an-scolar-2025-2026/c5/modul-3/10",
+   "collection": "standard",
+   "course": "c5",
+   "module": "modul-4",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 4"
+   ],
+   "text": "# G3 - Distanţa dintre două puncte\n\n---\n\n## Ce este distanța dintre două puncte?\n\n**Distanța dintre două puncte** $A$ și $B$ este egală cu **lungimea segmentului** $[AB]$ care le unește.\n\n$$\nAB \\quad \\text{sau} \\quad d(A, B)\n$$\n\n \n [figură] \n \n\n- Distanța este întotdeauna un număr **pozitiv** (sau $0$).\n- Distanța de la un punct la el însuși este $0$: $\\;d(A, A) = 0$.\n- Distanța nu depinde de ordinea punctelor: $\\;AB = BA$.\n\n---\n\n## Măsurarea distanței cu rigla\n\nPentru a măsura distanța dintre două puncte de pe o foaie, folosim **rigla gradată**:\n\n \n [figură] \n \n\nAșezăm rigla astfel încât punctul $A$ să fie în dreptul gradației $2$, iar punctul $B$ în dreptul gradației $7$. Distanța este diferența dintre cele două citiri:\n\n$$\nAB = 7 - 2 = 5\\,cm\n$$\n\nPutem așeza rigla și cu gradația $0$ exact în punctul $A$ — atunci distanța se citește direct în dreptul punctului $B$.\n\n---\n\n## Distanțe pe o dreaptă (puncte coliniare)\n\nCând trei puncte sunt **coliniare** (se află pe aceeași dreaptă), distanțele dintre ele se pot **aduna** sau **scădea**.\n\nConsiderăm punctul $C$ situat **între** $A$ și $B$:\n\n \n [figură] \n \n\nDacă punctul $C$ se află **între** $A$ și $B$, atunci:\n\n$$\nAC + CB = AB\n$$\n\n$$\nAC = AB - CB \\qquad CB = AB - AC\n$$\n\nPunctele $A$, $C$, $B$ sunt coliniare, în această ordine, cu $AC = 4\\,cm$ și $CB = 9\\,cm$. Cât este $AB$?\n\nCum $C$ este între $A$ și $B$:\n\n$$\nAB = AC + CB = 4 + 9 = 13\\,cm\n$$\n\nPunctele $A$, $C$, $B$ sunt coliniare, în această ordine, cu $AB = 20\\,cm$ și $AC = 12\\,cm$. Cât este $CB$?\n\n$$\nCB = AB - AC = 20 - 12 = 8\\,cm\n$$\n\nRegula $AC + CB = AB$ este valabilă **doar** dacă $C$ se află între $A$ și $B$. Dacă punctele sunt în altă ordine pe dreaptă, relația se schimbă.\n\nDe exemplu, dacă ordinea este $A,\\,B,\\,C$ (deci $B$ este între $A$ și $C$), atunci $AB + BC = AC$.\n\n---\n\n## Calcule cu distanțe\n\nPe o dreaptă, în ordinea $A,\\, M,\\, B$, avem $AM = 2x$ și $MB = x + 5$ (în cm). Știind că $AB = 17\\,cm$, află $x$.\n\nCum $M$ este între $A$ și $B$:\n\n$$\nAM + MB = AB\n$$\n\n$$\n2x + (x + 5) = 17\n$$\n\n$$\n3x + 5 = 17 \\;\\Rightarrow\\; 3x = 12 \\;\\Rightarrow\\; x = 4\n$$\n\nVerificare: $AM = 2 \\cdot 4 = 8\\,cm$, $MB = 4 + 5 = 9\\,cm$, iar $8 + 9 = 17\\,cm$. ✓\n\nPe o dreaptă se află punctele $A$, $B$, $C$ în această ordine, cu $AB = 6\\,cm$ și $BC = 10\\,cm$. Cât este distanța $AC$?\n\nCum $B$ este între $A$ și $C$:\n\n$$\nAC = AB + BC = 6 + 10 = 16\\,cm\n$$\n\n---"
+  },
+  {
+   "title": "G4 - Mijlocul unui segment și simetricul unui punct",
+   "url": "/curs/docs/arhiva/an-scolar-2025-2026/c5/modul-3/11",
+   "collection": "standard",
+   "course": "c5",
+   "module": "modul-4",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 4"
+   ],
+   "text": "# G4 - Mijlocul unui segment și simetricul unui punct\nfață de un punct\n\n---\n\n## Mijlocul unui segment\n\n**Mijlocul** unui segment $[AB]$ este punctul $M$ situat pe segment, egal depărtat de capetele acestuia.\n\n$$\nAM = MB\n$$\n\n \n [figură] \n \n\nLiniuțele albastre marchează faptul că cele două jumătăți sunt **congruente** (au aceeași lungime).\n\nDacă $M$ este mijlocul segmentului $[AB]$, atunci fiecare jumătate este egală cu **jumătatea** întregului segment:\n\n$$\nAM = MB = \\frac{AB}{2}\n$$\n\nReciproc, lungimea întregului segment este dublul unei jumătăți:\n\n$$\nAB = 2 \\cdot AM = 2 \\cdot MB\n$$\n\nUn segment are **un singur** mijloc. Mijlocul se află întotdeauna **între** cele două capete ale segmentului.\n\nPunctul $M$ este mijlocul segmentului $[AB]$, iar $AB = 18\\,cm$. Cât este $AM$?\n\nMijlocul împarte segmentul în două părți egale, fiecare egală cu jumătatea lungimii:\n\n$$\nAM = \\frac{AB}{2} = \\frac{18}{2} = 9\\,cm\n$$\n\nPunctul $M$ este mijlocul segmentului $[AB]$ și $AM = 7\\,cm$. Cât este $AB$?\n\nLungimea întregului segment este dublul jumătății:\n\n$$\nAB = 2 \\cdot AM = 2 \\cdot 7 = 14\\,cm\n$$\n\n---\n\n## Simetricul unui punct față de un punct\n\nPornim de la o întrebare simplă: dat fiind un punct $A$ și un alt punct $O$, există un punct $A'$ astfel încât $O$ să fie exact la mijloc între $A$ și $A'$?\n\n**Simetricul** punctului $A$ față de punctul $O$ este punctul $A'$ pentru care $O$ este **mijlocul** segmentului $[AA']$.\n\n \n [figură] \n \n\nDin definiție rezultă imediat că:\n\n$$\nOA = OA'\n$$\n\niar punctele $A$, $O$ și $A'$ sunt **coliniare** (se află pe aceeași dreaptă), cu $O$ între $A$ și $A'$.\n\n- $A'$ este simetricul lui $A$ față de $O$ $\\;\\Longleftrightarrow\\;$ $O$ este mijlocul lui $[AA']$.\n- Relația este **reciprocă**: dacă $A'$ este simetricul lui $A$, atunci $A$ este simetricul lui $A'$ (față de același $O$).\n- Simetricul punctului $O$ față de el însuși este **chiar $O$**.\n\nPentru a construi simetricul lui $A$ față de $O$:\n1. Trasăm semidreapta $AO$ și o prelungim dincolo de $O$.\n2. Măsurăm distanța $OA$ și o reportăm de cealaltă parte a lui $O$.\n3. Punctul obținut, la aceeași distanță, este $A'$.\n\nPunctul $O$ este mijlocul segmentului $[AA']$ și $OA = 5\\,cm$. Cât este lungimea segmentului $[AA']$?\n\nDeoarece $O$ este mijloc, avem $OA = OA' = 5\\,cm$, deci:\n\n$$\nAA' = OA + OA' = 5 + 5 = 2 \\cdot 5 = 10\\,cm\n$$\n\n---\n\n## Calcule cu mijloc și simetric\n\nMulte probleme combină mijlocul, simetricul și lungimile de segmente. Cheia este să reținem mereu cele două relații:\n\n$$\n\\boxed{AM = MB = \\dfrac{AB}{2}} \\qquad \\boxed{AB = 2 \\cdot AM}\n$$\n\nPe o dreaptă se consideră punctele $A$, $O$, $B$ astfel încât $O$ este mijlocul lui $[AB]$. Știind că $AO = 2x + 1$ și $OB = x + 4$ (în centimetri), află $x$ și lungimea $AB$.\n\nCum $O$ este mijloc, cele două jumătăți sunt egale:\n\n$$\nAO = OB \\;\\Rightarrow\\; 2x + 1 = x + 4\n$$\n\n$$\n2x - x = 4 - 1 \\;\\Rightarrow\\; x = 3\n$$\n\nAtunci $AO = 2 \\cdot 3 + 1 = 7\\,cm$, iar:\n\n$$\nAB = 2 \\cdot AO = 2 \\cdot 7 = 14\\,cm\n$$\n\nPunctul $C$ este simetricul lui $A$ față de $B$, iar $AB = 6\\,cm$. Pe segment se mai ia mijlocul $M$ al lui $[AB]$. Calculează $MC$.\n\nCum $C$ este simetricul lui $A$ față de $B$, $B$ este mijlocul lui $[AC]$, deci:\n\n$$\nBC = AB = 6\\,cm \\;\\Rightarrow\\; AC = 12\\,cm\n$$\n\n$M$ este mijlocul lui $[AB]$, deci:\n\n$$\nMB = \\frac{AB}{2} = \\frac{6}{2} = 3\\,cm\n$$\n\nPunctele sunt în ordinea $A,\\, M,\\, B,\\, C$ pe dreaptă, deci:\n\n$$\nMC = MB + BC = 3 + 6 = 9\\,cm\n$$\n\n---"
+  },
+  {
+   "title": "C22 - Adunarea și scăderea fracțiilor ordinare",
+   "url": "/curs/docs/arhiva/an-scolar-2025-2026/c5/modul-4/00",
+   "collection": "standard",
+   "course": "c5",
+   "module": "modul-4",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 4"
+   ],
+   "text": "# C22 - Adunarea și scăderea fracțiilor ordinare\n\n---\n\n## Adunarea și Scăderea Fracțiilor\n\n### Fracții cu același numitor\nAdunarea (scăderea) a două fracții care au același numitor se efectuează adunând (scăzând) numărătorii și păstrând numitorul:\n\n$$\\dfrac{a}{n} + \\dfrac{b}{n} = \\dfrac{a+b}{n}, \\quad \\dfrac{a}{n} - \\dfrac{b}{n} = \\dfrac{a-b}{n}, \\quad n \\neq 0$$\n\n> **Exemple:**\n> * $\\dfrac{5}{13} + \\dfrac{2}{13} = \\dfrac{5+2}{13} = \\dfrac{7}{13}$\n\n> * $\\dfrac{5}{13} - \\dfrac{2}{13} = \\dfrac{5-2}{13} = \\dfrac{3}{13}$\n\n---\n\n### Fracții cu numitori diferiți\nDacă fracțiile nu au același numitor, pentru adunare (scădere), se aduc la **numitor comun** prin amplificare sau simplificare.\n\n> **Exemple:**\n> * $\\stackrel{4)}{\\dfrac{5}{6}} + \\stackrel{3)}{\\dfrac{3}{8}} = \\dfrac{20}{24} + \\dfrac{9}{24} = \\dfrac{29}{24}$\n\n> * $\\dfrac{12^{(4}}{16} - \\dfrac{1}{4} = \\dfrac{3}{4} - \\dfrac{1}{4} = \\dfrac{2^{(2}}{4} = \\dfrac{1}{2}$\n\nDacă este posibil, rezultatul se simplifică.\n\n---\n\n## Operații între un număr natural și o fracție\n\nAdunarea (scăderea) dintre un număr natural și o fracție ordinară se efectuează scriind numărul natural ca fracție ordinară cu numitorul 1 astfel:\n\n$$n + \\dfrac{a}{b} = \\dfrac{n}{1} + \\dfrac{a}{b} = \\dfrac{n \\cdot b}{b} + \\dfrac{a}{b} = \\dfrac{n \\cdot b + a}{b}$$\n$$n - \\dfrac{a}{b} = \\dfrac{n}{1} - \\dfrac{a}{b} = \\dfrac{n \\cdot b}{b} - \\dfrac{a}{b} = \\dfrac{n \\cdot b - a}{b}$$\n\n> **Exemplu:**\n> * $5 + \\dfrac{3}{7} = \\dfrac{5}{1} + \\dfrac{3}{7} = \\dfrac{5 \\cdot 7}{7} + \\dfrac{3}{7} = \\dfrac{5 \\cdot 7 + 3}{7} = \\dfrac{38}{7}$\n\n> * $5 - \\dfrac{3}{7} = \\dfrac{5}{1} - \\dfrac{3}{7} = \\dfrac{5 \\cdot 7}{7} - \\dfrac{3}{7} = \\dfrac{5 \\cdot 7 - 3}{7} = \\dfrac{32}{7}$\n\n---\n\n## Proprietățile adunării\n\n* Adunarea fracțiilor ordinare este **comutativă** (termenii pot fi adunați în orice ordine și rezultatul adunării nu se modifică).\n $$\\dfrac{a}{b} + \\dfrac{c}{d} = \\dfrac{c}{d} + \\dfrac{a}{b}$$\n\n* Adunarea fracțiilor ordinare este **asociativă** (dacă o adunare are trei sau mai mulți termeni, aceștia pot fi grupați în moduri diferite și rezultatul adunării nu se modifică).\n $$\\left(\\dfrac{a}{b} + \\dfrac{c}{d}\\right) + \\dfrac{n}{m} = \\dfrac{a}{b} + \\left(\\dfrac{c}{d} + \\dfrac{n}{m}\\right)$$\n\n* **0 este element neutru** pentru adunare (numărul 0 nu schimbă rezultatul adunării).\n $$\\dfrac{a}{b} + 0 = 0 + \\dfrac{a}{b} = \\dfrac{a}{b}$$\n\nProprietățile de mai sus **nu** sunt adevărate pentru operația de scădere.\n\n---"
+  },
+  {
+   "title": "C23.1 - Înumlțirea fracțiilor ordinare",
+   "url": "/curs/docs/arhiva/an-scolar-2025-2026/c5/modul-4/01",
+   "collection": "standard",
+   "course": "c5",
+   "module": "modul-4",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 4"
+   ],
+   "text": "# C23.1 - Înumlțirea fracțiilor ordinare\n\n---\n\n## Înmulțirea a două fracții ordinare\n\nÎnmulțirea a două fracții ordinare se efectuează înmulțind numărătorii între ei și numitorii între ei:\n\n$$\\dfrac{a}{b} \\cdot \\dfrac{c}{d} = \\dfrac{a \\cdot c}{b \\cdot d}$$\n\nDacă este posibil, rezultatul se simplifică. Simplificarea se poate face și **înainte de înmulțire**. Se simplifică totdeauna un numărător cu un numitor.\n\n> **Exemplu (simplificare la final):**\n\n> $$\\dfrac{5}{6} \\cdot \\dfrac{3}{8} = \\dfrac{5 \\cdot 3}{6 \\cdot 8} = \\dfrac{15^{(3}}{48} = \\dfrac{5}{16}$$\n>\n> **Exemplu (simplificare pe parcurs):**\n\n> $$\\dfrac{5}{\\underset{2}{\\cancel{6}}} \\cdot \\dfrac{\\cancel{3}^1}{8} = \\dfrac{5 \\cdot 1}{2 \\cdot 8} = \\dfrac{5}{16}$$\n\n> *Spunem: 3 și 6 se simplifică prin 3. În locul lui 3 rămâne 1, iar în locul lui 6 rămâne 2.*\n\n---\n\n## Înmulțirea între un număr natural și o fracție\n\nSe efectuează scriind numărul natural ca fracție cu numitorul 1:\n\n$$n \\cdot \\dfrac{a}{b} = \\dfrac{n}{1} \\cdot \\dfrac{a}{b} = \\dfrac{n \\cdot a}{1 \\cdot b} = \\dfrac{n \\cdot a}{b}$$\n\n> **Exemplu:**\n> $$3 \\cdot \\dfrac{5}{7} = \\dfrac{3}{1} \\cdot \\dfrac{5}{7} = \\dfrac{3 \\cdot 5}{1 \\cdot 7} = \\dfrac{15}{7}$$\n\n---\n\n## Proprietățile înmulțirii\n\nDeoarece înmulțirea fracțiilor ordinare se reduce la înmulțiri între numere naturale, toate proprietățile înmulțirii de la numerele naturale rămân adevărate:\n\n1. **Comutativitatea:** Factorii pot fi înmulțiți în orice ordine.\n $$\\dfrac{a}{b} \\cdot \\dfrac{c}{d} = \\dfrac{c}{d} \\cdot \\dfrac{a}{b}$$\n\n2. **Asociativitatea:** Factorii pot fi grupați în moduri diferite.\n $$\\left( \\dfrac{a}{b} \\cdot \\dfrac{c}{d} \\right) \\cdot \\dfrac{n}{m} = \\dfrac{a}{b} \\cdot \\left( \\dfrac{c}{d} \\cdot \\dfrac{n}{m} \\right)$$\n\n3. **Element neutru:** Numărul 1 nu schimbă rezultatul înmulțirii.\n $$\\dfrac{a}{b} \\cdot 1 = 1 \\cdot \\dfrac{a}{b} = \\dfrac{a}{b}$$\n\n4. **Distributivitatea față de adunare (scădere):**\n $$\\dfrac{n}{m} \\cdot \\left( \\dfrac{a}{b} + \\dfrac{c}{d} \\right) = \\dfrac{n}{m} \\cdot \\dfrac{a}{b} + \\dfrac{n}{m} \\cdot \\dfrac{c}{d}$$\n\n $$\\dfrac{n}{m} \\cdot \\left( \\dfrac{a}{b} - \\dfrac{c}{d} \\right) = \\dfrac{n}{m} \\cdot \\dfrac{a}{b} - \\dfrac{n}{m} \\cdot \\dfrac{c}{d}$$\n\n---"
+  },
+  {
+   "title": "C23.2 - Împarțirea fracțiilor ordinare",
+   "url": "/curs/docs/arhiva/an-scolar-2025-2026/c5/modul-4/02",
+   "collection": "standard",
+   "course": "c5",
+   "module": "modul-4",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 4"
+   ],
+   "text": "# C23.2 - Împarțirea fracțiilor ordinare\n\n---\n\n## Observă și descoperă!\n\n### A. Model vizual\nCât este $\\dfrac{4}{6} : \\dfrac{1}{3}$? Altfel spus, de câte ori se cuprinde $\\dfrac{1}{3}$ în $\\dfrac{4}{6}$?\n\nCu ajutorul desenului, observăm că $\\dfrac{4}{6}$ este echivalent cu două treimi, deci rezultatul împărțirii este **2**.\n$$\\dfrac{4}{6} : \\dfrac{1}{3} = 2$$\n\n### B. Justificare prin probă\nProba împărțirii se face prin înmulțire. Dacă $\\dfrac{4}{6} : \\dfrac{1}{3} = A$, atunci $\\dfrac{4}{6} = A \\cdot \\dfrac{1}{3}$.\nÎnmulțind ambele părți cu inversul lui $\\dfrac{1}{3}$ (adică $\\dfrac{3}{1}$), obținem:\n\n$$\\dfrac{4}{6} \\cdot \\dfrac{3}{1} = A$$\n\n---\n\n## Regulă Importantă\n\nÎmpărțirea a două fracții ordinare se transformă în **înmulțire între prima fracție și a doua fracție inversată**.\n\n$$\\dfrac{a}{b} : \\dfrac{c}{d} = \\dfrac{a}{b} \\cdot \\dfrac{d}{c}$$\n\n> **Exemplu:**\n\n> $$\\dfrac{5}{4} : \\dfrac{3}{2} = \\dfrac{5}{\\cancel{4}_2} \\cdot \\dfrac{\\cancel{2}^1}{3} = \\dfrac{5 \\cdot 1}{2 \\cdot 3} = \\dfrac{5}{6}$$\n\n---\n\n## Problemă rezolvată\n\n**Cât este jumătate din 3 sferturi?**\n\n**Rezolvare:**\nCând împărțim o fracție la un număr natural, procedăm astfel:\n\n$$\\dfrac{3}{4} : 2 = \\dfrac{3}{4} : \\dfrac{2}{1} = \\dfrac{3}{4} \\cdot \\dfrac{1}{2} = \\dfrac{3}{8}$$\n\n*Explicație intuitivă:* Deoarece numărul de sferturi (3) nu este par, lucrăm cu optimi. Orice sfert are două optimi, deci 3 sferturi au 6 optimi. Jumătate din 6 optimi sunt **3 optimi**.\n\n---"
+  },
+  {
+   "title": "C24 - Ridicarea la putere a fracțiilor ordinare",
+   "url": "/curs/docs/arhiva/an-scolar-2025-2026/c5/modul-4/03",
+   "collection": "standard",
+   "course": "c5",
+   "module": "modul-4",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 4"
+   ],
+   "text": "# C24 - Ridicarea la putere a fracțiilor ordinare\n\n---\n\n## Ridicarea la putere a unei fracții\n\nO fracție se ridică la putere ridicând la putere atât numărătorul, cât și numitorul, la acea putere:\n\n$$\\left( \\dfrac{a}{b} \\right)^n = \\dfrac{a^n}{b^n}$$\n\n> **Exemplu:**\n> $$\\left( \\dfrac{2}{5} \\right)^2 = \\dfrac{2^2}{5^2} = \\dfrac{4}{25}$$\n\n## Reguli de calcul\n\nPentru orice numere naturale nenule $a, b, c, d, m, n$ se verifică următoarele relații:\n\n### 1. Înmulțirea puterilor cu aceeași bază\nPentru a înmulți două puteri cu aceeași bază, se păstrează baza și se **adună** exponenții:\n\n$$\\left( \\dfrac{a}{b} \\right)^m \\cdot \\left( \\dfrac{a}{b} \\right)^n = \\left( \\dfrac{a}{b} \\right)^{m+n}$$\n\n> **Exemplu:**\n> $$\\left( \\dfrac{5}{2} \\right)^3 \\cdot \\left( \\dfrac{5}{2} \\right)^4 = \\left( \\dfrac{5}{2} \\right)^{3+4} = \\left( \\dfrac{5}{2} \\right)^7$$\n\n---\n\n### 2. Împărțirea puterilor cu aceeași bază\nPentru a împărți două puteri cu aceeași bază, se păstrează baza și se **scad** exponenții ($m \\ge n$):\n\n$$\\left( \\dfrac{a}{b} \\right)^m : \\left( \\dfrac{a}{b} \\right)^n = \\left( \\dfrac{a}{b} \\right)^{m-n}$$\n\n> **Exemplu:**\n> $$\\left( \\dfrac{4}{5} \\right)^7 : \\left( \\dfrac{4}{5} \\right)^4 = \\left( \\dfrac{4}{5} \\right)^{7-4} = \\left( \\dfrac{4}{5} \\right)^3$$\n\n---\n\n### 3. Puterea unei puteri\nPentru a ridica o putere la o altă putere, se păstrează baza și se **înmulțesc** exponenții:\n\n$$\\left[ \\left( \\dfrac{a}{b} \\right)^m \\right]^n = \\left( \\dfrac{a}{b} \\right)^{m \\cdot n}$$\n\n> **Exemple:**\n> * $\\left[ \\left( \\dfrac{2}{5} \\right)^2 \\right]^5 = \\left( \\dfrac{2}{5} \\right)^{2 \\cdot 5} = \\left( \\dfrac{2}{5} \\right)^{10}$\n> * $\\left[ \\left( \\dfrac{11}{101} \\right)^{99} \\right]^0 = \\left( \\dfrac{11}{101} \\right)^{99 \\cdot 0} = \\left( \\dfrac{11}{101} \\right)^0 = 1$\n\n---\n\n### 4. Puterea unui produs\nPentru a ridica un produs la o putere, se distribuie exponentul fiecărui factor:\n\n$$\\left( \\dfrac{a}{b} \\cdot \\dfrac{c}{d} \\right)^n = \\left( \\dfrac{a}{b} \\right)^n \\cdot \\left( \\dfrac{c}{d} \\right)^n$$\n\n> **Exemplu:**\n> $$\\left( \\dfrac{2}{3} \\cdot \\dfrac{5}{7} \\right)^3 = \\left( \\dfrac{2}{3} \\right)^3 \\cdot \\left( \\dfrac{5}{7} \\right)^3$$\n\n#### Produsul a două puteri cu același exponent\n$$\\left( \\dfrac{a}{b} \\right)^n \\cdot \\left( \\dfrac{c}{d} \\right)^n = \\left( \\dfrac{a}{b} \\cdot \\dfrac{c}{d} \\right)^n$$\n\n---\n\n### 5. Puterea unui cât\nPentru a ridica un cât la o putere, se distribuie exponentul fiecărui factor al câtului:\n\n$$\\left( \\dfrac{a}{b} : \\dfrac{c}{d} \\right)^n = \\left( \\dfrac{a}{b} \\right)^n : \\left( \\dfrac{c}{d} \\right)^n$$\n\n> **Exemplu:**\n> $$\\left( \\dfrac{4}{9} : \\dfrac{2}{7} \\right)^5 = \\left( \\dfrac{4}{9} \\right)^5 : \\left( \\dfrac{2}{7} \\right)^5$$\n\n#### Câtul a două puteri cu același exponent\n$$\\left( \\dfrac{a}{b} \\right)^n : \\left( \\dfrac{c}{d} \\right)^n = \\left( \\dfrac{a}{b} : \\dfrac{c}{d} \\right)^n$$\n\n> **Exemplu:**\n> $$\\left( \\dfrac{3}{13} \\right)^6 : \\left( \\dfrac{5}{13} \\right)^6 = \\left( \\dfrac{3}{13} : \\dfrac{5}{13} \\right)^6 = \\left( \\dfrac{3}{13} \\cdot \\dfrac{13}{5} \\right)^6 = \\left( \\dfrac{3}{5} \\right)^6$$\n\n---"
+  },
+  {
+   "title": "C25 - Scrierea numerelor zecimale neperiodice sub formă de fracții ordinare",
+   "url": "/curs/docs/arhiva/an-scolar-2025-2026/c5/modul-4/04",
+   "collection": "standard",
+   "course": "c5",
+   "module": "modul-4",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 4"
+   ],
+   "text": "# C25 - Scrierea numerelor zecimale neperiodice sub formă de fracții ordinare\n\n---\n\n## Observă și descoperă!\n\n### 1. Înmulțirea și împărțirea cu puteri ale lui 10\n\n| Numărul | 1 | 3 | 13 | 123 |\n| :--- | :--- | :--- | :--- | :--- |\n| Mărit de 10 ori | 10 | 30 | 130 | 1 230 |\n| Mărit de 100 de ori | 100 | 300 | 1 300 | 12 300 |\n| Mărit de 1 000 de ori | 1 000 | 3 000 | 13 000 | 123 000 |\n\n| Numărul | 1 000 | 30 000 | 130 000 |\n| :--- | :--- | :--- | :--- |\n| Micșorat de 10 ori | 100 | 3 000 | 13 000 |\n| Micșorat de 100 de ori | 10 | 300 | 1 300 |\n| Micșorat de 1 000 de ori | 1 | 30 | 130 |\n\n---\n\n## Formarea fracțiilor zecimale\n\nPentru a micșora numărul $1$ de $10, 100$ sau $1 000$ de ori, folosim o **virgulă** după primul zero din stânga:\n\n* $1 : 10 \\rightarrow 0,1$ (**o zecime**)\n\n* $1 : 100 \\rightarrow 0,01$ (**o sutime**)\n\n* $1 : 1 000 \\rightarrow 0,001$ (**o miime**)\n\n### Echivalențe importante:\n* Un întreg are zece zecimi: $1 : 10 = 0,1$ și $0,1 \\cdot 10 = 1$\n\n* Un întreg are o sută de sutimi: $1 : 100 = 0,01$ și $0,01 \\cdot 100 = 1$\n\n* Zece sutimi înseamnă o zecime: $0,10 = 0,1$\n\n* Zece miimi înseamnă o sutime: $0,010 = 0,01$\n\n---\n\n## Structura unei fracții zecimale\n\nO fracție zecimală (de exemplu $23,456$) este compusă din:\n1. **Partea întreagă:** numărul din fața virgulei ($23$)\n2. **Partea fracționară:** cifrele de după virgulă ($456$)\n\n### Citirea numerelor zecimale:\nPentru $23,456$ putem spune:\n* *\"douăzeci și trei de întregi, patru zecimi, cinci sutimi și șase miimi\"*\n\n* *\"douăzeci și trei de întregi și patru sute cincizeci și șase de miimi\"*\n\n* *\"douăzeci și trei virgulă patru sute cincizeci și șase\"*\n\nNumerele naturale sunt fracții zecimale care au după virgulă numai cifre de $0$.\n\n$5 = 5,0 = 5,00 = 5,000$\n\n---\n\n## Transformări\n\n### 1. Din fracție ordinară în fracție zecimală\nSe scrie numărătorul și se separă prin virgulă, de la dreapta la stânga, atâtea cifre câte zerouri sunt la numitor.\n\n* $\\dfrac{234}{10} = 23\\dfrac{4}{10} = 23,4$\n\n* $\\dfrac{234}{100} = 2\\dfrac{34}{100} = 2,34$\n\n* $\\dfrac{1234}{1000} = 1\\dfrac{234}{1000} = 1,234$\n\n### 2. Din fracție zecimală în fracție ordinară\nLa numărător se scrie numărul fără virgulă, iar la numitor se scrie puterea lui 10 cu atâtea zerouri câte cifre sunt după virgulă.\n\n* $3,7 = 3\\dfrac{7}{10}$\n\n* $1,57 = 1\\dfrac{57}{100}$\n\n* $2,013 = 2\\dfrac{13}{1000}$\n\n* $0,12 = \\dfrac{12}{100} = \\dfrac{3}{25}$ (prin simplificare)\n\n---"
+  },
+  {
+   "title": "Test Clasa a V-a REFACERE",
+   "url": "/curs/docs/arhiva/an-scolar-2025-2026/c5/modul-4/10",
+   "collection": "standard",
+   "course": "c5",
+   "module": "modul-5",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 5"
+   ],
+   "text": "# Test Clasa a V-a REFACERE\n**Nume: \\\n_______________________** \\\n**Prenume: \\\n_______________________**\n\n- Toate subiectele sunt obligatorii\n- Timpul efectiv de lucru este de **50 de minute**\n- Utilizarea instrumentelor de geometrie este **permisă și recomandată**\n- Se acordă **20 puncte** din oficiu\n\n---\n\nRubrica aceasta se completează **doar de profesorul evaluator**!\n\n**Testul începe de pe pagina următoare.**\n\n \n \n## Grila de notare\n\n| Subiect | Punctaj total| Punctaj obținut |\n|---------|---------|------|\n| I | 35 | |\n| II | 30 | |\n| III | 15 | |\n| Total | 80 | |\n| Oficiu | 20 | 20 |\n\n \n \n\n## Calificativ capitole incluse\n\n---\n\n*C22 - Adunarea și scăderea fracțiilor ordinare*\n\n N | \n S | \n B | \n E \n\n*C23.1 - Înumlțirea fracțiilor ordinare*\n\n N | \n S | \n B | \n E \n\n*C23.2 - Împarțirea fracțiilor ordinare*\n\n N | \n S | \n B | \n E \n\n*C24 - Ridicarea la putere a fracțiilor ordinare*\n\n N | \n S | \n B | \n E \n\n \n \n\n> Legendă:\n\n> **N - Nesatisfăcător | S - Satisfăcător | B - Bine | E - Excelent**\n\n---\n\n## Subiectul I - 35 puncte \n\n### Exercițiul 1 **(2x5p = 10p)**\n\nSă se calculeze:\n\nb) $2\\dfrac{9}{10} - 1\\dfrac{3}{8}$\n\n### Exercițiul 2 **(2x5p = 10p)**\n\nSă se calculeze:\n\nb) $\\dfrac{29}{24} - \\dfrac{3}{4}$\n\n### Exercițiul 3 **(3x5p = 15p)**\n\nSă se calculeze:\n\nb) $\\dfrac{15}{8} \\cdot (\\dfrac{6}{25} + \\dfrac{16}{45})$\n\nc) $2\\dfrac{2}{9} \\cdot \\dfrac{6}{25} - \\dfrac{2}{27} \\cdot \\dfrac{2}{8}$\n\n---\n\n## Subiectul al II-lea - 30 puncte \n\n### Exercițiul 1 **(8p)**\n\nMihai are de rezolvat mai multe probleme în 3 zile. În prima zi rezolvă $\\dfrac{1}{3}$ din numărul lor, în a doua zi $\\dfrac{1}{4}$ din același număr. \nCe fracție din numărul problemelor i-a rămas de rezolvat a treia zi?\n\n### Exercițiul 2 **(3x5p = 15p)**\n\nSă se calculeze:\n\nb) $(\\dfrac{1}{2} - \\dfrac{1}{3}):\\dfrac{1}{6}$\n\nc) $\\dfrac{14}{3} : (\\dfrac{21}{4} : \\dfrac{7}{2}) : \\dfrac{28}{9}$\n\n### Exercițiul 3 **(7p)**\n\nMihai are de rezolvat 48 de probleme în 3 zile. În prima zi rezolvă o treime din numărul lor, iar în a doua zi o pătrime din numărul problemelor. Câte probleme i-au rămas de rezolvat pentru a treia zi?\n \n\n---\n\n## Subiectul al III-lea - 15 puncte \n\n### Exercițiul 1 **(2x5p = 10p)**\n\nSă se calculeze:\n\nb) $\\left(\\dfrac{144}{49}\\right)^6 : \\left(\\dfrac{9}{7}\\right)^{12}$\n\n### Exercițiul 2 **(5p)**\n\nCalculați:\n\n$$\n\\left[\\left(\\dfrac{5}{7}\\right)^3\\cdot \\left(\\dfrac{5}{7}\\right)^5\\right]^4:\\left[\\left(\\dfrac{5}{7}\\right)^5\\right]^6 = ?\n$$\n\n---\n\n## SFÂRȘIT TEST"
+  },
+  {
+   "title": "PROIECT - „Locuința mea – camera personală\"",
+   "url": "/curs/docs/arhiva/an-scolar-2025-2026/c5/modul-5/00",
+   "collection": "standard",
+   "course": "c5",
+   "module": "modul-5",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 5"
+   ],
+   "text": "# PROIECT - „Locuința mea – camera personală\"\n\n---\n\n## Obiectivele proiectului\n\n1. Să identifice și să recunoască figuri geometrice plane (pătrat, dreptunghi, triunghi, cerc) în schița tehnică a unei locuințe.\n2. Să calculeze perimetrul și aria unor suprafețe simple (ex. din camera personală).\n3. Să utilizeze corect unități de măsură pentru lungime și suprafață.\n\n### Obiective aplicative (practice)\n\n- Să realizeze schița unei locuințe folosind figuri geometrice.\n- Să construiască un plan simplu (desen sau machetă) respectând proporțiile.\n- Să manifeste creativitate în proiectarea locuinței.\n- Să își prezinte clar și argumentat proiectul realizat.\n\n---\n\n## Cerințele proiectului\n\n| Nr. | Cerință | Punctaj |\n|---|---|---|\n| **1** | Proiectul va fi realizat pe **format A4**, cu acuratețe și îngrijire. Se vor utiliza **instrumente geometrice** (riglă, creion, echer) și **notații matematice corecte**. Limbajul folosit trebuie să fie clar, corect și specific matematicii. | $1\\text{p}$ |\n| **2** | Realizează **desenul schematic** al camerei tale (vedere de sus). Notează **dimensiunile reale** măsurate cu ruleta: lungimea, lățimea, înălțimea. Respectă proporțiile și marchează corect unitățile de măsură (metri). | $1\\text{p}$ |\n| **3** | Calculează **perimetrul podelei** camerei. Scrie formula utilizată și rezultatul final. | $1\\text{p}$ |\n| **4** | Determină **costul total al baghetei** pentru podea. Se consideră: $1\\,m$ baghetă $= 150$ lei. Prezintă calculul complet. | $1\\text{p}$ |\n| **5** | Calculează **aria podelei** (în $m^2$). Notează formula și rezultatul. | $1\\text{p}$ |\n| **6** | Determină **costul total al laminatului**. Se consideră: $1\\,m^2$ laminat $= 320$ lei. Prezintă calculul complet. | $1\\text{p}$ |\n| **7** | Calculează **suprafața totală a pereților** (aria laterală a camerei). Arată pașii de calcul. | $1\\text{p}$ |\n| **8** | Determină **numărul de rulouri** (tapet de hârtie) necesare ($1$ rulou acoperă $4\\,m^2$) și **costul total** ($1$ rulou $= 600$ lei). Justifică modul de calcul (rotunjiri dacă este cazul). | $1\\text{p}$ |\n| **9** | Calculează **prețul total** (baghetă $+$ laminat $+$ tapet). Prezintă rezultatul final. | $1\\text{p}$ |\n| **10** | **Concluzie personală.** Redactează $3$–$5$ propoziții despre: utilitatea matematicii în viața reală; ce ai învățat realizând acest proiect. | $1\\text{p}$ |\n\nTotal **10p** se echivalează cu **nota 10**, dacă proiectul este prezentat la timpul indicat și fiecare punct este realizat cu argumentări.\n\n---\n\n## Exemplu de desen al camerei (vedere de sus)\n\n \n [figură] \n \n\nCamera ta poate avea alte dimensiuni! Măsoară cu ruleta lungimea, lățimea și înălțimea camerei tale și folosește valorile **tale** în toate calculele. Schița de mai sus are dimensiunile $290\\,cm \\times 330\\,cm$, doar ca exemplu.\n\n---\n\n## Model de rezolvare\n\nPentru a vedea cum se completează fiecare cerință, urmărim un exemplu rezolvat pas cu pas. Considerăm o cameră cu:\n\n$$\nL = 4\\,m \\;(\\text{lungime}), \\quad l = 3\\,m \\;(\\text{lățime}), \\quad h = 2{,}5\\,m \\;(\\text{înălțime})\n$$\n\n \n Vezi rezolvarea completă (punctele 3–9) \n\n**Punctul 3 — Perimetrul podelei**\n\nPodeaua este un dreptunghi cu lungimea $L$ și lățimea $l$:\n\n$$\nP = 2 \\cdot (L + l) = 2 \\cdot (4 + 3) = 2 \\cdot 7 = 14\\,m\n$$\n\n**Punctul 4 — Costul baghetei**\n\nBagheta se pune de jur împrejurul podelei, deci pe lungimea perimetrului:\n\n$$\n\\text{cost}_{\\text{baghetă}} = P \\cdot 150 = 14 \\cdot 150 = 2100\\;\\text{lei}\n$$\n\n**Punctul 5 — Aria podelei**\n\n$$\nA_{\\text{podea}} = L \\cdot l = 4 \\cdot 3 = 12\\,m^2\n$$\n\n**Punctul 6 — Costul laminatului**\n\n$$\n\\text{cost}_{\\text{laminat}} = A_{\\text{podea}} \\cdot 320 = 12 \\cdot 320 = 3840\\;\\text{lei}\n$$\n\n**Punctul 7 — Suprafața pereților (aria laterală)**\n\nAria laterală a camerei (cei patru pereți) se calculează ca perimetrul podelei înmulțit cu înălțimea:\n\n$$\n\\mathcal{A}_\\ell = P \\cdot h = 14 \\cdot 2{,}5 = 35\\,m^2\n$$\n\n**Punctul 8 — Numărul de rulouri de tapet și costul**\n\nUn rulou acoperă $4\\,m^2$, iar pereții au $35\\,m^2$:\n\n$$\n"
+  },
+  {
+   "title": "G5 - Unități de măsură. Perimetre și arii",
+   "url": "/curs/docs/arhiva/an-scolar-2025-2026/c5/modul-5/01",
+   "collection": "standard",
+   "course": "c5",
+   "module": "modul-5",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 5"
+   ],
+   "text": "# G5 - Unități de măsură. Perimetre și arii\n\n---\n\n## Măsurarea lungimii\n\nÎn Sistemul Internațional de unități de măsură, unitatea principală pentru lungime este **metrul**, notat cu $m$.\n\n**Metrul** este unitatea principală de măsură pentru lungime. El are atât **multipli** (unități mai mari), cât și **submultipli** (unități mai mici).\n\n| Denumire | Notație | Relație cu metrul |\n|---|---|---|\n| kilometru | $km$ | $1\\,km = 1000\\,m$ |\n| hectometru | $hm$ | $1\\,hm = 100\\,m$ |\n| decametru | $dam$ | $1\\,dam = 10\\,m$ |\n| **metru** | $m$ | $1\\,m$ |\n| decimetru | $dm$ | $1\\,dm = 0{,}1\\,m$ |\n| centimetru | $cm$ | $1\\,cm = 0{,}01\\,m$ |\n| milimetru | $mm$ | $1\\,mm = 0{,}001\\,m$ |\n\n### Schema transformărilor\n\nPe scara unităților de lungime, fiecare treaptă este de **10 ori** mai mare decât cea de sub ea:\n\n$$\nkm \\;\\xrightarrow{\\;\\times 10\\;}\\; hm \\;\\xrightarrow{\\;\\times 10\\;}\\; dam \\;\\xrightarrow{\\;\\times 10\\;}\\; m \\;\\xrightarrow{\\;\\times 10\\;}\\; dm \\;\\xrightarrow{\\;\\times 10\\;}\\; cm \\;\\xrightarrow{\\;\\times 10\\;}\\; mm\n$$\n\n- Când trecem de la o unitate **mai mare** la una **mai mică**, **înmulțim** cu $10$ la fiecare treaptă coborâtă.\n- Când trecem de la o unitate **mai mică** la una **mai mare**, **împărțim** la $10$ la fiecare treaptă urcată.\n\n$$\n1\\,km = 10\\,hm = 100\\,dam = 1000\\,m\n$$\n\n$$\n1\\,m = 10\\,dm = 100\\,cm = 1000\\,mm\n$$\n\nTransformă în metri:\n\n**a)** $3{,}5\\,dam$ — coborâm o treaptă (dam → m), deci înmulțim cu $10$:\n\n$$\n3{,}5\\,dam = 3{,}5 \\cdot 10 = 35\\,m\n$$\n\n**b)** $1700\\,cm$ — urcăm două trepte (cm → m), deci împărțim la $100$:\n\n$$\n1700\\,cm = 1700 : 100 = 17\\,m\n$$\n\n**c)** $6{,}29\\,hm$ — coborâm două trepte (hm → m), deci înmulțim cu $100$:\n\n$$\n6{,}29\\,hm = 6{,}29 \\cdot 100 = 629\\,m\n$$\n\nCalculează, exprimând rezultatul în $dm$:\n\n$$\n0{,}00023\\,km + 685\\,mm\n$$\n\nTransformăm fiecare termen în $dm$:\n\n$$\n0{,}00023\\,km = 0{,}00023 \\cdot 10^4\\,dm = 2{,}3\\,dm\n$$\n\n$$\n685\\,mm = 685 : 10^2\\,dm = 6{,}85\\,dm\n$$\n\nAdunăm:\n\n$$\n2{,}3\\,dm + 6{,}85\\,dm = 9{,}15\\,dm\n$$\n\n---\n\n## Perimetrul unui poligon\n\n**Perimetrul** unui poligon este egal cu suma lungimilor laturilor sale. Se notează cu $P$.\n\n### Perimetrul pătratului\n\nPătratul are toate cele patru laturi egale, de lungime $l$.\n\n \n [figură] \n \n\n$$\nP_{\\text{pătrat}} = l + l + l + l = 4 \\cdot l\n$$\n\n### Perimetrul dreptunghiului\n\nDreptunghiul are laturile opuse egale: lungimea $L$ și lățimea $l$.\n\n \n [figură] \n \n\n$$\nP_{\\text{dreptunghi}} = 2 \\cdot L + 2 \\cdot l = 2 \\cdot (L + l)\n$$\n\n### Perimetrul triunghiului\n\nDacă laturile triunghiului au lungimile $a$, $b$ și $c$:\n\n \n [figură] \n \n\n$$\nP_{\\text{triunghi}} = a + b + c\n$$\n\nTriunghiul $\\triangle ABC$ are laturile $AB = 24\\,cm$, $AC = 100\\,mm$ și $BC = 2{,}6\\,dm$. Calculează perimetrul.\n\n**Pasul 1.** Aducem toate lungimile la aceeași unitate de măsură ($cm$):\n\n$$\nAC = 100\\,mm = 10\\,cm,\\qquad BC = 2{,}6\\,dm = 26\\,cm\n$$\n\n**Pasul 2.** Calculăm perimetrul:\n\n$$\nP = AB + AC + BC = 24\\,cm + 10\\,cm + 26\\,cm = 60\\,cm\n$$\n\nÎnainte de a aduna lungimi exprimate în unități diferite, transformăm **întotdeauna** toate valorile în aceeași unitate de măsură.\n\n---\n\n## Măsurarea ariei\n\n**Aria** unei suprafețe arată cât de mare este suprafața respectivă. Pentru a o măsura, ne întrebăm câte pătrate de o anumită mărime încap în interiorul ei.\n\nÎn figura de mai jos, un pătrat cu latura de $3\\,cm$ poate fi acoperit cu exact **9 pătrate** mici, fiecare cu latura de $1\\,cm$. Spunem că aria lui este de $9\\,cm^2$.\n\n \n [figură] \n \n\nUnitatea principală de măsură pentru arie este **metrul pătrat**, notat $m^2$. Acesta reprezintă aria unui pătrat cu latura de $1$ metru.\n\n| Denumire | Notație | Relație cu $m^2$ |\n|---|---|---|\n| kilometru pătrat | $km^2$ | $1\\,km^2 = 1\\,000\\,000\\,m^2$ |\n| hectometru pătrat | $hm^2$ | $1\\,hm^2 = 10\\,000\\,m^2$ |\n| decametru pătrat | $dam^2$ | $1\\,dam^2 = 100\\,m^2$ |\n| **metru pătrat** | $m^2$ | $1\\,m^2$ |\n| decimetru pătrat | $dm^2$ | $1\\,dm^2 = 0{,}01\\,m^2$ |\n| centimetru pătrat | $cm^2$ | $1\\,cm^2 = 0{,}0001\\,m^2$ |\n| milimetru pătrat | $mm^2$ | $1\\,mm^2 = 0"
+  },
+  {
+   "title": "G6 - Măsurarea volumului și a capacității",
+   "url": "/curs/docs/arhiva/an-scolar-2025-2026/c5/modul-5/02",
+   "collection": "standard",
+   "course": "c5",
+   "module": "modul-5",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 5"
+   ],
+   "text": "# G6 - Măsurarea volumului și a capacității\n\n---\n\n## Măsurarea volumului\n\nPentru a măsura volumul unui corp, ne întrebăm **din câte cuburi mici de o anumită mărime este format** acel corp.\n\n**Volumul** unui corp este numărul care arată de câte ori se cuprinde o unitate de măsură (un cub unitate) în acel corp.\n\n \n [figură] \n \n\nMultiplii și submultiplii metrului cub sunt:\n\n| Denumire | Notație | Relație cu $m^3$ |\n|---|---|---|\n| kilometru cub | $km^3$ | $1\\,km^3 = 10^9\\,m^3$ |\n| hectometru cub | $hm^3$ | $1\\,hm^3 = 10^6\\,m^3$ |\n| decametru cub | $dam^3$ | $1\\,dam^3 = 1000\\,m^3$ |\n| **metru cub** | $m^3$ | $1\\,m^3$ |\n| decimetru cub | $dm^3$ | $1\\,dm^3 = 0{,}001\\,m^3$ |\n| centimetru cub | $cm^3$ | $1\\,cm^3 = 0{,}000001\\,m^3$ |\n| milimetru cub | $mm^3$ | $1\\,mm^3 = 0{,}000000001\\,m^3$ |\n\n### Schema transformărilor pentru volum\n\nLa unitățile de **volum**, fiecare treaptă diferă de vecina ei prin **$1000$** (la lungime era $10$, la arie era $100$).\n\n- Pentru a transforma o unitate într-una **imediat inferioară** (mai mică), **înmulțim cu $1000$**.\n- Pentru a transforma o unitate într-una **imediat superioară** (mai mare), **împărțim la $1000$**.\n\n$$\nkm^3 \\;\\xrightarrow{\\;\\times 1000\\;}\\; hm^3 \\;\\xrightarrow{\\;\\times 1000\\;}\\; dam^3 \\;\\xrightarrow{\\;\\times 1000\\;}\\; m^3 \\;\\xrightarrow{\\;\\times 1000\\;}\\; dm^3 \\;\\xrightarrow{\\;\\times 1000\\;}\\; cm^3 \\;\\xrightarrow{\\;\\times 1000\\;}\\; mm^3\n$$\n\nPentru $n$ trepte parcurse, înmulțim sau împărțim cu $(10^3)^n = 1000^n$.\n\nLa lungime trecem printr-o singură dimensiune ($\\times 10$), la arie prin două dimensiuni ($\\times 10^2 = 100$), iar la volum prin **trei dimensiuni**, deci $\\times 10^3 = 1000$.\n\n**1)** $25\\,m^3 = \\;?\\;dm^3$ — coborâm o treaptă, deci înmulțim cu $1000$:\n\n$$\n25\\,m^3 = 25 \\cdot 1000 = 25\\,000\\,dm^3\n$$\n\n**2)** $126{,}5\\,cm^3 = \\;?\\;dm^3$ — urcăm o treaptă, deci împărțim la $1000$:\n\n$$\n126{,}5\\,cm^3 = 126{,}5 : 1000 = 0{,}1265\\,dm^3\n$$\n\n**3)** $29{,}47\\,dam^3 = \\;?\\;dm^3$ — coborâm două trepte, deci înmulțim cu $(10^3)^2 = 10^6$:\n\n$$\n29{,}47\\,dam^3 = 29{,}47 \\cdot 10^6 = 29\\,470\\,000\\,dm^3\n$$\n\n---\n\n## Volumul cubului\n\nSă numărăm din câte cuburi unitate (cu muchia de $1\\,cm$) este format un cub cu muchia de $3\\,cm$. Avem $3$ cuburi pe lungime, $3$ pe lățime și $3$ pe înălțime:\n\n$$\n3 \\cdot 3 \\cdot 3 = 27 \\;\\text{cuburi unitate}\n$$\n\nDeci volumul lui este $V = 27\\,cm^3$. Generalizând:\n\n \n [figură] \n \n\nVolumul unui cub cu muchia de lungime $l$ este:\n\n$$\nV_{\\text{cub}} = l \\cdot l \\cdot l = l^3\n$$\n\nUn cubuleț al unui cub Rubik are muchia de $2\\,cm$. Cât este volumul cubului Rubik?\n\nCubul Rubik are $3$ cubulețe pe fiecare muchie, deci latura lui este:\n\n$$\nl = 3 \\cdot 2 = 6\\,cm\n$$\n\nVolumul:\n\n$$\nV = l^3 = 6^3 = 216\\,cm^3\n$$\n\n---\n\n## Volumul paralelipipedului dreptunghic\n\nParalelipipedul dreptunghic are trei dimensiuni: **lungimea** $L$, **lățimea** $l$ și **înălțimea** $h$.\n\nDacă punem $4$ cuburi pe lungime, $3$ pe lățime și $2$ pe înălțime, obținem $4 \\cdot 3 \\cdot 2 = 24$ cuburi unitate. De aici:\n\n \n [figură] \n \n\nVolumul unui paralelipiped dreptunghic cu dimensiunile $L$, $l$ și $h$ este:\n\n$$\nV_{\\text{paralelipiped}} = L \\cdot l \\cdot h\n$$\n\nToate dimensiunile trebuie exprimate în **aceeași unitate de măsură**.\n\nUn container are forma unui paralelipiped dreptunghic cu dimensiunile $10\\,m$, $6\\,m$ și $5\\,m$. Află volumul, exprimat în $dm^3$.\n\n$$\nV = L \\cdot l \\cdot h = 10 \\cdot 6 \\cdot 5 = 300\\,m^3\n$$\n\nTransformăm în $dm^3$ (coborâm o treaptă, înmulțim cu $1000$):\n\n$$\n300\\,m^3 = 300 \\cdot 1000 = 300\\,000\\,dm^3\n$$\n\n---\n\n## Aria laterală și aria totală\n\nPe lângă volum (cât „spațiu\" ocupă un corp), ne poate interesa și **aria suprafeței** lui — de exemplu, cât carton ne trebuie pentru a confecționa o cutie, sau cât tapet pentru a îmbrăca un perete.\n\n- **Aria laterală** ($\\mathcal{A}_\\ell$) este suma ariilor **fețelor laterale** ale corpului (fețele „din jur\", fără baza de sus și cea de jos).\n- **Aria totală** ($\\mathcal{A}_t$) este suma ariilor **tuturor fețelor** corpului. Se obține adunâ"
+  },
+  {
+   "title": "G7 - Tipuri de unghiuri. Măsura unghiurilor",
+   "url": "/curs/docs/arhiva/an-scolar-2025-2026/c5/modul-5/03",
+   "collection": "standard",
+   "course": "c5",
+   "module": "modul-5",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 5"
+   ],
+   "text": "# G7 - Tipuri de unghiuri. Măsura unghiurilor\n\n---\n\n## Ce este un unghi?\n\nUn **unghi** este figura geometrică formată din două semidrepte care au aceeași origine.\n\n \n [figură] \n \n\nUnghiul din figură se notează în mai multe feluri:\n\n$$\n\\angle AOB,\\quad \\angle BOA,\\quad \\angle O,\\quad \\alpha\n$$\n\nCând notăm un unghi cu trei litere, **litera din mijloc reprezintă întotdeauna vârful** unghiului.\n\n---\n\n## Măsura unghiurilor\n\nMăsura unui unghi se exprimă în **grade**, notate cu simbolul $^\\circ$.\n\nUn unghi complet (o rotație întreagă) are măsura de $360^\\circ$.\n\n$$\n\\text{1 rotație completă} = 360^\\circ\n$$\n\n$$\n1^\\circ = 60' \\quad (\\text{minute})\n$$\n\n$$\n1' = 60'' \\quad (\\text{secunde})\n$$\n\nAșadar:\n\n$$\n1^\\circ = 60' = 3600''\n$$\n\n---\n\n## Tipuri de unghiuri după măsură\n\nClasificăm unghiurile în funcție de măsura lor astfel:\n\n \n [figură] \n \n\n \n [figură] \n \n\nTabelul de mai jos rezumă clasificarea:\n\n| Tipul unghiului | Măsura |\n|---|---|\n| Unghi nul | $0^\\circ$ |\n| Unghi ascuțit | $0^\\circ < \\alpha < 90^\\circ$ |\n| Unghi drept | $\\alpha = 90^\\circ$ |\n| Unghi obtuz | $90^\\circ < \\alpha < 180^\\circ$ |\n| Unghi alungit | $\\alpha = 180^\\circ$ |\n| Unghi complet | $\\alpha = 360^\\circ$ |\n\nUn unghi **drept** se marchează de obicei cu un mic pătrat în vârf, în loc de un arc.\n\n---\n\n## Perechi remarcabile de unghiuri\n\n### Unghiuri complementare\n\nDouă unghiuri sunt **complementare** dacă suma măsurilor lor este $90^\\circ$.\n\n$$\n\\alpha + \\beta = 90^\\circ\n$$\n\n \n [figură] \n \n\nFiecare dintre cele două unghiuri se numește **complementul** celuilalt.\n\n### Unghiuri suplementare\n\nDouă unghiuri sunt **suplementare** dacă suma măsurilor lor este $180^\\circ$.\n\n$$\n\\alpha + \\beta = 180^\\circ\n$$\n\n \n [figură] \n \n\nFiecare dintre cele două unghiuri se numește **suplementul** celuilalt.\n\n### Unghiuri opuse la vârf\n\nDouă unghiuri sunt **opuse la vârf** dacă laturile unuia sunt prelungirile laturilor celuilalt.\n\nDouă unghiuri opuse la vârf sunt **congruente** (au aceeași măsură).\n\n \n [figură] \n \n\nÎn figură, unghiurile notate cu $\\alpha$ sunt opuse la vârf, deci sunt egale. La fel, cele notate cu $\\beta$.\n\n---\n\n## Calcule cu unghiuri\n\n### Adunarea și scăderea măsurilor\n\nCând lucrăm cu grade, minute și secunde, ținem cont că:\n\n$$\n1^\\circ = 60', \\qquad 1' = 60''\n$$\n\nCalculează:\n\n$$\n35^\\circ 40' + 28^\\circ 30'\n$$\n\n**Rezolvare:**\n\nAdunăm separat gradele și minutele:\n\n$$\n(35^\\circ + 28^\\circ) + (40' + 30') = 63^\\circ + 70'\n$$\n\nCum $70' = 60' + 10' = 1^\\circ 10'$, transformăm:\n\n$$\n63^\\circ + 1^\\circ 10' = 64^\\circ 10'\n$$\n\n### Aflarea complementului și a suplementului\n\nAflă complementul și suplementul unghiului de $35^\\circ$.\n\n**Complement:**\n\n$$\n90^\\circ - 35^\\circ = 55^\\circ\n$$\n\n**Suplement:**\n\n$$\n180^\\circ - 35^\\circ = 145^\\circ\n$$\n\n---"
+  },
+  {
+   "title": "Test Clasa a V-a — Unghiuri",
+   "url": "/curs/docs/arhiva/an-scolar-2025-2026/c5/modul-5/test-g7",
+   "collection": "standard",
+   "course": "c5",
+   "module": "modul-5",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 5"
+   ],
+   "text": "# Test Clasa a V-a — Unghiuri\n**Nume: \\\n_______________________** \\\n**Prenume: \\\n_______________________**\n\n- Toate subiectele sunt obligatorii\n- Timpul efectiv de lucru este de **50 de minute**\n- Utilizarea instrumentelor de geometrie este **permisă și recomandată**\n- Se acordă **20 puncte** din oficiu\n\n---\n\nRubrica aceasta se completează **doar de profesorul evaluator**!\n\n**Testul începe de pe pagina următoare.**\n\n \n \n## Grila de notare\n\n| Subiect | Punctaj total| Punctaj obținut |\n|---------|---------|------|\n| I | 35 | |\n| II | 30 | |\n| III | 15 | |\n| Total | 80 | |\n| Oficiu | 20 | 20 |\n\n \n \n\n## Calificativ capitole incluse\n\n---\n\n*G7 - Tipuri de unghiuri. Măsura unghiurilor*\n\n N | \n S | \n B | \n E \n\n \n \n\n> Legendă:\n\n> **N - Nesatisfăcător | S - Satisfăcător | B - Bine | E - Excelent**\n\n---\n\n## Subiectul I - 35 puncte \n\n### Exercițiul 1 **(3x5p = 15p)**\n\nPrecizați tipul fiecărui unghi după măsură (nul, ascuțit, drept, obtuz sau alungit):\n\nb) $\\angle MNP = 90^\\circ$\n\nc) $\\angle XYZ = 134^\\circ$\n\n### Exercițiul 2 **(2x5p = 10p)**\n\nCompletați spațiile libere, știind că $1^\\circ = 60'$ și $1' = 60''$:\n\nb) $2' = \\underline{\\hspace{2cm}} \\ ''$\n\n### Exercițiul 3 **(2x5p = 10p)**\n\nCalculați:\n\nb) suplementul unghiului de $110^\\circ$\n\n---\n\n## Subiectul al II-lea - 30 puncte \n\n### Exercițiul 1 **(2x5p = 10p)**\n\nCalculați:\n\nb) $75^\\circ 30' - 28^\\circ 50'$\n\n### Exercițiul 2 **(2x5p = 10p)**\n\nRăspundeți la următoarele cerințe:\n\nb) Două unghiuri sunt **suplementare**. Unul dintre ele are $63^\\circ$. Câte grade are celălalt?\n\n### Exercițiul 3 **(10p)**\n\nÎn figura de mai jos, punctele $A$, $O$, $D$ sunt **coliniare** (situate pe aceeași dreaptă), iar $OB$ și $OC$ sunt două semidrepte cu originea în $O$. Măsurile unghiurilor sunt exprimate în funcție de $x$, ca în desen.\n\nAflați valoarea lui $x$ și apoi măsurile unghiurilor $\\angle AOB$, $\\angle BOC$ și $\\angle COD$.\n\n \n [figură] \n \n\n---\n\n## Subiectul al III-lea - 15 puncte \n\n### Exercițiul 1 **(7p)**\n\nÎn figura de mai jos, dreptele $AB$ și $CD$ se intersectează în punctul $O$. Măsurile a două unghiuri sunt exprimate în funcție de $x$, ca în desen.\n\nȘtiind că $\\angle AOC = 75°$ = $\\angle BOD°$, aflați măsurile unghiurilor: $\\angle AOD$ și $\\angle BOC$.\n\n \n [figură] \n \n\n### Exercițiul 2 **(8p)**\n\nÎn figura de mai jos, semidreptele $OA$, $OB$, $OC$ și $OD$ pornesc din punctul $O$ și împart planul în jurul lui $O$ în patru unghiuri. Măsurile lor sunt exprimate în funcție de $x$, ca în desen.\n\nȘtiind că suma măsurilor unghiurilor din jurul punctului $O$ este $360^\\circ$, aflați valoarea lui $x$ și apoi măsurile unghiurilor $\\angle AOB$, $\\angle BOC$, $\\angle COD$ și $\\angle DOA$.\n\n \n [figură] \n \n\n---\n\n## SFÂRȘIT TEST"
+  },
   {
    "title": "C4 - Împărțirea Euclidiană. Împărțirea nr. zecimale",
    "url": "/curs/docs/c5/06",
+   "collection": "standard",
    "course": "c5",
    "module": "modul-1",
    "keywords": [
@@ -15,6 +172,7 @@
   {
    "title": "C1 - Scrierea sub forma zecimala",
    "url": "/curs/docs/c5/modul-1/01",
+   "collection": "standard",
    "course": "c5",
    "module": "modul-1",
    "keywords": [
@@ -26,6 +184,7 @@
   {
    "title": "C2 - Adunarea și scăderea nr. zecimale",
    "url": "/curs/docs/c5/modul-1/02",
+   "collection": "standard",
    "course": "c5",
    "module": "modul-1",
    "keywords": [
@@ -37,6 +196,7 @@
   {
    "title": "C3 - Înmulțirea nr. zecimale",
    "url": "/curs/docs/c5/modul-1/03",
+   "collection": "standard",
    "course": "c5",
    "module": "modul-1",
    "keywords": [
@@ -48,6 +208,7 @@
   {
    "title": "C5 - Semidreapta gradată",
    "url": "/curs/docs/c5/modul-1/05",
+   "collection": "standard",
    "course": "c5",
    "module": "modul-1",
    "keywords": [
@@ -59,6 +220,7 @@
   {
    "title": "C6.1 - Mulțimi. Mulțimea nr. naturale",
    "url": "/curs/docs/c5/modul-1/06",
+   "collection": "standard",
    "course": "c5",
    "module": "modul-1",
    "keywords": [
@@ -70,6 +232,7 @@
   {
    "title": "C6.2 - Scrierea si citirea nr. naturale",
    "url": "/curs/docs/c5/modul-1/07",
+   "collection": "standard",
    "course": "c5",
    "module": "modul-1",
    "keywords": [
@@ -79,8 +242,9 @@
    "text": "# C6.2 - Scrierea si citirea nr. naturale\n\n---\n\n## Ne reamintim\n\n### Scrierea cu cifre arabe\n\nSă se scrie cu cifre arabe:\n\n| zeci de milioane | milioane | sute de mii | zeci de mii | mii | sute | zeci | unități |\n|---|---|---|---|---|---|---|---|\n| - | - | - | - | **1** | 0 | 0 | 7 |\n\nb) șapte milioane treizeci de mii paisprezece = $7\\,030\\,014$\n\n| zeci de milioane | milioane | sute de mii | zeci de mii | mii | sute | zeci | unități |\n|---|---|---|---|---|---|---|---|\n| - | **7** | 0 | 3 | 0 | 0 | 1 | 4 |\n\n---\n\n \n \n ### Scrierea cu cifre romane\n\n | Simbol | Valoare |\n |---|---|\n | I | 1 |\n | V | 5 |\n | X | 10 |\n | L | 50 |\n | C | 100 |\n | D | 500 |\n | M | 1000 |\n \n \n \n Să se scrie cu cifre romane:\n \n \n **Răspuns:** $XII$ \n\n b) 24 \n \n **Răspuns:** $XXIV$ \n\n c) 78 \n \n **Răspuns:** $LXXVIII$\n \n \n\n---\n\n## Descompunerea unui nr. natural\n\nUn număr natural având cifre necunoscute se scrie sub forma generală:\n$$\n\\Large \\overline{abc\\ldots z}\n$$\nunde fiecare cifră reprezintă ordinul.\n\n`Exemplu:` \n$\\overline{ab}$ este un număr format din două cifre, unde\n$$\n\\begin{cases}\na - \\text{cifra zecilor}\\\\\nb - \\text{cifra unităților}\n\\end{cases}\n$$\n\nOrice număr scris sub această formă se poate descompune astfel:\n$$\n\\Large \\underbrace{\\overline{abcd}}_{\\text{4 cifre}}\n = \\underbrace{a \\times 1000}_{\\text{ordinul miilor}}\n + \\underbrace{b \\times 100}_{\\text{ordinul sutelor}}\n + \\underbrace{c \\times 10}_{\\text{ordinul zecilor}}\n + \\underbrace{d \\times 1}_{\\text{ordinul unităților}}\n$$\n\n## Metode\n\n1. Să se afle cifrele $a,b,c$ dacă:\n\na) $459 = a \\times 100 + b \\times 10 + 9$\n\n| mii | sute | zeci | unități |\n|-----|------|------|---------|\n| – | 4 | 5 | 9 |\n| – | a | b | 9 |\n\n$\n\\begin{cases}\na = 4\\\\[10pt]\nb = 5\n\\end{cases}\n$\n\n$\n\\Rightarrow 4 \\times 100 + 5 \\times 10 + 9 = 400 + 50 + 9 = 450 + 9 = 459\n$\n\n---\n\nb) $1024 = a \\times 1000 + b \\times 100 + c \\times 10 + 4$\n\n| mii | sute | zeci | unități |\n|-----|------|------|---------|\n| 1 | 0 | 2 | 4 |\n| a | b | c | 4 |\n\n$\n\\begin{cases}\na = 1\\\\\nb = 0\\\\\nc = 2\n\\end{cases}\n$\n\n$\n\\Rightarrow 1 \\times 1000 + 0 \\times 100 + 2 \\times 10 + 4 = 1000 + 0 + 20 + 4 = 1020 + 4 = 1024\n$\n\n---\n\n2. Găsește toate numerele $x$ în următoarele cazuri:\n\na) $x = \\overline{1ab}$, cu $a = 3 \\times b$\n\n**METODA I:**\n\n**Pasul I:** Descompun numărul $x$:\n\n$\nx = 100 + a \\times 10 + b\n$\n\n$\nx = 100 + 3 \\times b \\times 10 + b\n$\n\n$\nx = 100 + 30 \\times b + b\n$\n\nOrice cifră este cuprinsă între **0 și 9**.\n\n$\n\\Rightarrow a \\in \\{0;1;2;3;4\\dots 9\\}\n$\n\n$\n\\Rightarrow b \\in \\{0;1;2;3;4\\dots 9\\}\n$\n\nCum $a \\times 10 = b \\times 30$ reprezintă **ordinul zecilor**:\n\n- Când $\\large b = 0 \\Rightarrow b \\times 30 = 0 \\Rightarrow$ ordinul zecilor $=0$\n\n- Când $\\large b \\neq 0 \\Rightarrow b \\times 30 \\in \\{10;11;12;13;14\\dots 99\\}$\n\n### Pasul II: Încercăm valori\n\n1. Dacă $b = 0 \\Rightarrow x = 100 + 30 \\times 0 + 0 = 100$\n\n- Este o soluție bună, deoarece satisface condițiile de mai sus:\n\n>$b = 0 \\in \\{0;1;2;3;4\\dots 9\\}$\n\n>$a = 3 \\times b = 3 \\times 0 = 0 \\in \\{0;1;2;3;4\\dots 9\\}$\n\n>$b \\times 30 = 0 \\times 30 = 0 \\Rightarrow \\text{ordinul zecilor } = 0$\n\n---\n\n2. Dacă $b = 1 \\Rightarrow x = 100 + 30 \\times 1 + 1 = 131$\n\n- Este o soluție bună, deoarece satisface condițiile de mai sus:\n\n>$b = 1 \\in \\{0;1;2;3;4\\dots 9\\}$\n\n>$a = 3 \\times b = 3 \\times 1 = 3 \\in \\{0;1;2;3;4\\dots 9\\}$\n\n>$b \\times 30 = 1 \\times 30 = 30 \\in \\{10;11;12;13;14\\dots 99\\}$\n\n---\n\n3. Dacă $b = 2 \\Rightarrow x = 100 + 30 \\times 2 + 2 = 162$\n\n- Este o soluție bună, deoarece satisface condițiile de mai sus:\n\n>$b = 2 \\in \\{0;1;2;3;4\\dots 9\\}$\n\n>$a = 3 \\times b = 3 \\times 2 = 6 \\in \\{0;1;2;3;4\\dots 9\\}$\n\n>$b \\times 30 = 2 \\times 30 = 60 \\in \\{10;11;12;13;14\\dots 99\\}$\n\n---\n\n4. Dacă $b = 3 \\Rightarrow x = 100 + 30 \\times 3 + 3 = 193$\n\n- Este o soluție bună, deoarece satisface condițiile de mai sus:\n\n> $b = 3 \\in \\{0;1;2;3;4\\dots 9\\}$ \n\n> $a = 3 \\times b = 3 \\times 3 = 9 \\in \\{0;1;2;3;4\\dots 9\\}$ \n\n> $b \\times 30 = 3 \\times 30 = 90 \\in \\{10;11;12;13;14\\dots 99\\}$\n\n---\n\n5. Dacă $b = 4 \\Rightarrow"
   },
   {
-   "title": "C7.1 - Ilustrarea fracţiilor echiunitare, subunitare și supraunitare",
+   "title": "C7.1 – Ilustrarea fracţiilor echiunitare, subunitare și supraunitare",
    "url": "/curs/docs/c5/modul-1/08",
+   "collection": "standard",
    "course": "c5",
    "module": "modul-1",
    "keywords": [
@@ -90,8 +254,9 @@
    "text": "# C7.1 – Ilustrarea fracţiilor echiunitare, subunitare și supraunitare\n\n---\n\n## Introducere\n\nFracțiile reprezintă părți dintr-un întreg. În funcție de mărimea lor față de unitate, le clasificăm în:\n\n- **Fracții echiunitare** (unitare): numitorul este egal cu numărătorul. \n\nExemple: $ \\dfrac{1}{1} $, $ \\dfrac{2}{2} $\n\n- **Fracții subunitare** (proprii): mai mici decât $1$. \n\nExemple: $ \\dfrac{1}{2} $, $ \\dfrac{3}{4} $\n\n- **Fracții supraunitare** (improprii): mai mari decât $1$. \n\nExemple: $ \\dfrac{3}{2} $, $ \\dfrac{5}{3} $\n\n---\n\n## Reprezentări grafice variate\n\n### Reprezentarea circulară\n\n \n\n \n [figură] \n 1/2 Fracție subunitară \n \n\n \n [figură] \n 3/2 Fracție supraunitară \n \n\n \n\n---\n\n### Reprezentarea dreptunghiulară\n\n \n\n \n [figură] \n 2/3 Fracție subunitară \n \n\n \n [figură] \n 5/3 Fracție supraunitară \n \n\n \n\n---\n\n### Reprezentarea pe axa numerelor\n\n \n\n \n [figură] \n 3/4 – Fracție subunitară \n \n\n \n [figură] \n 7/4 – Fracție supraunitară \n \n\n \n\n---\n\n## Exemple detaliate\n\n### Exemplul 1 – Fracție subunitară $ \\dfrac{2}{5} $\n\n \n\n \n [figură] \n Reprezentare dreptunghiulară \n \n\n \n [figură] \n Reprezentare pe axa numerelor \n \n\n \n\n---\n\n### Exemplul 2 – Fracție supraunitară $ \\dfrac{4}{3} $\n\n \n [figură] \n Reprezentare pe axa numerelor \n \n\n---"
   },
   {
-   "title": "C7.2 - Fracții și scrierea procentuală",
+   "title": "C7.2 – Fracții și scrierea procentuală",
    "url": "/curs/docs/c5/modul-1/09",
+   "collection": "standard",
    "course": "c5",
    "module": "modul-1",
    "keywords": [
@@ -103,6 +268,7 @@
   {
    "title": "C8 - Proprietăți ale înmulțirii",
    "url": "/curs/docs/c5/modul-1/10",
+   "collection": "standard",
    "course": "c5",
    "module": "modul-1",
    "keywords": [
@@ -114,6 +280,7 @@
   {
    "title": "C9 - Proprietăți puteri cu exponent natural",
    "url": "/curs/docs/c5/modul-1/11",
+   "collection": "standard",
    "course": "c5",
    "module": "modul-1",
    "keywords": [
@@ -125,6 +292,7 @@
   {
    "title": "C10 - Factor comun",
    "url": "/curs/docs/c5/modul-1/12",
+   "collection": "standard",
    "course": "c5",
    "module": "modul-1",
    "keywords": [
@@ -136,6 +304,7 @@
   {
    "title": "C11 - Compararea nr. ridicate la o putere și pătratul perfect",
    "url": "/curs/docs/c5/modul-1/13",
+   "collection": "standard",
    "course": "c5",
    "module": "modul-1",
    "keywords": [
@@ -147,6 +316,7 @@
   {
    "title": "C12 - Scrierea în baza 10 și baza 2",
    "url": "/curs/docs/c5/modul-1/14",
+   "collection": "standard",
    "course": "c5",
    "module": "modul-1",
    "keywords": [
@@ -158,6 +328,7 @@
   {
    "title": "C13 - Ordinea efectuării operațiilor",
    "url": "/curs/docs/c5/modul-1/15",
+   "collection": "standard",
    "course": "c5",
    "module": "modul-1",
    "keywords": [
@@ -169,6 +340,7 @@
   {
    "title": "C14 - Media aritmetică",
    "url": "/curs/docs/c5/modul-1/16",
+   "collection": "standard",
    "course": "c5",
    "module": "modul-1",
    "keywords": [
@@ -180,6 +352,7 @@
   {
    "title": "C15.1 - Metoda reducerii la unitate",
    "url": "/curs/docs/c5/modul-2/01",
+   "collection": "standard",
    "course": "c5",
    "module": "modul-2",
    "keywords": [
@@ -191,6 +364,7 @@
   {
    "title": "C15.2 - Metoda comparației",
    "url": "/curs/docs/c5/modul-2/02",
+   "collection": "standard",
    "course": "c5",
    "module": "modul-2",
    "keywords": [
@@ -202,6 +376,7 @@
   {
    "title": "C15.3 - Metoda figurativă",
    "url": "/curs/docs/c5/modul-2/03",
+   "collection": "standard",
    "course": "c5",
    "module": "modul-2",
    "keywords": [
@@ -213,6 +388,7 @@
   {
    "title": "C15.4 - Metoda mersului invers",
    "url": "/curs/docs/c5/modul-2/04",
+   "collection": "standard",
    "course": "c5",
    "module": "modul-2",
    "keywords": [
@@ -224,6 +400,7 @@
   {
    "title": "G1 - Punct, dreaptă și plan",
    "url": "/curs/docs/c5/modul-2/05",
+   "collection": "standard",
    "course": "c5",
    "module": "modul-2",
    "keywords": [
@@ -235,6 +412,7 @@
   {
    "title": "G2 - Semiplan, semidreaptă și segment",
    "url": "/curs/docs/c5/modul-2/06",
+   "collection": "standard",
    "course": "c5",
    "module": "modul-2",
    "keywords": [
@@ -246,6 +424,7 @@
   {
    "title": "C15.5 - Metoda falsei ipoteze",
    "url": "/curs/docs/c5/modul-2/07",
+   "collection": "standard",
    "course": "c5",
    "module": "modul-2",
    "keywords": [
@@ -257,6 +436,7 @@
   {
    "title": "C16 - Divizori și multiplii",
    "url": "/curs/docs/c5/modul-2/08",
+   "collection": "standard",
    "course": "c5",
    "module": "modul-2",
    "keywords": [
@@ -268,6 +448,7 @@
   {
    "title": "C17 - Criterii de divizibilitate",
    "url": "/curs/docs/c5/modul-2/09",
+   "collection": "standard",
    "course": "c5",
    "module": "modul-2",
    "keywords": [
@@ -279,6 +460,7 @@
   {
    "title": "C18 - Număr prim, număr compus",
    "url": "/curs/docs/c5/modul-2/10",
+   "collection": "standard",
    "course": "c5",
    "module": "modul-2",
    "keywords": [
@@ -290,6 +472,7 @@
   {
    "title": "PROIECT",
    "url": "/curs/docs/c5/modul-3/00",
+   "collection": "standard",
    "course": "c5",
    "module": "modul-3",
    "keywords": [
@@ -301,6 +484,7 @@
   {
    "title": "C19.1 - Fracții subunitare, echiunitare şi supraunitare",
    "url": "/curs/docs/c5/modul-3/01",
+   "collection": "standard",
    "course": "c5",
    "module": "modul-3",
    "keywords": [
@@ -312,6 +496,7 @@
   {
    "title": "C19.2 - Procente şi fracții echivalente",
    "url": "/curs/docs/c5/modul-3/02",
+   "collection": "standard",
    "course": "c5",
    "module": "modul-3",
    "keywords": [
@@ -323,6 +508,7 @@
   {
    "title": "C19.3 - Compararea fracțiilor cu același numitor sau numărător",
    "url": "/curs/docs/c5/modul-3/03",
+   "collection": "standard",
    "course": "c5",
    "module": "modul-3",
    "keywords": [
@@ -334,6 +520,7 @@
   {
    "title": "C19.4 - Reprezentarea pe axa numerelor a unei fracții ordinare",
    "url": "/curs/docs/c5/modul-3/04",
+   "collection": "standard",
    "course": "c5",
    "module": "modul-3",
    "keywords": [
@@ -345,6 +532,7 @@
   {
    "title": "C19.5 - Introducerea și scoaterea întregilor dintr-o fracție",
    "url": "/curs/docs/c5/modul-3/05",
+   "collection": "standard",
    "course": "c5",
    "module": "modul-3",
    "keywords": [
@@ -356,6 +544,7 @@
   {
    "title": "C20.1 - Cel mai mare divizor comun a două numere naturale",
    "url": "/curs/docs/c5/modul-3/06",
+   "collection": "standard",
    "course": "c5",
    "module": "modul-3",
    "keywords": [
@@ -367,6 +556,7 @@
   {
    "title": "C20.2 - Amplificarea și simplificarea fracțiilor",
    "url": "/curs/docs/c5/modul-3/07",
+   "collection": "standard",
    "course": "c5",
    "module": "modul-3",
    "keywords": [
@@ -378,6 +568,7 @@
   {
    "title": "C21.1 - Cel mai mic multiplu comun a două numere naturale",
    "url": "/curs/docs/c5/modul-3/08",
+   "collection": "standard",
    "course": "c5",
    "module": "modul-3",
    "keywords": [
@@ -389,6 +580,7 @@
   {
    "title": "C21.2 - Aducerea fracțiilor la un numitor comun",
    "url": "/curs/docs/c5/modul-3/09",
+   "collection": "standard",
    "course": "c5",
    "module": "modul-3",
    "keywords": [
@@ -398,151 +590,9 @@
    "text": "# C21.2 - Aducerea fracțiilor la un numitor comun\n\n---\n\n## Definiție\n\nPentru a le compara sau pentru a efectua adunarea și scăderea, este necesar să aducem fracțiile la același numitor. Pentru aceasta întâi determinăm \nun numitor comun, **preferabil cel mai mic** și apoi amplificăm corespunzător.\n\nOricare două fracții pot fi înlocuite cu fracții echivalente care să aibă numitorul comun.\n\n---\n\n## Compararea fracțiilor\n\n### Problemă rezolvată\n**O pizza este tăiată în 6 felii identice.**\n* Ce fracție reprezintă o felie din întreaga pizza?\n* Dacă mâncăm o felie, ce fracție reprezintă acum două felii din pizza rămasă?\n* Dacă mai mâncăm o felie, ce fracție reprezintă acum 3 felii din pizza rămasă?\n* Stabilește care dintre fracțiile alăturate este mai mare.\n\n \n \n {/* Pizza 1: 1/6 */}\n \n [figură] \n $\\dfrac{1}{6}$ \n \n\n {/* Pizza 2: 2/5 */}\n \n [figură] \n $\\dfrac{2}{5}$ \n \n\n {/* Pizza 3: 3/4 */}\n \n [figură] \n $\\dfrac{3}{4}$ \n \n\n \n\n* **Rezolvare:** Pentru a determina care dintre aceste fracții este cea mai mare, le vom compara două câte două.\n\nMai întâi, comparăm $\\dfrac{1}{6}$ cu $\\dfrac{2}{5}$. Un numitor comun este 30. Prin urmare,\n$${}^{5)}\\dfrac{1}{6} = \\dfrac{5}{30}, \\text{ iar } {}^{6)}\\dfrac{2}{5} = \\dfrac{12}{30},$$\ndeci $\\dfrac{1}{6} < \\dfrac{2}{5}$\n\nComparăm acum cea mai mare fracție dintre primele două cu cea de-a treia fracție: $\\dfrac{2}{5}$ și $\\dfrac{3}{4}$. Un numitor comun este 20, deci\n$${}^{4)}\\dfrac{2}{5} = \\dfrac{8}{20}, \\text{ iar } {}^{5)}\\dfrac{3}{4} = \\dfrac{15}{20}$$\n\nCum $\\dfrac{8}{20} < \\dfrac{15}{20}$, atunci fracția $\\dfrac{3}{4}$ este cea mai mare.\n\n> Deci $\\dfrac{1}{6} < \\dfrac{2}{5} < \\dfrac{3}{4}$\n\n---\n\n## Exersează! \n\nFolosește modelul de rezolvare de la exercițiul anterior pentru a ordona crescător fracțiile:\n\n* **a)** $\\dfrac{1}{2}, \\dfrac{1}{3} \\text{ și } \\dfrac{1}{5}$\n\n* **b)** $\\dfrac{1}{3}, \\dfrac{1}{4} \\text{ și } \\dfrac{1}{5}$\n\n* **c)** $\\dfrac{1}{10}, \\dfrac{1}{15} \\text{ și } \\dfrac{3}{20}$\n\n* **d)** $70\\%, \\dfrac{3}{5} \\text{ și } \\dfrac{1}{2}$ \n\n* **e)** $\\dfrac{5}{6}, \\dfrac{6}{7} \\text{ și } \\dfrac{7}{8}$\n\n---"
   },
   {
-   "title": "G3 - Distanţa dintre două puncte",
-   "url": "/curs/docs/c5/modul-3/10",
-   "course": "c5",
-   "module": "modul-4",
-   "keywords": [
-    "clasa 5 a cincea V",
-    "modul 4"
-   ],
-   "text": "# G3 - Distanţa dintre două puncte\n\n---\n\n## Ce este distanța dintre două puncte?\n\n**Distanța dintre două puncte** $A$ și $B$ este egală cu **lungimea segmentului** $[AB]$ care le unește.\n\n$$\nAB \\quad \\text{sau} \\quad d(A, B)\n$$\n\n \n [figură] \n \n\n- Distanța este întotdeauna un număr **pozitiv** (sau $0$).\n- Distanța de la un punct la el însuși este $0$: $\\;d(A, A) = 0$.\n- Distanța nu depinde de ordinea punctelor: $\\;AB = BA$.\n\n---\n\n## Măsurarea distanței cu rigla\n\nPentru a măsura distanța dintre două puncte de pe o foaie, folosim **rigla gradată**:\n\n \n [figură] \n \n\nAșezăm rigla astfel încât punctul $A$ să fie în dreptul gradației $2$, iar punctul $B$ în dreptul gradației $7$. Distanța este diferența dintre cele două citiri:\n\n$$\nAB = 7 - 2 = 5\\,cm\n$$\n\nPutem așeza rigla și cu gradația $0$ exact în punctul $A$ — atunci distanța se citește direct în dreptul punctului $B$.\n\n---\n\n## Distanțe pe o dreaptă (puncte coliniare)\n\nCând trei puncte sunt **coliniare** (se află pe aceeași dreaptă), distanțele dintre ele se pot **aduna** sau **scădea**.\n\nConsiderăm punctul $C$ situat **între** $A$ și $B$:\n\n \n [figură] \n \n\nDacă punctul $C$ se află **între** $A$ și $B$, atunci:\n\n$$\nAC + CB = AB\n$$\n\n$$\nAC = AB - CB \\qquad CB = AB - AC\n$$\n\nPunctele $A$, $C$, $B$ sunt coliniare, în această ordine, cu $AC = 4\\,cm$ și $CB = 9\\,cm$. Cât este $AB$?\n\nCum $C$ este între $A$ și $B$:\n\n$$\nAB = AC + CB = 4 + 9 = 13\\,cm\n$$\n\nPunctele $A$, $C$, $B$ sunt coliniare, în această ordine, cu $AB = 20\\,cm$ și $AC = 12\\,cm$. Cât este $CB$?\n\n$$\nCB = AB - AC = 20 - 12 = 8\\,cm\n$$\n\nRegula $AC + CB = AB$ este valabilă **doar** dacă $C$ se află între $A$ și $B$. Dacă punctele sunt în altă ordine pe dreaptă, relația se schimbă.\n\nDe exemplu, dacă ordinea este $A,\\,B,\\,C$ (deci $B$ este între $A$ și $C$), atunci $AB + BC = AC$.\n\n---\n\n## Calcule cu distanțe\n\nPe o dreaptă, în ordinea $A,\\, M,\\, B$, avem $AM = 2x$ și $MB = x + 5$ (în cm). Știind că $AB = 17\\,cm$, află $x$.\n\nCum $M$ este între $A$ și $B$:\n\n$$\nAM + MB = AB\n$$\n\n$$\n2x + (x + 5) = 17\n$$\n\n$$\n3x + 5 = 17 \\;\\Rightarrow\\; 3x = 12 \\;\\Rightarrow\\; x = 4\n$$\n\nVerificare: $AM = 2 \\cdot 4 = 8\\,cm$, $MB = 4 + 5 = 9\\,cm$, iar $8 + 9 = 17\\,cm$. ✓\n\nPe o dreaptă se află punctele $A$, $B$, $C$ în această ordine, cu $AB = 6\\,cm$ și $BC = 10\\,cm$. Cât este distanța $AC$?\n\nCum $B$ este între $A$ și $C$:\n\n$$\nAC = AB + BC = 6 + 10 = 16\\,cm\n$$\n\n---"
-  },
-  {
-   "title": "G4 - Mijlocul unui segment și simetricul unui punct",
-   "url": "/curs/docs/c5/modul-3/11",
-   "course": "c5",
-   "module": "modul-4",
-   "keywords": [
-    "clasa 5 a cincea V",
-    "modul 4"
-   ],
-   "text": "# G4 - Mijlocul unui segment și simetricul unui punct\nfață de un punct\n\n---\n\n## Mijlocul unui segment\n\n**Mijlocul** unui segment $[AB]$ este punctul $M$ situat pe segment, egal depărtat de capetele acestuia.\n\n$$\nAM = MB\n$$\n\n \n [figură] \n \n\nLiniuțele albastre marchează faptul că cele două jumătăți sunt **congruente** (au aceeași lungime).\n\nDacă $M$ este mijlocul segmentului $[AB]$, atunci fiecare jumătate este egală cu **jumătatea** întregului segment:\n\n$$\nAM = MB = \\frac{AB}{2}\n$$\n\nReciproc, lungimea întregului segment este dublul unei jumătăți:\n\n$$\nAB = 2 \\cdot AM = 2 \\cdot MB\n$$\n\nUn segment are **un singur** mijloc. Mijlocul se află întotdeauna **între** cele două capete ale segmentului.\n\nPunctul $M$ este mijlocul segmentului $[AB]$, iar $AB = 18\\,cm$. Cât este $AM$?\n\nMijlocul împarte segmentul în două părți egale, fiecare egală cu jumătatea lungimii:\n\n$$\nAM = \\frac{AB}{2} = \\frac{18}{2} = 9\\,cm\n$$\n\nPunctul $M$ este mijlocul segmentului $[AB]$ și $AM = 7\\,cm$. Cât este $AB$?\n\nLungimea întregului segment este dublul jumătății:\n\n$$\nAB = 2 \\cdot AM = 2 \\cdot 7 = 14\\,cm\n$$\n\n---\n\n## Simetricul unui punct față de un punct\n\nPornim de la o întrebare simplă: dat fiind un punct $A$ și un alt punct $O$, există un punct $A'$ astfel încât $O$ să fie exact la mijloc între $A$ și $A'$?\n\n**Simetricul** punctului $A$ față de punctul $O$ este punctul $A'$ pentru care $O$ este **mijlocul** segmentului $[AA']$.\n\n \n [figură] \n \n\nDin definiție rezultă imediat că:\n\n$$\nOA = OA'\n$$\n\niar punctele $A$, $O$ și $A'$ sunt **coliniare** (se află pe aceeași dreaptă), cu $O$ între $A$ și $A'$.\n\n- $A'$ este simetricul lui $A$ față de $O$ $\\;\\Longleftrightarrow\\;$ $O$ este mijlocul lui $[AA']$.\n- Relația este **reciprocă**: dacă $A'$ este simetricul lui $A$, atunci $A$ este simetricul lui $A'$ (față de același $O$).\n- Simetricul punctului $O$ față de el însuși este **chiar $O$**.\n\nPentru a construi simetricul lui $A$ față de $O$:\n1. Trasăm semidreapta $AO$ și o prelungim dincolo de $O$.\n2. Măsurăm distanța $OA$ și o reportăm de cealaltă parte a lui $O$.\n3. Punctul obținut, la aceeași distanță, este $A'$.\n\nPunctul $O$ este mijlocul segmentului $[AA']$ și $OA = 5\\,cm$. Cât este lungimea segmentului $[AA']$?\n\nDeoarece $O$ este mijloc, avem $OA = OA' = 5\\,cm$, deci:\n\n$$\nAA' = OA + OA' = 5 + 5 = 2 \\cdot 5 = 10\\,cm\n$$\n\n---\n\n## Calcule cu mijloc și simetric\n\nMulte probleme combină mijlocul, simetricul și lungimile de segmente. Cheia este să reținem mereu cele două relații:\n\n$$\n\\boxed{AM = MB = \\dfrac{AB}{2}} \\qquad \\boxed{AB = 2 \\cdot AM}\n$$\n\nPe o dreaptă se consideră punctele $A$, $O$, $B$ astfel încât $O$ este mijlocul lui $[AB]$. Știind că $AO = 2x + 1$ și $OB = x + 4$ (în centimetri), află $x$ și lungimea $AB$.\n\nCum $O$ este mijloc, cele două jumătăți sunt egale:\n\n$$\nAO = OB \\;\\Rightarrow\\; 2x + 1 = x + 4\n$$\n\n$$\n2x - x = 4 - 1 \\;\\Rightarrow\\; x = 3\n$$\n\nAtunci $AO = 2 \\cdot 3 + 1 = 7\\,cm$, iar:\n\n$$\nAB = 2 \\cdot AO = 2 \\cdot 7 = 14\\,cm\n$$\n\nPunctul $C$ este simetricul lui $A$ față de $B$, iar $AB = 6\\,cm$. Pe segment se mai ia mijlocul $M$ al lui $[AB]$. Calculează $MC$.\n\nCum $C$ este simetricul lui $A$ față de $B$, $B$ este mijlocul lui $[AC]$, deci:\n\n$$\nBC = AB = 6\\,cm \\;\\Rightarrow\\; AC = 12\\,cm\n$$\n\n$M$ este mijlocul lui $[AB]$, deci:\n\n$$\nMB = \\frac{AB}{2} = \\frac{6}{2} = 3\\,cm\n$$\n\nPunctele sunt în ordinea $A,\\, M,\\, B,\\, C$ pe dreaptă, deci:\n\n$$\nMC = MB + BC = 3 + 6 = 9\\,cm\n$$\n\n---"
-  },
-  {
-   "title": "C22 - Adunarea și scăderea fracțiilor ordinare",
-   "url": "/curs/docs/c5/modul-4/00",
-   "course": "c5",
-   "module": "modul-4",
-   "keywords": [
-    "clasa 5 a cincea V",
-    "modul 4"
-   ],
-   "text": "# C22 - Adunarea și scăderea fracțiilor ordinare\n\n---\n\n## Adunarea și Scăderea Fracțiilor\n\n### Fracții cu același numitor\nAdunarea (scăderea) a două fracții care au același numitor se efectuează adunând (scăzând) numărătorii și păstrând numitorul:\n\n$$\\dfrac{a}{n} + \\dfrac{b}{n} = \\dfrac{a+b}{n}, \\quad \\dfrac{a}{n} - \\dfrac{b}{n} = \\dfrac{a-b}{n}, \\quad n \\neq 0$$\n\n> **Exemple:**\n> * $\\dfrac{5}{13} + \\dfrac{2}{13} = \\dfrac{5+2}{13} = \\dfrac{7}{13}$\n\n> * $\\dfrac{5}{13} - \\dfrac{2}{13} = \\dfrac{5-2}{13} = \\dfrac{3}{13}$\n\n---\n\n### Fracții cu numitori diferiți\nDacă fracțiile nu au același numitor, pentru adunare (scădere), se aduc la **numitor comun** prin amplificare sau simplificare.\n\n> **Exemple:**\n> * $\\stackrel{4)}{\\dfrac{5}{6}} + \\stackrel{3)}{\\dfrac{3}{8}} = \\dfrac{20}{24} + \\dfrac{9}{24} = \\dfrac{29}{24}$\n\n> * $\\dfrac{12^{(4}}{16} - \\dfrac{1}{4} = \\dfrac{3}{4} - \\dfrac{1}{4} = \\dfrac{2^{(2}}{4} = \\dfrac{1}{2}$\n\nDacă este posibil, rezultatul se simplifică.\n\n---\n\n## Operații între un număr natural și o fracție\n\nAdunarea (scăderea) dintre un număr natural și o fracție ordinară se efectuează scriind numărul natural ca fracție ordinară cu numitorul 1 astfel:\n\n$$n + \\dfrac{a}{b} = \\dfrac{n}{1} + \\dfrac{a}{b} = \\dfrac{n \\cdot b}{b} + \\dfrac{a}{b} = \\dfrac{n \\cdot b + a}{b}$$\n$$n - \\dfrac{a}{b} = \\dfrac{n}{1} - \\dfrac{a}{b} = \\dfrac{n \\cdot b}{b} - \\dfrac{a}{b} = \\dfrac{n \\cdot b - a}{b}$$\n\n> **Exemplu:**\n> * $5 + \\dfrac{3}{7} = \\dfrac{5}{1} + \\dfrac{3}{7} = \\dfrac{5 \\cdot 7}{7} + \\dfrac{3}{7} = \\dfrac{5 \\cdot 7 + 3}{7} = \\dfrac{38}{7}$\n\n> * $5 - \\dfrac{3}{7} = \\dfrac{5}{1} - \\dfrac{3}{7} = \\dfrac{5 \\cdot 7}{7} - \\dfrac{3}{7} = \\dfrac{5 \\cdot 7 - 3}{7} = \\dfrac{32}{7}$\n\n---\n\n## Proprietățile adunării\n\n* Adunarea fracțiilor ordinare este **comutativă** (termenii pot fi adunați în orice ordine și rezultatul adunării nu se modifică).\n $$\\dfrac{a}{b} + \\dfrac{c}{d} = \\dfrac{c}{d} + \\dfrac{a}{b}$$\n\n* Adunarea fracțiilor ordinare este **asociativă** (dacă o adunare are trei sau mai mulți termeni, aceștia pot fi grupați în moduri diferite și rezultatul adunării nu se modifică).\n $$\\left(\\dfrac{a}{b} + \\dfrac{c}{d}\\right) + \\dfrac{n}{m} = \\dfrac{a}{b} + \\left(\\dfrac{c}{d} + \\dfrac{n}{m}\\right)$$\n\n* **0 este element neutru** pentru adunare (numărul 0 nu schimbă rezultatul adunării).\n $$\\dfrac{a}{b} + 0 = 0 + \\dfrac{a}{b} = \\dfrac{a}{b}$$\n\nProprietățile de mai sus **nu** sunt adevărate pentru operația de scădere.\n\n---"
-  },
-  {
-   "title": "C23.1 - Înumlțirea fracțiilor ordinare",
-   "url": "/curs/docs/c5/modul-4/01",
-   "course": "c5",
-   "module": "modul-4",
-   "keywords": [
-    "clasa 5 a cincea V",
-    "modul 4"
-   ],
-   "text": "# C23.1 - Înumlțirea fracțiilor ordinare\n\n---\n\n## Înmulțirea a două fracții ordinare\n\nÎnmulțirea a două fracții ordinare se efectuează înmulțind numărătorii între ei și numitorii între ei:\n\n$$\\dfrac{a}{b} \\cdot \\dfrac{c}{d} = \\dfrac{a \\cdot c}{b \\cdot d}$$\n\nDacă este posibil, rezultatul se simplifică. Simplificarea se poate face și **înainte de înmulțire**. Se simplifică totdeauna un numărător cu un numitor.\n\n> **Exemplu (simplificare la final):**\n\n> $$\\dfrac{5}{6} \\cdot \\dfrac{3}{8} = \\dfrac{5 \\cdot 3}{6 \\cdot 8} = \\dfrac{15^{(3}}{48} = \\dfrac{5}{16}$$\n>\n> **Exemplu (simplificare pe parcurs):**\n\n> $$\\dfrac{5}{\\underset{2}{\\cancel{6}}} \\cdot \\dfrac{\\cancel{3}^1}{8} = \\dfrac{5 \\cdot 1}{2 \\cdot 8} = \\dfrac{5}{16}$$\n\n> *Spunem: 3 și 6 se simplifică prin 3. În locul lui 3 rămâne 1, iar în locul lui 6 rămâne 2.*\n\n---\n\n## Înmulțirea între un număr natural și o fracție\n\nSe efectuează scriind numărul natural ca fracție cu numitorul 1:\n\n$$n \\cdot \\dfrac{a}{b} = \\dfrac{n}{1} \\cdot \\dfrac{a}{b} = \\dfrac{n \\cdot a}{1 \\cdot b} = \\dfrac{n \\cdot a}{b}$$\n\n> **Exemplu:**\n> $$3 \\cdot \\dfrac{5}{7} = \\dfrac{3}{1} \\cdot \\dfrac{5}{7} = \\dfrac{3 \\cdot 5}{1 \\cdot 7} = \\dfrac{15}{7}$$\n\n---\n\n## Proprietățile înmulțirii\n\nDeoarece înmulțirea fracțiilor ordinare se reduce la înmulțiri între numere naturale, toate proprietățile înmulțirii de la numerele naturale rămân adevărate:\n\n1. **Comutativitatea:** Factorii pot fi înmulțiți în orice ordine.\n $$\\dfrac{a}{b} \\cdot \\dfrac{c}{d} = \\dfrac{c}{d} \\cdot \\dfrac{a}{b}$$\n\n2. **Asociativitatea:** Factorii pot fi grupați în moduri diferite.\n $$\\left( \\dfrac{a}{b} \\cdot \\dfrac{c}{d} \\right) \\cdot \\dfrac{n}{m} = \\dfrac{a}{b} \\cdot \\left( \\dfrac{c}{d} \\cdot \\dfrac{n}{m} \\right)$$\n\n3. **Element neutru:** Numărul 1 nu schimbă rezultatul înmulțirii.\n $$\\dfrac{a}{b} \\cdot 1 = 1 \\cdot \\dfrac{a}{b} = \\dfrac{a}{b}$$\n\n4. **Distributivitatea față de adunare (scădere):**\n $$\\dfrac{n}{m} \\cdot \\left( \\dfrac{a}{b} + \\dfrac{c}{d} \\right) = \\dfrac{n}{m} \\cdot \\dfrac{a}{b} + \\dfrac{n}{m} \\cdot \\dfrac{c}{d}$$\n\n $$\\dfrac{n}{m} \\cdot \\left( \\dfrac{a}{b} - \\dfrac{c}{d} \\right) = \\dfrac{n}{m} \\cdot \\dfrac{a}{b} - \\dfrac{n}{m} \\cdot \\dfrac{c}{d}$$\n\n---"
-  },
-  {
-   "title": "C23.2 - Împarțirea fracțiilor ordinare",
-   "url": "/curs/docs/c5/modul-4/02",
-   "course": "c5",
-   "module": "modul-4",
-   "keywords": [
-    "clasa 5 a cincea V",
-    "modul 4"
-   ],
-   "text": "# C23.2 - Împarțirea fracțiilor ordinare\n\n---\n\n## Observă și descoperă!\n\n### A. Model vizual\nCât este $\\dfrac{4}{6} : \\dfrac{1}{3}$? Altfel spus, de câte ori se cuprinde $\\dfrac{1}{3}$ în $\\dfrac{4}{6}$?\n\nCu ajutorul desenului, observăm că $\\dfrac{4}{6}$ este echivalent cu două treimi, deci rezultatul împărțirii este **2**.\n$$\\dfrac{4}{6} : \\dfrac{1}{3} = 2$$\n\n### B. Justificare prin probă\nProba împărțirii se face prin înmulțire. Dacă $\\dfrac{4}{6} : \\dfrac{1}{3} = A$, atunci $\\dfrac{4}{6} = A \\cdot \\dfrac{1}{3}$.\nÎnmulțind ambele părți cu inversul lui $\\dfrac{1}{3}$ (adică $\\dfrac{3}{1}$), obținem:\n\n$$\\dfrac{4}{6} \\cdot \\dfrac{3}{1} = A$$\n\n---\n\n## Regulă Importantă\n\nÎmpărțirea a două fracții ordinare se transformă în **înmulțire între prima fracție și a doua fracție inversată**.\n\n$$\\dfrac{a}{b} : \\dfrac{c}{d} = \\dfrac{a}{b} \\cdot \\dfrac{d}{c}$$\n\n> **Exemplu:**\n\n> $$\\dfrac{5}{4} : \\dfrac{3}{2} = \\dfrac{5}{\\cancel{4}_2} \\cdot \\dfrac{\\cancel{2}^1}{3} = \\dfrac{5 \\cdot 1}{2 \\cdot 3} = \\dfrac{5}{6}$$\n\n---\n\n## Problemă rezolvată\n\n**Cât este jumătate din 3 sferturi?**\n\n**Rezolvare:**\nCând împărțim o fracție la un număr natural, procedăm astfel:\n\n$$\\dfrac{3}{4} : 2 = \\dfrac{3}{4} : \\dfrac{2}{1} = \\dfrac{3}{4} \\cdot \\dfrac{1}{2} = \\dfrac{3}{8}$$\n\n*Explicație intuitivă:* Deoarece numărul de sferturi (3) nu este par, lucrăm cu optimi. Orice sfert are două optimi, deci 3 sferturi au 6 optimi. Jumătate din 6 optimi sunt **3 optimi**.\n\n---"
-  },
-  {
-   "title": "C24 - Ridicarea la putere a fracțiilor ordinare",
-   "url": "/curs/docs/c5/modul-4/03",
-   "course": "c5",
-   "module": "modul-4",
-   "keywords": [
-    "clasa 5 a cincea V",
-    "modul 4"
-   ],
-   "text": "# C24 - Ridicarea la putere a fracțiilor ordinare\n\n---\n\n## Ridicarea la putere a unei fracții\n\nO fracție se ridică la putere ridicând la putere atât numărătorul, cât și numitorul, la acea putere:\n\n$$\\left( \\dfrac{a}{b} \\right)^n = \\dfrac{a^n}{b^n}$$\n\n> **Exemplu:**\n> $$\\left( \\dfrac{2}{5} \\right)^2 = \\dfrac{2^2}{5^2} = \\dfrac{4}{25}$$\n\n## Reguli de calcul\n\nPentru orice numere naturale nenule $a, b, c, d, m, n$ se verifică următoarele relații:\n\n### 1. Înmulțirea puterilor cu aceeași bază\nPentru a înmulți două puteri cu aceeași bază, se păstrează baza și se **adună** exponenții:\n\n$$\\left( \\dfrac{a}{b} \\right)^m \\cdot \\left( \\dfrac{a}{b} \\right)^n = \\left( \\dfrac{a}{b} \\right)^{m+n}$$\n\n> **Exemplu:**\n> $$\\left( \\dfrac{5}{2} \\right)^3 \\cdot \\left( \\dfrac{5}{2} \\right)^4 = \\left( \\dfrac{5}{2} \\right)^{3+4} = \\left( \\dfrac{5}{2} \\right)^7$$\n\n---\n\n### 2. Împărțirea puterilor cu aceeași bază\nPentru a împărți două puteri cu aceeași bază, se păstrează baza și se **scad** exponenții ($m \\ge n$):\n\n$$\\left( \\dfrac{a}{b} \\right)^m : \\left( \\dfrac{a}{b} \\right)^n = \\left( \\dfrac{a}{b} \\right)^{m-n}$$\n\n> **Exemplu:**\n> $$\\left( \\dfrac{4}{5} \\right)^7 : \\left( \\dfrac{4}{5} \\right)^4 = \\left( \\dfrac{4}{5} \\right)^{7-4} = \\left( \\dfrac{4}{5} \\right)^3$$\n\n---\n\n### 3. Puterea unei puteri\nPentru a ridica o putere la o altă putere, se păstrează baza și se **înmulțesc** exponenții:\n\n$$\\left[ \\left( \\dfrac{a}{b} \\right)^m \\right]^n = \\left( \\dfrac{a}{b} \\right)^{m \\cdot n}$$\n\n> **Exemple:**\n> * $\\left[ \\left( \\dfrac{2}{5} \\right)^2 \\right]^5 = \\left( \\dfrac{2}{5} \\right)^{2 \\cdot 5} = \\left( \\dfrac{2}{5} \\right)^{10}$\n> * $\\left[ \\left( \\dfrac{11}{101} \\right)^{99} \\right]^0 = \\left( \\dfrac{11}{101} \\right)^{99 \\cdot 0} = \\left( \\dfrac{11}{101} \\right)^0 = 1$\n\n---\n\n### 4. Puterea unui produs\nPentru a ridica un produs la o putere, se distribuie exponentul fiecărui factor:\n\n$$\\left( \\dfrac{a}{b} \\cdot \\dfrac{c}{d} \\right)^n = \\left( \\dfrac{a}{b} \\right)^n \\cdot \\left( \\dfrac{c}{d} \\right)^n$$\n\n> **Exemplu:**\n> $$\\left( \\dfrac{2}{3} \\cdot \\dfrac{5}{7} \\right)^3 = \\left( \\dfrac{2}{3} \\right)^3 \\cdot \\left( \\dfrac{5}{7} \\right)^3$$\n\n#### Produsul a două puteri cu același exponent\n$$\\left( \\dfrac{a}{b} \\right)^n \\cdot \\left( \\dfrac{c}{d} \\right)^n = \\left( \\dfrac{a}{b} \\cdot \\dfrac{c}{d} \\right)^n$$\n\n---\n\n### 5. Puterea unui cât\nPentru a ridica un cât la o putere, se distribuie exponentul fiecărui factor al câtului:\n\n$$\\left( \\dfrac{a}{b} : \\dfrac{c}{d} \\right)^n = \\left( \\dfrac{a}{b} \\right)^n : \\left( \\dfrac{c}{d} \\right)^n$$\n\n> **Exemplu:**\n> $$\\left( \\dfrac{4}{9} : \\dfrac{2}{7} \\right)^5 = \\left( \\dfrac{4}{9} \\right)^5 : \\left( \\dfrac{2}{7} \\right)^5$$\n\n#### Câtul a două puteri cu același exponent\n$$\\left( \\dfrac{a}{b} \\right)^n : \\left( \\dfrac{c}{d} \\right)^n = \\left( \\dfrac{a}{b} : \\dfrac{c}{d} \\right)^n$$\n\n> **Exemplu:**\n> $$\\left( \\dfrac{3}{13} \\right)^6 : \\left( \\dfrac{5}{13} \\right)^6 = \\left( \\dfrac{3}{13} : \\dfrac{5}{13} \\right)^6 = \\left( \\dfrac{3}{13} \\cdot \\dfrac{13}{5} \\right)^6 = \\left( \\dfrac{3}{5} \\right)^6$$\n\n---"
-  },
-  {
-   "title": "C25 - Scrierea numerelor zecimale neperiodice sub formă de fracții ordinare",
-   "url": "/curs/docs/c5/modul-4/04",
-   "course": "c5",
-   "module": "modul-4",
-   "keywords": [
-    "clasa 5 a cincea V",
-    "modul 4"
-   ],
-   "text": "# C25 - Scrierea numerelor zecimale neperiodice sub formă de fracții ordinare\n\n---\n\n## Observă și descoperă!\n\n### 1. Înmulțirea și împărțirea cu puteri ale lui 10\n\n| Numărul | 1 | 3 | 13 | 123 |\n| :--- | :--- | :--- | :--- | :--- |\n| Mărit de 10 ori | 10 | 30 | 130 | 1 230 |\n| Mărit de 100 de ori | 100 | 300 | 1 300 | 12 300 |\n| Mărit de 1 000 de ori | 1 000 | 3 000 | 13 000 | 123 000 |\n\n| Numărul | 1 000 | 30 000 | 130 000 |\n| :--- | :--- | :--- | :--- |\n| Micșorat de 10 ori | 100 | 3 000 | 13 000 |\n| Micșorat de 100 de ori | 10 | 300 | 1 300 |\n| Micșorat de 1 000 de ori | 1 | 30 | 130 |\n\n---\n\n## Formarea fracțiilor zecimale\n\nPentru a micșora numărul $1$ de $10, 100$ sau $1 000$ de ori, folosim o **virgulă** după primul zero din stânga:\n\n* $1 : 10 \\rightarrow 0,1$ (**o zecime**)\n\n* $1 : 100 \\rightarrow 0,01$ (**o sutime**)\n\n* $1 : 1 000 \\rightarrow 0,001$ (**o miime**)\n\n### Echivalențe importante:\n* Un întreg are zece zecimi: $1 : 10 = 0,1$ și $0,1 \\cdot 10 = 1$\n\n* Un întreg are o sută de sutimi: $1 : 100 = 0,01$ și $0,01 \\cdot 100 = 1$\n\n* Zece sutimi înseamnă o zecime: $0,10 = 0,1$\n\n* Zece miimi înseamnă o sutime: $0,010 = 0,01$\n\n---\n\n## Structura unei fracții zecimale\n\nO fracție zecimală (de exemplu $23,456$) este compusă din:\n1. **Partea întreagă:** numărul din fața virgulei ($23$)\n2. **Partea fracționară:** cifrele de după virgulă ($456$)\n\n### Citirea numerelor zecimale:\nPentru $23,456$ putem spune:\n* *\"douăzeci și trei de întregi, patru zecimi, cinci sutimi și șase miimi\"*\n\n* *\"douăzeci și trei de întregi și patru sute cincizeci și șase de miimi\"*\n\n* *\"douăzeci și trei virgulă patru sute cincizeci și șase\"*\n\nNumerele naturale sunt fracții zecimale care au după virgulă numai cifre de $0$.\n\n$5 = 5,0 = 5,00 = 5,000$\n\n---\n\n## Transformări\n\n### 1. Din fracție ordinară în fracție zecimală\nSe scrie numărătorul și se separă prin virgulă, de la dreapta la stânga, atâtea cifre câte zerouri sunt la numitor.\n\n* $\\dfrac{234}{10} = 23\\dfrac{4}{10} = 23,4$\n\n* $\\dfrac{234}{100} = 2\\dfrac{34}{100} = 2,34$\n\n* $\\dfrac{1234}{1000} = 1\\dfrac{234}{1000} = 1,234$\n\n### 2. Din fracție zecimală în fracție ordinară\nLa numărător se scrie numărul fără virgulă, iar la numitor se scrie puterea lui 10 cu atâtea zerouri câte cifre sunt după virgulă.\n\n* $3,7 = 3\\dfrac{7}{10}$\n\n* $1,57 = 1\\dfrac{57}{100}$\n\n* $2,013 = 2\\dfrac{13}{1000}$\n\n* $0,12 = \\dfrac{12}{100} = \\dfrac{3}{25}$ (prin simplificare)\n\n---"
-  },
-  {
-   "title": "Test Clasa a V-a REFACERE",
-   "url": "/curs/docs/c5/modul-4/10",
-   "course": "c5",
-   "module": "modul-5",
-   "keywords": [
-    "clasa 5 a cincea V",
-    "modul 5"
-   ],
-   "text": "# Test Clasa a V-a REFACERE\n**Nume: \\\n_______________________** \\\n**Prenume: \\\n_______________________**\n\n- Toate subiectele sunt obligatorii\n- Timpul efectiv de lucru este de **50 de minute**\n- Utilizarea instrumentelor de geometrie este **permisă și recomandată**\n- Se acordă **20 puncte** din oficiu\n\n---\n\nRubrica aceasta se completează **doar de profesorul evaluator**!\n\n**Testul începe de pe pagina următoare.**\n\n \n \n## Grila de notare\n\n| Subiect | Punctaj total| Punctaj obținut |\n|---------|---------|------|\n| I | 35 | |\n| II | 30 | |\n| III | 15 | |\n| Total | 80 | |\n| Oficiu | 20 | 20 |\n\n \n \n\n## Calificativ capitole incluse\n\n---\n\n*C22 - Adunarea și scăderea fracțiilor ordinare*\n\n N | \n S | \n B | \n E \n\n*C23.1 - Înumlțirea fracțiilor ordinare*\n\n N | \n S | \n B | \n E \n\n*C23.2 - Împarțirea fracțiilor ordinare*\n\n N | \n S | \n B | \n E \n\n*C24 - Ridicarea la putere a fracțiilor ordinare*\n\n N | \n S | \n B | \n E \n\n \n \n\n> Legendă:\n\n> **N - Nesatisfăcător | S - Satisfăcător | B - Bine | E - Excelent**\n\n---\n\n## Subiectul I - 35 puncte \n\n### Exercițiul 1 **(2x5p = 10p)**\n\nSă se calculeze:\n\nb) $2\\dfrac{9}{10} - 1\\dfrac{3}{8}$\n\n### Exercițiul 2 **(2x5p = 10p)**\n\nSă se calculeze:\n\nb) $\\dfrac{29}{24} - \\dfrac{3}{4}$\n\n### Exercițiul 3 **(3x5p = 15p)**\n\nSă se calculeze:\n\nb) $\\dfrac{15}{8} \\cdot (\\dfrac{6}{25} + \\dfrac{16}{45})$\n\nc) $2\\dfrac{2}{9} \\cdot \\dfrac{6}{25} - \\dfrac{2}{27} \\cdot \\dfrac{2}{8}$\n\n---\n\n## Subiectul al II-lea - 30 puncte \n\n### Exercițiul 1 **(8p)**\n\nMihai are de rezolvat mai multe probleme în 3 zile. În prima zi rezolvă $\\dfrac{1}{3}$ din numărul lor, în a doua zi $\\dfrac{1}{4}$ din același număr. \nCe fracție din numărul problemelor i-a rămas de rezolvat a treia zi?\n\n### Exercițiul 2 **(3x5p = 15p)**\n\nSă se calculeze:\n\nb) $(\\dfrac{1}{2} - \\dfrac{1}{3}):\\dfrac{1}{6}$\n\nc) $\\dfrac{14}{3} : (\\dfrac{21}{4} : \\dfrac{7}{2}) : \\dfrac{28}{9}$\n\n### Exercițiul 3 **(7p)**\n\nMihai are de rezolvat 48 de probleme în 3 zile. În prima zi rezolvă o treime din numărul lor, iar în a doua zi o pătrime din numărul problemelor. Câte probleme i-au rămas de rezolvat pentru a treia zi?\n \n\n---\n\n## Subiectul al III-lea - 15 puncte \n\n### Exercițiul 1 **(2x5p = 10p)**\n\nSă se calculeze:\n\nb) $\\left(\\dfrac{144}{49}\\right)^6 : \\left(\\dfrac{9}{7}\\right)^{12}$\n\n### Exercițiul 2 **(5p)**\n\nCalculați:\n\n$$\n\\left[\\left(\\dfrac{5}{7}\\right)^3\\cdot \\left(\\dfrac{5}{7}\\right)^5\\right]^4:\\left[\\left(\\dfrac{5}{7}\\right)^5\\right]^6 = ?\n$$\n\n---\n\n## SFÂRȘIT TEST"
-  },
-  {
-   "title": "PROIECT - „Locuința mea – camera personală\"",
-   "url": "/curs/docs/c5/modul-5/00",
-   "course": "c5",
-   "module": "modul-5",
-   "keywords": [
-    "clasa 5 a cincea V",
-    "modul 5"
-   ],
-   "text": "# PROIECT - „Locuința mea – camera personală\"\n\n---\n\n## Obiectivele proiectului\n\n1. Să identifice și să recunoască figuri geometrice plane (pătrat, dreptunghi, triunghi, cerc) în schița tehnică a unei locuințe.\n2. Să calculeze perimetrul și aria unor suprafețe simple (ex. din camera personală).\n3. Să utilizeze corect unități de măsură pentru lungime și suprafață.\n\n### Obiective aplicative (practice)\n\n- Să realizeze schița unei locuințe folosind figuri geometrice.\n- Să construiască un plan simplu (desen sau machetă) respectând proporțiile.\n- Să manifeste creativitate în proiectarea locuinței.\n- Să își prezinte clar și argumentat proiectul realizat.\n\n---\n\n## Cerințele proiectului\n\n| Nr. | Cerință | Punctaj |\n|---|---|---|\n| **1** | Proiectul va fi realizat pe **format A4**, cu acuratețe și îngrijire. Se vor utiliza **instrumente geometrice** (riglă, creion, echer) și **notații matematice corecte**. Limbajul folosit trebuie să fie clar, corect și specific matematicii. | $1\\text{p}$ |\n| **2** | Realizează **desenul schematic** al camerei tale (vedere de sus). Notează **dimensiunile reale** măsurate cu ruleta: lungimea, lățimea, înălțimea. Respectă proporțiile și marchează corect unitățile de măsură (metri). | $1\\text{p}$ |\n| **3** | Calculează **perimetrul podelei** camerei. Scrie formula utilizată și rezultatul final. | $1\\text{p}$ |\n| **4** | Determină **costul total al baghetei** pentru podea. Se consideră: $1\\,m$ baghetă $= 150$ lei. Prezintă calculul complet. | $1\\text{p}$ |\n| **5** | Calculează **aria podelei** (în $m^2$). Notează formula și rezultatul. | $1\\text{p}$ |\n| **6** | Determină **costul total al laminatului**. Se consideră: $1\\,m^2$ laminat $= 320$ lei. Prezintă calculul complet. | $1\\text{p}$ |\n| **7** | Calculează **suprafața totală a pereților** (aria laterală a camerei). Arată pașii de calcul. | $1\\text{p}$ |\n| **8** | Determină **numărul de rulouri** (tapet de hârtie) necesare ($1$ rulou acoperă $4\\,m^2$) și **costul total** ($1$ rulou $= 600$ lei). Justifică modul de calcul (rotunjiri dacă este cazul). | $1\\text{p}$ |\n| **9** | Calculează **prețul total** (baghetă $+$ laminat $+$ tapet). Prezintă rezultatul final. | $1\\text{p}$ |\n| **10** | **Concluzie personală.** Redactează $3$–$5$ propoziții despre: utilitatea matematicii în viața reală; ce ai învățat realizând acest proiect. | $1\\text{p}$ |\n\nTotal **10p** se echivalează cu **nota 10**, dacă proiectul este prezentat la timpul indicat și fiecare punct este realizat cu argumentări.\n\n---\n\n## Exemplu de desen al camerei (vedere de sus)\n\n \n [figură] \n \n\nCamera ta poate avea alte dimensiuni! Măsoară cu ruleta lungimea, lățimea și înălțimea camerei tale și folosește valorile **tale** în toate calculele. Schița de mai sus are dimensiunile $290\\,cm \\times 330\\,cm$, doar ca exemplu.\n\n---\n\n## Model de rezolvare\n\nPentru a vedea cum se completează fiecare cerință, urmărim un exemplu rezolvat pas cu pas. Considerăm o cameră cu:\n\n$$\nL = 4\\,m \\;(\\text{lungime}), \\quad l = 3\\,m \\;(\\text{lățime}), \\quad h = 2{,}5\\,m \\;(\\text{înălțime})\n$$\n\n \n Vezi rezolvarea completă (punctele 3–9) \n\n**Punctul 3 — Perimetrul podelei**\n\nPodeaua este un dreptunghi cu lungimea $L$ și lățimea $l$:\n\n$$\nP = 2 \\cdot (L + l) = 2 \\cdot (4 + 3) = 2 \\cdot 7 = 14\\,m\n$$\n\n**Punctul 4 — Costul baghetei**\n\nBagheta se pune de jur împrejurul podelei, deci pe lungimea perimetrului:\n\n$$\n\\text{cost}_{\\text{baghetă}} = P \\cdot 150 = 14 \\cdot 150 = 2100\\;\\text{lei}\n$$\n\n**Punctul 5 — Aria podelei**\n\n$$\nA_{\\text{podea}} = L \\cdot l = 4 \\cdot 3 = 12\\,m^2\n$$\n\n**Punctul 6 — Costul laminatului**\n\n$$\n\\text{cost}_{\\text{laminat}} = A_{\\text{podea}} \\cdot 320 = 12 \\cdot 320 = 3840\\;\\text{lei}\n$$\n\n**Punctul 7 — Suprafața pereților (aria laterală)**\n\nAria laterală a camerei (cei patru pereți) se calculează ca perimetrul podelei înmulțit cu înălțimea:\n\n$$\n\\mathcal{A}_\\ell = P \\cdot h = 14 \\cdot 2{,}5 = 35\\,m^2\n$$\n\n**Punctul 8 — Numărul de rulouri de tapet și costul**\n\nUn rulou acoperă $4\\,m^2$, iar pereții au $35\\,m^2$:\n\n$$\n"
-  },
-  {
-   "title": "G5 - Unități de măsură. Perimetre și arii",
-   "url": "/curs/docs/c5/modul-5/01",
-   "course": "c5",
-   "module": "modul-5",
-   "keywords": [
-    "clasa 5 a cincea V",
-    "modul 5"
-   ],
-   "text": "# G5 - Unități de măsură. Perimetre și arii\n\n---\n\n## Măsurarea lungimii\n\nÎn Sistemul Internațional de unități de măsură, unitatea principală pentru lungime este **metrul**, notat cu $m$.\n\n**Metrul** este unitatea principală de măsură pentru lungime. El are atât **multipli** (unități mai mari), cât și **submultipli** (unități mai mici).\n\n| Denumire | Notație | Relație cu metrul |\n|---|---|---|\n| kilometru | $km$ | $1\\,km = 1000\\,m$ |\n| hectometru | $hm$ | $1\\,hm = 100\\,m$ |\n| decametru | $dam$ | $1\\,dam = 10\\,m$ |\n| **metru** | $m$ | $1\\,m$ |\n| decimetru | $dm$ | $1\\,dm = 0{,}1\\,m$ |\n| centimetru | $cm$ | $1\\,cm = 0{,}01\\,m$ |\n| milimetru | $mm$ | $1\\,mm = 0{,}001\\,m$ |\n\n### Schema transformărilor\n\nPe scara unităților de lungime, fiecare treaptă este de **10 ori** mai mare decât cea de sub ea:\n\n$$\nkm \\;\\xrightarrow{\\;\\times 10\\;}\\; hm \\;\\xrightarrow{\\;\\times 10\\;}\\; dam \\;\\xrightarrow{\\;\\times 10\\;}\\; m \\;\\xrightarrow{\\;\\times 10\\;}\\; dm \\;\\xrightarrow{\\;\\times 10\\;}\\; cm \\;\\xrightarrow{\\;\\times 10\\;}\\; mm\n$$\n\n- Când trecem de la o unitate **mai mare** la una **mai mică**, **înmulțim** cu $10$ la fiecare treaptă coborâtă.\n- Când trecem de la o unitate **mai mică** la una **mai mare**, **împărțim** la $10$ la fiecare treaptă urcată.\n\n$$\n1\\,km = 10\\,hm = 100\\,dam = 1000\\,m\n$$\n\n$$\n1\\,m = 10\\,dm = 100\\,cm = 1000\\,mm\n$$\n\nTransformă în metri:\n\n**a)** $3{,}5\\,dam$ — coborâm o treaptă (dam → m), deci înmulțim cu $10$:\n\n$$\n3{,}5\\,dam = 3{,}5 \\cdot 10 = 35\\,m\n$$\n\n**b)** $1700\\,cm$ — urcăm două trepte (cm → m), deci împărțim la $100$:\n\n$$\n1700\\,cm = 1700 : 100 = 17\\,m\n$$\n\n**c)** $6{,}29\\,hm$ — coborâm două trepte (hm → m), deci înmulțim cu $100$:\n\n$$\n6{,}29\\,hm = 6{,}29 \\cdot 100 = 629\\,m\n$$\n\nCalculează, exprimând rezultatul în $dm$:\n\n$$\n0{,}00023\\,km + 685\\,mm\n$$\n\nTransformăm fiecare termen în $dm$:\n\n$$\n0{,}00023\\,km = 0{,}00023 \\cdot 10^4\\,dm = 2{,}3\\,dm\n$$\n\n$$\n685\\,mm = 685 : 10^2\\,dm = 6{,}85\\,dm\n$$\n\nAdunăm:\n\n$$\n2{,}3\\,dm + 6{,}85\\,dm = 9{,}15\\,dm\n$$\n\n---\n\n## Perimetrul unui poligon\n\n**Perimetrul** unui poligon este egal cu suma lungimilor laturilor sale. Se notează cu $P$.\n\n### Perimetrul pătratului\n\nPătratul are toate cele patru laturi egale, de lungime $l$.\n\n \n [figură] \n \n\n$$\nP_{\\text{pătrat}} = l + l + l + l = 4 \\cdot l\n$$\n\n### Perimetrul dreptunghiului\n\nDreptunghiul are laturile opuse egale: lungimea $L$ și lățimea $l$.\n\n \n [figură] \n \n\n$$\nP_{\\text{dreptunghi}} = 2 \\cdot L + 2 \\cdot l = 2 \\cdot (L + l)\n$$\n\n### Perimetrul triunghiului\n\nDacă laturile triunghiului au lungimile $a$, $b$ și $c$:\n\n \n [figură] \n \n\n$$\nP_{\\text{triunghi}} = a + b + c\n$$\n\nTriunghiul $\\triangle ABC$ are laturile $AB = 24\\,cm$, $AC = 100\\,mm$ și $BC = 2{,}6\\,dm$. Calculează perimetrul.\n\n**Pasul 1.** Aducem toate lungimile la aceeași unitate de măsură ($cm$):\n\n$$\nAC = 100\\,mm = 10\\,cm,\\qquad BC = 2{,}6\\,dm = 26\\,cm\n$$\n\n**Pasul 2.** Calculăm perimetrul:\n\n$$\nP = AB + AC + BC = 24\\,cm + 10\\,cm + 26\\,cm = 60\\,cm\n$$\n\nÎnainte de a aduna lungimi exprimate în unități diferite, transformăm **întotdeauna** toate valorile în aceeași unitate de măsură.\n\n---\n\n## Măsurarea ariei\n\n**Aria** unei suprafețe arată cât de mare este suprafața respectivă. Pentru a o măsura, ne întrebăm câte pătrate de o anumită mărime încap în interiorul ei.\n\nÎn figura de mai jos, un pătrat cu latura de $3\\,cm$ poate fi acoperit cu exact **9 pătrate** mici, fiecare cu latura de $1\\,cm$. Spunem că aria lui este de $9\\,cm^2$.\n\n \n [figură] \n \n\nUnitatea principală de măsură pentru arie este **metrul pătrat**, notat $m^2$. Acesta reprezintă aria unui pătrat cu latura de $1$ metru.\n\n| Denumire | Notație | Relație cu $m^2$ |\n|---|---|---|\n| kilometru pătrat | $km^2$ | $1\\,km^2 = 1\\,000\\,000\\,m^2$ |\n| hectometru pătrat | $hm^2$ | $1\\,hm^2 = 10\\,000\\,m^2$ |\n| decametru pătrat | $dam^2$ | $1\\,dam^2 = 100\\,m^2$ |\n| **metru pătrat** | $m^2$ | $1\\,m^2$ |\n| decimetru pătrat | $dm^2$ | $1\\,dm^2 = 0{,}01\\,m^2$ |\n| centimetru pătrat | $cm^2$ | $1\\,cm^2 = 0{,}0001\\,m^2$ |\n| milimetru pătrat | $mm^2$ | $1\\,mm^2 = 0"
-  },
-  {
-   "title": "G6 - Măsurarea volumului și a capacității",
-   "url": "/curs/docs/c5/modul-5/02",
-   "course": "c5",
-   "module": "modul-5",
-   "keywords": [
-    "clasa 5 a cincea V",
-    "modul 5"
-   ],
-   "text": "# G6 - Măsurarea volumului și a capacității\n\n---\n\n## Măsurarea volumului\n\nPentru a măsura volumul unui corp, ne întrebăm **din câte cuburi mici de o anumită mărime este format** acel corp.\n\n**Volumul** unui corp este numărul care arată de câte ori se cuprinde o unitate de măsură (un cub unitate) în acel corp.\n\n \n [figură] \n \n\nMultiplii și submultiplii metrului cub sunt:\n\n| Denumire | Notație | Relație cu $m^3$ |\n|---|---|---|\n| kilometru cub | $km^3$ | $1\\,km^3 = 10^9\\,m^3$ |\n| hectometru cub | $hm^3$ | $1\\,hm^3 = 10^6\\,m^3$ |\n| decametru cub | $dam^3$ | $1\\,dam^3 = 1000\\,m^3$ |\n| **metru cub** | $m^3$ | $1\\,m^3$ |\n| decimetru cub | $dm^3$ | $1\\,dm^3 = 0{,}001\\,m^3$ |\n| centimetru cub | $cm^3$ | $1\\,cm^3 = 0{,}000001\\,m^3$ |\n| milimetru cub | $mm^3$ | $1\\,mm^3 = 0{,}000000001\\,m^3$ |\n\n### Schema transformărilor pentru volum\n\nLa unitățile de **volum**, fiecare treaptă diferă de vecina ei prin **$1000$** (la lungime era $10$, la arie era $100$).\n\n- Pentru a transforma o unitate într-una **imediat inferioară** (mai mică), **înmulțim cu $1000$**.\n- Pentru a transforma o unitate într-una **imediat superioară** (mai mare), **împărțim la $1000$**.\n\n$$\nkm^3 \\;\\xrightarrow{\\;\\times 1000\\;}\\; hm^3 \\;\\xrightarrow{\\;\\times 1000\\;}\\; dam^3 \\;\\xrightarrow{\\;\\times 1000\\;}\\; m^3 \\;\\xrightarrow{\\;\\times 1000\\;}\\; dm^3 \\;\\xrightarrow{\\;\\times 1000\\;}\\; cm^3 \\;\\xrightarrow{\\;\\times 1000\\;}\\; mm^3\n$$\n\nPentru $n$ trepte parcurse, înmulțim sau împărțim cu $(10^3)^n = 1000^n$.\n\nLa lungime trecem printr-o singură dimensiune ($\\times 10$), la arie prin două dimensiuni ($\\times 10^2 = 100$), iar la volum prin **trei dimensiuni**, deci $\\times 10^3 = 1000$.\n\n**1)** $25\\,m^3 = \\;?\\;dm^3$ — coborâm o treaptă, deci înmulțim cu $1000$:\n\n$$\n25\\,m^3 = 25 \\cdot 1000 = 25\\,000\\,dm^3\n$$\n\n**2)** $126{,}5\\,cm^3 = \\;?\\;dm^3$ — urcăm o treaptă, deci împărțim la $1000$:\n\n$$\n126{,}5\\,cm^3 = 126{,}5 : 1000 = 0{,}1265\\,dm^3\n$$\n\n**3)** $29{,}47\\,dam^3 = \\;?\\;dm^3$ — coborâm două trepte, deci înmulțim cu $(10^3)^2 = 10^6$:\n\n$$\n29{,}47\\,dam^3 = 29{,}47 \\cdot 10^6 = 29\\,470\\,000\\,dm^3\n$$\n\n---\n\n## Volumul cubului\n\nSă numărăm din câte cuburi unitate (cu muchia de $1\\,cm$) este format un cub cu muchia de $3\\,cm$. Avem $3$ cuburi pe lungime, $3$ pe lățime și $3$ pe înălțime:\n\n$$\n3 \\cdot 3 \\cdot 3 = 27 \\;\\text{cuburi unitate}\n$$\n\nDeci volumul lui este $V = 27\\,cm^3$. Generalizând:\n\n \n [figură] \n \n\nVolumul unui cub cu muchia de lungime $l$ este:\n\n$$\nV_{\\text{cub}} = l \\cdot l \\cdot l = l^3\n$$\n\nUn cubuleț al unui cub Rubik are muchia de $2\\,cm$. Cât este volumul cubului Rubik?\n\nCubul Rubik are $3$ cubulețe pe fiecare muchie, deci latura lui este:\n\n$$\nl = 3 \\cdot 2 = 6\\,cm\n$$\n\nVolumul:\n\n$$\nV = l^3 = 6^3 = 216\\,cm^3\n$$\n\n---\n\n## Volumul paralelipipedului dreptunghic\n\nParalelipipedul dreptunghic are trei dimensiuni: **lungimea** $L$, **lățimea** $l$ și **înălțimea** $h$.\n\nDacă punem $4$ cuburi pe lungime, $3$ pe lățime și $2$ pe înălțime, obținem $4 \\cdot 3 \\cdot 2 = 24$ cuburi unitate. De aici:\n\n \n [figură] \n \n\nVolumul unui paralelipiped dreptunghic cu dimensiunile $L$, $l$ și $h$ este:\n\n$$\nV_{\\text{paralelipiped}} = L \\cdot l \\cdot h\n$$\n\nToate dimensiunile trebuie exprimate în **aceeași unitate de măsură**.\n\nUn container are forma unui paralelipiped dreptunghic cu dimensiunile $10\\,m$, $6\\,m$ și $5\\,m$. Află volumul, exprimat în $dm^3$.\n\n$$\nV = L \\cdot l \\cdot h = 10 \\cdot 6 \\cdot 5 = 300\\,m^3\n$$\n\nTransformăm în $dm^3$ (coborâm o treaptă, înmulțim cu $1000$):\n\n$$\n300\\,m^3 = 300 \\cdot 1000 = 300\\,000\\,dm^3\n$$\n\n---\n\n## Aria laterală și aria totală\n\nPe lângă volum (cât „spațiu\" ocupă un corp), ne poate interesa și **aria suprafeței** lui — de exemplu, cât carton ne trebuie pentru a confecționa o cutie, sau cât tapet pentru a îmbrăca un perete.\n\n- **Aria laterală** ($\\mathcal{A}_\\ell$) este suma ariilor **fețelor laterale** ale corpului (fețele „din jur\", fără baza de sus și cea de jos).\n- **Aria totală** ($\\mathcal{A}_t$) este suma ariilor **tuturor fețelor** corpului. Se obține adunâ"
-  },
-  {
-   "title": "G7 - Tipuri de unghiuri. Măsura unghiurilor",
-   "url": "/curs/docs/c5/modul-5/03",
-   "course": "c5",
-   "module": "modul-5",
-   "keywords": [
-    "clasa 5 a cincea V",
-    "modul 5"
-   ],
-   "text": "# G7 - Tipuri de unghiuri. Măsura unghiurilor\n\n---\n\n## Ce este un unghi?\n\nUn **unghi** este figura geometrică formată din două semidrepte care au aceeași origine.\n\n \n [figură] \n \n\nUnghiul din figură se notează în mai multe feluri:\n\n$$\n\\angle AOB,\\quad \\angle BOA,\\quad \\angle O,\\quad \\alpha\n$$\n\nCând notăm un unghi cu trei litere, **litera din mijloc reprezintă întotdeauna vârful** unghiului.\n\n---\n\n## Măsura unghiurilor\n\nMăsura unui unghi se exprimă în **grade**, notate cu simbolul $^\\circ$.\n\nUn unghi complet (o rotație întreagă) are măsura de $360^\\circ$.\n\n$$\n\\text{1 rotație completă} = 360^\\circ\n$$\n\n$$\n1^\\circ = 60' \\quad (\\text{minute})\n$$\n\n$$\n1' = 60'' \\quad (\\text{secunde})\n$$\n\nAșadar:\n\n$$\n1^\\circ = 60' = 3600''\n$$\n\n---\n\n## Tipuri de unghiuri după măsură\n\nClasificăm unghiurile în funcție de măsura lor astfel:\n\n \n [figură] \n \n\n \n [figură] \n \n\nTabelul de mai jos rezumă clasificarea:\n\n| Tipul unghiului | Măsura |\n|---|---|\n| Unghi nul | $0^\\circ$ |\n| Unghi ascuțit | $0^\\circ < \\alpha < 90^\\circ$ |\n| Unghi drept | $\\alpha = 90^\\circ$ |\n| Unghi obtuz | $90^\\circ < \\alpha < 180^\\circ$ |\n| Unghi alungit | $\\alpha = 180^\\circ$ |\n| Unghi complet | $\\alpha = 360^\\circ$ |\n\nUn unghi **drept** se marchează de obicei cu un mic pătrat în vârf, în loc de un arc.\n\n---\n\n## Perechi remarcabile de unghiuri\n\n### Unghiuri complementare\n\nDouă unghiuri sunt **complementare** dacă suma măsurilor lor este $90^\\circ$.\n\n$$\n\\alpha + \\beta = 90^\\circ\n$$\n\n \n [figură] \n \n\nFiecare dintre cele două unghiuri se numește **complementul** celuilalt.\n\n### Unghiuri suplementare\n\nDouă unghiuri sunt **suplementare** dacă suma măsurilor lor este $180^\\circ$.\n\n$$\n\\alpha + \\beta = 180^\\circ\n$$\n\n \n [figură] \n \n\nFiecare dintre cele două unghiuri se numește **suplementul** celuilalt.\n\n### Unghiuri opuse la vârf\n\nDouă unghiuri sunt **opuse la vârf** dacă laturile unuia sunt prelungirile laturilor celuilalt.\n\nDouă unghiuri opuse la vârf sunt **congruente** (au aceeași măsură).\n\n \n [figură] \n \n\nÎn figură, unghiurile notate cu $\\alpha$ sunt opuse la vârf, deci sunt egale. La fel, cele notate cu $\\beta$.\n\n---\n\n## Calcule cu unghiuri\n\n### Adunarea și scăderea măsurilor\n\nCând lucrăm cu grade, minute și secunde, ținem cont că:\n\n$$\n1^\\circ = 60', \\qquad 1' = 60''\n$$\n\nCalculează:\n\n$$\n35^\\circ 40' + 28^\\circ 30'\n$$\n\n**Rezolvare:**\n\nAdunăm separat gradele și minutele:\n\n$$\n(35^\\circ + 28^\\circ) + (40' + 30') = 63^\\circ + 70'\n$$\n\nCum $70' = 60' + 10' = 1^\\circ 10'$, transformăm:\n\n$$\n63^\\circ + 1^\\circ 10' = 64^\\circ 10'\n$$\n\n### Aflarea complementului și a suplementului\n\nAflă complementul și suplementul unghiului de $35^\\circ$.\n\n**Complement:**\n\n$$\n90^\\circ - 35^\\circ = 55^\\circ\n$$\n\n**Suplement:**\n\n$$\n180^\\circ - 35^\\circ = 145^\\circ\n$$\n\n---"
-  },
-  {
-   "title": "Test Clasa a V-a — Unghiuri",
-   "url": "/curs/docs/c5/modul-5/test-g7",
-   "course": "c5",
-   "module": "modul-5",
-   "keywords": [
-    "clasa 5 a cincea V",
-    "modul 5"
-   ],
-   "text": "# Test Clasa a V-a — Unghiuri\n**Nume: \\\n_______________________** \\\n**Prenume: \\\n_______________________**\n\n- Toate subiectele sunt obligatorii\n- Timpul efectiv de lucru este de **50 de minute**\n- Utilizarea instrumentelor de geometrie este **permisă și recomandată**\n- Se acordă **20 puncte** din oficiu\n\n---\n\nRubrica aceasta se completează **doar de profesorul evaluator**!\n\n**Testul începe de pe pagina următoare.**\n\n \n \n## Grila de notare\n\n| Subiect | Punctaj total| Punctaj obținut |\n|---------|---------|------|\n| I | 35 | |\n| II | 30 | |\n| III | 15 | |\n| Total | 80 | |\n| Oficiu | 20 | 20 |\n\n \n \n\n## Calificativ capitole incluse\n\n---\n\n*G7 - Tipuri de unghiuri. Măsura unghiurilor*\n\n N | \n S | \n B | \n E \n\n \n \n\n> Legendă:\n\n> **N - Nesatisfăcător | S - Satisfăcător | B - Bine | E - Excelent**\n\n---\n\n## Subiectul I - 35 puncte \n\n### Exercițiul 1 **(3x5p = 15p)**\n\nPrecizați tipul fiecărui unghi după măsură (nul, ascuțit, drept, obtuz sau alungit):\n\nb) $\\angle MNP = 90^\\circ$\n\nc) $\\angle XYZ = 134^\\circ$\n\n### Exercițiul 2 **(2x5p = 10p)**\n\nCompletați spațiile libere, știind că $1^\\circ = 60'$ și $1' = 60''$:\n\nb) $2' = \\underline{\\hspace{2cm}} \\ ''$\n\n### Exercițiul 3 **(2x5p = 10p)**\n\nCalculați:\n\nb) suplementul unghiului de $110^\\circ$\n\n---\n\n## Subiectul al II-lea - 30 puncte \n\n### Exercițiul 1 **(2x5p = 10p)**\n\nCalculați:\n\nb) $75^\\circ 30' - 28^\\circ 50'$\n\n### Exercițiul 2 **(2x5p = 10p)**\n\nRăspundeți la următoarele cerințe:\n\nb) Două unghiuri sunt **suplementare**. Unul dintre ele are $63^\\circ$. Câte grade are celălalt?\n\n### Exercițiul 3 **(10p)**\n\nÎn figura de mai jos, punctele $A$, $O$, $D$ sunt **coliniare** (situate pe aceeași dreaptă), iar $OB$ și $OC$ sunt două semidrepte cu originea în $O$. Măsurile unghiurilor sunt exprimate în funcție de $x$, ca în desen.\n\nAflați valoarea lui $x$ și apoi măsurile unghiurilor $\\angle AOB$, $\\angle BOC$ și $\\angle COD$.\n\n \n [figură] \n \n\n---\n\n## Subiectul al III-lea - 15 puncte \n\n### Exercițiul 1 **(7p)**\n\nÎn figura de mai jos, dreptele $AB$ și $CD$ se intersectează în punctul $O$. Măsurile a două unghiuri sunt exprimate în funcție de $x$, ca în desen.\n\nȘtiind că $\\angle AOC = 75°$ = $\\angle BOD°$, aflați măsurile unghiurilor: $\\angle AOD$ și $\\angle BOC$.\n\n \n [figură] \n \n\n### Exercițiul 2 **(8p)**\n\nÎn figura de mai jos, semidreptele $OA$, $OB$, $OC$ și $OD$ pornesc din punctul $O$ și împart planul în jurul lui $O$ în patru unghiuri. Măsurile lor sunt exprimate în funcție de $x$, ca în desen.\n\nȘtiind că suma măsurilor unghiurilor din jurul punctului $O$ este $360^\\circ$, aflați valoarea lui $x$ și apoi măsurile unghiurilor $\\angle AOB$, $\\angle BOC$, $\\angle COD$ și $\\angle DOA$.\n\n \n [figură] \n \n\n---\n\n## SFÂRȘIT TEST"
-  },
-  {
    "title": "Organigramă",
    "url": "/curs/docs/c5/organigrama",
+   "collection": "standard",
    "course": "c5",
    "module": "",
    "keywords": [
@@ -553,6 +603,7 @@
   {
    "title": "C1 - Multiplii si divizori",
    "url": "/curs/docs/c6/modul-1/01",
+   "collection": "standard",
    "course": "c6",
    "module": "modul-1",
    "keywords": [
@@ -564,6 +615,7 @@
   {
    "title": "C2 - Numere prime. Descompunerea in factori primi",
    "url": "/curs/docs/c6/modul-1/02",
+   "collection": "standard",
    "course": "c6",
    "module": "modul-1",
    "keywords": [
@@ -575,6 +627,7 @@
   {
    "title": "C3 - Mulțimi. Mulțimea numerelor naturale N",
    "url": "/curs/docs/c6/modul-1/03",
+   "collection": "standard",
    "course": "c6",
    "module": "modul-1",
    "keywords": [
@@ -586,6 +639,7 @@
   {
    "title": "C4 - Multimea nr. intregi Z",
    "url": "/curs/docs/c6/modul-1/04",
+   "collection": "standard",
    "course": "c6",
    "module": "modul-1",
    "keywords": [
@@ -597,6 +651,7 @@
   {
    "title": "C5.1 – Diagrame în bastoane și histograme",
    "url": "/curs/docs/c6/modul-1/05",
+   "collection": "standard",
    "course": "c6",
    "module": "modul-1",
    "keywords": [
@@ -608,6 +663,7 @@
   {
    "title": "C5.2 - Diagrame circulare",
    "url": "/curs/docs/c6/modul-1/06",
+   "collection": "standard",
    "course": "c6",
    "module": "modul-1",
    "keywords": [
@@ -619,6 +675,7 @@
   {
    "title": "C5.3 - Procente. Calcul procentual",
    "url": "/curs/docs/c6/modul-1/07",
+   "collection": "standard",
    "course": "c6",
    "module": "modul-1",
    "keywords": [
@@ -630,6 +687,7 @@
   {
    "title": "C5.4 – Procente de mărire și micșorare",
    "url": "/curs/docs/c6/modul-1/08",
+   "collection": "standard",
    "course": "c6",
    "module": "modul-1",
    "keywords": [
@@ -641,6 +699,7 @@
   {
    "title": "C5.5 - Rapoarte",
    "url": "/curs/docs/c6/modul-1/09",
+   "collection": "standard",
    "course": "c6",
    "module": "modul-1",
    "keywords": [
@@ -652,6 +711,7 @@
   {
    "title": "C5.6 - Scara numerică",
    "url": "/curs/docs/c6/modul-1/10",
+   "collection": "standard",
    "course": "c6",
    "module": "modul-1",
    "keywords": [
@@ -663,6 +723,7 @@
   {
    "title": "C5.7 - Proporții",
    "url": "/curs/docs/c6/modul-1/11",
+   "collection": "standard",
    "course": "c6",
    "module": "modul-1",
    "keywords": [
@@ -674,6 +735,7 @@
   {
    "title": "C6.1 - Mărimi direct proporționale",
    "url": "/curs/docs/c6/modul-1/12",
+   "collection": "standard",
    "course": "c6",
    "module": "modul-1",
    "keywords": [
@@ -685,6 +747,7 @@
   {
    "title": "C6.2 - Mărimi invers proporționale",
    "url": "/curs/docs/c6/modul-1/13",
+   "collection": "standard",
    "course": "c6",
    "module": "modul-1",
    "keywords": [
@@ -696,6 +759,7 @@
   {
    "title": "C6.3 - Regula de trei simplă",
    "url": "/curs/docs/c6/modul-1/14",
+   "collection": "standard",
    "course": "c6",
    "module": "modul-1",
    "keywords": [
@@ -707,6 +771,7 @@
   {
    "title": "C7 - Probabilități",
    "url": "/curs/docs/c6/modul-1/15",
+   "collection": "standard",
    "course": "c6",
    "module": "modul-1",
    "keywords": [
@@ -718,6 +783,7 @@
   {
    "title": "C8.1 - Cel mai mare divizor comun",
    "url": "/curs/docs/c6/modul-1/16",
+   "collection": "standard",
    "course": "c6",
    "module": "modul-1",
    "keywords": [
@@ -729,6 +795,7 @@
   {
    "title": "C8.2 - Cel mai mic multiplu comun",
    "url": "/curs/docs/c6/modul-1/17",
+   "collection": "standard",
    "course": "c6",
    "module": "modul-1",
    "keywords": [
@@ -740,6 +807,7 @@
   {
    "title": "C9 - Relații și operații între mulțimi",
    "url": "/curs/docs/c6/modul-1/18",
+   "collection": "standard",
    "course": "c6",
    "module": "modul-1",
    "keywords": [
@@ -751,6 +819,7 @@
   {
    "title": "C10 - Modulul unui număr întreg (valoarea absolută)",
    "url": "/curs/docs/c6/modul-2/01",
+   "collection": "standard",
    "course": "c6",
    "module": "modul-2",
    "keywords": [
@@ -762,6 +831,7 @@
   {
    "title": "C11 - Compararea și ordonarea numerelor întregi",
    "url": "/curs/docs/c6/modul-2/02",
+   "collection": "standard",
    "course": "c6",
    "module": "modul-2",
    "keywords": [
@@ -773,6 +843,7 @@
   {
    "title": "C12.1 - Adunarea și scăderea numerelor întregi",
    "url": "/curs/docs/c6/modul-2/03",
+   "collection": "standard",
    "course": "c6",
    "module": "modul-2",
    "keywords": [
@@ -784,6 +855,7 @@
   {
    "title": "C12.2 - Înmulțirea și împărțirea numerelor întregi",
    "url": "/curs/docs/c6/modul-2/04",
+   "collection": "standard",
    "course": "c6",
    "module": "modul-2",
    "keywords": [
@@ -795,6 +867,7 @@
   {
    "title": "G1 - Unghiuri adiacente și bisectoarea unui unghi",
    "url": "/curs/docs/c6/modul-2/05",
+   "collection": "standard",
    "course": "c6",
    "module": "modul-2",
    "keywords": [
@@ -806,6 +879,7 @@
   {
    "title": "G2 - Unghiuri opuse la vârf și unghiuri formate în jurul unui punct",
    "url": "/curs/docs/c6/modul-2/06",
+   "collection": "standard",
    "course": "c6",
    "module": "modul-2",
    "keywords": [
@@ -817,6 +891,7 @@
   {
    "title": "G3 - Unghiul. Clasificare și măsurarea unghiurilor",
    "url": "/curs/docs/c6/modul-2/07",
+   "collection": "standard",
    "course": "c6",
    "module": "modul-2",
    "keywords": [
@@ -828,6 +903,7 @@
   {
    "title": "C13 - Mărimi și unități de măsură",
    "url": "/curs/docs/c6/modul-2/08",
+   "collection": "standard",
    "course": "c6",
    "module": "modul-2",
    "keywords": [
@@ -839,6 +915,7 @@
   {
    "title": "C14 - Puterea cu exponent număr natural a unui număr întreg nenul",
    "url": "/curs/docs/c6/modul-2/09",
+   "collection": "standard",
    "course": "c6",
    "module": "modul-2",
    "keywords": [
@@ -850,6 +927,7 @@
   {
    "title": "C15 - Reguli de calcul cu puteri",
    "url": "/curs/docs/c6/modul-2/10",
+   "collection": "standard",
    "course": "c6",
    "module": "modul-2",
    "keywords": [
@@ -861,6 +939,7 @@
   {
    "title": "C16 - Ecuații în mulțimea numerelor întregi",
    "url": "/curs/docs/c6/modul-3/01",
+   "collection": "standard",
    "course": "c6",
    "module": "modul-3",
    "keywords": [
@@ -872,6 +951,7 @@
   {
    "title": "C17 - Inecuații în mulțimea numerelor întregi",
    "url": "/curs/docs/c6/modul-3/02",
+   "collection": "standard",
    "course": "c6",
    "module": "modul-3",
    "keywords": [
@@ -883,6 +963,7 @@
   {
    "title": "C18.1 - Mulțimea numerelor raționale",
    "url": "/curs/docs/c6/modul-3/03",
+   "collection": "standard",
    "course": "c6",
    "module": "modul-3",
    "keywords": [
@@ -894,6 +975,7 @@
   {
    "title": "C18.2 - Opusul, modulul și compararea numerelor raționale",
    "url": "/curs/docs/c6/modul-3/04",
+   "collection": "standard",
    "course": "c6",
    "module": "modul-3",
    "keywords": [
@@ -905,6 +987,7 @@
   {
    "title": "C19.1 - Adunarea și scăderea numerelor raționale",
    "url": "/curs/docs/c6/modul-3/05",
+   "collection": "standard",
    "course": "c6",
    "module": "modul-3",
    "keywords": [
@@ -916,6 +999,7 @@
   {
    "title": "C19.2 - Inmulțirea și împărțirea numerelor raționale",
    "url": "/curs/docs/c6/modul-3/06",
+   "collection": "standard",
    "course": "c6",
    "module": "modul-3",
    "keywords": [
@@ -927,6 +1011,7 @@
   {
    "title": "C19.3 - Ridicarea la putere a numerelor raționale",
    "url": "/curs/docs/c6/modul-3/07",
+   "collection": "standard",
    "course": "c6",
    "module": "modul-3",
    "keywords": [
@@ -938,6 +1023,7 @@
   {
    "title": "G4 - Drepte paralele",
    "url": "/curs/docs/c6/modul-3/08",
+   "collection": "standard",
    "course": "c6",
    "module": "modul-3",
    "keywords": [
@@ -949,6 +1035,7 @@
   {
    "title": "G5 - Drepte perpendiculare și drepte oblice",
    "url": "/curs/docs/c6/modul-3/09",
+   "collection": "standard",
    "course": "c6",
    "module": "modul-3",
    "keywords": [
@@ -960,6 +1047,7 @@
   {
    "title": "PROIECT",
    "url": "/curs/docs/c6/modul-3/10",
+   "collection": "standard",
    "course": "c6",
    "module": "modul-3",
    "keywords": [
@@ -971,6 +1059,7 @@
   {
    "title": "Rezolvare Test FINAL Geometrie – Clasa a VIII-a",
    "url": "/curs/docs/c6/modul-3/100",
+   "collection": "standard",
    "course": "c6",
    "module": "modul-3",
    "keywords": [
@@ -982,6 +1071,7 @@
   {
    "title": "Triunghiul - clasificare și proprietăți",
    "url": "/curs/docs/c6/modul-5/01",
+   "collection": "standard",
    "course": "c6",
    "module": "modul-5",
    "keywords": [
@@ -993,6 +1083,7 @@
   {
    "title": "Suma măsurilor unghiurilor într-un triunghi",
    "url": "/curs/docs/c6/modul-5/02",
+   "collection": "standard",
    "course": "c6",
    "module": "modul-5",
    "keywords": [
@@ -1004,6 +1095,7 @@
   {
    "title": "Organigramă",
    "url": "/curs/docs/c6/organigrama",
+   "collection": "standard",
    "course": "c6",
    "module": "",
    "keywords": [
@@ -1014,6 +1106,7 @@
   {
    "title": "C1 – Definiția și utilizarea puterilor",
    "url": "/curs/docs/c7/modul-1/01",
+   "collection": "standard",
    "course": "c7",
    "module": "modul-1",
    "keywords": [
@@ -1025,6 +1118,7 @@
   {
    "title": "C2 – Reguli de calcul cu puteri",
    "url": "/curs/docs/c7/modul-1/02",
+   "collection": "standard",
    "course": "c7",
    "module": "modul-1",
    "keywords": [
@@ -1036,6 +1130,7 @@
   {
    "title": "C3 – Calcul cu radicali și proprietăți",
    "url": "/curs/docs/c7/modul-1/03",
+   "collection": "standard",
    "course": "c7",
    "module": "modul-1",
    "keywords": [
@@ -1047,6 +1142,7 @@
   {
    "title": "C4.1 – Notația științifică și simplificarea puterilor",
    "url": "/curs/docs/c7/modul-1/04",
+   "collection": "standard",
    "course": "c7",
    "module": "modul-1",
    "keywords": [
@@ -1058,6 +1154,7 @@
   {
    "title": "C4.2 – Puteri: prioritatea operațiilor și notația științifică",
    "url": "/curs/docs/c7/modul-1/05",
+   "collection": "standard",
    "course": "c7",
    "module": "modul-1",
    "keywords": [
@@ -1069,6 +1166,7 @@
   {
    "title": "C5 - Mulțimea nr. reale (1)",
    "url": "/curs/docs/c7/modul-1/06",
+   "collection": "standard",
    "course": "c7",
    "module": "modul-1",
    "keywords": [
@@ -1080,6 +1178,7 @@
   {
    "title": "C5 - Mulțimea nr. reale (2)",
    "url": "/curs/docs/c7/modul-1/07",
+   "collection": "standard",
    "course": "c7",
    "module": "modul-1",
    "keywords": [
@@ -1091,6 +1190,7 @@
   {
    "title": "C6 – Modulul, compararea și ordonarea numerelor reale",
    "url": "/curs/docs/c7/modul-1/08",
+   "collection": "standard",
    "course": "c7",
    "module": "modul-1",
    "keywords": [
@@ -1102,6 +1202,7 @@
   {
    "title": "C7 – Raționalizarea numitorului de forma a√b",
    "url": "/curs/docs/c7/modul-1/09",
+   "collection": "standard",
    "course": "c7",
    "module": "modul-1",
    "keywords": [
@@ -1113,6 +1214,7 @@
   {
    "title": "C8.1 – Media aritmetică",
    "url": "/curs/docs/c7/modul-1/10",
+   "collection": "standard",
    "course": "c7",
    "module": "modul-1",
    "keywords": [
@@ -1122,8 +1224,9 @@
    "text": "# C8.1 – Media aritmetică\n\n---\n\n## Introducere\n\nMedia aritmetică este o măsură a valorii centrale a unui set de numere reale. Ea reprezintă valoarea obținută prin împărțirea sumei tuturor valorilor la numărul de valori.\n\nDe exemplu, media aritmetică a notelor unui elev la mai multe teste sau a temperaturilor înregistrate într-o săptămână.\n\n---\n\n## Media aritmetică a `n` numere reale\n\nPentru n numere reale $a_1, a_2, \\dots, a_n$, unde $n \\geq 2$, media aritmetică se calculează astfel:\n\n$$\nM_a = \\dfrac{a_1 + a_2 + \\dots + a_n}{n}\n$$\n\n#### Exemple\n\n1. Calculează media aritmetică a numerelor $4, 6, 8$.\n\n Numărul de valori: $3$\n\n Media aritmetică: $\\dfrac{18}{3} = 6$\n\n---\n\n2. Calculează media aritmetică a numerelor $-2, 0, 2, 4$.\n\n Numărul de valori: $4$\n\n Media aritmetică: $\\dfrac{4}{4} = 1$\n\n---\n\n3. Calculează media aritmetică a numerelor $\\dfrac{1}{2}, \\dfrac{3}{4}, 1$.\n\n Numărul de valori: $3$\n\n Media aritmetică: $\\dfrac{\\dfrac{9}{4}}{3} = \\dfrac{9}{12} = \\dfrac{3}{4}$\n\n---\n\n## Media aritmetică ponderată\n\nMedia aritmetică ponderată este o medie în care fiecare valoare are o pondere (importanță) diferită. Ponderea arată cât de importantă este fiecare valoare în calculul mediei.\n\nPentru n valori $a_1, a_2, \\dots, a_n$ cu ponderile corespunzătoare $p_1, p_2, \\dots, p_n$ (numere pozitive), media aritmetică ponderată se calculează astfel:\n\n$$\nM_{ap} = \\dfrac{a_1 \\cdot p_1 + a_2 \\cdot p_2 + \\dots + a_n \\cdot p_n}{p_1 + p_2 + \\dots + p_n}\n$$\n\n#### Exemple\n\n1. Un elev are notele: $8$ (pondere $2$), $7$ (pondere $3$), $9$ (pondere $1$).\n\n Suma ponderilor: $2 + 3 + 1 = 6$\n\n Media ponderată: $\\dfrac{46}{6} = \\dfrac{23}{3} \\approx 7,67$\n\n---\n\n2. Într-un concurs, punctajele sunt: proba A: $85$ puncte (pondere $3$), proba B: $90$ puncte (pondere $2$), proba C: $80$ puncte (pondere $1$).\n\n Suma ponderilor: $3 + 2 + 1 = 6$\n\n Media ponderată: $\\dfrac{515}{6} \\approx 85,83$\n\n---"
   },
   {
-   "title": "C8.2 – Media geometrică",
+   "title": "11",
    "url": "/curs/docs/c7/modul-1/11",
+   "collection": "standard",
    "course": "c7",
    "module": "modul-1",
    "keywords": [
@@ -1133,8 +1236,9 @@
    "text": "# C8.2 – Media geometrică\n\n---\n\n## Introducere\n\nMedia geometrică (sau proporțională) a două numere reale pozitive este o măsură care reprezintă valoarea centrală a celor două numere, calculată ca rădăcina pătrată a produsului lor.\n\nEa este folosită în situații în care valorile se multiplică, cum ar fi ratele de creștere sau proporțiile.\n\n---\n\n## Formula mediei geometrice\n\nPentru două numere reale pozitive $a$ și $b$, media geometrică se calculează astfel:\n\n$$\nM_g = \\sqrt{a \\cdot b}\n$$\n\n#### Exemple\n\n1. Calculează media geometrică a numerelor $4$ și $9$.\n\n Produsul: $4 \\cdot 9 = 36$\n\n Media geometrică: $\\sqrt{36} = 6$\n\n2. Calculează media geometrică a numerelor $2$ și $8$.\n\n Produsul: $2 \\cdot 8 = 16$\n\n Media geometrică: $\\sqrt{16} = 4$\n\n3. Calculează media geometrică a numerelor $\\dfrac{1}{2}$ și $2$.\n\n Produsul: $\\dfrac{1}{2} \\cdot 2 = 1$\n\n Media geometrică: $\\sqrt{1} = 1$\n\n4. Calculează media geometrică a numerelor $5$ și $20$.\n\n Produsul: $5 \\cdot 20 = 100$\n\n Media geometrică: $\\sqrt{100} = 10$\n\n---\n\n## Proprietăți ale mediei geometrice\n\n1. Media geometrică a două numere pozitive este întotdeauna mai mică sau egală cu media aritmetică a acelorași numere.\n\n2. Dacă cele două numere sunt egale, media geometrică este egală cu ele.\n\n3. Media geometrică este pozitivă pentru numere pozitive.\n\n#### Exemplu de aplicare\n\nComparăm media aritmetică și media geometrică pentru numerele $1$ și $4$.\n\nMedia aritmetică: $\\dfrac{1+4}{2} = 2.5$\n\nMedia geometrică: $\\sqrt{1 \\cdot 4} = \\sqrt{4} = 2$\n\n---"
   },
   {
-   "title": "G1 - Punct, dreaptă și plan",
+   "title": "12",
    "url": "/curs/docs/c7/modul-1/12",
+   "collection": "standard",
    "course": "c7",
    "module": "modul-1",
    "keywords": [
@@ -1146,6 +1250,7 @@
   {
    "title": "G2 - Unghiul. Clasificare și măsurarea unghiurilor",
    "url": "/curs/docs/c7/modul-1/13",
+   "collection": "standard",
    "course": "c7",
    "module": "modul-1",
    "keywords": [
@@ -1157,6 +1262,7 @@
   {
    "title": "C9 - Ecuația x² = a",
    "url": "/curs/docs/c7/modul-1/14",
+   "collection": "standard",
    "course": "c7",
    "module": "modul-1",
    "keywords": [
@@ -1168,6 +1274,7 @@
   {
    "title": "G3 - Patrulaterul convex",
    "url": "/curs/docs/c7/modul-1/15",
+   "collection": "standard",
    "course": "c7",
    "module": "modul-1",
    "keywords": [
@@ -1179,6 +1286,7 @@
   {
    "title": "C10 - Aproximări ale numerelor iraționale",
    "url": "/curs/docs/c7/modul-1/17",
+   "collection": "standard",
    "course": "c7",
    "module": "modul-1",
    "keywords": [
@@ -1190,6 +1298,7 @@
   {
    "title": "G4 - Paralelogramul",
    "url": "/curs/docs/c7/modul-2/01",
+   "collection": "standard",
    "course": "c7",
    "module": "modul-2",
    "keywords": [
@@ -1201,6 +1310,7 @@
   {
    "title": "C11 - Relația de egalitate",
    "url": "/curs/docs/c7/modul-2/02",
+   "collection": "standard",
    "course": "c7",
    "module": "modul-2",
    "keywords": [
@@ -1212,6 +1322,7 @@
   {
    "title": "C12 - Ecuația ax+b=0",
    "url": "/curs/docs/c7/modul-2/03",
+   "collection": "standard",
    "course": "c7",
    "module": "modul-2",
    "keywords": [
@@ -1223,6 +1334,7 @@
   {
    "title": "G5 - Linia mijlocie în triunghi",
    "url": "/curs/docs/c7/modul-2/04",
+   "collection": "standard",
    "course": "c7",
    "module": "modul-2",
    "keywords": [
@@ -1234,6 +1346,7 @@
   {
    "title": "C13.1 - Sisteme de ecuații",
    "url": "/curs/docs/c7/modul-2/05",
+   "collection": "standard",
    "course": "c7",
    "module": "modul-2",
    "keywords": [
@@ -1245,6 +1358,7 @@
   {
    "title": "C13.2 - Probleme care se rezolvă cu ajutorul sistemelor de ecuații",
    "url": "/curs/docs/c7/modul-2/06",
+   "collection": "standard",
    "course": "c7",
    "module": "modul-2",
    "keywords": [
@@ -1256,6 +1370,7 @@
   {
    "title": "G6 - Centrul de greutate al unui triunghi",
    "url": "/curs/docs/c7/modul-2/07",
+   "collection": "standard",
    "course": "c7",
    "module": "modul-2",
    "keywords": [
@@ -1267,6 +1382,7 @@
   {
    "title": "C14 - Operații cu numere reale (recapitulare)",
    "url": "/curs/docs/c7/modul-2/08",
+   "collection": "standard",
    "course": "c7",
    "module": "modul-2",
    "keywords": [
@@ -1278,6 +1394,7 @@
   {
    "title": "C15 - Operații cu mulțimi (recapitulare)",
    "url": "/curs/docs/c7/modul-2/09",
+   "collection": "standard",
    "course": "c7",
    "module": "modul-2",
    "keywords": [
@@ -1289,6 +1406,7 @@
   {
    "title": "C16 - Apartenența la o mulțime",
    "url": "/curs/docs/c7/modul-2/10",
+   "collection": "standard",
    "course": "c7",
    "module": "modul-2",
    "keywords": [
@@ -1300,6 +1418,7 @@
   {
    "title": "C17.1 - Sistem de axe ortogonale în plan",
    "url": "/curs/docs/c7/modul-3/01",
+   "collection": "standard",
    "course": "c7",
    "module": "modul-3",
    "keywords": [
@@ -1311,6 +1430,7 @@
   {
    "title": "C17.2 - Distanţa dintre două puncte din plan",
    "url": "/curs/docs/c7/modul-3/02",
+   "collection": "standard",
    "course": "c7",
    "module": "modul-3",
    "keywords": [
@@ -1322,6 +1442,7 @@
   {
    "title": "C17.3 - Reprezentarea şi interpretarea unor dependenţe funcţionale prin tabele, diagrame şi grafice",
    "url": "/curs/docs/c7/modul-3/03",
+   "collection": "standard",
    "course": "c7",
    "module": "modul-3",
    "keywords": [
@@ -1333,6 +1454,7 @@
   {
    "title": "C17.4 - Poligonul frecvenţelor",
    "url": "/curs/docs/c7/modul-3/04",
+   "collection": "standard",
    "course": "c7",
    "module": "modul-3",
    "keywords": [
@@ -1344,6 +1466,7 @@
   {
    "title": "PROIECT (partea I) - Elemente de organizare a datelor",
    "url": "/curs/docs/c7/modul-3/05",
+   "collection": "standard",
    "course": "c7",
    "module": "modul-3",
    "keywords": [
@@ -1355,6 +1478,7 @@
   {
    "title": "G7.1 - Unghi înscris în cerc, coarde şi arce în cerc",
    "url": "/curs/docs/c7/modul-3/06",
+   "collection": "standard",
    "course": "c7",
    "module": "modul-3",
    "keywords": [
@@ -1366,6 +1490,7 @@
   {
    "title": "G7.2 - Tangente dintr-un punct exterior la un cerc",
    "url": "/curs/docs/c7/modul-3/07",
+   "collection": "standard",
    "course": "c7",
    "module": "modul-3",
    "keywords": [
@@ -1377,6 +1502,7 @@
   {
    "title": "G7.3 - Poligoane regulate înscrise în cerc",
    "url": "/curs/docs/c7/modul-3/08",
+   "collection": "standard",
    "course": "c7",
    "module": "modul-3",
    "keywords": [
@@ -1388,6 +1514,7 @@
   {
    "title": "G7.4 - Lungimea cercului și aria discului",
    "url": "/curs/docs/c7/modul-3/09",
+   "collection": "standard",
    "course": "c7",
    "module": "modul-3",
    "keywords": [
@@ -1399,6 +1526,7 @@
   {
    "title": "C18.1 - Funcții trigonometrice (demonstrații)",
    "url": "/curs/docs/c7/modul-4/02",
+   "collection": "standard",
    "course": "c7",
    "module": "modul-4",
    "keywords": [
@@ -1410,6 +1538,7 @@
   {
    "title": "C18.2 - Funcții trigonometrice (proprietăți)",
    "url": "/curs/docs/c7/modul-4/03",
+   "collection": "standard",
    "course": "c7",
    "module": "modul-4",
    "keywords": [
@@ -1421,6 +1550,7 @@
   {
    "title": "Organigramă",
    "url": "/curs/docs/c7/organigrama",
+   "collection": "standard",
    "course": "c7",
    "module": "",
    "keywords": [
@@ -1431,6 +1561,7 @@
   {
    "title": "C1 - Notații și simboluri matematice",
    "url": "/curs/docs/c8/modul-1/01",
+   "collection": "standard",
    "course": "c8",
    "module": "modul-1",
    "keywords": [
@@ -1442,6 +1573,7 @@
   {
    "title": "C2 - Mulțimea nr. reale R",
    "url": "/curs/docs/c8/modul-1/02",
+   "collection": "standard",
    "course": "c8",
    "module": "modul-1",
    "keywords": [
@@ -1453,6 +1585,7 @@
   {
    "title": "C3.1 – Egalitatea expresiilor literale. Distributivitate simplă",
    "url": "/curs/docs/c8/modul-1/03",
+   "collection": "standard",
    "course": "c8",
    "module": "modul-1",
    "keywords": [
@@ -1464,6 +1597,7 @@
   {
    "title": "C3.2 – Dezvoltarea și simplificarea expresiilor literale",
    "url": "/curs/docs/c8/modul-1/04",
+   "collection": "standard",
    "course": "c8",
    "module": "modul-1",
    "keywords": [
@@ -1475,6 +1609,7 @@
   {
    "title": "C3.3 - Dublă distributivitate și identitate remarcabilă",
    "url": "/curs/docs/c8/modul-1/05",
+   "collection": "standard",
    "course": "c8",
    "module": "modul-1",
    "keywords": [
@@ -1486,6 +1621,7 @@
   {
    "title": "C4 - Intervale si comparatii in multimea nr. reale",
    "url": "/curs/docs/c8/modul-1/06",
+   "collection": "standard",
    "course": "c8",
    "module": "modul-1",
    "keywords": [
@@ -1497,6 +1633,7 @@
   {
    "title": "C5 - Inecuatii de forma ax + b",
    "url": "/curs/docs/c8/modul-1/07",
+   "collection": "standard",
    "course": "c8",
    "module": "modul-1",
    "keywords": [
@@ -1508,6 +1645,7 @@
   {
    "title": "C6 – Raționalizarea numitorului folosind conjugata",
    "url": "/curs/docs/c8/modul-1/08",
+   "collection": "standard",
    "course": "c8",
    "module": "modul-1",
    "keywords": [
@@ -1519,6 +1657,7 @@
   {
    "title": "C7 - Fracții: amplificarea și simplificarea",
    "url": "/curs/docs/c8/modul-1/09",
+   "collection": "standard",
    "course": "c8",
    "module": "modul-1",
    "keywords": [
@@ -1530,6 +1669,7 @@
   {
    "title": "C8.1 - Calcul literar: expresii algebrice",
    "url": "/curs/docs/c8/modul-1/10",
+   "collection": "standard",
    "course": "c8",
    "module": "modul-1",
    "keywords": [
@@ -1541,6 +1681,7 @@
   {
    "title": "C8.2 - Calcul literar: descompuneri în factori",
    "url": "/curs/docs/c8/modul-1/11",
+   "collection": "standard",
    "course": "c8",
    "module": "modul-1",
    "keywords": [
@@ -1550,8 +1691,9 @@
    "text": "# C8.2 - Calcul literar: descompuneri în factori\n---\n\n## Dezvoltare și factorizare\n\n- **Dezvoltarea** reprezintă un produs (înmulțire) înlocuit de o sumă egală, pentru toate valorile atribuite literelor.\n \n **Exemplu:** \n $$\\begin{aligned}\n (2x - 3)(5x + 7) &= 2x\\cdot5x + 2x\\cdot7 - 3\\cdot5x - 3\\cdot7 \\\\\n &= 10x^2 + 14x - 15x - 21 \\\\\n &= 10x^2 - x - 21\n \\end{aligned}$$ \n\n- **Factorizarea** reprezintă o sumă înlocuită de un produs egal, pentru toate valorile atribuite literelor.\n\n **Exemplu 1:** \n $$\\begin{aligned}\n &12x^2 - 15x = 3 \\cdot 4x^2 - 3\\cdot 5x = \\\\[10pt] \n &=3(4x^2 - 5x) = 3x(4x - 5)\\quad // \\text{factorul comun este } 3x\n \\end{aligned}$$ \n **Exemplu 2:**\n $$5(y + 2) + x(y + 2) = (y + 2)(5 + x)\\quad // \\text{factorul comun este } (y + 2)$$ \n\n---\n\n### Factorizarea unei expresii algebrice\n\nFactorizează următoarele expresii, dacă este posibil:\n$$\n E_1(x) = 5x^2 + 3x \\quad\\quad E_2(x) = 9-4x^2 \\quad\\quad E_3(x) = 25 + x^2\n$$\n\n> Observăm toți termenii din expresie (aici, în cazul nostru, fiecare expresie are câte 2 termeni). Acești termeni conțin un **factor comun**?\n- **DA** pentru $E_1(x)$\n\nAmplicăm proprietatea **distributivității simple**\n\n$ab + ac = a(b+c)$\n\n$ab - ac = a(b-c)$\n\n$\\large E_1(x) = 5x^2 + 3x = 5x \\cdot \\underline x + 3\\underline x$\n\n>Tragem concluzia că `x` este factorul comun\n\n$\\large E_1(x) = x(5x+3)$\n\n---\n\n- **NU** pentru $E_2(x) \\quad și \\quad E_3(x)$\n\nPutem utiliza **identități remarcabile**\n\n$a^2 - b^2 = (a+b)(a-b)$\n\n$(a+b)^2=a^2+2ab+b^2$\n\n$(a-b)^2=a^2-2ab+b^2$\n\n>Pentru $E_2(x)$: **folosim identitatea $a^2-b^2$**\n\n$\\large E_2(x) = 9 - 4x^2 = 3^2 - (2x)^2 \\;,\\;cu\\;a=3 \\quad și \\quad b=2x$\n\n$\\large E_2(x) = (3-2x)(3+2x)$\n\n>Pentru $E_3(x)$: **nu putem factoriza și nici să folosim formule de calcul prescurtat**\n\n$\\large E_3(x) = 25 + x^2$\n\n---\n\n## Caz particular: diferența de pătrate\n\nPentru orice `a,b`: \n $$\\boldsymbol{\n(a + b)(a - b) = a^2 - b^2\n}$$ \n\n- Citită de la stânga la dreapta, egalitatea permite următoarea **dezvoltare**:\n \n $$(3x - 5)(3x + 5) = ?$$ \n \n $$\\begin{aligned}\n &(3x - 5)(3x + 5) \\Rightarrow\\begin{cases}a = 3x \\\\\n b = 5\n \\end{cases}\\\\[10pt]\n \\\\\n &\\Rightarrow(3x - 5)(3x + 5)=(3x)^2 - 5^2 = \\\\[10pt]\n &\\boldsymbol{9x^2-25}\n \\end{aligned}$$ \n\n- Citită de la dreapta la stânga, egalitatea permite următoarea **factorizare**: \n \n $$16 - 49x^2 = ?$$ \n \n $$\\begin{aligned}\n &16 - 49x^2 \\Rightarrow\n \\begin{cases}\n a^2 = 16 \\Rightarrow\\boldsymbol{a = \\sqrt{16} = 4} \\\\\n b^2 = 49x^2 \\Rightarrow\\boldsymbol{b = \\sqrt{49\\cdot x^2} = \\sqrt{49}\\cdot \\sqrt{x^2} = 7x}\n \\end{cases}\\\\[10pt]\n \\\\\n &\\Rightarrow16-49x^2 = \\boldsymbol{(4+7x)\\cdot (4-7x)}\n \\end{aligned}$$"
   },
   {
-   "title": "G1 - Punct, dreaptă și plan",
+   "title": "12",
    "url": "/curs/docs/c8/modul-1/12",
+   "collection": "standard",
    "course": "c8",
    "module": "modul-1",
    "keywords": [
@@ -1561,8 +1703,9 @@
    "text": "# G1 - Punct, dreaptă și plan\n\n---\n\n## Notații geometrice\n\n- **Punctele** se notează cu **litere mari de tipar**: A, B, C, ...\n- **Dreptele** se notează cu **litere mici**: a, b, c, ...\n- **Planele** se notează cu **litere grecești**: α (alfa), β (beta), γ (gamma), ...\n\n---\n\n## Punctul și dreapta\n\n- Punctele se notează cu **litere mari de tipar** (A, B, C...).\n - Două puncte pot fi distincte: {String.raw`A \\neq B`} \n - Sau identice: {String.raw`A = B`} \n - Figurile geometrice sunt **mulțimi de puncte**.\n\n \n [figură] \n \nFig. 1\n\n* Dreptele se notează cu **litere mici** (a, b, c...).\n\n *Un punct poate sau nu să aparțină unei drepte.*\n \n [figură] \n \n\n*Fig. 2*\n\n---\n## Puncte coliniare\n\nTrei sau mai multe puncte care aparțin aceleiași drepte se numesc **coliniare**.\n\n \n [figură] \n \n\n*Fig. 3*\n\n---\n## Drepte concurente\n\nMai multe drepte care au un punct comun se numesc **drepte concurente**.\n\n \n \n [figură] \n \n \n [figură] \n \n \n\n---\n\n## Planul\n\n* Planul se notează cu **litere grecești**: {String.raw`\\alpha, \\beta, \\gamma...`} \n* Un punct poate sau nu să aparțină unui plan.\n\n [figură] \n \n {String.raw`\\begin{cases} \nA \\in \\alpha \\\\ \nB \\notin \\alpha\n\\end{cases}`} \n\n \n \n\n* Dacă două puncte distincte aparțin unui plan, atunci dreapta determinată de acestea este inclusă în acel plan.\n\n [figură] \n \n {String.raw`\\begin{cases} \nA \\in \\beta \\\\ \nB \\in \\beta\n\\end{cases} \\Rightarrow a \\in \\beta`} \n\n \n \n\n* O dreaptă poate fi inclusă în plan, poate avea un punct comun cu planul, sau poate să **nu aibă niciun punct comun** — în acest caz spunem că este **paralelă cu planul**.\n\n [figură] \n\n---\n\n## Drepte coplanare și necoplanare\n\n* Două drepte **conținute în același plan** se numesc **coplanare**.\n* Două drepte care **nu sunt în același plan** se numesc **necoplanare**.\n* Două drepte coplanare care **nu au puncte comune** se numesc **paralele**: {String.raw`a \\parallel b`} \n \n {String.raw`a \\cap b = \\emptyset `} - mulțimea intersecției a două drepte paralele este **vidă**.\n\n [figură]"
   },
   {
-   "title": "G2 - Relații între puncte, drepte și plane",
+   "title": "13",
    "url": "/curs/docs/c8/modul-1/13",
+   "collection": "standard",
    "course": "c8",
    "module": "modul-1",
    "keywords": [
@@ -1572,8 +1715,9 @@
    "text": "# G2 - Relații între puncte, drepte și plane\n\n---\n\n## Punctul, dreapta, planul\n\nNoțiunile fundamentale ale geometriei sunt **punctul**, **dreapta** și **planul**. \n> Acestea nu se definesc, ci pot fi descrise.\n\n---\n\n### **Punctul**\n\nPunctul poate fi asemănat cu urma vârfului unui creion bine ascuțit, lăsată pe foaia de hârtie atunci când o atinge. \nÎl reprezentăm printr-o **bulină** sau prin **două liniuțe care se intersectează**. \n\nPunctele **se notează cu litere mari**. \nO mulțime nevidă de puncte se numește **figură geometrică**.\n\n**Exemple:** \nA, B, C sunt puncte.\n\n [figură] \n\n---\n\n### **Dreapta**\n\nNe putem imagina **dreapta** ca pe un fir de ață foarte subțire, bine întins, infinit. \nDreapta este o **figură geometrică** (o mulțime de puncte) și este **nelimitată**.\n\nPentru a reprezenta în desen o dreaptă, utilizăm rigla. \nDreapta se **notează cu o literă mică** sau **cu două litere mari** prin care am notat două puncte distincte ce aparțin dreptei.\n\n**Exemplu:** \nÎn figură avem dreapta **a**, care poate fi numită și **ST**, **SV** sau **TV**.\n\n [figură] \n---\n\n## Pozițiile relative ale unui punct față de o dreaptă\n\nFață de o dreaptă, un punct poate fi:\n- **interior** (aparține dreptei),\n- **exterior** (nu aparține dreptei).\n\n**Exemplu:** \nÎn figura de alături avem: \nA și C – puncte **interioare**, \nB și D – puncte **exterioare** dreptei d.\n\n [figură] \n\n---\n\n### Puncte coliniare și necoliniare\n\nTrei (sau mai multe) puncte sunt **coliniare**, dacă există o dreaptă care să conțină cele trei puncte. \nÎn caz contrar, se numesc **necoliniare**.\n\n**Exemplu:** \nPunctele D, E, F sunt coliniare, iar Y, Z, W sunt necoliniare.\n\n [figură] \n\n---\n\n## **Planul**\n\nDescriem planul ca pe o **suprafață netedă, întinsă la nesfârșit în toate direcțiile**, alcătuită din puncte.\n\nUn plan se **notează cu o literă din alfabetul grecesc** (α, β etc.) \nsau **prin trei litere mari puse între paranteze rotunde**, cu condiția ca cele trei litere să reprezinte notațiile a trei **puncte necoliniare** ce-i aparțin.\n\n**Exemplu:** \nPlanul din figură poate fi numit **α** sau **(ABC)**.\n\n [figură] \n\n---\n\n## Determinarea dreptei\n\n**Axioma** = propoziție adevărată acceptată fără demonstrație (un adevăr evident care nu se poate demonstra folosind alte adevăruri).\n\n### Axioma dreptei\n\nPrin două puncte distincte trece o dreaptă și numai una. \n(Două puncte distincte determină o dreaptă.)\n\n> Dreapta **d** care conține punctele **A** și **B** este **unică**.\n\n---\n\n### Axioma paralelor (axioma lui Euclid)\n\nPrintr-un punct exterior unei drepte trece **o singură paralelă** cu dreapta dată.\n\n---\n\n## Determinarea planului\n\nTrei puncte necoliniare determină un plan.\n\n [figură] \n\n---\n\nO dreaptă și un punct exterior ei determină un plan.\n\n [figură] \n\n---\n\nDouă drepte concurente determină un plan.\n\n [figură] \n\n---\n\nDouă drepte paralele determină un plan.\n\n [figură] \n\n---\n\n## Pozițiile relative a două drepte în spațiu\n\nDrepte paralele – sunt drepte situate în același plan care nu au niciun punct comun.\n\n [figură] \n\n---\n\nDrepte concurente – drepte care au un punct comun\n\n [figură] \n\n---\n\nDrepte necoplanare – drepte care nu au niciun punct comun și sunt situate în plane diferite.\n\n [figură] \n\n---\n\nDrepte confundate (identice) – drepte care coincid (au două puncte comune).\n\n \n [figură] \n\n---\n\n## Pozițiile relative ale unei drepte față de un plan\n\nDreaptă paralelă cu planul – nu are niciun punct comun cu planul.\n\n [figură] \n\n---\n\nDreaptă secantă planului – are un punct comun cu planul.\n\n [figură] \n\n---\n\nDreaptă inclusă în plan – toatepunctele ei aparțin planului.\n\nDacă două puncte distincte ale unei drepte aparțin unui plan, atunci dreapta este inclusă în plan.\n\n [figură] \n\n---\n\n## Pozițiile relative a două plane\n\nPlane paralele – nu au niciun punct comun.\n\n$\\alpha \\parallel \\beta$\n\n$\\alpha \\cap \\beta = \\phi$\n\n [figură] \n\n---\n\nPlane secante – au o dreaptă comună.\n\n> Dacă două plane au un punct comun atunci ele au o dreaptă comună.\n\n$\\alpha \\cap \\beta = d$\n\n [figură] \n\n---\n\nPlane co"
   },
   {
-   "title": "C9 - Existența, amplificarea și simplificarea fracțiilor algebrice",
+   "title": "14",
    "url": "/curs/docs/c8/modul-1/14",
+   "collection": "standard",
    "course": "c8",
    "module": "modul-1",
    "keywords": [
@@ -1583,8 +1727,9 @@
    "text": "# C9 - Existența, amplificarea și simplificarea fracțiilor algebrice\n\n---\n\n## Introducere\n\nNumim fracție algebrică raportul dintre două expresii algebrice.\n\n$$\nE(x) = \\frac{7x + 1}{3x - 6}, \\quad F(x) = \\frac{x^3 + 1}{2x}, \\quad F(a) = \\frac{3a - 1}{a^2 + a + 1}\n$$\n\n---\n\n**Exemplul 1:**\n\nCalculează valoarea numerică a fracției algebrice $F(x) = \\dfrac{3x + 1}{x - 2}$ pentru $x = 3$.\n\n**Soluție:**\n\n$$\nF(3) = \\frac{3 \\cdot 3 + 1}{3 - 2} = \\frac{9 + 1}{1} = \\frac{10}{1} = 10\n$$\n\n---\n\n### Observație\n\n**Valoarea numerică a unei fracții algebrice nu se poate calcula pentru orice număr real.**\n\nDe exemplu, pentru $x = 2$ vom obține:\n\n$$\nE(2) = \\frac{3 \\cdot 2 + 1}{2 - 2} = \\frac{6 + 1}{0} = \\frac{7}{0}\n$$\n\nFracția nu este definită (o fracție sau un raport nu pot avea numitorul egal cu zero).\n\n---\n\n**Exemplul 2:**\n\nDeterminați valorile lui $x$ pentru care fracția algebrică $E(x)$ nu este definită, în următoarele cazuri:\n\n#### a) $ E(x) = \\dfrac{7x + 1}{3x - 6}$\n\n**Soluție:**\n\n$$\n3x - 6 = 0 \\Rightarrow 3x = 6 \\Rightarrow x = \\frac{6}{3} = 2\n$$\n\n> Prin urmare, $E(x)$ nu este definită pentru $x = 2$.\n\n---\n\n#### b) $E(x) = \\dfrac{5 - x^2}{x^2 + 6x}$\n\n**Soluție:**\n\n$$\nx^2 + 6x = 0 \\Rightarrow x(x + 6) = 0 \\Rightarrow x = 0 \\ \\text{sau} \\ x = -6\n$$\n\n> Prin urmare $E(x)$ nu este definită pentru $x \\in \\{0, -6\\}$.\n\n---\n\nMulțimea numerelor reale pentru care **se poate calcula** valoarea numerică a unei fracții algebrice se numește domeniul de definiție al fracției algebrice (D).\n\n---\n\n**Exemplul 3:**\n\nDeterminați domeniul de definiție pentru fracția algebrică $F(x)$ în următoarele cazuri:\n\n#### a) $$F(x) = \\dfrac{x^3}{4x - 8}$$\n\n**Soluție:**\n\n$$\n4x - 8 = 0 \\Rightarrow 4x = 8 \\Rightarrow x = \\frac{8}{4} = 2\n$$\n\nDeci:\n\n$$\nD = \\mathbb{R} \\setminus \\{2\\}\n$$\n\n---\n\n#### b) $F(x) = \\dfrac{x^2}{x^2 - 9}$\n\n**Soluție:**\n\n$$\nx^2 - 9 = 0 \\Rightarrow x^2 = 9 \\Rightarrow x = \\pm 3\n$$\n\nDeci:\n\n$$\nD = \\mathbb{R} \\setminus \\{-3, 3\\}\n$$\n\n---\n\n## Operația de amplificare\n\nOperația de amplificare a unui raport algebric constă în a înmulți atât numărătorul cât și numitorul cu o expresie algebrică nenulă.\n\n**Exemple:**\n\n$\n\\text{a)} \\quad \\dfrac{3x}{x^2 + 1} = \\dfrac{4 \\cdot 3x}{4 \\cdot (x^2 + 1)} = \\dfrac{12x}{4x^2 + 4}\n$\n\n$\n\\text{b)} \\quad \\dfrac{2x}{3x} = \\dfrac{3x \\cdot 2x}{3x \\cdot (x + 5)} = \\dfrac{6x^2}{3x^2 + 15x}\n$\n\n$\n\\text{c)} \\quad \\dfrac{x - 2}{x + 2} = \\dfrac{(x + 2)(x - 2)}{(x + 2)(x + 2)} = \\dfrac{x^2 - 4}{x^2 + 4x + 4}\n$\n\n$\n\\text{d)} \\quad \\dfrac{11x - 3}{x^2 + 1} = \\dfrac{(x - 1)(11x - 3)}{(x - 1)(x^2 + 1)} = \\dfrac{11x^2 - 14x + 3}{x^3 - x^2 + x - 1}\n$\n\n---\n\n## Operația de simplificare\n\nOperația de simplificare a unui raport algebric constă în a împărți atât numărătorul, cât și numitorul prin aceeași expresie algebrică nenulă.\n\n**Exemple:**\n\n1. $\\dfrac{7x^3}{2x^6} = \\dfrac{7x^3 : x}{2x^6 : x} = \\dfrac{7x^2}{2x^5}$\n\n2. $\\dfrac{18x^2}{6x^4 + 10x^3} = \\dfrac{18x^2 : 2x^2}{(6x^4 + 10x^3) : 2x^2} = \\dfrac{9}{3x^2 + 5x}$\n\n---\n\n### Observație\n\nÎn general, pentru simplificarea fracțiilor algebrice este necesară descompunerea în factori a numărătorului și a numitorului.\n\n**Exemplu:**\n\n$$\n\\frac{3x + 15}{x^2 - 25} = \\frac{3(x + 5)}{(x - 5)(x + 5)} = \\frac{3}{x - 5}\n$$\n\n---"
   },
   {
-   "title": "G3 - Piramida",
+   "title": "15",
    "url": "/curs/docs/c8/modul-1/15",
+   "collection": "standard",
    "course": "c8",
    "module": "modul-1",
    "keywords": [
@@ -1596,6 +1741,7 @@
   {
    "title": "C10.1 - Adunarea și scăderea fracțiilor algebrice",
    "url": "/curs/docs/c8/modul-2/01",
+   "collection": "standard",
    "course": "c8",
    "module": "modul-2",
    "keywords": [
@@ -1607,6 +1753,7 @@
   {
    "title": "C10.2 - Înmulțirea, împărțirea și ridicarea la putere a fracțiilor algebrice",
    "url": "/curs/docs/c8/modul-2/02",
+   "collection": "standard",
    "course": "c8",
    "module": "modul-2",
    "keywords": [
@@ -1618,6 +1765,7 @@
   {
    "title": "C10.3 - Ordinea efectuării operațiilor a fracțiilor algebrice",
    "url": "/curs/docs/c8/modul-2/03",
+   "collection": "standard",
    "course": "c8",
    "module": "modul-2",
    "keywords": [
@@ -1629,6 +1777,7 @@
   {
    "title": "C11 - Ecuația de gradul al doilea",
    "url": "/curs/docs/c8/modul-2/04",
+   "collection": "standard",
    "course": "c8",
    "module": "modul-2",
    "keywords": [
@@ -1640,6 +1789,7 @@
   {
    "title": "G4.1 - Prisma dreaptă",
    "url": "/curs/docs/c8/modul-2/05",
+   "collection": "standard",
    "course": "c8",
    "module": "modul-2",
    "keywords": [
@@ -1651,6 +1801,7 @@
   {
    "title": "G4.2 - Prisma regulată (arii și volum)",
    "url": "/curs/docs/c8/modul-2/06",
+   "collection": "standard",
    "course": "c8",
    "module": "modul-2",
    "keywords": [
@@ -1662,6 +1813,7 @@
   {
    "title": "G5.1 - Cilindrul circular drept",
    "url": "/curs/docs/c8/modul-2/07",
+   "collection": "standard",
    "course": "c8",
    "module": "modul-2",
    "keywords": [
@@ -1673,6 +1825,7 @@
   {
    "title": "G5.2 - Cilindrul circular drept (arii și volum)",
    "url": "/curs/docs/c8/modul-2/08",
+   "collection": "standard",
    "course": "c8",
    "module": "modul-2",
    "keywords": [
@@ -1684,6 +1837,7 @@
   {
    "title": "C13 - Mărimi și unități de măsură",
    "url": "/curs/docs/c8/modul-2/09",
+   "collection": "standard",
    "course": "c8",
    "module": "modul-2",
    "keywords": [
@@ -1693,8 +1847,9 @@
    "text": "# C13 - Mărimi și unități de măsură\n\n---"
   },
   {
-   "title": "C1* | EXTRA - Triunghiuri asemenea (recapitulare)",
+   "title": "C1 | EXTRA - Triunghiuri asemenea (recapitulare)",
    "url": "/curs/docs/c8/modul-2/10",
+   "collection": "standard",
    "course": "c8",
    "module": "modul-2",
    "keywords": [
@@ -1704,8 +1859,9 @@
    "text": "# C1* | EXTRA - Triunghiuri asemenea (recapitulare)\n---\n\n**A se parcurge împreunǎ cu [CURS 11](11.mdx)**\n\n---\n\n## Definiție\n\nÎn două **triunghiuri asemenea**:\n- unghiurile sunt egale între ele\n- catetele opuse unghiurilor egale sunt proporționale\n\n [figură] \n\n \n \n\n> Triunghiurile $\\triangle EFG$ și $\\triangle AMN$ sunt **egale**\n\n> Triunghiurile $\\triangle AMN$ și $\\triangle ABC$ sunt **omotetice**\n\n$\\rightarrow$ Spunem că $\\triangle EFG $ și $ \\triangle ABC$ sunt **triunghiuri asemenea.**\n\n---\n\n## Notații\n\n>Pentru exemplul de mai sus se notează:\n\n$\n\\begin{cases}\n\\measuredangle EFG = \\measuredangle ABC \\\\[5pt]\n\\measuredangle FGE = \\measuredangle BCA \\\\[5pt]\n\\measuredangle GEF = \\measuredangle CAB\n\\end{cases}\n$\n\n$\n\\begin{cases}\nEF = AN \\\\[5pt]\nFG = MN \\\\[5pt]\nGE = AN\n\\end{cases}\n$\n\n$$\n\\frac{EF}{AB} = \\frac{FG}{BC} = \\frac{GE}{CA}\n$$\n\n$$\n\n$$\n\n---\n\n## Demonstrație\n\n**Pentru a demonstra că 2 triunghiuri sunt asemenea, ajunge să demonstrăm că ne aflăm în unul din următoarele trei cazuri:**\n\nDouă triunghiuri care au două unghiuri egale sunt asemenea\n\n>Spunem că: $A \\hat BC = I \\hat JK$ și $A \\hat CB = I \\hat KJ$\n\n>Deducem că: $\\triangle ABC, \\triangle IJK$ sunt **asemenea**\n\n [figură] \n\n$\\Rightarrow \\measuredangle BAC = \\measuredangle JIK$\n\n$$\n\\frac{IJ}{AB} = \\frac{JK}{BC} = \\frac{KI}{CA}\n$$\n\n---\n\nDouă triunghiuri care au un unghi cuprins între două catete proporționale sunt asemenea\n\n>Spunem că: $B \\hat AC = T \\hat RS$ și $\\frac{AB}{RT} = \\frac{AC}{RS}$\n\n>Deducem că: $\\triangle ABC, \\triangle RTS$ sunt **asemenea**\n\n [figură] \n\n$\\Rightarrow \\measuredangle ABC = \\measuredangle RTS$ și $\\measuredangle ACB = \\measuredangle RST$\n\n$$\n\\frac{AB}{RT} = \\frac{AC}{RS} = \\frac{BC}{TS}\n$$\n\n---\n\nDouă triunghiuri care au toate cele 3 laturi proporționale sunt asemenea\n\n>Spunem că: $\\frac{A'B'}{AB} = \\frac{A'C'}{AC} = \\frac{B'C'}{BC}$\n\n>Deducem că: $\\triangle ABC, \\triangle A'B'C'$ sunt **asemenea**\n\n [figură] \n\n \n \n\n$\n\\Rightarrow \n\\begin{cases}\n\\measuredangle ABC = \\measuredangle A'B'C'\\\\\n\\measuredangle BAC = \\measuredangle B'A'C'\\\\\n\\measuredangle ACB = \\measuredangle A'C'B'\n\\end{cases}\n$\n\n---"
   },
   {
-   "title": "C2* | EXTRA - Triunghiul dreptunghic. Teorema lui Pitagora",
+   "title": "C2 | EXTRA - Triunghiul dreptunghic. Teorema lui Pitagora",
    "url": "/curs/docs/c8/modul-2/11",
+   "collection": "standard",
    "course": "c8",
    "module": "modul-2",
    "keywords": [
@@ -1717,6 +1873,7 @@
   {
    "title": "Portofoliu (partea I)",
    "url": "/curs/docs/c8/modul-3/01",
+   "collection": "standard",
    "course": "c8",
    "module": "modul-3",
    "keywords": [
@@ -1728,6 +1885,7 @@
   {
    "title": "FIȘA DE LABORATOR - Modelare matematică în 3D",
    "url": "/curs/docs/c8/modul-3/012",
+   "collection": "standard",
    "course": "c8",
    "module": "modul-3",
    "keywords": [
@@ -1739,6 +1897,7 @@
   {
    "title": "C14.1 - Descompuneri în factori utilizând reguli de calcul în ℝ (factor comun)",
    "url": "/curs/docs/c8/modul-3/02",
+   "collection": "standard",
    "course": "c8",
    "module": "modul-3",
    "keywords": [
@@ -1750,6 +1909,7 @@
   {
    "title": "C14.2 - Descompuneri în factori utilizând reguli de calcul în ℝ (formule de calcul prescurtat)",
    "url": "/curs/docs/c8/modul-3/03",
+   "collection": "standard",
    "course": "c8",
    "module": "modul-3",
    "keywords": [
@@ -1761,6 +1921,7 @@
   {
    "title": "C14.3 - Descompuneri în factori utilizând reguli de calcul în ℝ (grupare de termeni)",
    "url": "/curs/docs/c8/modul-3/04",
+   "collection": "standard",
    "course": "c8",
    "module": "modul-3",
    "keywords": [
@@ -1772,6 +1933,7 @@
   {
    "title": "PROIECT - Modelare matematică în 3D",
    "url": "/curs/docs/c8/modul-3/05",
+   "collection": "standard",
    "course": "c8",
    "module": "modul-3",
    "keywords": [
@@ -1783,6 +1945,7 @@
   {
    "title": "G6.1 - Paralelism: drepte paralele; unghiul a două drepte",
    "url": "/curs/docs/c8/modul-3/06",
+   "collection": "standard",
    "course": "c8",
    "module": "modul-3",
    "keywords": [
@@ -1794,6 +1957,7 @@
   {
    "title": "G6.2 - Dreapta paralelă cu planul",
    "url": "/curs/docs/c8/modul-3/07",
+   "collection": "standard",
    "course": "c8",
    "module": "modul-3",
    "keywords": [
@@ -1805,6 +1969,7 @@
   {
    "title": "G7 - Conul circular drept",
    "url": "/curs/docs/c8/modul-3/08",
+   "collection": "standard",
    "course": "c8",
    "module": "modul-3",
    "keywords": [
@@ -1816,6 +1981,7 @@
   {
    "title": "G8.1 - Trunchi de piramidă regulată",
    "url": "/curs/docs/c8/modul-3/09",
+   "collection": "standard",
    "course": "c8",
    "module": "modul-3",
    "keywords": [
@@ -1827,6 +1993,7 @@
   {
    "title": "G8.2 - Trunchi de con circular drept",
    "url": "/curs/docs/c8/modul-3/10",
+   "collection": "standard",
    "course": "c8",
    "module": "modul-3",
    "keywords": [
@@ -1838,6 +2005,7 @@
   {
    "title": "C15 - Funcția de gradul I și graficul acesteia",
    "url": "/curs/docs/c8/modul-4/00",
+   "collection": "standard",
    "course": "c8",
    "module": "modul-4",
    "keywords": [
@@ -1849,6 +2017,7 @@
   {
    "title": "C16.1 - Funcții trigonometrice (demonstrații)",
    "url": "/curs/docs/c8/modul-4/02",
+   "collection": "standard",
    "course": "c8",
    "module": "modul-4",
    "keywords": [
@@ -1860,6 +2029,7 @@
   {
    "title": "C16.2 - Funcții trigonometrice (proprietăți)",
    "url": "/curs/docs/c8/modul-4/03",
+   "collection": "standard",
    "course": "c8",
    "module": "modul-4",
    "keywords": [
@@ -1871,6 +2041,7 @@
   {
    "title": "C17 - Elemente de statistică: indicatorii tendinței centrale (frecvență, medie, mediană, mod și amplitudine a unui set de date)",
    "url": "/curs/docs/c8/modul-4/04",
+   "collection": "standard",
    "course": "c8",
    "module": "modul-4",
    "keywords": [
@@ -1882,12 +2053,39 @@
   {
    "title": "Organigramă",
    "url": "/curs/docs/c8/organigrama",
+   "collection": "standard",
    "course": "c8",
    "module": "",
    "keywords": [
     "clasa 8 a opta VIII"
    ],
    "text": "export default function LectiiTreeView() {\n const saptamani = [\n {\n hide: true,\n titlu: 'Săptămâna 22: 16.03 - 20.03',\n note: 'Materiale incarcate',\n lectii: [\n ],\n },\n {\n titlu: 'Săptămâna 21: 09.03 - 13.03',\n note: 'Materiale incarcate',\n lectii: [\n {titlu: 'LP - Funcția de gradul I', zi: '09.03', tip: 'Algebra', link: '', pdf: ''},\n {titlu: 'C17 - Elemente de statistică: indicatorii tendinței centrale (frecvență, medie, mediană, mod și amplitudine a unui set de date) ', zi: '11.03 (ora 1)', tip: 'Algebra', link: 'c8/modul-4/04', pdf: ''},\n {titlu: 'LP - Elemente de statistică: indicatorii tendinței centrale', zi: '11.03 (ora 1)', tip: 'Algebra', link: '', pdf: ''},\n {titlu: 'PREZENTARE PORTOFOLIU', zi: '12.03 (ora 1)', tip: 'PORTOFOLIU', link: '', pdf: ''},\n {titlu: 'RECAPITULARE SIMULARE NAȚIONALǍ', zi: '11.03 (ora 2)', tip: 'Algebra', link: '', pdf: ''},\n ],\n },\n {\n titlu: 'Săptămâna 20: 02.03 - 06.03',\n note: 'Materiale incarcate',\n lectii: [\n {titlu: 'LP - Funcția de gradul I', zi: '02.03', tip: 'Algebra', link: '', pdf: ''},\n {titlu: 'C16.1 - Funcții trigonometrice (demonstrații)', zi: '04.03 (ora 1)', tip: 'Algebra', link: 'c8/modul-4/02', pdf: ''},\n {titlu: 'C16.2 - Funcții trigonometrice (proprietăți)', zi: '04.03 (ora 2)', tip: 'Algebra', link: 'c8/modul-4/03', pdf: ''},\n {titlu: 'LP - Simulare | Subiectul I+II EN', zi: '05.03 (ora 1)', tip: 'Algebra', link: '', pdf: ''},\n {titlu: 'LP - Simulare | Subiectul III EN', zi: '05.03 (ora 2)', tip: 'Geometrie', link: '', pdf: ''},\n\n ],\n },\n {\n titlu: 'Săptămâna 19: 23.02 - 27.02',\n note: 'Modulul 4: 23.02 -> 03.04',\n lectii: [\n {titlu: 'C15 - Funcția de gradul I', zi: '23.02', tip: 'Algebra', link: 'c8/modul-4/00', pdf: ''},\n {titlu: 'LP - Funcția de gradul I', zi: '25.02 (ora 1)', tip: 'Algebra', link: '', pdf: ''},\n {titlu: 'LP - Funcția de gradul I', zi: '25.02 (ora 2)', tip: 'Algebra', link: '', pdf: ''},\n {titlu: 'LP - Simulare | Subiectul I+II EN', zi: '26.02 (ora 1)', tip: 'Algebra', link: '', pdf: ''},\n {titlu: 'LP - Simulare | Subiectul III EN', zi: '26.02 (ora 2)', tip: 'Geometrie', link: '', pdf: ''},\n\n ],\n },\n {\n titlu: 'Săptămâna 18: 09.02 - 13.02',\n note: 'Materiale incarcate',\n lectii: [\n { titlu: 'G8.1 - Trunchi de piramidă regulată', zi: '02.02', tip: 'Geometrie', link: 'c8/modul-3/09', pdf: '' },\n { titlu: 'LP - Trunchi de piramidă regulată', zi: '04.02 (ora 1)', tip: 'Geometrie', link: '', pdf: '' },\n { titlu: 'G8.2 - Trunchi de con circular drept', zi: '04.02 (ora 2)', tip: 'Geometrie', link: 'c8/modul-3/10', pdf: '' },\n { titlu: 'Simulare EN (S1+2)', zi: '05.02 (ora 1)', tip: 'Simulare EN', link: '', pdf: '' },\n { titlu: 'Simulare EN (S3)', zi: '05.02 (ora 2)', tip: 'Simulare EN', link: '', pdf: '' },\n ],\n },\n {\n titlu: 'Săptămâna 17: 02.02 - 06.02',\n note: 'Materiale incarcate',\n lectii: [\n { titlu: 'TEST (50% NOTA 6) | C14.1 - C14.3 & G6.1 - G7', zi: '02.02', tip: 'Evaluare Sumativa', link: '', pdf: '' },\n { titlu: 'G7 - Conul circular drept', zi: '04.02 (ora 1)', tip: 'Geometrie', link: 'c8/modul-3/08', pdf: '' },\n { titlu: 'LP - REZOLVARE TEST', zi: '04.02 (ora 2)', tip: 'Recapitulare', link: '', pdf: '' },\n { titlu: 'LP - Conul circular drept', zi: '05.02 (ora 1)', tip: 'Rezolvare Test', link: '', pdf: '' },\n { titlu: 'LP - Conul circular drept', zi: '05.02 (ora 2)', tip: 'Geometrie', link: '', pdf: '' },\n ],\n },\n {\n titlu: 'Săptămâna 16: 26.01 - 30.01',\n note: 'Materiae incarcate',\n lectii: [\n { titlu: 'G6.2 - Dreapta paralelă cu planul', zi: '26.01', tip: 'Geometrie', link: 'c8/modul-3/06', pdf: '' },\n { titlu: 'Simulare EN 2 | PARTEA I (Algebra)', zi: '28.01 (ora 1)', tip: 'Simulare EN 2', link: '', pdf: '' },\n { titlu: 'Simulare EN 2 | PARTEA II (Geometrie)', zi: '28.01 (ora 2)', tip: 'Simulare EN 2', link: '', pdf: '' },\n { titlu: 'RECUPERAT 20.01 (ora 1)', zi: '29.01 (ora 1)', tip: '-', link: '', pdf: '' },\n { titlu: 'LP - Dreapta paralelă cu planul ', zi: '29.01 (ora 2)', tip: 'Geometrie', link: '', pdf: '' },\n ],\n },\n {\n titlu: 'Săptămâna"
+  },
+  {
+   "title": "C1 - Scrierea sub forma zecimala",
+   "url": "/curs/docs/edupasi/c5/modul-1/01",
+   "collection": "edupasi",
+   "course": "c5",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 1",
+    "EduPASI lectie adaptata accesibila"
+   ],
+   "text": "# C1 - Scrierea sub forma zecimala\n\n---\n\n## Definiție\n\nUn ** număr zecimal ** este un număr care conține o ** virgulă zecimală ** care separă ** partea întreagă ** de ** partea fracționară **.\n\n $$\\begin{aligned}\n& \\text{Exemplu: } \\color{#FF6B6B}{37\\,540}\\color{#4ECDC4}{{,85}} \\\\\n& \\text{Parte întreagă: } \\color{#FF6B6B}{37\\,540} \\\\\n& \\text{Parte fracționară: } \\color{#4ECDC4}{0{,}85}\n\\end{aligned}$$ \n\n---\n\n## Reprezentarea pozițională\n\n| milioane | sute de mii | zeci de mii | unități de mii | sute | zeci | unități | zecimi | sutimi | miimi |\n|----------|-------------|-------------|----------------|------|------|---------|--------|--------|-------|\n| | 3 | 7 | 5 | 4 | 0 | 8 | 5 | | |\n\n $$37\\,540{,}85 = 3 \\times 10\\,000 + \\\\[6pt]\n7 \\times 1\\,000 + 5 \\times 100 +\\\\[6pt] 4 \\times 10 + 0 \\times 1 + 8 \\times 0{,}1 + 5 \\times 0{,}01$$ \n\n---\n\n## Citirea numerelor zecimale\n\n $$\\begin{aligned}\n& \\text{1. Citim } \\color{#FF6B6B}{\\text{partea întreagă}} \\text{ ca un număr natural}\\\\[6pt]\n& \\text{2. Spunem „} \\color{#4ECDC4}{\\text{virgulă}} \\text{\"}\\\\[6pt]\n& \\text{3. Citim } \\color{#4ECDC4}{\\text{partea fracționară}} \\text{ cifră cu cifră}\n\\end{aligned}$$ \n\n**Exemplu:**\n- **37 540,85** se citește „treizeci și șapte de mii cinci sute patruzeci ** virgulă ** optzeci și cinci\"\n- Sau: „treizeci și șapte de mii cinci sute patruzeci și 85 ** sutimi **\"\n\n---\n\n## Scrierea numerelor zecimale\n\n $$\\begin{aligned}\n& \\text{1. Scriere } \\color{#FF6B6B}{\\text{zecimală: }} 37\\,540{,}85\\\\[6pt]\n& \\text{2. Scriere } \\color{#4ECDC4}{\\text{fracționară: }} 37\\,540 + \\frac{85}{100} = 37\\,540 + \\frac{17}{20}\\\\[6pt]\n& \\text{3. Scriere } \\color{#9370DB}{\\text{mixtă: }} 37\\,540\\frac{85}{100} = 37\\,540\\frac{17}{20}\n\\end{aligned}$$ \n\n** Numerele întregi ** sunt un caz particular al ** numerelor zecimale ** cu ** partea fracționară ** nulă.\n\n $$\\color{#FF6B6B}{38} = 38{,}0 = 38{,}00 = 38{,}000$$ \n\n---\n\n## Conversii\n\n $$\\begin{aligned}\n& \\text{4,72} = \\frac{472}{100} = \\frac{118}{25} \\quad (472 \\color{#FF8C00}{\\text{sutimi}})\\\\[6pt]\n& \\text{4,72} = \\frac{4720}{1000} = \\frac{118}{25} \\quad (4720 \\color{#9370DB}{\\text{miimi}})\n\\end{aligned}$$ \n\n---\n\n## Cifră vs Număr\n\n- ** Cifra ** = simbolul care reprezintă o valoare într-un anumit ** rang **\n- ** Numărul ** = valoarea numerică a tuturor cifrelor din ** rangul ** respectiv\n\nÎn numărul **37 540,85**:\n\n $$\\begin{aligned}\n& \\text{Cifra } \\color{#FF6B6B}{\\text{zecilor}} = 4\\\\[6pt]\n& \\text{Numărul } \\color{#4ECDC4}{\\text{zecilor}} = 3\\,754\n\\end{aligned}$$ \n\n---\n\n## Operații cu puteri zecimale\n\n $$\\begin{aligned}\n& \\text{Înmulțire cu 10, 100, 1000: } \\color{#FF6B6B}{\\text{virgula spre DREAPTA}}\\\\[8pt]\n& \\text{Împărțire la 10, 100, 1000: } \\color{#4ECDC4}{\\text{virgula spre STÂNGA}}\n\\end{aligned}$$ \n\n**Exemple de înmulțire:**\n $$\\begin{aligned}\n& 64 \\times 10 = 640\\\\[6pt]\n& 23{,}6 \\times 100 = 2\\,360\\\\[6pt]\n& 0{,}07 \\times 1\\,000 = 70\n\\end{aligned}$$ \n\n**Exemple de împărțire:**\n $$\\begin{aligned}\n& 53{,}2 \\div 10 = 5{,}32\\\\[6pt]\n& 6{,}4 \\div 100 = 0{,}064\\\\[6pt]\n& 5\\,140 \\div 1\\,000 = 5{,}140\n\\end{aligned}$$ \n\n---\n\n## Aproximări\n\n $$\\begin{aligned}\n& \\text{Trunchiere: } 5{,}73 \\to 5 \\quad (\\color{#FF6B6B}{\\text{se ignoră zecimalele}})\\\\[6pt]\n& \\text{Rotunjire: } 5{,}73 \\to 6 \\quad (\\color{#4ECDC4}{\\text{la cea mai apropiată unitate}})\n\\end{aligned}$$"
+  },
+  {
+   "title": "C2 - Adunarea și scăderea nr. zecimale",
+   "url": "/curs/docs/edupasi/c5/modul-1/02",
+   "collection": "edupasi",
+   "course": "c5",
+   "module": "modul-1",
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 1",
+    "EduPASI lectie adaptata accesibila"
+   ],
+   "text": "# C2 - Adunarea și scăderea nr. zecimale\n\n---\n\n## Generalități\n\nUn ** număr zecimal ** este un număr pe care îl putem scrie cu un număr finit de cifre și o virgulă.\n\n**Exemple:**\n- 2,37 și 5 (=5,0) sunt numere zecimale.\n\nRezultatul unei adunări se numește ** sumă **; rezultatul unei scăderi se numește ** diferență **.\n\n**Exemple:**\n- 5,7 + 3,12 = 8,82 ; 5,32 – 2,5 = 2,82.\n\n```\ntermeni: 5,7 și 3,12 ➝ sumă: 8,82\ntermeni: 5,32 şi 2,5 ➝ diferență: 2,82\n```\n\nÎntr-o suită de adunări, putem efectua calculele în ordinea pe care o dorim.\n\nAceastă proprietate este **valabilă pentru adunare**! Scăderea **NU** este comutativă.\n\n**Exemplu:**\n- 8 - 3 = 5\n- 3 - 8 = -5\n\nOrdinea termenilor **schimbă rezultatul**!\n\n**Exemplu:** Pentru a efectua 12,4 + 3,9 + 2,6, putem:\n- începe prin a efectua 12,4 + 3,9;\n- sau începe prin a efectua 3,9 + 2,6;\n- sau începe prin a efectua 12,4 + 2,6.\n\nAceastă ultimă grupare facilitează calculul, deoarece 12,4 + 2,6 = 15.\n\nObținem deci:\n12,4 + 3,9 + 2,6 = (12,4 + 2,6) + 3,9 = 15 + 3,9 = 18,9.\n\n---\n\nPutem schimba locurile... nu schimbă rezultatul!\n\n $$12{,}4 + 3{,}9 + 2{,}6 = 12{,}4 + 2{,}6 + 3{,}9$$ \n\n---\n\n## Metoda\n\n### Adunarea și scăderea numerelor zecimale prin poziționare\n\n** PASUL 1. ** Scriem termenii adunării sau scăderii, unii sub alții (în coloană), aliniind vertical virgulele, cifrele unităților, etc.\n\n** PASUL 2. ** Efectuăm adunarea sau scăderea cifrelor, fără a uita ce ținem minte sau împrumutǎm.\n\n**Notă:** *Adăugăm dacă este necesar o virgulă și zerouri la sfârșitul părții zecimale.*\n\n** PASUL 3. ** Plasăm virgula la rezultat.\n\n---\n\n## Exemple practice\n\n**Calculați 345,20 + 7,92 și 125 – 6,21.**\n\n### Reținutul\n\n**Adunare:** Când suma cifrelor > 9, ținem minte 1 la ordinul superior\n\n**Scădere:** Când cifra de sus < cifra de jos, împrumutăm 1 de la ordinul superior\n\n### Operații\n\n \n \n ➕ Adunare \n $$\\Large\\begin{array}{r}345{,}20 \\\\ +\\ 7{,}92 \\\\ \\hline 353{,}12\\end{array}$$ \n \n\n \n\n \n ➖ Scădere \n $$\\Large\\begin{array}{r}125{,}00 \\\\ -\\ 6{,}21 \\\\ \\hline 118{,}79\\end{array}$$ \n \n \n\n---"
   }
  ]
 }

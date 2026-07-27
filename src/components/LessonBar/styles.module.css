@@ -41,6 +41,12 @@
   border-color: var(--km-orange);
 }
 
+.navBtn:focus-visible,
+.cuprinsBtn:focus-visible {
+  outline: 3px solid var(--ifm-color-primary);
+  outline-offset: 3px;
+}
+
 .navRight {
   justify-content: flex-end;
 }

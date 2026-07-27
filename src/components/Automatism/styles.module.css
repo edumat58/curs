@@ -1,0 +1,255 @@
+/* Componenta de automatisme — folosește variabilele de temă ale site-ului
+   (--ifm-*) ca să se potrivească pe fiecare curs (V–VIII). */
+.card {
+  /* Portocaliu EduMat (nu verde). */
+  --auto-accent: #e8590c;
+  --auto-accent-strong: #c2410c;
+  --auto-surface: var(--ifm-background-surface-color, #ffffff);
+  --auto-border: var(--ifm-color-emphasis-300, #d7e5e0);
+  --auto-text: var(--ifm-font-color-base, #161616);
+  --auto-ok: #1e7d4f;
+  --auto-bad: #c0392b;
+
+  margin: 1.5rem 0;
+  padding: clamp(1rem, 3vw, 1.5rem);
+  background: var(--auto-surface);
+  border: 2px solid var(--auto-border);
+  border-radius: 16px;
+  color: var(--auto-text);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--auto-text);
+}
+
+.subtitle {
+  margin: 0.15rem 0 0;
+  font-size: 0.85rem;
+  color: var(--ifm-color-emphasis-600, #5b5b5b);
+}
+
+.scoreBox {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 0 0 auto;
+}
+
+.streak {
+  padding: 0.25rem 0.6rem;
+  background: color-mix(in srgb, var(--auto-accent) 12%, transparent);
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.tally {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--ifm-color-emphasis-700, #444);
+  font-variant-numeric: tabular-nums;
+}
+
+.loading {
+  padding: 2rem 0;
+  text-align: center;
+  color: var(--ifm-color-emphasis-600, #5b5b5b);
+}
+
+/* --- enunțul --- */
+.prompt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.25rem 0.5rem;
+}
+
+.promptText {
+  margin: 0;
+  max-width: 46ch;
+  text-align: center;
+  font-size: 1.02rem;
+  line-height: 1.55;
+}
+
+.promptMath {
+  font-size: 1.6rem;
+}
+
+.texBlock :global(.katex-display) {
+  margin: 0;
+}
+
+.figure {
+  color: var(--auto-text);
+}
+
+.figure svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.figureImg {
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+/* --- casetele de răspuns --- */
+.blanks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.blank {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  align-items: center;
+}
+
+.blankLabel {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--ifm-color-emphasis-600, #5b5b5b);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.input,
+.inputOk,
+.inputBad {
+  width: 8.5rem;
+  min-height: 54px;
+  padding: 0.5rem 0.9rem;
+  font-size: 1.35rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--auto-text);
+  background: var(--ifm-background-color, #fff);
+  border: 2.5px solid var(--auto-border);
+  border-radius: 12px;
+  outline: none;
+}
+
+.input:focus {
+  border-color: var(--auto-accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--auto-accent) 22%, transparent);
+}
+
+.inputOk {
+  border-color: var(--auto-ok);
+  background: color-mix(in srgb, var(--auto-ok) 12%, #fff);
+}
+
+.inputBad {
+  border-color: var(--auto-bad);
+  background: color-mix(in srgb, var(--auto-bad) 10%, #fff);
+}
+
+/* --- butoane --- */
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  justify-content: center;
+}
+
+.primary {
+  min-height: 50px;
+  padding: 0.6rem 1.6rem;
+  color: #fff;
+  background: var(--auto-accent);
+  border: 2px solid var(--auto-accent-strong);
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background 140ms ease, transform 80ms ease;
+}
+
+.primary:hover {
+  background: var(--auto-accent-strong);
+}
+
+.primary:active {
+  transform: translateY(1px);
+}
+
+.ghost {
+  min-height: 50px;
+  padding: 0.6rem 1.1rem;
+  color: var(--auto-accent-strong);
+  background: transparent;
+  border: 2px solid var(--auto-border);
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.ghost:hover {
+  background: color-mix(in srgb, var(--auto-accent) 8%, transparent);
+  border-color: var(--auto-accent);
+}
+
+/* --- feedback --- */
+.feedbackOk {
+  margin: 1rem 0 0;
+  text-align: center;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--auto-ok);
+}
+
+.feedbackBad {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding: 0.85rem;
+  background: color-mix(in srgb, var(--auto-bad) 7%, transparent);
+  border: 1px solid color-mix(in srgb, var(--auto-bad) 30%, transparent);
+  border-radius: 12px;
+  color: var(--auto-bad);
+  font-weight: 700;
+}
+
+.solution {
+  font-size: 1.15rem;
+  color: var(--auto-text);
+}
+
+.tex,
+.texBlock {
+  color: inherit;
+}
+
+.error {
+  color: var(--auto-bad);
+  font-weight: 700;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .primary {
+    transition: none;
+  }
+}

@@ -80,20 +80,42 @@ export default function DoamnaCapsunica() {
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const scrollRef = useRef(null);
+  const inputRef = useRef(null);
+  const triggerRef = useRef(null);
 
   useEffect(() => {
     const sync = () => setHideUI(localStorage.getItem('hideUI') === 'true');
+    const openFromEduPasi = () => setOpen(true);
     window.addEventListener('storage', sync);
     window.addEventListener('uiToggle', sync);
+    window.addEventListener('edupasi:open-capsunica', openFromEduPasi);
     return () => {
       window.removeEventListener('storage', sync);
       window.removeEventListener('uiToggle', sync);
+      window.removeEventListener('edupasi:open-capsunica', openFromEduPasi);
     };
   }, []);
 
   useEffect(() => {
-    scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: 'smooth' });
+    const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    scrollRef.current?.scrollTo({
+      top: scrollRef.current.scrollHeight,
+      behavior: reducedMotion ? 'auto' : 'smooth',
+    });
   }, [messages, loading, open]);
+
+  useEffect(() => {
+    if (!open) return undefined;
+    inputRef.current?.focus();
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') setOpen(false);
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => {
+      window.removeEventListener('keydown', onKeyDown);
+      requestAnimationFrame(() => triggerRef.current?.focus());
+    };
+  }, [open]);
 
   async function send() {
     const text = input.trim();
@@ -132,18 +154,23 @@ export default function DoamnaCapsunica() {
   return (
     <>
       {!open && (
-        <button className={styles.fab} onClick={() => setOpen(true)} aria-label="Întreabă-o pe Doamna Căpșunică">
+        <button
+          ref={triggerRef}
+          className={styles.fab}
+          onClick={() => setOpen(true)}
+          aria-label="Întreabă-o pe Doamna Căpșunică"
+        >
           <img className={styles.fabAvatar} src={AVATAR} alt="" />
           <span className={styles.fabLabel}>Întreabă-o pe Doamna Căpșunică</span>
         </button>
       )}
 
       {open && (
-        <aside className={styles.panel} role="dialog" aria-label="Chat cu Doamna Căpșunică">
+        <aside className={styles.panel} role="dialog" aria-labelledby="capsunica-dialog-title">
           <header className={styles.header}>
             <img className={styles.headerAvatar} src={AVATAR} alt="Doamna Căpșunică" />
             <div className={styles.headerText}>
-              <strong>Doamna Căpșunică</strong>
+              <strong id="capsunica-dialog-title">Doamna Căpșunică</strong>
               <span>Tutore Kulturosfera</span>
             </div>
             <button className={styles.close} onClick={() => setOpen(false)} aria-label="Închide">
@@ -151,7 +178,7 @@ export default function DoamnaCapsunica() {
             </button>
           </header>
 
-          <div className={styles.messages} ref={scrollRef}>
+          <div className={styles.messages} ref={scrollRef} aria-live="polite">
             {messages.map((m, i) =>
               m.role === 'user' ? (
                 <div key={i} className={styles.userRow}>
@@ -186,7 +213,9 @@ export default function DoamnaCapsunica() {
 
           <div className={styles.inputRow}>
             <textarea
+              ref={inputRef}
               className={styles.input}
+              aria-label="Întrebarea ta pentru Doamna Căpșunică"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => {

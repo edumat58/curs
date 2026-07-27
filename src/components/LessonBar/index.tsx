@@ -23,6 +23,9 @@ interface LessonBarProps {
 
 /** Cuprinsul cursului curent, derivat din URL (maparea istorică a platformei). */
 function courseIndexFor(pathname: string): { label: string; href: string } | null {
+  if (/\/docs\/edupasi(\/|$)/.test(pathname)) {
+    return { label: 'Hub EduPASI', href: '/curs/edupasi' };
+  }
   const m = pathname.match(/\/docs\/c([5-8])(\/|$)/);
   if (!m) return null;
   const roman: Record<string, string> = { '5': 'curs-v', '6': 'curs-vi', '7': 'curs-vii', '8': 'curs-viii' };
@@ -69,7 +72,14 @@ export default function LessonBar({ prev, next }: LessonBarProps) {
         )}
 
         {cuprins ? (
-          <Link className={styles.cuprinsBtn} to={cuprins.href}>
+          <Link
+            className={styles.cuprinsBtn}
+            to={cuprins.href}
+            onClick={(e) => {
+              e.preventDefault();
+              window.dispatchEvent(new CustomEvent('edupasi:open-toc'));
+            }}
+          >
             <span aria-hidden className={styles.layersIcon}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
                 <polygon points="12 2 2 7 12 12 22 7 12 2" />

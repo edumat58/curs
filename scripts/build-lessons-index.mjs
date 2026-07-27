@@ -7,6 +7,11 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import {
+  normalizeEduPasiSlug,
+  parseFrontmatter,
+  resolveLessonTitle,
+} from './lib/markdown-metadata.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DOCS = path.join(ROOT, 'docs');
@@ -21,31 +26,10 @@ const CLASS_LABEL = {
   c8: 'clasa 8 a opta VIII',
 };
 
-function parseFrontmatter(raw) {
-  const m = raw.match(/^---\r?\n([\s\S]*?)\r?\n---/);
-  if (!m) return {};
-  const fm = {};
-  for (const line of m[1].split(/\r?\n/)) {
-    const kv = line.match(/^([A-Za-z_][\w-]*):\s*(.*)$/);
-    if (!kv) continue;
-    let value = kv[2].trim();
-    if (
-      (value.startsWith('"') && value.endsWith('"')) ||
-      (value.startsWith("'") && value.endsWith("'"))
-    ) {
-      value = value.slice(1, -1);
-    }
-    fm[kv[1]] = value;
-  }
-  return fm;
-}
-
-// primul titlu H1 din corpul lecției (după frontmatter și eventuale importuri)
-function firstH1(raw) {
-  const body = raw.replace(/^---[\s\S]*?---/, '');
-  const m = body.match(/^\s*#\s+(.+?)\s*$/m);
-  return m ? m[1].trim() : '';
-}
+const COLLECTION_LABEL = {
+  standard: '',
+  edupasi: 'EduPASI lectie adaptata accesibila',
+};
 
 // Extrage textul CURAT al lecției pentru RAG (ce citește tutorele): păstrează
 // proza, definițiile, exemplele și formulele LaTeX; scoate frontmatter, importuri,
@@ -75,12 +59,17 @@ function walk(dir) {
       walk(abs);
       continue;
     }
+    if (entry.name.startsWith('_')) continue;
     if (!/\.(md|mdx)$/i.test(entry.name)) continue;
 
     const rel = path.relative(DOCS, abs).split(path.sep).join('/');
     const id = rel.replace(/\.(md|mdx)$/i, '');
     const segments = id.split('/');
-    const course = segments[0];
+    const collection = segments[0] === 'edupasi' ? 'edupasi' : 'standard';
+    const course = collection === 'edupasi' ? segments[1] : segments[0];
+    const moduleSeg = collection === 'edupasi'
+      ? (segments.length > 3 ? segments[2] : '')
+      : (segments.length > 2 ? segments[1] : '');
 
     // doar lecțiile cursurilor live (fără arhivă, intro, status)
     if (!['c5', 'c6', 'c7', 'c8'].includes(course)) continue;
@@ -88,17 +77,24 @@ function walk(dir) {
     const raw = fs.readFileSync(abs, 'utf8');
     const fm = parseFrontmatter(raw);
     if (fm.hide === 'true' || fm.hide === 'True') continue;
+    if (collection === 'edupasi' && fm.edupasi_type === 'guide') continue;
 
-    const slug = fm.slug || '/' + id; // slug frontmatter poate diferi de calea fișierului
-    const title = fm.title || firstH1(raw) || segments[segments.length - 1];
-    const moduleSeg = segments.length > 2 ? segments[1] : '';
+    const slug = collection === 'edupasi'
+      ? normalizeEduPasiSlug(fm.slug, segments.slice(1).join('/'))
+      : fm.slug || '/' + id;
+    const title = resolveLessonTitle(raw, fm, segments[segments.length - 1]);
 
     lessons.push({
       title,
       url: BASE + slug, // ex. /curs/docs/c5/modul-1/01
+      collection,
       course,
       module: moduleSeg,
-      keywords: [CLASS_LABEL[course] || '', moduleSeg.replace('-', ' ')].filter(Boolean),
+      keywords: [
+        CLASS_LABEL[course] || '',
+        moduleSeg.replace('-', ' '),
+        COLLECTION_LABEL[collection],
+      ].filter(Boolean),
       text: extractText(raw), // conținutul lecției pentru RAG
     });
   }
@@ -108,5 +104,5 @@ walk(DOCS);
 lessons.sort((a, b) => a.url.localeCompare(b.url, 'ro'));
 
 fs.mkdirSync(path.dirname(OUT), { recursive: true });
-fs.writeFileSync(OUT, JSON.stringify({ generatedAt: new Date().toISOString(), lessons }, null, 1), 'utf8');
+fs.writeFileSync(OUT, JSON.stringify({ schemaVersion: 1, lessons }, null, 1), 'utf8');
 console.log(`lessons-index: ${lessons.length} lecții → ${path.relative(ROOT, OUT)}`);

@@ -1,0 +1,12 @@
+{
+  "label": "EduPAȘI",
+  "position": 1,
+  "collapsible": true,
+  "collapsed": false,
+  "link": {
+    "type": "generated-index",
+    "slug": "/edupasi",
+    "title": "Lecții EduPAȘI",
+    "description": "Lecții de matematică adaptate, organizate pe clase și module."
+  }
+}

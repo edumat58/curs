@@ -38,8 +38,8 @@ const config = {
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
+    defaultLocale: 'ro',
+    locales: ['ro'],
   },
 
   presets: [
@@ -132,7 +132,7 @@ const config = {
     navbar: {
       title: '',
       logo: {
-        alt: 'My Site Logo',
+        alt: 'EduMat58',
         src: 'img/logo.png',
       },
       items: [
@@ -141,6 +141,17 @@ const config = {
           to: '/navigation',
           position: 'left',
           className: 'desktop-menu-link', // Custom class for styling/hiding
+        },
+        {
+          label: 'EduPAȘI',
+          to: '/edupasi',
+          position: 'left',
+          className: 'edupasi-nav-link',
+        },
+        {
+          position: 'left',
+          label: 'Automatisme',
+          to: '/docs/automatisme',
         },
         {
           position: 'left',
@@ -197,7 +208,7 @@ const config = {
                 <circle cx="12" cy="12" r="9"></circle>
                 <polyline points="12 7 12 12 15.5 14"></polyline>
               </svg>
-              <span class="nav-update-date">18.07.2026, 01:04</span>
+              <span class="nav-update-date">27.07.2026, 01:59</span>
             </span>
           `,
         },
@@ -280,6 +291,10 @@ const config = {
             {
               label: 'Stare Sistem',
               to: '/docs/status',
+            },
+            {
+              label: 'EduPASI',
+              to: '/edupasi',
             }
           ],
         },

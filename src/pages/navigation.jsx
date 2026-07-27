@@ -11,17 +11,59 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
  * ----------------------------------------------------------------------------------------------- */
 const SCHOOL_YEAR_CONFIG = {
     // Format: YYYY-MM-DD
-    startDate: '2025-09-08',
-    endDate: '2026-06-20',
+    startDate: '2026-09-07',
+    endDate: '2027-06-18',
     holidays: [
-        { name: 'Vacanța de toamnă', start: '2025-10-27', end: '2025-11-02' },
-        { name: 'Vacanța de iarnă', start: '2025-12-20', end: '2026-01-07' },
-        { name: 'Vacanța de schi', start: '2026-02-14', end: '2026-02-22' },
-        { name: 'Vacanța de primăvară', start: '2026-04-04', end: '2026-04-14' },
+        { name: 'Vacanța de toamnă', start: '2026-10-24', end: '2026-11-01' },
+        { name: 'Vacanța de iarnă', start: '2026-12-23', end: '2027-01-10' },
+        { name: 'Vacanța de schi', start: '2027-02-22', end: '2027-02-27' },
+        { name: 'Vacanța de primăvară', start: '2027-04-23', end: '2027-05-02' },
     ],
 };
 
 const getNavLinks = () => [
+    {
+        title: 'EduPAȘI — Matematică Adaptată',
+        description: 'Lecții adaptate pas cu pas, accesibilitate vizuală și traseu de învățare adaptat.',
+        link: '/curs/edupasi',
+        icon: 'accessibility_new',
+    },
+    {
+        title: 'Automatisme',
+        description: 'Exerciții de calcul rapid și exersarea deprinderilor matematice.',
+        link: '/curs/docs/automatisme',
+        icon: 'bolt',
+    },
+    {
+        title: 'Curs Clasa a V-a',
+        description: 'Materiale de studiu și lecții pentru clasa a V-a.',
+        link: '/curs/docs/category/curs-v',
+        icon: 'filter_5',
+    },
+    {
+        title: 'Curs Clasa a VI-a',
+        description: 'Materiale de studiu și lecții pentru clasa a VI-a.',
+        link: '/curs/docs/category/curs-vi',
+        icon: 'filter_6',
+    },
+    {
+        title: 'Curs Clasa a VII-a',
+        description: 'Materiale de studiu și lecții pentru clasa a VII-a.',
+        link: '/curs/docs/category/curs-vii',
+        icon: 'filter_7',
+    },
+    {
+        title: 'Curs Clasa a VIII-a',
+        description: 'Materiale de studiu și lecții pentru clasa a VIII-a.',
+        link: '/curs/docs/category/curs-viii',
+        icon: 'filter_8',
+    },
+    {
+        title: 'Bun Venit!',
+        description: 'Ghidul de introducere în platformă.',
+        link: '/curs/docs/intro',
+        icon: 'waving_hand',
+    },
     {
         title: 'Kulturosfera',
         description: 'Ecosistemul tău educațional complet.',
@@ -35,42 +77,6 @@ const getNavLinks = () => [
         link: 'https://edurev.kulturosfera.com',
         icon: 'data_thresholding',
         external: true,
-    },
-    {
-        title: 'Bun Venit!',
-        description: 'Ghidul de introducere în platformă.',
-        link: '/curs/docs/intro',
-        icon: 'waving_hand',
-    },
-    {
-        title: 'Stare Sistem',
-        description: 'Verifică disponibilitatea serviciilor.',
-        link: '/curs/docs/status',
-        icon: 'dns',
-    },
-    {
-        title: 'Clasa a V-a',
-        description: 'Materiale de studiu pentru clasa a V-a.',
-        link: '/curs/docs/category/curs-v',
-        icon: 'filter_5',
-    },
-    {
-        title: 'Clasa a VI-a',
-        description: 'Materiale de studiu pentru clasa a VI-a.',
-        link: '/curs/docs/category/curs-vi',
-        icon: 'filter_6',
-    },
-    {
-        title: 'Clasa a VII-a',
-        description: 'Materiale de studiu pentru clasa a VII-a.',
-        link: '/curs/docs/category/curs-vii',
-        icon: 'filter_7',
-    },
-    {
-        title: 'Clasa a VIII-a',
-        description: 'Materiale de studiu pentru clasa a VIII-a.',
-        link: '/curs/docs/category/curs-viii',
-        icon: 'filter_8',
     },
 ];
 
@@ -237,7 +243,7 @@ const SchoolYearProgress = () => {
         <div className={styles.progressContainer}>
             <div className={styles.progressHeaderRow}>
                 <div className={styles.titleGroup}>
-                    <h2 className={styles.progressTitle}>Structura Anului Școlar</h2>
+                    <h2 className={styles.progressTitle}>Structura Anului Școlar 2026 - 2027</h2>
                     <p className={styles.progressSubtitle}>Progres: {Math.round(progress)}%</p>
                 </div>
 

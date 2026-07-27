@@ -5,7 +5,8 @@
 
 .fab {
   position: fixed;
-  right: 1.25rem;
+  left: 1.25rem !important;
+  right: auto !important;
   bottom: 5.5rem;
   z-index: 195;
   display: inline-flex;
@@ -37,9 +38,21 @@
   flex: none;
 }
 
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-24px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
 .panel {
   position: fixed;
-  right: 1.25rem;
+  left: 1.25rem !important;
+  right: auto !important;
   bottom: 5.5rem;
   z-index: 196;
   width: min(384px, 92vw);
@@ -55,6 +68,8 @@
   flex-direction: column;
   overflow: hidden;
   color: #2c2723;
+  animation: slideInFromLeft 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
+  transform-origin: bottom left;
 }
 
 .header {
@@ -251,16 +266,17 @@
 @media (max-width: 640px) {
   .fab {
     bottom: 5rem;
-    right: 1rem;
+    left: 1rem !important;
+    right: auto !important;
     padding: 0.5rem;
   }
   .fabLabel {
     display: none;
   }
   .panel {
-    right: 0.5rem;
-    left: 0.5rem;
-    width: auto;
+    left: 0.5rem !important;
+    right: auto !important;
+    width: min(384px, calc(100vw - 1rem));
     bottom: 4.75rem;
     height: 60dvh;
     max-height: calc(100dvh - 120px);

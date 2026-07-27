@@ -1,46 +1,97 @@
-/* Cardurile din Cuprins: albe pe pagina crem, hairline, accent portocaliu. */
+/* Cardurile din Cuprins: stil compact, similar cu lista EduPAȘI.
+   Grid: [număr/iconiță] [titlu + descriere] [CTA →].
+   Accent portocaliu (--km-orange). */
 
 .cardContainer {
   --ifm-link-color: var(--ifm-font-color-base);
   --ifm-link-hover-color: var(--ifm-font-color-base);
   --ifm-link-hover-decoration: none;
 
+  display: grid !important;
+  grid-template-columns: 42px minmax(0, 1fr) auto;
+  gap: 0.9rem;
+  align-items: center;
+  min-height: 74px;
+  padding: 0.8rem 1.15rem !important;
   background: #ffffff;
-  border: 1px solid var(--km-line);
+  border: 1px solid var(--km-line, rgba(28, 26, 22, 0.12));
   border-radius: 12px;
   box-shadow: 0 1px 3px rgba(28, 26, 22, 0.05);
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  text-decoration: none !important;
+  color: var(--km-ink, #1c1a16) !important;
 }
 
 .cardContainer:hover {
-  border-color: var(--km-orange);
+  border-color: var(--km-orange, #e8590c);
   box-shadow: 0 4px 14px rgba(28, 26, 22, 0.1);
+  background: #fffcf5;
 }
 
 .cardContainer *:last-child {
   margin-bottom: 0;
 }
 
-.cardTitle {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  font-size: 1.05rem;
-}
-
+/* Coloana 1: Iconiță / Număr */
 .cardIcon {
+  grid-column: 1;
+  grid-row: 1;
   flex-shrink: 0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 34px;
+  width: 38px;
+  height: 38px;
   border-radius: 9px;
-  color: var(--km-orange-deep);
+  color: var(--km-orange-deep, #c05600);
   background: rgba(232, 89, 12, 0.09);
+  font-family: Inter, var(--ifm-font-family-base), system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Coloana 2: Titlu + Descriere */
+.cardCopy {
+  grid-column: 2;
+  grid-row: 1;
+  min-width: 0;
+}
+
+.cardTitle {
+  display: block;
+  overflow: hidden;
+  color: var(--km-ink, #1c1a16);
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 0;
 }
 
 .cardDescription {
-  font-size: 0.82rem;
-  color: var(--km-ink3);
+  display: block;
+  overflow: hidden;
+  margin-top: 0.25rem;
+  margin-bottom: 0;
+  color: var(--km-ink3, #8b857a);
+  font-size: 0.75rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
+
+/* Coloana 3: CTA „Deschide →" */
+.cardCta {
+  grid-column: 3;
+  grid-row: 1;
+  display: inline-flex;
+  gap: 0.45rem;
+  align-items: center;
+  color: var(--km-orange-deep, #c05600);
+  font-size: 0.75rem;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+/* Separatoarele subtile între carduri — linia de sus nu mai e necesară
+   dacă border-ul cartonașului oferă deja contur vizual. */

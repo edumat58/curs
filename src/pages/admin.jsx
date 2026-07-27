@@ -19,6 +19,24 @@ const TOKEN_KEY = 'edumat-admin-token';
 const NAME_KEY = 'edumat-admin-name';
 
 const PROD_BACKEND = 'https://backend-deussebyum11724s-projects.vercel.app';
+const COLLECTION_OPTIONS = [
+  { value: 'standard', label: 'Lecții standard' },
+  { value: 'edupasi', label: 'EduPASI' },
+];
+const COURSE_OPTIONS = [
+  { value: 'c5', label: 'Clasa a V-a' },
+  { value: 'c6', label: 'Clasa a VI-a' },
+  { value: 'c7', label: 'Clasa a VII-a' },
+  { value: 'c8', label: 'Clasa a VIII-a' },
+];
+
+function lessonCollection(lesson) {
+  return lesson.collection || (lesson.id?.startsWith('edupasi/') ? 'edupasi' : 'standard');
+}
+
+function courseLabel(course) {
+  return COURSE_OPTIONS.find((option) => option.value === course)?.label || course;
+}
 
 // Pe localhost preferăm backend-ul local (scrie direct în fișierele repo-ului);
 // dacă nu rulează, cădem automat pe backend-ul din producție — validarea
@@ -255,6 +273,7 @@ function LessonManager({ token, name, onLogout, apiBase }) {
   const [error, setError] = React.useState('');
   const [notice, setNotice] = React.useState('');
   const [filter, setFilter] = React.useState('');
+  const [collection, setCollection] = React.useState('standard');
   const [course, setCourse] = React.useState('toate');
   const [creating, setCreating] = React.useState(false);
   const [config, setConfig] = React.useState(null);
@@ -301,19 +320,34 @@ function LessonManager({ token, name, onLogout, apiBase }) {
   }, []);
 
   const courses = React.useMemo(() => {
-    const set = new Set((lessons || []).map((l) => l.course).filter(Boolean));
+    const set = new Set(
+      (lessons || [])
+        .filter((lesson) => lessonCollection(lesson) === collection)
+        .map((lesson) => lesson.course)
+        .filter(Boolean),
+    );
     return ['toate', ...Array.from(set).sort()];
+  }, [lessons, collection]);
+
+  const collectionCounts = React.useMemo(() => {
+    const counts = { standard: 0, edupasi: 0 };
+    for (const lesson of lessons || []) {
+      const key = lessonCollection(lesson);
+      if (key in counts) counts[key] += 1;
+    }
+    return counts;
   }, [lessons]);
 
   const visible = React.useMemo(() => {
     if (!lessons) return [];
     const needle = filter.trim().toLowerCase();
     return lessons.filter((l) => {
+      if (lessonCollection(l) !== collection) return false;
       if (course !== 'toate' && l.course !== course) return false;
       if (!needle) return true;
       return `${l.id} ${l.title}`.toLowerCase().includes(needle);
     });
-  }, [lessons, filter, course]);
+  }, [lessons, filter, collection, course]);
 
   const searching = filter.trim().length > 0;
 
@@ -321,15 +355,17 @@ function LessonManager({ token, name, onLogout, apiBase }) {
   const tree = React.useMemo(() => {
     const byCourse = new Map();
     for (const l of visible) {
-      const courseKey = l.course || 'pagini-generale';
-      const courseLabel = l.course || 'Pagini generale';
+      const courseKey = `${collection}:${l.course || 'pagini-generale'}`;
+      const courseName = l.course ? courseLabel(l.course) : 'Pagini generale';
       if (!byCourse.has(courseKey)) {
-        byCourse.set(courseKey, { key: courseKey, label: courseLabel, direct: [], modules: new Map(), all: [] });
+        byCourse.set(courseKey, { key: courseKey, label: courseName, direct: [], modules: new Map(), all: [] });
       }
       const node = byCourse.get(courseKey);
       node.all.push(l);
       const segments = l.id.split('/');
-      const moduleDir = segments.length > 2 ? segments.slice(1, -1).join('/') : '';
+      const moduleDir = collection === 'edupasi'
+        ? l.module || ''
+        : segments.length > 2 ? segments.slice(1, -1).join('/') : '';
       if (!moduleDir) {
         node.direct.push(l);
       } else {
@@ -345,7 +381,7 @@ function LessonManager({ token, name, onLogout, apiBase }) {
       modules: Array.from(node.modules.values()),
       hiddenCount: node.all.filter((l) => l.hidden).length,
     }));
-  }, [visible]);
+  }, [visible, collection]);
 
   function toggleExpand(key) {
     setExpanded((prev) => {
@@ -614,23 +650,78 @@ function LessonManager({ token, name, onLogout, apiBase }) {
       {creating ? (
         <CreateForm
           lessons={lessons || []}
-          onCreate={async ({ course: c, module: m, slug, title }) => {
-            const p = `docs/${c}/${m}/${slug}.mdx`;
-            const siblings = (lessons || []).filter((l) => l.course === c && l.module === m);
+          initialCollection={collection}
+          onCreate={async ({ collection: targetCollection, course: c, module: m, slug, title }) => {
+            const relativeId = targetCollection === 'edupasi'
+              ? `edupasi/${c}/${m}/${slug}`
+              : `${c}/${m}/${slug}`;
+            const p = `docs/${relativeId}.mdx`;
+            const routeSlug = `/${relativeId}`;
+            const siblings = (lessons || []).filter(
+              (lesson) =>
+                lessonCollection(lesson) === targetCollection
+                && lesson.course === c
+                && lesson.module === m,
+            );
             const position = siblings.reduce((max, l) => Math.max(max, l.position || 0), 0) + 1;
-            const template = `---\ntitle: "${title}"\nsidebar_position: ${position}\nslug: /${c}/${m}/${slug}\ndescription: ""\n---\n\n# ${title}\n\n## Introducere\n\nConținut nou — completează lecția.\n`;
+            const edupasiFrontmatter = targetCollection === 'edupasi' ? '\nedupasi_type: lesson' : '';
+            const edupasiHint = targetCollection === 'edupasi'
+              ? '\n\n{/* Imagine accesibilă: <EduPasiFigure src="/curs/img/exemplu.png" alt="Titlu scurt" description="Descriere matematică detaliată..." /> */}\n{/* Pentru audio sau video: <EduPasiTranscript>Transcrierea...</EduPasiTranscript> */}\n'
+              : '';
+            // Pentru EduPASI, H1 este unica sursă de titlu. Astfel, editarea
+            // liniei „# ...” actualizează simultan hubul, sidebarul și metadata
+            // Docusaurus, fără un frontmatter.title care poate rămâne vechi.
+            const titleFrontmatter = targetCollection === 'edupasi'
+              ? ''
+              : `title: ${JSON.stringify(title)}\n`;
+            const template = `---\n${titleFrontmatter}sidebar_position: ${position}\nslug: ${routeSlug}\ndescription: ""${edupasiFrontmatter}\n---\n\n# ${title}\n\n## Introducere\n\nConținut nou — completează lecția.${edupasiHint}\n`;
             const ok = await saveRaw(p, template, null, `„${title}" a fost creată — site-ul se republică în câteva minute.`);
             if (ok) {
               setCreating(false);
+              setCollection(targetCollection);
+              setCourse(c);
               setLessons((ls) => [
                 ...(ls || []),
-                { id: `${c}/${m}/${slug}`, path: p, title, course: c, module: m, position, slug: `/${c}/${m}/${slug}`, hidden: false, frontmatterOk: true },
+                {
+                  id: relativeId,
+                  path: p,
+                  title,
+                  description: '',
+                  collection: targetCollection,
+                  course: c,
+                  module: m,
+                  kind: 'lesson',
+                  position,
+                  slug: routeSlug,
+                  url: `/docs${routeSlug}`,
+                  hidden: false,
+                  frontmatterOk: true,
+                },
               ].sort((a, b) => a.id.localeCompare(b.id, 'ro')));
             }
             return ok;
           }}
         />
       ) : null}
+
+      <div className={styles.collectionTabs} role="tablist" aria-label="Rubrica lecțiilor">
+        {COLLECTION_OPTIONS.map((option) => (
+          <button
+            key={option.value}
+            type="button"
+            role="tab"
+            aria-selected={collection === option.value}
+            className={collection === option.value ? styles.collectionTabActive : styles.collectionTab}
+            onClick={() => {
+              setCollection(option.value);
+              setCourse('toate');
+            }}
+          >
+            {option.label}
+            <span className={styles.collectionCount}>{collectionCounts[option.value]}</span>
+          </button>
+        ))}
+      </div>
 
       <div style={{ marginTop: '1rem', display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '0.5rem' }}>
         <input
@@ -643,14 +734,14 @@ function LessonManager({ token, name, onLogout, apiBase }) {
           onChange={(e) => setFilter(e.target.value)}
         />
         <select
-          aria-label="Filtru clasă"
+          aria-label="Filtru după clasă"
           className={styles.input}
           style={{ width: 'auto' }}
           value={course}
           onChange={(e) => setCourse(e.target.value)}
         >
           {courses.map((c) => (
-            <option key={c} value={c}>{c === 'toate' ? 'Toate clasele' : c}</option>
+            <option key={c} value={c}>{c === 'toate' ? 'Toate clasele' : courseLabel(c)}</option>
           ))}
         </select>
         <span style={{ fontSize: '0.75rem', color: 'var(--km-ink3)', fontVariantNumeric: 'tabular-nums' }}>
@@ -766,7 +857,8 @@ function LessonRow({ lesson: l, depth, onOpen, onToggleHidden, onRemove }) {
   );
 }
 
-function CreateForm({ lessons, onCreate }) {
+function CreateForm({ lessons, onCreate, initialCollection = 'standard' }) {
+  const [collection, setCollection] = React.useState(initialCollection);
   const [course, setCourse] = React.useState('c5');
   const [module, setModule] = React.useState('');
   const [slug, setSlug] = React.useState('');
@@ -781,13 +873,16 @@ function CreateForm({ lessons, onCreate }) {
       setErr('Clasa/modulul/slug-ul: doar litere mici, cifre și cratimă.');
       return;
     }
-    if (lessons.some((l) => l.id === `${course}/${module}/${slug}`)) {
+    const id = collection === 'edupasi'
+      ? `edupasi/${course}/${module}/${slug}`
+      : `${course}/${module}/${slug}`;
+    if (lessons.some((l) => l.id === id)) {
       setErr('Există deja o lecție cu acest slug.');
       return;
     }
     setBusy(true);
     try {
-      const ok = await onCreate({ course, module, slug, title });
+      const ok = await onCreate({ collection, course, module, slug, title });
       if (!ok) setErr('Crearea nu a mers.');
     } finally {
       setBusy(false);
@@ -795,13 +890,28 @@ function CreateForm({ lessons, onCreate }) {
   }
 
   const FIELDS = [
-    ['Clasa (curs)', course, setCourse, 'c5'],
     ['Modul', module, setModule, 'modul-1'],
     ['Slug fișier', slug, setSlug, '08'],
   ];
 
   return (
     <form className={styles.createForm} onSubmit={submit}>
+      <label className={styles.createLabel}>
+        Rubrică
+        <select className={styles.input} style={{ width: 150 }} value={collection} onChange={(e) => setCollection(e.target.value)}>
+          {COLLECTION_OPTIONS.map((option) => (
+            <option key={option.value} value={option.value}>{option.label}</option>
+          ))}
+        </select>
+      </label>
+      <label className={styles.createLabel}>
+        Clasă
+        <select className={styles.input} style={{ width: 150 }} value={course} onChange={(e) => setCourse(e.target.value)}>
+          {COURSE_OPTIONS.map((option) => (
+            <option key={option.value} value={option.value}>{option.label}</option>
+          ))}
+        </select>
+      </label>
       {FIELDS.map(([label, value, set, placeholder]) => (
         <label key={label} className={styles.createLabel}>
           {label}
@@ -815,6 +925,11 @@ function CreateForm({ lessons, onCreate }) {
       <button type="submit" className={styles.btn} disabled={busy}>
         {busy ? 'Se creează…' : 'Creează'}
       </button>
+      {collection === 'edupasi' ? (
+        <p className={styles.createHint}>
+          Lecția va fi creată separat în <code>docs/edupasi/{course}/{module || 'modul-…'}/…</code>.
+        </p>
+      ) : null}
       {err ? <p className={styles.error} style={{ width: '100%', margin: 0 }}>{err}</p> : null}
     </form>
   );

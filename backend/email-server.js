@@ -22,6 +22,7 @@ const fs = require('fs');
 const jwt = require('jsonwebtoken');
 const { MongoClient } = require('mongodb');
 
+
 // La rulare locală, env-urile vin din backend/.env.local (gitignored) — pe
 // Vercel sunt setate pe proiect, iar fișierul nici nu ajunge acolo. Astfel
 // validarea locală e identică cu cea din producție (aceeași bază educonnect).
@@ -53,7 +54,10 @@ app.use(cors({
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
-app.use(express.json({ limit: '2mb' }));
+// Secțiunile EduPAȘI pot conține capturi rasterizate. Limita globală rămâne
+// modestă, iar endpointurile multimodale aplică limite mai stricte pe fiecare
+// câmp și pe totalul imaginilor înainte de orice apel Gemini.
+app.use(express.json({ limit: '4mb' }));
 
 // ---------------------------------------------------------------------------
 // Email (neschimbat funcțional)
