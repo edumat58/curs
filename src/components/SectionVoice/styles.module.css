@@ -1,22 +1,24 @@
-/* Butonul de secțiune + playerul.
-   Discret lângă heading: prezent, dar fără să concureze cu titlul lecției. */
+/* Butonul de secțiune + panoul cu playerul.
+   Butonul stă discret în heading. Playerul NU: el trăiește într-un panou
+   separat, imediat sub titlu, ca să nu moștenească fontul mare al headingului,
+   să nu se suprapună peste ancora „#" și să nu se lipească de text. */
 
 .slot {
   display: inline-flex;
   align-items: center;
-  margin-left: 0.5rem;
+  margin-left: 0.45rem;
   vertical-align: middle;
 }
 
 .speaker,
 .speakerOn,
 .speakerBusy {
-  --voice-accent: var(--ifm-color-primary, #003058);
+  --voice-accent: var(--ifm-color-primary, #005340);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   padding: 0;
   color: var(--voice-accent);
   background: transparent;
@@ -47,10 +49,11 @@
 }
 
 .spinner {
+  flex: none;
   width: 14px;
   height: 14px;
-  border: 2px solid color-mix(in srgb, var(--ifm-color-primary, #003058) 30%, transparent);
-  border-top-color: var(--ifm-color-primary, #003058);
+  border: 2px solid color-mix(in srgb, var(--ifm-color-primary, #005340) 30%, transparent);
+  border-top-color: var(--ifm-color-primary, #005340);
   border-radius: 50%;
   animation: voice-spin 700ms linear infinite;
 }
@@ -59,52 +62,94 @@
   to { transform: rotate(360deg); }
 }
 
-.status,
-.statusError {
-  display: inline-block;
-  margin-left: 0.5rem;
-  font-size: 0.78rem;
+/* --- panoul de sub heading --- */
+
+/* Resetul explicit nu e redundant: panoul e frate cu headingul, iar unele teme
+   dau lui `h2 + *` moșteniri de spațiere sau de literă. Aici vrem text de corp. */
+.panel {
+  margin: 0.6rem 0 1.35rem;
+  font-size: 1rem;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-transform: none;
+  text-align: left;
+}
+
+.waiting,
+.failure,
+.player {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.7rem 0.9rem;
+  background: var(--ifm-background-surface-color, #fff);
+  border: 1px solid var(--ifm-color-emphasis-200, #e6ecea);
+  border-left: 4px solid var(--ifm-color-primary, #005340);
+  border-radius: 12px;
+}
+
+.waitingText {
+  display: flex;
+  flex-direction: column;
+  color: var(--ifm-color-emphasis-800, #333);
+  font-size: 0.9rem;
   font-weight: 600;
-  vertical-align: middle;
 }
 
-.status {
+.waitingHint {
   color: var(--ifm-color-emphasis-600, #5b5b5b);
+  font-size: 0.78rem;
+  font-weight: 400;
 }
 
-.statusError {
-  color: #c0392b;
+.failure {
+  flex-wrap: wrap;
+  border-left-color: #c0392b;
+}
+
+.failureText {
+  flex: 1 1 200px;
+  color: var(--ifm-color-emphasis-800, #333);
+  font-size: 0.88rem;
+}
+
+.retry {
+  padding: 0.35rem 0.8rem;
+  color: #fff;
+  background: #c0392b;
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 700;
 }
 
 /* --- player --- */
 .player {
-  display: block;
-  margin: 0.75rem 0 1rem;
-  padding: 0.85rem 1rem;
-  background: var(--ifm-background-surface-color, #fff);
-  border: 1.5px solid var(--ifm-color-emphasis-300, #d7e5e0);
-  border-radius: 14px;
-  font-size: 0.9rem;
-  /* headingul are font mare; playerul revine la normal */
-  font-weight: 400;
-  line-height: 1.4;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.5rem;
 }
 
-.transport {
+.mainRow {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
+  gap: 0.35rem;
 }
 
 .playBtn {
   display: inline-flex;
+  flex: none;
   align-items: center;
   justify-content: center;
-  width: 52px;
-  height: 52px;
+  width: 44px;
+  height: 44px;
+  margin-right: 0.15rem;
   color: #fff;
-  background: var(--ifm-color-primary, #003058);
+  background: var(--ifm-color-primary, #005340);
   border: 0;
   border-radius: 50%;
   cursor: pointer;
@@ -117,10 +162,11 @@
 .iconBtn {
   position: relative;
   display: inline-flex;
+  flex: none;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
+  width: 38px;
+  height: 38px;
   color: var(--ifm-font-color-base, #161616);
   background: transparent;
   border: 1.5px solid var(--ifm-color-emphasis-300, #d7e5e0);
@@ -134,54 +180,67 @@
 
 .iconLabel {
   position: absolute;
-  bottom: 5px;
-  font-size: 0.55rem;
+  bottom: 4px;
+  font-size: 0.5rem;
   font-weight: 800;
 }
 
-.progressRow {
+/* Bara de derulare împarte rândul cu butoanele pe ecran lat și trece pe rândul
+   următor pe telefon — fără versiune separată de mobil, doar wrap. */
+.progress {
   display: flex;
+  flex: 1 1 210px;
   align-items: center;
-  gap: 0.6rem;
-  margin-top: 0.7rem;
+  gap: 0.5rem;
+  min-width: 190px;
+  margin-left: 0.35rem;
 }
 
 .time {
-  min-width: 3.1rem;
+  min-width: 2.9rem;
   color: var(--ifm-color-emphasis-700, #444);
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   font-variant-numeric: tabular-nums;
   text-align: center;
 }
 
 .seek {
   flex: 1;
-  height: 24px;
-  accent-color: var(--ifm-color-primary, #003058);
+  height: 22px;
+  min-width: 0;
+  accent-color: var(--ifm-color-primary, #005340);
   cursor: pointer;
 }
 
 .bottomRow {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 0.5rem;
-  margin-top: 0.55rem;
+  gap: 0.4rem;
+  padding-top: 0.35rem;
+  border-top: 1px solid var(--ifm-color-emphasis-100, #f2f5f4);
+}
+
+.speedLabel {
+  color: var(--ifm-color-emphasis-600, #5b5b5b);
+  font-size: 0.74rem;
 }
 
 .speeds {
   display: flex;
-  gap: 0.25rem;
+  flex-wrap: wrap;
+  gap: 0.2rem;
 }
 
 .speed,
 .speedOn {
-  min-width: 44px;
-  min-height: 34px;
-  padding: 0.25rem 0.45rem;
+  min-width: 40px;
+  min-height: 30px;
+  padding: 0.2rem 0.4rem;
   border: 1.5px solid var(--ifm-color-emphasis-300, #d7e5e0);
-  border-radius: 9px;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 0.76rem;
+  font-size: 0.74rem;
   font-weight: 700;
 }
 
@@ -192,35 +251,37 @@
 
 .speedOn {
   color: #fff;
-  background: var(--ifm-color-primary, #003058);
-  border-color: var(--ifm-color-primary, #003058);
+  background: var(--ifm-color-primary, #005340);
+  border-color: var(--ifm-color-primary, #005340);
 }
 
 .hint {
   color: var(--ifm-color-emphasis-600, #5b5b5b);
-  font-size: 0.76rem;
+  font-size: 0.74rem;
 }
 
 .close {
   margin-left: auto;
-  min-width: 34px;
-  min-height: 34px;
+  min-width: 32px;
+  min-height: 32px;
   color: var(--ifm-color-emphasis-700, #444);
   background: transparent;
   border: 0;
   border-radius: 8px;
   cursor: pointer;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
 }
 
 .close:hover {
   background: var(--ifm-color-emphasis-100, #f2f5f4);
 }
 
+/* Pe telefon ținta de atingere crește spre 44 px, minimul recomandat. */
 @media (max-width: 600px) {
-  .playBtn { width: 56px; height: 56px; }
-  .iconBtn { width: 46px; height: 46px; }
-  .speeds { flex-wrap: wrap; }
+  .playBtn { width: 50px; height: 50px; }
+  .iconBtn { width: 44px; height: 44px; }
+  .speed, .speedOn { min-width: 46px; min-height: 36px; }
+  .progress { flex-basis: 100%; margin-left: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {

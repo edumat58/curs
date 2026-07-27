@@ -84,14 +84,18 @@ function createOpenAiCompatible({ name, baseUrl, apiKey, model, timeoutMs, maxRe
               provider: name,
               retryable,
             });
+            // +1,5 s peste ce cere furnizorul: fereastra de tokeni pe minut e
+            // glisantă, iar la o cerere mare „exact cât a spus" o prinde încă
+            // plină și primim al doilea 429 degeaba.
             err.retryAfterMs = Number.isFinite(headerWait) && headerWait > 0
-              ? headerWait
-              : bodyWait ? Math.ceil(parseFloat(bodyWait[1]) * 1000) + 500 : 0;
+              ? headerWait + 1500
+              : bodyWait ? Math.ceil(parseFloat(bodyWait[1]) * 1000) + 1500 : 0;
             throw err;
           }
 
           const data = await res.json();
-          const message = data?.choices?.[0]?.message || {};
+          const choice = data?.choices?.[0] || {};
+          const message = choice.message || {};
           const content = message.content;
           if (typeof content !== 'string' || !content.trim()) {
             if (body.response_format) relaxJson = true;
@@ -99,6 +103,10 @@ function createOpenAiCompatible({ name, baseUrl, apiKey, model, timeoutMs, maxRe
           }
           return {
             content,
+            // `length` înseamnă că modelul a fost oprit de plafonul de tokeni,
+            // nu că a terminat ce avea de spus. Fără acest semnal, trunchierea
+            // ajunge nedetectată în audio, ca frază tăiată la mijloc.
+            finishReason: choice.finish_reason || null,
             usage: data.usage || null,
             model: data.model || model,
           };
@@ -140,7 +148,9 @@ export function createLlm(env = process.env) {
     apiKey,
     model: env.VOICE_LLM_MODEL || preset.model,
     timeoutMs: Number(env.VOICE_LLM_TIMEOUT_MS || 60000),
-    maxRetries: Number(env.VOICE_LLM_MAX_RETRIES || 2),
+    // 3 reîncercări, nu 2: pe tierul gratuit limita e pe tokeni/minut, iar o
+    // secțiune mare poate prinde fereastra plină de două ori la rând.
+    maxRetries: Number(env.VOICE_LLM_MAX_RETRIES || 3),
   });
 }
 

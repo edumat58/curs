@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { collectLessonSections } from '@site/src/components/EduPasiAccessibility/lessonSections.mjs';
 import { canonicalSection, sectionHash } from '@site/src/lib/voice/canonical.mjs';
@@ -6,7 +6,8 @@ import { latexToRomanian } from '@site/src/components/EduPasiAccessibility/speec
 import AudioPlayer from './AudioPlayer';
 import styles from './styles.module.css';
 
-const PROMPT_VERSION = 1;
+/** Trebuie să coincidă cu PROMPT_VERSION din serviciu: intră în hash-ul secțiunii. */
+const PROMPT_VERSION = 2;
 
 /**
  * Adresa serviciului de voce.
@@ -29,16 +30,76 @@ function serviceUrl() {
 }
 
 /**
+ * Prima generare durează zeci de secunde: se citește secțiunea, se scrie
+ * explicația, apoi se rostește. Un singur mesaj fix pe tot intervalul arată ca
+ * o pagină blocată. Etapele de mai jos nu sunt măsurători reale de la server —
+ * sunt repere de timp — dar spun elevului că ceva se întâmplă și cam ce anume.
+ */
+const ETAPE = [
+  { after: 0, text: 'Citesc secțiunea…' },
+  { after: 5000, text: 'Pregătesc explicația…' },
+  { after: 14000, text: 'Înregistrez vocea…' },
+];
+
+function useProgressMessage(active) {
+  const [text, setText] = useState(ETAPE[0].text);
+  useEffect(() => {
+    if (!active) return undefined;
+    setText(ETAPE[0].text);
+    const timers = ETAPE.slice(1).map((etapa) =>
+      setTimeout(() => setText(etapa.text), etapa.after)
+    );
+    return () => timers.forEach(clearTimeout);
+  }, [active]);
+  return text;
+}
+
+/**
  * Un buton pe secțiune. Ține starea proprie: inactiv → se pregătește → player.
  * Nu blochează pagina și nu deschide modale: elevul rămâne în lecție.
  */
-function SectionButton({ section, route }) {
+function SectionButton({ section, route, headingElement }) {
   const [state, setState] = useState('idle'); // idle | loading | ready | error
   const [data, setData] = useState(null);
-  const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
+  const [panel, setPanel] = useState(null);
+  const panelRef = useRef(null);
   const abortRef = useRef(null);
+  const progress = useProgressMessage(state === 'loading');
 
   useEffect(() => () => abortRef.current && abortRef.current.abort(), []);
+
+  /**
+   * Panoul (mesaj de așteptare + player) trăiește ÎN AFARA headingului, ca frate
+   * imediat următor. În heading moștenea corpul de literă al titlului, se lipea
+   * de text și se suprapunea peste ancora „#". Îl creăm doar când chiar e nevoie,
+   * ca să nu stricăm selectorii CSS de tip „titlu urmat de paragraf" pe tot site-ul.
+   */
+  const needsPanel = state !== 'idle';
+  useEffect(() => {
+    if (!needsPanel || !headingElement) {
+      if (panelRef.current) {
+        panelRef.current.remove();
+        panelRef.current = null;
+        setPanel(null);
+      }
+      return;
+    }
+    if (panelRef.current) return;
+    const el = document.createElement('div');
+    el.setAttribute('data-edupasi-voice-panel', '');
+    el.className = styles.panel;
+    headingElement.insertAdjacentElement('afterend', el);
+    panelRef.current = el;
+    setPanel(el);
+  }, [needsPanel, headingElement]);
+
+  useEffect(
+    () => () => {
+      if (panelRef.current) panelRef.current.remove();
+    },
+    []
+  );
 
   const request = useCallback(async () => {
     if (state === 'loading') return;
@@ -47,7 +108,7 @@ function SectionButton({ section, route }) {
       return;
     }
     setState('loading');
-    setMessage('Pregătesc explicația…');
+    setError('');
 
     try {
       // Formulele se rostesc determinist, nu le „citește" modelul caracter cu caracter.
@@ -84,37 +145,30 @@ function SectionButton({ section, route }) {
 
       const hash = await sectionHash(section, PROMPT_VERSION);
       abortRef.current = new AbortController();
-      const res = await fetch(`${serviceUrl()}/voice/section`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          sectionHash: hash,
-          route,
-          sectionId: section.id,
-          section: { ...payload, canonical: canonicalSection(section) },
-        }),
-        signal: abortRef.current.signal,
+      const body = JSON.stringify({
+        sectionHash: hash,
+        route,
+        sectionId: section.id,
+        section: { ...payload, canonical: canonicalSection(section) },
       });
+      const post = () =>
+        fetch(`${serviceUrl()}/voice/section`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body,
+          signal: abortRef.current.signal,
+        });
+
+      let res = await post();
 
       if (res.status === 429) {
         // Limita gratuită e pe tokeni/minut. Nu e o eroare a elevului și nici
         // o defecțiune: așteptăm exact cât cere serviciul și reîncercăm o dată.
         const info = await res.json().catch(() => ({}));
         const wait = Math.min(30, Number(info.retryAfterSec) || 12);
-        setMessage(`Se pregătesc mai multe explicații deodată. Reîncerc în ${wait} secunde…`);
         await new Promise((r) => setTimeout(r, wait * 1000));
-        const retry = await fetch(`${serviceUrl()}/voice/section`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ sectionHash: hash, route, sectionId: section.id, section: { ...payload, canonical: canonicalSection(section) } }),
-          signal: abortRef.current.signal,
-        });
-        if (!retry.ok) throw new Error('rate');
-        const rjson = await retry.json();
-        if (!rjson.audioUrl) throw new Error('Nu am primit audio.');
-        setData(rjson);
-        setState('ready');
-        return;
+        res = await post();
+        if (!res.ok) throw new Error('rate');
       }
 
       if (!res.ok) throw new Error(`Serviciul a răspuns ${res.status}`);
@@ -125,7 +179,7 @@ function SectionButton({ section, route }) {
     } catch (err) {
       if (err.name === 'AbortError') return;
       setState('error');
-      setMessage(
+      setError(
         err.message === 'rate'
           ? 'Prea multe explicații cerute odată. Așteaptă un minut și apasă din nou.'
           : 'Nu am putut pregăti explicația. Apasă din nou pentru a reîncerca.'
@@ -168,15 +222,36 @@ function SectionButton({ section, route }) {
         )}
       </button>
 
-      {state === 'loading' && <span className={styles.status}>{message}</span>}
-      {state === 'error' && (
-        <span className={styles.statusError} role="status">
-          {message}
-        </span>
-      )}
-      {state === 'ready' && data && (
-        <AudioPlayer src={data.audioUrl} autoPlay onClose={() => setState('idle')} />
-      )}
+      {panel
+        && createPortal(
+          <>
+            {state === 'loading' && (
+              <div className={styles.waiting} role="status">
+                <span className={styles.spinner} aria-hidden="true" />
+                <span className={styles.waitingText}>
+                  {progress}
+                  <span className={styles.waitingHint}>
+                    Prima dată durează puțin. Apoi pornește instant.
+                  </span>
+                </span>
+              </div>
+            )}
+
+            {state === 'error' && (
+              <div className={styles.failure} role="status">
+                <span className={styles.failureText}>{error}</span>
+                <button type="button" className={styles.retry} onClick={request}>
+                  Încearcă din nou
+                </button>
+              </div>
+            )}
+
+            {state === 'ready' && data && (
+              <AudioPlayer src={data.audioUrl} autoPlay onClose={() => setState('idle')} />
+            )}
+          </>,
+          panel
+        )}
     </>
   );
 }
@@ -209,8 +284,12 @@ export default function SectionVoice() {
       const slot = document.createElement('span');
       slot.setAttribute('data-edupasi-voice-slot', '');
       slot.className = styles.slot;
-      heading.appendChild(slot);
-      created.push({ section, slot });
+      // Înaintea ancorei „#" a Docusaurus: altfel, la hover, ancora apare între
+      // titlu și buton și împinge butonul din loc chiar când elevul îl țintește.
+      const anchor = heading.querySelector('.hash-link');
+      if (anchor) heading.insertBefore(slot, anchor);
+      else heading.appendChild(slot);
+      created.push({ section, slot, heading });
     }
     setMounts(created);
 
@@ -222,8 +301,12 @@ export default function SectionVoice() {
 
   return (
     <>
-      {mounts.map(({ section, slot }) =>
-        createPortal(<SectionButton section={section} route={route} />, slot, section.id)
+      {mounts.map(({ section, slot, heading }) =>
+        createPortal(
+          <SectionButton section={section} route={route} headingElement={heading} />,
+          slot,
+          section.id
+        )
       )}
     </>
   );

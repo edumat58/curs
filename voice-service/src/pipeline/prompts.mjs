@@ -11,7 +11,12 @@
  * nu pe asociații.
  */
 
-export const PROMPT_VERSION = 1;
+/**
+ * v2: analiza inventariază explicit exemplele din material, bugetul de vorbire
+ * e mai larg, iar narațiunea are reguli de acoperire. Versiunea intră în hash,
+ * deci explicațiile generate cu v1 (incomplete) se regenerează automat.
+ */
+export const PROMPT_VERSION = 2;
 
 /** Terminologia școlară românească — nu traducem din engleză. */
 const GLOSAR = `
@@ -116,10 +121,13 @@ Sursele pe care ai voie să le citezi (exact aceste șiruri): ${sources.join(', 
   "evidence": [ { "source": "una din sursele permise", "observation": "ce ai observat acolo" } ],
   "definitions": [ { "term": "...", "meaning": "așa cum apare în material" } ],
   "formulas": [ { "ref": "mathLatex[i]", "role": "ce spune formula, în cuvinte" } ],
+  "examples": [ { "ref": "sursa din care provine", "shows": "ce ilustrează exemplul", "values": ["valorile exacte, copiate din material"], "result": "rezultatul, dacă materialul îl dă" } ],
   "figures": [ { "ref": "visuals[i]", "teaches": "ce informație didactică transmite figura" } ],
   "order": ["pașii logici în ordinea în care trebuie explicați"],
   "checks": [ { "item": "afirmație verificabilă", "status": "confirmed" | "incorrect" | "uncertain", "explanation": "..." } ]
 }
+
+La "examples": inventariază TOATE exemplele, calculele rezolvate și cazurile concrete care EXISTĂ în material, cu valorile lor exacte, în ordinea în care apar. Sunt partea din lecție pe care elevul o urmărește cel mai atent, deci niciunul nu are voie să lipsească din listă. Dacă materialul nu conține niciun exemplu, lista rămâne goală — nu inventezi.
 
 Dacă o categorie nu se aplică, pune listă goală. Nu inventa intrări ca să umpli structura.
 
@@ -135,15 +143,28 @@ ${renderSource(section)}
 
 /**
  * Buget de lungime derivat din materialul sursă.
- * Fără el, modelul umple spațiul repetând aceeași idee — observat empiric:
- * 98 de secunde de vorbire pentru o definiție de 125 de caractere.
+ *
+ * Bugetul are două roluri opuse și ambele contează. Fără plafon, modelul umple
+ * spațiul repetând aceeași idee — observat empiric: 98 de secunde de vorbire
+ * pentru o definiție de 125 de caractere. Cu plafonul prea jos însă (v1:
+ * caractere/3,2, maximum 400 de cuvinte), modelul e forțat să aleagă ce spune
+ * și taie exact partea scumpă: exemplele rezolvate. Elevul aude regula, dar nu
+ * și cum se aplică.
+ *
+ * De aceea explicația are voie să fie mai lungă decât sursa. O formulă scrisă
+ * pe un rând se desface în câteva fraze rostite; o figură care „se vede dintr-o
+ * privire" trebuie povestită. Ponderile de mai jos reflectă acest cost.
  */
 export function speechBudget(section) {
-  const chars =
+  const weighted =
     (section.contentText || '').length
-    + (section.latex || []).length * 60
-    + (section.visuals || []).length * 40;
-  const words = Math.round(Math.min(400, Math.max(45, chars / 3.2)));
+    + (section.latex || []).length * 100
+    + (section.visuals || []).length * 90;
+  // Plafonul de 450 de cuvinte (~3 minute) nu e ales estetic: peste el, o
+  // singură secțiune consumă tot bugetul gratuit de tokeni pe minut al
+  // furnizorului și blochează generarea următoarelor. Sunt și trei minute de
+  // ascultare continuă — mult pentru un elev care are nevoie de sprijin.
+  const words = Math.round(Math.min(450, Math.max(60, weighted / 2.6)));
   return { words, seconds: Math.round((words / 150) * 60) };
 }
 
@@ -155,6 +176,12 @@ function narratableAnalysis(analysis) {
     purpose: analysis.purpose,
     definitions: analysis.definitions || [],
     formulas: analysis.formulas || [],
+    // Exemplele trec mai departe cu valorile lor: sunt fapte extrase din
+    // material, nu invenții. Absența lor din v1 era motivul pentru care
+    // narațiunea le sărea — nu le vedea niciodată.
+    examples: (analysis.examples || []).filter(
+      (e) => e && (e.shows || (e.values && e.values.length))
+    ),
     figures: (analysis.figures || []).filter((f) => f && f.teaches),
     order: analysis.order || [],
     confirmedFacts: (analysis.checks || [])
@@ -163,9 +190,23 @@ function narratableAnalysis(analysis) {
   };
 }
 
+/** Lista de acoperire — ce anume trebuie să apară în explicație, punct cu punct. */
+function coverageChecklist(narratable) {
+  const items = [];
+  (narratable.definitions || []).forEach((d) => d && d.term && items.push(`definiția: ${d.term}`));
+  (narratable.formulas || []).forEach((f) => f && f.role && items.push(`formula: ${f.role}`));
+  (narratable.examples || []).forEach((e, i) => {
+    const values = (e.values || []).join(', ');
+    items.push(`exemplul ${i + 1}: ${e.shows || 'din material'}${values ? ` (${values})` : ''}`);
+  });
+  (narratable.figures || []).forEach((f) => items.push(`ce arată figura: ${f.teaches}`));
+  return items;
+}
+
 export function buildNarrationPrompt(section, analysis) {
   const budget = speechBudget(section);
   const narratable = narratableAnalysis(analysis);
+  const checklist = coverageChecklist(narratable);
   return {
     system: `Ești profesor de matematică într-o școală din România. Vorbești unui elev de gimnaziu care are nevoie de sprijin. Textul tău va fi CITIT CU VOCE TARE — deci scrii vorbire, nu articol.
 
@@ -179,11 +220,24 @@ Cum vorbești:
 - Terminologie școlară românească:
 ${GLOSAR}
 
+Româna rostită trebuie să fie corectă gramatical:
+- Articolul hotărât NU se pierde. Subiectul se articulează: „Virgula separă partea întreagă", nu „Virgulă separă"; „Numitorul arată în câte părți", nu „Numitor arată"; „Fracția se simplifică", nu „Fracție se simplifică".
+- Acordul în gen, număr și caz se respectă în fiecare frază.
+- Diacritice complete peste tot: ă, â, î, ș, ț.
+
 Fidelitate — regula cea mai importantă:
-- Explici DOAR ce există în material.
-- INTERZIS să inventezi exemple, numere, valori sau cazuri care nu apar în material. Dacă materialul nu dă niciun exemplu numeric, NU inventa unul.
+- Explici DOAR ce există în material. Materialul e singura ta sursă.
+- Exemplele DIN MATERIAL se explică, nu se sar. Dacă materialul conține un exemplu, un calcul rezolvat sau un caz concret, îl parcurgi cu elevul folosind exact valorile scrise acolo. Sunt partea pe care elevul o înțelege cel mai bine.
+- INTERZIS să inventezi exemple, numere, valori sau cazuri NOI, care nu apar în material. Dacă materialul nu dă niciun exemplu, explici regula în cuvinte — nu o ilustrezi cu valori proprii.
+- Distincția e simplă: exemplele existente le folosești integral; exemple noi nu creezi.
+- Nu adăuga echivalențe, conversii sau reformulări matematice care nu apar în material. Dacă materialul spune doar cum se citește un număr, spui doar cum se citește — nu îl mai traduci și în alte unități, pentru că exact acolo apar greșelile.
 - Nu introduci noțiuni care nu apar în secțiune.
 - Mai bine spui mai puțin decât să inventezi. Corectitudinea este prioritatea absolută.
+
+Acoperire — a doua regulă ca importanță:
+- Parcurgi TOT ce apare în lista de acoperire primită: fiecare definiție, fiecare formulă, fiecare exemplu, fiecare informație din figuri. Niciun punct nu se sare.
+- Respecți ordinea logică indicată.
+- Termini ce ai început. Ultima idee se spune la fel de complet ca prima, iar textul se încheie cu o frază terminată — niciodată la mijlocul unui gând.
 
 Nu comenta materialul, predă-l:
 - NU vorbi despre lecție ca obiect: fără „definiția spune", „materialul arată", „noi vorbim despre ce scrie".
@@ -192,22 +246,28 @@ Nu comenta materialul, predă-l:
 
 Explici, nu recitești:
 - NU relua definiția cuvânt cu cuvânt. Desfă-o în pași: ce este, din ce e alcătuită, cum recunoști, la ce folosește — dar numai cu informația din material.
-- Dacă materialul dă o regulă, spune-o și apoi arată ce înseamnă practic, fără să inventezi valori.
+- Dacă materialul dă o regulă, spune-o și apoi arată ce înseamnă practic. Dacă materialul are un exemplu, exemplul lui este demonstrația: îl iei pas cu pas, spui de unde pleci, ce faci și ce obții.
 
-LUNGIME: între ${Math.round(budget.words * 0.7)} și ${budget.words} de cuvinte (≈ ${budget.seconds} secunde). Sub acest prag explicația e prea seacă; peste el începi să repeți. Dacă materialul e scurt, explicația e scurtă.
+LUNGIME: ai la dispoziție până la ${budget.words} de cuvinte (≈ ${budget.seconds} secunde) și cel puțin ${Math.round(budget.words * 0.75)}. Nu e o țintă de umplut: dacă ai acoperit tot ce era de acoperit mai devreme, te oprești. Dar nu sacrifici niciun punct din lista de acoperire ca să te încadrezi — spațiul e calculat ca să încapă tot.
 
 Răspunzi NUMAI cu textul de rostit. Fără introducere, fără comentarii, fără ghilimele.`,
 
     user: `Ai citit deja secțiunea. Iată ce ai înțeles (doar fapte confirmate):
 
 ${JSON.stringify(narratable, null, 1)}
-
+${
+  checklist.length
+    ? `\nLISTĂ DE ACOPERIRE — fiecare punct trebuie să se audă în explicație:\n${checklist
+        .map((item, i) => `${i + 1}. ${item}`)
+        .join('\n')}\n`
+    : ''
+}
 Iată din nou materialul, ca să rămâi fidel:
 
 --- MATERIAL SURSĂ ---
 ${renderSource(section)}
 --- SFÂRȘIT MATERIAL ---
 
-Explică-i acum elevului această secțiune, cu voce tare, în română.`,
+Explică-i acum elevului această secțiune, cu voce tare, în română. Acoperă toate punctele din listă, în ordine, și încheie cu o frază completă.`,
   };
 }
