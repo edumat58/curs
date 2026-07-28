@@ -68,6 +68,7 @@ function SkipIcon({ forward }) {
  */
 function useEvidentiere(activ, blocuri, indexBloc, pilot) {
   const anterior = useRef(null);
+  const pilotAnterior = useRef(pilot);
 
   useEffect(() => {
     const stinge = () => {
@@ -81,10 +82,21 @@ function useEvidentiere(activ, blocuri, indexBloc, pilot) {
       return undefined;
     }
     const el = blocuri[indexBloc].el;
-    if (el === anterior.current) return undefined;
-    stinge();
-    el.classList.add(styles.evidentiat);
-    anterior.current = el;
+    /**
+     * Revenirea în pilot trebuie să miște pagina PE LOC.
+     *
+     * Fără asta, elevul apăsa „Urmărește textul" și nu se întâmpla nimic până la
+     * fraza următoare — care putea fi la zece secunde distanță. Butonul părea
+     * stricat exact în momentul în care omul cerea ajutor.
+     */
+    const tocmaiAmRevenitInPilot = pilot && !pilotAnterior.current;
+    pilotAnterior.current = pilot;
+    if (el === anterior.current && !tocmaiAmRevenitInPilot) return undefined;
+    if (el !== anterior.current) {
+      stinge();
+      el.classList.add(styles.evidentiat);
+      anterior.current = el;
+    }
 
     /**
      * Derularea aparține pilotului, nu evidențierii.
