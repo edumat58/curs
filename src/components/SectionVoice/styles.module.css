@@ -24,6 +24,18 @@
   --voice-border: var(--edupasi-border-subtle, #d7e5e0);
   --voice-focus: var(--edupasi-focus, #0197b0);
   --voice-danger: var(--edupasi-decoration-red, #b73528);
+
+  /* Limbajul vizual, într-un singur loc.
+     Trei decizii care se aplică peste tot și pe care le poate contrazice doar
+     un motiv anume: greutatea vine din material și spațiu, nu din umbre;
+     mișcarea se folosește DOAR când poartă informație; colțurile sunt ferme,
+     nu rotunjite generos — rotunjimea mare citește a aplicație, iar asta e
+     material de lecție. */
+  --voice-raza: 10px;
+  --voice-raza-mica: 6px;
+  --voice-hairline: color-mix(in srgb, var(--voice-accent) 16%, transparent);
+  --voice-camp: color-mix(in srgb, var(--voice-accent) 6%, transparent);
+  --voice-ritm: 0.65rem;
 }
 
 .slot {
@@ -96,65 +108,76 @@
   text-align: left;
 }
 
+/* Bandă, nu buton.
+   Varianta veche era un dreptunghi plin cu o iconiță într-un cerc — soluția pe
+   care o alege oricine în trei minute, fără caracter propriu. Aici forma spune
+   ceva: un capăt plin, care poartă gestul, și un câmp deschis care poartă
+   cuvintele. Se citește ca o invitație tipărită, nu ca un control de aplicație.
+   Greutatea vine din contrastul dintre cele două zone, nu dintr-o umbră. */
 .lessonBtn,
 .lessonBtnOn {
   display: flex;
-  align-items: center;
-  gap: 0.85rem;
+  align-items: stretch;
+  gap: 0;
   width: 100%;
-  padding: 0.85rem 1.05rem;
-  color: var(--voice-on-accent);
-  background: var(--voice-accent);
-  border: 0;
-  border-radius: 14px;
+  padding: 0;
+  overflow: hidden;
+  color: var(--voice-accent);
+  background: var(--voice-camp);
+  border: 1px solid var(--voice-hairline);
+  border-radius: var(--voice-raza);
   cursor: pointer;
   text-align: left;
-  /* Umbra e discretă intenționat: butonul trebuie să iasă în evidență fa­ță de
-     text, nu să concureze cu titlul lecției, care rămâne primul lucru citit. */
-  box-shadow: 0 2px 10px color-mix(in srgb, var(--voice-accent) 22%, transparent);
-  transition: filter 140ms ease, transform 80ms ease;
+  transition: background 160ms ease, border-color 160ms ease;
 }
 
 .lessonBtn:hover,
 .lessonBtnOn:hover {
-  filter: brightness(1.08);
-}
-
-.lessonBtn:active,
-.lessonBtnOn:active {
-  transform: scale(0.995);
+  background: color-mix(in srgb, var(--voice-accent) 11%, transparent);
+  border-color: color-mix(in srgb, var(--voice-accent) 34%, transparent);
 }
 
 .lessonBtnOn {
-  background: var(--voice-accent-strong);
+  background: color-mix(in srgb, var(--voice-accent) 10%, transparent);
 }
 
+/* Capătul plin. Lățime fixă, ca marginea din stânga a lecției să rămână o linie
+   dreaptă indiferent de lungimea titlului. */
 .lessonIcon {
   display: inline-flex;
   flex: none;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  border: 1.5px solid color-mix(in srgb, var(--voice-on-accent) 45%, transparent);
-  border-radius: 50%;
+  align-self: stretch;
+  width: 58px;
+  color: var(--voice-on-accent);
+  background: var(--voice-accent);
+  border: 0;
+  border-radius: 0;
 }
 
 .lessonText {
   display: flex;
   flex-direction: column;
+  gap: 0.1rem;
   min-width: 0;
+  padding: 0.72rem 0.95rem;
 }
 
+/* Titlul poartă vocea; explicația stă dedesubt, mai mică și mai stinsă, dar în
+   ACEEAȘI culoare — griul ar rupe unitatea și ar arăta a text secundar de
+   sistem, nu a doua propoziție a aceleiași invitații. */
 .lessonTitle {
-  font-size: 1.02rem;
+  font-size: 1.04rem;
   font-weight: 700;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
 }
 
 .lessonHint {
-  color: color-mix(in srgb, var(--voice-on-accent) 78%, transparent);
-  font-size: 0.82rem;
+  color: color-mix(in srgb, var(--voice-accent) 62%, transparent);
+  font-size: 0.8rem;
+  line-height: 1.35;
 }
 
 /* Rotocolul de așteptare, pe fundal de accent: alb, nu în culoarea accentului. */
@@ -219,9 +242,11 @@
   gap: 0.65rem;
   padding: 0.7rem 0.9rem;
   background: var(--voice-surface);
-  border: 1px solid var(--voice-border);
-  border-left: 4px solid var(--voice-accent);
-  border-radius: 12px;
+  /* Fără bordură groasă în stânga: era singurul lucru care ținea panoul legat
+     de titlu, dar îl făcea să arate a citat. Legătura o face acum poziția și
+     câmpul de fundal, care sunt oricum acolo. */
+  border: 1px solid var(--voice-hairline);
+  border-radius: var(--voice-raza);
 }
 
 /* Panoul de așteptare nu conține decât bara, deci nu are nevoie de aliniere pe
@@ -233,10 +258,10 @@
 
 .bar {
   position: relative;
-  height: 8px;
+  height: 5px;
   overflow: hidden;
-  background: var(--voice-accent-soft);
-  border-radius: 999px;
+  background: color-mix(in srgb, var(--voice-accent) 12%, transparent);
+  border-radius: 2px;
 }
 
 .barFill {
@@ -246,87 +271,27 @@
   left: 0;
   width: 0;
   overflow: hidden;
-  background: linear-gradient(
-    90deg,
-    color-mix(in srgb, var(--voice-accent) 72%, white) 0%,
-    var(--voice-accent) 100%
-  );
-  border-radius: 999px;
+  background: var(--voice-accent);
+  border-radius: 2px;
   /* Puțin mai lungă decât intervalul de recalculare (100 ms), ca înaintarea să
      fie continuă, nu în trepte de o zecime de secundă. */
   transition: width 160ms linear;
 }
 
-/* Dunga care traversează porțiunea umplută. Sinteza unei secțiuni lungi poate
-   ține un minut, iar în minutul ăla bara înaintează prea încet ca ochiul să
-   prindă mișcarea. Fără ea, un progres real arată identic cu o pagină moartă. */
+/* Bara: mai puțin, mai precis.
+   Avusese dungă care baleiază, puls la vârf și mișcare pe traseul gol — trei
+   animații care se suprapuneau și făceau așteptarea să pară agitată, nu activă.
+   Rămâne una singură, și doar pentru că poartă informație: capătul care
+   înaintează are o linie mai deschisă, care spune unde s-a ajuns fără să
+   pretindă că avansează. Restul e material și spațiu. */
 .barFill::after {
   content: '';
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 0;
-  width: 45%;
-  background: linear-gradient(
-    100deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.55) 50%,
-    transparent 100%
-  );
-  animation: voice-sheen 1.7s ease-in-out infinite;
-}
-
-/* Vârful barei — capul care înaintează.
-   Fără el, marginea din dreapta e o tăietură dreaptă și rece, iar când etapa
-   durează, bara pare oprită chiar dacă lucrează. Pulsul de aici spune „încă
-   merge" fără să pretindă că a avansat. */
-.barFill::before {
-  content: '';
-  position: absolute;
-  top: -3px;
-  bottom: -3px;
-  right: -1px;
-  width: 10px;
-  background: radial-gradient(
-    closest-side,
-    color-mix(in srgb, var(--voice-accent) 85%, white) 0%,
-    transparent 100%
-  );
-  border-radius: 999px;
-  animation: voice-cap 1.4s ease-in-out infinite;
-}
-
-@keyframes voice-cap {
-  0%, 100% { opacity: 0.45; transform: scaleX(1); }
-  50% { opacity: 1; transform: scaleX(1.5); }
-}
-
-/* Traseul gol capătă o mișcare proprie, foarte lentă: arată că sistemul
-   lucrează chiar și în etapele în care bara abia se mișcă. */
-.bar::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    color-mix(in srgb, var(--voice-accent) 14%, transparent) 50%,
-    transparent 100%
-  );
-  background-size: 55% 100%;
-  background-repeat: no-repeat;
-  animation: voice-track 2.6s linear infinite;
-  pointer-events: none;
-}
-
-@keyframes voice-track {
-  from { background-position: -60% 0; }
-  to { background-position: 160% 0; }
-}
-
-@keyframes voice-sheen {
-  from { transform: translateX(-100%); }
-  to { transform: translateX(320%); }
+  right: 0;
+  width: 2px;
+  background: color-mix(in srgb, white 70%, var(--voice-accent));
 }
 
 .failure {
@@ -394,7 +359,7 @@
   height: 38px;
   color: var(--voice-text);
   background: transparent;
-  border: 1.5px solid var(--voice-border);
+  border: 1px solid var(--voice-hairline);
   border-radius: 50%;
   cursor: pointer;
   transition: background 140ms ease, border-color 140ms ease, transform 80ms ease;
@@ -460,8 +425,8 @@
   min-width: 40px;
   min-height: 30px;
   padding: 0.2rem 0.4rem;
-  border: 1.5px solid var(--voice-border);
-  border-radius: 8px;
+  border: 1px solid var(--voice-hairline);
+  border-radius: var(--voice-raza-mica);
   cursor: pointer;
   font-size: 0.74rem;
   font-weight: 700;
@@ -549,18 +514,29 @@
  * obosește. Bara din stânga poartă informația și pentru cine nu distinge bine
  * culorile — nu ne bazăm doar pe nuanță.
  */
-/* Variabilele se iau direct din paleta EduPAȘI, nu din cele locale ale
-   playerului: elementul luminat trăiește în conținutul lecției, deci în afara
-   containerelor unde sunt definite `--voice-*`. */
+/* Evidențierea ca LUMINĂ, nu ca fundal.
+   Un bloc plat de culoare se citește ca „text selectat" — altă intenție decât
+   „profesorul arată aici". Diferența o face marginea: selecția are muchii
+   drepte, atenția are cădere. De aceea fundalul se stinge spre capete, iar
+   textul se închide ușor în loc să fie acoperit.
+
+   Variabilele se iau direct din paleta EduPAȘI: elementul luminat trăiește în
+   conținutul lecției, deci în afara containerelor unde sunt definite `--voice-*`. */
 .evidentiat {
   position: relative;
-  background: var(--edupasi-accent-soft, #d9eef7);
-  /* Doar fundalul, fără bară laterală: bara adăuga o a doua muchie verticală
-     lângă cea a casetelor și a listelor, iar pe rânduri scurte arăta ca un
-     citat, nu ca o evidențiere. */
-  box-shadow: 0 0 0 6px var(--edupasi-accent-soft, #d9eef7);
-  border-radius: 4px;
-  transition: background 220ms ease, box-shadow 220ms ease;
+  background:
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      color-mix(in srgb, var(--edupasi-accent-soft, #d9eef7) 92%, transparent) 6%,
+      color-mix(in srgb, var(--edupasi-accent-soft, #d9eef7) 92%, transparent) 94%,
+      transparent 100%
+    );
+  box-shadow:
+    0 0 0 4px color-mix(in srgb, var(--edupasi-accent-soft, #d9eef7) 45%, transparent),
+    0 0 22px 8px color-mix(in srgb, var(--edupasi-accent-soft, #d9eef7) 30%, transparent);
+  border-radius: 2px;
+  transition: background 260ms ease, box-shadow 260ms ease;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -599,9 +575,7 @@
   .speaker, .speakerOn, .speakerBusy { transition: none; }
   /* Bara continuă să înainteze — asta e informație, nu decor. Dispare doar
      dunga care baleiază, singura parte pur vizuală. */
-  .barFill::after,
-  .barFill::before,
-  .bar::after { animation: none; }
+  .barFill::after { animation: none; }
   .barFill { transition: none; }
   .saritor:hover { box-shadow: none; }
   .iconBtn:active { transform: none; }
