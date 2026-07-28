@@ -9,14 +9,16 @@
   --ep-text-muted: var(--edupasi-text-muted, #4a4a4a);
   --ep-border: var(--edupasi-border-subtle, #ddd);
   position: relative;
-  z-index: 240;
+  /* Deasupra navigației (999) și a navigatorului extins (1100): altfel butonul
+     de accesibilitate rămâne sub ele exact pe ecranele mici. */
+  z-index: 1150;
 }
 
 .trigger {
   display: none !important;
   left: 1rem;
   bottom: 5.5rem;
-  z-index: 240;
+  z-index: 1150;
   display: inline-flex;
   min-height: 48px;
   align-items: center;
@@ -241,7 +243,11 @@
   right: 1.25rem !important;
   left: auto !important;
   bottom: auto !important;
-  z-index: 241;
+  /* Peste bara de navigație (999) și peste navigatorul extins (1100). Cu 241
+     panoul se deschidea DEDESUBTUL lor: pe telefon rămânea complet acoperit,
+     iar setările de accesibilitate erau exact lucrul la care nu ajungea cine
+     avea mai multă nevoie de el. */
+  z-index: 1200;
   width: min(430px, calc(100vw - 2rem));
   max-height: calc(100dvh - var(--ifm-navbar-height, 4.25rem) - 80px);
   overflow: hidden;
@@ -534,20 +540,23 @@
     display: none;
   }
 
+  /* Pe telefon panoul devine foaie de jos, nu casetă agățată sub navbar.
+     Agățat de sus intra sub bara EduPAȘI și sub „Traseul meu", iar pe ecranele
+     mici nu mai rămânea loc de nimic. Jos e și mai ușor de atins cu degetul. */
   .panel {
     position: fixed !important;
-    top: calc(var(--ifm-navbar-height, 4.25rem) + 56px + 8px) !important;
+    top: auto !important;
     right: 0.5rem !important;
-    left: auto !important;
-    bottom: auto !important;
-    width: 85vw !important;
-    max-width: 340px !important;
-    height: 55dvh !important;
-    max-height: 55dvh !important;
-    border-radius: 18px !important;
-    transform-origin: right top !important;
+    left: 0.5rem !important;
+    bottom: 0.75rem !important;
+    width: auto !important;
+    max-width: none !important;
+    height: auto !important;
+    max-height: 72dvh !important;
+    border-radius: 20px !important;
+    transform-origin: bottom center !important;
     animation: edupasiExpandFromRight 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
-    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.28) !important;
+    box-shadow: 0 -8px 48px rgba(0, 0, 0, 0.3) !important;
   }
 
   .body {

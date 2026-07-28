@@ -66,7 +66,7 @@ function SkipIcon({ forward }) {
  * o pagină care sare la fiecare frază e mai obositoare decât una care nu se
  * mișcă deloc.
  */
-function useEvidentiere(activ, blocuri, indexBloc) {
+function useEvidentiere(activ, blocuri, indexBloc, pilot) {
   const anterior = useRef(null);
 
   useEffect(() => {
@@ -86,16 +86,26 @@ function useEvidentiere(activ, blocuri, indexBloc) {
     el.classList.add(styles.evidentiat);
     anterior.current = el;
 
-    const cadru = el.getBoundingClientRect();
-    const inafara = cadru.top < 80 || cadru.bottom > window.innerHeight - 80;
-    if (inafara) {
-      el.scrollIntoView({
-        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
-        block: 'center',
-      });
+    /**
+     * Derularea aparține pilotului, nu evidențierii.
+     *
+     * Evidențierea merge mai departe oricum — elevul care s-a dus să se uite
+     * mai jos vede în continuare unde a ajuns explicația când se întoarce. Doar
+     * urmărirea automată se oprește, pentru că altfel pagina i-ar smulge
+     * privirea înapoi de fiecare dată când citește altceva.
+     */
+    if (pilot) {
+      const cadru = el.getBoundingClientRect();
+      const inafara = cadru.top < 90 || cadru.bottom > window.innerHeight - 90;
+      if (inafara) {
+        el.scrollIntoView({
+          behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+          block: 'center',
+        });
+      }
     }
     return undefined;
-  }, [activ, blocuri, indexBloc]);
+  }, [activ, blocuri, indexBloc, pilot]);
 
   // La demontare sau la oprirea sincronizării, pagina rămâne curată.
   useEffect(() => () => {
@@ -117,6 +127,16 @@ export default function AudioPlayer({
   const [speed, setSpeed] = useState(1);
   const [buffering, setBuffering] = useState(true);
   const [sincron, setSincron] = useState(false);
+  /**
+   * Pilotul: pagina urmărește singură explicația.
+   *
+   * Pornește odată cu sincronizarea, dar se oprește în clipa în care elevul
+   * derulează el însuși — nu i se ia controlul din mână. Sincronizarea rămâne
+   * pornită, deci textul continuă să se lumineze, iar întoarcerea în pilot e un
+   * singur buton. Ieșirea și revenirea sunt două acțiuni separate de pornirea
+   * sincronizării, exact ca la o hartă care te urmărește până când o miști tu.
+   */
+  const [pilot, setPilot] = useState(true);
 
   /**
    * Potrivirea se calculează o singură dată, la pornirea sincronizării.
@@ -142,7 +162,31 @@ export default function AudioPlayer({
     ? frazaLaMoment(potrivire.timpi, current)
     : -1;
   const blocCurent = frazaCurenta >= 0 ? (potrivire.drum[frazaCurenta] ?? -1) : -1;
-  useEvidentiere(sincron && playing, potrivire.blocuri, blocCurent);
+  useEvidentiere(sincron && playing, potrivire.blocuri, blocCurent, pilot);
+
+  /**
+   * Derularea făcută de om oprește pilotul; cea făcută de noi, nu.
+   *
+   * Nu există un eveniment care să spună cine a derulat, așa că ne uităm la
+   * INTENȚIE: rotița, degetul pe ecran și tastele de navigare vin de la elev.
+   * `scroll` singur nu ar merge — l-ar declanșa și `scrollIntoView`-ul nostru,
+   * iar pilotul s-ar opri singur la prima frază.
+   */
+  useEffect(() => {
+    if (!sincron) { setPilot(true); return undefined; }
+    const iese = () => setPilot(false);
+    const laTasta = (e) => {
+      if (['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '].includes(e.key)) iese();
+    };
+    window.addEventListener('wheel', iese, { passive: true });
+    window.addEventListener('touchmove', iese, { passive: true });
+    window.addEventListener('keydown', laTasta);
+    return () => {
+      window.removeEventListener('wheel', iese);
+      window.removeEventListener('touchmove', iese);
+      window.removeEventListener('keydown', laTasta);
+    };
+  }, [sincron]);
 
   useEffect(() => {
     const el = audioRef.current;
@@ -340,6 +384,27 @@ export default function AudioPlayer({
               <circle cx="18.5" cy="12" r="2.4" fill="currentColor" />
             </svg>
             Sincronizat
+          </button>
+        )}
+
+        {sincron && !pilot && (
+          <button
+            type="button"
+            className={styles.pilot}
+            onClick={() => setPilot(true)}
+            title="Pagina urmărește din nou explicația"
+          >
+            <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+              <path
+                d="M12 4v13M7 12l5 5 5-5"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            Urmărește textul
           </button>
         )}
 

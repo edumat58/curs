@@ -437,6 +437,23 @@
 
 /* --- Sincronizat --- */
 
+/* Pilotul apare doar cât timp sincronizarea e pornită și elevul a plecat singur
+   din urmărire. E o invitație de întoarcere, nu un comutator permanent. */
+.pilot {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  min-height: 30px;
+  padding: 0.2rem 0.55rem;
+  color: var(--voice-on-accent);
+  background: var(--voice-accent);
+  border: 1.5px solid var(--voice-accent);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
 .sync,
 .syncOn {
   display: inline-flex;
@@ -476,10 +493,11 @@
 .evidentiat {
   position: relative;
   background: var(--edupasi-accent-soft, #d9eef7);
-  box-shadow:
-    inset 3px 0 0 0 var(--edupasi-accent, #003058),
-    0 0 0 6px var(--edupasi-accent-soft, #d9eef7);
-  border-radius: 3px;
+  /* Doar fundalul, fără bară laterală: bara adăuga o a doua muchie verticală
+     lângă cea a casetelor și a listelor, iar pe rânduri scurte arăta ca un
+     citat, nu ca o evidențiere. */
+  box-shadow: 0 0 0 6px var(--edupasi-accent-soft, #d9eef7);
+  border-radius: 4px;
   transition: background 220ms ease, box-shadow 220ms ease;
 }
 
