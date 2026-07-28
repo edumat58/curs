@@ -270,10 +270,58 @@
   background: linear-gradient(
     100deg,
     transparent 0%,
-    rgba(255, 255, 255, 0.5) 50%,
+    rgba(255, 255, 255, 0.55) 50%,
     transparent 100%
   );
   animation: voice-sheen 1.7s ease-in-out infinite;
+}
+
+/* Vârful barei — capul care înaintează.
+   Fără el, marginea din dreapta e o tăietură dreaptă și rece, iar când etapa
+   durează, bara pare oprită chiar dacă lucrează. Pulsul de aici spune „încă
+   merge" fără să pretindă că a avansat. */
+.barFill::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  bottom: -3px;
+  right: -1px;
+  width: 10px;
+  background: radial-gradient(
+    closest-side,
+    color-mix(in srgb, var(--voice-accent) 85%, white) 0%,
+    transparent 100%
+  );
+  border-radius: 999px;
+  animation: voice-cap 1.4s ease-in-out infinite;
+}
+
+@keyframes voice-cap {
+  0%, 100% { opacity: 0.45; transform: scaleX(1); }
+  50% { opacity: 1; transform: scaleX(1.5); }
+}
+
+/* Traseul gol capătă o mișcare proprie, foarte lentă: arată că sistemul
+   lucrează chiar și în etapele în care bara abia se mișcă. */
+.bar::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in srgb, var(--voice-accent) 14%, transparent) 50%,
+    transparent 100%
+  );
+  background-size: 55% 100%;
+  background-repeat: no-repeat;
+  animation: voice-track 2.6s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes voice-track {
+  from { background-position: -60% 0; }
+  to { background-position: 160% 0; }
 }
 
 @keyframes voice-sheen {
@@ -437,6 +485,20 @@
 
 /* --- Sincronizat --- */
 
+/* Blocurile despre care explicația chiar spune ceva devin clicabile. Semnalul e
+   deliberat discret — o pagină de lecție plină de sublinieri ar arăta a hartă
+   de linkuri, nu a text de citit. Se vede la trecerea cu mouse-ul și rămâne
+   accesibil la atingere, unde nu există hover. */
+.saritor {
+  cursor: pointer;
+}
+
+.saritor:hover {
+  background: color-mix(in srgb, var(--edupasi-accent-soft, #d9eef7) 55%, transparent);
+  border-radius: 4px;
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--edupasi-accent-soft, #d9eef7) 55%, transparent);
+}
+
 /* Pilotul apare doar cât timp sincronizarea e pornită și elevul a plecat singur
    din urmărire. E o invitație de întoarcere, nu un comutator permanent. */
 .pilot {
@@ -537,8 +599,11 @@
   .speaker, .speakerOn, .speakerBusy { transition: none; }
   /* Bara continuă să înainteze — asta e informație, nu decor. Dispare doar
      dunga care baleiază, singura parte pur vizuală. */
-  .barFill::after { animation: none; }
+  .barFill::after,
+  .barFill::before,
+  .bar::after { animation: none; }
   .barFill { transition: none; }
+  .saritor:hover { box-shadow: none; }
   .iconBtn:active { transform: none; }
   .spinnerLight { animation-duration: 2s; }
   .lessonBtn, .lessonBtnOn { transition: none; }

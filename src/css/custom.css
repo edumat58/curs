@@ -1692,14 +1692,38 @@ html[data-edupasi-font='lizibil'] { --edupasi-font-ales: 'EduPasiLizibil', Verda
 html[data-edupasi-font='dislexie'] { --edupasi-font-ales: 'EduPasiDislexie', Verdana, system-ui, sans-serif; }
 html[data-edupasi-font='serif'] { --edupasi-font-ales: Georgia, 'Iowan Old Style', 'Times New Roman', serif; }
 
-/* Titlurile primesc de la temă o familie proprie („Space Grotesk"), care
-   câștigă în fața moștenirii de la `body`. Dacă alegerea elevului nu le
-   acoperă, jumătate din pagină rămâne în alt font decât a cerut — și pare că
-   setarea nu funcționează. */
-html[data-edupasi-font]:not([data-edupasi-font='implicit']) :where(body, .menu, .navbar),
-html[data-edupasi-font]:not([data-edupasi-font='implicit'])
-  .theme-doc-markdown :where(p, li, td, th, blockquote, h1, h2, h3, h4, h5, h6, strong, em, a) {
-  font-family: var(--edupasi-font-ales);
+/* O preferință de accesibilitate trebuie să câștige în fața stilurilor
+   autorului. Aici `!important` nu e o scurtătură, e semantica corectă a
+   cascadei: componentele de lecție (casete, text evidențiat, titluri) își
+   impun fiecare propriul font din module CSS cu specificitate mai mare, iar o
+   listă de tag-uri nu le poate acoperi pe toate — mereu ar rămâne una pe
+   dinafară, și elevul ar vedea jumătate de pagină schimbată. De aceea alegerea
+   se aplică pe TOT subarborele lecției. */
+html[data-edupasi-font]:not([data-edupasi-font='implicit']) :where(body, .menu, .navbar) {
+  font-family: var(--edupasi-font-ales) !important;
+}
+
+html[data-edupasi-font]:not([data-edupasi-font='implicit']) .theme-doc-markdown,
+html[data-edupasi-font]:not([data-edupasi-font='implicit']) .theme-doc-markdown * {
+  font-family: var(--edupasi-font-ales) !important;
+}
+
+/* Două excepții, ambele obligatorii. Fonturile KaTeX nu sunt o alegere
+   estetică: simbolurile matematice există DOAR în ele, iar înlocuirea lor
+   transformă radicalii și fracțiile în pătrățele. Iconițele Material sunt
+   ligaturi — cu alt font, „check_circle" se afișează ca text. */
+/* Specificitatea contează aici, nu doar `!important`: regula de mai sus e
+   `html[attr]:not([attr]) .theme-doc-markdown *`, iar o excepție scrisă mai
+   slab pierde în fața ei. Cu ambele `!important`, câștigă selectorul mai
+   specific — de aceea excepțiile repetă condiția și adaugă clasa. */
+html[data-edupasi-font]:not([data-edupasi-font='implicit']) .theme-doc-markdown .katex,
+html[data-edupasi-font]:not([data-edupasi-font='implicit']) .theme-doc-markdown .katex * {
+  font-family: KaTeX_Main, KaTeX_Math, 'Times New Roman', serif !important;
+}
+
+html[data-edupasi-font]:not([data-edupasi-font='implicit']) .theme-doc-markdown .material-icons,
+html[data-edupasi-font]:not([data-edupasi-font='implicit']) .theme-doc-markdown .material-icons * {
+  font-family: 'Material Icons' !important;
 }
 
 /* Mărimea se schimbă din rădăcină, ca tot ce e exprimat în `rem` — spațieri,
@@ -1711,16 +1735,18 @@ html[data-edupasi-text-size='foarte-mare'] { font-size: 131.25%; }
    litere depărtate devine greu de scanat, iar butoanele s-ar sparge în două
    rânduri. Formulele KaTeX sunt excluse — acolo distanțele au înțeles
    matematic, iar lărgirea lor rupe alinierea fracțiilor și a radicalilor. */
-html[data-edupasi-spacing='aerisit'] .theme-doc-markdown :where(p, li, td, th, blockquote) {
-  letter-spacing: 0.06em;
-  word-spacing: 0.14em;
-  line-height: 1.75;
+html[data-edupasi-spacing='aerisit'] .theme-doc-markdown,
+html[data-edupasi-spacing='aerisit'] .theme-doc-markdown *:not(.katex):not(.katex *) {
+  letter-spacing: 0.06em !important;
+  word-spacing: 0.14em !important;
+  line-height: 1.75 !important;
 }
 
-html[data-edupasi-spacing='foarte-aerisit'] .theme-doc-markdown :where(p, li, td, th, blockquote) {
-  letter-spacing: 0.11em;
-  word-spacing: 0.22em;
-  line-height: 2;
+html[data-edupasi-spacing='foarte-aerisit'] .theme-doc-markdown,
+html[data-edupasi-spacing='foarte-aerisit'] .theme-doc-markdown *:not(.katex):not(.katex *) {
+  letter-spacing: 0.11em !important;
+  word-spacing: 0.22em !important;
+  line-height: 2 !important;
 }
 
 html[data-edupasi-spacing='foarte-aerisit'] .theme-doc-markdown :where(p, li) {

@@ -177,6 +177,47 @@ export default function AudioPlayer({
   useEvidentiere(sincron && playing, potrivire.blocuri, blocCurent, pilot);
 
   /**
+   * Salt la secțiune: click pe orice bloc din pagină duce explicația acolo.
+   *
+   * Sincronizarea răspunde până acum la o singură întrebare — „unde a ajuns
+   * explicația?". Asta o face să răspundă și la cealaltă, care e cel puțin la
+   * fel de des pusă: „ce spune despre BUCATA ASTA?". Pentru un elev care a
+   * recitit un paragraf și nu l-a înțeles, e diferența dintre a asculta cinci
+   * minute până ajunge acolo și a apăsa o dată.
+   *
+   * Se caută PRIMA frază care trimite la blocul apăsat, pentru că explicația
+   * unei bucăți începe la prima ei mențiune. Blocurile despre care nu se
+   * vorbește nu primesc cursor de mână — un click care nu face nimic e mai rău
+   * decât unul care lipsește.
+   */
+  useEffect(() => {
+    if (!sincron || !potrivire.blocuri.length) return undefined;
+    const el = audioRef.current;
+    const ascultatori = [];
+
+    potrivire.blocuri.forEach((bloc, index) => {
+      const frazaTinta = potrivire.drum.indexOf(index);
+      if (frazaTinta < 0 || !potrivire.timpi[frazaTinta]) return;
+      const sari = (e) => {
+        // Nu furăm click-urile de pe linkuri sau butoane din conținut.
+        if (e.target.closest('a, button, input, [role="button"]')) return;
+        el.currentTime = Math.max(0, potrivire.timpi[frazaTinta].start + 0.05);
+        setCurrent(el.currentTime);
+        setPilot(true);
+        if (el.paused) el.play().then(() => setPlaying(true)).catch(() => {});
+      };
+      bloc.el.addEventListener('click', sari);
+      bloc.el.classList.add(styles.saritor);
+      ascultatori.push([bloc.el, sari]);
+    });
+
+    return () => ascultatori.forEach(([el2, fn]) => {
+      el2.removeEventListener('click', fn);
+      el2.classList.remove(styles.saritor);
+    });
+  }, [sincron, potrivire]);
+
+  /**
    * Derularea făcută de om oprește pilotul; cea făcută de noi, nu.
    *
    * Nu există un eveniment care să spună cine a derulat, așa că ne uităm la
