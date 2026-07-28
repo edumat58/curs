@@ -158,17 +158,31 @@ export default function AudioPlayer({
    * ori pe secundă, ar fi fost singura parte scumpă a funcției.
    */
   const potrivire = useMemo(() => {
-    if (!sincron || !transcript) return { blocuri: [], timpi: [], drum: [] };
+    if (!transcript) return { blocuri: [], timpi: [], drum: [], demn: false };
     const blocuri = headingElement
       ? adunaBlocuriSectiune(headingElement)
       : adunaBlocuri(contentRoot);
     const fraze = imparteFraze(transcript);
-    return {
-      blocuri,
-      timpi: timpiFraze(fraze, sentences, duration || knownDuration || 1),
-      drum: aliniaza(fraze, blocuri),
-    };
-  }, [sincron, transcript, sentences, headingElement, contentRoot, duration, knownDuration]);
+    const timpi = timpiFraze(fraze, sentences, duration || knownDuration || 1);
+    const drum = aliniaza(fraze, blocuri);
+
+    /**
+     * Sincronizarea se oferă doar când chiar poate ține pasul.
+     *
+     * Două condiții, amândouă necesare. Timpii trebuie să fie MĂSURAȚI la
+     * sinteză, nu estimați din lungimea frazelor: estimarea se dezaliniază
+     * cumulativ, iar după un minut arată complet altceva decât se aude. Și
+     * potrivirea trebuie să prindă cel puțin jumătate din fraze — sub atât,
+     * blocul luminat e mai des greșit decât corect.
+     *
+     * A arăta pe rândul greșit e mai rău decât a nu arăta nimic, cu atât mai
+     * mult pentru un elev care are deja dificultăți de urmărire: el nu are cum
+     * să știe că indicația minte, și o va crede.
+     */
+    const timpiReali = Array.isArray(sentences) && sentences.length === fraze.length;
+    const potriviteFractie = drum.filter((j) => j >= 0).length / Math.max(1, drum.length);
+    return { blocuri, timpi, drum, demn: timpiReali && potriviteFractie >= 0.5 };
+  }, [transcript, sentences, headingElement, contentRoot, duration, knownDuration]);
 
   const frazaCurenta = sincron && potrivire.timpi.length
     ? frazaLaMoment(potrivire.timpi, current)
@@ -418,7 +432,7 @@ export default function AudioPlayer({
         </div>
         {/* Sincronizarea apare doar când are cu ce lucra. Un buton care nu poate
             face nimic e mai rău decât unul care lipsește. */}
-        {transcript && (
+        {transcript && potrivire.demn && (
           <button
             type="button"
             className={sincron ? styles.syncOn : styles.sync}
