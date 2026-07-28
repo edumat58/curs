@@ -145,3 +145,27 @@ test('miile despărțite prin spațiu nu mai par valori inventate', () => {
   const r = checkFidelity(section, 'Deci 23,6 înmulțit cu 100 face 2 360.');
   assert.deepEqual(r.unsupportedNumbers, []);
 });
+
+test('o zecimală cu trei cifre nu e confundată cu mii', () => {
+  // „0.125" era citit ca grupare de mii și devenea „125", în timp ce „0,125"
+  // din explicație rămânea „0.125": aceeași valoare, declarată inventată.
+  const s = { heading: 'x', sourceCode: 'Avem 0.125 aici.' };
+  assert.deepEqual(checkFidelity(s, 'Avem 0,125 aici.').unsupportedNumbers, []);
+  // Iar gruparea reală de mii rămâne grupare.
+  const t = { heading: 'x', sourceCode: String.raw`Avem 37\,540{,}85.` };
+  assert.deepEqual(checkFidelity(t, 'Avem 37.540,85 deci.').unsupportedNumbers, []);
+});
+
+test('vocabularul de geometrie nu declanșează garda de meta-fraze', () => {
+  // Golul de 60 de caractere între substantiv și verb prindea matematică bună.
+  const bune = [
+    'Graficul funcției trece prin origine și indică panta.',
+    'Schema de calcul a ariei conține lungimea și lățimea.',
+    'Desenul tehnic al unei case conține pereți.',
+    'Figura geometrică se numește romb.',
+    'Formula ariei unui dreptunghi se scrie lungime înmulțit cu lățime.',
+  ];
+  for (const text of bune) {
+    assert.deepEqual(detectMetaPhrases(text), [], `fals pozitiv la: ${text}`);
+  }
+});

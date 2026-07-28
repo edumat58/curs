@@ -138,3 +138,48 @@ test('comenzile LaTeX cu înțeles se traduc, nu se șterg', () => {
   assert.equal(toSpeakable('Calculăm 2^{10}.'), 'Calculăm 2 la puterea 10.');
   assert.equal(toSpeakable('Avem \\left( 3 \\right) aici.'), 'Avem ( 3 ) aici.');
 });
+
+test('fracțiile cu acolade imbricate nu mai lipesc cifrele', () => {
+  // Regexul `[^{}]*` nu poate trece peste o acoladă interioară, deci
+  // `\dfrac{1}{2^{3}}` nu se potrivea deloc și cădea la ștergerea generică:
+  // „12 la cub". În docs/ sunt 115 fracții cu acoladă imbricată.
+  assert.equal(toSpeakable('Deci \\dfrac{1}{2^{3}} este mic.'), 'Deci 1 supra 2 la cub este mic.');
+  assert.equal(toSpeakable('Este \\dfrac{3\\sqrt{5}}{5}.'), 'Este 3 radical din 5 supra 5.');
+  assert.equal(toSpeakable('Este \\dfrac{\\sqrt{2}}{2}.'), 'Este radical din 2 supra 2.');
+  // Cel mai periculos caz: bara nerostită transforma o împărțire în produs,
+  // iar numerele fiind uzuale, garda de fidelitate nu avea ce semnala.
+  assert.equal(toSpeakable('Este \\dfrac{1}{\\sqrt{2}}.'), 'Este 1 supra radical din 2.');
+  assert.equal(toSpeakable('Avem \\frac{\\frac{1}{2}}{3} aici.'), 'Avem 1 supra 2 supra 3 aici.');
+});
+
+test('comanda nu se lipește de cuvântul următor', () => {
+  // Săream peste spații și după ULTIMUL argument: „3 supra 4din tort".
+  assert.equal(toSpeakable('Avem \\frac{3}{4} din tort.'), 'Avem 3 supra 4 din tort.');
+  assert.equal(toSpeakable('Deci \\sqrt{9} este trei.'), 'Deci radical din 9 este trei.');
+});
+
+test('culoarea nu se rostește, dar conținutul ei da', () => {
+  // Lecțiile colorează masiv. Ștearsă ca o comandă oarecare, rămânea codul
+  // culorii în text: „#FF6B6B37540".
+  assert.equal(
+    toSpeakable('Exemplu: \\color{#FF6B6B}{37\\,540}\\color{#4ECDC4}{{,85}} da'),
+    'Exemplu: 37540,85 da'
+  );
+  assert.equal(toSpeakable('Vezi \\textcolor{red}{12} aici.'), 'Vezi 12 aici.');
+});
+
+test('gradele nu devin exponent', () => {
+  // `\circ` era șters, iar circumflexul orfan îl trimitea la regula de putere.
+  assert.equal(toSpeakable('Unghiul are 45^\\circ exact.'), 'Unghiul are 45 grade exact.');
+});
+
+test('exponentul nu înghite cuvântul următor', () => {
+  // `\w{1,6}` mânca litere: „2^ este" devenea „la puterea este".
+  assert.equal(toSpeakable('Calculăm 2^10 acum.'), 'Calculăm 2 la puterea 10 acum.');
+  assert.equal(toSpeakable('Calculăm x^n acum.'), 'Calculăm x la puterea n acum.');
+});
+
+test('bara dintre cuvinte obișnuite rămâne bară', () => {
+  // Lărgind regula fracției, „și/sau" ar fi devenit „și supra sau".
+  assert.equal(toSpeakable('Alegi și/sau amândouă.'), 'Alegi și/sau amândouă.');
+});

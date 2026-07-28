@@ -119,19 +119,30 @@ function spokenHint(text) {
  */
 const FEREASTRA_TOKENI = Number(process.env.VOICE_TOKEN_WINDOW || 8000);
 
-/** Româna consumă ~3,3 caractere pe token la modelele OpenAI-compatibile. */
-const CARACTERE_PE_TOKEN = 3.3;
+/**
+ * Cât consumă româna, MĂSURAT, nu presupus.
+ *
+ * O cerere reală de narațiune: 11 619 caractere de prompt = 4143 de tokeni
+ * raportați de furnizor, adică 2,80 caractere pe token. Estimarea de 3,3 pe
+ * care o folosisem lăsa cererea cu 343 de tokeni peste fereastră: primea 413,
+ * cobora pe modelul mic și explicația ieșea de trei ori mai scurtă — fără nici
+ * un semn că ceva ar fi mers prost.
+ */
+const CARACTERE_PE_TOKEN = 2.8;
+
+/** Promptul de sistem al narațiunii, măsurat: 6429 de caractere ≈ 2296 de tokeni. */
+const TOKENI_PROMPT_SISTEM = 2400;
 
 /**
  * Câte caractere de sursă încap, lăsând loc instrucțiunilor și răspunsului.
  *
- * Se scad: promptul de sistem (măsurat ~1950 de tokeni), rezerva pentru
+ * Se scad: promptul de sistem (măsurat), rezerva pentru
  * răspuns, și 5% marjă pentru estimarea grosolană a tokenilor. Ce rămâne e
  * pentru material. Când fereastra e mare, plafonul devine lungimea maximă a
  * unei lecții și limita practic dispare.
  */
 export function bugetSursaCaractere(rezervaRaspuns) {
-  const disponibil = FEREASTRA_TOKENI * 0.95 - 1950 - (rezervaRaspuns || 0);
+  const disponibil = FEREASTRA_TOKENI * 0.95 - TOKENI_PROMPT_SISTEM - (rezervaRaspuns || 0);
   return Math.max(1500, Math.round(disponibil * CARACTERE_PE_TOKEN));
 }
 

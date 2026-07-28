@@ -24,9 +24,18 @@ const PROMPT_VERSION = 6;
  * automatisme, centralizatoare, organigrame și pagini-hub — toate cu titlu și
  * secțiuni, deci toate ar primi butoane fără să fie nimic de predat acolo.
  * Semnul distinctiv, respectat de toate lecțiile platformei, e titlul: „C1 - …",
- * „C6.1 - …". Automatismele încep cu „A5.1", hub-urile cu altceva.
+ * „C6.1 - …" la algebră și „G2 - …" la geometrie.
+ *
+ * „G" lipsea, iar consecința nu se vedea în niciun test: 34 de lecții de
+ * geometrie din 193 pur și simplu nu primeau buton, iar pagina arăta perfect
+ * normal fără el. Numărat pe titlurile reale din docs/: 124 de lecții „C", 34
+ * „G", 35 de automatisme „A", 22 de pagini fără cod.
+ *
+ * Automatismele („A5.1") rămân în afară dinadins: sunt exerciții interactive
+ * generate din nou la fiecare rulare, nu au conținut de predat. La fel paginile
+ * de proiect, portofoliu, test, intro sau hub — verificate una câte una.
  */
-const TITLU_DE_LECTIE = /^\s*C\s*\d/;
+const TITLU_DE_LECTIE = /^\s*[CG]\s*\d/;
 
 function esteLectie(root) {
   const h1 = root && root.querySelector('h1');
@@ -294,6 +303,16 @@ function useExplanation(section, route, mode) {
       if (err.name === 'AbortError') return;
       if (pareCadereDeServiciu(err)) {
         raporteazaCadere();
+        /**
+         * Starea se întoarce la „idle", altfel butonul rămâne în „loading".
+         *
+         * Audio se stinge pe tot site-ul abia după DOUĂ căderi consecutive —
+         * pe bună dreptate, ca o pană de o clipă să nu strice pagina. Dar la
+         * PRIMA cădere componenta rămânea încărcând la nesfârșit: elevul vedea
+         * o rotiță care nu se mai oprea și nu putea nici măcar reîncerca,
+         * pentru că `cere` iese devreme cât timp starea e „loading".
+         */
+        setState('idle');
         return;
       }
       setState('error');

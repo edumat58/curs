@@ -44,33 +44,148 @@
  *   `\frac{3}{4}` ar rămâne „34" — un număr plauzibil și complet greșit, adică
  *   exact felul de eroare pe care un elev nu are cum să o prindă.
  */
+
+/**
+ * Argumentul unei comenzi, citit cu acolade ECHILIBRATE.
+ *
+ * Cu regex nu se poate: `[^{}]*` nu trece peste o acoladă interioară, deci
+ * `\dfrac{1}{2^{3}}` nu se potrivea deloc și cădea la ștergerea generică, care
+ * lipea cifrele: „12 la cub". Un număr plauzibil și fals — exact ce trebuia
+ * evitat. Cazul nu e teoretic: în lecțiile din curs sunt 115 fracții cu acoladă
+ * imbricată și 183 cu o comandă în operand.
+ *
+ * @returns {{corp: string, sfarsit: number}|null} null dacă acolada nu se
+ *   închide — atunci textul rămâne neatins, că nu e LaTeX valid.
+ */
+function citesteArgument(text, start) {
+  if (text[start] !== '{') return null;
+  let adancime = 0;
+  for (let i = start; i < text.length; i += 1) {
+    if (text[i] === '{') adancime += 1;
+    else if (text[i] === '}') {
+      adancime -= 1;
+      if (adancime === 0) return { corp: text.slice(start + 1, i), sfarsit: i + 1 };
+    }
+  }
+  return null;
+}
+
+/** Comenzile cu argumente, și ce rămâne rostit din ele. */
+const COMENZI = [
+  // Fracțiile devin forma „3/4", pe care regula de mai jos o rostește „3 supra 4".
+  { nume: ['frac', 'dfrac', 'tfrac'], argumente: 2, iesire: (a, b) => `${a}/${b}` },
+  { nume: ['sqrt'], argumente: 1, iesire: (a) => `√${a}` },
+  { nume: ['text', 'textrm', 'mathrm', 'mathbf', 'mathit', 'operatorname'], argumente: 1, iesire: (a) => a },
+  /**
+   * Culoarea nu se rostește, dar conținutul ei DA.
+   *
+   * Lecțiile colorează masiv (`\color{#FF6B6B}{37\,540}`). Ștearsă ca o comandă
+   * oarecare, rămâneau două acolade lipite și codul culorii ajungea în text:
+   * „#FF6B6B37540". Culoarea e formatare; numărul dinăuntru e lecția.
+   */
+  { nume: ['color'], argumente: 2, iesire: (_culoare, continut) => continut },
+  { nume: ['textcolor', 'colorbox'], argumente: 2, iesire: (_culoare, continut) => continut },
+];
+
+/** Simbolurile fără argumente au deja echivalent rostit în `simboluriMatematice`. */
+const SIMBOLURI_LATEX = [
+  [/\\(?:cdot|times)(?![a-zA-Z])/g, '×'],
+  [/\\div(?![a-zA-Z])/g, '÷'],
+  [/\\(?:le|leq)(?![a-zA-Z])/g, '≤'],
+  [/\\(?:ge|geq)(?![a-zA-Z])/g, '≥'],
+  [/\\(?:ne|neq)(?![a-zA-Z])/g, '≠'],
+  [/\\approx(?![a-zA-Z])/g, '≈'],
+  [/\\pi(?![a-zA-Z])/g, 'π'],
+  [/\\circ(?![a-zA-Z])/g, '°'],
+];
+
+/**
+ * Aplică o singură dată comenzile cu argumente, de la stânga la dreapta.
+ * Se rulează în buclă până nu se mai schimbă nimic: așa se desfac și
+ * imbricările, dinspre exterior spre interior.
+ */
+function desfaComenzi(text) {
+  let out = '';
+  let i = 0;
+  while (i < text.length) {
+    const m = /^\\([a-zA-Z]+)/.exec(text.slice(i));
+    if (!m) { out += text[i]; i += 1; continue; }
+    const regula = COMENZI.find((c) => c.nume.includes(m[1]));
+    if (!regula) { out += m[0]; i += m[0].length; continue; }
+
+    let poz = i + m[0].length;
+    while (text[poz] === ' ') poz += 1;
+    const argumente = [];
+    // Spațiul se sare doar ÎNTRE argumente. Sărindu-l și după ultimul, comanda
+    // se lipea de cuvântul următor: „\frac{3}{4} din tort" ieșea „3 supra 4din
+    // tort", iar sinteza rostea un cuvânt inexistent.
+    for (let k = 0; k < regula.argumente; k += 1) {
+      if (k > 0) while (text[poz] === ' ') poz += 1;
+      const arg = citesteArgument(text, poz);
+      if (!arg) break;
+      argumente.push(arg.corp);
+      poz = arg.sfarsit;
+    }
+    // Comandă fără argumentele ei: o lăsăm ștergerii generice de mai jos.
+    if (argumente.length < regula.argumente) { out += m[0]; i += m[0].length; continue; }
+    out += regula.iesire(...argumente);
+    i = poz;
+  }
+  return out;
+}
+
 function faraLatex(text) {
-  return String(text)
+  let out = String(text)
     // spațiile fine din formule: \, \; \: \!
     .replace(/\\[,;:!]/g, '')
     // virgula zecimală protejată de acolade
-    .replace(/\{\s*,\s*\}/g, ',')
-    // \text{...} și rudele lui păstrează doar conținutul
-    .replace(/\\(?:text|textrm|mathrm|mathbf|mathit|operatorname)\s*\{([^{}]*)\}/g, '$1')
-    // fracțiile devin forma pe care regula „3/4" o rostește deja corect
-    .replace(/\\[dt]?frac\s*\{([^{}]*)\}\s*\{([^{}]*)\}/g, '$1/$2')
-    // radicalul și puterile își păstrează operandul
-    .replace(/\\sqrt\s*\{([^{}]*)\}/g, '√$1')
-    .replace(/\^\s*\{([^{}]*)\}/g, '^$1')
-    .replace(/_\s*\{([^{}]*)\}/g, '$1')
-    // operatorii au deja echivalent rostit mai jos, în simboluriMatematice
-    .replace(/\\(?:cdot|times)\b/g, '×')
-    .replace(/\\div\b/g, '÷')
-    .replace(/\\(?:le|leq)\b/g, '≤')
-    .replace(/\\(?:ge|geq)\b/g, '≥')
-    .replace(/\\(?:ne|neq)\b/g, '≠')
-    .replace(/\\approx\b/g, '≈')
-    .replace(/\\pi\b/g, 'π')
+    .replace(/\{\s*,\s*\}/g, ',');
+
+  /**
+   * Punct fix: `\dfrac{1}{\sqrt{2}}` are nevoie de două treceri — una pentru
+   * fracție, alta pentru radicalul care abia atunci ajunge la suprafață.
+   * Șase treceri acoperă orice imbricare din lecțiile reale (maximul văzut e 3).
+   */
+  for (let i = 0; i < 6; i += 1) {
+    const inainte = out;
+    out = desfaIndici(desfaComenzi(out));
+    if (out === inainte) break;
+  }
+
+  for (const [re, semn] of SIMBOLURI_LATEX) out = out.replace(re, semn);
+
+  return out
     // orice altă comandă rămasă (\left, \right, \quad, \displaystyle…)
     .replace(/\\[a-zA-Z]+/g, ' ')
-    // delimitatori și acolade
-    .replace(/[{}$]/g, '')
+    /**
+     * Acoladele devin SPAȚIU, nu nimic.
+     *
+     * Dacă tot scapă o construcție pe care nu am prevăzut-o, „1 2" sună ciudat
+     * și se aude că lipsește ceva; „12" sună perfect normal și e fals. Din două
+     * rele, îl alegem pe cel pe care elevul îl poate sesiza. Garda de
+     * fidelitate face deja la fel, în `faraNotatie`.
+     */
+    .replace(/[{}$]/g, ' ')
     .replace(/\s{2,}/g, ' ');
+}
+
+/** Exponenții și indicii cu acolade: `2^{3}` → `2^3`, `a_{n}` → `an`. */
+function desfaIndici(text) {
+  let out = '';
+  let i = 0;
+  while (i < text.length) {
+    if ((text[i] === '^' || text[i] === '_') && text[i + 1] === '{') {
+      const arg = citesteArgument(text, i + 1);
+      if (arg) {
+        out += text[i] === '^' ? `^${arg.corp}` : arg.corp;
+        i = arg.sfarsit;
+        continue;
+      }
+    }
+    out += text[i];
+    i += 1;
+  }
+  return out;
 }
 
 /** Spațiile care nu sunt spațiul obișnuit — inclusiv cel îngust, de la mii. */
@@ -241,9 +356,21 @@ export function toSpeakable(text) {
 
   for (const [pattern, spoken] of SIMBOLURI) out = out.replace(pattern, spoken);
 
+  // Gradele se scriu „45^\circ" în lecțiile de geometrie. Fără regula asta,
+  // circumflexul rămâne orfan și regula generală de mai jos face din el
+  // „la puterea", pe un simbol care nu e exponent.
+  out = out.replace(/\s*\^\s*°/g, ' grade');
+
   // Ridicare la putere scrisă cu circumflex: „2^10", „x^{n}".
   out = out.replace(/\^\s*\{([^}]{1,12})\}/g, (_all, exp) => spusaPutere(exp.trim()));
-  out = out.replace(/\^\s*(-?\w{1,6})/g, (_all, exp) => spusaPutere(exp));
+  /**
+   * Exponentul se oprește la prima literă care începe un cuvânt nou.
+   *
+   * `\w{1,6}` înghițea cuvântul de după un circumflex rămas orfan: „2^ este"
+   * dădea „la puterea este". Un exponent e ori numeric, ori o singură literă
+   * (n, x, k) eventual cu cifră — nu un cuvânt.
+   */
+  out = out.replace(/\^\s*(-?(?:\d+|[a-zA-Z]\d?))(?![\p{L}])/gu, (_all, exp) => spusaPutere(exp));
 
   // Comparațiile: espeak taie „<" și „>" fără să scoată vreun sunet.
   out = out
@@ -258,7 +385,21 @@ export function toSpeakable(text) {
   // de o enumerare („Pașii sunt: 1. aduni").
   out = out
     .replace(/(\d) +: +(\d)/g, '$1 împărțit la $2')
-    .replace(/(\d)\s*\/\s*(\d)/g, '$1 supra $2');
+    /**
+     * Bara de fracție, și când operandul nu e o cifră.
+     *
+     * `\dfrac{1}{\sqrt{2}}` ajunge aici ca „1/radical din 2". Cu regula veche,
+     * care cerea cifre de ambele părți, bara rămânea nerostită și elevul auzea
+     * „unu radical din doi" — un PRODUS în loc de o împărțire. Cel mai urât fel
+     * de greșeală: sună corect și garda de fidelitate nu are ce semnala.
+     */
+    /**
+     * Partea dreaptă se verifică prin lookahead, ca să nu fie consumată: la
+     * „1/2/3" regula veche lua „1/2" și pierdea a doua bară, pentru că „2" era
+     * deja mâncat. Partea stângă rămâne cifră, paranteză sau radical — altfel
+     * „și/sau" ar deveni „și supra sau".
+     */
+    .replace(/([\d)√])\s*\/\s*(?=\d|\(|√|radical|[a-zA-Z](?![a-zA-Z]))/g, '$1 supra ');
 
   out = spokenMinus(out);
 

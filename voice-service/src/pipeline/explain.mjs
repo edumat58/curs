@@ -234,21 +234,34 @@ export async function explainSection(section, llm, { signal, analysisLlm, onStag
    * consuma inutil bugetul de tokeni pe minut.
    */
   if (truncated) {
-    const cont = await llm.chat(
-      [
-        { role: 'system', content: n.system },
-        { role: 'user', content: n.user },
-        { role: 'assistant', content: raw },
-        {
-          role: 'user',
-          content:
-            'Ai fost întrerupt înainte să termini. Continuă exact de unde ai rămas, fără să reiei ce ai spus deja și fără nicio introducere. Termină ideile rămase și încheie cu o frază completă.',
-        },
-      ],
-      { maxTokens: tokenCeiling, signal }
-    );
-    raw = `${raw.replace(/\s+$/, '')} ${cont.content.replace(/^\s+/, '')}`;
-    truncated = cont.finishReason === 'length';
+    /**
+     * O continuare eșuată nu are voie să arunce la gunoi narațiunea existentă.
+     *
+     * Excepția urca până sus și explicația se marca „error", deși aveam în mână
+     * un text bun, doar neterminat — pe care `trimToCompleteSentence` îl
+     * încheie oricum la ultima frază completă. Elevul primea „nu am putut
+     * pregăti explicația" în locul a nouăzeci la sută dintr-o lecție bună, iar
+     * tokenii deja cheltuiți se pierdeau.
+     */
+    try {
+      const cont = await llm.chat(
+        [
+          { role: 'system', content: n.system },
+          { role: 'user', content: n.user },
+          { role: 'assistant', content: raw },
+          {
+            role: 'user',
+            content:
+              'Ai fost întrerupt înainte să termini. Continuă exact de unde ai rămas, fără să reiei ce ai spus deja și fără nicio introducere. Termină ideile rămase și încheie cu o frază completă.',
+          },
+        ],
+        { maxTokens: tokenCeiling, signal }
+      );
+      raw = `${raw.replace(/\s+$/, '')} ${cont.content.replace(/^\s+/, '')}`;
+      truncated = cont.finishReason === 'length';
+    } catch (err) {
+      console.warn(`[voice] continuarea a eșuat, păstrez ce am: ${err.message.slice(0, 120)}`);
+    }
   }
 
   let transcript = trimToCompleteSentence(cleanForSpeech(raw));
@@ -303,8 +316,29 @@ Păstrează același ton și aceeași lungime, și acoperă în continuare toate
        */
       { maxTokens: rescriereCeiling(transcript), temperature: 0.3, signal }
     );
-    transcript = trimToCompleteSentence(cleanForSpeech(repairRes.content));
-    fidelity = checkFidelity(section, transcript);
+
+    /**
+     * O rescriere se acceptă doar dacă e cel puțin la fel de bună.
+     *
+     * Rezultatul se lua pe încredere. O rescriere oprită de plafon, sau care
+     * pierde jumătate din lecție ca să scape de reproș, înlocuia o explicație
+     * bună cu una ciuntită — și nimeni nu observa, pentru că `needsReview`
+     * arăta chiar mai bine după. Păstrăm ce e mai bun, nu ce e mai nou.
+     */
+    const candidat = trimToCompleteSentence(cleanForSpeech(repairRes.content));
+    const fidelitateNoua = checkFidelity(section, candidat);
+    const cuvinteVechi = transcript.split(/\s+/).filter(Boolean).length;
+    const cuvinteNoi = candidat.split(/\s+/).filter(Boolean).length;
+    const ciuntita = repairRes.finishReason === 'length' || cuvinteNoi < cuvinteVechi * 0.6;
+
+    if (ciuntita && fidelitateNoua.score <= fidelity.score) {
+      console.warn(
+        `[voice] rescrierea ${repairs} a ieșit mai scurtă (${cuvinteNoi} din ${cuvinteVechi}) fără câștig; păstrez varianta dinainte`
+      );
+      break;
+    }
+    transcript = candidat;
+    fidelity = fidelitateNoua;
   }
 
   return {

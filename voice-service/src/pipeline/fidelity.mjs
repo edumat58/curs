@@ -35,7 +35,16 @@ const CUVINTE_NUMERE = {
  */
 function normalizeNumber(value) {
   return String(value)
-    .replace(/(?<=\d)\.(?=\d{3}(?!\d))/g, '')
+    /**
+     * Gruparea miilor nu începe niciodată cu zero.
+     *
+     * Cu lookbehind-ul lacom `(?<=\d)`, „0.125" era citit ca mii și devenea
+     * „125", în timp ce „0,125" din explicație rămânea „0.125" — două forme ale
+     * aceluiași număr, declarate diferite, deci o valoare corectă raportată ca
+     * inventată. Cerând o cifră nenulă la începutul grupei, „0.125" rămâne
+     * zecimală, iar „37.540" rămâne treizeci și șapte de mii.
+     */
+    .replace(/(?<=[1-9]\d{0,2})\.(?=\d{3}(?!\d))/g, '')
     .replace(',', '.')
     .replace(/\.0+$/, '')
     .replace(/^0+(?=\d)/, '');
@@ -128,16 +137,22 @@ const FORMULARI_META = [
   // le prefera exact acolo unde comenta suportul.
   tipar(`${M0}((acest|această|acel|acea)\\s+)?(tabel|tabelul|figura|imaginea|desenul|schema|graficul|formula|definiția|materialul|textul)\\s+(arată|ne arată|prezintă|indică|spune|ne spune|conține|scrie|explică|ilustrează)${M1}`, 'vorbește despre suport'),
   /**
-   * Aceleași referiri, dar cu cuvinte între suport și verb.
-   *
-   * Tiparul de deasupra cere „formula arată" lipite. Modelul scrie însă
-   * „O formulă care reprezintă un exemplu de număr zecimal arată astfel." —
-   * aceeași abatere, cu șase cuvinte la mijloc, și trecea nestingherită. Așa a
-   * ajuns în audio o explicație care anunța trei formule fără să spună ce e în
-   * ele. Golul e mărginit și oprit la punctuație, ca să nu lege două fraze
-   * diferite într-o falsă potrivire.
+   * Aceleași referiri, dar cu determinant nehotărât: „o altă formulă arată",
+   * „a treia formulă prezintă". Tiparul de deasupra cere articolul hotărât și
+   * le rata pe toate.
    */
-  tipar(`${M0}(o |un |această |acest |acea |acel |prima |a doua |a treia |altă |alt |următoarea |următorul )?\\s*(formulă|formula|figură|figura|imagine|imaginea|desen|desenul|schemă|schema|grafic|graficul|tabel|tabelul)(?![\\p{L}])[^.!?]{0,60}?\\s(arată|ne arată|prezintă|ne prezintă|indică|ne indică|ilustrează|reprezintă|conține|scrie)${M1}`, 'vorbește despre suport'),
+  tipar(`${M0}(o|un|altă|alt|prima|a doua|a treia|următoarea|următorul)\\s+(formulă|figură|imagine|desen|schemă|grafic|tabel)\\s+(arată|ne arată|prezintă|ne prezintă|indică|ne indică|ilustrează|reprezintă)${M1}`, 'vorbește despre suport'),
+  /**
+   * Aceeași abatere, cu o propoziție relativă la mijloc:
+   * „O formulă CARE reprezintă un exemplu de număr zecimal arată astfel."
+   *
+   * Golul se admite numai după „care" — un „care" leagă suportul de verbul care
+   * îl descrie. Fără condiția asta, orice gol de 60 de caractere prindea
+   * geometrie curată: „Graficul funcției trece prin origine și indică panta"
+   * sau „Schema de calcul a ariei conține lungimea și lățimea" — propoziții pe
+   * care le vrem rostite, nu rescrise.
+   */
+  tipar(`${M0}(formulă|formula|figură|figura|imagine|imaginea|desen|desenul|schemă|schema|grafic|graficul|tabel|tabelul)\\s+care\\s[^.!?]{0,60}?\\s(arată|ne arată|prezintă|ne prezintă|indică|ne indică|ilustrează)${M1}`, 'vorbește despre suport'),
   /**
    * „Arată astfel" e trimitere la ceva ce elevul ar trebui să VADĂ — exact ce
    * nu are cum, ascultând. Fără continuare, fraza nu transmite nimic.
