@@ -13,7 +13,6 @@ const katex = require('rehype-katex');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Edumat58',
-  tagline: 'Platforma digitală de matematică dedicată claselor V - VIII',
   favicon: 'img/logo.jpg',
 
   // Set the production url of your site here
@@ -41,6 +40,23 @@ const config = {
     defaultLocale: 'ro',
     locales: ['ro'],
   },
+
+  // Căutare LOCALĂ (offline, fără cont, fără Algolia): indexează la build tot
+  // conținutul și pune o bară de căutare în navbar. Română = fără stemmer, dar
+  // căutarea pe cuvinte întregi merge; diacriticele se ignoră la potrivire.
+  themes: [
+    [
+      require.resolve('@easyops-cn/docusaurus-search-local'),
+      /** @type {import('@easyops-cn/docusaurus-search-local').PluginOptions} */
+      ({
+        hashed: true,
+        indexDocs: true,
+        indexBlog: false,
+        docsRouteBasePath: '/docs',
+        language: ['en'], // română nu e suportată ca stemmer; „en" e cel mai tolerant
+      }),
+    ],
+  ],
 
   presets: [
     [
@@ -208,7 +224,7 @@ const config = {
                 <circle cx="12" cy="12" r="9"></circle>
                 <polyline points="12 7 12 12 15.5 14"></polyline>
               </svg>
-              <span class="nav-update-date">27.07.2026, 01:59</span>
+              <span class="nav-update-date">28.07.2026, 20:40</span>
             </span>
           `,
         },

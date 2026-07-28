@@ -62,11 +62,15 @@ function grupTitlu(parsat) {
  *
  * @returns {string|null} ex. „MAT-05-C15-3", sau null dacă nu e lecție.
  */
-export function identitateLectie({ course, title }) {
+export function identitateLectie({ course, title, collection, edupasi }) {
   const grad = GRAD[course];
   const parsat = parseTitlu(title);
   if (!grad || !parsat) return null;
-  return `MAT-${grad}-${grupTitlu(parsat)}-${parsat.subdiviziune}`;
+  // Flagul ADAPTATĂ intră în identitate, nu doar în afișare: „C1 standard" și
+  // „C1 EduPAȘI" sunt lecții DIFERITE, cu conținut diferit, deci audio diferit.
+  // Fără el ar împărți aceeași cheie și una ar reda explicația celeilalte.
+  const adaptata = collection === 'edupasi' || edupasi ? 1 : 0;
+  return `MAT-${grad}-${grupTitlu(parsat)}-${parsat.subdiviziune}-${adaptata}`;
 }
 
 /**
@@ -78,10 +82,11 @@ export function identitateLectie({ course, title }) {
 export function codLectie(lectie) {
   const identitate = identitateLectie(lectie);
   if (!identitate) return null;
-  const adaptata = lectie.collection === 'edupasi' || lectie.edupasi ? 1 : 0;
+  // Identitatea poartă deja subiect+clasă+titlu+subdiviziune+ADAPTATĂ. Codul
+  // complet adaugă ultimele două flaguri: Finală și vizibilă permanent.
   const finala = lectie.final ? 1 : 0;
   const vizibil = lectie.vizibilPermanent ? 1 : 0;
-  return `${identitate}-${adaptata}${finala}${vizibil}`;
+  return `${identitate}${finala}${vizibil}`;
 }
 
 /**

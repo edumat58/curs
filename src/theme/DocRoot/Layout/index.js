@@ -822,30 +822,20 @@ export default function DocRootLayout({ children }) {
     };
   }, [isEduPasi]);
 
-  if (!isEduPasi) {
-    return (
-      <>
-        <NormalLessonNavbarIndicator />
-        <OriginalDocRootLayout>{children}</OriginalDocRootLayout>
-        <EduPasiAccessibilityTools />
-      </>
-    );
-  }
-
+  /**
+   * Navigatorul EduPAȘI custom a fost DESFIINȚAT (cerut explicit).
+   *
+   * Se revine la sidebarul standard Docusaurus pentru toate paginile. Diferența
+   * la EduPAȘI rămâne doar TEMA: atributul `data-edupasi-page` (pus mai sus)
+   * o comută pe bleumarin, iar Docusaurus alege singur `edupasiSidebar`, deci
+   * sidebarul standard conține chiar lecțiile și modulele EduPAȘI. Uneltele de
+   * accesibilitate rămân pe ambele. O singură cale de randare, fără shell propriu.
+   */
   return (
-    <div className={shellStyles.edupasiShell}>
-      <EduPasiContextBar items={sidebar?.items || []} />
-      <div className={shellStyles.learningWorkspace}>
-        <EduPasiLearningNavigator items={sidebar?.items || []} />
-        <div
-          id="edupasi-lesson-content"
-          className={shellStyles.lessonCanvas}
-          tabIndex="-1"
-        >
-          <OriginalDocRootLayout>{children}</OriginalDocRootLayout>
-        </div>
-      </div>
+    <>
+      <NormalLessonNavbarIndicator />
+      <OriginalDocRootLayout>{children}</OriginalDocRootLayout>
       <EduPasiAccessibilityTools />
-    </div>
+    </>
   );
 }

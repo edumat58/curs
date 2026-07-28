@@ -16,6 +16,20 @@
 .panel {
   --voice-accent: var(--edupasi-accent, #003058);
   --voice-accent-strong: var(--edupasi-accent-strong, #003058);
+}
+
+/* Pe lecțiile NORMALE (nu EduPAȘI) butonul poartă portocaliul mărcii, ca să se
+   potrivească cu restul site-ului. Pe EduPAȘI rămâne pe bleumarinul temei.
+   Comutarea se face după atributul pus de SectionVoice pe gazdă. */
+.lessonSlot:not([data-edupasi]),
+.panel:not([data-edupasi]) {
+  --voice-accent: var(--km-orange, #e8590c);
+  --voice-accent-strong: var(--km-orange-deep, #c2540a);
+}
+
+.slot,
+.lessonSlot,
+.panel {
   --voice-accent-soft: var(--edupasi-accent-soft, #d9eef7);
   --voice-on-accent: var(--edupasi-on-accent, #ffffff);
   --voice-surface: var(--edupasi-surface, #ffffff);
@@ -36,8 +50,9 @@
      glow cinematic pe fond întunecat; EduPAȘI e material de lecție pentru copii
      care obosesc la contrast puternic, deci ia aceeași GRAMATICĂ — rotunjime,
      gradient, adâncime moale — la volum redus, pe bleumarinul propriu. */
-  --voice-raza: 999px;
-  --voice-raza-mica: 12px;
+  /* Colțuri mici, formă dreptunghiulară — nu pastilă. Cerut explicit. */
+  --voice-raza: 10px;
+  --voice-raza-mica: 8px;
   --voice-hairline: color-mix(in srgb, var(--voice-accent) 22%, transparent);
   --voice-camp: color-mix(in srgb, var(--voice-accent) 6%, transparent);
   --voice-umbra: 0 2px 8px color-mix(in srgb, var(--voice-accent) 10%, transparent);

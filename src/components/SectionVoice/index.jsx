@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { useLocation } from '@docusaurus/router';
 import { collectLessonSections } from '@site/src/components/EduPasiAccessibility/lessonSections.mjs';
 import { sha256Hex } from '@site/src/lib/voice/canonical.mjs';
 import { PROMPT_VERSION, codLectie, identitateLectie } from '@site/src/lib/voice/cod.mjs';
@@ -277,7 +278,7 @@ function useLessonAudio(route, section) {
   useEffect(() => {
     let viu = true;
     const ctx = contextLectie(route);
-    const identitate = ctx && section ? identitateLectie({ course: ctx.course, title: section.heading }) : null;
+    const identitate = ctx && section ? identitateLectie({ course: ctx.course, title: section.heading, edupasi: ctx.edupasi }) : null;
     if (!identitate) return undefined;
     (async () => {
       try {
@@ -321,6 +322,11 @@ function usePanel(host, needed) {
     const el = document.createElement('div');
     el.setAttribute('data-edupasi-voice-panel', '');
     el.className = styles.panel;
+    // Playerul urmează culoarea butonului: portocaliu pe lecții normale, bleumarin
+    // pe EduPAȘI. Atributul comută accentul din CSS.
+    if (contextLectie(typeof window !== 'undefined' ? window.location.pathname : '')?.edupasi) {
+      el.setAttribute('data-edupasi', '');
+    }
     host.insertAdjacentElement('afterend', el);
     ref.current = el;
     setPanel(el);
@@ -477,7 +483,10 @@ export default function SectionVoice() {
   const [mounts, setMounts] = useState([]);
   const [lesson, setLesson] = useState(null);
   const [disponibil, setDisponibil] = useState(stareCurenta);
-  const route = typeof window !== 'undefined' ? window.location.pathname : '';
+  // `useLocation`, nu `window.location`: așa componenta reacționează la
+  // navigarea SPA din sidebar și re-injectează codul + butonul pe fiecare
+  // lecție, fără reload. Citind direct din window, rămânea pe ruta veche.
+  const { pathname: route } = useLocation();
 
   useEffect(() => {
     setDisponibil(stareCurenta());
@@ -490,57 +499,76 @@ export default function SectionVoice() {
   }, []);
 
   useEffect(() => {
-    const root = document.querySelector('.theme-doc-markdown') || document.querySelector('article');
-    // Pe orice altceva decât o lecție nu montăm nimic — nici butoane, nici
-    // mesajul de indisponibilitate. O pagină de centralizator nu are ce explica.
-    if (!root || !esteLectie(root)) return undefined;
-
-    const toate = collectLessonSections(root);
-    const h1 = root.querySelector('h1');
-    // Secțiunea de nivel 1 acoperă deja toată lecția: exact materialul pe care
-    // îl vrem pentru explicația integrală.
-    const intreaga = toate.find((s) => s.level === 1) || null;
-
-    // Butoanele mici, pe fiecare secțiune, au dispărut dinadins: acum se predă
-    // și se ascultă DOAR lecția întreagă, generată de administrator. Elevul are
-    // un singur buton, deasupra titlului, și niciodată de generat.
-    const created = [];
+    let anulat = false;
+    let curatare = null;
+    let incercari = 0;
 
     /**
-     * Codul canonic al lecției, sus deasupra titlului.
+     * Montarea AȘTEAPTĂ ca pagina să fie gata.
      *
-     * E o etichetă discretă — evidența care leagă lecția de fișierul ei audio.
-     * Se pune o singură dată, înaintea oricărui buton de voce, ca să fie primul
-     * lucru din colțul din stânga sus.
+     * La navigarea SPA (din sidebar), efectul rulează în clipa schimbării rutei,
+     * dar noul conținut al lecției — titlul, textul — abia urmează să fie randat
+     * de Docusaurus. Dacă am injecta atunci, am prinde pagina veche sau una
+     * goală: codul și butonul lipseau până la un reload. Reîncercăm scurt până
+     * apare titlul, deci totul e la locul lui din prima afișare, fără reload.
      */
-    const cod = codPagina(route, h1);
-    let etichetaCod = null;
-    if (cod && h1 && !h1.previousElementSibling?.hasAttribute?.('data-edupasi-cod')) {
-      etichetaCod = document.createElement('div');
-      etichetaCod.setAttribute('data-edupasi-cod', '');
-      etichetaCod.className = styles.codLectie;
-      etichetaCod.textContent = cod;
-      etichetaCod.title = 'Cod canonic al lecției (identitate + flaguri)';
-      h1.insertAdjacentElement('beforebegin', etichetaCod);
-    }
+    const monteaza = () => {
+      if (anulat) return;
+      const root = document.querySelector('.theme-doc-markdown') || document.querySelector('article');
+      const h1 = root && root.querySelector('h1');
 
-    // Gazda de deasupra titlului există și când serviciul e căzut: acolo apare
-    // mesajul, o singură dată pe pagină, nu la fiecare titlu.
-    let banner = null;
-    if (h1 && !h1.previousElementSibling?.hasAttribute?.('data-edupasi-lesson-voice')) {
-      banner = document.createElement('div');
-      banner.setAttribute('data-edupasi-lesson-voice', '');
-      banner.className = styles.lessonSlot;
-      h1.insertAdjacentElement('beforebegin', banner);
-    }
+      // Conținutul încă nu e în DOM: mai așteptăm puțin (până la ~2 s).
+      if (!root || !h1) {
+        if (incercari < 50) {
+          incercari += 1;
+          setTimeout(monteaza, 40);
+        }
+        return;
+      }
+      // Conținut încărcat, dar nu e o lecție: nu montăm nimic (corect, nu eroare).
+      if (!esteLectie(root)) return;
 
-    setMounts(created);
-    setLesson(banner && intreaga ? { banner, section: intreaga } : banner ? { banner, section: null } : null);
+      const toate = collectLessonSections(root);
+      const intreaga = toate.find((s) => s.level === 1) || null;
+      const created = [];
+
+      // Codul canonic, etichetă discretă sus-stânga deasupra titlului.
+      const cod = codPagina(route, h1);
+      let etichetaCod = null;
+      if (cod && !h1.previousElementSibling?.hasAttribute?.('data-edupasi-cod')) {
+        etichetaCod = document.createElement('div');
+        etichetaCod.setAttribute('data-edupasi-cod', '');
+        etichetaCod.className = styles.codLectie;
+        etichetaCod.textContent = cod;
+        etichetaCod.title = 'Cod canonic al lecției (identitate + flaguri)';
+        h1.insertAdjacentElement('beforebegin', etichetaCod);
+      }
+
+      // Gazda de deasupra titlului: butonul, sau mesajul de indisponibilitate.
+      let banner = null;
+      if (!h1.previousElementSibling?.hasAttribute?.('data-edupasi-lesson-voice')) {
+        banner = document.createElement('div');
+        banner.setAttribute('data-edupasi-lesson-voice', '');
+        banner.className = styles.lessonSlot;
+        if (contextLectie(route)?.edupasi) banner.setAttribute('data-edupasi', '');
+        h1.insertAdjacentElement('beforebegin', banner);
+      }
+
+      setMounts(created);
+      setLesson(banner && intreaga ? { banner, section: intreaga } : banner ? { banner, section: null } : null);
+
+      curatare = () => {
+        created.forEach(({ slot }) => slot.remove());
+        if (banner) banner.remove();
+        if (etichetaCod) etichetaCod.remove();
+      };
+    };
+
+    monteaza();
 
     return () => {
-      created.forEach(({ slot }) => slot.remove());
-      if (banner) banner.remove();
-      if (etichetaCod) etichetaCod.remove();
+      anulat = true;
+      if (curatare) curatare();
       setMounts([]);
       setLesson(null);
     };
