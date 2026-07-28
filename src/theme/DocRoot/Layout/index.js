@@ -823,17 +823,22 @@ export default function DocRootLayout({ children }) {
   }, [isEduPasi]);
 
   /**
-   * Navigatorul EduPAȘI custom a fost DESFIINȚAT (cerut explicit).
+   * Doar NAVIGATORUL EduPAȘI (aside-ul cu „traseul/progresul”) a fost desființat.
    *
-   * Se revine la sidebarul standard Docusaurus pentru toate paginile. Diferența
-   * la EduPAȘI rămâne doar TEMA: atributul `data-edupasi-page` (pus mai sus)
-   * o comută pe bleumarin, iar Docusaurus alege singur `edupasiSidebar`, deci
-   * sidebarul standard conține chiar lecțiile și modulele EduPAȘI. Uneltele de
-   * accesibilitate rămân pe ambele. O singură cale de randare, fără shell propriu.
+   * BARA EduPAȘI de sub navbarul edumat rămâne: e a doua bară de navigare
+   * (`EduPasiContextBar` — wordmark, „Toate rubricile”, lecția curentă, butonul
+   * de Accesibilitate). E `position: sticky`, deci intră în flux SUB navbar și nu
+   * mai acoperă conținutul (fostul shell rezerva 68px cu un wrapper; acum nu mai e
+   * nevoie). Sidebarul rămâne cel standard Docusaurus (edupasiSidebar), cu
+   * hamburger pe mobil. La lecțiile normale păstrăm indicatorul din navbar.
    */
   return (
     <>
-      <NormalLessonNavbarIndicator />
+      {isEduPasi ? (
+        <EduPasiContextBar items={sidebar?.items || []} />
+      ) : (
+        <NormalLessonNavbarIndicator />
+      )}
       <OriginalDocRootLayout>{children}</OriginalDocRootLayout>
       <EduPasiAccessibilityTools />
     </>

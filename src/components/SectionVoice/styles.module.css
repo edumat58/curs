@@ -269,6 +269,17 @@
   letter-spacing: normal;
   text-transform: none;
   text-align: left;
+  /* SPLIT VIEW: player + transcript rămân LIPITE sus cât timp elevul derulează
+     lecția și vede conținutul dedesubt, în același timp. Se lipesc sub navbar;
+     `--edupasi-navbar-real` e marginea de jos măsurată a navbarului. */
+  position: sticky;
+  top: calc(var(--edupasi-navbar-real, var(--ifm-navbar-height, 4.25rem)) + 10px);
+  z-index: 50;
+}
+
+/* Pe EduPAȘI mai există o bară (contextBar, 68px) sub navbar; coborâm panoul sub ea. */
+.panel[data-edupasi] {
+  top: calc(var(--edupasi-navbar-real, var(--ifm-navbar-height, 4.25rem)) + 68px + 10px);
 }
 
 .waiting,
@@ -709,14 +720,20 @@ details[open] .transcriptToggle::before { content: '▾ '; }
   width: 100%;
   box-sizing: border-box;
   margin-top: 12px;
-  padding: 16px 18px;
+  padding: 14px 18px;
   overflow-wrap: break-word;
-  font-size: 1.1rem;
-  line-height: 2.05;
+  /* Înălțime PRESTABILITĂ — nu tot textul deodată (e prea lung). Cutie cu
+     derulare internă; cuvântul citit acum se aduce singur în mijloc. */
+  max-height: 30vh;
+  overflow-y: auto;
+  font-size: 1.06rem;
+  line-height: 2;
   text-align: left; /* aliniat la stânga, cerut */
   border-radius: 10px;
   background: color-mix(in srgb, var(--voice-accent) 4%, transparent);
   border: 1px solid var(--voice-hairline);
+  -webkit-mask-image: linear-gradient(transparent, #000 10%, #000 90%, transparent);
+  mask-image: linear-gradient(transparent, #000 10%, #000 90%, transparent);
 }
 
 /* Titlu de secțiune în subtitrare: pe rând propriu, bold, clicabil — sare la
@@ -768,4 +785,47 @@ details[open] .transcriptToggle::before { content: '▾ '; }
   transition: color 140ms ease, background 140ms ease;
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
+}
+
+/* ============================================================
+   Iconița de sunet de lângă titlul FIECĂREI secțiuni.
+   ------------------------------------------------------------
+   Injectată în H2/H3-ul din lecție (nu în panou), deci folosește variabilele
+   GLOBALE ale site-ului, nu cele locale ale playerului. La apăsare, playerul se
+   deschide și sare la momentul secțiunii. Discretă lângă titlu, clară la hover.
+   Portocaliu pe lecțiile normale, bleumarin pe EduPAȘI (după data-edupasi-page).
+   ============================================================ */
+.sectiuneAudio {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.55em;
+  height: 1.55em;
+  margin-left: 0.5rem;
+  padding: 0;
+  vertical-align: middle;
+  border: 1px solid var(--km-line, #d9d2c2);
+  border-radius: 50%;
+  background: var(--km-cream-2, #fffcf5);
+  color: var(--km-orange, #e8590c);
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 140ms ease, background 140ms ease, transform 100ms ease;
+}
+.sectiuneAudio:hover,
+.sectiuneAudio:focus-visible {
+  opacity: 1;
+  background: color-mix(in srgb, var(--km-orange, #e8590c) 14%, var(--km-cream-2, #fffcf5));
+  transform: scale(1.08);
+  outline: none;
+}
+.sectiuneAudio svg { display: block; }
+
+/* Pe EduPAȘI, accentul e bleumarinul temei. */
+:global(html[data-edupasi-page='true']) .sectiuneAudio {
+  color: var(--edupasi-accent, #003058);
+}
+:global(html[data-edupasi-page='true']) .sectiuneAudio:hover,
+:global(html[data-edupasi-page='true']) .sectiuneAudio:focus-visible {
+  background: color-mix(in srgb, var(--edupasi-accent, #003058) 12%, var(--km-cream-2, #fffcf5));
 }

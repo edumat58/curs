@@ -152,6 +152,7 @@ function indiceToken(tokens, ms) {
  */
 function Subtitrare({ words, currentMs, contentRoot }) {
   const activ = useRef(null);
+  const cutie = useRef(null);
   const tokens = useMemo(() => {
     const baza = construiesteTokeni(words);
     // Titlurile REALE ale lecției (H2/H3 din conținut) — după ele recunoaștem
@@ -170,26 +171,28 @@ function Subtitrare({ words, currentMs, contentRoot }) {
   const idx = indiceToken(tokens, currentMs);
 
   useEffect(() => {
-    // Transcript static: urmărirea o face PAGINA, nu o cutie. Aducem cuvântul
-    // activ în ecran DOAR când iese din fereastra vizibilă — nu la fiecare
-    // cuvânt — ca pagina să nu tresară. `window.innerHeight` e o măsură sigură,
-    // spre deosebire de dimensiunile portalului care se pot îngusta o clipă.
+    // Cutia are înălțime PRESTABILITĂ și derulare proprie: aducem cuvântul rostit
+    // acum în MIJLOCUL cutiei, mișcând DOAR cutia (scrollTop), niciodată pagina —
+    // altfel split-view-ul ar smuci lecția din spate la fiecare cuvânt. Măsurăm
+    // prin getBoundingClientRect (robust, indiferent de poziționare) și derulăm
+    // cutia cu diferența până la centru.
     const raf = requestAnimationFrame(() => {
+      const box = cutie.current;
       const el = activ.current;
-      if (!el) return;
-      const r = el.getBoundingClientRect();
-      const sus = 96;
-      const jos = window.innerHeight - 140;
-      if (r.top < sus || r.bottom > jos) {
-        const redus = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        el.scrollIntoView({ block: 'center', behavior: redus ? 'auto' : 'smooth' });
-      }
+      if (!box || !el) return;
+      const rBox = box.getBoundingClientRect();
+      const rEl = el.getBoundingClientRect();
+      const centru = (rEl.top - rBox.top) - (box.clientHeight / 2 - rEl.height / 2);
+      // Prag mic: nu re-derulăm pentru fracțiuni de pixel (evită tremuratul).
+      if (Math.abs(centru) < 4) return;
+      const redus = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      box.scrollTo({ top: box.scrollTop + centru, behavior: redus ? 'auto' : 'smooth' });
     });
     return () => cancelAnimationFrame(raf);
   }, [idx]);
 
   return (
-    <div className={styles.subtitrare} aria-label="Transcript sincronizat">
+    <div ref={cutie} className={styles.subtitrare} aria-label="Transcript sincronizat">
       {tokens.map((tok, i) => {
         const clasa = i === idx ? styles.cuvantActiv : (i < idx ? styles.cuvantCitit : styles.cuvant);
         const ref = i === idx ? activ : null;
@@ -228,6 +231,7 @@ function Subtitrare({ words, currentMs, contentRoot }) {
 export default function AudioPlayer({
   src, autoPlay = false, onClose, knownDuration = 0, onUnavailable,
   transcript = '', sentences = null, words = null, headingElement = null, contentRoot = null,
+  seekTo = null,
 }) {
   const audioRef = useRef(null);
   const [playing, setPlaying] = useState(false);
@@ -406,6 +410,32 @@ export default function AudioPlayer({
     const el = audioRef.current;
     if (el) el.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
   }, [autoPlay, src]);
+
+  /**
+   * Salt la o SECȚIUNE, cerut de iconița de sunet de lângă titlul ei.
+   *
+   * `seekTo` e `{ms, nonce}`: nonce-ul se schimbă la fiecare apăsare, ca două
+   * click-uri pe aceeași secțiune să reia saltul (altfel prop-ul ar fi „egal" și
+   * efectul n-ar mai rula). Dacă metadatele încă nu s-au încărcat, `currentTime`
+   * nu „prinde"; așteptăm `loadedmetadata` o singură dată și aplicăm apoi.
+   */
+  useEffect(() => {
+    if (!seekTo || !Number.isFinite(seekTo.ms)) return undefined;
+    const el = audioRef.current;
+    if (!el) return undefined;
+    const sari = () => {
+      el.currentTime = Math.max(0, seekTo.ms / 1000);
+      setCurrent(el.currentTime);
+      setPilot(true);
+      el.play().then(() => setPlaying(true)).catch(() => {});
+    };
+    if (el.readyState >= 1) {
+      sari();
+      return undefined;
+    }
+    el.addEventListener('loadedmetadata', sari, { once: true });
+    return () => el.removeEventListener('loadedmetadata', sari);
+  }, [seekTo]);
 
   const toggle = useCallback(() => {
     const el = audioRef.current;

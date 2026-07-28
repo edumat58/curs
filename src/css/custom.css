@@ -714,6 +714,77 @@ main {
   .navbar__items:not(.navbar__items--right) .navbar__item {
     order: 4;
   }
+
+  /* SEARCH pe RÂNDUL 2 (cerut). Dizolvăm și banda dreaptă, ca elementele ei să
+     poată sta pe rânduri diferite. Utilitarele (ochi, EduConnect+, dată, status)
+     rămân pe rândul 1, dreapta; search-ul trece pe rândul 2, tot la dreapta. */
+  .navbar__inner > .navbar__items--right {
+    display: contents;
+  }
+
+  .navbar__items--right > .navbar__item {
+    order: 2;
+  }
+
+  /* Primul utilitar împinge tot grupul din dreapta pe rândul 1. */
+  .navbar__items--right > .navbar__item:first-child {
+    margin-left: auto;
+  }
+
+  /* Fără gap de coloană, elementele dizolvate s-ar lipi între ele. */
+  .navbar__inner {
+    column-gap: 0.5rem;
+  }
+
+  /* Search-ul: rândul 2 (după linia ::after de order 3), lipit la dreapta,
+     aliniat cu banda de utilitare de pe rândul 1. */
+  .navbar__items--right > [class*='navbarSearchContainer'] {
+    order: 5;
+    margin-left: auto;
+  }
+}
+
+/* ============================================================
+   SEARCH PE MOBIL — în sidebar (drawer), nu în bara de sus. Cerut.
+   ------------------------------------------------------------
+   Bara din navbar dispare sub 997px; căutarea trăiește în meniul principal al
+   drawerului (adăugată prin swizzle-ul PrimaryMenu), lată, cu spațiu deasupra
+   linkurilor.
+   ============================================================ */
+@media (max-width: 996px) {
+  /* Instanța din bara de sus nu se mai arată pe mobil. */
+  .navbar__items--right [class*='navbarSearchContainer'] {
+    display: none !important;
+  }
+
+  /* Instanța din sidebar: full-width, cu aer. */
+  .navbar-sidebar .edupasi-mobile-search {
+    padding: 0.25rem 0 0.9rem;
+    border-bottom: 1px solid var(--km-line, #d9d2c2);
+    margin-bottom: 0.6rem;
+  }
+  .navbar-sidebar .edupasi-mobile-search [class*='navbarSearchContainer'],
+  .navbar-sidebar .edupasi-mobile-search .navbar__search {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    /* `.navbar__search` are implicit `margin-left: 16px` (marginea de navbar) —
+       la lățime 100% ieșea 16px în dreapta, de unde „fără spațiu în dreapta".
+       O anulăm: input-ul umple simetric lățimea drawerului. */
+    margin: 0;
+  }
+  .navbar-sidebar .edupasi-mobile-search .navbar__search-input {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+/* Pe desktop, instanța din drawer (mereu montată de Docusaurus, dar ascunsă) nu
+   trebuie să ocupe spațiu. */
+@media (min-width: 997px) {
+  .navbar-sidebar .edupasi-mobile-search {
+    display: none;
+  }
 }
 
 /* --- footer: crem, text cald --- */
@@ -1561,10 +1632,22 @@ article,
   }
 }
 
-/* 7. Pe mobil în EduPAȘI ascundem butonul de meniu hamburguer / sidebar Docusaurus (.navbar__toggle),
-      deoarece EduPAȘI folosește propriul său Navigator dedicat (.navigator) */
-html[data-edupasi-page='true'] .navbar__toggle {
-  display: none !important;
+/* 7. Hamburgerul (.navbar__toggle) rămâne VIZIBIL și pe EduPAȘI.
+      Regula veche îl ascundea pentru că EduPAȘI avea un Navigator dedicat care
+      ținea loc de navigare. Navigatorul a fost desființat (se folosește sidebarul
+      standard Docusaurus, care conține chiar lecțiile/modulele EduPAȘI), deci pe
+      mobil AVEM nevoie de hamburger ca elevul să poată deschide sidebarul. */
+
+/* 7b. Bara EduPAȘI (`.contextBar`, sticky, 68px) stă sub navbarul edumat. Când se
+      derulează, sidebarul standard și cuprinsul din dreapta se lipesc implicit la
+      înălțimea navbarului — adică FIX în spatele barei EduPAȘI. Le coborâm cu 68px
+      ca să se lipească SUB ea, nu dedesubtul ei ascunse. Doar pe paginile EduPAȘI. */
+html[data-edupasi-page='true'] [class*='sidebarViewport_'] {
+  top: 68px !important;
+  height: calc(100vh - 68px) !important;
+}
+html[data-edupasi-page='true'] .theme-doc-toc-desktop {
+  top: calc(var(--ifm-navbar-height, 6.5rem) + 1rem + 68px) !important;
 }
 
 /* 8. Fundal 100% alb curat (#ffffff) pe toate paginile și wrapperele de lecții (atât normale cât și EduPAȘI),

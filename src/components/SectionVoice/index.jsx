@@ -13,8 +13,31 @@ import {
 } from '@site/src/lib/voice/availability.mjs';
 import { latexToRomanian } from '@site/src/components/EduPasiAccessibility/speech.mjs';
 import { sursaPentru } from '@site/src/lib/voice/sursa.mjs';
+import { construiesteTokeni, marcheazaSectiuni } from '@site/src/lib/voice/subtitrareMath.mjs';
 import AudioPlayer from './AudioPlayer';
 import styles from './styles.module.css';
+
+/**
+ * Momentul de start al FIECĂREI secțiuni din lecție, din transcriptul rostit.
+ *
+ * Acum că modelul delimitează secțiunile (`[[Titlu]]` → recunoscute după H2-urile
+ * reale), fiecare titlu rostit are un timp măsurat. Îl legăm de elementul H2, ca
+ * să putem pune o iconiță de sunet lângă titlu care redă exact de-acolo.
+ * Întoarce doar secțiunile chiar anunțate în explicație (restul n-au ce reda).
+ */
+function momenteSectiuni(words, root) {
+  if (!Array.isArray(words) || !words.length || !root) return [];
+  const titluri = [...root.querySelectorAll('h2, h3')]
+    .map((el) => ({ nume: (el.textContent || '').replace(/#$/, '').trim(), el }))
+    .filter((h) => h.nume);
+  if (!titluri.length) return [];
+  const tokens = marcheazaSectiuni(construiesteTokeni(words), titluri);
+  const out = [];
+  tokens.forEach((t) => {
+    if (t.titlu && t.sectiune && Number.isFinite(t.t)) out.push({ el: t.sectiune, ms: t.t });
+  });
+  return out;
+}
 
 /**
  * Ce e o lecție și ce nu.
@@ -338,7 +361,7 @@ function usePanel(host, needed) {
 }
 
 /** Bara, eroarea și playerul — aceleași pentru orice buton. */
-function Panou({ state, fractie, error, data, onRetry, onClose, headingElement, contentRoot }) {
+function Panou({ state, fractie, error, data, onRetry, onClose, headingElement, contentRoot, seekTo }) {
   return (
     <>
       {/* Doar bara. Progresul se citește dintr-o privire, fără cifre și fără
@@ -384,6 +407,7 @@ function Panou({ state, fractie, error, data, onRetry, onClose, headingElement, 
           words={data.words || null}
           headingElement={headingElement}
           contentRoot={contentRoot}
+          seekTo={seekTo}
         />
       )}
     </>
@@ -400,7 +424,51 @@ function Panou({ state, fractie, error, data, onRetry, onClose, headingElement, 
 function LessonButton({ section, route, host }) {
   const data = useLessonAudio(route, section);
   const [deschis, setDeschis] = useState(false);
+  // Ținta de salt cerută de o iconiță de secțiune: {ms, nonce}. Nonce-ul se
+  // schimbă la fiecare apăsare, ca două click-uri pe aceeași secțiune să reia.
+  const [seekTarget, setSeekTarget] = useState(null);
+  const nonce = useRef(0);
   const panel = usePanel(host, deschis);
+
+  /**
+   * Iconița de sunet pe FIECARE secțiune delimitată (H2/H3).
+   *
+   * Se injectează în titlul din pagină, lângă text. La apăsare: deschide playerul
+   * (dacă e închis) și îl trimite la momentul exact al secției, apoi redă. Butonul
+   * lecției întregi rămâne separat, deasupra titlului.
+   */
+  useEffect(() => {
+    if (!data || !Array.isArray(data.words) || !data.words.length) return undefined;
+    const root = document.querySelector('.theme-doc-markdown') || document.querySelector('article');
+    if (!root) return undefined;
+    const sectiuni = momenteSectiuni(data.words, root);
+    if (!sectiuni.length) return undefined;
+    const injectate = [];
+    sectiuni.forEach(({ el, ms }) => {
+      if (el.querySelector('[data-edupasi-sectiune-audio]')) return; // pusă deja
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.setAttribute('data-edupasi-sectiune-audio', '');
+      btn.className = styles.sectiuneAudio;
+      btn.title = 'Ascultă explicația acestei secțiuni';
+      btn.setAttribute(
+        'aria-label',
+        `Ascultă explicația secțiunii: ${(el.textContent || '').replace(/#$/, '').trim()}`
+      );
+      btn.innerHTML = '<svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M7 4.5l13 7.5-13 7.5z" fill="currentColor"/></svg>';
+      const laClick = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setDeschis(true);
+        nonce.current += 1;
+        setSeekTarget({ ms, nonce: nonce.current });
+      };
+      btn.addEventListener('click', laClick);
+      el.appendChild(btn);
+      injectate.push(btn);
+    });
+    return () => injectate.forEach((b) => b.remove());
+  }, [data]);
 
   if (!data) return null;
 
@@ -438,6 +506,7 @@ function LessonButton({ section, route, host }) {
             state="ready"
             data={data}
             onClose={() => setDeschis(false)}
+            seekTo={seekTarget}
             contentRoot={typeof document !== 'undefined'
               ? document.querySelector('.theme-doc-markdown') || document.querySelector('article')
               : null}
