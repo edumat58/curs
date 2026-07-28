@@ -435,6 +435,58 @@
   font-size: 0.74rem;
 }
 
+/* --- Sincronizat --- */
+
+.sync,
+.syncOn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  min-height: 30px;
+  padding: 0.2rem 0.55rem;
+  border: 1.5px solid var(--voice-border);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+.sync {
+  color: var(--voice-text);
+  background: transparent;
+}
+
+.syncOn {
+  color: var(--voice-on-accent);
+  background: var(--voice-accent);
+  border-color: var(--voice-accent);
+}
+
+/**
+ * Blocul despre care se vorbește chiar acum.
+ *
+ * Fundal blând plus o bară în margine, nu chenar și nu culoare tare: elevii
+ * pentru care e făcută funcția sunt exact cei pe care contrastul agresiv îi
+ * obosește. Bara din stânga poartă informația și pentru cine nu distinge bine
+ * culorile — nu ne bazăm doar pe nuanță.
+ */
+/* Variabilele se iau direct din paleta EduPAȘI, nu din cele locale ale
+   playerului: elementul luminat trăiește în conținutul lecției, deci în afara
+   containerelor unde sunt definite `--voice-*`. */
+.evidentiat {
+  position: relative;
+  background: var(--edupasi-accent-soft, #d9eef7);
+  box-shadow:
+    inset 3px 0 0 0 var(--edupasi-accent, #003058),
+    0 0 0 6px var(--edupasi-accent-soft, #d9eef7);
+  border-radius: 3px;
+  transition: background 220ms ease, box-shadow 220ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .evidentiat { transition: none; }
+}
+
 .close {
   margin-left: auto;
   min-width: 32px;

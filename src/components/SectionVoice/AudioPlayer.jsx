@@ -1,4 +1,12 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import {
+  adunaBlocuri,
+  adunaBlocuriSectiune,
+  aliniaza,
+  frazaLaMoment,
+  imparteFraze,
+  timpiFraze,
+} from '@site/src/lib/voice/sincronizare.mjs';
 import styles from './styles.module.css';
 
 /** mm:ss — elevii citesc durata, nu secunde brute. */
@@ -50,8 +58,54 @@ function SkipIcon({ forward }) {
  * Aceleași controale pe desktop și pe mobil — fără versiune „redusă" pe telefon,
  * pentru că exact acolo sunt elevii.
  */
+/**
+ * Evidențierea sincronizată.
+ *
+ * Ține minte ultimul element luminat, ca să îl stingă înainte să aprindă
+ * altul, și derulează pagina spre el doar când chiar iese din câmpul vizual —
+ * o pagină care sare la fiecare frază e mai obositoare decât una care nu se
+ * mișcă deloc.
+ */
+function useEvidentiere(activ, blocuri, indexBloc) {
+  const anterior = useRef(null);
+
+  useEffect(() => {
+    const stinge = () => {
+      if (anterior.current) {
+        anterior.current.classList.remove(styles.evidentiat);
+        anterior.current = null;
+      }
+    };
+    if (!activ || indexBloc < 0 || !blocuri[indexBloc]) {
+      stinge();
+      return undefined;
+    }
+    const el = blocuri[indexBloc].el;
+    if (el === anterior.current) return undefined;
+    stinge();
+    el.classList.add(styles.evidentiat);
+    anterior.current = el;
+
+    const cadru = el.getBoundingClientRect();
+    const inafara = cadru.top < 80 || cadru.bottom > window.innerHeight - 80;
+    if (inafara) {
+      el.scrollIntoView({
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+        block: 'center',
+      });
+    }
+    return undefined;
+  }, [activ, blocuri, indexBloc]);
+
+  // La demontare sau la oprirea sincronizării, pagina rămâne curată.
+  useEffect(() => () => {
+    if (anterior.current) anterior.current.classList.remove(styles.evidentiat);
+  }, []);
+}
+
 export default function AudioPlayer({
   src, autoPlay = false, onClose, knownDuration = 0, onUnavailable,
+  transcript = '', sentences = null, headingElement = null, contentRoot = null,
 }) {
   const audioRef = useRef(null);
   const [playing, setPlaying] = useState(false);
@@ -62,6 +116,33 @@ export default function AudioPlayer({
   const [duration, setDuration] = useState(knownDuration || 0);
   const [speed, setSpeed] = useState(1);
   const [buffering, setBuffering] = useState(true);
+  const [sincron, setSincron] = useState(false);
+
+  /**
+   * Potrivirea se calculează o singură dată, la pornirea sincronizării.
+   *
+   * E ieftină — câteva milisecunde — dar depinde de DOM-ul lecției, care nu se
+   * schimbă în timpul redării. Refăcută la fiecare `timeupdate`, adică de patru
+   * ori pe secundă, ar fi fost singura parte scumpă a funcției.
+   */
+  const potrivire = useMemo(() => {
+    if (!sincron || !transcript) return { blocuri: [], timpi: [], drum: [] };
+    const blocuri = headingElement
+      ? adunaBlocuriSectiune(headingElement)
+      : adunaBlocuri(contentRoot);
+    const fraze = imparteFraze(transcript);
+    return {
+      blocuri,
+      timpi: timpiFraze(fraze, sentences, duration || knownDuration || 1),
+      drum: aliniaza(fraze, blocuri),
+    };
+  }, [sincron, transcript, sentences, headingElement, contentRoot, duration, knownDuration]);
+
+  const frazaCurenta = sincron && potrivire.timpi.length
+    ? frazaLaMoment(potrivire.timpi, current)
+    : -1;
+  const blocCurent = frazaCurenta >= 0 ? (potrivire.drum[frazaCurenta] ?? -1) : -1;
+  useEvidentiere(sincron && playing, potrivire.blocuri, blocCurent);
 
   useEffect(() => {
     const el = audioRef.current;
@@ -238,6 +319,30 @@ export default function AudioPlayer({
             </button>
           ))}
         </div>
+        {/* Sincronizarea apare doar când are cu ce lucra. Un buton care nu poate
+            face nimic e mai rău decât unul care lipsește. */}
+        {transcript && (
+          <button
+            type="button"
+            className={sincron ? styles.syncOn : styles.sync}
+            onClick={() => setSincron((v) => !v)}
+            aria-pressed={sincron}
+            title="Evidențiază pe pagină ce se explică acum"
+          >
+            <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+              <path
+                d="M4 7h10M4 12h7M4 17h12"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+              <circle cx="18.5" cy="12" r="2.4" fill="currentColor" />
+            </svg>
+            Sincronizat
+          </button>
+        )}
+
         {buffering && <span className={styles.hint}>se încarcă…</span>}
         {onClose && (
           <button type="button" className={styles.close} onClick={onClose} aria-label="Închide">

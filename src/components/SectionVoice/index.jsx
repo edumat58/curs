@@ -323,7 +323,7 @@ function usePanel(host, needed) {
 }
 
 /** Bara, eroarea și playerul — aceleași pentru orice buton. */
-function Panou({ state, fractie, error, data, onRetry, onClose }) {
+function Panou({ state, fractie, error, data, onRetry, onClose, headingElement, contentRoot }) {
   return (
     <>
       {/* Doar bara. Progresul se citește dintr-o privire, fără cifre și fără
@@ -364,6 +364,10 @@ function Panou({ state, fractie, error, data, onRetry, onClose }) {
           autoPlay
           onClose={onClose}
           onUnavailable={raporteazaCadere}
+          transcript={data.explanationText || ''}
+          sentences={data.sentences || null}
+          headingElement={headingElement}
+          contentRoot={contentRoot}
         />
       )}
     </>
@@ -419,6 +423,7 @@ function SectionButton({ section, route, headingElement }) {
             data={data}
             onRetry={cere}
             onClose={() => setState('idle')}
+            headingElement={headingElement}
           />,
           panel
         )}
@@ -482,6 +487,9 @@ function LessonButton({ section, route, host }) {
             data={data}
             onRetry={cere}
             onClose={() => setState('idle')}
+            contentRoot={typeof document !== 'undefined'
+              ? document.querySelector('.theme-doc-markdown') || document.querySelector('article')
+              : null}
           />,
           panel
         )}
