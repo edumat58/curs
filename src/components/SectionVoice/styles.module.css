@@ -470,6 +470,68 @@
   transform: scale(0.94);
 }
 
+/* Restrânge/extinde dock-ul — aceeași formă rotundă ca celelalte icon-butoane. */
+.colaps {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  color: var(--voice-text);
+  background: transparent;
+  border: 1px solid var(--voice-hairline);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 140ms ease, transform 80ms ease;
+}
+.colaps:hover { background: var(--voice-accent-soft); }
+.colaps:active { transform: scale(0.94); }
+
+/* Setări (viteză): buton compact care arată viteza curentă + meniu ce se deschide
+   ÎN SUS (dock-ul e jos). Înlocuiește fostul rând întreg de viteză. */
+.setariWrap {
+  position: relative;
+  flex: none;
+  display: inline-flex;
+}
+.setariBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 48px;
+  height: 38px;
+  padding: 0 0.65rem;
+  color: var(--voice-text);
+  background: transparent;
+  border: 1px solid var(--voice-hairline);
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 140ms ease, border-color 140ms ease;
+}
+.setariBtn:hover { background: var(--voice-accent-soft); }
+.setariMeniu {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 8px);
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 6px;
+  background: var(--voice-surface);
+  border: 1px solid var(--voice-crem-linie);
+  border-radius: 12px;
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.18);
+}
+.setariMeniu .speed,
+.setariMeniu .speedOn {
+  min-width: 92px;
+  justify-content: center;
+}
+
 /* Bara de derulare împarte rândul cu butoanele pe ecran lat și trece pe rândul
    următor pe telefon — fără versiune separată de mobil, doar wrap. */
 .progress {
@@ -795,8 +857,11 @@ details[open] .transcriptToggle::before { content: '▾ '; }
    secțiunea din lecție. Marcat discret ca link (subliniere la hover), nu ca
    buton greoi. Primul titlu nu are spațiu mare deasupra. */
 .subtitluSectiune {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
   width: fit-content;
+  max-width: 100%;
   margin: 1.1em 0 0.35em;
   padding: 2px 0;
   background: none;
@@ -806,13 +871,28 @@ details[open] .transcriptToggle::before { content: '▾ '; }
   font-weight: 800;
   letter-spacing: -0.01em;
   text-align: left;
+  /* MEREU negru + bold — niciodată estompat sau evidențiat ca proza. Cerut. */
+  color: var(--voice-text, #1c1a16);
   cursor: pointer;
   border-bottom: 2px solid transparent;
-  transition: border-color 140ms ease, color 140ms ease;
+  transition: border-color 140ms ease;
 }
 .subtitluSectiune:first-child { margin-top: 0; }
 .subtitluSectiune:hover {
   border-bottom-color: currentColor;
+}
+
+/* Săgeata de lângă titlu: spune „e apăsabil" (sare la secțiune — audio + pagină).
+   Discretă, se aprinde și alunecă puțin la hover. */
+.subtitluSageata {
+  flex: none;
+  opacity: 0.55;
+  color: var(--voice-accent, currentColor);
+  transition: transform 140ms ease, opacity 140ms ease;
+}
+.subtitluSectiune:hover .subtitluSageata {
+  opacity: 1;
+  transform: translateX(2px);
 }
 
 /* Cuvintele încă necitite: șterse, discrete (efect de teleprompter). */

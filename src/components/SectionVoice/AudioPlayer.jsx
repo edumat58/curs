@@ -150,10 +150,27 @@ function indiceToken(tokens, ms) {
  * ca „înmulțit cu". Cutia se derulează singură ca să țină jetonul activ în
  * mijloc, dar mișcă DOAR cutia, nu pagina.
  */
-function Subtitrare({ words, currentMs, contentRoot }) {
+/**
+ * Derulează PAGINA la o secțiune, așezând-o sub barele de sus (navbarul edumat
+ * + bara de context EduPAȘI, când există), nu sub ele. `--edupasi-navbar-real` e
+ * marginea de jos măsurată a navbarului.
+ */
+function scrollPaginaLaSectiune(el) {
+  if (!el || typeof window === 'undefined') return;
+  const stil = getComputedStyle(document.documentElement);
+  const navbar = parseInt(stil.getPropertyValue('--edupasi-navbar-real'), 10) || 110;
+  const edupasi = document.documentElement.getAttribute('data-edupasi-page') === 'true';
+  const offset = navbar + (edupasi ? 68 : 0) + 16;
+  const y = el.getBoundingClientRect().top + window.scrollY - offset;
+  const redus = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  window.scrollTo({ top: Math.max(0, y), behavior: redus ? 'auto' : 'smooth' });
+}
+
+function Subtitrare({ words, currentMs, contentRoot, onSeek }) {
   const activ = useRef(null);
   const cutie = useRef(null);
   const idxAnterior = useRef(-1);
+  const sectiuneCurenta = useRef(null);
   const tokens = useMemo(() => {
     const baza = construiesteTokeni(words);
     // Titlurile REALE ale lecției (H2/H3 din conținut) — după ele recunoaștem
@@ -200,13 +217,34 @@ function Subtitrare({ words, currentMs, contentRoot }) {
     return () => cancelAnimationFrame(raf);
   }, [idx]);
 
+  /**
+   * Când redarea TRECE într-o secțiune nouă, sărim și PAGINA la ea (cerut), ca
+   * elevul să vadă în lecție exact bucata despre care se vorbește. Doar la
+   * SCHIMBAREA de secțiune (o dată la zeci de secunde), nu la fiecare cuvânt. La
+   * prima secțiune (chiar la deschidere) NU smucim pagina — omul tocmai a apăsat
+   * play și citește de sus.
+   */
+  useEffect(() => {
+    if (idx < 0) return;
+    let sect = null;
+    for (let j = idx; j >= 0; j -= 1) {
+      if (tokens[j] && tokens[j].titlu && tokens[j].sectiune) { sect = tokens[j].sectiune; break; }
+    }
+    if (sect && sect !== sectiuneCurenta.current) {
+      const prima = sectiuneCurenta.current === null;
+      sectiuneCurenta.current = sect;
+      if (!prima) scrollPaginaLaSectiune(sect);
+    }
+  }, [idx, tokens]);
+
   return (
     <div ref={cutie} className={styles.subtitrare} aria-label="Transcript sincronizat">
       {tokens.map((tok, i) => {
         const clasa = i === idx ? styles.cuvantActiv : (i < idx ? styles.cuvantCitit : styles.cuvant);
         const ref = i === idx ? activ : null;
-        // Titlu de secțiune: bold, pe rând propriu, clicabil — sare la secțiunea
-        // din lecție. Rămâne și evidențiat când e citit acum.
+        // Titlu de secțiune: MEREU negru + bold (niciodată estompat sau evidențiat
+        // ca proza), cu o săgeată care spune „e apăsabil". La clic: sare AUDIO la
+        // momentul secțiunii ȘI derulează pagina la ea.
         if (tok.titlu && tok.sectiune) {
           return (
             // eslint-disable-next-line react/no-array-index-key
@@ -214,14 +252,30 @@ function Subtitrare({ words, currentMs, contentRoot }) {
               key={i}
               type="button"
               ref={ref}
-              className={`${styles.subtitluSectiune} ${clasa}`}
-              onClick={() => tok.sectiune.scrollIntoView({
-                behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
-                block: 'start',
-              })}
-              title="Sari la această secțiune în lecție"
+              className={styles.subtitluSectiune}
+              onClick={() => {
+                if (onSeek && Number.isFinite(tok.t)) onSeek(tok.t);
+                scrollPaginaLaSectiune(tok.sectiune);
+              }}
+              title="Sari aici — audio și pagină"
             >
-              {tok.text}
+              <span>{tok.text}</span>
+              <svg
+                className={styles.subtitluSageata}
+                viewBox="0 0 24 24"
+                width="15"
+                height="15"
+                aria-hidden="true"
+              >
+                <path
+                  d="M5 12h13m-6-6l6 6-6 6"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.4"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
             </button>
           );
         }
@@ -480,6 +534,28 @@ export default function AudioPlayer({
     setCurrent(value);
   }, []);
 
+  /** Salt la un moment (ms), cerut de titlul de secțiune din transcript. */
+  const seekLaMs = useCallback((ms) => {
+    const el = audioRef.current;
+    if (!el || !Number.isFinite(ms)) return;
+    el.currentTime = Math.max(0, ms / 1000);
+    setCurrent(el.currentTime);
+    el.play().then(() => setPlaying(true)).catch(() => {});
+  }, []);
+
+  // Meniul de viteză (setări): scos din rândul care mânca un rând întreg din dock.
+  const [setari, setSetari] = useState(false);
+
+  /**
+   * Dock COLAPSABIL — cerut, pentru mai mult spațiu de lecție.
+   *
+   * Extins (implicit): toate controalele + transcriptul. Restrâns: rămâne DOAR
+   * bara de audio (play + derulare + timp), o singură dungă subțire, ca lecția
+   * să respire. Înălțimea dock-ului e măsurată oricum, deci rezervarea de spațiu
+   * din josul lecției se micșorează singură la restrângere.
+   */
+  const [extins, setExtins] = useState(true);
+
   return (
     <div className={styles.player} role="group" aria-label="Explicație audio">
       <audio ref={audioRef} src={src} preload="metadata" />
@@ -506,37 +582,41 @@ export default function AudioPlayer({
           )}
         </button>
 
-        <button
-          type="button"
-          className={styles.iconBtn}
-          onClick={() => skip(-10)}
-          aria-label="Înapoi 10 secunde"
-          title="Înapoi 10 secunde"
-        >
-          <SkipIcon forward={false} />
-        </button>
+        {extins && (
+          <>
+            <button
+              type="button"
+              className={styles.iconBtn}
+              onClick={() => skip(-10)}
+              aria-label="Înapoi 10 secunde"
+              title="Înapoi 10 secunde"
+            >
+              <SkipIcon forward={false} />
+            </button>
 
-        <button
-          type="button"
-          className={styles.iconBtn}
-          onClick={() => skip(10)}
-          aria-label="Înainte 10 secunde"
-          title="Înainte 10 secunde"
-        >
-          <SkipIcon forward />
-        </button>
+            <button
+              type="button"
+              className={styles.iconBtn}
+              onClick={() => skip(10)}
+              aria-label="Înainte 10 secunde"
+              title="Înainte 10 secunde"
+            >
+              <SkipIcon forward />
+            </button>
 
-        <button
-          type="button"
-          className={styles.iconBtn}
-          onClick={stop}
-          aria-label="Oprește"
-          title="Oprește"
-        >
-          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
-            <rect x="6" y="6" width="12" height="12" rx="2" fill="currentColor" />
-          </svg>
-        </button>
+            <button
+              type="button"
+              className={styles.iconBtn}
+              onClick={stop}
+              aria-label="Oprește"
+              title="Oprește"
+            >
+              <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                <rect x="6" y="6" width="12" height="12" rx="2" fill="currentColor" />
+              </svg>
+            </button>
+          </>
+        )}
 
         <div className={styles.progress}>
           <span className={styles.time}>{fmt(current)}</span>
@@ -552,28 +632,62 @@ export default function AudioPlayer({
           />
           <span className={styles.time}>-{fmt(Math.max(0, (duration || 0) - current))}</span>
         </div>
-      </div>
 
-      <div className={styles.bottomRow}>
-        <span className={styles.speedLabel}>Viteză</span>
-        <div className={styles.speeds} role="group" aria-label="Viteza de redare">
-          {SPEEDS.map((value) => (
+        {/* Viteza stă acum într-un mic meniu de SETĂRI, nu pe un rând întreg — mai
+            mult loc lizibil pentru lecție. Meniul se deschide în SUS (dock jos). */}
+        {extins && (
+          <div className={styles.setariWrap}>
             <button
-              key={value}
               type="button"
-              className={value === speed ? styles.speedOn : styles.speed}
-              onClick={() => setSpeed(value)}
-              aria-pressed={value === speed}
+              className={styles.setariBtn}
+              onClick={() => setSetari((v) => !v)}
+              aria-expanded={setari}
+              aria-label={`Viteză de redare: ${speed}×`}
+              title="Viteză de redare"
             >
-              {value}×
+              {speed}×
             </button>
-          ))}
-        </div>
-        {/* „Sincronizat" a fost scos dinadins: evidențierea în timp real pe
-            pagină îngreuna redarea și se dezalinia. Rămâne transcriptul, static,
-            dedesubt — text simplu, care merge lin. */}
+            {setari && (
+              <div className={styles.setariMeniu} role="menu" aria-label="Viteza de redare">
+                {SPEEDS.map((value) => (
+                  <button
+                    key={value}
+                    type="button"
+                    role="menuitemradio"
+                    aria-checked={value === speed}
+                    className={value === speed ? styles.speedOn : styles.speed}
+                    onClick={() => { setSpeed(value); setSetari(false); }}
+                  >
+                    {value}×
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
 
-        {buffering && <span className={styles.hint}>se încarcă…</span>}
+        {/* Restrânge / extinde. Restrâns: rămâne DOAR bara de audio (play +
+            derulare), o dungă subțire — maximum de lecție vizibilă. */}
+        <button
+          type="button"
+          className={styles.colaps}
+          onClick={() => { setSetari(false); setExtins((v) => !v); }}
+          aria-expanded={extins}
+          aria-label={extins ? 'Restrânge playerul' : 'Extinde playerul'}
+          title={extins ? 'Restrânge — doar bara de audio' : 'Extinde — controale + transcript'}
+        >
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <path
+              d={extins ? 'M6 9l6 6 6-6' : 'M6 15l6-6 6 6'}
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.4"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </button>
+
         {onClose && (
           <button type="button" className={styles.close} onClick={onClose} aria-label="Închide">
             ✕
@@ -581,16 +695,21 @@ export default function AudioPlayer({
         )}
       </div>
 
-      {/* Subtitrarea sincronizată când avem timpii pe cuvânt; altfel, transcriptul
+      {buffering && <span className={styles.hint}>se încarcă…</span>}
+
+      {/* Transcriptul apare doar EXTINS. Restrâns, rămâne doar bara de audio.
+          Subtitrare sincronizată când avem timpii pe cuvânt; altfel transcriptul
           static, pliabil (audio generat înainte de a exista funcția). */}
-      {Array.isArray(words) && words.length ? (
-        <Subtitrare words={words} currentMs={current * 1000} contentRoot={contentRoot} />
-      ) : transcript ? (
-        <details className={styles.transcriptBox}>
-          <summary className={styles.transcriptToggle}>Vezi transcriptul</summary>
-          <div className={styles.transcriptText}>{transcript}</div>
-        </details>
-      ) : null}
+      {extins && (
+        Array.isArray(words) && words.length ? (
+          <Subtitrare words={words} currentMs={current * 1000} contentRoot={contentRoot} onSeek={seekLaMs} />
+        ) : transcript ? (
+          <details className={styles.transcriptBox}>
+            <summary className={styles.transcriptToggle}>Vezi transcriptul</summary>
+            <div className={styles.transcriptText}>{transcript}</div>
+          </details>
+        ) : null
+      )}
     </div>
   );
 }
