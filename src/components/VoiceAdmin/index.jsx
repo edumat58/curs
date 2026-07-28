@@ -233,7 +233,7 @@ export default function VoiceAdmin({ token, apiBase }) {
     <div className={styles.wrap}>
       <div className={styles.usageGrid}>
         <UsageBar usage={usage} />
-        <GroqBar llm={llmUsage} />
+        <GeminiBar llm={llmUsage} />
       </div>
 
       <div className={styles.controls}>
@@ -389,13 +389,13 @@ function dataOra(iso) {
 }
 
 /**
- * Bugetul de LIMBAJ (Groq) pentru generarea textului — consumat, total, reset.
+ * Bugetul de LIMBAJ (Gemini) pentru generarea textului — consumat, total, reset.
  *
- * Limita zilnică Groq e o fereastră RULANTĂ de 24h: nu se resetează la o oră
+ * Limita zilnică Gemini e o fereastră RULANTĂ de 24h: nu se resetează la o oră
  * fixă, ci se eliberează pe măsură ce cele mai vechi generări împlinesc 24h.
  * Arătăm exact când se eliberează prima tranșă și cât.
  */
-function GroqBar({ llm }) {
+function GeminiBar({ llm }) {
   if (!llm) return null;
   const { folosit, limita, ramas, procent, seEliberezaLa, elibereaza, model } = llm;
   const pct = procent != null ? Math.min(100, procent) : null;
@@ -403,7 +403,7 @@ function GroqBar({ llm }) {
   return (
     <div className={styles.usage}>
       <div className={styles.usageTop}>
-        <span className={styles.usageLabel}>Buget text (Groq)</span>
+        <span className={styles.usageLabel}>Buget text (Gemini)</span>
         <span className={styles.usageNums}>
           {folosit?.toLocaleString('ro-RO')} {limita != null ? `/ ${limita.toLocaleString('ro-RO')}` : ''} tokeni
         </span>

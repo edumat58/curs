@@ -777,6 +777,25 @@ main {
     width: 100%;
     box-sizing: border-box;
   }
+
+  /* Containerul intern de search (`.searchBar_...`) umple lățimea drawerului. */
+  .navbar-sidebar .edupasi-mobile-search [class*='searchBar_'] {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* DROPDOWN-ul de rezultate/previzualizări: implicit e right-aligned cu lățime
+     FIXĂ (~340px, gândit pentru un search în dreapta navbarului, care se deschide
+     spre stânga). În drawerul îngust (~311px) ieșea ~116px în stânga ecranului —
+     „meniul e tăiat pe marginea din stânga". Îl aliniem la STÂNGA input-ului, pe
+     lățimea drawerului. Măsurat live: -116px → 13px, netăiat. */
+  .navbar-sidebar .edupasi-mobile-search [class*='dropdownMenu'] {
+    left: 0 !important;
+    right: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
 }
 
 /* Pe desktop, instanța din drawer (mereu montată de Docusaurus, dar ascunsă) nu

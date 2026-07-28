@@ -111,8 +111,8 @@ function serviceUrl() {
  * care serverul o estimează din material și o trimite în `expectedSpeechSec`.
  * O definiție scurtă și o lecție întreagă nu pot împărți aceeași scală.
  *
- * Ponderile vin din măsurători pe serviciul real, nu din intuiție. Groq scrie
- * explicația în două-trei secunde; rostirea ei durează zeci. Prima variantă
+ * Ponderile vin din măsurători pe serviciul real, nu din intuiție. Modelul scrie
+ * explicația în câteva secunde; rostirea ei durează zeci. Prima variantă
  * dădea etapelor de model aproape jumătate din bară, iar aceea se umplea
  * instantaneu și apoi se târa — adică exact impresia de blocaj pe care bara ar
  * trebui să o evite.
