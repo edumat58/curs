@@ -265,9 +265,11 @@ export async function createServer(env = process.env) {
           sectionHash: doc.sectionHash, heading: doc.heading, route: doc.route,
         }).catch(() => {});
       }
+      // encodeOpus întoarce {buffer, codec, contentType} — folosim câmpurile lui,
+      // nu obiectul întreg (altfel GridFS primește un Object, nu un Buffer).
       const encoded = await encodeOpus(audio.wav);
       const gata = await store.attachAudio(doc.sectionHash, {
-        codec: 'opus', contentType: 'audio/ogg', buffer: encoded,
+        codec: encoded.codec, contentType: encoded.contentType, buffer: encoded.buffer,
         durationSec: audio.durationSec, sampleRate: audio.sampleRate, voice: audio.voice,
       });
       const baseUrl = env.VOICE_PUBLIC_URL || `${req.protocol}://${req.get('host')}`;
