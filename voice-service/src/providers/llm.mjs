@@ -25,17 +25,35 @@ class LlmError extends Error {
  * Ambii furnizori vorbesc dialectul OpenAI /chat/completions, deci avem un
  * singur client. Diferă doar baza URL, cheia și modelul implicit.
  */
-function createOpenAiCompatible({ name, baseUrl, apiKey, model, timeoutMs, maxRetries }) {
+/**
+ * Cât are sens să așteptăm în interiorul unei cereri.
+ *
+ * Limita pe tokeni/MINUT se trece așteptând: fereastra e glisantă și trece
+ * repede. Limita pe ZI nu — furnizorul cere „try again in 30m", iar un elev
+ * care a apăsat un buton nu poate fi ținut o jumătate de oră. Peste pragul
+ * ăsta nu mai așteptăm, ci schimbăm modelul.
+ */
+const ASTEPTARE_MAXIMA_MS = 45000;
+const LIMITA_PE_ZI = /per day|\bTPD\b|\bRPD\b/i;
+
+function createOpenAiCompatible({ name, baseUrl, apiKey, models, timeoutMs, maxRetries }) {
+  const lista = models.filter(Boolean);
+  // Modelul curent se ține la nivel de client, nu de cerere: odată ce bugetul
+  // zilnic al celui principal s-a terminat, s-a terminat pentru toate cererile
+  // care urmează. Fiecare ar redescoperi asta cu încă un 429 pierdut.
+  let index = 0;
+
   return {
     name,
-    model,
+    get model() { return lista[index]; },
     async chat(messages, { json = false, temperature, maxTokens } = {}) {
+      const model = lista[index];
       // Modelele cu raționament (gpt-oss) consumă bugetul în câmpul `reasoning`
       // și pot întoarce content gol în modul JSON strict. Ținem raționamentul
       // scurt: aici avem nevoie de extragere fidelă, nu de deliberare lungă.
       const isReasoning = /gpt-oss|thinking|reasoner|\bo\d\b/i.test(model);
       const body = {
-        model,
+        model: lista[index],
         messages,
         temperature: temperature ?? (json ? 0.1 : 0.6),
         stream: false,
@@ -90,6 +108,8 @@ function createOpenAiCompatible({ name, baseUrl, apiKey, model, timeoutMs, maxRe
             err.retryAfterMs = Number.isFinite(headerWait) && headerWait > 0
               ? headerWait + 1500
               : bodyWait ? Math.ceil(parseFloat(bodyWait[1]) * 1000) + 1500 : 0;
+            err.epuizatPeZi = res.status === 429
+              && (LIMITA_PE_ZI.test(text) || err.retryAfterMs > ASTEPTARE_MAXIMA_MS);
             throw err;
           }
 
@@ -112,6 +132,23 @@ function createOpenAiCompatible({ name, baseUrl, apiKey, model, timeoutMs, maxRe
           };
         } catch (err) {
           lastError = err;
+
+          /**
+           * Bugetul zilnic al modelului s-a terminat: trecem la următorul din
+           * listă și reîncercăm IMEDIAT, fără să consumăm o încercare.
+           *
+           * Modelele au bugete zilnice separate, deci al doilea chiar are ce
+           * oferi. Explicația iese ceva mai simplă decât cu modelul principal,
+           * dar o explicație bună azi bate una perfectă mâine.
+           */
+          if (err.epuizatPeZi && index < lista.length - 1) {
+            index += 1;
+            body.model = lista[index];
+            console.warn(`[voice] buget zilnic epuizat, trec pe ${lista[index]}`);
+            attempt -= 1;
+            continue;
+          }
+
           const retryable = err.retryable || err.name === 'AbortError';
           if (!retryable || attempt === maxRetries) break;
           // Dacă furnizorul a spus cât să așteptăm, îl ascultăm; altfel backoff
@@ -142,11 +179,23 @@ export function createLlm(env = process.env) {
     throw new Error('Lipsește GROQ_API_KEY. Pune-l în voice-service/.env');
   }
 
+  /**
+   * Modelele de rezervă au bugete zilnice separate la același furnizor. Fără
+   * ele, tierul gratuit al Groq (200 000 de tokeni pe zi pe model) oprea complet
+   * generarea la câteva zeci de explicații, iar elevul primea o eroare pe care
+   * nu avea cum să o rezolve.
+   */
+  const fallbacks = String(
+    env.VOICE_LLM_FALLBACKS ?? 'llama-3.3-70b-versatile,openai/gpt-oss-20b'
+  ).split(',').map((s) => s.trim()).filter(Boolean);
+
+  const principal = env.VOICE_LLM_MODEL || preset.model;
+
   return createOpenAiCompatible({
     name: provider,
     baseUrl: env.VOICE_LLM_BASE_URL || preset.baseUrl,
     apiKey,
-    model: env.VOICE_LLM_MODEL || preset.model,
+    models: [principal, ...fallbacks.filter((m) => m !== principal)],
     timeoutMs: Number(env.VOICE_LLM_TIMEOUT_MS || 60000),
     // 3 reîncercări, nu 2: pe tierul gratuit limita e pe tokeni/minut, iar o
     // secțiune mare poate prinde fereastra plină de două ori la rând.

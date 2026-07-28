@@ -73,7 +73,25 @@ export function createPiperTts(env = process.env) {
         '--length-scale', String(lengthScale),
         '--sentence-silence', String(sentenceSilence),
       ];
-      const proc = spawn(python, args, { stdio: ['pipe', 'ignore', 'pipe'] });
+      /**
+       * UTF-8 impus explicit, în ambele sensuri.
+       *
+       * Node scrie textul pe stdin ca UTF-8. Pe Linux asta se potrivea din
+       * întâmplare cu ce aștepta Python. Pe Windows, `sys.stdin` folosește
+       * codificarea locală (cp1252), deci „și" — octeții C8 99 — era decodat ca
+       * „È™", iar espeak citește ™ „marcă comercială". Explicația ieșea rostită
+       * corect ca voce și complet fără sens ca text, cu audio cu 40% mai lung
+       * decât ar fi trebuit, pentru că fiecare diacritică devenea două simboluri
+       * silabisite.
+       *
+       * `PYTHONUTF8=1` pune interpretorul în modul UTF-8 indiferent de locale;
+       * `PYTHONIOENCODING` acoperă și versiunile în care modul nu se aplică la
+       * fluxurile standard.
+       */
+      const proc = spawn(python, args, {
+        stdio: ['pipe', 'ignore', 'pipe'],
+        env: { ...env, PYTHONUTF8: '1', PYTHONIOENCODING: 'utf-8' },
+      });
       let stderr = '';
       proc.stderr.on('data', (d) => { stderr += d.toString(); });
       proc.on('error', reject);
