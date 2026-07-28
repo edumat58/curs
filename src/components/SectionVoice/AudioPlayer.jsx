@@ -153,6 +153,7 @@ function indiceToken(tokens, ms) {
 function Subtitrare({ words, currentMs, contentRoot }) {
   const activ = useRef(null);
   const cutie = useRef(null);
+  const idxAnterior = useRef(-1);
   const tokens = useMemo(() => {
     const baza = construiesteTokeni(words);
     // Titlurile REALE ale lecției (H2/H3 din conținut) — după ele recunoaștem
@@ -173,9 +174,16 @@ function Subtitrare({ words, currentMs, contentRoot }) {
   useEffect(() => {
     // Cutia are înălțime PRESTABILITĂ și derulare proprie: aducem cuvântul rostit
     // acum în MIJLOCUL cutiei, mișcând DOAR cutia (scrollTop), niciodată pagina —
-    // altfel split-view-ul ar smuci lecția din spate la fiecare cuvânt. Măsurăm
-    // prin getBoundingClientRect (robust, indiferent de poziționare) și derulăm
-    // cutia cu diferența până la centru.
+    // altfel split-view-ul ar smuci lecția din spate la fiecare cuvânt.
+    //
+    // Comportamentul se alege după CÂT de departe e saltul:
+    //   • pas mic (redare normală, sau scrub târât încet) → animat, lin — textul
+    //     curge în timp real sub cuvântul rostit;
+    //   • salt mare (skip de zeci de secunde, click pe bară, salt la secțiune) →
+    //     INSTANTANEU. O animație lină pe o distanță uriașă practic îngheață, iar
+    //     cuvântul corect rămânea în afara cutiei: părea că „nu urmărește".
+    const salt = Math.abs(idx - idxAnterior.current);
+    idxAnterior.current = idx;
     const raf = requestAnimationFrame(() => {
       const box = cutie.current;
       const el = activ.current;
@@ -186,7 +194,8 @@ function Subtitrare({ words, currentMs, contentRoot }) {
       // Prag mic: nu re-derulăm pentru fracțiuni de pixel (evită tremuratul).
       if (Math.abs(centru) < 4) return;
       const redus = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      box.scrollTo({ top: box.scrollTop + centru, behavior: redus ? 'auto' : 'smooth' });
+      const departe = redus || salt > 8 || Math.abs(centru) > box.clientHeight;
+      box.scrollTo({ top: box.scrollTop + centru, behavior: departe ? 'auto' : 'smooth' });
     });
     return () => cancelAnimationFrame(raf);
   }, [idx]);
