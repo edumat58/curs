@@ -5,9 +5,13 @@
 }
 
 .shell {
-  width: min(1180px, calc(100% - 2rem));
+  /* Lățime completă, indiferent de ecran: gutiere care cresc cu viewportul, nu
+     un plafon fix. Înainte se oprea la 1180px și lăsa margini albe uriașe pe
+     monitoare mari. */
+  width: 100%;
+  max-width: none;
   margin: 0 auto;
-  padding: 1.25rem 0 4rem !important;
+  padding: 1.25rem clamp(1rem, 4vw, 4rem) 4rem !important;
 }
 
 .hero {
@@ -35,6 +39,19 @@
 .supportPanel {
   position: relative;
   z-index: 1;
+}
+
+/* Acum că eroul e pe toată lățimea, textul se oprește la o lățime lizibilă și
+   lasă dreapta liberă pentru animația „Parcursul EduPAȘI". Pe ecran îngust nu
+   e nicio limită: textul ocupă tot, iar animația trece discret dedesubt. */
+.heroCopy {
+  max-width: 680px;
+}
+
+@media (min-width: 721px) {
+  .hero {
+    min-height: clamp(360px, 42vw, 560px);
+  }
 }
 
 .sectionKicker,

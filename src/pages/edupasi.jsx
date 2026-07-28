@@ -3,6 +3,7 @@ import Link from '@docusaurus/Link';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import Layout from '@theme/Layout';
 import EduPasiAccessibility from '@site/src/components/EduPasiAccessibility/SectionAccessibility';
+import StepsCanvas from '@site/src/components/EduPasiHero/StepsCanvas';
 import styles from './edupasi.module.css';
 
 /* Etichete de clasă și ordinea lor. Lecțiile în sine vin AUTOMAT din
@@ -162,6 +163,7 @@ export default function EduPasiPage() {
       <div className={styles.page}>
         <main className={styles.shell}>
           <section className={styles.hero}>
+            <StepsCanvas />
             <div className={styles.heroCopy}>
               <p className={styles.sectionKicker}>EduPAȘI — Matematica Adaptată</p>
               <div className={styles.wordmark}>
