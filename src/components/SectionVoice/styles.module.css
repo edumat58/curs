@@ -38,9 +38,9 @@
      gradient, adâncime moale — la volum redus, pe bleumarinul propriu. */
   --voice-raza: 999px;
   --voice-raza-mica: 12px;
-  --voice-hairline: color-mix(in srgb, var(--voice-accent) 16%, transparent);
+  --voice-hairline: color-mix(in srgb, var(--voice-accent) 22%, transparent);
   --voice-camp: color-mix(in srgb, var(--voice-accent) 6%, transparent);
-  --voice-umbra: 0 6px 18px color-mix(in srgb, var(--voice-accent) 16%, transparent);
+  --voice-umbra: 0 2px 8px color-mix(in srgb, var(--voice-accent) 10%, transparent);
   --voice-plin: linear-gradient(
     135deg,
     color-mix(in srgb, var(--voice-accent) 88%, white) 0%,
@@ -148,26 +148,31 @@
 .lessonBtnOn:hover {
   background: color-mix(in srgb, var(--voice-accent) 11%, transparent);
   border-color: color-mix(in srgb, var(--voice-accent) 34%, transparent);
-  box-shadow: 0 10px 26px color-mix(in srgb, var(--voice-accent) 22%, transparent);
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--voice-accent) 16%, transparent);
 }
 
 .lessonBtnOn {
   background: color-mix(in srgb, var(--voice-accent) 10%, transparent);
 }
 
-/* Capătul plin. Lățime fixă, ca marginea din stânga a lecției să rămână o linie
-   dreaptă indiferent de lungimea titlului. */
+/* Gestul stă într-un CERC, nu într-un bloc lipit de margine.
+   Varianta cu capăt dreptunghiular arăta a element prost decupat: colțuri
+   drepte înfipte într-o pastilă, cu spațiu pal deasupra și dedesubt. Cercul
+   rezolvă și potrivirea cu pagina — „Accesibilitate" și butonul de acasă au
+   exact forma asta, pastilă cu disc înăuntru. */
 .lessonIcon {
   display: inline-flex;
   flex: none;
   align-items: center;
   justify-content: center;
-  align-self: stretch;
-  width: 62px;
+  align-self: center;
+  width: 46px;
+  height: 46px;
+  margin: 0.45rem 0 0.45rem 0.5rem;
   color: var(--voice-on-accent);
   background: var(--voice-plin);
   border: 0;
-  border-radius: 0;
+  border-radius: 50%;
 }
 
 .lessonText {
@@ -175,7 +180,7 @@
   flex-direction: column;
   gap: 0.1rem;
   min-width: 0;
-  padding: 0.72rem 1.15rem 0.72rem 1rem;
+  padding: 0.7rem 1.2rem 0.7rem 0.85rem;
 }
 
 /* Titlul poartă vocea; explicația stă dedesubt, mai mică și mai stinsă, dar în
@@ -547,10 +552,14 @@
       color-mix(in srgb, var(--edupasi-accent-soft, #d9eef7) 92%, transparent) 94%,
       transparent 100%
     );
-  box-shadow:
-    0 0 0 4px color-mix(in srgb, var(--edupasi-accent-soft, #d9eef7) 45%, transparent),
-    0 0 22px 8px color-mix(in srgb, var(--edupasi-accent-soft, #d9eef7) 30%, transparent);
+  /* Fără aureolă. O umbră difuză în jurul unui bloc de text nu arată a atenție
+     îndreptată, ci a element care plutește greșit — mai ales lateral, unde se
+     întinde în marginea paginii și nu are de ce să se agațe. Rămâne doar tonul,
+     care e oricum singurul care poartă informația. */
+  box-shadow: none;
   border-radius: 8px;
+  padding: 0.1rem 0.45rem;
+  margin-inline: -0.45rem;
   transition: background 260ms ease, box-shadow 260ms ease, outline-color 260ms ease;
 }
 
