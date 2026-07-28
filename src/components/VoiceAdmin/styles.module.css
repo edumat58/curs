@@ -185,3 +185,39 @@
   color: var(--km-ink3);
   letter-spacing: 0.02em;
 }
+
+/* ---- UX mobil: master-detail ---- */
+.back {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  color: var(--km-orange-deep, #c2540a);
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 4px 0;
+  cursor: pointer;
+  min-height: 40px;
+}
+.editorCod {
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 0.72rem;
+  color: var(--km-ink3);
+  display: block;
+  margin-bottom: 4px;
+}
+
+@media (max-width: 899px) {
+  /* Când editezi o lecție, lista se retrage — ecranul e al editorului. */
+  .layoutEditing .list { display: none; }
+  .layoutEditing .editor { border: none; padding: 0; background: transparent; }
+  .back { display: inline-flex; }
+  /* Acțiunile devin butoane pline, unul sub altul — ușor de nimerit cu degetul. */
+  .actions { flex-direction: column; }
+  .btn, .btnPrimary, .btnAccent, .btnGhost { flex: 1 1 auto; width: 100%; min-height: 50px; font-size: 1rem; }
+  .btnGhost { order: 5; }
+  .textarea { min-height: 320px; font-size: 1.05rem; }
+  /* Lista ocupă tot ecranul când alegi, nu doar 60vh. */
+  .list { max-height: none; }
+}

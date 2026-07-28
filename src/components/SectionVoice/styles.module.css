@@ -648,3 +648,31 @@
   user-select: all;
   line-height: 1.4;
 }
+
+/* Transcriptul static (înlocuiește „Sincronizat") — text simplu, sub player. */
+.transcriptBox {
+  margin-top: 10px;
+  border-top: 1px solid var(--km-line, rgba(28, 26, 22, 0.14));
+  padding-top: 8px;
+}
+.transcriptToggle {
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--km-ink2, #4f4b43);
+  list-style: none;
+  padding: 4px 0;
+  user-select: none;
+}
+.transcriptToggle::-webkit-details-marker { display: none; }
+.transcriptToggle::before { content: '▸ '; color: var(--km-ink3, #8b857a); }
+details[open] .transcriptToggle::before { content: '▾ '; }
+.transcriptText {
+  margin-top: 6px;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--km-ink, #1c1a16);
+  max-height: 45vh;
+  overflow-y: auto;
+  white-space: pre-wrap;
+}

@@ -15,6 +15,18 @@
  * singură definiție, ca toate să calculeze exact același cod.
  */
 
+/**
+ * Versiunea promptului — intră în cheia audio, ca la o schimbare de prompt
+ * lecțiile să se regenereze controlat.
+ *
+ * Stă AICI, o singură dată, pentru că e împărțită între panoul de admin (care
+ * generează) și pagina elevului (care caută). Când erau două constante separate
+ * și una rămânea în urmă (admin pe 6, elev pe 7), hash-urile nu se mai potriveau
+ * și butonul nu apărea deloc, deși audio-ul exista. Trebuie ținută egală și cu
+ * `PROMPT_VERSION` din `voice-service/src/pipeline/prompts.mjs` (partea de Node).
+ */
+export const PROMPT_VERSION = 7;
+
 /** Clasa, din numele cursului (c5 → „05"). */
 const GRAD = { c5: '05', c6: '06', c7: '07', c8: '08' };
 

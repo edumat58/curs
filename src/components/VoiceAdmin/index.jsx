@@ -15,7 +15,7 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import { sha256Hex } from '@site/src/lib/voice/canonical.mjs';
-import { codLectie, identitateLectie, numeFisierAudio } from '@site/src/lib/voice/cod.mjs';
+import { PROMPT_VERSION, codLectie, identitateLectie, numeFisierAudio } from '@site/src/lib/voice/cod.mjs';
 import styles from './styles.module.css';
 
 /**
@@ -29,8 +29,6 @@ async function cheieLectie(identitate, promptVersion) {
   return sha256Hex(`lectie|${identitate}|pv${promptVersion}`);
 }
 
-/** Trebuie să coincidă cu PROMPT_VERSION din serviciu — intră în hash. */
-const PROMPT_VERSION = 6;
 const MAX_CONTENT = 5800; // sub limita serverului (MAX_TEXT), cu marjă
 
 const CLASE = { c5: 'Clasa a V-a', c6: 'Clasa a VI-a', c7: 'Clasa a VII-a', c8: 'Clasa a VIII-a' };
@@ -255,7 +253,7 @@ export default function VoiceAdmin({ token, apiBase }) {
 
       {mesaj ? <div className={styles.mesaj}>{mesaj}</div> : null}
 
-      <div className={styles.layout}>
+      <div className={`${styles.layout} ${selectat ? styles.layoutEditing : ''}`}>
         <ul className={styles.list}>
           {lectiiFiltrate.map((l) => {
             const s = staree(l.url);
@@ -284,8 +282,14 @@ export default function VoiceAdmin({ token, apiBase }) {
             <div className={styles.hint}>Alege o lecție din listă ca s-o generezi sau s-o revizuiești.</div>
           ) : (
             <>
+              <button type="button" className={styles.back} onClick={() => setSelected(null)}>
+                <span aria-hidden>←</span> Toate lecțiile
+              </button>
               <div className={styles.editorHead}>
                 <div>
+                  <span className={styles.editorCod}>
+                    {codLectie({ course: selectat.course, title: selectat.title, collection: selectat.collection }) || ''}
+                  </span>
                   <h3 className={styles.editorTitle}>{selectat.title}</h3>
                   <span className={`${styles.badge} ${styles[`badge_${staree(selectat.url)}`]}`}>
                     {STARE_ETICHETA[staree(selectat.url)]}

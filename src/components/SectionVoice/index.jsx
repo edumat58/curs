@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { collectLessonSections } from '@site/src/components/EduPasiAccessibility/lessonSections.mjs';
-import { canonicalSection, sectionHash } from '@site/src/lib/voice/canonical.mjs';
-import { codLectie } from '@site/src/lib/voice/cod.mjs';
+import { sha256Hex } from '@site/src/lib/voice/canonical.mjs';
+import { PROMPT_VERSION, codLectie, identitateLectie } from '@site/src/lib/voice/cod.mjs';
 import {
   asculta as ascultaDisponibilitate,
   pornesteSupravegherea,
@@ -14,9 +14,6 @@ import { latexToRomanian } from '@site/src/components/EduPasiAccessibility/speec
 import { sursaPentru } from '@site/src/lib/voice/sursa.mjs';
 import AudioPlayer from './AudioPlayer';
 import styles from './styles.module.css';
-
-/** Trebuie să coincidă cu PROMPT_VERSION din serviciu: intră în hash-ul secțiunii. */
-const PROMPT_VERSION = 7;
 
 /**
  * Ce e o lecție și ce nu.
@@ -266,137 +263,39 @@ function pareCadereDeServiciu(err) {
   return /Serviciul a răspuns 5\d\d/.test(String(err.message));
 }
 
-/** Logica de cerere, comună butonului de secțiune și celui de lecție. */
-function useExplanation(section, route, mode) {
-  const [state, setState] = useState('idle'); // idle | loading | ready | error
+/**
+ * Verifică dacă o lecție ARE deja audio generat de administrator și îl aduce.
+ *
+ * Elevii nu mai generează nimic — aud doar ce a pregătit și aprobat
+ * administratorul. Cheia e IDENTITATEA din codul lecției (MAT-GG-XTT-D), aceeași
+ * pe care o folosește panoul de admin: așa, ce s-a generat pentru o lecție se
+ * regăsește exact pe pagina ei. Fără audio gata, întoarcem null și butonul nici
+ * nu apare.
+ */
+function useLessonAudio(route, section) {
   const [data, setData] = useState(null);
-  const [error, setError] = useState('');
-  const [status, setStatus] = useState(null);
-  const abortRef = useRef(null);
-  const fractie = useProgress(state === 'loading', status);
-
-  useEffect(() => () => abortRef.current && abortRef.current.abort(), []);
-
-  const cere = useCallback(async () => {
-    if (state === 'loading') return;
-    if (state === 'ready') {
-      setState('idle');
-      return;
-    }
-    setState('loading');
-    setError('');
-    setStatus(null);
-
-    const cerut = { ...section, mode };
-
-    try {
-      // Formulele se rostesc determinist, nu le „citește" modelul caracter cu caracter.
-      const latex = (section.latex || []).map((item) => ({
-        source: item.source,
-        display: item.display,
-        spoken: (() => {
-          try {
-            return latexToRomanian(item.source);
-          } catch {
-            return '';
-          }
-        })(),
-      }));
-
-      /**
-       * Sursa brută a lecției — cea mai bună formă în care modelul poate primi
-       * materialul. Vezi `sursa.mjs`: reconstrucția pierdea notația exactă și
-       * ordinea, iar modelul umplea golurile cu interpretări proprii.
-       */
-      const sourceCode = await sursaPentru(
-        typeof window !== 'undefined' ? window.location.origin + '/curs/' : '/curs/',
-        route,
-        { heading: section.heading, level: section.level, intreaga: mode === 'lectie' }
-      );
-
-      const payload = {
-        mode,
-        sourceCode,
-        heading: section.heading,
-        level: section.level,
-        contentText: section.contentText,
-        latex,
-        visuals: (section.visuals || []).map((v) =>
-          v.type === 'image'
-            ? { type: 'image', src: v.src, alt: v.alt, label: v.label }
-            : {
-                type: 'svg',
-                label: v.label,
-                description: v.description,
-                // Markup-ul nu mai ajunge la model: serviciul citește din el
-                // geometria (puncte, segmente, unghiuri drepte) și trimite mai
-                // departe doar faptele. Fiind gratuit în tokeni, limita poate
-                // fi generoasă — un desen tăiat în două pierde exact laturile
-                // care dau sensul figurii.
-                markup: String(v.markup || '').slice(0, 12000),
-              }
-        ),
-        context: section.context,
-        lessonTitle: document.querySelector('h1')?.textContent?.trim() || '',
-      };
-
-      const hash = await sectionHash(cerut, PROMPT_VERSION);
-      abortRef.current = new AbortController();
-      const res = await fetch(`${serviceUrl()}/voice/section`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          sectionHash: hash,
-          route,
-          sectionId: section.id,
-          section: { ...payload, canonical: canonicalSection(cerut) },
-        }),
-        signal: abortRef.current.signal,
-      });
-
-      // 200 = era deja în cache. 202 = a pornit generarea; durata ei nu mai
-      // trece printr-o conexiune deschisă, deci întrebăm din când în când.
-      let json = res.ok ? await res.json() : null;
-      if (res.status === 202) {
-        json = await waitForReady(hash, abortRef.current.signal, setStatus);
-      } else if (!res.ok) {
-        throw new Error(`Serviciul a răspuns ${res.status}`);
+  useEffect(() => {
+    let viu = true;
+    const ctx = contextLectie(route);
+    const identitate = ctx && section ? identitateLectie({ course: ctx.course, title: section.heading }) : null;
+    if (!identitate) return undefined;
+    (async () => {
+      try {
+        const hash = await sha256Hex(`lectie|${identitate}|pv${PROMPT_VERSION}`);
+        const res = await fetch(`${serviceUrl()}/voice/section/${hash}`);
+        if (!res.ok) return;
+        const json = await res.json();
+        if (viu && json && json.status === 'ready' && json.audioUrl) {
+          setData(json);
+          raporteazaReusita();
+        }
+      } catch {
+        // fără audio ori serviciu indisponibil — butonul pur și simplu nu apare
       }
-
-      if (!json || !json.audioUrl) throw new Error('Nu am primit audio.');
-      raporteazaReusita();
-      setData(json);
-      setState('ready');
-    } catch (err) {
-      if (err.name === 'AbortError') return;
-      if (pareCadereDeServiciu(err)) {
-        raporteazaCadere();
-        /**
-         * Starea se întoarce la „idle", altfel butonul rămâne în „loading".
-         *
-         * Audio se stinge pe tot site-ul abia după DOUĂ căderi consecutive —
-         * pe bună dreptate, ca o pană de o clipă să nu strice pagina. Dar la
-         * PRIMA cădere componenta rămânea încărcând la nesfârșit: elevul vedea
-         * o rotiță care nu se mai oprea și nu putea nici măcar reîncerca,
-         * pentru că `cere` iese devreme cât timp starea e „loading".
-         */
-        setState('idle');
-        return;
-      }
-      setState('error');
-      setError(
-        err.epuizat
-          ? err.message
-          : err.message === 'rate'
-            ? 'Prea multe explicații cerute odată. Așteaptă un minut și apasă din nou.'
-            : err.message === 'reluare'
-              ? 'Pregătirea a fost întreruptă. Apasă din nou ca să reia.'
-              : 'Nu am putut pregăti explicația. Apasă din nou pentru a reîncerca.'
-      );
-    }
-  }, [section, route, mode, state]);
-
-  return { state, setState, data, error, fractie, cere };
+    })();
+    return () => { viu = false; };
+  }, [route, section]);
+  return data;
 }
 
 /**
@@ -484,119 +383,58 @@ function Panou({ state, fractie, error, data, onRetry, onClose, headingElement, 
   );
 }
 
-/** Butonul discret din heading: explică doar secțiunea lui. */
-function SectionButton({ section, route, headingElement }) {
-  const { state, setState, data, error, fractie, cere } = useExplanation(section, route, 'sectiune');
-  const panel = usePanel(headingElement, state !== 'idle');
-
-  return (
-    <>
-      <button
-        type="button"
-        className={
-          state === 'ready' ? styles.speakerOn : state === 'loading' ? styles.speakerBusy : styles.speaker
-        }
-        onClick={cere}
-        aria-label={
-          state === 'ready'
-            ? `Ascunde explicația audio pentru „${section.heading}"`
-            : `Ascultă explicația pentru „${section.heading}"`
-        }
-        aria-expanded={state === 'ready'}
-        title="Ascultă explicația"
-        data-edupasi-speak-button=""
-      >
-        {state === 'loading' ? (
-          <span className={styles.spinner} aria-hidden="true" />
-        ) : (
-          <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true">
-            <path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor" />
-            {state === 'ready' && (
-              <path
-                d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8 8 0 0 1 0 12"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.8"
-                strokeLinecap="round"
-              />
-            )}
-          </svg>
-        )}
-      </button>
-
-      {panel
-        && createPortal(
-          <Panou
-            state={state}
-            fractie={fractie}
-            error={error}
-            data={data}
-            onRetry={cere}
-            onClose={() => setState('idle')}
-            headingElement={headingElement}
-          />,
-          panel
-        )}
-    </>
-  );
-}
-
 /**
- * Butonul de deasupra titlului: lecția întreagă, predată ca la oră.
+ * Butonul de deasupra titlului: lecția întreagă, redată din cache.
  *
- * Nu e butonul de secțiune mărit. Cere serviciului modul `lectie`, care are
- * alt prompt — cu fir narativ, tranziții între părți și recapitulare — și alt
- * buget de vorbire. Stă deasupra titlului pentru că e primul lucru pe care un
- * elev care nu știe de unde să înceapă ar trebui să îl vadă.
+ * Apare DOAR dacă administratorul a generat și a aprobat audio pentru lecție.
+ * Elevul nu generează nimic — apasă și ascultă. Fără audio gata, componenta
+ * întoarce null, deci pagina nu are niciun buton de voce.
  */
 function LessonButton({ section, route, host }) {
-  const { state, setState, data, error, fractie, cere } = useExplanation(section, route, 'lectie');
-  const panel = usePanel(host, state !== 'idle');
+  const data = useLessonAudio(route, section);
+  const [deschis, setDeschis] = useState(false);
+  const panel = usePanel(host, deschis);
+
+  if (!data) return null;
 
   return (
     <>
       <button
         type="button"
-        className={state === 'ready' ? styles.lessonBtnOn : styles.lessonBtn}
-        onClick={cere}
-        aria-expanded={state === 'ready'}
+        className={deschis ? styles.lessonBtnOn : styles.lessonBtn}
+        onClick={() => setDeschis((d) => !d)}
+        aria-expanded={deschis}
         data-edupasi-speak-button=""
       >
         <span className={styles.lessonIcon} aria-hidden="true">
-          {state === 'loading' ? (
-            <span className={styles.spinnerLight} />
-          ) : (
-            <svg viewBox="0 0 24 24" width="20" height="20">
-              {state === 'ready' ? (
-                <>
-                  <rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor" />
-                  <rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor" />
-                </>
-              ) : (
-                <path d="M7 4.5l13 7.5-13 7.5z" fill="currentColor" />
-              )}
-            </svg>
-          )}
+          <svg viewBox="0 0 24 24" width="20" height="20">
+            {deschis ? (
+              <>
+                <rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor" />
+                <rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor" />
+              </>
+            ) : (
+              <path d="M7 4.5l13 7.5-13 7.5z" fill="currentColor" />
+            )}
+          </svg>
         </span>
         <span className={styles.lessonText}>
           <span className={styles.lessonTitle}>
-            {state === 'ready' ? 'Ascunde lecția explicată' : 'Ascultă lecția explicată'}
+            {deschis ? 'Ascunde lecția explicată' : 'Ascultă lecția explicată'}
           </span>
           <span className={styles.lessonHint}>
-            Explicația se generează pe tot conținutul lecției.
+            Un profesor îți parcurge toată lecția, pas cu pas.
           </span>
         </span>
       </button>
 
       {panel
+        && deschis
         && createPortal(
           <Panou
-            state={state}
-            fractie={fractie}
-            error={error}
+            state="ready"
             data={data}
-            onRetry={cere}
-            onClose={() => setState('idle')}
+            onClose={() => setDeschis(false)}
             contentRoot={typeof document !== 'undefined'
               ? document.querySelector('.theme-doc-markdown') || document.querySelector('article')
               : null}
@@ -663,31 +501,10 @@ export default function SectionVoice() {
     // îl vrem pentru explicația integrală.
     const intreaga = toate.find((s) => s.level === 1) || null;
 
+    // Butoanele mici, pe fiecare secțiune, au dispărut dinadins: acum se predă
+    // și se ascultă DOAR lecția întreagă, generată de administrator. Elevul are
+    // un singur buton, deasupra titlului, și niciodată de generat.
     const created = [];
-    if (disponibil !== false) {
-      for (const section of toate) {
-        // Titlul lecției primește butonul mare, nu unul mic în plus.
-        if (section.level === 1) continue;
-        if (
-          !((section.contentText && section.contentText.length > 40)
-            || section.latex.length > 0
-            || section.visuals.length > 0)
-        ) continue;
-
-        const heading = section.headingElement;
-        if (!heading || heading.querySelector('[data-edupasi-voice-slot]')) continue;
-        const slot = document.createElement('span');
-        slot.setAttribute('data-edupasi-voice-slot', '');
-        slot.className = styles.slot;
-        // Înaintea ancorei „#" a Docusaurus: altfel, la hover, ancora apare
-        // între titlu și buton și împinge butonul din loc chiar când elevul îl
-        // țintește.
-        const anchor = heading.querySelector('.hash-link');
-        if (anchor) heading.insertBefore(slot, anchor);
-        else heading.appendChild(slot);
-        created.push({ section, slot, heading });
-      }
-    }
 
     /**
      * Codul canonic al lecției, sus deasupra titlului.
@@ -739,14 +556,6 @@ export default function SectionVoice() {
               ? <LessonButton section={lesson.section} route={route} host={lesson.banner} />
               : null,
           lesson.banner
-        )}
-      {disponibil === true
-        && mounts.map(({ section, slot, heading }) =>
-          createPortal(
-            <SectionButton section={section} route={route} headingElement={heading} />,
-            slot,
-            section.id
-          )
         )}
     </>
   );

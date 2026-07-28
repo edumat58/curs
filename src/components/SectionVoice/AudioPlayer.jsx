@@ -430,50 +430,9 @@ export default function AudioPlayer({
             </button>
           ))}
         </div>
-        {/* Sincronizarea apare doar când are cu ce lucra. Un buton care nu poate
-            face nimic e mai rău decât unul care lipsește. */}
-        {transcript && potrivire.demn && (
-          <button
-            type="button"
-            className={sincron ? styles.syncOn : styles.sync}
-            onClick={() => setSincron((v) => !v)}
-            aria-pressed={sincron}
-            title="Evidențiază pe pagină ce se explică acum"
-          >
-            <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
-              <path
-                d="M4 7h10M4 12h7M4 17h12"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-              />
-              <circle cx="18.5" cy="12" r="2.4" fill="currentColor" />
-            </svg>
-            Sincronizat
-          </button>
-        )}
-
-        {sincron && !pilot && (
-          <button
-            type="button"
-            className={styles.pilot}
-            onClick={() => setPilot(true)}
-            title="Pagina urmărește din nou explicația"
-          >
-            <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
-              <path
-                d="M12 4v13M7 12l5 5 5-5"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-            Urmărește textul
-          </button>
-        )}
+        {/* „Sincronizat" a fost scos dinadins: evidențierea în timp real pe
+            pagină îngreuna redarea și se dezalinia. Rămâne transcriptul, static,
+            dedesubt — text simplu, care merge lin. */}
 
         {buffering && <span className={styles.hint}>se încarcă…</span>}
         {onClose && (
@@ -482,6 +441,13 @@ export default function AudioPlayer({
           </button>
         )}
       </div>
+
+      {transcript ? (
+        <details className={styles.transcriptBox}>
+          <summary className={styles.transcriptToggle}>Vezi transcriptul</summary>
+          <div className={styles.transcriptText}>{transcript}</div>
+        </details>
+      ) : null}
     </div>
   );
 }
