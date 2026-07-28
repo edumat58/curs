@@ -152,11 +152,25 @@ function LoginCard({ onLogin, apiBase }) {
     setBusy(true);
     setError('');
     try {
-      const r = await fetch(`${apiBase}/admin/login`, {
+      /**
+       * Backend-ul e pe Vercel free tier, care „adoarme" după inactivitate.
+       * Prima cerere îl trezește (cold start) și poate pica singură conexiunea,
+       * iar administratorul vedea „backend-ul nu a răspuns" pe un backend perfect
+       * sănătos. Reîncercăm o dată, după o scurtă pauză de încălzire, înainte de
+       * a raporta o eroare — a doua cerere prinde funcția deja pornită.
+       */
+      const cerere = () => fetch(`${apiBase}/admin/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: identifier.trim(), password }),
       });
+      let r;
+      try {
+        r = await cerere();
+      } catch {
+        await new Promise((res) => setTimeout(res, 1500));
+        r = await cerere();
+      }
       const data = await r.json().catch(() => ({}));
       if (!r.ok) {
         setError(data.error || 'Autentificarea nu a reușit.');
@@ -166,7 +180,7 @@ function LoginCard({ onLogin, apiBase }) {
       localStorage.setItem(NAME_KEY, data.name || data.email);
       onLogin(data);
     } catch {
-      setError('Backend-ul nu a răspuns — verifică conexiunea.');
+      setError('Backend-ul nu a răspuns — verifică conexiunea și reîncearcă.');
     } finally {
       setBusy(false);
     }

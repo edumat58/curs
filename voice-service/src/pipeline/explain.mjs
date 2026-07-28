@@ -157,7 +157,6 @@ export async function explainSection(section, llm, { signal, onStage } = {}) {
    * Fidelitatea o verificăm oricum după generare, pe materialul complet.
    */
   const analysis = {};
-  const analysisMs = 0;
 
   stage('naratiune');
   const budget = speechBudget(section);
@@ -353,12 +352,9 @@ Păstrează același ton și aceeași lungime, și acoperă în continuare toate
       // profesor că acea explicație merită recitită.
       truncated,
       words: transcript.split(/\s+/).filter(Boolean).length,
-      analysisMs,
       totalMs: Date.now() - startedAt,
-      usage: {
-        analysis: analysisRes.usage,
-        narration: narrationRes.usage,
-      },
+      // O singură trecere acum: doar narațiunea. Pasul de analiză a fost scos.
+      usage: { narration: narrationRes.usage },
     },
   };
 }

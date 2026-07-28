@@ -49,6 +49,11 @@ app.use(cors({
     'http://localhost:3000',
     'http://localhost:3001',
     'http://localhost:3002',
+    // Docusaurus pornește pe 3100 când 3000 e ocupat de alt proiect
+    // Kulturosfera — fără portul ăsta, login-ul local pica cu „backend nu a
+    // răspuns", deși backend-ul chiar răspundea (browserul bloca CORS).
+    'http://localhost:3100',
+    'http://localhost:3200',
     'http://localhost:3480',
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
