@@ -547,12 +547,12 @@ export default function AudioPlayer({
   const [setari, setSetari] = useState(false);
 
   /**
-   * Dock COLAPSABIL — cerut, pentru mai mult spațiu de lecție.
+   * MENIUL DE CONTROL e colapsabil (cerut) — NU transcriptul. Transcriptul e
+   * exact ce vrea elevul să vadă, deci rămâne mereu.
    *
-   * Extins (implicit): toate controalele + transcriptul. Restrâns: rămâne DOAR
-   * bara de audio (play + derulare + timp), o singură dungă subțire, ca lecția
-   * să respire. Înălțimea dock-ului e măsurată oricum, deci rezervarea de spațiu
-   * din josul lecției se micșorează singură la restrângere.
+   * Extins (implicit): toate controalele (±10, stop, viteză). Restrâns: rămâne
+   * DOAR bara de audio (play + derulare + timp) — butoanele extra se ascund, ca
+   * dock-ul să fie curat. Transcriptul e vizibil în ambele stări.
    */
   const [extins, setExtins] = useState(true);
 
@@ -666,15 +666,16 @@ export default function AudioPlayer({
           </div>
         )}
 
-        {/* Restrânge / extinde. Restrâns: rămâne DOAR bara de audio (play +
-            derulare), o dungă subțire — maximum de lecție vizibilă. */}
+        {/* Restrânge / extinde MENIUL DE CONTROL. Restrâns: rămâne doar bara de
+            audio (play + derulare); butoanele extra se ascund. Transcriptul e
+            vizibil oricum, în ambele stări. */}
         <button
           type="button"
           className={styles.colaps}
           onClick={() => { setSetari(false); setExtins((v) => !v); }}
           aria-expanded={extins}
-          aria-label={extins ? 'Restrânge playerul' : 'Extinde playerul'}
-          title={extins ? 'Restrânge — doar bara de audio' : 'Extinde — controale + transcript'}
+          aria-label={extins ? 'Restrânge controalele' : 'Mai multe controale'}
+          title={extins ? 'Ascunde controalele extra' : 'Arată toate controalele'}
         >
           <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
             <path
@@ -697,19 +698,18 @@ export default function AudioPlayer({
 
       {buffering && <span className={styles.hint}>se încarcă…</span>}
 
-      {/* Transcriptul apare doar EXTINS. Restrâns, rămâne doar bara de audio.
+      {/* Transcriptul rămâne MEREU vizibil — e exact ce vrea elevul să vadă.
+          Colapsul restrânge doar butoanele EXTRA (±10, stop, viteză), nu textul.
           Subtitrare sincronizată când avem timpii pe cuvânt; altfel transcriptul
           static, pliabil (audio generat înainte de a exista funcția). */}
-      {extins && (
-        Array.isArray(words) && words.length ? (
-          <Subtitrare words={words} currentMs={current * 1000} contentRoot={contentRoot} onSeek={seekLaMs} />
-        ) : transcript ? (
-          <details className={styles.transcriptBox}>
-            <summary className={styles.transcriptToggle}>Vezi transcriptul</summary>
-            <div className={styles.transcriptText}>{transcript}</div>
-          </details>
-        ) : null
-      )}
+      {Array.isArray(words) && words.length ? (
+        <Subtitrare words={words} currentMs={current * 1000} contentRoot={contentRoot} onSeek={seekLaMs} />
+      ) : transcript ? (
+        <details className={styles.transcriptBox}>
+          <summary className={styles.transcriptToggle}>Vezi transcriptul</summary>
+          <div className={styles.transcriptText}>{transcript}</div>
+        </details>
+      ) : null}
     </div>
   );
 }
