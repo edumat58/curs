@@ -61,6 +61,15 @@ export function summarizeSvg(markup) {
 export function canonicalSection(section) {
   return {
     v: 1,
+    // Aceeași lecție explicată ca secțiune și explicată integral, ca la clasă,
+    // sunt două explicații diferite. Fără modul în forma canonică ar avea
+    // același hash și una ar rămâne peste cealaltă în cache.
+    //
+    // Cheia apare DOAR pentru lecția întreagă, dinadins. Adăugată și la
+    // secțiuni, ar schimba toate hash-urile existente și ar arunca un cache
+    // valid — adică ar cere regenerarea a zeci de explicații bune, pe un buget
+    // de tokeni care oricum e limitat pe zi.
+    ...(section.mode === 'lectie' ? { mode: 'lectie' } : {}),
     heading: norm(section.heading),
     level: Number(section.level) || 0,
     text: norm(section.contentText != null ? section.contentText : section.text),

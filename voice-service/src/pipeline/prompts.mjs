@@ -22,6 +22,13 @@ import { describeFigure } from './figure.mjs';
  * împingea modelul să vorbească despre desen în loc să spună ce arată; iar
  * evaluarea materialului („figura nu explică în detaliu") e interzisă explicit
  * și verificată după generare.
+ *
+ * Lecția întreagă are propriul mod (`section.mode === 'lectie'`), cu fir
+ * narativ și buget separat. Modul intră în forma canonică DOAR atunci, deci
+ * numai lecțiile primesc hash nou; explicațiile pe secțiuni rămân valabile,
+ * pentru că promptul lor nu s-a schimbat. Versiunea nu se incrementează pentru
+ * ceva ce nu schimbă rezultatul: ar arunca un cache bun și ar cere zeci de
+ * regenerări pe un buget de tokeni limitat pe zi.
  */
 export const PROMPT_VERSION = 3;
 
@@ -126,10 +133,15 @@ export function evidenceSources(section) {
 
 export function buildAnalysisPrompt(section) {
   const sources = evidenceSources(section);
+  const lectie = esteLectieIntreaga(section);
   return {
     system: `Ești profesor de matematică în învățământul gimnazial românesc, cu experiență în lucrul cu elevi cu cerințe educaționale speciale.
 
-ACUM NU EXPLICI NIMIC. Acum doar CITEȘTI ȘI ÎNȚELEGI secțiunea, ca înainte de oră.
+ACUM NU EXPLICI NIMIC. Acum doar CITEȘTI ȘI ÎNȚELEGI ${lectie ? 'LECȚIA ÎNTREAGĂ' : 'secțiunea'}, ca înainte de oră.${
+      lectie
+        ? '\n\nMaterialul e o lecție completă, cu mai multe părți. La "order" pui firul ei: în ce ordine se construiesc ideile, de la ce se pleacă și unde se ajunge. Inventarul de definiții, formule și exemple le acoperă pe TOATE, din toate părțile.'
+        : ''
+    }
 
 Reguli absolute:
 - Lucrezi EXCLUSIV cu materialul primit. Nu completezi din memorie, nu adaugi exemple care nu există, nu extinzi lecția.
@@ -186,11 +198,31 @@ ${renderSource(section)}
  * pe un rând se desface în câteva fraze rostite; o figură care „se vede dintr-o
  * privire" trebuie povestită. Ponderile de mai jos reflectă acest cost.
  */
+/** O lecție întreagă se explică altfel decât o secțiune — vezi `LECTIE`. */
+export function esteLectieIntreaga(section) {
+  return section && section.mode === 'lectie';
+}
+
 export function speechBudget(section) {
   const weighted =
     (section.contentText || '').length
     + (section.latex || []).length * 100
     + (section.visuals || []).length * 90;
+
+  /**
+   * Lecția întreagă are alt plafon, dar nu cu mult mai mare.
+   *
+   * Ar merita mai mult spațiu — e o oră de curs, nu un paragraf. Limita nu e
+   * pedagogică, ci de furnizor: Groq numără promptul PLUS `max_tokens` rezervat
+   * în bugetul de 8000 de tokeni pe minut. Promptul unei lecții mari trece de
+   * 2500 de tokeni, deci peste ~1100 de cuvinte cererea se respinge cu 429 și
+   * elevul nu primește nimic. Mai bine o explicație bună de zece minute decât
+   * una perfectă care nu pornește.
+   */
+  if (esteLectieIntreaga(section)) {
+    const words = Math.round(Math.min(1100, Math.max(220, weighted / 2.4)));
+    return { words, seconds: Math.round((words / 150) * 60) };
+  }
   // Plafonul nu e o alegere pedagogică — o secțiune are dreptul să fie explicată
   // integral, oricât ar dura. E doar limita tehnică sub care cererea încape în
   // bugetul gratuit de 8000 de tokeni pe minut al furnizorului; peste ea,
@@ -258,13 +290,31 @@ function coverageChecklist(narratable) {
   return items;
 }
 
+/**
+ * Ce se schimbă când se explică lecția întreagă, nu o secțiune.
+ *
+ * Diferența nu e doar de lungime. O secțiune se explică pe loc, în context; o
+ * lecție are un fir — se deschide, se construiește pas cu pas, se leagă, se
+ * strânge la final. Fără instrucțiunea asta, modelul producea aceeași explicație
+ * punctuală, doar mai lungă: o înșiruire de bucăți fără trecere între ele, adică
+ * exact ce se aude când cineva citește un manual în loc să predea.
+ */
+const LECTIE = `
+Predai LECȚIA ÎNTREAGĂ, ca la clasă, într-o singură oră:
+- Începi spunând, în două fraze, ce va ști elevul la final. Fără „în această lecție" — vorbește direct: „Astăzi înveți să…".
+- Parcurgi părțile în ordinea din material și le LEGI între ele. Fiecare parte nouă începe de la ce tocmai s-a înțeles: „Acum că știi ce separă virgula, hai să vedem cum se citește numărul".
+- Exemplele se fac pe îndelete, cu voce tare, pas cu pas. Ele sunt lecția; regula fără exemplu nu se reține.
+- Când o parte e grea, te oprești și o reformulezi altfel, o singură dată.
+- Închei strângând firul: ce am învățat, în trei-patru propoziții, în ordinea în care s-au construit. Fără să te povestești pe tine — spui MATEMATICA învățată, nu că ai explicat-o.`;
+
 export function buildNarrationPrompt(section, analysis) {
   const budget = speechBudget(section);
   const narratable = narratableAnalysis(analysis, section);
   const checklist = coverageChecklist(narratable);
+  const lectie = esteLectieIntreaga(section);
   return {
     system: `Ești profesor de matematică într-o școală din România. Vorbești unui elev de gimnaziu care are nevoie de sprijin. Textul tău va fi CITIT CU VOCE TARE — deci scrii vorbire, nu articol.
-
+${lectie ? LECTIE : ''}
 Cum vorbești:
 - Natural, cald, ca la tablă. Legi ideile între ele, faci tranziții, reformulezi când e greu.
 - Fraze scurte. Un gând pe frază.

@@ -50,7 +50,9 @@ function SkipIcon({ forward }) {
  * Aceleași controale pe desktop și pe mobil — fără versiune „redusă" pe telefon,
  * pentru că exact acolo sunt elevii.
  */
-export default function AudioPlayer({ src, autoPlay = false, onClose, knownDuration = 0 }) {
+export default function AudioPlayer({
+  src, autoPlay = false, onClose, knownDuration = 0, onUnavailable,
+}) {
   const audioRef = useRef(null);
   const [playing, setPlaying] = useState(false);
   const [current, setCurrent] = useState(0);
@@ -74,20 +76,33 @@ export default function AudioPlayer({ src, autoPlay = false, onClose, knownDurat
     const onEnd = () => setPlaying(false);
     const onWait = () => setBuffering(true);
     const onPlaying = () => setBuffering(false);
+    /**
+     * Audio-ul stă în GridFS și e servit tot de serviciul de voce. Dacă el cade,
+     * o explicație deja generată devine la fel de indisponibilă ca una care
+     * încă nu există — deci o eroare de redare e un semnal despre serviciu, nu
+     * despre fișierul ăsta anume.
+     */
+    const onError = () => {
+      setPlaying(false);
+      setBuffering(false);
+      if (onUnavailable) onUnavailable();
+    };
 
     el.addEventListener('timeupdate', onTime);
     el.addEventListener('loadedmetadata', onMeta);
     el.addEventListener('ended', onEnd);
     el.addEventListener('waiting', onWait);
     el.addEventListener('playing', onPlaying);
+    el.addEventListener('error', onError);
     return () => {
       el.removeEventListener('timeupdate', onTime);
       el.removeEventListener('loadedmetadata', onMeta);
       el.removeEventListener('ended', onEnd);
       el.removeEventListener('waiting', onWait);
       el.removeEventListener('playing', onPlaying);
+      el.removeEventListener('error', onError);
     };
-  }, []);
+  }, [onUnavailable]);
 
   useEffect(() => {
     const el = audioRef.current;

@@ -122,6 +122,9 @@ export async function createServer(env = process.env) {
           heading: section.heading,
           headingLevel: section.level || null,
           lessonTitle: section.lessonTitle || null,
+          // `lectie` = toată lecția, predată ca la oră; `sectiune` = un singur
+          // titlu. Se salvează ca să se vadă din bază ce fel de explicație e.
+          mode: section.mode === 'lectie' ? 'lectie' : 'sectiune',
           // Cât va dura audio-ul, estimat din materialul sursă. Sinteza domină
           // timpul de generare și e proporțională cu asta, deci e singura
           // mărime cu care clientul poate scala o bară de progres onest.

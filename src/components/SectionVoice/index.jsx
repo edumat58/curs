@@ -2,6 +2,13 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { collectLessonSections } from '@site/src/components/EduPasiAccessibility/lessonSections.mjs';
 import { canonicalSection, sectionHash } from '@site/src/lib/voice/canonical.mjs';
+import {
+  asculta as ascultaDisponibilitate,
+  pornesteSupravegherea,
+  raporteazaCadere,
+  raporteazaReusita,
+  stareCurenta,
+} from '@site/src/lib/voice/availability.mjs';
 import { latexToRomanian } from '@site/src/components/EduPasiAccessibility/speech.mjs';
 import AudioPlayer from './AudioPlayer';
 import styles from './styles.module.css';
@@ -10,20 +17,30 @@ import styles from './styles.module.css';
 const PROMPT_VERSION = 3;
 
 /**
+ * Ce e o lecție și ce nu.
+ *
+ * Butoanele de explicație au sens doar pe lecții. În `docs/` mai stau pagini de
+ * automatisme, centralizatoare, organigrame și pagini-hub — toate cu titlu și
+ * secțiuni, deci toate ar primi butoane fără să fie nimic de predat acolo.
+ * Semnul distinctiv, respectat de toate lecțiile platformei, e titlul: „C1 - …",
+ * „C6.1 - …". Automatismele încep cu „A5.1", hub-urile cu altceva.
+ */
+const TITLU_DE_LECTIE = /^\s*C\s*\d/;
+
+function esteLectie(root) {
+  const h1 = root && root.querySelector('h1');
+  return Boolean(h1 && TITLU_DE_LECTIE.test(h1.textContent || ''));
+}
+
+/**
  * Adresa serviciului de voce.
  *
- * Implicit rulează pe NAS-ul propriu (Synology, container Docker, pornit non-stop),
- * expus prin reverse proxy DSM cu certificat wildcard. Se poate suprascrie oricând
- * din `window.EDUPASI_VOICE_API`, fără recompilare.
+ * Se poate suprascrie oricând din `window.EDUPASI_VOICE_API`, fără recompilare.
  */
 const DEFAULT_VOICE_API = 'https://voce.asbrihome.synology.me';
 
 function serviceUrl() {
   if (typeof window === 'undefined') return '';
-  // Și în dezvoltare lovim tot NAS-ul: are repornire automată, iar CORS-ul
-  // permite explicit localhost. Altfel, testând din localhost, ajungeai la un
-  // serviciu local care putea să nici nu ruleze — sau, mai rău, care murise.
-  // Pentru lucru offline pe serviciu, se pune window.EDUPASI_VOICE_API.
   const configured = window.EDUPASI_VOICE_API;
   if (configured) return String(configured).replace(/\/$/, '');
   return DEFAULT_VOICE_API;
@@ -40,7 +57,7 @@ function serviceUrl() {
  *
  * Etapa de sinteză nu are timp fix: e proporțională cu lungimea explicației, pe
  * care serverul o estimează din material și o trimite în `expectedSpeechSec`.
- * O definiție scurtă și un capitol întreg nu pot împărți aceeași scală.
+ * O definiție scurtă și o lecție întreagă nu pot împărți aceeași scală.
  *
  * Ponderile vin din măsurători pe serviciul real, nu din intuiție. Groq scrie
  * explicația în două-trei secunde; rostirea ei durează zeci. Prima variantă
@@ -77,13 +94,13 @@ function fractieEtapa(stage, secundeInEtapa, expectedSpeechSec) {
  * Așteaptă terminarea unei generări pornite pe server.
  *
  * Serverul răspunde imediat cu 202 și lucrează mai departe, pentru că o
- * explicație completă pentru o secțiune mare poate dura minute, iar reverse
- * proxy-ul din fața lui închide conexiunile la 180 de secunde. Aici doar
- * întrebăm periodic dacă e gata — fără limită de timp impusă de rețea.
+ * explicație completă poate dura minute, iar reverse proxy-ul din fața lui
+ * închide conexiunile la 180 de secunde. Aici doar întrebăm periodic dacă e
+ * gata — fără limită de timp impusă de rețea.
  */
 async function waitForReady(hash, signal, onStatus) {
   const started = Date.now();
-  const LIMITA_MS = 15 * 60 * 1000;
+  const LIMITA_MS = 20 * 60 * 1000;
 
   while (Date.now() - started < LIMITA_MS) {
     await new Promise((r) => setTimeout(r, 3000));
@@ -132,8 +149,6 @@ function useProgress(active, status) {
     }
     if (!active || !status || !status.stage) return;
     if (reper.current.stage !== status.stage) {
-      // Prima dată când vedem etapa: pornim ceasul local din secundele deja
-      // raportate de server, ca să nu pierdem timpul scurs până la interogare.
       reper.current = { stage: status.stage, la: Date.now() - (status.stageSec || 0) * 1000 };
     }
   }, [active, status]);
@@ -154,54 +169,29 @@ function useProgress(active, status) {
 }
 
 /**
- * Un buton pe secțiune. Ține starea proprie: inactiv → se pregătește → player.
- * Nu blochează pagina și nu deschide modale: elevul rămâne în lecție.
+ * O cădere de rețea sau un 5xx înseamnă că serviciul e jos, nu că explicația
+ * asta anume e imposibilă. Distincția contează: prima situație stinge butoanele
+ * pe tot site-ul, a doua doar arată o eroare aici.
  */
-function SectionButton({ section, route, headingElement }) {
+function pareCadereDeServiciu(err) {
+  if (!err) return false;
+  if (err.message === 'rate') return false;
+  if (err.name === 'TypeError') return true; // fetch a eșuat: rețea sau serviciu mort
+  return /Serviciul a răspuns 5\d\d/.test(String(err.message));
+}
+
+/** Logica de cerere, comună butonului de secțiune și celui de lecție. */
+function useExplanation(section, route, mode) {
   const [state, setState] = useState('idle'); // idle | loading | ready | error
   const [data, setData] = useState(null);
   const [error, setError] = useState('');
-  const [panel, setPanel] = useState(null);
   const [status, setStatus] = useState(null);
-  const panelRef = useRef(null);
   const abortRef = useRef(null);
   const fractie = useProgress(state === 'loading', status);
 
   useEffect(() => () => abortRef.current && abortRef.current.abort(), []);
 
-  /**
-   * Panoul (mesaj de așteptare + player) trăiește ÎN AFARA headingului, ca frate
-   * imediat următor. În heading moștenea corpul de literă al titlului, se lipea
-   * de text și se suprapunea peste ancora „#". Îl creăm doar când chiar e nevoie,
-   * ca să nu stricăm selectorii CSS de tip „titlu urmat de paragraf" pe tot site-ul.
-   */
-  const needsPanel = state !== 'idle';
-  useEffect(() => {
-    if (!needsPanel || !headingElement) {
-      if (panelRef.current) {
-        panelRef.current.remove();
-        panelRef.current = null;
-        setPanel(null);
-      }
-      return;
-    }
-    if (panelRef.current) return;
-    const el = document.createElement('div');
-    el.setAttribute('data-edupasi-voice-panel', '');
-    el.className = styles.panel;
-    headingElement.insertAdjacentElement('afterend', el);
-    panelRef.current = el;
-    setPanel(el);
-  }, [needsPanel, headingElement]);
-
-  useEffect(
-    () => () => {
-      if (panelRef.current) panelRef.current.remove();
-    },
-    []
-  );
-
-  const request = useCallback(async () => {
+  const cere = useCallback(async () => {
     if (state === 'loading') return;
     if (state === 'ready') {
       setState('idle');
@@ -210,6 +200,8 @@ function SectionButton({ section, route, headingElement }) {
     setState('loading');
     setError('');
     setStatus(null);
+
+    const cerut = { ...section, mode };
 
     try {
       // Formulele se rostesc determinist, nu le „citește" modelul caracter cu caracter.
@@ -226,6 +218,7 @@ function SectionButton({ section, route, headingElement }) {
       }));
 
       const payload = {
+        mode,
         heading: section.heading,
         level: section.level,
         contentText: section.contentText,
@@ -249,18 +242,17 @@ function SectionButton({ section, route, headingElement }) {
         lessonTitle: document.querySelector('h1')?.textContent?.trim() || '',
       };
 
-      const hash = await sectionHash(section, PROMPT_VERSION);
+      const hash = await sectionHash(cerut, PROMPT_VERSION);
       abortRef.current = new AbortController();
-      const body = JSON.stringify({
-        sectionHash: hash,
-        route,
-        sectionId: section.id,
-        section: { ...payload, canonical: canonicalSection(section) },
-      });
       const res = await fetch(`${serviceUrl()}/voice/section`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body,
+        body: JSON.stringify({
+          sectionHash: hash,
+          route,
+          sectionId: section.id,
+          section: { ...payload, canonical: canonicalSection(cerut) },
+        }),
         signal: abortRef.current.signal,
       });
 
@@ -274,10 +266,15 @@ function SectionButton({ section, route, headingElement }) {
       }
 
       if (!json || !json.audioUrl) throw new Error('Nu am primit audio.');
+      raporteazaReusita();
       setData(json);
       setState('ready');
     } catch (err) {
       if (err.name === 'AbortError') return;
+      if (pareCadereDeServiciu(err)) {
+        raporteazaCadere();
+        return;
+      }
       setState('error');
       setError(
         err.message === 'rate'
@@ -287,7 +284,96 @@ function SectionButton({ section, route, headingElement }) {
             : 'Nu am putut pregăti explicația. Apasă din nou pentru a reîncerca.'
       );
     }
-  }, [section, route, state]);
+  }, [section, route, mode, state]);
+
+  return { state, setState, data, error, fractie, cere };
+}
+
+/**
+ * Panoul (bară + player) trăiește ÎN AFARA elementului-gazdă, ca frate imediat
+ * următor. În heading moștenea corpul de literă al titlului, se lipea de text
+ * și se suprapunea peste ancora „#". Îl creăm doar când chiar e nevoie, ca să
+ * nu stricăm selectorii CSS de tip „titlu urmat de paragraf" pe tot site-ul.
+ */
+function usePanel(host, needed) {
+  const [panel, setPanel] = useState(null);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    if (!needed || !host) {
+      if (ref.current) {
+        ref.current.remove();
+        ref.current = null;
+        setPanel(null);
+      }
+      return;
+    }
+    if (ref.current) return;
+    const el = document.createElement('div');
+    el.setAttribute('data-edupasi-voice-panel', '');
+    el.className = styles.panel;
+    host.insertAdjacentElement('afterend', el);
+    ref.current = el;
+    setPanel(el);
+  }, [needed, host]);
+
+  useEffect(() => () => { if (ref.current) ref.current.remove(); }, []);
+
+  return panel;
+}
+
+/** Bara, eroarea și playerul — aceleași pentru orice buton. */
+function Panou({ state, fractie, error, data, onRetry, onClose }) {
+  return (
+    <>
+      {/* Doar bara. Progresul se citește dintr-o privire, fără cifre și fără
+          cronometru — pentru un elev care abia așteaptă explicația, un procent
+          care crește încet e o presiune în plus, nu o informație. Textul rămâne
+          doar pentru cititoarele de ecran, care nu au ce face cu o bară. */}
+      {state === 'loading' && (
+        <div className={styles.waiting}>
+          <div
+            className={styles.bar}
+            role="progressbar"
+            aria-valuemin={0}
+            aria-valuemax={100}
+            aria-valuenow={Math.round(fractie * 100)}
+            aria-label="Se pregătește explicația"
+          >
+            {/* Lățime, nu `scaleX`: scalarea ar turti și dunga care traversează
+                porțiunea umplută, cu atât mai mult cu cât bara e mai goală —
+                adică exact la început. */}
+            <span className={styles.barFill} style={{ width: `${fractie * 100}%` }} />
+          </div>
+        </div>
+      )}
+
+      {state === 'error' && (
+        <div className={styles.failure} role="status">
+          <span className={styles.failureText}>{error}</span>
+          <button type="button" className={styles.retry} onClick={onRetry}>
+            Încearcă din nou
+          </button>
+        </div>
+      )}
+
+      {state === 'ready' && data && (
+        <AudioPlayer
+          src={data.audioUrl}
+          knownDuration={Number(data.durationSec) || 0}
+          autoPlay
+          onClose={onClose}
+          onUnavailable={raporteazaCadere}
+        />
+      )}
+    </>
+  );
+}
+
+/** Butonul discret din heading: explică doar secțiunea lui. */
+function SectionButton({ section, route, headingElement }) {
+  const { state, setState, data, error, fractie, cere } = useExplanation(section, route, 'sectiune');
+  const panel = usePanel(headingElement, state !== 'idle');
 
   return (
     <>
@@ -296,7 +382,7 @@ function SectionButton({ section, route, headingElement }) {
         className={
           state === 'ready' ? styles.speakerOn : state === 'loading' ? styles.speakerBusy : styles.speaker
         }
-        onClick={request}
+        onClick={cere}
         aria-label={
           state === 'ready'
             ? `Ascunde explicația audio pentru „${section.heading}"`
@@ -326,48 +412,14 @@ function SectionButton({ section, route, headingElement }) {
 
       {panel
         && createPortal(
-          <>
-            {/* Doar bara. Progresul se citește dintr-o privire, fără cifre și
-                fără cronometru — pentru un elev care abia așteaptă explicația,
-                un procent care crește încet e o presiune în plus, nu o
-                informație. Textul rămâne doar pentru cititoarele de ecran,
-                care nu au ce face cu o bară. */}
-            {state === 'loading' && (
-              <div className={styles.waiting}>
-                <div
-                  className={styles.bar}
-                  role="progressbar"
-                  aria-valuemin={0}
-                  aria-valuemax={100}
-                  aria-valuenow={Math.round(fractie * 100)}
-                  aria-label="Se pregătește explicația"
-                >
-                  {/* Lățime, nu `scaleX`: scalarea ar turti și dunga care
-                      traversează porțiunea umplută, cu atât mai mult cu cât
-                      bara e mai goală — adică exact la început. */}
-                  <span className={styles.barFill} style={{ width: `${fractie * 100}%` }} />
-                </div>
-              </div>
-            )}
-
-            {state === 'error' && (
-              <div className={styles.failure} role="status">
-                <span className={styles.failureText}>{error}</span>
-                <button type="button" className={styles.retry} onClick={request}>
-                  Încearcă din nou
-                </button>
-              </div>
-            )}
-
-            {state === 'ready' && data && (
-              <AudioPlayer
-                src={data.audioUrl}
-                knownDuration={Number(data.durationSec) || 0}
-                autoPlay
-                onClose={() => setState('idle')}
-              />
-            )}
-          </>,
+          <Panou
+            state={state}
+            fractie={fractie}
+            error={error}
+            data={data}
+            onRetry={cere}
+            onClose={() => setState('idle')}
+          />,
           panel
         )}
     </>
@@ -375,57 +427,190 @@ function SectionButton({ section, route, headingElement }) {
 }
 
 /**
- * Montează câte un buton lângă fiecare heading al lecției.
+ * Butonul de deasupra titlului: lecția întreagă, predată ca la oră.
+ *
+ * Nu e butonul de secțiune mărit. Cere serviciului modul `lectie`, care are
+ * alt prompt — cu fir narativ, tranziții între părți și recapitulare — și alt
+ * buget de vorbire. Stă deasupra titlului pentru că e primul lucru pe care un
+ * elev care nu știe de unde să înceapă ar trebui să îl vadă.
+ */
+function LessonButton({ section, route, host }) {
+  const { state, setState, data, error, fractie, cere } = useExplanation(section, route, 'lectie');
+  const panel = usePanel(host, state !== 'idle');
+
+  return (
+    <>
+      <button
+        type="button"
+        className={state === 'ready' ? styles.lessonBtnOn : styles.lessonBtn}
+        onClick={cere}
+        aria-expanded={state === 'ready'}
+        data-edupasi-speak-button=""
+      >
+        <span className={styles.lessonIcon} aria-hidden="true">
+          {state === 'loading' ? (
+            <span className={styles.spinnerLight} />
+          ) : (
+            <svg viewBox="0 0 24 24" width="20" height="20">
+              {state === 'ready' ? (
+                <>
+                  <rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor" />
+                  <rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor" />
+                </>
+              ) : (
+                <path d="M7 4.5l13 7.5-13 7.5z" fill="currentColor" />
+              )}
+            </svg>
+          )}
+        </span>
+        <span className={styles.lessonText}>
+          <span className={styles.lessonTitle}>
+            {state === 'ready' ? 'Ascunde lecția explicată' : 'Ascultă lecția explicată'}
+          </span>
+          <span className={styles.lessonHint}>
+            Un profesor îți parcurge toată lecția, pas cu pas.
+          </span>
+        </span>
+      </button>
+
+      {panel
+        && createPortal(
+          <Panou
+            state={state}
+            fractie={fractie}
+            error={error}
+            data={data}
+            onRetry={cere}
+            onClose={() => setState('idle')}
+          />,
+          panel
+        )}
+    </>
+  );
+}
+
+/** Ce se vede în locul butoanelor când serviciul nu răspunde. */
+function Indisponibil() {
+  return (
+    <div className={styles.offline} role="status">
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" className={styles.offlineIcon}>
+        <path
+          d="M12 8v5M12 16.5v.5"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+        />
+        <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="1.6" />
+      </svg>
+      <span>
+        Sistemul este indisponibil temporar
+        <span className={styles.offlineHint}>Explicațiile audio revin de la sine, fără să reîncarci pagina.</span>
+      </span>
+    </div>
+  );
+}
+
+/**
+ * Montează butoanele pe lecție.
  *
  * Folosim portaluri în loc să rescriem DOM-ul lecției: conținutul randat de
  * Docusaurus rămâne neatins, iar butoanele dispar curat la demontare.
  */
 export default function SectionVoice() {
   const [mounts, setMounts] = useState([]);
+  const [lesson, setLesson] = useState(null);
+  const [disponibil, setDisponibil] = useState(stareCurenta);
   const route = typeof window !== 'undefined' ? window.location.pathname : '';
 
   useEffect(() => {
-    const root = document.querySelector('.theme-doc-markdown') || document.querySelector('article');
-    if (!root) return undefined;
+    setDisponibil(stareCurenta());
+    const opreste = ascultaDisponibilitate(setDisponibil);
+    const opresteSupravegherea = pornesteSupravegherea(serviceUrl());
+    return () => {
+      opreste();
+      opresteSupravegherea();
+    };
+  }, []);
 
-    const sections = collectLessonSections(root).filter(
-      (s) =>
-        (s.contentText && s.contentText.length > 40)
-        || s.latex.length > 0
-        || s.visuals.length > 0
-    );
+  useEffect(() => {
+    const root = document.querySelector('.theme-doc-markdown') || document.querySelector('article');
+    // Pe orice altceva decât o lecție nu montăm nimic — nici butoane, nici
+    // mesajul de indisponibilitate. O pagină de centralizator nu are ce explica.
+    if (!root || !esteLectie(root)) return undefined;
+
+    const toate = collectLessonSections(root);
+    const h1 = root.querySelector('h1');
+    // Secțiunea de nivel 1 acoperă deja toată lecția: exact materialul pe care
+    // îl vrem pentru explicația integrală.
+    const intreaga = toate.find((s) => s.level === 1) || null;
 
     const created = [];
-    for (const section of sections) {
-      const heading = section.headingElement;
-      if (!heading || heading.querySelector('[data-edupasi-voice-slot]')) continue;
-      const slot = document.createElement('span');
-      slot.setAttribute('data-edupasi-voice-slot', '');
-      slot.className = styles.slot;
-      // Înaintea ancorei „#" a Docusaurus: altfel, la hover, ancora apare între
-      // titlu și buton și împinge butonul din loc chiar când elevul îl țintește.
-      const anchor = heading.querySelector('.hash-link');
-      if (anchor) heading.insertBefore(slot, anchor);
-      else heading.appendChild(slot);
-      created.push({ section, slot, heading });
+    if (disponibil !== false) {
+      for (const section of toate) {
+        // Titlul lecției primește butonul mare, nu unul mic în plus.
+        if (section.level === 1) continue;
+        if (
+          !((section.contentText && section.contentText.length > 40)
+            || section.latex.length > 0
+            || section.visuals.length > 0)
+        ) continue;
+
+        const heading = section.headingElement;
+        if (!heading || heading.querySelector('[data-edupasi-voice-slot]')) continue;
+        const slot = document.createElement('span');
+        slot.setAttribute('data-edupasi-voice-slot', '');
+        slot.className = styles.slot;
+        // Înaintea ancorei „#" a Docusaurus: altfel, la hover, ancora apare
+        // între titlu și buton și împinge butonul din loc chiar când elevul îl
+        // țintește.
+        const anchor = heading.querySelector('.hash-link');
+        if (anchor) heading.insertBefore(slot, anchor);
+        else heading.appendChild(slot);
+        created.push({ section, slot, heading });
+      }
     }
+
+    // Gazda de deasupra titlului există și când serviciul e căzut: acolo apare
+    // mesajul, o singură dată pe pagină, nu la fiecare titlu.
+    let banner = null;
+    if (h1 && !h1.previousElementSibling?.hasAttribute?.('data-edupasi-lesson-voice')) {
+      banner = document.createElement('div');
+      banner.setAttribute('data-edupasi-lesson-voice', '');
+      banner.className = styles.lessonSlot;
+      h1.insertAdjacentElement('beforebegin', banner);
+    }
+
     setMounts(created);
+    setLesson(banner && intreaga ? { banner, section: intreaga } : banner ? { banner, section: null } : null);
 
     return () => {
       created.forEach(({ slot }) => slot.remove());
+      if (banner) banner.remove();
       setMounts([]);
+      setLesson(null);
     };
-  }, [route]);
+  }, [route, disponibil]);
 
   return (
     <>
-      {mounts.map(({ section, slot, heading }) =>
-        createPortal(
-          <SectionButton section={section} route={route} headingElement={heading} />,
-          slot,
-          section.id
-        )
-      )}
+      {lesson
+        && createPortal(
+          disponibil === false
+            ? <Indisponibil />
+            : lesson.section && disponibil === true
+              ? <LessonButton section={lesson.section} route={route} host={lesson.banner} />
+              : null,
+          lesson.banner
+        )}
+      {disponibil === true
+        && mounts.map(({ section, slot, heading }) =>
+          createPortal(
+            <SectionButton section={section} route={route} headingElement={heading} />,
+            slot,
+            section.id
+          )
+        )}
     </>
   );
 }
