@@ -113,7 +113,8 @@ export default function VoiceAdmin({ token, apiBase }) {
     const lectie = lessons.find((l) => l.url === url);
     const sursa = sources[url];
     if (!lectie || !sursa) { setMesaj('Lipsește sursa lecției.'); return; }
-    setBusy(`text:${url}`); setMesaj('Generez textul (model local, poate dura un minut sau două)…');
+    setBusy(`text:${url}`);
+    setMesaj('Generez textul cu modelul local — durează câteva minute. Poți lăsa pagina deschisă.');
     try {
       const hash = await hashLectie(url, PROMPT_VERSION);
       const r = await authFetch('/admin/voice/text', {
@@ -129,13 +130,36 @@ export default function VoiceAdmin({ token, apiBase }) {
       });
       const d = await r.json().catch(() => ({}));
       if (!r.ok) throw new Error(d.error || `Serverul a răspuns ${r.status}`);
-      setText(d.text || '');
       setSelected(url);
-      setMesaj('Text generat. Citește-l, corectează ce trebuie, apoi aprobă audio.');
+      await incarca();
+      // Generarea rulează în fundal; întrebăm de starea ei până apare ciorna.
+      const gata = await asteaptaCiorna(hash);
+      if (gata && gata.status === 'draft') {
+        setText(gata.text || '');
+        setMesaj('Text generat. Citește-l, corectează ce trebuie (modelul local greșește), apoi aprobă audio.');
+      } else if (gata && gata.status === 'error') {
+        setMesaj('Generarea a eșuat pe server. Încearcă din nou.');
+      } else {
+        setMesaj('Generarea durează neobișnuit de mult — revino peste puțin și reîmprospătează.');
+      }
       await incarca();
     } catch (err) {
       setMesaj(`Generarea a eșuat: ${err.message}`);
     } finally { setBusy(''); }
+  }
+
+  /** Întreabă periodic de starea unei generări pornite în fundal. */
+  async function asteaptaCiorna(hash) {
+    const start = Date.now();
+    const LIMITA = 12 * 60 * 1000;
+    while (Date.now() - start < LIMITA) {
+      await new Promise((res) => setTimeout(res, 4000));
+      const r = await authFetch(`/admin/voice/text/${hash}`).catch(() => null);
+      if (!r || !r.ok) continue;
+      const d = await r.json();
+      if (d.status === 'draft' || d.status === 'ready' || d.status === 'error') return d;
+    }
+    return null;
   }
 
   async function salveazaText() {

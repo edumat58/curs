@@ -191,23 +191,45 @@ export async function createServer(env = process.env) {
       return res.status(400).json({ error: String(err.message) });
     }
     const { sectionHash, section } = parsed;
-    try {
-      const result = await explainSection(section, llm, {});
-      const doc = await store.saveDraft(sectionHash, {
-        route: req.body.route || null,
-        sectionId: req.body.sectionId || null,
-        heading: section.heading,
-        lessonTitle: section.lessonTitle || null,
-        text: result.transcript,
-        meta: { ...result.meta, fidelity: result.fidelity },
-      });
-      return res.json({
-        sectionHash, status: 'draft', text: doc.explanationText,
-        fidelity: result.fidelity, meta: result.meta,
-      });
-    } catch (err) {
-      return res.status(502).json({ error: String(err.message), code: 'generation_failed' });
+
+    /**
+     * Generarea e ASINCRONĂ, nu în cadrul cererii HTTP.
+     *
+     * Modelul local scrie o lecție în două-patru minute — mult peste timeout-ul
+     * reverse-proxy-ului din față (observat: 504 după ~1 minut). Așa că marcăm
+     * imediat „pending", pornim generarea în fundal și răspundem pe loc. Panoul
+     * întreabă periodic de starea hash-ului până apare ciorna. Aceeași mecanică
+     * pe care o folosește și fluxul elevului, din exact același motiv.
+     */
+    if (inFlight.has(sectionHash)) {
+      return res.status(202).json({ sectionHash, status: 'pending', deduped: true });
     }
+    await store.markPending(sectionHash, {
+      route: req.body.route || null,
+      sectionId: req.body.sectionId || null,
+      heading: section.heading,
+      lessonTitle: section.lessonTitle || null,
+    });
+
+    const work = (async () => {
+      try {
+        const result = await explainSection(section, llm, {});
+        await store.saveDraft(sectionHash, {
+          route: req.body.route || null,
+          sectionId: req.body.sectionId || null,
+          heading: section.heading,
+          lessonTitle: section.lessonTitle || null,
+          text: result.transcript,
+          meta: { ...result.meta, fidelity: result.fidelity },
+        });
+      } catch (err) {
+        await store.fail(sectionHash, err).catch(() => {});
+      }
+    })();
+    inFlight.set(sectionHash, work);
+    work.finally(() => inFlight.delete(sectionHash));
+
+    return res.status(202).json({ sectionHash, status: 'pending' });
   });
 
   /** Textul curent (draft sau final) al unei explicații, pentru revizuire. */

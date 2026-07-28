@@ -215,6 +215,24 @@ export async function createStore(env = process.env) {
       return col.findOne({ sectionHash });
     },
 
+    /**
+     * Marchează o generare de text pornită, ca panoul să vadă „se generează".
+     *
+     * Nu atinge un text sau audio deja existent decât prin status: o regenerare
+     * păstrează varianta veche vizibilă până sosește cea nouă, ca administratorul
+     * să nu rămână cu ecranul gol în cele câteva minute de așteptare.
+     */
+    async markPending(sectionHash, meta) {
+      await col.updateOne(
+        { sectionHash },
+        {
+          $set: { status: 'pending', stage: 'naratiune', ...meta, updatedAt: new Date() },
+          $setOnInsert: { sectionHash, createdAt: new Date() },
+        },
+        { upsert: true }
+      );
+    },
+
     /** Editarea manuală a textului de către administrator. */
     async updateText(sectionHash, text) {
       const res = await col.updateOne(
