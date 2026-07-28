@@ -22,8 +22,23 @@ const CUVINTE_NUMERE = {
   nouă: '9', noua: '9', zece: '10', sută: '100', suta: '100', mie: '1000',
 };
 
+/**
+ * Un număr scris românește, adus la o formă unică.
+ *
+ * Românește punctul GRUPEAZĂ miile și virgula separă zecimalele: „37.540,85"
+ * și „37540,85" sunt același număr. Fără regula asta, garda le vedea diferite
+ * și acuza explicația că a inventat „37.540" — iar reparările pornite degeaba
+ * consumau din bugetul zilnic de tokeni.
+ *
+ * Punctul se șterge doar când chiar grupează exact trei cifre, ca „0.1" să
+ * rămână zecimală, nu să devină „01".
+ */
 function normalizeNumber(value) {
-  return String(value).replace(',', '.').replace(/\.0+$/, '').replace(/^0+(?=\d)/, '');
+  return String(value)
+    .replace(/(?<=\d)\.(?=\d{3}(?!\d))/g, '')
+    .replace(',', '.')
+    .replace(/\.0+$/, '')
+    .replace(/^0+(?=\d)/, '');
 }
 
 /**
@@ -40,13 +55,37 @@ export function despeakNumbers(text) {
   return String(text).replace(/(\d+)\s+virgulă\s+(\d+)/gi, '$1,$2');
 }
 
-/** Toate numerele dintr-un text, inclusiv cele scrise cu virgulă zecimală. */
+/**
+ * Toate numerele dintr-un text, inclusiv cele scrise cu virgulă zecimală.
+ *
+ * Prima alternativă prinde numărul cu mii grupate ÎNTREG („37.540,85"); fără
+ * ea, potrivirea lacomă rupea numărul în „37.540" și „85", adică fix invers
+ * decât are nevoie comparația.
+ */
 function extractNumbers(text) {
   const found = new Set();
-  const re = /-?\d+(?:[.,]\d+)?/g;
+  const re = /-?\d{1,3}(?:\.\d{3})+(?:,\d+)?|-?\d+(?:[.,]\d+)?/g;
   let m;
-  while ((m = re.exec(despeakNumbers(text))) !== null) found.add(normalizeNumber(m[0]));
+  const normalizat = lipesteMii(despeakNumbers(text));
+  while ((m = re.exec(normalizat)) !== null) found.add(normalizeNumber(m[0]));
   return found;
+}
+
+/**
+ * Miile despărțite prin spațiu, lipite — pe AMBELE părți ale comparației.
+ *
+ * Modelul scrie „2 360" acolo unde sursa are `2\,360`. Extractorul vedea „2" și
+ * „360", iar „360" era raportat ca valoare inventată. Sinteza nu are nicio
+ * problemă cu forma asta — verificat pe Piper, „37 540,85" și „37540,85" dau
+ * exact aceleași foneme — deci nu textul rostit trebuie schimbat, ci felul în
+ * care garda citește numerele. Aplicând regula identic pe sursă și pe
+ * transcript, o eventuală lipire greșită („2 100 de elevi") nu creează
+ * diferență între ele, deci nu poate produce o alarmă falsă.
+ */
+function lipesteMii(text) {
+  // Spațiile se scriu cu cod: îngustul (U+202F) și cel neîntrerupt (U+00A0) nu
+  // se disting cu ochiul de spațiul obișnuit într-un fișier sursă.
+  return String(text).replace(/(?<=\d)[ \t\u00A0\u202F\u2009](?=\d{3}(?!\d))/g, '');
 }
 
 /** Numerele rostite în cuvinte („trei virgulă cinci" → 3, 5). */
@@ -88,6 +127,27 @@ const FORMULARI_META = [
   // Formele nearticulate („acest tabel", „această schemă") intră și ele: modelul
   // le prefera exact acolo unde comenta suportul.
   tipar(`${M0}((acest|această|acel|acea)\\s+)?(tabel|tabelul|figura|imaginea|desenul|schema|graficul|formula|definiția|materialul|textul)\\s+(arată|ne arată|prezintă|indică|spune|ne spune|conține|scrie|explică|ilustrează)${M1}`, 'vorbește despre suport'),
+  /**
+   * Aceleași referiri, dar cu cuvinte între suport și verb.
+   *
+   * Tiparul de deasupra cere „formula arată" lipite. Modelul scrie însă
+   * „O formulă care reprezintă un exemplu de număr zecimal arată astfel." —
+   * aceeași abatere, cu șase cuvinte la mijloc, și trecea nestingherită. Așa a
+   * ajuns în audio o explicație care anunța trei formule fără să spună ce e în
+   * ele. Golul e mărginit și oprit la punctuație, ca să nu lege două fraze
+   * diferite într-o falsă potrivire.
+   */
+  tipar(`${M0}(o |un |această |acest |acea |acel |prima |a doua |a treia |altă |alt |următoarea |următorul )?\\s*(formulă|formula|figură|figura|imagine|imaginea|desen|desenul|schemă|schema|grafic|graficul|tabel|tabelul)(?![\\p{L}])[^.!?]{0,60}?\\s(arată|ne arată|prezintă|ne prezintă|indică|ne indică|ilustrează|reprezintă|conține|scrie)${M1}`, 'vorbește despre suport'),
+  /**
+   * „Arată astfel" e trimitere la ceva ce elevul ar trebui să VADĂ — exact ce
+   * nu are cum, ascultând. Fără continuare, fraza nu transmite nimic.
+   */
+  tipar(`${M0}(arată|se prezintă|se scrie|se reprezintă) (astfel|așa|în felul următor|în felul acesta)${M1}`, 'trimite la ce se vede'),
+  /**
+   * Exemplul se PARCURGE, nu se anunță. „Exemplul ne arată cum se efectuează
+   * operația" ocupă locul calculului, fără să spună niciun număr.
+   */
+  tipar(`${M0}(exemplul|exemplele|exercițiul)(?![\\p{L}])[^.!?]{0,50}?\\s(ne arată|ne indică|ne prezintă|ne spune|arată cum|ilustrează)${M1}`, 'anunță exemplul în loc să îl facă'),
   tipar(`${M0}(în|din) (această|acest|acea|acel) (secțiune|material|lecție|text|paragraf|imagine|figură)${M1}`, 'se referă la secțiune'),
   // „secțiune" simplu lipsește dinadins din lista de mai jos: „secțiunea axială
   // a unui con" e geometrie curată, iar o falsă alarmă acolo ar cere o
@@ -127,11 +187,19 @@ export function detectMetaPhrases(transcript) {
   return found;
 }
 
-/** Materialul sursă, concatenat — tot ce are voie modelul să folosească. */
+/**
+ * Materialul sursă, concatenat — tot ce are voie modelul să folosească.
+ *
+ * `sourceCode` intră în corpus pentru că a devenit materialul PRINCIPAL: de
+ * când modelul primește codul lecției, acolo scriu numerele. Fără el, garda
+ * compara explicația cu o sursă mai săracă decât cea citită de model și
+ * declara inventat tot ce venea din cod.
+ */
 function sourceCorpus(section) {
   const parts = [
     section.heading,
     section.lessonTitle,
+    section.sourceCode,
     section.contentText,
     ...(section.latex || []).map((l) => `${l.source} ${l.spoken || ''}`),
     ...(section.visuals || []).flatMap((v) => [
@@ -145,10 +213,28 @@ function sourceCorpus(section) {
 }
 
 /**
+ * Numerele din sursă se citesc DUPĂ ce notația LaTeX e desfăcută.
+ *
+ * În fișier scrie `37\,540{,}85`; extractorul vedea acolo trei numere fără
+ * legătură — 37, 540, 85 — și niciodată 37540 sau 37540,85. Explicația, care
+ * spunea corect „37540,85", era acuzată că inventează. Măsurat pe lecția
+ * „Scrierea sub formă zecimală": 5 valori reale marcate ca inventate, scor 0,4,
+ * două rescrieri cerute degeaba, fiecare pe bugetul de tokeni al zilei.
+ */
+function faraNotatie(text) {
+  return String(text)
+    .replace(/\\[,;:!]/g, '')
+    .replace(/\{\s*,\s*\}/g, ',')
+    .replace(/\\(?:text|textrm|mathrm|mathbf|mathit|operatorname)\s*\{([^{}]*)\}/g, '$1')
+    .replace(/\\[a-zA-Z]+/g, ' ')
+    .replace(/[{}$]/g, ' ');
+}
+
+/**
  * @returns {{score, needsReview, unsupportedNumbers, notes}}
  */
 export function checkFidelity(section, transcript) {
-  const corpus = sourceCorpus(section);
+  const corpus = faraNotatie(sourceCorpus(section));
   const sourceNumbers = extractNumbers(corpus);
   const spoken = extractSpelledNumbers(transcript);
   const written = extractNumbers(transcript);

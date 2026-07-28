@@ -24,6 +24,55 @@
  * caractere pe care nu o poți vedea în editor nu o poate verifica nimeni.
  */
 
+/**
+ * Resturile de LaTeX, scoase ÎNAINTE de orice altceva.
+ *
+ * De când modelul primește codul sursă al lecției, poate copia notația din el
+ * întocmai — și atunci espeak o citește literal, cu rezultate care sună exact
+ * ca niște cifre tăiate. Măsurat pe espeak-ng, în română:
+ *
+ *   „37\,540{,}85" → „treizeci și șapte VIRGULĂ CINCI PATRU ZERO, optzeci…"  ✘
+ *   „0{,}1"         → „zero, unu"  — virgula zecimală devine pauză           ✘
+ *
+ * Nu e o problemă de sinteză: Piper rostește uniform, verificat la ~51 ms pe
+ * fonem indiferent de conținut. E textul care ajunge la el.
+ *
+ * Ordinea contează de două ori:
+ * - `\,` dispare înainte de lipirea grupelor de mii, ca „37\,540" să devină
+ *   „37540", nu „37 540";
+ * - comenzile cu ÎNȚELES se traduc înainte de ștergerea generică. Fără asta,
+ *   `\frac{3}{4}` ar rămâne „34" — un număr plauzibil și complet greșit, adică
+ *   exact felul de eroare pe care un elev nu are cum să o prindă.
+ */
+function faraLatex(text) {
+  return String(text)
+    // spațiile fine din formule: \, \; \: \!
+    .replace(/\\[,;:!]/g, '')
+    // virgula zecimală protejată de acolade
+    .replace(/\{\s*,\s*\}/g, ',')
+    // \text{...} și rudele lui păstrează doar conținutul
+    .replace(/\\(?:text|textrm|mathrm|mathbf|mathit|operatorname)\s*\{([^{}]*)\}/g, '$1')
+    // fracțiile devin forma pe care regula „3/4" o rostește deja corect
+    .replace(/\\[dt]?frac\s*\{([^{}]*)\}\s*\{([^{}]*)\}/g, '$1/$2')
+    // radicalul și puterile își păstrează operandul
+    .replace(/\\sqrt\s*\{([^{}]*)\}/g, '√$1')
+    .replace(/\^\s*\{([^{}]*)\}/g, '^$1')
+    .replace(/_\s*\{([^{}]*)\}/g, '$1')
+    // operatorii au deja echivalent rostit mai jos, în simboluriMatematice
+    .replace(/\\(?:cdot|times)\b/g, '×')
+    .replace(/\\div\b/g, '÷')
+    .replace(/\\(?:le|leq)\b/g, '≤')
+    .replace(/\\(?:ge|geq)\b/g, '≥')
+    .replace(/\\(?:ne|neq)\b/g, '≠')
+    .replace(/\\approx\b/g, '≈')
+    .replace(/\\pi\b/g, 'π')
+    // orice altă comandă rămasă (\left, \right, \quad, \displaystyle…)
+    .replace(/\\[a-zA-Z]+/g, ' ')
+    // delimitatori și acolade
+    .replace(/[{}$]/g, '')
+    .replace(/\s{2,}/g, ' ');
+}
+
 /** Spațiile care nu sunt spațiul obișnuit — inclusiv cel îngust, de la mii. */
 const SPATII = '\\u00A0\\u1680\\u2000-\\u200A\\u202F\\u205F\\u3000';
 const SPATII_EXOTICE = new RegExp(`[${SPATII}]`, 'g');
@@ -157,6 +206,7 @@ export function spokenMinus(text) {
  */
 export function toSpeakable(text) {
   let out = String(text == null ? '' : text).normalize('NFC').replace(INVIZIBILE, '');
+  out = faraLatex(out);
 
   out = lipesteGrupeleDeCifre(out);
   out = out.replace(SPATII_EXOTICE, ' ');

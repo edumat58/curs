@@ -2,7 +2,15 @@
  * Pipeline-ul de explicație: înțelegere → narațiune → verificare.
  * Nu știe nimic despre HTTP, MongoDB sau furnizorul concret de LLM.
  */
-import { buildAnalysisPrompt, buildNarrationPrompt, speechBudget, PROMPT_VERSION } from './prompts.mjs';
+import {
+  buildAnalysisPrompt,
+  buildNarrationPrompt,
+  bugetSursaCaractere,
+  esteLectieIntreaga,
+  imparteLectia,
+  speechBudget,
+  PROMPT_VERSION,
+} from './prompts.mjs';
 import { checkFidelity } from './fidelity.mjs';
 import { toSpeakable } from './speakable.mjs';
 
@@ -123,6 +131,15 @@ export function cleanForSpeech(text) {
 }
 
 /**
+ * Cât spațiu rezervăm pentru o REscriere: cât are textul existent, plus o
+ * marjă. Româna consumă ~2,5–3 tokeni pe cuvânt; 3,5 acoperă și cazul lung.
+ */
+function rescriereCeiling(text) {
+  const words = String(text).split(/\s+/).filter(Boolean).length;
+  return Math.max(900, Math.round(words * 3.5) + 350);
+}
+
+/**
  * Generează explicația unei secțiuni.
  * @returns {{transcript, analysis, fidelity, meta}}
  */
@@ -148,8 +165,19 @@ export async function explainSection(section, llm, { signal, analysisLlm, onStag
   const analysisMs = Date.now() - startedAt;
 
   stage('naratiune');
-  const n = buildNarrationPrompt(section, analysis);
   const budget = speechBudget(section);
+
+  /**
+   * Lecțiile lungi se predau pe bucăți, nu se taie.
+   *
+   * Măsurat pe cele 219 fișiere din curs: 88 sunt mai lungi decât încape într-o
+   * cerere pe tierul gratuit. Tăiate la plafon, elevul ar primi o explicație
+   * oprită pe la jumătate — și nimic nu i-ar spune că lipsește restul.
+   */
+  const segmente = esteLectieIntreaga(section)
+    ? imparteLectia(section.sourceCode || '', bugetSursaCaractere(budget.words * 3.5 + 350))
+    : [null];
+  const n = buildNarrationPrompt(section, analysis);
   /**
    * Limită de siguranță, NU obiectiv.
    *
@@ -163,16 +191,41 @@ export async function explainSection(section, llm, { signal, analysisLlm, onStag
    */
   const tokenCeiling = Math.max(900, Math.round(budget.words * 3.5) + 350);
 
-  const narrationRes = await llm.chat(
-    [
-      { role: 'system', content: n.system },
-      { role: 'user', content: n.user },
-    ],
-    { maxTokens: tokenCeiling, signal }
-  );
+  /**
+   * Bugetul de vorbire se împarte între bucăți proporțional cu materialul lor,
+   * ca partea cu trei exemple să primească mai mult decât cea cu o definiție.
+   */
+  const totalCaractere = segmente.reduce((s, b) => s + (b ? b.length : 0), 0) || 1;
+  let narrationRes = null;
+  let raw = '';
+  let truncated = false;
 
-  let raw = narrationRes.content;
-  let truncated = narrationRes.finishReason === 'length';
+  for (let i = 0; i < segmente.length; i += 1) {
+    const bucata = segmente[i];
+    const segment = bucata === null ? undefined : {
+      index: i,
+      total: segmente.length,
+      sursa: bucata,
+      // Ultimele cuvinte spuse, ca următoarea bucată să lege, nu să reia.
+      dinainte: raw.trim().slice(-220),
+    };
+    const p = segment ? buildNarrationPrompt(section, analysis, segment) : n;
+    const plafon = segmente.length > 1
+      ? Math.max(700, Math.round(tokenCeiling * (bucata.length / totalCaractere)))
+      : tokenCeiling;
+
+    if (i > 0) stage(`naratiune ${i + 1}/${segmente.length}`);
+    const res = await llm.chat(
+      [
+        { role: 'system', content: p.system },
+        { role: 'user', content: p.user },
+      ],
+      { maxTokens: plafon, signal }
+    );
+    narrationRes = res;
+    raw = raw ? `${raw.replace(/\s+$/, '')} ${res.content.replace(/^\s+/, '')}` : res.content;
+    truncated = res.finishReason === 'length';
+  }
 
   /**
    * Dacă furnizorul confirmă că a oprit modelul la plafon, cerem continuarea în
@@ -238,9 +291,17 @@ export async function explainSection(section, llm, { signal, analysisLlm, onStag
 Păstrează același ton și aceeași lungime, și acoperă în continuare toate punctele din lista de acoperire. Răspunde doar cu textul rescris.`,
         },
       ],
-      // Același plafon ca la generarea inițială: o rescriere trunchiată e la fel
-      // de inutilizabilă ca o generare trunchiată.
-      { maxTokens: tokenCeiling, temperature: 0.3, signal }
+      /**
+       * Rezerva se măsoară pe textul care se rescrie, nu pe bugetul lecției.
+       *
+       * O rescriere are lungimea originalului, nu a plafonului. Cerând plafonul
+       * întreg, cererea de reparare ajungea la ~8600 de tokeni (prompt mai mare
+       * decât la generare, plus 4200 rezervați) peste fereastra de 8000 pe
+       * minut a furnizorului — deci ORICE reparare primea 429 și trimitea
+       * serviciul pe modelul de rezervă. Nu bugetul zilnic era problema, ci
+       * rezerva noastră.
+       */
+      { maxTokens: rescriereCeiling(transcript), temperature: 0.3, signal }
     );
     transcript = trimToCompleteSentence(cleanForSpeech(repairRes.content));
     fidelity = checkFidelity(section, transcript);
@@ -256,6 +317,9 @@ Păstrează același ton și aceeași lungime, și acoperă în continuare toate
       llmProvider: llm.name,
       llmModel: narrationRes.model || llm.model,
       budgetWords: budget.words,
+      // Câte bucăți a avut lecția. Peste 1 înseamnă că a fost predată în
+      // reprize — util când se compară două explicații ale aceleiași lecții.
+      segmente: segmente.length,
       // Rămâne `true` doar dacă nici continuarea nu a încăput: semnal pentru
       // profesor că acea explicație merită recitită.
       truncated,

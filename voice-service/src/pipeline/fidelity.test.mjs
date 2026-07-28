@@ -80,3 +80,68 @@ test('bucățile unui număr din sursă nu sunt invenții', () => {
   const corect = checkFidelity(SECTIUNE, 'Partea întreagă a lui 37540,85 este 37540, iar partea fracționară este 85 de sutimi, adică ce urmează după virgulă.');
   assert.deepEqual(corect.unsupportedNumbers, []);
 });
+
+test('numerele din codul sursă nu mai trec drept inventate', () => {
+  // Măsurat pe „C1 - Scrierea sub forma zecimala": garda raporta 5 valori
+  // inventate — 37.540, 23.6, 2360, 53.2, 5.32 — toate scrise în lecție, dar
+  // în notație LaTeX. Scor 0,4 și două rescrieri cerute degeaba.
+  const section = {
+    heading: 'C1 - Scrierea sub forma zecimala',
+    sourceCode: String.raw`
+      \text{Exemplu: } 37\,540{,}85
+      23{,}6 \times 100 = 2\,360
+      53{,}2 \div 10 = 5{,}32
+    `,
+  };
+  const transcript = 'Numărul 37.540,85 se descompune. Apoi 23,6 înmulțit cu 100 dă 2360, '
+    + 'iar 53,2 împărțit la 10 dă 5,32.';
+  const r = checkFidelity(section, transcript);
+  assert.deepEqual(r.unsupportedNumbers, []);
+  assert.equal(r.needsReview, false);
+});
+
+test('o valoare chiar inventată este în continuare prinsă', () => {
+  const section = { heading: 'Definiție', sourceCode: 'Un număr zecimal are o virgulă.' };
+  const r = checkFidelity(section, 'Să luăm numărul 3,5 ca exemplu.');
+  assert.deepEqual(r.unsupportedNumbers, ['3.5']);
+});
+
+test('meta-frazele cu cuvinte între suport și verb sunt prinse', () => {
+  // Citate din explicația generată REAL pentru „C1 - Scrierea sub forma
+  // zecimala": trei formule anunțate, niciuna explicată. Tiparul vechi cerea
+  // „formula arată" lipite, deci nu prindea niciuna.
+  const rele = [
+    'O formulă care reprezintă un exemplu de număr zecimal arată astfel.',
+    'Apoi, o altă formulă arată reprezentarea pozițională a unui număr zecimal.',
+    'Și, în final, o a treia formulă prezintă modul de citire a numerelor zecimale.',
+    'În sfârșit, exemplul de împărțire la puteri zecimale ne arată cum se efectuează operația.',
+  ];
+  for (const text of rele) {
+    assert.ok(detectMetaPhrases(text).length > 0, `nu a prins: ${text}`);
+  }
+});
+
+test('matematica adevărată nu declanșează garda de meta-fraze', () => {
+  // Fiecare propoziție de aici e conținut curat. O falsă alarmă costă o
+  // rescriere din bugetul zilnic și poate strica un text bun.
+  const bune = [
+    'Virgula separă partea întreagă de partea fracționară.',
+    'Un pătrat este o figură geometrică cu patru laturi egale.',
+    'Aria dreptunghiului se calculează înmulțind lungimea cu lățimea.',
+    'Împărțim 53,2 la 10 și obținem 5,32, pentru că virgula se mută spre stânga.',
+    'Când la sfârșitul părții zecimale lipsesc cifre, adăugăm zerouri.',
+    'Secțiunea axială a unui con este un triunghi isoscel.',
+    'Dacă nu îți este clar, reia partea cu rangurile.',
+    'Desenăm un unghi drept în punctul O și măsurăm laturile.',
+  ];
+  for (const text of bune) {
+    assert.deepEqual(detectMetaPhrases(text), [], `fals pozitiv la: ${text}`);
+  }
+});
+
+test('miile despărțite prin spațiu nu mai par valori inventate', () => {
+  // Sursa scrie 2\,360; modelul scrie „2 360". Garda raporta „360" ca inventat.
+  const section = { heading: 'Operații', sourceCode: String.raw`23{,}6 \times 100 = 2\,360` };
+  const r = checkFidelity(section, 'Deci 23,6 înmulțit cu 100 face 2 360.');
+  assert.deepEqual(r.unsupportedNumbers, []);
+});

@@ -36,31 +36,79 @@ class LlmError extends Error {
 const ASTEPTARE_MAXIMA_MS = 45000;
 const LIMITA_PE_ZI = /per day|\bTPD\b|\bRPD\b/i;
 
+/**
+ * Modelele cu raționament (gpt-oss) consumă bugetul în câmpul `reasoning` și
+ * pot întoarce content gol în modul JSON strict. Le ținem raționamentul scurt:
+ * aici avem nevoie de extragere fidelă, nu de deliberare lungă.
+ */
+const CU_RATIONAMENT = /gpt-oss|thinking|reasoner|\bo\d\b/i;
+
+/**
+ * Schimbă modelul din cerere ÎMPREUNĂ cu câmpurile care depind de el.
+ *
+ * Nu e o comoditate, e o corecție. `reasoning_effort` se punea o singură dată,
+ * după modelul inițial, iar trecerea pe rezervă schimba doar `model`. Așa,
+ * fiecare lecție întreagă murea: cererea mare lua 413 de la gpt-oss-120b,
+ * trecea pe llama-3.3-70b-versatile — care refuză `reasoning_effort` — și
+ * primea 400, o eroare pe care nu o reîncercăm. Elevul vedea „generarea a
+ * eșuat" după nouă secunde, fără ca vreun buget să fi fost depășit cu adevărat.
+ */
+function aplicaModel(body, model) {
+  body.model = model;
+  if (CU_RATIONAMENT.test(model)) body.reasoning_effort = 'low';
+  else delete body.reasoning_effort;
+}
+
 function createOpenAiCompatible({ name, baseUrl, apiKey, models, timeoutMs, maxRetries }) {
   const lista = models.filter(Boolean);
-  // Modelul curent se ține la nivel de client, nu de cerere: odată ce bugetul
-  // zilnic al celui principal s-a terminat, s-a terminat pentru toate cererile
-  // care urmează. Fiecare ar redescoperi asta cu încă un 429 pierdut.
+  /**
+   * Retrogradarea de durată — și DOAR pentru bugetul zilnic.
+   *
+   * Ce era înainte: orice 429 cu o așteptare lungă muta clientul pe modelul de
+   * rezervă, definitiv, pentru tot procesul. Iar 429-urile lungi vin mai ales
+   * de la limita pe MINUT, care se golește singură în câteva zeci de secunde.
+   * Consecința, măsurată: prima rescriere a primei lecții epuiza fereastra pe
+   * minut, serviciul trecea pe llama-3.3-70b-versatile și rămânea acolo până la
+   * repornire. Toate explicațiile de după ieșeau de la un model mai slab —
+   * scurte, cu fraze despre „formula care arată astfel". Nimeni nu vedea de ce.
+   *
+   * Acum retrogradarea are termen: `blocatPanaLa` vine din ce spune chiar
+   * furnizorul („try again in 30m"), iar după el se încearcă din nou modelul
+   * bun. Limita pe minut nu mai retrogradează pe termen lung — se rezolvă în
+   * interiorul cererii, așteptând sau cerând o singură dată de la rezervă.
+   */
   let index = 0;
+  let blocatPanaLa = 0;
+
+  /** Ceasul e injectabil ca testele să nu aștepte o jumătate de oră. */
+  const acum = () => Date.now();
+
+  function modelCurent() {
+    if (index > 0 && blocatPanaLa && acum() > blocatPanaLa) {
+      console.warn(`[voice] revin pe ${lista[0]}: fereastra de buget s-a golit`);
+      index = 0;
+      blocatPanaLa = 0;
+    }
+    return lista[index];
+  }
 
   return {
     name,
-    get model() { return lista[index]; },
+    get model() { return modelCurent(); },
     async chat(messages, { json = false, temperature, maxTokens } = {}) {
-      const model = lista[index];
-      // Modelele cu raționament (gpt-oss) consumă bugetul în câmpul `reasoning`
-      // și pot întoarce content gol în modul JSON strict. Ținem raționamentul
-      // scurt: aici avem nevoie de extragere fidelă, nu de deliberare lungă.
-      const isReasoning = /gpt-oss|thinking|reasoner|\bo\d\b/i.test(model);
+      // Poziția din listă folosită de CEREREA asta. Poate coborî temporar sub
+      // cea a clientului (limită pe minut, cerere prea mare) fără să condamne
+      // și cererile următoare la modelul slab.
+      let local = lista.indexOf(modelCurent());
       const body = {
-        model: lista[index],
+        model: lista[local],
         messages,
         temperature: temperature ?? (json ? 0.1 : 0.6),
         stream: false,
       };
       if (json) body.response_format = { type: 'json_object' };
       if (maxTokens) body.max_tokens = maxTokens;
-      if (isReasoning) body.reasoning_effort = 'low';
+      aplicaModel(body, lista[local]);
 
       // Unele modele nu respectă `response_format` (json_validate_failed) sau
       // întorc gol. Atunci reîncercăm fără el: promptul cere oricum JSON, iar
@@ -108,8 +156,15 @@ function createOpenAiCompatible({ name, baseUrl, apiKey, models, timeoutMs, maxR
             err.retryAfterMs = Number.isFinite(headerWait) && headerWait > 0
               ? headerWait + 1500
               : bodyWait ? Math.ceil(parseFloat(bodyWait[1]) * 1000) + 1500 : 0;
-            err.epuizatPeZi = res.status === 429
-              && (LIMITA_PE_ZI.test(text) || err.retryAfterMs > ASTEPTARE_MAXIMA_MS);
+            /**
+             * Doar limita pe ZI retrogradează clientul. Un 429 pe minut cu
+             * așteptare lungă rămâne o problemă a cererii curente: se rezolvă
+             * cerând de la rezervă acum, nu condamnând orele următoare la un
+             * model mai slab. Distincția o face textul furnizorului, nu durata.
+             */
+            err.epuizatPeZi = res.status === 429 && LIMITA_PE_ZI.test(text);
+            err.asteptarePreaLunga = res.status === 429
+              && err.retryAfterMs > ASTEPTARE_MAXIMA_MS;
             /**
              * 413 nu e o limită de ritm, e o limită de MĂRIME.
              *
@@ -139,19 +194,11 @@ function createOpenAiCompatible({ name, baseUrl, apiKey, models, timeoutMs, maxR
             // ajunge nedetectată în audio, ca frază tăiată la mijloc.
             finishReason: choice.finish_reason || null,
             usage: data.usage || null,
-            model: data.model || model,
+            model: data.model || lista[local],
           };
         } catch (err) {
           lastError = err;
 
-          /**
-           * Bugetul zilnic al modelului s-a terminat: trecem la următorul din
-           * listă și reîncercăm IMEDIAT, fără să consumăm o încercare.
-           *
-           * Modelele au bugete zilnice separate, deci al doilea chiar are ce
-           * oferi. Explicația iese ceva mai simplă decât cu modelul principal,
-           * dar o explicație bună azi bate una perfectă mâine.
-           */
           /**
            * Cererea nu încape: o înjumătățim o dată, apoi trecem la alt model.
            * Jumătate din buget e tot o explicație bună; niciuna nu e nimic.
@@ -162,10 +209,35 @@ function createOpenAiCompatible({ name, baseUrl, apiKey, models, timeoutMs, maxR
             attempt -= 1;
             continue;
           }
-          if ((err.epuizatPeZi || err.preaMare) && index < lista.length - 1) {
+
+          /**
+           * Bugetul ZILNIC s-a terminat: retrogradăm clientul, cu termen.
+           *
+           * Modelele au bugete zilnice separate, deci al doilea chiar are ce
+           * oferi. Explicația iese ceva mai simplă decât cu modelul principal,
+           * dar o explicație bună azi bate una perfectă mâine. Termenul îl dă
+           * furnizorul; până atunci nu mai plătim un 429 la fiecare cerere.
+           */
+          if (err.epuizatPeZi && index < lista.length - 1) {
             index += 1;
-            body.model = lista[index];
-            console.warn(`[voice] buget zilnic epuizat, trec pe ${lista[index]}`);
+            blocatPanaLa = acum() + Math.min(err.retryAfterMs || 1800000, 86400000);
+            local = index;
+            aplicaModel(body, lista[local]);
+            console.warn(`[voice] buget zilnic epuizat, trec pe ${lista[local]} — ${err.message.slice(0, 200)}`);
+            attempt -= 1;
+            continue;
+          }
+
+          /**
+           * Limită pe minut cu așteptare lungă, sau cerere care nu încape nici
+           * înjumătățită: întrebăm rezerva DOAR pentru cererea asta. Clientul
+           * rămâne pe modelul bun, pentru că fereastra pe minut se golește
+           * singură până la următorul elev.
+           */
+          if ((err.asteptarePreaLunga || err.preaMare) && local < lista.length - 1) {
+            local += 1;
+            aplicaModel(body, lista[local]);
+            console.warn(`[voice] fereastră plină, cer de la ${lista[local]} doar acum — ${err.message.slice(0, 200)}`);
             attempt -= 1;
             continue;
           }

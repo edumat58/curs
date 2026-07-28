@@ -15,7 +15,7 @@ import AudioPlayer from './AudioPlayer';
 import styles from './styles.module.css';
 
 /** Trebuie să coincidă cu PROMPT_VERSION din serviciu: intră în hash-ul secțiunii. */
-const PROMPT_VERSION = 5;
+const PROMPT_VERSION = 6;
 
 /**
  * Ce e o lecție și ce nu.

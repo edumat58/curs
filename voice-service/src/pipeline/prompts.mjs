@@ -29,8 +29,13 @@ import { describeFigure } from './figure.mjs';
  * pentru că promptul lor nu s-a schimbat. Versiunea nu se incrementează pentru
  * ceva ce nu schimbă rezultatul: ar arunca un cache bun și ar cere zeci de
  * regenerări pe un buget de tokeni limitat pe zi.
+ *
+ * v6: primind codul sursă, modelul a început să copieze și notația LaTeX din el
+ * („0{,}1", „37\,540{,}85"), iar sinteza o rostea literal — numărul se auzea
+ * rupt în cifre. Interdicția e acum explicită în prompt, deci explicațiile
+ * generate cu v5 chiar sunt altele și trebuie refăcute.
  */
-export const PROMPT_VERSION = 5;
+export const PROMPT_VERSION = 6;
 
 /** Terminologia școlară românească — nu traducem din engleză. */
 const GLOSAR = `
@@ -103,8 +108,78 @@ function spokenHint(text) {
     .trim();
 }
 
+/**
+ * Fereastra de tokeni pe minut a furnizorului.
+ *
+ * Pe tierul gratuit Groq sunt 8000. Nu e o preferință de-a noastră, e plafonul
+ * peste care cererea primește „request too large" — și tot de el depinde cât
+ * din lecție îi putem arăta modelului deodată. Stă în variabilă de mediu tocmai
+ * ca trecerea pe un plan plătit (sute de mii de tokeni pe minut) să fie o
+ * singură linie de configurare, nu o rescriere de prompturi.
+ */
+const FEREASTRA_TOKENI = Number(process.env.VOICE_TOKEN_WINDOW || 8000);
+
+/** Româna consumă ~3,3 caractere pe token la modelele OpenAI-compatibile. */
+const CARACTERE_PE_TOKEN = 3.3;
+
+/**
+ * Câte caractere de sursă încap, lăsând loc instrucțiunilor și răspunsului.
+ *
+ * Se scad: promptul de sistem (măsurat ~1950 de tokeni), rezerva pentru
+ * răspuns, și 5% marjă pentru estimarea grosolană a tokenilor. Ce rămâne e
+ * pentru material. Când fereastra e mare, plafonul devine lungimea maximă a
+ * unei lecții și limita practic dispare.
+ */
+export function bugetSursaCaractere(rezervaRaspuns) {
+  const disponibil = FEREASTRA_TOKENI * 0.95 - 1950 - (rezervaRaspuns || 0);
+  return Math.max(1500, Math.round(disponibil * CARACTERE_PE_TOKEN));
+}
+
+/**
+ * Împarte lecția în bucăți care încap fiecare în fereastra furnizorului.
+ *
+ * 40% dintre lecțiile reale (88 din 219, măsurat) sunt mai lungi decât încape
+ * într-o singură cerere pe tierul gratuit. Alternativa — să tăiem sursa la
+ * plafon — înseamnă că elevul primește o explicație care se oprește pe la
+ * jumătatea lecției fără să spună nimeni nimic. O tăiere pe care nu o vede
+ * nimeni e mai rea decât o generare mai lentă.
+ *
+ * Tăiem la titlurile de nivel 2, pentru că acolo taie și profesorul: fiecare
+ * bucată e o parte întreagă a lecției. Dacă o singură parte e prea mare, se
+ * taie mai departe la rând gol — nu la mijloc de frază.
+ */
+export function imparteLectia(source, maxChars) {
+  const text = String(source || '');
+  if (text.length <= maxChars) return [text];
+
+  const parti = text.split(/\n(?=##\s)/);
+  const bucati = [];
+  let curent = '';
+
+  const adauga = (parte) => {
+    if (!curent) { curent = parte; return; }
+    if (curent.length + parte.length + 1 <= maxChars) curent += `\n${parte}`;
+    else { bucati.push(curent); curent = parte; }
+  };
+
+  for (const parte of parti) {
+    if (parte.length <= maxChars) { adauga(parte); continue; }
+    // O parte singură nu încape: o rupem la rând gol, păstrând paragrafele.
+    let rest = parte;
+    while (rest.length > maxChars) {
+      const taietura = rest.lastIndexOf('\n\n', maxChars);
+      const punct = taietura > maxChars * 0.5 ? taietura : maxChars;
+      adauga(rest.slice(0, punct));
+      rest = rest.slice(punct);
+    }
+    adauga(rest);
+  }
+  if (curent) bucati.push(curent);
+  return bucati;
+}
+
 /** Materialul sursă, identic pentru ambele treceri — singura realitate permisă. */
-export function renderSource(section) {
+export function renderSource(section, maxChars = 12000) {
   /**
    * Dacă avem sursa brută, ea ESTE materialul.
    *
@@ -121,7 +196,7 @@ export function renderSource(section) {
       'nu o rescrii ca „zece la puterea minus unu". Ordinea titlurilor este ordinea lecției.',
       '',
       '```mdx',
-      String(section.sourceCode).slice(0, 12000),
+      String(section.sourceCode).slice(0, maxChars),
       '```',
     ].join('\n');
   }
@@ -345,7 +420,11 @@ Predai LECȚIA ÎNTREAGĂ, ca la clasă, într-o singură oră:
 - Când o parte e grea, te oprești și o reformulezi altfel, o singură dată.
 - Închei strângând firul: ce am învățat, în trei-patru propoziții, în ordinea în care s-au construit. Fără să te povestești pe tine — spui MATEMATICA învățată, nu că ai explicat-o.`;
 
-export function buildNarrationPrompt(section, analysis) {
+/**
+ * @param {object} [segment] Bucata de lecție de predat acum, când lecția nu
+ *   încape într-o singură cerere: `{index, total, sursa, dinainte}`.
+ */
+export function buildNarrationPrompt(section, analysis, segment) {
   const budget = speechBudget(section);
   const narratable = narratableAnalysis(analysis, section);
   const checklist = coverageChecklist(narratable);
@@ -374,6 +453,7 @@ Fidelitate — regula cea mai importantă:
 - INTERZIS să inventezi exemple, numere, valori sau cazuri NOI, care nu apar în material. Dacă materialul nu dă niciun exemplu, explici regula în cuvinte — nu o ilustrezi cu valori proprii.
 - Distincția e simplă: exemplele existente le folosești integral; exemple noi nu creezi.
 - Nu adăuga echivalențe, conversii sau reformulări matematice care nu apar în material. Dacă materialul spune doar cum se citește un număr, spui doar cum se citește — nu îl mai traduci și în alte unități, pentru că exact acolo apar greșelile.
+- FORMA din material se păstrează, nu se „modernizează". Dacă acolo scrie „3 înmulțit cu 10000", spui „3 înmulțit cu 10000" — NU „3 înmulțit cu 10 la puterea 4". Dacă scrie „8 înmulțit cu 0,1", spui „8 înmulțit cu 0,1" — NU „8 înmulțit cu 10 la puterea minus 1". Rescrierea nu e greșită matematic, dar e din altă clasă decât lecția: elevul aude o notație pe care profesorul nu i-a predat-o și pierde firul.
 - Nu introduci noțiuni care nu apar în secțiune.
 - Mai bine spui mai puțin decât să inventezi. Corectitudinea este prioritatea absolută.
 
@@ -393,6 +473,7 @@ Cum scrii numerele (textul tău e trimis mai departe la sinteza vocală):
 - Cu cifre și virgulă zecimală: „12,4", nu „12 virgulă 4" și nu „doisprezece virgulă patru".
 - Fără separator de mii: „37540", „1000" — nu „37 540" și nu „1 000".
 - Fără simboluri matematice: scrii „înmulțit cu", „împărțit la", „minus", „la pătrat", nu „×", „÷", „−", „²".
+- Materialul îți vine ca sursă de lecție, deci conține notație LaTeX. Aceea NU se copiază: scrii „37540,85", nu „37\\,540{,}85"; „0,1", nu „0{,}1". Fără dolari, fără acolade, fără bare oblice inversate. Sinteza vocală le rostește literal și numărul se aude rupt în cifre.
 
 Explici, nu recitești:
 - NU relua definiția cuvânt cu cuvânt. Desfă-o în pași: ce este, din ce e alcătuită, cum recunoști, la ce folosește — dar numai cu informația din material.
@@ -402,7 +483,60 @@ LUNGIME: ai la dispoziție până la ${budget.words} de cuvinte (≈ ${budget.se
 
 Răspunzi NUMAI cu textul de rostit. Fără introducere, fără comentarii, fără ghilimele.`,
 
-    user: `Ai citit deja secțiunea. Iată ce ai înțeles (doar fapte confirmate):
+    /**
+     * Ce vede narațiunea diferă după cât are de predat.
+     *
+     * La o SECȚIUNE încap amândouă: rezumatul analizei și materialul. E ieftin
+     * și rezumatul chiar ajută la un fragment scurt.
+     *
+     * La o LECȚIE ÎNTREAGĂ nu încap. Am ținut întâi rezumatul și am scos
+     * materialul — și s-a văzut la ascultare: narațiunea vorbea despre ce
+     * extrăsese analiza, nu despre lecție. „O formulă care reprezintă un exemplu
+     * de număr zecimal arată astfel. Apoi, o altă formulă arată reprezentarea
+     * pozițională." Trei formule anunțate, niciun număr rostit — pentru că
+     * modelul chiar nu le mai avea. Rezumatul e o hartă; nu poți preda o hartă.
+     *
+     * Deci la lecție ținem MATERIALUL și lăsăm rezumatul deoparte, păstrând din
+     * el doar lista de acoperire. Sursa e mai mică decât rezumatul JSON și e
+     * neambiguă: acolo scrie ce valori are lecția și în ce ordine.
+     */
+    user: lectie
+      ? `Iată ${segment && segment.total > 1 ? `partea ${segment.index + 1} din ${segment.total} a lecției` : 'lecția'}, exact așa cum e scrisă de profesor. Ea este singura ta sursă.
+
+--- MATERIAL SURSĂ ---
+${
+  segment
+    ? renderSource({ ...section, sourceCode: segment.sursa }, segment.sursa.length)
+    : renderSource(section, bugetSursaCaractere(budget.words * 3.5 + 350))
+}
+--- SFÂRȘIT MATERIAL ---
+${
+  checklist.length
+    ? `\nLISTĂ DE ACOPERIRE — fiecare punct trebuie să se audă în explicație:\n${checklist
+        .map((item, i) => `${i + 1}. ${item}`)
+        .join('\n')}\n`
+    : ''
+}${
+  /**
+   * Continuitatea între bucăți, fără să retrimitem tot ce s-a spus.
+   *
+   * Ultimele fraze sunt de ajuns ca modelul să nu reia introducerea și să lege
+   * ideea nouă de cea tocmai încheiată. Elevul aude o oră de curs, nu trei
+   * explicații lipite.
+   */
+  segment && segment.total > 1
+    ? `
+CONTINUITATE — ești la mijlocul aceleiași ore de curs:
+${segment.index === 0
+  ? '- Ești la ÎNCEPUT: deschizi lecția, spui în două fraze ce va ști elevul la final, apoi intri în materialul de mai sus. NU încheia lecția — mai urmează.'
+  : segment.index === segment.total - 1
+    ? `- Ești la FINAL. Ultimele tale cuvinte au fost: „…${segment.dinainte}"\n- Continui de acolo, fără să te prezinți din nou și fără să reiei ce ai spus. La sfârșit strângi firul întregii lecții în trei-patru propoziții.`
+    : `- Ești la MIJLOC. Ultimele tale cuvinte au fost: „…${segment.dinainte}"\n- Continui de acolo, legând ideea nouă de cea tocmai încheiată. NU deschizi și NU închei lecția — mai urmează.`}
+`
+    : ''
+}
+Predă-i acum elevului ${segment && segment.total > 1 ? 'această parte' : 'lecția întreagă'}, cu voce tare, în română, în ordinea din material. Fiecare exemplu se face cu valorile lui exacte. Încheie cu o frază completă.`
+      : `Ai citit deja secțiunea. Iată ce ai înțeles (doar fapte confirmate):
 
 ${JSON.stringify(narratable, null, 1)}
 ${
@@ -412,30 +546,11 @@ ${
         .join('\n')}\n`
     : ''
 }
-${
-  /**
-   * La lecția întreagă, materialul NU se mai repetă.
-   *
-   * Îl trimiteam de două ori — o dată la analiză, o dată aici — ca narațiunea
-   * să poată verifica valorile. Pentru o secțiune e ieftin și util. Pentru o
-   * lecție completă, a doua copie e exact ce face cererea să depășească
-   * fereastra de 8000 de tokeni pe minut a tierului gratuit: furnizorul
-   * răspunde „request too large", iar asta nu se rezolvă așteptând — cererea ar
-   * fi prea mare și peste un minut, și peste o oră.
-   *
-   * Fidelitatea nu are de suferit: analiza a extras deja definițiile, formulele
-   * și exemplele CU VALORILE LOR, iar lista de acoperire le poartă mai departe.
-   * Verificarea de după generare se face oricum pe materialul complet, pe
-   * server, unde nu costă niciun token.
-   */
-  lectie
-    ? 'Ai deja mai sus tot ce ai extras din material. Folosește EXCLUSIV acele valori — nu adăuga altele.'
-    : `Iată din nou materialul, ca să rămâi fidel:
+Iată din nou materialul, ca să rămâi fidel:
 
 --- MATERIAL SURSĂ ---
 ${renderSource(section)}
---- SFÂRȘIT MATERIAL ---`
-}
+--- SFÂRȘIT MATERIAL ---
 
 Explică-i acum elevului această secțiune, cu voce tare, în română. Acoperă toate punctele din listă, în ordine, și încheie cu o frază completă.`,
   };

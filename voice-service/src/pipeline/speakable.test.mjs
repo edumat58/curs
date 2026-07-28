@@ -113,3 +113,28 @@ test('zecimalele, orele și enumerările rămân intacte', () => {
   assert.equal(toSpeakable('Avem 12 : 4 = 3.'), 'Avem 12 împărțit la 4 = 3.');
   assert.equal(toSpeakable('Ora este 12:30 fix.'), 'Ora este 12:30 fix.');
 });
+
+test('notația LaTeX din material nu ajunge rostită', () => {
+  // De când modelul primește codul sursă al lecției, poate copia notația din el.
+  // Măsurat pe espeak: „37\,540{,}85" se auzea „treizeci și șapte virgulă cinci
+  // patru zero, optzeci și cinci" — cifre pierdute, exact ce s-a reclamat.
+  assert.equal(toSpeakable('Avem 37\\,540{,}85 aici.'), 'Avem 37540,85 aici.');
+  assert.equal(toSpeakable('Este 0{,}1 din întreg.'), 'Este 0,1 din întreg.');
+  assert.equal(toSpeakable('Scriem $37{,}5$ pe tablă.'), 'Scriem 37,5 pe tablă.');
+  assert.equal(toSpeakable('\\text{Parte întreagă: } 37\\,540'), 'Parte întreagă: 37540');
+  // Textul obișnuit nu are de suferit.
+  assert.equal(toSpeakable('Rezultatul este 8,82.'), 'Rezultatul este 8,82.');
+});
+
+test('comenzile LaTeX cu înțeles se traduc, nu se șterg', () => {
+  // Ștergerea oarbă transforma „\frac{3}{4}" în „34" — un număr plauzibil și
+  // greșit, adică singurul fel de eroare pe care elevul nu are cum să o prindă.
+  assert.equal(toSpeakable('Avem \\frac{3}{4} din tort.'), 'Avem 3 supra 4 din tort.');
+  assert.equal(toSpeakable('Avem $\\dfrac{1}{2}$ aici.'), 'Avem 1 supra 2 aici.');
+  assert.equal(toSpeakable('Calculăm \\sqrt{9}.'), 'Calculăm radical din 9.');
+  assert.equal(toSpeakable('Avem 5 \\cdot 3.'), 'Avem 5 înmulțit cu 3.');
+  assert.equal(toSpeakable('Avem 10 \\div 2.'), 'Avem 10 împărțit la 2.');
+  assert.equal(toSpeakable('Este \\le 5.'), 'Este mai mic sau egal cu 5.');
+  assert.equal(toSpeakable('Calculăm 2^{10}.'), 'Calculăm 2 la puterea 10.');
+  assert.equal(toSpeakable('Avem \\left( 3 \\right) aici.'), 'Avem ( 3 ) aici.');
+});
