@@ -193,6 +193,10 @@ export async function explainSection(section, llm, { signal, onStage } = {}) {
   let narrationRes = null;
   let raw = '';
   let truncated = false;
+  // Suma tuturor tokenilor consumați de la furnizor pentru ACEASTĂ lecție —
+  // narațiune (toate bucățile), continuări și rescrieri. Din ea se ține evidența
+  // bugetului zilnic al modelului, pe care furnizorul nu-l expune în anteturi.
+  let tokeniTotal = 0;
 
   for (let i = 0; i < segmente.length; i += 1) {
     const bucata = segmente[i];
@@ -217,6 +221,7 @@ export async function explainSection(section, llm, { signal, onStage } = {}) {
       { maxTokens: plafon, signal }
     );
     narrationRes = res;
+    tokeniTotal += res.usage?.total_tokens || 0;
     raw = raw ? `${raw.replace(/\s+$/, '')} ${res.content.replace(/^\s+/, '')}` : res.content;
     truncated = res.finishReason === 'length';
   }
@@ -251,6 +256,7 @@ export async function explainSection(section, llm, { signal, onStage } = {}) {
         ],
         { maxTokens: tokenCeiling, signal }
       );
+      tokeniTotal += cont.usage?.total_tokens || 0;
       raw = `${raw.replace(/\s+$/, '')} ${cont.content.replace(/^\s+/, '')}`;
       truncated = cont.finishReason === 'length';
     } catch (err) {
@@ -319,6 +325,7 @@ Păstrează același ton și aceeași lungime, și acoperă în continuare toate
      * bună cu una ciuntită — și nimeni nu observa, pentru că `needsReview`
      * arăta chiar mai bine după. Păstrăm ce e mai bun, nu ce e mai nou.
      */
+    tokeniTotal += repairRes.usage?.total_tokens || 0;
     const candidat = trimToCompleteSentence(cleanForSpeech(repairRes.content));
     const fidelitateNoua = checkFidelity(section, candidat);
     const cuvinteVechi = transcript.split(/\s+/).filter(Boolean).length;
@@ -355,6 +362,10 @@ Păstrează același ton și aceeași lungime, și acoperă în continuare toate
       totalMs: Date.now() - startedAt,
       // O singură trecere acum: doar narațiunea. Pasul de analiză a fost scos.
       usage: { narration: narrationRes.usage },
+      // Totalul consumat la furnizor pentru lecția asta (narațiune + continuări +
+      // rescrieri). Alimentează evidența bugetului zilnic în panoul de admin.
+      llmProvider: llm.name,
+      tokeniTotal,
     },
   };
 }

@@ -1035,7 +1035,7 @@ function AuthedAdmin({ session, logout, apiBase }) {
             Voce — explicații pe lecții
           </h1>
           <p style={{ marginTop: 0, marginBottom: '1rem', fontSize: '0.875rem', color: 'var(--km-ink3)' }}>
-            Generezi textul cu modelul local, îl corectezi, apoi aprobi sinteza Azure. Elevii aud doar lecțiile marcate „gata".
+            Generezi textul (Groq), îl corectezi, apoi aprobi sinteza Azure. Elevii aud doar lecțiile marcate „gata".
           </p>
           <VoiceAdmin token={session.token} apiBase={apiBase} />
         </div>

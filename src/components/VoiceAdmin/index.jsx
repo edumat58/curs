@@ -53,6 +53,7 @@ export default function VoiceAdmin({ token, apiBase }) {
   const [sources, setSources] = useState({}); // url -> mdx brut
   const [status, setStatus] = useState({}); // route -> doc voce
   const [usage, setUsage] = useState(null);
+  const [llmUsage, setLlmUsage] = useState(null);
   const [selected, setSelected] = useState(null); // url selectat
   const [text, setText] = useState('');
   const [busy, setBusy] = useState(''); // ce operație rulează
@@ -74,11 +75,12 @@ export default function VoiceAdmin({ token, apiBase }) {
   // Lista de lecții + sursele (de pe site) și starea vocii (de la serviciu).
   const incarca = useCallback(async () => {
     try {
-      const [idx, src, st, us] = await Promise.all([
+      const [idx, src, st, us, llm] = await Promise.all([
         fetch(indexUrl).then((r) => r.json()).catch(() => ({ lessons: [] })),
         fetch(sourcesUrl).then((r) => r.json()).catch(() => ({})),
         authFetch('/admin/voice/lessons').then((r) => (r.ok ? r.json() : { lessons: {} })).catch(() => ({ lessons: {} })),
         authFetch('/admin/voice/usage').then((r) => (r.ok ? r.json() : null)).catch(() => null),
+        authFetch('/admin/voice/llm-usage').then((r) => (r.ok ? r.json() : null)).catch(() => null),
       ]);
       // Doar lecțiile reale (titlu care începe cu C sau G); restul n-au voce.
       const doarLectii = (idx.lessons || []).filter((l) => /^\s*[CG]\s*\d/.test(l.title || ''));
@@ -86,6 +88,7 @@ export default function VoiceAdmin({ token, apiBase }) {
       setSources(src || {});
       setStatus(st.lessons || {});
       setUsage(us);
+      setLlmUsage(llm);
     } catch (err) {
       setMesaj(`Nu am putut încărca: ${err.message}`);
     }
@@ -126,7 +129,7 @@ export default function VoiceAdmin({ token, apiBase }) {
     const identitate = identitateLectie({ course: lectie.course, title: lectie.title });
     if (!identitate) { setMesaj('Titlul lecției nu produce un cod valid.'); return; }
     setBusy(`text:${url}`);
-    setMesaj('Generez textul cu modelul local — durează câteva minute. Poți lăsa pagina deschisă.');
+    setMesaj('Generez textul — durează un minut sau două. Poți lăsa pagina deschisă.');
     try {
       const hash = await cheieLectie(identitate, PROMPT_VERSION);
       const cod = codLectie({ course: lectie.course, title: lectie.title, collection: lectie.collection });
@@ -152,7 +155,7 @@ export default function VoiceAdmin({ token, apiBase }) {
       const gata = await asteaptaCiorna(hash);
       if (gata && gata.status === 'draft') {
         setText(gata.text || '');
-        setMesaj('Text generat. Citește-l, corectează ce trebuie (modelul local greșește), apoi aprobă audio.');
+        setMesaj('Text generat. Citește-l, corectează ce trebuie, apoi aprobă audio.');
       } else if (gata && gata.status === 'error') {
         setMesaj('Generarea a eșuat pe server. Încearcă din nou.');
       } else {
@@ -228,7 +231,10 @@ export default function VoiceAdmin({ token, apiBase }) {
 
   return (
     <div className={styles.wrap}>
-      <UsageBar usage={usage} />
+      <div className={styles.usageGrid}>
+        <UsageBar usage={usage} />
+        <GroqBar llm={llmUsage} />
+      </div>
 
       <div className={styles.controls}>
         <input
@@ -370,6 +376,57 @@ function UsageBar({ usage }) {
         {reset ? ` · se reînnoiește ${reset}` : ''}
         {sursa === 'azure' ? ' · direct din Azure' : ''}
       </div>
+    </div>
+  );
+}
+
+/** Data și ora exacte, în română, pentru resetul bugetului. */
+function dataOra(iso) {
+  if (!iso) return null;
+  return new Date(iso).toLocaleString('ro-RO', {
+    day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit',
+  });
+}
+
+/**
+ * Bugetul de LIMBAJ (Groq) pentru generarea textului — consumat, total, reset.
+ *
+ * Limita zilnică Groq e o fereastră RULANTĂ de 24h: nu se resetează la o oră
+ * fixă, ci se eliberează pe măsură ce cele mai vechi generări împlinesc 24h.
+ * Arătăm exact când se eliberează prima tranșă și cât.
+ */
+function GroqBar({ llm }) {
+  if (!llm) return null;
+  const { folosit, limita, ramas, procent, seEliberezaLa, elibereaza, model } = llm;
+  const pct = procent != null ? Math.min(100, procent) : null;
+  const reset = dataOra(seEliberezaLa);
+  return (
+    <div className={styles.usage}>
+      <div className={styles.usageTop}>
+        <span className={styles.usageLabel}>Buget text (Groq)</span>
+        <span className={styles.usageNums}>
+          {folosit?.toLocaleString('ro-RO')} {limita != null ? `/ ${limita.toLocaleString('ro-RO')}` : ''} tokeni
+        </span>
+      </div>
+      {pct != null ? (
+        <div className={styles.bar}>
+          <div
+            className={styles.barFill}
+            style={pct >= 90 ? { width: `${pct}%`, background: 'var(--a-burg)' } : { width: `${pct}%` }}
+          />
+        </div>
+      ) : null}
+      <div className={styles.usageFoot}>
+        {ramas != null ? `${ramas.toLocaleString('ro-RO')} rămași azi` : ''}
+        {model ? ` · ${model}` : ''}
+      </div>
+      {reset ? (
+        <div className={styles.usageFoot}>
+          Se eliberează {elibereaza ? `${elibereaza.toLocaleString('ro-RO')} tokeni ` : ''}pe {reset}
+        </div>
+      ) : (
+        <div className={styles.usageFoot}>Nimic consumat în ultimele 24h.</div>
+      )}
     </div>
   );
 }

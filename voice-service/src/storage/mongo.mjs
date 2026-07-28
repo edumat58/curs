@@ -12,6 +12,8 @@ const COLLECTION = 'voice_explanations';
 const BUCKET = 'voice_audio';
 /** Evidența apelurilor de sinteză Azure, pentru urmărirea cotei lunare. */
 const USAGE = 'voice_azure_usage';
+/** Evidența tokenilor de LIMBAJ (Groq), pentru bugetul zilnic al modelului. */
+const LLM_USAGE = 'voice_llm_usage';
 
 let clientPromise = null;
 
@@ -317,6 +319,55 @@ export async function createStore(env = process.env) {
         }
       }
       return sterse;
+    },
+
+    /**
+     * Înregistrează tokenii de LIMBAJ consumați la o generare.
+     *
+     * Groq nu expune în anteturi bugetul ZILNIC (doar cel pe minut), iar cel
+     * zilnic apare doar în mesajul de 429. Ca să-l putem arăta în timp real, îl
+     * ținem noi: câți tokeni am consumat, cu marca de timp.
+     */
+    async recordLlmUsage(tokens, { provider, model, route, heading } = {}) {
+      if (!tokens || tokens <= 0) return;
+      await db.collection(LLM_USAGE).insertOne({
+        tokens, provider: provider || null, model: model || null,
+        route: route || null, heading: heading || null, at: new Date(),
+      });
+    },
+
+    /**
+     * Bugetul zilnic de LIMBAJ, pe fereastră RULANTĂ de 24 de ore.
+     *
+     * Limita Groq pe zi (ex. 200.000 de tokeni pe gpt-oss-120b) nu se resetează
+     * la o oră fixă, ci glisant: fiecare apel iese din fereastră la 24h după ce a
+     * fost făcut, eliberând atâția tokeni. De aceea „reset"-ul e momentul în care
+     * cel mai vechi apel din fereastră împlinește 24h — atunci se eliberează
+     * prima tranșă. Îl dăm ca dată și oră exactă.
+     */
+    async llmUsage(limit = null) {
+      const DOUAZECISIPATRU = 24 * 60 * 60 * 1000;
+      const acum = Date.now();
+      const col = db.collection(LLM_USAGE);
+      const inFereastra = await col
+        .find({ at: { $gte: new Date(acum - DOUAZECISIPATRU) } })
+        .sort({ at: 1 })
+        .toArray();
+      const folosit = inFereastra.reduce((s, d) => s + (d.tokens || 0), 0);
+      const celMaiVechi = inFereastra[0];
+      const seEliberezaLa = celMaiVechi
+        ? new Date(new Date(celMaiVechi.at).getTime() + DOUAZECISIPATRU)
+        : null;
+      return {
+        folosit,
+        limita: limit,
+        ramas: limit != null ? Math.max(0, limit - folosit) : null,
+        procent: limit ? Math.round((folosit / limit) * 1000) / 10 : null,
+        apeluri: inFereastra.length,
+        // Câți tokeni și când se eliberează prima tranșă (cel mai vechi + 24h).
+        seEliberezaLa: seEliberezaLa ? seEliberezaLa.toISOString() : null,
+        elibereaza: celMaiVechi ? (celMaiVechi.tokens || 0) : 0,
+      };
     },
 
     /**

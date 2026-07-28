@@ -221,3 +221,7 @@
   /* Lista ocupă tot ecranul când alegi, nu doar 60vh. */
   .list { max-height: none; }
 }
+
+/* Cele două bugete (Azure + Groq): stivuite pe mobil, alături pe lat. */
+.usageGrid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+@media (min-width: 720px) { .usageGrid { grid-template-columns: 1fr 1fr; } }

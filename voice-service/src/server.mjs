@@ -170,6 +170,20 @@ export async function createServer(env = process.env) {
     }
   });
 
+  /**
+   * Bugetul zilnic de LIMBAJ (Groq): consumat în timp real, limita, când se
+   * eliberează prima tranșă. Fereastră rulantă de 24h, urmărită local.
+   */
+  app.get('/admin/voice/llm-usage', cereAdmin, async (_req, res) => {
+    try {
+      // Limita zilnică a modelului principal. gpt-oss-120b = 200.000 tokeni/zi.
+      const limita = env.VOICE_LLM_DAILY_LIMIT ? Number(env.VOICE_LLM_DAILY_LIMIT) : 200000;
+      res.json({ provider: llm.name, model: llm.model, ...(await store.llmUsage(limita)) });
+    } catch (err) {
+      return res.status(500).json({ error: String(err.message) });
+    }
+  });
+
   /** Starea vocii pentru toate lecțiile, indexată pe rută (lista din admin). */
   app.get('/admin/voice/lessons', cereAdmin, async (_req, res) => {
     try {
@@ -214,6 +228,13 @@ export async function createServer(env = process.env) {
     const work = (async () => {
       try {
         const result = await explainSection(section, llm, {});
+        // Tokenii de limbaj consumați intră în evidența bugetului zilnic.
+        if (result.meta && result.meta.tokeniTotal) {
+          store.recordLlmUsage(result.meta.tokeniTotal, {
+            provider: result.meta.llmProvider, model: result.meta.llmModel,
+            route: req.body.route || null, heading: section.heading,
+          }).catch(() => {});
+        }
         await store.saveDraft(sectionHash, {
           route: req.body.route || null,
           sectionId: req.body.sectionId || null,
