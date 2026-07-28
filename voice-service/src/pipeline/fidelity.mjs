@@ -93,10 +93,22 @@ const FORMULARI_META = [
   tipar(`${M0}(în|din) (material|materialul|lecție|lecția|text|textul|enunț|enunțul)${M1}`, 'se referă la material'),
   tipar(`${M0}după cum (se observă|se vede|vezi|arată)${M1}`, 'formulare de manual'),
   tipar(`${M0}(materialul|enunțul) (nostru|acesta|ăsta)${M1}`, 'vorbește despre material'),
-  // Evaluarea materialului — interzisă indiferent de formulare
-  tipar(`${M0}nu (este|e|sunt) (foarte |prea |chiar )?(bine|bun|bună|clar|clară|complet|completă|explicat|explicată|detaliat|detaliată)${M1}`, 'evaluează materialul'),
+  // Evaluarea materialului — interzisă indiferent de formulare.
+  // Lookbehind-ul scoate adresarea către elev: „dacă nu îți este clar, reia" e
+  // pedagogie, nu verdict despre lecție.
+  tipar(`${M0}(?<!îți |ți-|vi )nu (este|e|sunt) (foarte |prea |chiar )?(bine|bun|bună|clar|clară|complet|completă|explicat|explicată|detaliat|detaliată)${M1}`, 'evaluează materialul'),
   tipar(`${M0}(deși|dar) nu (explică|arată|spune|precizează|detaliază)${M1}`, 'critică materialul'),
-  tipar(`${M0}(lipsește|lipsesc|ar fi trebuit|ar trebui să conțină|nu se precizează|nu se explică)${M1}`, 'reclamă ce lipsește'),
+  /**
+   * „Lipsește" se raportează DOAR când lipsește ceva din lecție.
+   *
+   * Prima formă a tiparului prindea cuvântul singur și a oprit o explicație
+   * corectă: „dacă la sfârșitul părții zecimale lipsesc cifre, adăugăm zerouri"
+   * — matematică curată. A costat două rescrieri degeaba, iar textul final tot
+   * era marcat. Ce lipsește dintr-un număr e conținut; ce lipsește din material
+   * e o reclamație.
+   */
+  tipar(`${M0}(lipsește|lipsesc)[^.!?]{0,40}(din (material|lecție|text|enunț)|explicaț|informaț|precizare|detali)`, 'reclamă ce lipsește din lecție'),
+  tipar(`${M0}(ar fi trebuit să|ar trebui să conțină|nu se precizează|nu se explică|nu ni se spune)${M1}`, 'reclamă ce lipsește din lecție'),
   // Modelul se povestește pe sine
   tipar(`${M0}(am parcurs|am explicat|am arătat|am acoperit|am prezentat)${M1}`, 'își narează propria explicație'),
   tipar(`${M0}(închei|sper că|sperăm că|în cele ce urmează|în concluzie, am)${M1}`, 'încheiere despre sine'),

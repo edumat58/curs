@@ -37,6 +37,19 @@ test('prinde modelul care se povestește pe sine', () => {
   assert.ok(detectMetaPhrases('Închei cu speranța că totul este clar.').length);
 });
 
+test('ce lipsește dintr-un număr e conținut, nu o reclamație', () => {
+  // ✗ Fals pozitiv prins în producție: garda a cerut două rescrieri pentru
+  // fraza asta, care e matematică curată.
+  assert.deepEqual(
+    detectMetaPhrases('Dacă la sfârșitul părții zecimale lipsesc cifre, adăugăm zerouri.'),
+    []
+  );
+  assert.deepEqual(detectMetaPhrases('Dacă nu îți este clar, reia pasul anterior.'), []);
+  // Reclamația propriu-zisă rămâne prinsă.
+  assert.ok(detectMetaPhrases('Lipsește explicația pentru al doilea caz.').length);
+  assert.ok(detectMetaPhrases('Din material lipsesc detaliile despre împrumut.').length);
+});
+
 test('nu confundă vocabularul de manual cu vorbitul despre lecție', () => {
   // „figură" și „imagine" sunt termeni de matematică; a le interzice ca simple
   // cuvinte ar tăia exact conținutul corect.
