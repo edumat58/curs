@@ -631,3 +631,20 @@
   .spinnerLight { animation-duration: 2s; }
   .lessonBtn, .lessonBtnOn { transition: none; }
 }
+
+/* Codul canonic al lecției — etichetă discretă deasupra titlului, sus-stânga. */
+.codLectie {
+  font-family: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--km-ink3, #8b857a);
+  margin: 0 0 0.35rem;
+  padding: 2px 8px;
+  display: inline-block;
+  border: 1px solid var(--km-line, rgba(28, 26, 22, 0.14));
+  border-radius: 6px;
+  background: var(--km-cream-2, #fffcf5);
+  user-select: all;
+  line-height: 1.4;
+}

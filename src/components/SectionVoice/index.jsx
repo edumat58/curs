@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { collectLessonSections } from '@site/src/components/EduPasiAccessibility/lessonSections.mjs';
 import { canonicalSection, sectionHash } from '@site/src/lib/voice/canonical.mjs';
+import { codLectie } from '@site/src/lib/voice/cod.mjs';
 import {
   asculta as ascultaDisponibilitate,
   pornesteSupravegherea,
@@ -40,6 +41,26 @@ const TITLU_DE_LECTIE = /^\s*[CG]\s*\d/;
 function esteLectie(root) {
   const h1 = root && root.querySelector('h1');
   return Boolean(h1 && TITLU_DE_LECTIE.test(h1.textContent || ''));
+}
+
+/** Clasa și dacă e lecție adaptată, din adresa paginii. */
+function contextLectie(route) {
+  const m = /\/docs\/(edupasi\/)?(c[5-8])\b/.exec(String(route || ''));
+  if (!m) return null;
+  return { course: m[2], edupasi: Boolean(m[1]) };
+}
+
+/**
+ * Codul canonic al lecției curente, calculat din adresă + titlu.
+ *
+ * Flagul „finală" (V) nu se știe în pagină — se marchează din admin și stă în
+ * baza de voce; aici e 0 până la o eventuală citire. Restul flagurilor se
+ * cunosc: adaptată din cale, vizibil implicit 0 (lecțiile pot fi ascunse).
+ */
+function codPagina(route, h1) {
+  const ctx = contextLectie(route);
+  if (!ctx || !h1) return null;
+  return codLectie({ course: ctx.course, title: h1.textContent || '', edupasi: ctx.edupasi });
 }
 
 /**
@@ -668,6 +689,24 @@ export default function SectionVoice() {
       }
     }
 
+    /**
+     * Codul canonic al lecției, sus deasupra titlului.
+     *
+     * E o etichetă discretă — evidența care leagă lecția de fișierul ei audio.
+     * Se pune o singură dată, înaintea oricărui buton de voce, ca să fie primul
+     * lucru din colțul din stânga sus.
+     */
+    const cod = codPagina(route, h1);
+    let etichetaCod = null;
+    if (cod && h1 && !h1.previousElementSibling?.hasAttribute?.('data-edupasi-cod')) {
+      etichetaCod = document.createElement('div');
+      etichetaCod.setAttribute('data-edupasi-cod', '');
+      etichetaCod.className = styles.codLectie;
+      etichetaCod.textContent = cod;
+      etichetaCod.title = 'Cod canonic al lecției (identitate + flaguri)';
+      h1.insertAdjacentElement('beforebegin', etichetaCod);
+    }
+
     // Gazda de deasupra titlului există și când serviciul e căzut: acolo apare
     // mesajul, o singură dată pe pagină, nu la fiecare titlu.
     let banner = null;
@@ -684,6 +723,7 @@ export default function SectionVoice() {
     return () => {
       created.forEach(({ slot }) => slot.remove());
       if (banner) banner.remove();
+      if (etichetaCod) etichetaCod.remove();
       setMounts([]);
       setLesson(null);
     };
