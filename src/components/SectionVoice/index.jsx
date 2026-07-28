@@ -406,34 +406,30 @@ function LessonButton({ section, route, host }) {
 
   return (
     <>
-      <button
-        type="button"
-        className={deschis ? styles.lessonBtnOn : styles.lessonBtn}
-        onClick={() => setDeschis((d) => !d)}
-        aria-expanded={deschis}
-        data-edupasi-speak-button=""
-      >
-        <span className={styles.lessonIcon} aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="20" height="20">
-            {deschis ? (
-              <>
-                <rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor" />
-                <rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor" />
-              </>
-            ) : (
+      {/* Butonul-invitație apare DOAR când playerul e închis. Deschis, playerul
+          are propriile controale (play/pauză) + ✕ de închidere — două butoane de
+          redare, unul peste altul, erau redundante. */}
+      {!deschis && (
+        <button
+          type="button"
+          className={styles.lessonBtn}
+          onClick={() => setDeschis(true)}
+          aria-expanded={deschis}
+          data-edupasi-speak-button=""
+        >
+          <span className={styles.lessonIcon} aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="20" height="20">
               <path d="M7 4.5l13 7.5-13 7.5z" fill="currentColor" />
-            )}
-          </svg>
-        </span>
-        <span className={styles.lessonText}>
-          <span className={styles.lessonTitle}>
-            {deschis ? 'Ascunde lecția explicată' : 'Ascultă lecția explicată'}
+            </svg>
           </span>
-          <span className={styles.lessonHint}>
-            Un profesor îți parcurge toată lecția, pas cu pas.
+          <span className={styles.lessonText}>
+            <span className={styles.lessonTitle}>Ascultă lecția explicată</span>
+            <span className={styles.lessonHint}>
+              Un profesor îți parcurge toată lecția, pas cu pas.
+            </span>
           </span>
-        </span>
-      </button>
+        </button>
+      )}
 
       {panel
         && deschis

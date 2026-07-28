@@ -31,8 +31,14 @@
 .lessonSlot,
 .panel {
   --voice-accent-soft: var(--edupasi-accent-soft, #d9eef7);
-  --voice-on-accent: var(--edupasi-on-accent, #ffffff);
+  /* Minimalist, cerut: butoanele + playerul pe CREM cu conținut NEGRU, nu pe
+     portocaliu. „plin" devine o suprafață crem plată; „on-accent" devine cerneala
+     neagră. Acolo unde crem-pe-crem ar dispărea (bara de progres, viteza activă)
+     folosim negru mai jos, ca să rămână citibile. */
+  --voice-on-accent: var(--km-ink, #1c1a16);
   --voice-surface: var(--edupasi-surface, #ffffff);
+  --voice-crem: var(--km-cream-2, #fffcf5);
+  --voice-crem-linie: var(--km-line, #d9d2c2);
   --voice-text: var(--edupasi-text, #161616);
   --voice-text-muted: var(--edupasi-text-muted, #5b5b5b);
   --voice-border: var(--edupasi-border-subtle, #d7e5e0);
@@ -56,12 +62,8 @@
   --voice-hairline: color-mix(in srgb, var(--voice-accent) 22%, transparent);
   --voice-camp: color-mix(in srgb, var(--voice-accent) 6%, transparent);
   --voice-umbra: 0 2px 8px color-mix(in srgb, var(--voice-accent) 10%, transparent);
-  --voice-plin: linear-gradient(
-    135deg,
-    color-mix(in srgb, var(--voice-accent) 82%, white) 0%,
-    var(--voice-accent) 55%,
-    var(--voice-accent-strong) 100%
-  );
+  /* „plin" nu mai e gradientul portocaliu, ci suprafața crem plată. */
+  --voice-plin: var(--voice-crem);
   --voice-ritm: 0.65rem;
 }
 
@@ -149,21 +151,21 @@
   width: 100%;
   padding: 0;
   overflow: hidden;
-  color: var(--voice-accent);
-  background: var(--voice-camp);
-  border: 1px solid var(--voice-hairline);
+  /* Minimalist: crem cu text negru, nu portocaliu. */
+  color: var(--km-ink, #1c1a16);
+  background: var(--voice-crem);
+  border: 1px solid var(--voice-crem-linie);
   border-radius: var(--voice-raza);
   cursor: pointer;
   text-align: left;
-  box-shadow: var(--voice-umbra);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
   transition: background 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
 }
 
 .lessonBtn:hover,
 .lessonBtnOn:hover {
-  background: color-mix(in srgb, var(--voice-accent) 11%, transparent);
-  border-color: color-mix(in srgb, var(--voice-accent) 34%, transparent);
-  box-shadow: 0 4px 14px color-mix(in srgb, var(--voice-accent) 16%, transparent);
+  background: var(--km-cream-3, #f1ecdf);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 }
 
 .lessonBtnOn {
@@ -186,7 +188,8 @@
   margin: 0.45rem 0 0.45rem 0.5rem;
   color: var(--voice-on-accent);
   background: var(--voice-plin);
-  border: 0;
+  /* Contur fin: crem pe crem/alb are nevoie de o muchie ca să se citească. */
+  border: 1px solid var(--voice-crem-linie);
   border-radius: 50%;
 }
 
@@ -209,7 +212,7 @@
 }
 
 .lessonHint {
-  color: color-mix(in srgb, var(--voice-accent) 62%, transparent);
+  color: var(--km-ink2, #4f4b43);
   font-size: 0.8rem;
   line-height: 1.35;
 }
@@ -305,7 +308,8 @@
   left: 0;
   width: 0;
   overflow: hidden;
-  background: var(--voice-plin);
+  /* Umplerea barei: negru, nu crem — pe pistă deschisă crem-ul ar dispărea. */
+  background: var(--km-ink, #1c1a16);
   border-radius: 999px;
   /* Puțin mai lungă decât intervalul de recalculare (100 ms), ca înaintarea să
      fie continuă, nu în trepte de o zecime de secundă. */
@@ -326,9 +330,8 @@
   right: 0;
   width: 3px;
   border-radius: 999px;
-  /* Vârful trebuie să fie partea CEA MAI colorată, nu cea mai spălăcită. O
-     linie aproape albă la capăt arăta ca și cum bara s-ar termina în gol. */
-  background: var(--voice-accent-strong);
+  /* Vârful, tot negru, ca restul barei — minimalist. */
+  background: var(--km-ink, #1c1a16);
 }
 
 .failure {
@@ -377,14 +380,14 @@
   margin-right: 0.15rem;
   color: var(--voice-on-accent);
   background: var(--voice-plin);
-  border: 0;
+  border: 1px solid var(--voice-crem-linie);
   border-radius: 50%;
   cursor: pointer;
-  box-shadow: var(--voice-umbra);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .playBtn:hover {
-  filter: brightness(1.06);
+  background: var(--km-cream-3, #f1ecdf);
 }
 
 .iconBtn {
@@ -434,7 +437,7 @@
   flex: 1;
   height: 22px;
   min-width: 0;
-  accent-color: var(--voice-accent);
+  accent-color: var(--km-ink, #1c1a16);
   cursor: pointer;
 }
 
@@ -475,10 +478,12 @@
   background: transparent;
 }
 
+/* Viteza activă: inversă — negru cu text crem, ca să iasă în evidență pe restul
+   crem. Simbolul „selectat" e contrastul, nu o culoare tare. */
 .speedOn {
-  color: var(--voice-on-accent);
-  background: var(--voice-plin);
-  border-color: transparent;
+  color: var(--km-cream-2, #fffcf5);
+  background: var(--km-ink, #1c1a16);
+  border-color: var(--km-ink, #1c1a16);
 }
 
 .hint {
