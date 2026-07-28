@@ -14,8 +14,20 @@
  */
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import useBaseUrl from '@docusaurus/useBaseUrl';
-import { hashLectie } from '@site/src/lib/voice/canonical.mjs';
+import { sha256Hex } from '@site/src/lib/voice/canonical.mjs';
+import { codLectie, identitateLectie, numeFisierAudio } from '@site/src/lib/voice/cod.mjs';
 import styles from './styles.module.css';
+
+/**
+ * Cheia audio a unei lecții, derivată din IDENTITATEA ei canonică (MAT-GG-XTT-D).
+ *
+ * Nu din rută și nu din flaguri: identitatea e stabilă, deci o marcare „finală"
+ * sau o mutare de fișier nu rupe legătura cu audio-ul deja generat. `pv` intră
+ * în cheie ca la o schimbare de prompt lecțiile să se regenereze controlat.
+ */
+async function cheieLectie(identitate, promptVersion) {
+  return sha256Hex(`lectie|${identitate}|pv${promptVersion}`);
+}
 
 /** Trebuie să coincidă cu PROMPT_VERSION din serviciu — intră în hash. */
 const PROMPT_VERSION = 6;
@@ -113,15 +125,21 @@ export default function VoiceAdmin({ token, apiBase }) {
     const lectie = lessons.find((l) => l.url === url);
     const sursa = sources[url];
     if (!lectie || !sursa) { setMesaj('Lipsește sursa lecției.'); return; }
+    const identitate = identitateLectie({ course: lectie.course, title: lectie.title });
+    if (!identitate) { setMesaj('Titlul lecției nu produce un cod valid.'); return; }
     setBusy(`text:${url}`);
     setMesaj('Generez textul cu modelul local — durează câteva minute. Poți lăsa pagina deschisă.');
     try {
-      const hash = await hashLectie(url, PROMPT_VERSION);
+      const hash = await cheieLectie(identitate, PROMPT_VERSION);
+      const cod = codLectie({ course: lectie.course, title: lectie.title, collection: lectie.collection });
       const r = await authFetch('/admin/voice/text', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           sectionHash: hash, route: url,
+          // Codul și identitatea merg la serviciu: fișierul audio se numește
+          // după cod, iar identitatea rămâne evidența stabilă a lecției.
+          cod, identitate, numeAudio: numeFisierAudio(identitate),
           section: {
             mode: 'lectie', sourceCode: sursa, heading: lectie.title,
             lessonTitle: lectie.title, contentText: textDinSursa(sursa),
@@ -248,7 +266,12 @@ export default function VoiceAdmin({ token, apiBase }) {
                 onClick={() => setSelected(l.url)}
               >
                 <span className={`${styles.dot} ${styles[`dot_${s}`]}`} aria-hidden />
-                <span className={styles.rowTitle}>{l.title}</span>
+                <span className={styles.rowTexts}>
+                  <span className={styles.rowTitle}>{l.title}</span>
+                  <span className={styles.rowCod}>
+                    {codLectie({ course: l.course, title: l.title, collection: l.collection }) || ''}
+                  </span>
+                </span>
                 <span className={styles.rowMeta}>{CLASE[l.course]?.replace('Clasa a ', '')}</span>
               </li>
             );
