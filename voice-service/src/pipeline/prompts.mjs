@@ -30,7 +30,7 @@ import { describeFigure } from './figure.mjs';
  * ceva ce nu schimbă rezultatul: ar arunca un cache bun și ar cere zeci de
  * regenerări pe un buget de tokeni limitat pe zi.
  */
-export const PROMPT_VERSION = 3;
+export const PROMPT_VERSION = 5;
 
 /** Terminologia școlară românească — nu traducem din engleză. */
 const GLOSAR = `
@@ -105,6 +105,27 @@ function spokenHint(text) {
 
 /** Materialul sursă, identic pentru ambele treceri — singura realitate permisă. */
 export function renderSource(section) {
+  /**
+   * Dacă avem sursa brută, ea ESTE materialul.
+   *
+   * Reconstrucția de mai jos — text din DOM, formule reconvertite, figuri
+   * descrise de noi — pierdea notația exactă și ordinea lecției. Un model care
+   * primește `0,1` deja interpretat își permite să dea altă interpretare;
+   * primind `0{,}1` din fișier, nu are ce reinterpreta. Iar structura lecției e
+   * explicită în cod, nu trebuie dedusă.
+   */
+  if (section.sourceCode && String(section.sourceCode).trim().length > 40) {
+    return [
+      'Acesta este codul sursă EXACT al lecției, așa cum e scris de profesor.',
+      'Notația din el se păstrează întocmai: dacă scrie 0{,}1, spui „zero virgulă unu",',
+      'nu o rescrii ca „zece la puterea minus unu". Ordinea titlurilor este ordinea lecției.',
+      '',
+      '```mdx',
+      String(section.sourceCode).slice(0, 12000),
+      '```',
+    ].join('\n');
+  }
+
   const lines = [];
   lines.push(`title: ${section.heading}`);
   if (section.context) {

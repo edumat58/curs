@@ -10,11 +10,12 @@ import {
   stareCurenta,
 } from '@site/src/lib/voice/availability.mjs';
 import { latexToRomanian } from '@site/src/components/EduPasiAccessibility/speech.mjs';
+import { sursaPentru } from '@site/src/lib/voice/sursa.mjs';
 import AudioPlayer from './AudioPlayer';
 import styles from './styles.module.css';
 
 /** Trebuie să coincidă cu PROMPT_VERSION din serviciu: intră în hash-ul secțiunii. */
-const PROMPT_VERSION = 3;
+const PROMPT_VERSION = 5;
 
 /**
  * Ce e o lecție și ce nu.
@@ -225,8 +226,20 @@ function useExplanation(section, route, mode) {
         })(),
       }));
 
+      /**
+       * Sursa brută a lecției — cea mai bună formă în care modelul poate primi
+       * materialul. Vezi `sursa.mjs`: reconstrucția pierdea notația exactă și
+       * ordinea, iar modelul umplea golurile cu interpretări proprii.
+       */
+      const sourceCode = await sursaPentru(
+        typeof window !== 'undefined' ? window.location.origin + '/curs/' : '/curs/',
+        route,
+        { heading: section.heading, level: section.level, intreaga: mode === 'lectie' }
+      );
+
       const payload = {
         mode,
+        sourceCode,
         heading: section.heading,
         level: section.level,
         contentText: section.contentText,

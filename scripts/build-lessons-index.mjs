@@ -51,6 +51,7 @@ function extractText(raw) {
 }
 
 const lessons = [];
+const surse = {};
 
 function walk(dir) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true }).sort((a, b) => a.name.localeCompare(b.name, 'ro'))) {
@@ -84,6 +85,18 @@ function walk(dir) {
       : fm.slug || '/' + id;
     const title = resolveLessonTitle(raw, fm, segments[segments.length - 1]);
 
+    /**
+     * Sursa BRUTĂ a lecției, păstrată separat.
+     *
+     * Modelul care explică lecția primea până acum o reconstrucție: text extras
+     * din DOM-ul randat, formule reconvertite, figuri traduse în propoziții.
+     * Fiecare pas pierdea ceva — și de acolo veneau greșelile: primind `0,1`
+     * deja interpretat, modelul se simțea liber să dea altă interpretare
+     * („10 la puterea minus 1"), iar ordinea lecției trebuia ghicită, deși în
+     * cod e explicită. Sursa e neambiguă și structurată; nu are ce reinterpreta.
+     */
+    surse[BASE + slug] = raw;
+
     lessons.push({
       title,
       url: BASE + slug, // ex. /curs/docs/c5/modul-1/01
@@ -105,4 +118,11 @@ lessons.sort((a, b) => a.url.localeCompare(b.url, 'ro'));
 
 fs.mkdirSync(path.dirname(OUT), { recursive: true });
 fs.writeFileSync(OUT, JSON.stringify({ schemaVersion: 1, lessons }, null, 1), 'utf8');
+// Sursele brute, într-un fișier separat: sunt mari și nu au ce căuta în indexul
+// de căutare, dar clientul le are nevoie ca să le trimită la generarea vocii.
+fs.writeFileSync(
+  OUT.replace('lessons-index.json', 'lesson-sources.json'),
+  JSON.stringify(surse),
+  'utf8'
+);
 console.log(`lessons-index: ${lessons.length} lecții → ${path.relative(ROOT, OUT)}`);
