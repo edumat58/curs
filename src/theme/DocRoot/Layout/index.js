@@ -784,10 +784,22 @@ export default function DocRootLayout({ children }) {
     const navbar = document.querySelector('.navbar');
     if (!navbar) return undefined;
     const masoara = () => {
-      document.documentElement.style.setProperty(
-        '--edupasi-navbar-real',
-        `${Math.round(navbar.getBoundingClientRect().height)}px`
-      );
+      /**
+       * Se măsoară MARGINEA DE JOS, nu înălțimea.
+       *
+       * Sunt lucruri diferite de îndată ce bara are un decalaj propriu, o
+       * margine sau o linie de separare: înălțimea spune cât de groasă e bara,
+       * dar nu unde se termină ea pe ecran. Prima variantă folosea înălțimea,
+       * iar bara de context ajungea să plutească sub navbar exact cu diferența
+       * dintre cele două.
+       *
+       * Pagina nu e derulată în momentul măsurării (bara e fixă, deci `bottom`
+       * e stabil), iar valoarea se recalculează la orice redimensionare.
+       */
+      const jos = Math.round(navbar.getBoundingClientRect().bottom);
+      if (jos > 0) {
+        document.documentElement.style.setProperty('--edupasi-navbar-real', `${jos}px`);
+      }
     };
     masoara();
     const observer = new ResizeObserver(masoara);
