@@ -697,29 +697,30 @@ details[open] .transcriptToggle::before { content: '▾ '; }
 .subtitrare {
   position: relative; /* ca offsetTop al cuvintelor să fie față de cutie */
   margin-top: 12px;
-  padding: 14px 16px;
-  max-height: 30vh;
+  padding: 14px 18px;
+  max-height: 32vh;
   overflow-y: auto;
-  font-size: 1.15rem;
-  line-height: 1.9;
-  text-align: center;
+  font-size: 1.08rem;
+  line-height: 2.05;
+  text-align: left; /* aliniat la stânga, cerut */
   border-radius: 10px;
-  background: color-mix(in srgb, var(--voice-accent) 5%, transparent);
+  background: color-mix(in srgb, var(--voice-accent) 4%, transparent);
   border: 1px solid var(--voice-hairline);
   scroll-behavior: smooth;
-  -webkit-mask-image: linear-gradient(transparent, #000 18%, #000 82%, transparent);
-  mask-image: linear-gradient(transparent, #000 18%, #000 82%, transparent);
+  -webkit-mask-image: linear-gradient(transparent, #000 14%, #000 86%, transparent);
+  mask-image: linear-gradient(transparent, #000 14%, #000 86%, transparent);
 }
 
-/* Cuvintele încă necitite: șterse, discrete. */
+/* Cuvintele încă necitite: șterse, discrete (efect de teleprompter). */
 .cuvant {
-  color: var(--voice-text-muted, #8b857a);
-  transition: color 120ms ease;
+  color: color-mix(in srgb, var(--voice-text, #1c1a16) 38%, transparent);
+  transition: color 140ms ease;
 }
 
 /* Cuvintele deja rostite: text normal, ca la o subtitrare care rămâne. */
 .cuvantCitit {
   color: var(--voice-text, #1c1a16);
+  transition: color 140ms ease;
 }
 
 /* Matematica reasamblată, randată KaTeX în subtitrare. Moștenește culoarea
@@ -735,14 +736,17 @@ details[open] .transcriptToggle::before { content: '▾ '; }
   color: inherit;
 }
 
-/* Cuvântul rostit ACUM: evidențiat pe accentul lecției (portocaliu/bleumarin). */
+/* Cuvântul rostit ACUM: NU o cutie plină țipătoare, ci un tuș fin — text în
+   culoarea accentului, ușor îngroșat, pe un fundal foarte estompat. Vizibil,
+   dar liniștit, profesional; nu obosește ochiul la citit pe tot parcursul. */
 .cuvantActiv {
-  color: var(--voice-on-accent, #fff);
-  background: var(--voice-accent);
-  border-radius: 5px;
-  padding: 1px 4px;
+  color: var(--voice-accent-strong, var(--voice-accent));
+  background: color-mix(in srgb, var(--voice-accent) 12%, transparent);
+  border-radius: 4px;
+  padding: 0 3px;
   margin: 0 -1px;
   font-weight: 600;
+  transition: color 140ms ease, background 140ms ease;
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
 }

@@ -19,7 +19,7 @@ function fmt(seconds) {
   return `${m}:${String(s).padStart(2, '0')}`;
 }
 
-const SPEEDS = [0.75, 1, 1.25, 1.5, 2];
+const SPEEDS = [0.75, 0.9, 1, 1.25, 1.5, 2];
 
 /**
  * Săritura de zece secunde, ca o singură icoană.
@@ -226,7 +226,7 @@ export default function AudioPlayer({
   // citească metadatele fișierului: pe conexiuni lente asta durează, iar până
   // atunci bara de derulare are lungime zero și elevul nu poate sări nicăieri.
   const [duration, setDuration] = useState(knownDuration || 0);
-  const [speed, setSpeed] = useState(1);
+  const [speed, setSpeed] = useState(0.9);
   const [buffering, setBuffering] = useState(true);
   const [sincron, setSincron] = useState(false);
   /**

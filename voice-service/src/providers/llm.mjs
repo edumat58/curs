@@ -52,6 +52,17 @@ const DEFAULTS = {
   // expune același dialect OpenAI la /v1. Portul și modelul se dau din mediu.
   local: { baseUrl: 'http://127.0.0.1:8090/v1', model: 'local' },
   ollama: { baseUrl: 'http://127.0.0.1:11434/v1', model: 'qwen2.5:7b' },
+  // Google Gemini prin endpointul lui OpENAI-compatibil. Nivelul gratuit are o
+  // limită ZILNICĂ mult peste Groq (mii de cereri/zi), deci nu mai blochează
+  // regenerarea lecțiilor. `gemini-2.5-flash`: rapid, bun la proză românească.
+  // Cheia (gratuită) vine de la ai.google.dev, în GEMINI_API_KEY.
+  gemini: {
+    baseUrl: 'https://generativelanguage.googleapis.com/v1beta/openai',
+    // `flash-lite-latest`: alias stabil la cel mai recent Flash-Lite. Modelele
+    // Flash „mari" (2.5/3.x) gândesc intern și mănâncă tot bugetul de tokeni,
+    // tăind textul; varianta lite răspunde direct, complet, cu proză bună.
+    model: 'gemini-flash-lite-latest',
+  },
 };
 
 class LlmError extends Error {
@@ -225,9 +236,12 @@ export function createLlm(env = process.env) {
   const preset = DEFAULTS[provider];
   if (!preset) throw new Error(`Furnizor LLM necunoscut: ${provider}`);
 
-  const apiKey = provider === 'groq' ? env.GROQ_API_KEY : env.VOICE_LLM_API_KEY;
-  if (provider === 'groq' && !apiKey) {
-    throw new Error('Lipsește GROQ_API_KEY. Pune-l în voice-service/.env');
+  // Fiecare furnizor din cloud își are cheia lui; cea genrică (VOICE_LLM_API_KEY)
+  // e rezerva pentru orice alt endpoint OpenAI-compatibil.
+  const CHEI = { groq: 'GROQ_API_KEY', gemini: 'GEMINI_API_KEY' };
+  const apiKey = CHEI[provider] ? (env[CHEI[provider]] || env.VOICE_LLM_API_KEY) : env.VOICE_LLM_API_KEY;
+  if (CHEI[provider] && !apiKey) {
+    throw new Error(`Lipsește ${CHEI[provider]}. Pune-l în voice-service/.env`);
   }
 
   return createOpenAiCompatible({
