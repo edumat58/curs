@@ -239,7 +239,7 @@
 
 .panel {
   position: fixed !important;
-  top: calc(var(--ifm-navbar-height, 4.25rem) + 64px) !important;
+  top: calc(var(--edupasi-navbar-real, var(--ifm-navbar-height, 4.25rem)) + 64px) !important;
   right: 1.25rem !important;
   left: auto !important;
   bottom: auto !important;
@@ -249,7 +249,7 @@
      avea mai multă nevoie de el. */
   z-index: 1200;
   width: min(430px, calc(100vw - 2rem));
-  max-height: calc(100dvh - var(--ifm-navbar-height, 4.25rem) - 80px);
+  max-height: calc(100dvh - var(--edupasi-navbar-real, var(--ifm-navbar-height, 4.25rem)) - 80px);
   overflow: hidden;
   color: var(--ep-text);
   background: var(--ep-surface);

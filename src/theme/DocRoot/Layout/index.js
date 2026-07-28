@@ -770,6 +770,35 @@ export default function DocRootLayout({ children }) {
     || cleanPath(pathname) === '/edupasi'
     || cleanPath(pathname).startsWith('/edupasi/');
 
+  /**
+   * Înălțimea REALĂ a barei de navigație, măsurată, nu presupusă.
+   *
+   * Bara de context EduPAȘI e `position: fixed` și se așeza sub `--ifm-navbar-height`.
+   * Pe mobil navbarul e mai scund decât variabila, deci rămânea o dungă albă
+   * între ele. Un număr fix ar fi rezolvat exact captura de ecran de azi și s-ar
+   * fi stricat la prima schimbare: navbarul își schimbă înălțimea și când elevul
+   * mărește textul din panoul de accesibilitate — adică fix la setarea care
+   * trebuie să funcționeze impecabil.
+   */
+  useEffect(() => {
+    const navbar = document.querySelector('.navbar');
+    if (!navbar) return undefined;
+    const masoara = () => {
+      document.documentElement.style.setProperty(
+        '--edupasi-navbar-real',
+        `${Math.round(navbar.getBoundingClientRect().height)}px`
+      );
+    };
+    masoara();
+    const observer = new ResizeObserver(masoara);
+    observer.observe(navbar);
+    window.addEventListener('resize', masoara);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('resize', masoara);
+    };
+  }, []);
+
   useEffect(() => {
     if (isEduPasi) {
       document.documentElement.setAttribute('data-edupasi-page', 'true');

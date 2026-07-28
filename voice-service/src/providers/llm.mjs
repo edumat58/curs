@@ -110,6 +110,17 @@ function createOpenAiCompatible({ name, baseUrl, apiKey, models, timeoutMs, maxR
               : bodyWait ? Math.ceil(parseFloat(bodyWait[1]) * 1000) + 1500 : 0;
             err.epuizatPeZi = res.status === 429
               && (LIMITA_PE_ZI.test(text) || err.retryAfterMs > ASTEPTARE_MAXIMA_MS);
+            /**
+             * 413 nu e o limită de ritm, e o limită de MĂRIME.
+             *
+             * „Request too large … tokens per minute: Limit 8000" înseamnă că
+             * promptul plus `max_tokens` rezervat depășesc fereastra — și vor
+             * depăși-o la fel și peste un minut. A aștepta e inutil: singurele
+             * ieșiri sunt să cerem mai puțin sau să întrebăm alt model. O
+             * lecție întreagă lovea exact aici, iar elevul rămânea cu bara
+             * oprită la prima etapă.
+             */
+            err.preaMare = res.status === 413 || /request too large/i.test(text);
             throw err;
           }
 
@@ -141,7 +152,17 @@ function createOpenAiCompatible({ name, baseUrl, apiKey, models, timeoutMs, maxR
            * oferi. Explicația iese ceva mai simplă decât cu modelul principal,
            * dar o explicație bună azi bate una perfectă mâine.
            */
-          if (err.epuizatPeZi && index < lista.length - 1) {
+          /**
+           * Cererea nu încape: o înjumătățim o dată, apoi trecem la alt model.
+           * Jumătate din buget e tot o explicație bună; niciuna nu e nimic.
+           */
+          if (err.preaMare && body.max_tokens && body.max_tokens > 900) {
+            body.max_tokens = Math.floor(body.max_tokens / 2);
+            console.warn(`[voice] cerere prea mare, reduc la ${body.max_tokens} tokeni`);
+            attempt -= 1;
+            continue;
+          }
+          if ((err.epuizatPeZi || err.preaMare) && index < lista.length - 1) {
             index += 1;
             body.model = lista[index];
             console.warn(`[voice] buget zilnic epuizat, trec pe ${lista[index]}`);

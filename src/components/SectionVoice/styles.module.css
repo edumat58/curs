@@ -43,8 +43,8 @@
   --voice-umbra: 0 2px 8px color-mix(in srgb, var(--voice-accent) 10%, transparent);
   --voice-plin: linear-gradient(
     135deg,
-    color-mix(in srgb, var(--voice-accent) 88%, white) 0%,
-    var(--voice-accent) 62%,
+    color-mix(in srgb, var(--voice-accent) 82%, white) 0%,
+    var(--voice-accent) 55%,
     var(--voice-accent-strong) 100%
   );
   --voice-ritm: 0.65rem;
@@ -309,8 +309,11 @@
   top: 0;
   bottom: 0;
   right: 0;
-  width: 2px;
-  background: color-mix(in srgb, white 70%, var(--voice-accent));
+  width: 3px;
+  border-radius: 999px;
+  /* Vârful trebuie să fie partea CEA MAI colorată, nu cea mai spălăcită. O
+     linie aproape albă la capăt arăta ca și cum bara s-ar termina în gol. */
+  background: var(--voice-accent-strong);
 }
 
 .failure {

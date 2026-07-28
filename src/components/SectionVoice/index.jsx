@@ -116,7 +116,11 @@ async function waitForReady(hash, signal, onStatus) {
 
     // 404 înseamnă că rezervarea a dispărut (repornire de serviciu); orice
     // altceva e o eroare reală de generare. În ambele cazuri, oprire.
-    throw new Error(res.status === 404 ? 'reluare' : `Serviciul a răspuns ${res.status}`);
+    const detaliu = await res.json().catch(() => null);
+    const err = new Error(res.status === 404 ? 'reluare' : `Serviciul a răspuns ${res.status}`);
+    // Serverul spune explicit dacă a picat GENERAREA, nu serviciul.
+    if (detaliu && detaliu.code === 'generation_failed') err.generare = true;
+    throw err;
   }
   throw new Error('Generarea durează neobișnuit de mult.');
 }
@@ -176,6 +180,10 @@ function useProgress(active, status) {
 function pareCadereDeServiciu(err) {
   if (!err) return false;
   if (err.message === 'rate') return false;
+  // O generare eșuată NU e o cădere de serviciu. Serverul răspunde tot 502 când
+  // modelul refuză cererea, iar confundându-le, clientul nici nu arăta eroarea,
+  // nici nu oprea bara: rămânea înghețată la prima etapă, fără nicio explicație.
+  if (err.generare) return false;
   if (err.name === 'TypeError') return true; // fetch a eșuat: rețea sau serviciu mort
   return /Serviciul a răspuns 5\d\d/.test(String(err.message));
 }

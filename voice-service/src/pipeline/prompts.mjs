@@ -391,11 +391,30 @@ ${
         .join('\n')}\n`
     : ''
 }
-Iată din nou materialul, ca să rămâi fidel:
+${
+  /**
+   * La lecția întreagă, materialul NU se mai repetă.
+   *
+   * Îl trimiteam de două ori — o dată la analiză, o dată aici — ca narațiunea
+   * să poată verifica valorile. Pentru o secțiune e ieftin și util. Pentru o
+   * lecție completă, a doua copie e exact ce face cererea să depășească
+   * fereastra de 8000 de tokeni pe minut a tierului gratuit: furnizorul
+   * răspunde „request too large", iar asta nu se rezolvă așteptând — cererea ar
+   * fi prea mare și peste un minut, și peste o oră.
+   *
+   * Fidelitatea nu are de suferit: analiza a extras deja definițiile, formulele
+   * și exemplele CU VALORILE LOR, iar lista de acoperire le poartă mai departe.
+   * Verificarea de după generare se face oricum pe materialul complet, pe
+   * server, unde nu costă niciun token.
+   */
+  lectie
+    ? 'Ai deja mai sus tot ce ai extras din material. Folosește EXCLUSIV acele valori — nu adăuga altele.'
+    : `Iată din nou materialul, ca să rămâi fidel:
 
 --- MATERIAL SURSĂ ---
 ${renderSource(section)}
---- SFÂRȘIT MATERIAL ---
+--- SFÂRȘIT MATERIAL ---`
+}
 
 Explică-i acum elevului această secțiune, cu voce tare, în română. Acoperă toate punctele din listă, în ordine, și încheie cu o frază completă.`,
   };
