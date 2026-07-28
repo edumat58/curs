@@ -1135,3 +1135,12 @@
     forced-color-adjust: auto;
   }
 }
+
+/* Nota de sub titlul unei setări: spune elevului CE face opțiunea și, unde
+   contează, ce să încerce întâi. Fără ea, „Spațiere" e doar un cuvânt. */
+.sectionNote {
+  margin: -0.15rem 0 0.5rem;
+  color: var(--edupasi-text-muted, #5b5b5b);
+  font-size: 0.78rem;
+  line-height: 1.4;
+}

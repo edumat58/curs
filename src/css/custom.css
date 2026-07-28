@@ -1647,3 +1647,83 @@ svg[class*='breadcrumbHomeIcon'] path {
     display: none !important;
   }
 }
+
+/* ==========================================================================
+   Tipografie adaptivă EduPAȘI
+   ==========================================================================
+
+   Ordinea din panou nu e estetică, e ierarhia dovezilor.
+
+   SPAȚIEREA are cel mai solid sprijin experimental: mărirea distanței dintre
+   litere îmbunătățește imediat viteza și acuratețea citirii la copiii cu
+   dislexie, fără niciun antrenament (Zorzi et al., PNAS 2012). De aceea e
+   prima opțiune și e formulată ca atare pentru elev.
+
+   FONTURILE „pentru dislexie" nu au acest sprijin. Studiile controlate arată că
+   elevii citesc la fel sau puțin mai încet cu OpenDyslexic decât cu Arial. Le
+   oferim pentru că preferința și confortul contează, dar nu le prezentăm drept
+   remediu și nu le punem primele.
+
+   Familiile se cer prin `local()`: nu se descarcă nimic. Dacă fontul e instalat
+   pe dispozitiv, se folosește; dacă nu, se cade pe stiva de sistem. Pagina
+   rămâne la fel de rapidă și offline, iar textul nu dispare niciodată în
+   așteptarea unei descărcări. */
+
+@font-face {
+  font-family: 'EduPasiDislexie';
+  src: local('OpenDyslexic'), local('OpenDyslexic-Regular'), local('Open-Dyslexic'),
+       local('Lexie Readable'), local('Comic Sans MS');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'EduPasiLizibil';
+  src: local('Atkinson Hyperlegible'), local('AtkinsonHyperlegible-Regular'),
+       local('Verdana'), local('Tahoma');
+  font-display: swap;
+}
+
+html[data-edupasi-font='lizibil'] :where(body, .theme-doc-markdown, .menu, .navbar) {
+  font-family: 'EduPasiLizibil', Verdana, Tahoma, system-ui, sans-serif;
+}
+
+html[data-edupasi-font='dislexie'] :where(body, .theme-doc-markdown, .menu, .navbar) {
+  font-family: 'EduPasiDislexie', Verdana, system-ui, sans-serif;
+}
+
+html[data-edupasi-font='serif'] :where(body, .theme-doc-markdown, .menu, .navbar) {
+  font-family: Georgia, 'Iowan Old Style', 'Times New Roman', serif;
+}
+
+/* Mărimea se schimbă din rădăcină, ca tot ce e exprimat în `rem` — spațieri,
+   butoane, panouri — să crească odată cu textul, nu doar literele. */
+html[data-edupasi-text-size='mare'] { font-size: 112.5%; }
+html[data-edupasi-text-size='foarte-mare'] { font-size: 131.25%; }
+
+/* Spațierea se aplică pe conținutul lecției, nu pe interfață: o navigație cu
+   litere depărtate devine greu de scanat, iar butoanele s-ar sparge în două
+   rânduri. Formulele KaTeX sunt excluse — acolo distanțele au înțeles
+   matematic, iar lărgirea lor rupe alinierea fracțiilor și a radicalilor. */
+html[data-edupasi-spacing='aerisit'] .theme-doc-markdown :where(p, li, td, th, blockquote) {
+  letter-spacing: 0.06em;
+  word-spacing: 0.14em;
+  line-height: 1.75;
+}
+
+html[data-edupasi-spacing='foarte-aerisit'] .theme-doc-markdown :where(p, li, td, th, blockquote) {
+  letter-spacing: 0.11em;
+  word-spacing: 0.22em;
+  line-height: 2;
+}
+
+html[data-edupasi-spacing='foarte-aerisit'] .theme-doc-markdown :where(p, li) {
+  /* Rândul lung obosește cu atât mai mult cu cât literele sunt mai depărtate:
+     ochiul pierde capătul rândului la întoarcere. Îl scurtăm odată cu ele. */
+  max-width: 62ch;
+}
+
+html[data-edupasi-spacing]:not([data-edupasi-spacing='normal'])
+  .theme-doc-markdown :where(.katex, .katex-display, code, pre) {
+  letter-spacing: normal;
+  word-spacing: normal;
+}

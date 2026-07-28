@@ -7,7 +7,58 @@ const DEFAULT_PREFERENCES = {
   easyText: false,
   focus: false,
   motion: 'full',
+  font: 'implicit',
+  textSize: 'normal',
+  spacing: 'normal',
 };
+
+/**
+ * Setările de tipografie, în ordinea în care chiar ajută.
+ *
+ * SPAȚIEREA e prima dinadins. Efectul ei asupra citirii la copiii cu dislexie
+ * e demonstrat experimental (Zorzi et al., PNAS 2012): mărirea distanței dintre
+ * litere îmbunătățește viteza și acuratețea imediat, fără antrenament. Fonturile
+ * „pentru dislexie" nu au acest sprijin — studiile controlate arată că elevii
+ * citesc la fel sau chiar puțin mai încet cu OpenDyslexic decât cu Arial. De
+ * aceea fontul e o preferință oferită, nu o promisiune, iar ordinea din panou
+ * spune elevului ce să încerce întâi.
+ *
+ * Familiile se cer prin `local()`: nu descărcăm nimic, deci pagina rămâne la fel
+ * de rapidă și offline. Dacă fontul e instalat pe dispozitiv, se folosește;
+ * dacă nu, se cade elegant pe stiva de sistem, fără text invizibil.
+ */
+const TIPOGRAFIE = [
+  {
+    cheie: 'spacing',
+    titlu: 'Spațierea literelor și a rândurilor',
+    nota: 'Cea mai eficientă setare pentru citit. Începe cu ea.',
+    optiuni: [
+      ['normal', 'Normală'],
+      ['aerisit', 'Aerisită'],
+      ['foarte-aerisit', 'Foarte aerisită'],
+    ],
+  },
+  {
+    cheie: 'textSize',
+    titlu: 'Mărimea textului',
+    optiuni: [
+      ['normal', 'Normal'],
+      ['mare', 'Mare'],
+      ['foarte-mare', 'Foarte mare'],
+    ],
+  },
+  {
+    cheie: 'font',
+    titlu: 'Forma literelor',
+    nota: 'Alege ce ți se pare ție mai comod — nu există un font care ajută pe toată lumea.',
+    optiuni: [
+      ['implicit', 'Implicit'],
+      ['lizibil', 'Litere clare'],
+      ['dislexie', 'Pentru dislexie'],
+      ['serif', 'Cu piciorușe'],
+    ],
+  },
+];
 
 function readPreferences() {
   if (typeof window === 'undefined') return DEFAULT_PREFERENCES;
@@ -34,6 +85,9 @@ function applyPreferencesToDom(prefs) {
   root.setAttribute('data-edupasi-easy-text', String(prefs.easyText));
   root.setAttribute('data-edupasi-focus', String(prefs.focus));
   root.setAttribute('data-edupasi-motion', prefs.motion || 'full');
+  root.setAttribute('data-edupasi-font', prefs.font || 'implicit');
+  root.setAttribute('data-edupasi-text-size', prefs.textSize || 'normal');
+  root.setAttribute('data-edupasi-spacing', prefs.spacing || 'normal');
 
   try {
     localStorage.setItem('edupasi-accessibility-v1', JSON.stringify(prefs));
@@ -101,6 +155,27 @@ function EduPasiVisualAccessibility(props, ref) {
           </div>
 
           <div className={styles.body}>
+            {TIPOGRAFIE.map((grup) => (
+              <div className={styles.section} key={grup.cheie}>
+                <h3>{grup.titlu}</h3>
+                {grup.nota && <p className={styles.sectionNote}>{grup.nota}</p>}
+                <div className={styles.choices}>
+                  {grup.optiuni.map(([valoare, eticheta]) => (
+                    <button
+                      type="button"
+                      key={valoare}
+                      className={
+                        preferences[grup.cheie] === valoare ? styles.choiceActive : styles.choice
+                      }
+                      onClick={() => updatePreference(grup.cheie, valoare)}
+                    >
+                      {eticheta}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            ))}
+
             <div className={styles.section}>
               <h3>Paletă culori & Contrast</h3>
               <div className={styles.choices}>
