@@ -5,19 +5,19 @@
    nedefiniți, de aceea fiecare token are aici o valoare de rezervă.
    ============================================================ */
 .edupasiShell {
-  --edupasi-shell-accent: var(--edupasi-accent, #005340);
-  --edupasi-shell-accent-strong: var(--edupasi-accent-strong, #003f31);
+  --edupasi-shell-accent: var(--edupasi-accent, #003058);
+  --edupasi-shell-accent-strong: var(--edupasi-accent-strong, #003058);
   --edupasi-shell-on-accent: var(--edupasi-on-accent, #ffffff);
-  --edupasi-shell-border: var(--edupasi-border-subtle, #c6dcd4);
+  --edupasi-shell-border: var(--edupasi-border-subtle, #D9EEF7);
   --edupasi-shell-border-strong: var(--edupasi-border, #8dbbb0);
   --edupasi-shell-page: var(--edupasi-page, #ffffff);
   --edupasi-shell-surface: var(--edupasi-surface, #ffffff);
-  --edupasi-shell-surface-alt: var(--edupasi-surface-alt, #eef3f1);
+  --edupasi-shell-surface-alt: var(--edupasi-surface-alt, #D9EEF7);
   --edupasi-shell-warm: var(--edupasi-surface-warm, #fffcf5);
   --edupasi-shell-text: var(--edupasi-text, #161616);
   --edupasi-shell-muted: var(--edupasi-text-secondary, #3a3a3a);
   --edupasi-shell-muted-2: var(--edupasi-text-muted, #5b5b5b);
-  --edupasi-shell-soft: var(--edupasi-accent-soft, #e2eeea);
+  --edupasi-shell-soft: var(--edupasi-accent-soft, #D9EEF7);
   --edupasi-shell-focus: var(--edupasi-focus, #0197b0);
   --edupasi-shell-gold: var(--edupasi-decoration-gold, #9a7415);
 
@@ -64,7 +64,7 @@
   gap: 0.55rem;
   padding: 0.45rem 0.85rem 0.45rem 0.45rem;
   min-height: 40px;
-  background: var(--edupasi-accent, #005340);
+  background: var(--edupasi-accent, #003058);
   border: none;
   border-radius: 999px;
   color: var(--edupasi-on-accent, #ffffff);
@@ -77,7 +77,7 @@
 }
 
 .contextAccessibilityBtn:hover {
-  background: var(--edupasi-accent-strong, #003f31);
+  background: var(--edupasi-accent-strong, #003058);
   transform: translateY(-1px);
 }
 
@@ -274,10 +274,16 @@
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  padding-bottom: 6.5rem;
 }
 
 .navBody[hidden] {
   display: none;
+  padding-bottom: 0;
+}
+
+.navigator:has(.navBody[hidden]) .navHeader {
+  margin-bottom: 0;
 }
 
 /* ---- Cardul „Ești aici” — ancora navigatorului (compact) ---- */
@@ -987,8 +993,8 @@
     width: 100% !important;
     width: 100vw !important;
     max-width: 100vw !important;
-    z-index: 90 !important;
-    max-height: calc(100dvh - var(--ifm-navbar-height, 4.25rem) - 68px) !important;
+    z-index: 1100 !important;
+    max-height: calc(100dvh - var(--ifm-navbar-height, 4.25rem) - 68px - 10rem) !important;
     overflow-y: auto !important;
     overscroll-behavior: contain;
     padding: 0.8rem clamp(0.75rem, 3vw, 1.15rem);
@@ -1007,6 +1013,7 @@
     display: flex;
     flex-direction: column;
     gap: 0.7rem;
+    padding-bottom: 10rem;
   }
 
   .navBody[hidden] {
@@ -1141,7 +1148,7 @@
   display: flex;
   flex-direction: column;
   background: var(--edupasi-surface, #ffffff);
-  border: 2px solid var(--edupasi-accent, #005340);
+  border: 2px solid var(--edupasi-accent, #003058);
   border-radius: 20px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
   overflow: hidden;
@@ -1152,8 +1159,8 @@
   align-items: flex-start;
   justify-content: space-between;
   padding: 1.2rem 1.4rem 1rem;
-  background: var(--edupasi-accent-soft, #e2eeea);
-  border-bottom: 1px solid var(--edupasi-border-subtle, #c6dcd4);
+  background: var(--edupasi-accent-soft, #D9EEF7);
+  border-bottom: 1px solid var(--edupasi-border-subtle, #D9EEF7);
 }
 
 .tocSubtitle {
@@ -1162,7 +1169,7 @@
   font-weight: 850;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--edupasi-accent-strong, #003f31);
+  color: var(--edupasi-accent-strong, #003058);
 }
 
 .tocTitle {
@@ -1179,7 +1186,7 @@
   justify-content: center;
   width: 36px;
   height: 36px;
-  border: 1px solid var(--edupasi-border-subtle, #c6dcd4);
+  border: 1px solid var(--edupasi-border-subtle, #D9EEF7);
   border-radius: 50%;
   background: var(--edupasi-surface, #ffffff);
   color: var(--edupasi-text, #161616);
@@ -1189,7 +1196,7 @@
 }
 
 .tocClose:hover {
-  background: var(--edupasi-accent, #005340);
+  background: var(--edupasi-accent, #003058);
   color: #ffffff;
 }
 
@@ -1234,14 +1241,14 @@
 }
 
 .tocButton:hover {
-  background: var(--edupasi-accent-soft, #e2eeea);
-  border-color: var(--edupasi-accent, #005340);
-  color: var(--edupasi-accent-strong, #003f31);
+  background: var(--edupasi-accent-soft, #D9EEF7);
+  border-color: var(--edupasi-accent, #003058);
+  color: var(--edupasi-accent-strong, #003058);
 }
 
 .tocNumber {
   font-weight: 900;
-  color: var(--edupasi-accent, #005340);
+  color: var(--edupasi-accent, #003058);
   font-size: 0.9rem;
 }
 

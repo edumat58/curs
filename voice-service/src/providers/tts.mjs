@@ -17,6 +17,7 @@ import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
+import { fileURLToPath } from 'node:url';
 
 /** Împarte în propoziții, păstrând semnul de punctuație. */
 export function splitSentences(text) {
@@ -62,14 +63,39 @@ export function createPiperTts(env = process.env) {
   const modelPath = env.PIPER_MODEL || path.join(process.cwd(), '.voice-models/ro_RO-raluca-high.onnx');
   const voiceName = path.basename(String(modelPath)).replace(/\.onnx$/, '');
   const lengthScale = Number(env.PIPER_LENGTH_SCALE || 1.0);
-  const sentenceSilence = Number(env.PIPER_SENTENCE_SILENCE || 0.4);
+  /**
+   * Pauza INSERTATĂ între propoziții, nu pauza totală.
+   *
+   * Piper lasă deja ~0,22 s de liniște la capătul fiecărei propoziții, iar
+   * valoarea asta se adaugă peste. Cu 0,4 s, pauza reală măsurată ajungea la
+   * 0,56–0,64 s — iar promptul cere dinadins fraze scurte, deci se ajungea la
+   * peste o jumătate de secundă de tăcere la fiecare opt cuvinte. Se auzea ca o
+   * voce care se oprește tot timpul.
+   *
+   * Cu 0,2 s, pauza reală iese pe la 0,42 s: destul cât un elev care are nevoie
+   * de timp să proceseze fraza, dar fără senzația de întrerupere.
+   */
+  const sentenceSilence = Number(env.PIPER_SENTENCE_SILENCE || 0.2);
 
-  /** Sintetizează un fragment și întoarce PCM brut. */
-  function synthChunk(text, sampleRateRef) {
+  /**
+   * Sintetizează și întoarce PCM brut plus granițele propozițiilor.
+   *
+   * Rulăm un script propriu în locul liniei de comandă `python -m piper`.
+   * Motivul nu e stilistic: CLI-ul lipește propozițiile într-un singur WAV și
+   * aruncă informația despre unde începe fiecare, deși modelul le produce
+   * separat. Fără timpii ăia nu se poate evidenția pe pagină ce se rostește
+   * chiar acum. Costul e zero — același model, aceeași încărcare unică.
+   */
+  // `fileURLToPath`, nu `new URL(...).pathname`: pe Windows acesta din urmă dă
+  // „/D:/cale", iar slash-ul din față face ca `path.join` să producă
+  // „D:\D:\cale". Aceeași capcană ca la compararea cu `import.meta.url`.
+  const helper = path.join(path.dirname(fileURLToPath(import.meta.url)), 'piper_sentences.py');
+
+  function synthChunk(text, sampleRateRef, sentencesRef) {
     return new Promise((resolve, reject) => {
       const out = path.join(os.tmpdir(), `piper-${process.pid}-${Math.random().toString(36).slice(2)}.wav`);
       const args = [
-        '-m', 'piper', '-m', modelPath, '-f', out,
+        helper, modelPath, out,
         '--length-scale', String(lengthScale),
         '--sentence-silence', String(sentenceSilence),
       ];
@@ -89,10 +115,12 @@ export function createPiperTts(env = process.env) {
        * fluxurile standard.
        */
       const proc = spawn(python, args, {
-        stdio: ['pipe', 'ignore', 'pipe'],
+        stdio: ['pipe', 'pipe', 'pipe'],
         env: { ...env, PYTHONUTF8: '1', PYTHONIOENCODING: 'utf-8' },
       });
       let stderr = '';
+      let stdout = '';
+      proc.stdout.on('data', (d) => { stdout += d.toString('utf8'); });
       proc.stderr.on('data', (d) => { stderr += d.toString(); });
       proc.on('error', reject);
       proc.on('close', (code) => {
@@ -104,6 +132,13 @@ export function createPiperTts(env = process.env) {
           const wav = fs.readFileSync(out);
           fs.unlinkSync(out);
           sampleRateRef.value = wav.readUInt32LE(24);
+          // Timpii sunt un bonus, nu o condiție: dacă scriptul nu i-a putut
+          // scoate, sinteza rămâne valabilă și doar evidențierea sincronizată
+          // cade pe estimare.
+          try {
+            const meta = JSON.parse(stdout);
+            if (meta && Array.isArray(meta.sentences)) sentencesRef.value = meta.sentences;
+          } catch { /* fără timpi */ }
           resolve(pcmFromWav(wav));
         } catch (err) {
           reject(err);
@@ -119,14 +154,15 @@ export function createPiperTts(env = process.env) {
 
     /**
      * Sintetizează textul complet, cu pauze naturale între propoziții.
-     * @returns {{wav: Buffer, durationSec: number, sampleRate: number, voice: string}}
+     * @returns {{wav, durationSec, sampleRate, voice, sentences}}
      */
     async synthesize(text, { onProgress } = {}) {
       const clean = String(text).trim();
       if (!clean) throw new Error('Text gol pentru sinteză.');
 
       const sampleRateRef = { value: 22050 };
-      const data = await synthChunk(clean, sampleRateRef);
+      const sentencesRef = { value: null };
+      const data = await synthChunk(clean, sampleRateRef, sentencesRef);
       if (onProgress) onProgress({ index: 0, total: 1 });
 
       const wav = Buffer.concat([wavHeader(data.length, sampleRateRef.value), data]);
@@ -135,6 +171,7 @@ export function createPiperTts(env = process.env) {
         durationSec: data.length / 2 / sampleRateRef.value,
         sampleRate: sampleRateRef.value,
         voice: voiceName,
+        sentences: sentencesRef.value,
       };
     },
   };

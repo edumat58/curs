@@ -438,9 +438,9 @@ function EduPasiBrandMark({ className = shellStyles.brandMark, width = "26", hei
       aria-hidden="true"
       focusable="false"
     >
-      <rect x="1" y="19" width="9" height="8" rx="1.6" fill="#005340" opacity="0.42" />
-      <rect x="12" y="10" width="9" height="17" rx="1.6" fill="#005340" opacity="0.75" />
-      <rect x="23" y="5" width="9" height="22" rx="1.6" fill="#005340" />
+      <rect x="1" y="19" width="9" height="8" rx="1.6" fill="#003058" opacity="0.42" />
+      <rect x="12" y="10" width="9" height="17" rx="1.6" fill="#003058" opacity="0.75" />
+      <rect x="23" y="5" width="9" height="22" rx="1.6" fill="#003058" />
       <circle cx="27.5" cy="2" r="2" fill="#0197b0" />
     </svg>
   );

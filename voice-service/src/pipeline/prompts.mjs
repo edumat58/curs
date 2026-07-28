@@ -83,7 +83,24 @@ function renderVisual(visual, index) {
  * sună identic și se citește ca un număr.
  */
 function spokenHint(text) {
-  return String(text).replace(/(\d+)\s+virgulă\s+(\d+)/gi, '$1,$2');
+  return String(text)
+    .replace(/(\d+)\s+virgulă\s+(\d+)/gi, '$1,$2')
+    /**
+     * Marcajele de așezare în pagină nu sunt matematică.
+     *
+     * Convertorul descrie și structura: „tabel de calcul, rândul 1:", „rândul
+     * următor:", „linie de separare". Pentru un cititor de ecran e util — el
+     * chiar trebuie să știe unde e pe pagină. Într-o explicație rostită e
+     * zgomot, iar modelul le copia cuminte: elevul auzea „se reprezintă prin
+     * tabelul de calcul, rândul 1: 345,20; rândul următor: plus 7,92; rândul
+     * următor: linie de separare" în loc de adunarea propriu-zisă.
+     */
+    .replace(/\b(tabel de calcul|matrice)\s*,\s*rândul\s*1\s*:\s*/gi, '')
+    .replace(/\s*;?\s*rândul următor\s*:\s*/gi, ', ')
+    .replace(/\s*;?\s*linie de separare\s*;?\s*/gi, ', rezultatul este ')
+    .replace(/\s*,\s*,\s*/g, ', ')
+    .replace(/\s{2,}/g, ' ')
+    .trim();
 }
 
 /** Materialul sursă, identic pentru ambele treceri — singura realitate permisă. */

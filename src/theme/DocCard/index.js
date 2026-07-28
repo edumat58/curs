@@ -48,6 +48,14 @@ function DocIcon() {
   );
 }
 
+function FolderIcon() {
+  return (
+    <svg {...iconProps}>
+      <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
+    </svg>
+  );
+}
+
 function ExternalIcon() {
   return (
     <svg {...iconProps}>
@@ -85,19 +93,23 @@ function useCategoryItemsPlural() {
     );
 }
 
-function CardLayout({ href, icon, title, description }) {
+function CardLayout({ href, icon, title, description, isEduPasi }) {
   return (
-    <Link href={href} className={styles.cardContainer}>
-      <span className={styles.cardIcon}>{icon}</span>
+    <Link
+      href={href}
+      className={clsx(styles.cardContainer, isEduPasi && styles.cardContainerEduPasi)}>
+      <span className={clsx(styles.cardIcon, isEduPasi && styles.cardIconEduPasi)}>{icon}</span>
       <div className={styles.cardCopy}>
-        <strong className={styles.cardTitle} title={title}>{title}</strong>
+        <strong className={clsx(styles.cardTitle, isEduPasi && styles.cardTitleEduPasi)} title={title}>
+          {title}
+        </strong>
         {description && (
           <small className={styles.cardDescription} title={description}>
             {description}
           </small>
         )}
       </div>
-      <span className={styles.cardCta}>
+      <span className={clsx(styles.cardCta, isEduPasi && styles.cardCtaEduPasi)}>
         Deschide <ArrowIcon />
       </span>
     </Link>
@@ -110,18 +122,21 @@ function CardCategory({ item }) {
   if (!href) {
     return null;
   }
+  const isEduPasi = href?.includes('/edupasi') || item.label?.includes('EduPAȘI');
   return (
     <CardLayout
       href={href}
-      icon={<CategoryIcon />}
+      icon={isEduPasi ? <FolderIcon /> : <CategoryIcon />}
       title={item.label}
       description={item.description ?? categoryItemsPlural(item.items.length)}
+      isEduPasi={isEduPasi}
     />
   );
 }
 
 function CardLink({ item }) {
-  const icon = isInternalUrl(item.href) ? <DocIcon /> : <ExternalIcon />;
+  const isEduPasi = item.href?.includes('/edupasi') || item.label?.includes('EduPAȘI');
+  const icon = isEduPasi ? <FolderIcon /> : isInternalUrl(item.href) ? <DocIcon /> : <ExternalIcon />;
   const doc = useDocById(item.docId ?? undefined);
   return (
     <CardLayout
@@ -129,6 +144,7 @@ function CardLink({ item }) {
       icon={icon}
       title={item.label}
       description={item.description ?? doc?.description}
+      isEduPasi={isEduPasi}
     />
   );
 }

@@ -20,15 +20,34 @@
 /** Cât ținem un rezultat bun înainte să reverificăm. */
 const VALABIL_MS = 5 * 60 * 1000;
 /** Cât de des reîncercăm cât timp serviciul e căzut. */
-const REINCERCARE_MS = 45 * 1000;
-/** O verificare nu are voie să atârne: mai bine „nu știu" decât o pagină blocată. */
-const TIMP_MAXIM_MS = 8000;
+const REINCERCARE_MS = 20 * 1000;
+/**
+ * Verificarea are voie să dureze. Opt secunde păreau generoase, dar pe o
+ * conexiune mobilă slabă un răspuns întârziat trecea drept serviciu mort, iar
+ * butoanele dispăreau degeaba.
+ */
+const TIMP_MAXIM_MS = 20000;
+/**
+ * Câte eșecuri LA RÂND înseamnă cu adevărat că serviciul e jos.
+ *
+ * Unul singur nu înseamnă nimic: un pachet pierdut, o schimbare de rețea, un
+ * telefon care trece de pe wifi pe date. Prima variantă stingea butoanele la
+ * prima cerere ratată, iar elevul trebuia să reîncarce pagina ca să și le
+ * recapete — exact comportamentul pe care mecanismul ăsta trebuia să îl evite.
+ */
+const ESECURI_PENTRU_CADERE = 2;
 
 const stare = {
   disponibil: null, // null = încă nu știm
   verificatLa: 0,
   inCurs: null,
+  esecuri: 0,
 };
+
+/** Dispozitivul e offline? Atunci nu serviciul e de vină, iar butoanele rămân. */
+function dispozitivOffline() {
+  return typeof navigator !== 'undefined' && navigator.onLine === false;
+}
 
 const ascultatori = new Set();
 
@@ -49,6 +68,23 @@ function seteaza(disponibil) {
   if (schimbat) anunta();
 }
 
+/**
+ * Un eșec. Nu stinge nimic până nu se repetă — și niciodată dacă dispozitivul
+ * însuși e offline, caz în care problema nu e la serviciu și nu are ce rezolva
+ * un mesaj despre el.
+ */
+function inregistreazaEsec() {
+  if (dispozitivOffline()) return;
+  stare.esecuri += 1;
+  stare.verificatLa = Date.now();
+  if (stare.esecuri >= ESECURI_PENTRU_CADERE) seteaza(false);
+}
+
+function inregistreazaReusita() {
+  stare.esecuri = 0;
+  seteaza(true);
+}
+
 /** @returns {boolean|null} `null` cât timp încă nu s-a verificat nimic. */
 export function stareCurenta() {
   return stare.disponibil;
@@ -64,12 +100,12 @@ export function asculta(fn) {
  * e dovada că serviciul nu poate livra, nu doar că nu răspunde la ping.
  */
 export function raporteazaCadere() {
-  seteaza(false);
+  inregistreazaEsec();
 }
 
 /** O cerere reală a reușit — serviciul e viu, indiferent ce credeam înainte. */
 export function raporteazaReusita() {
-  seteaza(true);
+  inregistreazaReusita();
 }
 
 /**
@@ -90,10 +126,18 @@ export function verifica(baseUrl, { fortat = false } = {}) {
   const controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
   const ceas = setTimeout(() => controller && controller.abort(), TIMP_MAXIM_MS);
 
-  stare.inCurs = fetch(`${baseUrl}/health`, { signal: controller && controller.signal })
-    .then((res) => res.ok && res.json())
-    .then((json) => seteaza(Boolean(json && json.ok)))
-    .catch(() => seteaza(false))
+  stare.inCurs = fetch(`${baseUrl}/health`, {
+    signal: controller && controller.signal,
+    // Fără cache: un `/health` servit din memoria browserului ar raporta la
+    // nesfârșit starea de acum cinci minute.
+    cache: 'no-store',
+  })
+    .then((res) => (res.ok ? res.json() : null))
+    .then((json) => {
+      if (json && json.ok) inregistreazaReusita();
+      else inregistreazaEsec();
+    })
+    .catch(() => inregistreazaEsec())
     .then(() => {
       clearTimeout(ceas);
       stare.inCurs = null;
@@ -116,5 +160,30 @@ export function pornesteSupravegherea(baseUrl) {
     if (typeof document !== 'undefined' && document.hidden) return;
     verifica(baseUrl);
   }, REINCERCARE_MS);
-  return () => clearInterval(id);
+
+  /**
+   * Revenirea trebuie să fie imediată, nu la următorul tur de ceas.
+   *
+   * Cele trei momente în care merită reverificat pe loc sunt exact cele în care
+   * elevul se uită la ecran: când dispozitivul revine online, când se întoarce
+   * la filă și când redeschide pagina. Fără ele, cineva care a trecut printr-un
+   * tunel rămânea cu butoanele stinse zeci de secunde după ce semnalul
+   * revenise, și învăța că „trebuie dat reload".
+   */
+  const acum = () => verifica(baseUrl, { fortat: true });
+  const laVizibilitate = () => { if (!document.hidden) acum(); };
+  if (typeof window !== 'undefined') {
+    window.addEventListener('online', acum);
+    window.addEventListener('focus', acum);
+    document.addEventListener('visibilitychange', laVizibilitate);
+  }
+
+  return () => {
+    clearInterval(id);
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('online', acum);
+      window.removeEventListener('focus', acum);
+      document.removeEventListener('visibilitychange', laVizibilitate);
+    }
+  };
 }

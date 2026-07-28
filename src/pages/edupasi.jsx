@@ -23,7 +23,7 @@ function classLabel(course) {
 function moduleLabel(key) {
   if (!key) return 'Lecții';
   const match = /modul[-_]?([0-9]+)/i.exec(key);
-  if (match) return `Modulul ${match[1]} - EduPAȘI`;
+  if (match) return `Modulul ${match[1]}`;
   return key.replace(/[-_]/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
@@ -40,6 +40,30 @@ export default function EduPasiPage() {
   const [state, setState] = useState({ status: 'loading', lessons: [], error: '' });
   const [selectedGrade, setSelectedGrade] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
+  const [expandedClass, setExpandedClass] = useState(null);
+  const [expandedModule, setExpandedModule] = useState(null);
+
+  useEffect(() => {
+    let alive = true;
+    setState({ status: 'loading', lessons: [], error: '' });
+    fetch(indexUrl)
+      .then((response) => {
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return response.json();
+      })
+      .then((data) => {
+        if (!alive) return;
+        const lessons = (data?.lessons || []).filter((l) => l.collection === 'edupasi');
+        setState({ status: 'ready', lessons, error: '' });
+      })
+      .catch((err) => {
+        if (!alive) return;
+        setState({ status: 'error', lessons: [], error: String(err?.message || err) });
+      });
+    return () => {
+      alive = false;
+    };
+  }, [indexUrl]);
 
   useEffect(() => {
     let alive = true;
@@ -166,6 +190,13 @@ export default function EduPasiPage() {
                 Fiecare lecție este adaptată și reorganizată în secțiuni scurte și
                 clare, cu explicații pas cu pas, format lizibil și opțiuni de
                 accesibilitate vizuală.
+
+                Mai multe detalii despre EduPAȘI și cum să folosești platforma sunt disponibile în:  
+                <br />
+                <br />
+                <a href="https://kulturosfera.com/edupasi" target="_blank" rel="noopener">
+                  <strong>Documentația EduPAȘI</strong>
+                </a>
               </p>
               <div className={styles.heroActions}>
                 <a className={styles.primaryAction} href="#lectii">
@@ -273,46 +304,73 @@ export default function EduPasiPage() {
                   <div className={styles.classGroups}>
                     {visible.map((group) => (
                       <div className={styles.classGroup} key={group.course}>
-                        <div className={styles.classHeader}>
-                          <p>EduPAȘI</p>
+                        <div
+                          className={styles.classHeader}
+                          onClick={() => {
+                            if (expandedClass === group.course) {
+                              setExpandedClass(null);
+                            } else {
+                              setExpandedClass(group.course);
+                            }
+                          }}
+                        >
                           <h3>{group.label}</h3>
+                          <span className={styles.expandIndicator}>
+                            {expandedClass === group.course ? '▲' : '▼'}
+                          </span>
                         </div>
-                        <div className={styles.moduleGrid}>
-                          {group.modules.map((mod) => (
-                            <div className={styles.moduleCard} key={mod.key}>
-                              <div className={styles.moduleHeader}>
-                                <h4>{mod.label}</h4>
-                                <span>
-                                  {mod.lessons.length}{' '}
-                                  {mod.lessons.length === 1 ? 'lecție' : 'lecții'}
-                                </span>
+                        {expandedClass === group.course && (
+                          <div className={styles.moduleGrid}>
+                            {group.modules.map((mod) => (
+                              <div className={styles.moduleCard} key={mod.key}>
+                                <div
+                                  className={styles.moduleHeader}
+                                  onClick={() => {
+                                    if (expandedModule === mod.key) {
+                                      setExpandedModule(null);
+                                    } else {
+                                      setExpandedModule(mod.key);
+                                    }
+                                  }}
+                                >
+                                  <h4>{mod.label}</h4>
+                                  <span>
+                                    {mod.lessons.length}{' '}
+                                    {mod.lessons.length === 1 ? 'lecție' : 'lecții'}
+                                  </span>
+                                  <span className={styles.expandIndicator}>
+                                    {expandedModule === mod.key ? '▲' : '▼'}
+                                  </span>
+                                </div>
+                                {expandedModule === mod.key && (
+                                  <ol className={styles.lessonList}>
+                                    {mod.lessons.map((lesson, index) => (
+                                      <li className={styles.lessonItem} key={lesson.url}>
+                                        <Link
+                                          className={styles.lessonCard}
+                                          to={stripBase(lesson.url)}
+                                        >
+                                          <span className={styles.lessonNumber}>
+                                            {index + 1}
+                                          </span>
+                                          <span className={styles.lessonCopy}>
+                                            <strong>{lesson.title}</strong>
+                                            <small>
+                                              {group.label} · {mod.label}
+                                            </small>
+                                          </span>
+                                          <span className={styles.openLesson} aria-hidden="true">
+                                            Deschide →
+                                          </span>
+                                        </Link>
+                                      </li>
+                                    ))}
+                                  </ol>
+                                )}
                               </div>
-                              <ol className={styles.lessonList}>
-                                {mod.lessons.map((lesson, index) => (
-                                  <li className={styles.lessonItem} key={lesson.url}>
-                                    <Link
-                                      className={styles.lessonCard}
-                                      to={stripBase(lesson.url)}
-                                    >
-                                      <span className={styles.lessonNumber}>
-                                        {index + 1}
-                                      </span>
-                                      <span className={styles.lessonCopy}>
-                                        <strong>{lesson.title}</strong>
-                                        <small>
-                                          {group.label} · {mod.label}
-                                        </small>
-                                      </span>
-                                      <span className={styles.openLesson} aria-hidden="true">
-                                        Deschide →
-                                      </span>
-                                    </Link>
-                                  </li>
-                                ))}
-                              </ol>
-                            </div>
-                          ))}
-                        </div>
+                            ))}
+                          </div>
+                        )}
                       </div>
                     ))}
                   </div>

@@ -8,11 +8,11 @@
   --ifm-link-hover-decoration: none;
 
   display: grid !important;
-  grid-template-columns: 42px minmax(0, 1fr) auto;
-  gap: 0.9rem;
+  grid-template-columns: 34px minmax(0, 1fr) auto;
+  gap: 0.65rem;
   align-items: center;
-  min-height: 74px;
-  padding: 0.8rem 1.15rem !important;
+  min-height: 50px;
+  padding: 0.4rem 0.85rem !important;
   background: #ffffff;
   border: 1px solid var(--km-line, rgba(28, 26, 22, 0.12));
   border-radius: 12px;
@@ -40,9 +40,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 38px;
-  height: 38px;
-  border-radius: 9px;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
   color: var(--km-orange-deep, #c05600);
   background: rgba(232, 89, 12, 0.09);
   font-family: Inter, var(--ifm-font-family-base), system-ui, sans-serif;
@@ -91,6 +91,32 @@
   font-size: 0.75rem;
   font-weight: 900;
   white-space: nowrap;
+}
+
+/* Varianta EduPAȘI pentru cardul de dosar/folder */
+.cardContainerEduPasi {
+  border-color: #8dbbb0 !important;
+  background: #f4faf8 !important;
+}
+
+.cardContainerEduPasi:hover {
+  border-color: #003058 !important;
+  box-shadow: 0 4px 14px rgba(0, 83, 64, 0.12) !important;
+  background: #e9f5f1 !important;
+}
+
+.cardIconEduPasi {
+  color: #003058 !important;
+  background: rgba(0, 83, 64, 0.12) !important;
+}
+
+.cardTitleEduPasi {
+  color: #003058 !important;
+  font-weight: 800 !important;
+}
+
+.cardCtaEduPasi {
+  color: #003058 !important;
 }
 
 /* Separatoarele subtile între carduri — linia de sus nu mai e necesară

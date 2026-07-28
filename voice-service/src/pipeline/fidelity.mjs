@@ -85,7 +85,9 @@ const tipar = (source, label) => [new RegExp(source, 'iu'), label];
 const FORMULARI_META = [
   // Referiri la suport
   tipar(`${M0}(figura|imaginea|desenul|schema|graficul|tabelul|formula|definiția|materialul|textul|secțiunea|lecția)\\s+(de mai (jos|sus)|din (material|lecție|secțiune|text))`, 'trimitere la suport'),
-  tipar(`${M0}(figura|imaginea|desenul|schema|graficul|formula|definiția|materialul|textul)\\s+(arată|ne arată|prezintă|indică|spune|ne spune|conține|scrie|explică|ilustrează)${M1}`, 'vorbește despre suport'),
+  // Formele nearticulate („acest tabel", „această schemă") intră și ele: modelul
+  // le prefera exact acolo unde comenta suportul.
+  tipar(`${M0}((acest|această|acel|acea)\\s+)?(tabel|tabelul|figura|imaginea|desenul|schema|graficul|formula|definiția|materialul|textul)\\s+(arată|ne arată|prezintă|indică|spune|ne spune|conține|scrie|explică|ilustrează)${M1}`, 'vorbește despre suport'),
   tipar(`${M0}(în|din) (această|acest|acea|acel) (secțiune|material|lecție|text|paragraf|imagine|figură)${M1}`, 'se referă la secțiune'),
   // „secțiune" simplu lipsește dinadins din lista de mai jos: „secțiunea axială
   // a unui con" e geometrie curată, iar o falsă alarmă acolo ar cere o

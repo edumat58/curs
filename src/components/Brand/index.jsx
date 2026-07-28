@@ -18,12 +18,12 @@ export function EdumatWordmark({ width = 160, style }) {
 export function KulturosferaLine({ width = 64 }) {
   return (
     <svg viewBox="0 0 177 17" width={width} aria-hidden="true">
-      <rect x="0" y="6" width="43" height="5" fill="#005340" />
+      <rect x="0" y="6" width="43" height="5" fill="#003058" />
       <rect x="43" y="6" width="44" height="5" fill="#d23d2d" />
       <rect x="87" y="6" width="44" height="5" fill="#0197b0" />
       <rect x="131" y="6" width="46" height="5" fill="#545454" />
       {[
-        { x: 0, c: '#005340' },
+        { x: 0, c: '#003058' },
         { x: 43, c: '#d23d2d' },
         { x: 87, c: '#0197b0' },
         { x: 131, c: '#545454' },

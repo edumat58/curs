@@ -51,12 +51,33 @@ function validatePayload(body) {
   return { sectionHash, section };
 }
 
+/**
+ * Adresa audio poartă o versiune, altfel un audio refăcut nu ajunge niciodată
+ * la elev.
+ *
+ * Fișierul e servit cu `immutable` și un an de valabilitate — corect, pentru că
+ * hash-ul se schimbă odată cu lecția. Dar când REGENERĂM audio pentru același
+ * text (sinteză reparată, altă voce), conținutul se schimbă sub aceeași adresă,
+ * iar `immutable` înseamnă exact că browserul nu mai întreabă. Elevul rămâne cu
+ * varianta veche până își golește cache-ul, ceea ce nu are de unde să știe.
+ * Marca de timp a ultimei scrieri rezolvă asta fără să atingă hash-ul.
+ */
+function audioUrl(doc, baseUrl) {
+  if (!doc.audio) return null;
+  const versiune = doc.updatedAt ? new Date(doc.updatedAt).getTime() : 0;
+  return `${baseUrl}/voice/audio/${doc.sectionHash}?v=${versiune}`;
+}
+
 function publicView(doc, baseUrl) {
   return {
     status: doc.status,
     sectionHash: doc.sectionHash,
     explanationText: doc.explanationText,
-    audioUrl: doc.audio ? `${baseUrl}/voice/audio/${doc.sectionHash}` : null,
+    audioUrl: audioUrl(doc, baseUrl),
+    // Granițele propozițiilor, măsurate la sinteză: temelia evidențierii
+    // sincronizate din player. Lipsesc la explicațiile generate înainte de a
+    // exista această funcție, iar clientul le estimează atunci.
+    sentences: doc.audio && doc.audio.sentences ? doc.audio.sentences : null,
     durationSec: doc.audio ? doc.audio.durationSec : null,
     voice: doc.audio ? doc.audio.voice : null,
     needsReview: doc.quality ? doc.quality.needsReview : null,

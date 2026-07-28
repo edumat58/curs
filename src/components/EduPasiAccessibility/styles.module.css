@@ -1,10 +1,10 @@
 .root {
-  --ep-green: var(--edupasi-accent, #005340);
-  --ep-green-dark: var(--edupasi-accent-strong, #003f31);
+  --ep-green: var(--edupasi-accent, #003058);
+  --ep-green-dark: var(--edupasi-accent-strong, #003058);
   --ep-on-green: var(--edupasi-on-accent, #fff);
   --ep-teal: var(--edupasi-focus, #0197b0);
   --ep-surface: var(--edupasi-surface, #fff);
-  --ep-surface-alt: var(--edupasi-surface-alt, #eef3f1);
+  --ep-surface-alt: var(--edupasi-surface-alt, #D9EEF7);
   --ep-text: var(--edupasi-text, #161616);
   --ep-text-muted: var(--edupasi-text-muted, #4a4a4a);
   --ep-border: var(--edupasi-border-subtle, #ddd);
@@ -630,7 +630,7 @@
   -webkit-appearance: none;
   width: 20px;
   height: 20px;
-  background: var(--edupasi-accent, #005340);
+  background: var(--edupasi-accent, #003058);
   border: 2px solid var(--edupasi-surface, #ffffff);
   border-radius: 50%;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
@@ -640,7 +640,7 @@
 .speedSlider::-moz-range-thumb {
   width: 20px;
   height: 20px;
-  background: var(--edupasi-accent, #005340);
+  background: var(--edupasi-accent, #003058);
   border: 2px solid var(--edupasi-surface, #ffffff);
   border-radius: 50%;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
@@ -663,7 +663,7 @@
 .speedValue {
   font-size: 0.82rem;
   font-weight: 900;
-  color: var(--edupasi-accent-strong, #003f31);
+  color: var(--edupasi-accent-strong, #003058);
   text-align: center;
   min-width: 2.5em;
 }
@@ -676,10 +676,10 @@
   gap: 0.3rem;
   margin-left: 0.25rem;
   padding: 0.25rem 0.55rem;
-  border: 2px solid var(--edupasi-accent, #005340);
+  border: 2px solid var(--edupasi-accent, #003058);
   border-radius: 8px;
-  background: var(--edupasi-accent-soft, #e2eeea);
-  color: var(--edupasi-accent-strong, #003f31);
+  background: var(--edupasi-accent-soft, #D9EEF7);
+  color: var(--edupasi-accent-strong, #003058);
   font-size: 0.72rem;
   font-weight: 850;
   cursor: pointer;
@@ -689,7 +689,7 @@
 }
 
 .inlineExplainButton:hover {
-  background: var(--edupasi-accent, #005340);
+  background: var(--edupasi-accent, #003058);
   color: var(--edupasi-on-accent, #ffffff);
 }
 
@@ -708,7 +708,7 @@
   margin: 0.75rem 0 1rem;
   padding: 1rem 1.15rem;
   background: var(--edupasi-surface-warm, #fffcf5);
-  border: 2px solid var(--edupasi-accent, #005340);
+  border: 2px solid var(--edupasi-accent, #003058);
   border-radius: 14px;
   font-size: 0.9rem;
   line-height: 1.65;
@@ -718,7 +718,7 @@
 .explainPanel summary {
   font-weight: 850;
   font-size: 0.85rem;
-  color: var(--edupasi-accent-strong, #003f31);
+  color: var(--edupasi-accent-strong, #003058);
   cursor: pointer;
   list-style: none;
   display: flex;
@@ -756,15 +756,15 @@
   border: 2px solid var(--edupasi-border-subtle, #d7e5e0);
   border-radius: 10px;
   background: var(--edupasi-surface, #ffffff);
-  color: var(--edupasi-accent-strong, #003f31);
+  color: var(--edupasi-accent-strong, #003058);
   font-size: 0.78rem;
   font-weight: 800;
   cursor: pointer;
 }
 
 .explainPanelAction:hover {
-  background: var(--edupasi-accent-soft, #e2eeea);
-  border-color: var(--edupasi-accent, #005340);
+  background: var(--edupasi-accent-soft, #D9EEF7);
+  border-color: var(--edupasi-accent, #003058);
 }
 
 .explainPanelNote {
@@ -787,9 +787,9 @@
   align-items: center;
   gap: 0.75rem;
   padding: 0.55rem 1.1rem 0.55rem 0.65rem;
-  color: #003f31;
+  color: #003058;
   background: linear-gradient(135deg, #ffffff 0%, #f4fbf8 100%);
-  border: 2px solid #005340;
+  border: 2px solid #003058;
   border-radius: 999px;
   box-shadow: 0 4px 14px rgba(0, 83, 64, 0.12);
   cursor: pointer;
@@ -804,7 +804,7 @@
   transform: translateY(-2px);
   background: linear-gradient(135deg, #e6f7f2 0%, #d4f2e9 100%);
   box-shadow: 0 6px 20px rgba(0, 83, 64, 0.2);
-  border-color: #003f31;
+  border-color: #003058;
 }
 
 .sectionExplainButton:disabled {
@@ -846,7 +846,7 @@
   border-radius: 50%;
   object-fit: cover;
   object-position: top;
-  border: 2px solid #005340;
+  border: 2px solid #003058;
   background: #fff;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
@@ -858,7 +858,7 @@
   border-radius: 50%;
   object-fit: cover;
   object-position: top;
-  border: 2px solid #005340;
+  border: 2px solid #003058;
   background: #fff;
 }
 
@@ -872,7 +872,7 @@
 .sectionExplainTitle {
   font-weight: 850;
   font-size: 0.86rem;
-  color: #003f31;
+  color: #003058;
 }
 
 .sectionExplainHint {
@@ -890,7 +890,7 @@
 .sectionExplanation {
   margin: 0.75rem 0 1.75rem;
   background: #ffffff;
-  border: 2px solid #005340;
+  border: 2px solid #003058;
   border-radius: 18px;
   box-shadow: 0 10px 30px rgba(0, 83, 64, 0.1);
   overflow: hidden;
@@ -903,7 +903,7 @@
   padding: 0.8rem 1.1rem;
   background: linear-gradient(135deg, #eaf6f2 0%, #d8f0e8 100%);
   border-bottom: 1px solid #c2e5db;
-  color: #003f31;
+  color: #003058;
   cursor: pointer;
   font-size: 0.95rem;
   font-weight: 900;
@@ -944,7 +944,7 @@
   margin: 0 0 0.6rem;
   font-size: 0.9rem;
   font-weight: 900;
-  color: #003f31;
+  color: #003058;
 }
 
 .sectionExplanationTranscript {
@@ -1041,7 +1041,7 @@
   gap: 0.85rem;
   padding: 0.65rem 0.95rem;
   background: linear-gradient(135deg, #eaf6f2 0%, #d6f2e9 100%);
-  border: 1.5px solid #005340;
+  border: 1.5px solid #003058;
   border-radius: 14px;
   margin-bottom: 0.85rem;
 }
@@ -1049,7 +1049,7 @@
 .sectionAudioTitle {
   font-size: 0.82rem;
   font-weight: 850;
-  color: #003f31;
+  color: #003058;
   flex-shrink: 0;
 }
 

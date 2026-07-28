@@ -205,6 +205,7 @@ main {
   border-right: 1px solid var(--km-line) !important;
   box-shadow: 2px 0 20px rgba(28, 26, 22, 0.08);
   animation: slideIn 0.3s ease-out;
+  z-index: 2147483648 !important;
 
   /* Fix height constraint */
   height: 100vh !important;
@@ -214,7 +215,7 @@ main {
   left: 0 !important;
   bottom: 0 !important;
   overflow-y: auto !important;
-  padding-bottom: 8rem !important;
+  padding-bottom: 10rem !important;
 }
 
 @keyframes slideIn {
@@ -1023,7 +1024,7 @@ html.docs-doc-page[class*='docs-doc-id'] .main-wrapper {
    ============================================================ */
 
 .edupasi-nav-link {
-  color: #005340 !important;
+  color: #003058 !important;
   font-weight: 700;
 }
 
@@ -1036,7 +1037,7 @@ html.docs-doc-page[class*='docs-doc-id'] .main-wrapper {
 .sidebar-card--edupasi > .menu__link,
 .sidebar-card--edupasi .menu__link {
   border: 1px solid rgba(0, 83, 64, 0.32);
-  color: #005340;
+  color: #003058;
   font-weight: 700;
 }
 
@@ -1044,15 +1045,15 @@ html[data-edupasi-palette] {
   color-scheme: light;
   --edupasi-page: #ffffff;
   --edupasi-surface: #ffffff;
-  --edupasi-surface-alt: #eef3f1;
+  --edupasi-surface-alt: #D9EEF7;
   --edupasi-surface-warm: #fffcf5;
   --edupasi-text: #161616;
   --edupasi-text-secondary: #3a3a3a;
   --edupasi-text-muted: #5b5b5b;
-  --edupasi-accent: #005340;
-  --edupasi-accent-strong: #003f31;
+  --edupasi-accent: #003058;
+  --edupasi-accent-strong: #003058;
   --edupasi-on-accent: #ffffff;
-  --edupasi-accent-soft: #e2eeea;
+  --edupasi-accent-soft: #D9EEF7;
   --edupasi-border: #8dbbb0;
   --edupasi-border-subtle: #d7e5e0;
   --edupasi-focus: #0197b0;
@@ -1511,22 +1512,7 @@ article,
   text-align: left !important;
 }
 
-/* Fix aliniere simetrică pe paginile de categorie (Curs V, Curs VI, etc.) */
-.generatedIndexPage .row,
-.generatedIndexPage [class*='row'] {
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-  width: 100% !important;
-}
-
-.generatedIndexPage [class*='col'] {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-  width: 100% !important;
-  max-width: 100% !important;
-}
+/* Spațierea compactă dintre carduri e controlată acum de DocCardList swizzle (styles.module.css). */
 
 /* Cardurile din paginile de categorie cu borduri gri laterale complete și vizibile */
 .generatedIndexPage .card,
@@ -1590,21 +1576,74 @@ article {
   background-color: #ffffff !important;
 }
 
-/* 9. Înlocuire iconiță casă din breadcrumb cu un SVG modern, aerisit (outline) */
-.breadcrumbs__link--home svg {
-  display: none !important;
+/* 9. Înlocuire garantată iconiță casă din breadcrumb cu un SVG modern, aerisit (outline stroke) */
+.breadcrumbs__item:first-child svg,
+.breadcrumbs__link svg,
+svg[class*='breadcrumbHomeIcon'],
+[class*='breadcrumbHomeIcon'] {
+  width: 17px !important;
+  height: 17px !important;
+  fill: none !important;
+  stroke: currentColor !important;
+  stroke-width: 2.2px !important;
 }
-.breadcrumbs__link--home::before {
-  content: '';
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  vertical-align: middle;
-  background: currentColor;
-  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8'/%3E%3Cpath d='M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z'/%3E%3C/svg%3E");
-  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8'/%3E%3Cpath d='M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z'/%3E%3C/svg%3E");
-  -webkit-mask-size: contain;
-  mask-size: contain;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
+
+.breadcrumbs__item:first-child svg path,
+svg[class*='breadcrumbHomeIcon'] path {
+  fill: none !important;
+  stroke: currentColor !important;
+  stroke-width: 2.2px !important;
+  stroke-linecap: round !important;
+  stroke-linejoin: round !important;
+  d: path('M 15 21 v -8 a 1 1 0 0 0 -1 -1 h -4 a 1 1 0 0 0 -1 1 v 8 M 3 10 a 2 2 0 0 1 .709 -1.528 l 7 -5.999 a 2 2 0 0 1 2.582 0 l 7 5.999 A 2 2 0 0 1 21 10 v 9 a 2 2 0 0 1 -2 2 H 5 a 2 2 0 0 1 -2 -2 z') !important;
+}
+
+/* 10. Indicator "Lecția curentă" pe 2 rânduri în navbar-ul principal EduMat, DOAR pe desktop */
+.navbar__brand {
+  display: flex !important;
+  align-items: center !important;
+}
+
+#normal-lesson-navbar-indicator-root {
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+.normalLessonNavbarIndicator {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-left: 0.75rem;
+  padding-left: 0.75rem;
+  border-left: 1.5px solid var(--km-line, rgba(28, 26, 22, 0.2));
+  max-width: clamp(180px, 28vw, 360px);
+  line-height: 1.15;
+}
+
+.normalLessonNavbarIndicator span {
+  display: block;
+  color: var(--km-orange-deep, #c05600);
+  font-weight: 850;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.1rem;
+}
+
+.normalLessonNavbarIndicator strong {
+  color: var(--km-ink, #1c1a16);
+  font-weight: 800;
+  font-size: 0.85rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+
+@media (max-width: 996px) {
+  #normal-lesson-navbar-indicator-root,
+  .normalLessonNavbarIndicator {
+    display: none !important;
+  }
 }

@@ -23,6 +23,14 @@ import { encodeOpus } from '../../voice-service/src/providers/encode.mjs';
 
 const PRAG_CUVINTE_PE_MINUT = 105;
 const doarRaport = process.argv.includes('--dry');
+/**
+ * `--tot` reface audio-ul tuturor explicațiilor, nu doar al celor stricate.
+ * Necesar când se schimbă un parametru de sinteză — pauza dintre propoziții,
+ * vocea — sau când vrem să capturăm ceva ce înainte nu se salva, cum sunt
+ * granițele propozițiilor. Textul rămâne oricum neatins, deci nu costă niciun
+ * token de model.
+ */
+const tot = process.argv.includes('--tot');
 
 const uri = process.env.MONGODB_URI_EDUCONNECT || process.env.MONGODB_URI;
 const client = await new MongoClient(uri).connect();
@@ -38,7 +46,9 @@ function cuvintePeMinut(doc) {
 }
 
 const toate = await col.find({ status: 'ready' }).toArray();
-const stricate = toate.filter((d) => d.explanationText && cuvintePeMinut(d) < PRAG_CUVINTE_PE_MINUT);
+const stricate = toate.filter(
+  (d) => d.explanationText && (tot || cuvintePeMinut(d) < PRAG_CUVINTE_PE_MINUT)
+);
 
 console.log(`${toate.length} explicații, dintre care ${stricate.length} cu audio de refăcut.`);
 if (doarRaport || !stricate.length) {
@@ -77,6 +87,8 @@ for (const doc of stricate) {
             durationSec: audio.durationSec,
             sampleRate: audio.sampleRate,
             voice: audio.voice,
+            // Granițele propozițiilor, pentru evidențierea sincronizată.
+            sentences: audio.sentences || null,
           },
           updatedAt: new Date(),
         },
