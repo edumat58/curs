@@ -84,20 +84,53 @@ const ETAPE = {
 };
 const ORDINE = ['analiza', 'naratiune', 'reparare', 'sinteza', 'audio'];
 
-function fractieEtapa(stage, secundeInEtapa, expectedSpeechSec) {
-  const index = ORDINE.indexOf(stage);
-  if (index < 0) return 0;
-  const etapa = ETAPE[stage];
-  const start = index > 0 ? ETAPE[ORDINE[index - 1]].pana : 0;
+/**
+ * Numele de etapă, adus la forma din hartă.
+ *
+ * Serverul raportează „naratiune 2/2" când predă o lecție lungă pe bucăți, și
+ * „reparare" de mai multe ori la rând. Fără normalizare, `indexOf` întorcea -1
+ * pentru bucăți, fracția ieșea 0, iar bara — ținută să nu dea înapoi — îngheța
+ * exact la 30%. Elevul vedea o bară oprită, deși generarea mergea. Tăiem orice
+ * după primul cuvânt.
+ */
+function etapaDeBaza(stage) {
+  return String(stage || '').trim().split(/\s+/)[0];
+}
+
+/**
+ * Ținta de umplere: cea mai mare dintre reperul etapei și o înaintare continuă
+ * în timp.
+ *
+ * Reperul de etapă e onest — nu trece de sinteză până serverul n-o confirmă —
+ * dar între etape de model, care pentru o lecție întreagă pot dura zeci de
+ * secunde (mai multe bucăți, reparări, așteptări de rată), reperul se lipește de
+ * capătul etapei și pare oprit. Peste el punem o înaintare care depinde DOAR de
+ * timpul total scurs și se apropie asimptotic de 92%: chiar dacă etapele se
+ * poticnesc, bara tot urcă. Niciuna nu ajunge la 100% înainte ca serverul să
+ * confirme că e gata — asta rămâne rolul stării „ready".
+ */
+function fractieEtapa(stage, secundeInEtapa, expectedSpeechSec, secundeTotal) {
+  const baza = etapaDeBaza(stage);
+  const index = ORDINE.indexOf(baza);
+  let reper = 0;
+  if (index >= 0) {
+    const etapa = ETAPE[baza];
+    const start = index > 0 ? ETAPE[ORDINE[index - 1]].pana : 0;
+    const tau = etapa.tau ?? Math.min(90, Math.max(4, (expectedSpeechSec || 40) * 0.18));
+    reper = start + (etapa.pana - start) * (1 - Math.exp(-Math.max(0, secundeInEtapa) / tau));
+  }
+
   /**
-   * Sinteza e singura etapă a cărei durată depinde de lungimea explicației:
-   * măsurat pe PC, aproape un sfert din durata audio-ului rezultat. Constanta
-   * de timp e aleasă ca bara să fie pe la patru cincimi când sinteza se termină
-   * de obicei — dacă mașina e mai lentă, bara doar înaintează mai încet, ceea ce
-   * e comportamentul corect, nu o eroare.
+   * Înaintarea de fundal. Constanta de timp o scalăm cu durata așteptată a
+   * audio-ului: o lecție de trei minute durează mai mult de generat decât o
+   * definiție, deci bara ei trebuie să urce mai lent, altfel ar sta lipită de
+   * 92% jumătate din timp. Se oprește la 0,9 ca reperul de etapă, mai precis, să
+   * poată prelua ultimele procente.
    */
-  const tau = etapa.tau ?? Math.min(90, Math.max(4, (expectedSpeechSec || 40) * 0.18));
-  return start + (etapa.pana - start) * (1 - Math.exp(-Math.max(0, secundeInEtapa) / tau));
+  const tauGlobal = Math.min(70, Math.max(12, (expectedSpeechSec || 40) * 0.5));
+  const creep = 0.9 * (1 - Math.exp(-Math.max(0, secundeTotal || 0) / tauGlobal));
+
+  return Math.max(reper, creep);
 }
 
 /**
@@ -147,11 +180,14 @@ async function waitForReady(hash, signal, onStatus) {
 function useProgress(active, status) {
   const [fractie, setFractie] = useState(0);
   const reper = useRef({ stage: null, la: 0 });
+  // Momentul în care a început TOATĂ generarea, pentru înaintarea de fundal.
+  const inceput = useRef(0);
 
   useEffect(() => {
     if (!active) {
       setFractie(0);
       reper.current = { stage: null, la: 0 };
+      inceput.current = 0;
     }
   }, [active]);
 
@@ -160,6 +196,7 @@ function useProgress(active, status) {
     // sta goală exact în secundele în care elevul se uită cel mai atent la ea.
     if (active && !reper.current.stage) {
       reper.current = { stage: 'analiza', la: Date.now() };
+      inceput.current = Date.now();
     }
     if (!active || !status || !status.stage) return;
     if (reper.current.stage !== status.stage) {
@@ -173,7 +210,10 @@ function useProgress(active, status) {
       const { stage, la } = reper.current;
       if (!stage) return;
       const secunde = (Date.now() - la) / 1000;
-      const tinta = fractieEtapa(stage, secunde, status && status.expectedSpeechSec);
+      const secundeTotal = inceput.current ? (Date.now() - inceput.current) / 1000 : secunde;
+      const tinta = fractieEtapa(
+        stage, secunde, status && status.expectedSpeechSec, secundeTotal
+      );
       setFractie((anterior) => Math.max(anterior, tinta));
     }, 100);
     return () => clearInterval(id);
@@ -513,7 +553,7 @@ function LessonButton({ section, route, host }) {
             {state === 'ready' ? 'Ascunde lecția explicată' : 'Ascultă lecția explicată'}
           </span>
           <span className={styles.lessonHint}>
-            Un profesor îți parcurge toată lecția, pas cu pas.
+            Explicația se generează pe tot conținutul lecției.
           </span>
         </span>
       </button>
