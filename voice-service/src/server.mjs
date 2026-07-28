@@ -15,6 +15,26 @@ import cors from 'cors';
 import { pathToFileURL } from 'node:url';
 import { createLlm } from './providers/llm.mjs';
 import { createPiperTts } from './providers/tts.mjs';
+import { createAzureTts } from './providers/tts-azure.mjs';
+
+/**
+ * Alege motorul de voce din configurație.
+ *
+ * `azure` dă o voce umană (recomandat), dar cere o cheie; dacă lipsește, cădem
+ * elegant pe Piper (local, robotic, dar funcțional) ca serviciul să nu se
+ * oprească. `VOICE_TTS_PROVIDER=piper` forțează Piper explicit.
+ */
+function createTts(env) {
+  const alegere = (env.VOICE_TTS_PROVIDER || (env.AZURE_SPEECH_KEY ? 'azure' : 'piper')).toLowerCase();
+  if (alegere === 'azure') {
+    try {
+      return createAzureTts(env);
+    } catch (err) {
+      console.warn(`[voice] Azure indisponibil (${err.message}); folosesc Piper.`);
+    }
+  }
+  return createPiperTts(env);
+}
 import { explainSection } from './pipeline/explain.mjs';
 import { speechBudget } from './pipeline/prompts.mjs';
 import { createStore } from './storage/mongo.mjs';
@@ -87,13 +107,10 @@ function publicView(doc, baseUrl) {
 
 export async function createServer(env = process.env) {
   const store = await createStore(env);
+  // UN SINGUR model, pentru tot. Fără al doilea model de „analiză" și fără lanț
+  // de rezerve: aceeași calitate la fiecare lecție, previzibilă.
   const llm = createLlm(env);
-  // Model separat pentru trecerea de înțelegere (buget de tokeni propriu).
-  const analysisLlm = createLlm({
-    ...env,
-    VOICE_LLM_MODEL: env.VOICE_LLM_MODEL_ANALYSIS || 'llama-3.3-70b-versatile',
-  });
-  const tts = createPiperTts(env);
+  const tts = createTts(env);
 
   const app = express();
   app.disable('x-powered-by');
@@ -158,7 +175,7 @@ export async function createServer(env = process.env) {
 
         try {
           const mark = (stage) => store.progress(sectionHash, stage).catch(() => {});
-          const result = await explainSection(section, llm, { analysisLlm, onStage: mark });
+          const result = await explainSection(section, llm, { onStage: mark });
           await mark('sinteza');
           const audio = await tts.synthesize(result.transcript);
           await mark('audio');
@@ -238,14 +255,24 @@ export async function createServer(env = process.env) {
       // afle asta ca să propună „încearcă din nou", nu „serviciul e picat".
       const message = String(doc.error || '');
       const rateLimited = /rate limit|429/i.test(message);
-      const waitMatch = /try again in ([\d.]+)s/i.exec(message);
+      // Bugetul pe ZI e altceva decât cel pe minut: primul cere să revii mâine,
+      // al doilea doar peste un minut. Cu un singur model, fără rezerve, bugetul
+      // zilnic epuizat înseamnă că azi nu se mai poate genera nimic nou.
+      const peZi = /per day|\bTPD\b|\bRPD\b/i.test(message);
+      // „try again in 34m18.048s": prindem și minutele, nu doar secundele.
+      const waitMatch = /try again in (?:(\d+)m)?([\d.]+)s/i.exec(message);
+      const retryAfterSec = waitMatch
+        ? Math.ceil((Number(waitMatch[1] || 0) * 60) + parseFloat(waitMatch[2]))
+        : undefined;
       res.status(rateLimited ? 429 : 502).json({
         status: 'error',
-        error: rateLimited
-          ? 'Prea multe explicații cerute în același timp.'
-          : message.slice(0, 300),
-        code: rateLimited ? 'rate_limited' : 'generation_failed',
-        retryAfterSec: waitMatch ? Math.ceil(parseFloat(waitMatch[1])) : undefined,
+        error: peZi
+          ? 'Bugetul de explicații pe ziua de azi s-a epuizat. Încearcă mai târziu.'
+          : rateLimited
+            ? 'Prea multe explicații cerute în același timp. Încearcă din nou într-un minut.'
+            : message.slice(0, 300),
+        code: peZi ? 'buget_epuizat' : rateLimited ? 'rate_limited' : 'generation_failed',
+        retryAfterSec,
       });
       return;
     }

@@ -1,9 +1,8 @@
 /**
- * Pipeline-ul de explicație: înțelegere → narațiune → verificare.
+ * Pipeline-ul de explicație: o singură trecere de narațiune → verificare.
  * Nu știe nimic despre HTTP, MongoDB sau furnizorul concret de LLM.
  */
 import {
-  buildAnalysisPrompt,
   buildNarrationPrompt,
   bugetSursaCaractere,
   esteLectieIntreaga,
@@ -15,6 +14,7 @@ import { checkFidelity } from './fidelity.mjs';
 import { toSpeakable } from './speakable.mjs';
 
 /** Modelele mai adaugă uneori ```json în jurul răspunsului. */
+// eslint-disable-next-line no-unused-vars
 function parseJsonLoose(raw) {
   const trimmed = String(raw).trim().replace(/^```(?:json)?\s*|\s*```$/g, '');
   try {
@@ -143,26 +143,21 @@ function rescriereCeiling(text) {
  * Generează explicația unei secțiuni.
  * @returns {{transcript, analysis, fidelity, meta}}
  */
-export async function explainSection(section, llm, { signal, analysisLlm, onStage } = {}) {
+export async function explainSection(section, llm, { signal, onStage } = {}) {
   const startedAt = Date.now();
   const stage = (name) => { if (onStage) onStage(name); };
-  stage('analiza');
-  // Trecerea de înțelegere este extragere structurată, nu pedagogie: o poate
-  // face un model mai mic. Rulând-o pe alt model câștigăm și un buget separat
-  // de tokeni pe minut (limitele furnizorului sunt per model), ceea ce dublează
-  // practic câte secțiuni pot fi generate într-un minut.
-  const analyst = analysisLlm || llm;
 
-  const a = buildAnalysisPrompt(section);
-  const analysisRes = await analyst.chat(
-    [
-      { role: 'system', content: a.system },
-      { role: 'user', content: a.user },
-    ],
-    { json: true, signal }
-  );
-  const analysis = parseJsonLoose(analysisRes.content);
-  const analysisMs = Date.now() - startedAt;
+  /**
+   * O SINGURĂ trecere, cu UN SINGUR model.
+   *
+   * Înainte erau două: una de „analiză" (extrăgea definiții și formule în JSON)
+   * și una de narațiune. Dubla tokenii — costisitor pe un buget zilnic strâns —
+   * fără să adauge calitate: de când modelul primește codul sursă al lecției,
+   * citește structura direct din el, nu are nevoie de o hartă intermediară.
+   * Fidelitatea o verificăm oricum după generare, pe materialul complet.
+   */
+  const analysis = {};
+  const analysisMs = 0;
 
   stage('naratiune');
   const budget = speechBudget(section);

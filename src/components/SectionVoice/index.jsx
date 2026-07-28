@@ -15,7 +15,7 @@ import AudioPlayer from './AudioPlayer';
 import styles from './styles.module.css';
 
 /** Trebuie să coincidă cu PROMPT_VERSION din serviciu: intră în hash-ul secțiunii. */
-const PROMPT_VERSION = 6;
+const PROMPT_VERSION = 7;
 
 /**
  * Ce e o lecție și ce nu.
@@ -154,7 +154,14 @@ async function waitForReady(hash, signal, onStatus) {
       if (onStatus) onStatus(await res.json().catch(() => null));
       continue;
     }
-    if (res.status === 429) throw new Error('rate');
+    if (res.status === 429) {
+      // Bugetul pe zi epuizat e altceva decât prea multe cereri pe minut.
+      const d = await res.json().catch(() => null);
+      if (d && d.code === 'buget_epuizat') {
+        throw Object.assign(new Error(d.error || 'Bugetul de azi s-a epuizat.'), { epuizat: true });
+      }
+      throw new Error('rate');
+    }
     if (res.ok) return res.json();
 
     // 404 înseamnă că rezervarea a dispărut (repornire de serviciu); orice
@@ -357,11 +364,13 @@ function useExplanation(section, route, mode) {
       }
       setState('error');
       setError(
-        err.message === 'rate'
-          ? 'Prea multe explicații cerute odată. Așteaptă un minut și apasă din nou.'
-          : err.message === 'reluare'
-            ? 'Pregătirea a fost întreruptă. Apasă din nou ca să reia.'
-            : 'Nu am putut pregăti explicația. Apasă din nou pentru a reîncerca.'
+        err.epuizat
+          ? err.message
+          : err.message === 'rate'
+            ? 'Prea multe explicații cerute odată. Așteaptă un minut și apasă din nou.'
+            : err.message === 'reluare'
+              ? 'Pregătirea a fost întreruptă. Apasă din nou ca să reia.'
+              : 'Nu am putut pregăti explicația. Apasă din nou pentru a reîncerca.'
       );
     }
   }, [section, route, mode, state]);
