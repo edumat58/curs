@@ -17,22 +17,29 @@
 /**
  * Node abandonează singur o cerere lungă — chiar dacă noi nu-i cerem.
  *
- * `fetch` din Node (undici) are un timeout INTERN de 5 minute pe primirea
- * corpului. Un model local, lent (RoLlama pe CPU, ~1,7 tokeni pe secundă),
- * generează o lecție în peste 5 minute, iar undici întrerupe cu „fetch failed" —
- * indiferent de `AbortController`-ul nostru de 15 minute, care e altă limită.
- * Punem un dispatcher fără acest timeout, ca generările lungi să meargă până la
- * capăt. `connect` rămâne scurt: dacă serverul chiar e mort, aflăm repede.
+ * `fetch` din Node are un timeout INTERN de 5 minute: pe primirea ANTETULUI
+ * (`headersTimeout`) și pe corp (`bodyTimeout`). Un model local lent (RoLlama pe
+ * CPU, ~2 tokeni pe secundă) trimite antetul abia după ce termină de generat,
+ * deci după 8 minute — peste cele 5 ale lui Node, care taie cu „fetch failed",
+ * indiferent de `AbortController`-ul nostru de 15 minute (altă limită).
+ *
+ * Ca să fim SIGURI că fixul se aplică, folosim `fetch`-ul din pachetul `undici`
+ * cu un agent fără aceste timeouturi, nu doar `setGlobalDispatcher` (care poate
+ * să nu prindă fetch-ul global, built-in). Dacă `undici` lipsește (alt runtime),
+ * cădem pe fetch-ul global — merge pentru un model rapid din cloud.
  */
+let fetchImpl = globalThis.fetch;
 try {
-  const { setGlobalDispatcher, Agent } = await import('undici');
-  setGlobalDispatcher(new Agent({
+  const undici = await import('undici');
+  const agent = new undici.Agent({
     headersTimeout: 0,
     bodyTimeout: 0,
     connect: { timeout: 10000 },
-  }));
+  });
+  undici.setGlobalDispatcher(agent);
+  fetchImpl = (url, opts) => undici.fetch(url, { ...opts, dispatcher: agent });
 } catch {
-  // undici lipsește (runtime neașteptat): rămânem pe comportamentul implicit.
+  // undici lipsește: rămânem pe fetch-ul global (timeout de 5 min).
 }
 
 const DEFAULTS = {
@@ -94,7 +101,7 @@ function createOpenAiCompatible({ name, baseUrl, apiKey, model, timeoutMs, maxRe
         const onAbort = () => controller.abort();
         if (signal) signal.addEventListener('abort', onAbort, { once: true });
         try {
-          const res = await fetch(`${baseUrl}/chat/completions`, {
+          const res = await fetchImpl(`${baseUrl}/chat/completions`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

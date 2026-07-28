@@ -10,6 +10,8 @@ import { MongoClient, GridFSBucket, ObjectId } from 'mongodb';
 
 const COLLECTION = 'voice_explanations';
 const BUCKET = 'voice_audio';
+/** Evidența apelurilor de sinteză Azure, pentru urmărirea cotei lunare. */
+const USAGE = 'voice_azure_usage';
 
 let clientPromise = null;
 
@@ -184,6 +186,67 @@ export async function createStore(env = process.env) {
         col.countDocuments({ 'quality.needsReview': true }),
       ]);
       return { total, ready, needsReview: review };
+    },
+
+    /**
+     * Înregistrează un apel de sinteză Azure în evidența de consum.
+     *
+     * O intrare per APEL, nu per lecție: Azure taxează fiecare sinteză, deci o
+     * regenerare consumă din nou. Așa evidența noastră oglindește factura.
+     */
+    async recordAzureUsage(chars, { sectionHash, heading, route } = {}) {
+      if (!chars || chars <= 0) return;
+      await db.collection(USAGE).insertOne({
+        chars, sectionHash: sectionHash || null, heading: heading || null,
+        route: route || null, at: new Date(),
+      });
+    },
+
+    /**
+     * Consumul Azure pe LUNA calendaristică curentă + defalcare pe lecție.
+     *
+     * Nivelul gratuit F0 dă 500.000 de caractere pe lună și se reînnoiește lunar.
+     * Reperul de reset e începutul lunii următoare — aproximare curată și
+     * ușor de urmărit pentru administrator.
+     */
+    async azureUsage(limit = 500000) {
+      const acum = new Date();
+      const inceputLuna = new Date(acum.getFullYear(), acum.getMonth(), 1);
+      const resetLa = new Date(acum.getFullYear(), acum.getMonth() + 1, 1);
+      const usageCol = db.collection(USAGE);
+
+      const [totalLuna, perLectie] = await Promise.all([
+        usageCol.aggregate([
+          { $match: { at: { $gte: inceputLuna } } },
+          { $group: { _id: null, chars: { $sum: '$chars' } } },
+        ]).toArray(),
+        usageCol.aggregate([
+          { $match: { at: { $gte: inceputLuna } } },
+          {
+            $group: {
+              _id: '$route',
+              heading: { $last: '$heading' },
+              chars: { $sum: '$chars' },
+              apeluri: { $sum: 1 },
+              ultima: { $max: '$at' },
+            },
+          },
+          { $sort: { chars: -1 } },
+        ]).toArray(),
+      ]);
+
+      const folosit = (totalLuna[0] && totalLuna[0].chars) || 0;
+      return {
+        folosit,
+        limita: limit,
+        ramas: Math.max(0, limit - folosit),
+        procent: Math.round((folosit / limit) * 1000) / 10,
+        seResetLa: resetLa.toISOString(),
+        perLectie: perLectie.map((l) => ({
+          route: l._id, heading: l.heading, chars: l.chars,
+          apeluri: l.apeluri, ultima: l.ultima,
+        })),
+      };
     },
 
     collection: col,

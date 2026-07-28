@@ -128,6 +128,19 @@ export async function createServer(env = process.env) {
     }
   });
 
+  /**
+   * Consumul Azure: cât s-a folosit din cota lunară, cât a rămas, când se
+   * resetează, și defalcarea pe lecție. Pentru evidența administratorului.
+   */
+  app.get('/admin/voice/usage', async (_req, res) => {
+    try {
+      const limit = Number(env.AZURE_FREE_CHARS || 500000);
+      res.json({ provider: tts.name, ...(await store.azureUsage(limit)) });
+    } catch (err) {
+      res.status(500).json({ error: String(err.message) });
+    }
+  });
+
   app.post('/voice/section', async (req, res) => {
     let parsed;
     try {
@@ -179,6 +192,14 @@ export async function createServer(env = process.env) {
           await mark('sinteza');
           const audio = await tts.synthesize(result.transcript);
           await mark('audio');
+          // Consumul Azure se scrie în evidență la fiecare sinteză reușită.
+          if (tts.name === 'azure' && audio.chars) {
+            store.recordAzureUsage(audio.chars, {
+              sectionHash,
+              heading: section.heading,
+              route: req.body.route || null,
+            }).catch(() => {});
+          }
           const encoded = await encodeOpus(audio.wav);
           return await store.complete(sectionHash, {
             transcript: result.transcript,
@@ -188,6 +209,7 @@ export async function createServer(env = process.env) {
               ...result.meta,
               ttsProvider: tts.name,
               ttsVoice: audio.voice,
+              azureChars: tts.name === 'azure' ? audio.chars : undefined,
               repairs: result.repairs,
             },
             audio: {

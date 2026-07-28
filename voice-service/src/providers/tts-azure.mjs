@@ -115,7 +115,10 @@ export function createAzureTts(env = process.env) {
         return { start: Number(start.toFixed(3)), end: Number(acum.toFixed(3)) };
       });
 
-      return { wav, durationSec, sampleRate, voice, sentences };
+      // `chars` = câte caractere au intrat în cota Azure la cererea asta.
+      // Azure taxează per caracter de text sintetizat, la fiecare apel — de
+      // aceea îl raportăm de fiecare dată, ca evidența să oglindească factura.
+      return { wav, durationSec, sampleRate, voice, sentences, chars: clean.length };
     },
   };
 }
