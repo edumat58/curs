@@ -694,21 +694,24 @@ details[open] .transcriptToggle::before { content: '▾ '; }
 
 /* Subtitrare sincronizată: transcriptul rostit, cu cuvântul curent evidențiat.
    Cutie derulabilă cu mască de estompare sus/jos, ca la subtitrări. */
+/* Transcript STATIC, pe toată lățimea — nu o cutie derulabilă cu înălțime fixă.
+   Cutia fragilă (portalul se îngusta o clipă și conținutul se rupea pe verticală
+   în zeci de mii de px, antrenând reflow) a fost înlocuită cu un bloc obișnuit:
+   textul curge natural sub player, aliniat la stânga, iar urmărirea o face
+   PAGINA — lin, doar când cuvântul activ iese din ecran. Robust, și exact ce
+   trebuie pe mobil: full-width, se citește în timp ce se ascultă. */
 .subtitrare {
-  position: relative; /* ca offsetTop al cuvintelor să fie față de cutie */
+  width: 100%;
+  box-sizing: border-box;
   margin-top: 12px;
-  padding: 14px 18px;
-  max-height: 32vh;
-  overflow-y: auto;
-  font-size: 1.08rem;
+  padding: 16px 18px;
+  overflow-wrap: break-word;
+  font-size: 1.1rem;
   line-height: 2.05;
   text-align: left; /* aliniat la stânga, cerut */
   border-radius: 10px;
   background: color-mix(in srgb, var(--voice-accent) 4%, transparent);
   border: 1px solid var(--voice-hairline);
-  scroll-behavior: smooth;
-  -webkit-mask-image: linear-gradient(transparent, #000 14%, #000 86%, transparent);
-  mask-image: linear-gradient(transparent, #000 14%, #000 86%, transparent);
 }
 
 /* Cuvintele încă necitite: șterse, discrete (efect de teleprompter). */
@@ -721,19 +724,6 @@ details[open] .transcriptToggle::before { content: '▾ '; }
 .cuvantCitit {
   color: var(--voice-text, #1c1a16);
   transition: color 140ms ease;
-}
-
-/* Matematica reasamblată, randată KaTeX în subtitrare. Moștenește culoarea
-   jetonului (ștearsă / normală / albă când e activ), ca să se lumineze la fel
-   ca proza. KaTeX își pune singur culorile, deci le forțăm la `inherit`. */
-.cuvantMath { display: inline-block; }
-.cuvant :global(.katex),
-.cuvantCitit :global(.katex),
-.cuvantActiv :global(.katex),
-.cuvant :global(.katex *),
-.cuvantCitit :global(.katex *),
-.cuvantActiv :global(.katex *) {
-  color: inherit;
 }
 
 /* Cuvântul rostit ACUM: NU o cutie plină țipătoare, ci un tuș fin — text în

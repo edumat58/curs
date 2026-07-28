@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import katex from 'katex';
 import {
   adunaBlocuri,
   adunaBlocuriSectiune,
@@ -144,73 +143,46 @@ function indiceToken(tokens, ms) {
   return idx;
 }
 
-/** LaTeX → HTML KaTeX, o singură dată per jeton (memoizat de React în render). */
-function katexHtml(latex) {
-  try {
-    return katex.renderToString(latex, { throwOnError: false, displayMode: false });
-  } catch {
-    return latex;
-  }
-}
-
 /**
  * Subtitrarea sincronizată: transcriptul rostit, jeton cu jeton, cu cel citit
- * acum evidențiat. Proza e cuvânt cu cuvânt; expresiile matematice sunt
- * reasamblate din cuvinte și RANDATE cu KaTeX (`3 × 10000 + 7 × 1000`), nu
- * lăsate ca „înmulțit cu". Cutia se derulează singură ca să țină jetonul activ
- * în mijloc, dar mișcă DOAR cutia, nu pagina.
+ * acum evidențiat. Proza e cuvânt cu cuvânt; expresiile matematice apar cu
+ * SIMBOLURI (`3 × 10000 + 7 × 1000`, `2²`), reasamblate din cuvinte, nu lăsate
+ * ca „înmulțit cu". Cutia se derulează singură ca să țină jetonul activ în
+ * mijloc, dar mișcă DOAR cutia, nu pagina.
  */
 function Subtitrare({ words, currentMs }) {
-  const cutie = useRef(null);
   const activ = useRef(null);
   const tokens = useMemo(() => construiesteTokeni(words), [words]);
   const idx = indiceToken(tokens, currentMs);
 
   useEffect(() => {
-    const el = activ.current;
-    const box = cutie.current;
-    if (!el || !box) return;
-    // `.subtitrare` e `position: relative`, deci offsetTop e chiar poziția în
-    // cutie. Ținem jetonul activ în mijloc.
-    const tinta = el.offsetTop - box.clientHeight / 2 + el.clientHeight / 2;
-    const distanta = Math.abs(box.scrollTop - tinta);
-    if (distanta > 24) {
-      const redus = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      box.scrollTo({
-        top: Math.max(0, tinta),
-        // Sărituri mari (derulare manuală a audio-ului) — instant; avans normal
-        // — lin. Un scroll lin peste toată lecția ar dura secunde și ar rata.
-        behavior: (redus || distanta > box.clientHeight * 2) ? 'auto' : 'smooth',
-      });
-    }
+    // Transcript static: urmărirea o face PAGINA, nu o cutie. Aducem cuvântul
+    // activ în ecran DOAR când iese din fereastra vizibilă — nu la fiecare
+    // cuvânt — ca pagina să nu tresară. `window.innerHeight` e o măsură sigură,
+    // spre deosebire de dimensiunile portalului care se pot îngusta o clipă.
+    const raf = requestAnimationFrame(() => {
+      const el = activ.current;
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      const sus = 96;
+      const jos = window.innerHeight - 140;
+      if (r.top < sus || r.bottom > jos) {
+        const redus = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        el.scrollIntoView({ block: 'center', behavior: redus ? 'auto' : 'smooth' });
+      }
+    });
+    return () => cancelAnimationFrame(raf);
   }, [idx]);
 
   return (
-    <div className={styles.subtitrare} ref={cutie} aria-label="Transcript sincronizat">
-      {tokens.map((tok, i) => {
-        const clasa = i === idx ? styles.cuvantActiv : (i < idx ? styles.cuvantCitit : styles.cuvant);
-        const ref = i === idx ? activ : null;
-        if (tok.tip === 'math') {
-          return (
-            <React.Fragment key={i}>
-              <span
-                ref={ref}
-                className={`${clasa} ${styles.cuvantMath}`}
-                // eslint-disable-next-line react/no-danger
-                dangerouslySetInnerHTML={{ __html: katexHtml(tok.latex) }}
-              />
-              {' '}
-            </React.Fragment>
-          );
-        }
-        return (
-          // eslint-disable-next-line react/no-array-index-key
-          <span key={i} ref={ref} className={clasa}>
-            {tok.text}
-            {' '}
-          </span>
-        );
-      })}
+    <div className={styles.subtitrare} aria-label="Transcript sincronizat">
+      {tokens.map((tok, i) => (
+        // eslint-disable-next-line react/no-array-index-key
+        <span key={i} ref={i === idx ? activ : null} className={i === idx ? styles.cuvantActiv : (i < idx ? styles.cuvantCitit : styles.cuvant)}>
+          {tok.text}
+          {' '}
+        </span>
+      ))}
     </div>
   );
 }

@@ -1,19 +1,21 @@
 /**
- * Din cuvintele rostite (granițele de la Azure) → jetoane de subtitrare, unde
- * expresiile matematice sunt REASAMBLATE ca LaTeX pentru randare KaTeX.
+ * Din cuvintele rostite (granițele de la Azure) → jetoane de subtitrare, cu
+ * matematica adusă la SIMBOLURI inline (× ÷ + − = puteri), nu lăsată ca vorbire.
  *
- * Motivul: pentru voce, `toSpeakable` transformă „3×10000+7×1000" în cuvinte —
- * „3 înmulțit cu 10000, plus 7 înmulțit cu 1000" — ca Azure să le rostească
- * corect, în ordine. Dar CITITE pe ecran, cuvintele acelea sunt urâte; elevul
- * vrea să VADĂ matematica: `3 × 10000 + 7 × 1000`. Aici facem drumul invers:
- * recunoaștem secvențele de cuvinte-operator și le lipim înapoi în simboluri,
- * apoi grupăm o expresie întreagă (număr operator număr …) într-un singur jeton
- * „math" pe care playerul îl randează cu KaTeX. Proza rămâne jeton cu jeton, ca
- * evidențierea pe cuvânt să meargă mai departe pentru text.
+ * De ce simboluri Unicode, nu KaTeX: subtitrarea curge cuvânt cu cuvânt, cu
+ * evidențiere sincronizată. Un bloc KaTeX e o formulă întreagă, indivizibilă —
+ * într-un rând îngust se rupe pe verticală, umflă cutia și strică derularea. Un
+ * simbol Unicode (`×`, `÷`, `²`) e un caracter obișnuit: se așază în rând ca
+ * orice cuvânt, își păstrează timpul, și evidențierea pe cuvânt merge mai
+ * departe. Pentru notația din lecții (înmulțiri, sume poziționale, puteri) e
+ * exact ce trebuie; fracția rămâne cu `/`, nu stivuită.
  *
- * Fiecare jeton păstrează timpii (t = start ms, d = durată ms) — uniunea
- * timpilor cuvintelor din care e făcut — deci sincronizarea rămâne exactă: un
- * grup matematic se aprinde cât e rostit, o proză cuvânt cu cuvânt.
+ * `toSpeakable` a transformat, pentru voce, „3×10000+7×1000" în „3 înmulțit cu
+ * 10000, plus 7 înmulțit cu 1000". Aici facem drumul invers, DOAR pentru afișat:
+ * recunoaștem secvențele de cuvinte-operator și le lipim înapoi în simbol.
+ *
+ * Fiecare jeton păstrează timpii (t = start ms, d = durată ms), uniunea
+ * cuvintelor din care e făcut — deci sincronizarea rămâne exactă.
  */
 
 /** Un cuvânt e „număr"? (întreg sau zecimal cu virgulă/punct.) */
@@ -21,27 +23,24 @@ function esteNumar(w) {
   return /^-?\d[\d.,]*$/.test(String(w || '').trim());
 }
 
-/** Numărul, pregătit pentru KaTeX: virgula zecimală lipită, fără spațiere. */
-function numarKatex(w) {
-  return String(w).replace(/,/g, '{,}');
-}
+const SUPERSCRIPT = {
+  0: '⁰', 1: '¹', 2: '²', 3: '³', 4: '⁴', 5: '⁵', 6: '⁶', 7: '⁷', 8: '⁸', 9: '⁹',
+};
 
-/**
- * Operatori INFIX pe una sau două cuvinte: leagă două numere.
- * Cheia e secvența de cuvinte (minuscule), valoarea e LaTeX-ul.
- */
+/** Operatori INFIX pe una sau două cuvinte, cu simbolul lor. */
 const INFIX = [
-  { cuv: ['înmulțit', 'cu'], latex: ' \\times ' },
-  { cuv: ['împărțit', 'la'], latex: ' \\div ' },
-  { cuv: ['egal', 'cu'], latex: ' = ' },
-  { cuv: ['plus'], latex: ' + ' },
-  { cuv: ['minus'], latex: ' - ' },
+  { cuv: ['înmulțit', 'cu'], sym: '×', matematic: true },
+  { cuv: ['împărțit', 'la'], sym: '÷', matematic: true },
+  { cuv: ['supra'], sym: '/', matematic: true },
+  { cuv: ['egal', 'cu'], sym: '=', matematic: true },
+  { cuv: ['plus'], sym: '+', matematic: false },
+  { cuv: ['minus'], sym: '−', matematic: false },
 ];
 
-/** Operatori POSTFIX: se lipesc de numărul dinainte (puteri). */
+/** Operatori POSTFIX: se lipesc de jetonul dinainte (puteri). */
 const POSTFIX = [
-  { cuv: ['la', 'pătrat'], latex: '^{2}' },
-  { cuv: ['la', 'cub'], latex: '^{3}' },
+  { cuv: ['la', 'pătrat'], sym: '²' },
+  { cuv: ['la', 'cub'], sym: '³' },
 ];
 
 /** Potrivește o listă de cuvinte-cheie la poziția i (comparație pe litere mici). */
@@ -55,71 +54,59 @@ function potrivesteSecventa(words, i, cuv) {
 
 /**
  * Transformă lista de cuvinte în jetoane de afișat.
- * @returns {Array<{tip:'text'|'math', text?:string, latex?:string, t:number, d:number}>}
+ * @returns {Array<{text:string, t:number, d:number}>}
  */
 export function construiesteTokeni(words) {
   if (!Array.isArray(words) || !words.length) return [];
   const out = [];
   let i = 0;
 
+  const extinde = (jeton, panaLa) => {
+    jeton.d = Math.max(jeton.d || 1, panaLa.t + panaLa.d - jeton.t);
+  };
+
   while (i < words.length) {
-    // O expresie matematică începe DOAR de la un număr — altfel „plus" dintr-o
-    // enumerare de proză nu declanșează o formulă.
-    if (esteNumar(words[i].w)) {
-      const start = words[i];
-      let latex = numarKatex(words[i].w);
-      let ultim = words[i];
-      let j = i + 1;
-      let aCrescut = true;
-
-      while (aCrescut && j < words.length) {
-        aCrescut = false;
-
-        // postfix (putere) lipit de ce am construit până acum
-        for (const op of POSTFIX) {
-          if (potrivesteSecventa(words, j, op.cuv)) {
-            latex += op.latex;
-            ultim = words[j + op.cuv.length - 1];
-            j += op.cuv.length;
-            aCrescut = true;
-            break;
-          }
-        }
-        if (aCrescut) continue;
-
-        // infix (operator între numere): operatorul + un număr după el
-        for (const op of INFIX) {
-          if (potrivesteSecventa(words, j, op.cuv)) {
-            const dupa = words[j + op.cuv.length];
-            if (dupa && esteNumar(dupa.w)) {
-              latex += op.latex + numarKatex(dupa.w);
-              ultim = dupa;
-              j += op.cuv.length + 1;
-              aCrescut = true;
-              break;
-            }
-          }
-        }
+    // POSTFIX (putere) — se lipește de ultimul jeton numeric.
+    let gasit = false;
+    for (const op of POSTFIX) {
+      if (potrivesteSecventa(words, i, op.cuv)) {
+        const ult = out[out.length - 1];
+        if (ult) { ult.text += op.sym; extinde(ult, words[i + op.cuv.length - 1]); }
+        i += op.cuv.length;
+        gasit = true;
+        break;
       }
-
-      // Un singur număr, fără operatori în jur, nu merită tratat ca „formulă":
-      // se afișează ca text obișnuit, ca să rămână evidențierea pe cuvânt.
-      if (j === i + 1) {
-        out.push({ tip: 'text', text: words[i].w, t: words[i].t, d: words[i].d });
-        i += 1;
-      } else {
-        out.push({
-          tip: 'math',
-          latex,
-          t: start.t,
-          d: Math.max(1, ultim.t + ultim.d - start.t),
-        });
-        i = j;
-      }
-    } else {
-      out.push({ tip: 'text', text: words[i].w, t: words[i].t, d: words[i].d });
-      i += 1;
     }
+    if (gasit) continue;
+
+    // „la puterea N" → exponent Unicode al lui N, lipit de jetonul dinainte.
+    if (potrivesteSecventa(words, i, ['la', 'puterea']) && words[i + 2] && /^\d+$/.test(words[i + 2].w)) {
+      const ult = out[out.length - 1];
+      const exp = [...words[i + 2].w].map((c) => SUPERSCRIPT[c] || c).join('');
+      if (ult) { ult.text += exp; extinde(ult, words[i + 2]); }
+      i += 3;
+      continue;
+    }
+
+    // INFIX — operator între operanzi. Cele „matematice" (înmulțit/împărțit/egal)
+    // se convertesc mereu; „plus"/„minus" doar între numere, ca să nu atingem
+    // „în plus" din proză.
+    for (const op of INFIX) {
+      if (!potrivesteSecventa(words, i, op.cuv)) continue;
+      const dupa = words[i + op.cuv.length];
+      const inainteNumar = out.length && /[\d)²³⁰¹⁴-⁹]$/u.test(out[out.length - 1].text);
+      const contextNumeric = (dupa && esteNumar(dupa.w)) || inainteNumar;
+      if (!op.matematic && !contextNumeric) continue;
+      out.push({ text: op.sym, t: words[i].t, d: words[i + op.cuv.length - 1].t + words[i + op.cuv.length - 1].d - words[i].t });
+      i += op.cuv.length;
+      gasit = true;
+      break;
+    }
+    if (gasit) continue;
+
+    // Cuvânt obișnuit.
+    out.push({ text: words[i].w, t: words[i].t, d: words[i].d });
+    i += 1;
   }
 
   return out;
