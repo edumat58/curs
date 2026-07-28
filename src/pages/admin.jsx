@@ -3,6 +3,7 @@ import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import { KulturosferaLine } from '@site/src/components/Brand';
+import VoiceAdmin from '@site/src/components/VoiceAdmin';
 import styles from './admin.module.css';
 
 /**
@@ -979,6 +980,59 @@ function CreateForm({ lessons, onCreate, initialCollection = 'standard' }) {
 
 // ---- pagina ----------------------------------------------------------------
 
+/**
+ * Învelișul autentificat: comută între gestiunea de lecții și panoul de voce.
+ *
+ * Managerul de lecții își păstrează antetul propriu (cu „Ieși"); panoul de voce
+ * primește unul minimal aici, ca „Ieși" să fie mereu la îndemână. Comutatorul e
+ * lipicios sus pe mobil, ca să nu se piardă la scroll printr-o listă lungă.
+ */
+function AuthedAdmin({ session, logout, apiBase }) {
+  const [tab, setTab] = React.useState('lectii');
+  return (
+    <div>
+      <div className={styles.tabbar}>
+        <div className={styles.tabs}>
+          <button
+            type="button"
+            className={`${styles.tab} ${tab === 'lectii' ? styles.tabOn : ''}`}
+            onClick={() => setTab('lectii')}
+          >
+            Lecții
+          </button>
+          <button
+            type="button"
+            className={`${styles.tab} ${tab === 'voce' ? styles.tabOn : ''}`}
+            onClick={() => setTab('voce')}
+          >
+            Voce
+          </button>
+        </div>
+        {tab === 'voce' ? (
+          <span className={styles.sessionChip}>
+            {session.name}
+            <button className={styles.linkQuiet} onClick={logout}>Ieși</button>
+          </span>
+        ) : null}
+      </div>
+      {tab === 'lectii' ? (
+        <LessonManager token={session.token} name={session.name} onLogout={logout} apiBase={apiBase} />
+      ) : (
+        <div>
+          <div className={styles.eyebrow}>Administrare</div>
+          <h1 className={styles.display} style={{ fontSize: '1.5rem', margin: '0.25rem 0 0.75rem' }}>
+            Voce — explicații pe lecții
+          </h1>
+          <p style={{ marginTop: 0, marginBottom: '1rem', fontSize: '0.875rem', color: 'var(--km-ink3)' }}>
+            Generezi textul cu modelul local, îl corectezi, apoi aprobi sinteza Azure. Elevii aud doar lecțiile marcate „gata".
+          </p>
+          <VoiceAdmin token={session.token} apiBase={apiBase} />
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function AdminPage() {
   const [session, setSession] = React.useState(null);
   const [mounted, setMounted] = React.useState(false);
@@ -1003,7 +1057,7 @@ export default function AdminPage() {
     <Layout title="Administrare" description="Panoul de administrare Edumat58" noFooter>
       <div className={styles.root}>
         {!mounted || !apiBase ? null : session ? (
-          <LessonManager token={session.token} name={session.name} onLogout={logout} apiBase={apiBase} />
+          <AuthedAdmin session={session} logout={logout} apiBase={apiBase} />
         ) : (
           <div className={styles.center}>
             <LoginCard apiBase={apiBase} onLogin={(data) => setSession({ token: data.token, name: data.name || data.email })} />

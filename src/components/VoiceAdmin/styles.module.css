@@ -1,0 +1,178 @@
+/* Panoul de voce — mobile-first. Aceleași culori ca restul adminului. */
+.wrap {
+  --a-turq: #0197b0;
+  --a-green: #2f9e77;
+  --a-burg: #8c2f39;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ---- bara de consum ---- */
+.usage {
+  background: var(--km-cream-2);
+  border: 1px solid var(--km-line);
+  border-radius: 14px;
+  padding: 14px 16px;
+}
+.usageTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.usageLabel { font-weight: 700; color: var(--km-ink); }
+.usageNums { color: var(--km-ink2); font-variant-numeric: tabular-nums; font-size: 0.92rem; }
+.bar {
+  margin-top: 10px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--km-cream-3);
+  overflow: hidden;
+}
+.barFill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--a-green), var(--a-turq));
+  transition: width 0.4s ease;
+}
+.usageHint, .usageFoot { margin-top: 8px; color: var(--km-ink3); font-size: 0.85rem; }
+
+/* ---- controale ---- */
+.controls { display: flex; flex-direction: column; gap: 10px; }
+.search {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--km-line);
+  border-radius: 12px;
+  background: var(--km-cream-2);
+  color: var(--km-ink);
+  font-size: 1rem;
+}
+.search:focus { outline: none; border-color: var(--km-orange); }
+.chips { display: flex; gap: 8px; flex-wrap: wrap; }
+.chip {
+  padding: 8px 14px;
+  border: 1px solid var(--km-line);
+  border-radius: 999px;
+  background: var(--km-cream-2);
+  color: var(--km-ink2);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.chipOn { background: var(--km-ink); color: var(--km-cream); border-color: var(--km-ink); }
+
+.mesaj {
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(1, 151, 176, 0.08);
+  border: 1px solid rgba(1, 151, 176, 0.25);
+  color: var(--km-ink);
+  font-size: 0.92rem;
+}
+
+/* ---- așezare: pe mobil o coloană, pe lat două ---- */
+.layout { display: flex; flex-direction: column; gap: 16px; }
+
+/* ---- lista ---- */
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--km-line);
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--km-cream-2);
+  max-height: 60vh;
+  overflow-y: auto;
+}
+.row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 14px;
+  border-bottom: 1px solid var(--km-line);
+  cursor: pointer;
+  min-height: 52px; /* țintă de atins confortabilă pe mobil */
+}
+.row:last-child { border-bottom: none; }
+.row:active { background: var(--km-cream-3); }
+.rowOn { background: var(--km-cream-3); }
+.rowTitle { flex: 1; color: var(--km-ink); font-weight: 600; font-size: 0.95rem; line-height: 1.3; }
+.rowMeta { color: var(--km-ink3); font-size: 0.8rem; font-weight: 600; white-space: nowrap; }
+.gol { padding: 24px; text-align: center; color: var(--km-ink3); }
+
+.dot { width: 12px; height: 12px; border-radius: 999px; flex: none; }
+.dot_none { background: var(--km-cream-3); border: 1.5px solid var(--km-ink3); }
+.dot_draft { background: var(--km-orange); }
+.dot_pending { background: var(--a-turq); animation: puls 1.2s ease-in-out infinite; }
+.dot_ready { background: var(--a-green); }
+.dot_error { background: var(--a-burg); }
+@keyframes puls { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+/* ---- editor ---- */
+.editor {
+  border: 1px solid var(--km-line);
+  border-radius: 14px;
+  background: var(--km-cream-2);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.hint { color: var(--km-ink3); text-align: center; padding: 28px 12px; }
+.editorHead { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.editorTitle { margin: 0 0 6px; font-size: 1.1rem; color: var(--km-ink); line-height: 1.25; }
+
+.badge { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 0.78rem; font-weight: 700; }
+.badge_none { background: var(--km-cream-3); color: var(--km-ink2); }
+.badge_draft { background: rgba(232, 89, 12, 0.14); color: var(--km-orange-deep); }
+.badge_pending { background: rgba(1, 151, 176, 0.14); color: var(--a-turq); }
+.badge_ready { background: rgba(47, 158, 119, 0.16); color: var(--a-green); }
+.badge_error { background: rgba(140, 47, 57, 0.14); color: var(--a-burg); }
+
+.actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.btn, .btnPrimary, .btnAccent, .btnGhost {
+  padding: 11px 16px;
+  border-radius: 11px;
+  font-weight: 700;
+  font-size: 0.92rem;
+  cursor: pointer;
+  border: 1px solid transparent;
+  flex: 1 1 auto;
+  min-height: 44px;
+}
+.btnPrimary { background: var(--km-ink); color: var(--km-cream); }
+.btnAccent { background: var(--a-green); color: #fff; }
+.btn { background: var(--km-cream-2); color: var(--km-ink); border-color: var(--km-line); }
+.btnGhost { background: transparent; color: var(--a-burg); border-color: rgba(140, 47, 57, 0.35); flex: 0 0 auto; }
+.btn:disabled, .btnPrimary:disabled, .btnAccent:disabled, .btnGhost:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.audioInfo { color: var(--a-green); font-size: 0.85rem; font-weight: 600; }
+
+.textarea {
+  width: 100%;
+  min-height: 260px;
+  resize: vertical;
+  padding: 14px;
+  border: 1px solid var(--km-line);
+  border-radius: 12px;
+  background: var(--km-cream);
+  color: var(--km-ink);
+  font-size: 1rem;
+  line-height: 1.6;
+  font-family: inherit;
+}
+.textarea:focus { outline: none; border-color: var(--km-orange); }
+.count { color: var(--km-ink3); font-size: 0.82rem; text-align: right; }
+
+/* ---- pe ecran lat: listă + editor alături ---- */
+@media (min-width: 900px) {
+  .layout { flex-direction: row; align-items: flex-start; }
+  .list { flex: 0 0 340px; max-height: 72vh; }
+  .editor { flex: 1; position: sticky; top: 16px; }
+  .controls { flex-direction: row; align-items: center; }
+  .search { flex: 1; }
+}

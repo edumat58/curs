@@ -136,3 +136,20 @@ export async function sectionHash(section, promptVersion = 1) {
   canonical.pv = promptVersion;
   return sha256Hex(stableStringify(canonical));
 }
+
+/**
+ * Hash-ul unei LECȚII ÎNTREGI, după rută — nu după conținutul extras din DOM.
+ *
+ * Explicația pe toată lecția e generată acum DOAR de administrator, dintr-un
+ * panou, o singură dată per lecție. Pentru asta ruta e cheia firească: e stabilă,
+ * o cunosc și panoul (din indexul de lecții), și pagina elevului (din adresa ei),
+ * fără să fie nevoie ca amândouă să reconstruiască identic textul din pagină.
+ * Așa, ce generează administratorul pentru o rută găsește elevul pe aceeași rută,
+ * garantat, indiferent de mărunțișuri de randare.
+ *
+ * `pv` (versiunea promptului) intră în hash: la o îmbunătățire a prompturilor,
+ * lecțiile se regenerează controlat.
+ */
+export async function hashLectie(route, promptVersion = 1) {
+  return sha256Hex(stableStringify({ v: 1, kind: 'lectie-route', route: norm(route), pv: promptVersion }));
+}
