@@ -10,6 +10,7 @@ const DEFAULT_PREFERENCES = {
   font: 'implicit',
   textSize: 'normal',
   spacing: 'normal',
+  rigla: 'oprit',
 };
 
 /**
@@ -45,6 +46,16 @@ const TIPOGRAFIE = [
       ['normal', 'Normal'],
       ['mare', 'Mare'],
       ['foarte-mare', 'Foarte mare'],
+    ],
+  },
+  {
+    cheie: 'rigla',
+    titlu: 'Riglă de citire',
+    nota: 'O bandă urmărește rândul pe care e mouse-ul sau degetul, ca să nu se piardă rândul la întoarcere.',
+    optiuni: [
+      ['oprit', 'Oprită'],
+      ['banda', 'Bandă'],
+      ['reflector', 'Reflector'],
     ],
   },
   {
@@ -88,6 +99,7 @@ function applyPreferencesToDom(prefs) {
   root.setAttribute('data-edupasi-font', prefs.font || 'implicit');
   root.setAttribute('data-edupasi-text-size', prefs.textSize || 'normal');
   root.setAttribute('data-edupasi-spacing', prefs.spacing || 'normal');
+  root.setAttribute('data-edupasi-rigla', prefs.rigla || 'oprit');
 
   try {
     localStorage.setItem('edupasi-accessibility-v1', JSON.stringify(prefs));

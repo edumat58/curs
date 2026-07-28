@@ -459,7 +459,7 @@ function EduPasiContextBar({ items }) {
   }, [items, pathname]);
 
   return (
-    <header className={shellStyles.contextBar}>
+    <header className={shellStyles.contextBar} data-edupasi-chrome="">
       <div className={shellStyles.contextLeft}>
         <Link className={shellStyles.wordmark} to={hubUrl} aria-label="EduPAȘI — toate lecțiile">
           <EduPasiBrandMark />
@@ -539,6 +539,7 @@ function EduPasiLearningNavigator({ items }) {
 
   return (
     <aside
+      data-edupasi-chrome=""
       className={shellStyles.navigator}
       aria-labelledby="edupasi-navigator-title"
       data-edupasi-secondary
@@ -692,6 +693,14 @@ function EduPasiAccessibilityTools() {
         {() => {
           const SectionVoice = require('@site/src/components/SectionVoice').default;
           return <SectionVoice />;
+        }}
+      </BrowserOnly>
+      {/* Rigla urmărește cursorul, deci nu are ce căuta pe server. */}
+      <BrowserOnly>
+        {() => {
+          const ReadingRuler =
+            require('@site/src/components/EduPasiAccessibility/ReadingRuler').default;
+          return <ReadingRuler />;
         }}
       </BrowserOnly>
     </>

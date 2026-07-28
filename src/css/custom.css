@@ -1356,7 +1356,12 @@ html[data-edupasi-focus='true'] .theme-doc-sidebar-container,
 html[data-edupasi-focus='true'] .theme-doc-toc-desktop,
 html[data-edupasi-focus='true'] .theme-doc-toc-mobile,
 html[data-edupasi-focus='true'] .footer,
-html[data-edupasi-focus='true'] [data-edupasi-secondary] {
+html[data-edupasi-focus='true'] [data-edupasi-secondary],
+/* Chrome-ul propriu EduPAȘI: bara de context și navigatorul lecției. Numele lor
+   de clasă sunt hash-uri de modul CSS, deci se marchează cu un atribut stabil.
+   Fără ele, „modul de concentrare" ascundea navbarul temei și lăsa pe ecran
+   exact barele care ocupă cel mai mult loc — părea că nu face nimic. */
+html[data-edupasi-focus='true'] [data-edupasi-chrome] {
   display: none !important;
 }
 
@@ -1683,16 +1688,18 @@ svg[class*='breadcrumbHomeIcon'] path {
   font-display: swap;
 }
 
-html[data-edupasi-font='lizibil'] :where(body, .theme-doc-markdown, .menu, .navbar) {
-  font-family: 'EduPasiLizibil', Verdana, Tahoma, system-ui, sans-serif;
-}
+html[data-edupasi-font='lizibil'] { --edupasi-font-ales: 'EduPasiLizibil', Verdana, Tahoma, system-ui, sans-serif; }
+html[data-edupasi-font='dislexie'] { --edupasi-font-ales: 'EduPasiDislexie', Verdana, system-ui, sans-serif; }
+html[data-edupasi-font='serif'] { --edupasi-font-ales: Georgia, 'Iowan Old Style', 'Times New Roman', serif; }
 
-html[data-edupasi-font='dislexie'] :where(body, .theme-doc-markdown, .menu, .navbar) {
-  font-family: 'EduPasiDislexie', Verdana, system-ui, sans-serif;
-}
-
-html[data-edupasi-font='serif'] :where(body, .theme-doc-markdown, .menu, .navbar) {
-  font-family: Georgia, 'Iowan Old Style', 'Times New Roman', serif;
+/* Titlurile primesc de la temă o familie proprie („Space Grotesk"), care
+   câștigă în fața moștenirii de la `body`. Dacă alegerea elevului nu le
+   acoperă, jumătate din pagină rămâne în alt font decât a cerut — și pare că
+   setarea nu funcționează. */
+html[data-edupasi-font]:not([data-edupasi-font='implicit']) :where(body, .menu, .navbar),
+html[data-edupasi-font]:not([data-edupasi-font='implicit'])
+  .theme-doc-markdown :where(p, li, td, th, blockquote, h1, h2, h3, h4, h5, h6, strong, em, a) {
+  font-family: var(--edupasi-font-ales);
 }
 
 /* Mărimea se schimbă din rădăcină, ca tot ce e exprimat în `rem` — spațieri,
