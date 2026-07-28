@@ -190,6 +190,25 @@ export function imparteLectia(source, maxChars) {
 }
 
 /** Materialul sursă, identic pentru ambele treceri — singura realitate permisă. */
+/**
+ * Înlocuiește în sursă fiecare SVG cu GEOMETRIA lui citită.
+ *
+ * Markup-ul brut (path-uri, coordonate) nu spune nimic unui model de limbaj și
+ * mănâncă tot bugetul de tokeni. `describeFigure` citește desenul — ce puncte,
+ * ce segmente, ce e egal, unde e unghi drept — și le scrie în română. Așa figura
+ * ajunge la model ca INFORMAȚIE, nu ca gunoi de coordonate, iar restul lecției
+ * încape lângă ea. Un desen decorativ (fără conținut) dispare complet.
+ */
+function inlocuiesteFiguri(mdx) {
+  return String(mdx).replace(/<svg[\s\S]*?<\/svg>/gi, (svg) => {
+    const fig = describeFigure(svg);
+    if (fig.meaningful && fig.facts.length) {
+      return `\n[FIGURĂ — ce se vede în desen:\n${fig.facts.map((f) => `  - ${f}`).join('\n')}\n]\n`;
+    }
+    return '[figură decorativă — se ignoră]';
+  });
+}
+
 export function renderSource(section, maxChars = 12000) {
   /**
    * Dacă avem sursa brută, ea ESTE materialul.
@@ -198,16 +217,19 @@ export function renderSource(section, maxChars = 12000) {
    * descrise de noi — pierdea notația exactă și ordinea lecției. Un model care
    * primește `0,1` deja interpretat își permite să dea altă interpretare;
    * primind `0{,}1` din fișier, nu are ce reinterpreta. Iar structura lecției e
-   * explicită în cod, nu trebuie dedusă.
+   * explicită în cod, nu trebuie dedusă. SVG-urile le înlocuim ÎNAINTE de tăiere
+   * cu geometria citită — altfel modelul nu vede figurile, doar path-uri.
    */
   if (section.sourceCode && String(section.sourceCode).trim().length > 40) {
     return [
       'Acesta este codul sursă EXACT al lecției, așa cum e scris de profesor.',
       'Notația din el se păstrează întocmai: dacă scrie 0{,}1, spui „zero virgulă unu",',
       'nu o rescrii ca „zece la puterea minus unu". Ordinea titlurilor este ordinea lecției.',
+      'Blocurile [FIGURĂ — ...] sunt desene din lecție, citite pentru tine: spui direct ce',
+      'arată desenul (punctele, laturile, unghiurile), fără să pomenești că există o figură.',
       '',
       '```mdx',
-      String(section.sourceCode).slice(0, maxChars),
+      inlocuiesteFiguri(section.sourceCode).slice(0, maxChars),
       '```',
     ].join('\n');
   }
@@ -450,7 +472,9 @@ Cum vorbești — asta contează cel mai mult, textul tău e AUZIT, nu citit:
 - Legi ideile cu vorbe de trecere: „așadar", „hai să vedem", „acum că știi asta", „ai grijă aici". Fără ele, frazele sună tăiate una de alta, robotic.
 - NU citești lecția cuvânt cu cuvânt. O explici cu vorbele tale, simplu.
 - NU spui „în această secțiune", „după cum se observă", „vom analiza". Vorbește direct.
-- ORGANIZEZI explicația PE SECȚIUNILE lecției. Fiecare titlu de secțiune din material (Definiție, Reprezentarea pozițională, Citirea numerelor zecimale, Conversii etc.) devine un pas. Înaintea fiecărei secțiuni pui titlul EI pe un rând singur, între paranteze duble, EXACT cum e în material: „[[Definiție]]", „[[Reprezentarea pozițională]]". Apoi explici acea secțiune. Titlurile în paranteze duble sunt SINGURELE marcaje permise.
+- ORGANIZEZI explicația PE SECȚIUNILE lecției. Fiecare titlu de secțiune din material (fiecare „## Titlu") devine un pas. Înaintea fiecărei secțiuni pui titlul EI pe un rând singur, între paranteze duble, EXACT cum e în material: „[[Definiție]]", „[[Reprezentarea pozițională]]", „[[Cifră vs Număr]]", „[[Aproximări]]". Apoi explici acea secțiune. Titlurile în paranteze duble sunt SINGURELE marcaje permise.
+- CHIAR ȘI ultimele secțiuni primesc titlul lor [[...]] și explicația lor completă, cu exemplele lor. Nu le comasa și nu le arunca într-o încheiere.
+- FĂRĂ recapitulare, rezumat sau concluzie la final. NU scrii „ai învățat", „am parcurs", „în concluzie", „așadar ai văzut". După ultima secțiune ([[Aproximări]] sau oricare e ultima în lecție), explicată integral cu exemplele ei, te OPREȘTI. Ultima secțiune e ultimul lucru, nu un rezumat al tuturor.
 - În rest: fără liste, fără alte titluri, fără emoji. Sub fiecare titlu, doar proză vorbită, curgătoare.
 - Formulele se rostesc în cuvinte, niciodată caracter cu caracter. Dacă ai primit forma citită a unei formule, folosește exact acea formă.
 - Terminologie școlară românească:
@@ -472,7 +496,8 @@ Fidelitate — regula cea mai importantă:
 - Mai bine spui mai puțin decât să inventezi. Corectitudinea este prioritatea absolută.
 
 Acoperire — a doua regulă ca importanță:
-- Parcurgi TOT ce apare în lista de acoperire primită: fiecare definiție, fiecare formulă, fiecare exemplu, fiecare informație din figuri. Niciun punct nu se sare.
+- ABSOLUT FIECARE secțiune din material (fiecare titlu ##) își are pasul ei cu titlul între [[...]], în ordinea din lecție. NICIO secțiune nu se sare, oricât de scurtă — dacă lecția are opt secțiuni, explicația are opt titluri [[...]]. Înainte să închei, verifici că ai atins toate titlurile din material.
+- În fiecare secțiune parcurgi TOT ce apare: fiecare definiție, fiecare formulă, fiecare exemplu (cu valorile exacte), fiecare informație din figuri. Niciun punct nu se sare.
 - Respecți ordinea logică indicată.
 - Termini ce ai început. Ultima idee se spune la fel de complet ca prima, iar textul se încheie cu o frază terminată — niciodată la mijlocul unui gând.
 
