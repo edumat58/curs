@@ -88,6 +88,38 @@ function createOpenAiCompatible({ name, baseUrl, apiKey, model, timeoutMs, maxRe
       if (maxTokens) body.max_tokens = maxTokens;
       if (isReasoning) body.reasoning_effort = 'low';
 
+      /**
+       * Modelul local (RoLlama-8b) divaghează: repetă idei și continuă mult peste
+       * ce are de spus. Observat direct în log — 1300+ tokeni pentru un segment de
+       * ~400 de cuvinte, la 1,7 tokeni pe secundă, adică minute pierdute pe text
+       * pe care oricum îl tăiem. Penalizările de repetiție îl țin la subiect, iar
+       * `stop` prinde tiparele de divagație (linii goale multiple, reluarea
+       * instrucțiunilor). Modelele mari din cloud nu au nevoie de asta.
+       */
+      if (name === 'local' || name === 'ollama') {
+        /**
+         * Plafonul dur e plasa de siguranță reală împotriva divagației.
+         *
+         * Măsurat: pe prompt simplu, RoLlama se oprește SINGUR (finish=stop, ~95
+         * tokeni). Ramblingul de 1300+ tokeni apărea doar pe promptul complex de
+         * lecție, când modelul se pierde încercând să acopere tot. La 1,7 tokeni
+         * pe secundă, 800 înseamnă deja ~8 minute pe segment; peste atât e
+         * divagație, nu conținut. Îl tăiem din rădăcină.
+         */
+        body.max_tokens = Math.min(body.max_tokens || 800, 800);
+        body.stop = ['\n\n\n', '\nInstruc', '\nMaterial', '\n---'];
+        /**
+         * Penalizări MICI, nu mari.
+         *
+         * Cu `frequency_penalty` la 0,5, modelul slab evita repetiția alegând
+         * cuvinte greșite — a scris „centura" în loc de „zecimi". Un 8b nu are
+         * vocabular de rezervă; forțat să varieze, inventează. Penalizarea mică
+         * descurajează bucla fără să-l împingă în halucinație.
+         */
+        body.frequency_penalty = 0.2;
+        body.presence_penalty = 0.15;
+      }
+
       // Unele modele nu respectă `response_format` (json_validate_failed) sau
       // întorc gol; atunci reîncercăm fără el (promptul cere oricum JSON).
       let relaxJson = false;
