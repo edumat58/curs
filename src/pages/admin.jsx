@@ -59,6 +59,17 @@ const API_OVERRIDE_KEY = 'edumat-admin-api';
 async function resolveApiBase() {
   if (typeof window === 'undefined') return PROD_BACKEND;
 
+  /**
+   * Prin tunel, backend-ul e pe ACEEAȘI origine, la /admin/* (proxy combinat).
+   *
+   * Așa nu mai există CORS și nici parametru de dat în URL: pagina cheamă pur și
+   * simplu propria origine. Recunoaștem tunelul după domeniu.
+   */
+  if (/\.trycloudflare\.com$/.test(window.location.hostname)
+    || /\.(ngrok|loca)\.(io|dev|app)$/.test(window.location.hostname)) {
+    return window.location.origin;
+  }
+
   try {
     const param = new URLSearchParams(window.location.search).get('adminApi');
     if (param && /^https?:\/\//.test(param)) {
