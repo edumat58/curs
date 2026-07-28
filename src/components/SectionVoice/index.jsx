@@ -431,6 +431,33 @@ function LessonButton({ section, route, host }) {
   const panel = usePanel(host, deschis);
 
   /**
+   * Cât timp dock-ul e deschis, rezervăm spațiu în josul lecției ca ULTIMUL ei
+   * conținut să nu rămână ascuns în spatele playerului fix. Măsurăm înălțimea
+   * REALĂ a dock-ului (transcriptul crește/scade) și o punem într-o variabilă,
+   * plus o clasă pe <body> care aplică padding-ul doar cât e deschis. La
+   * închidere (✕ → `deschis` false) sau la demontarea panoului, curățăm ambele.
+   */
+  useEffect(() => {
+    if (!panel || !deschis) return undefined;
+    const root = document.documentElement;
+    document.body.classList.add('voice-dock-open');
+    const masoara = () => {
+      const h = Math.round(panel.getBoundingClientRect().height);
+      if (h > 0) root.style.setProperty('--voice-dock-height', `${h}px`);
+    };
+    masoara();
+    const obs = new ResizeObserver(masoara);
+    obs.observe(panel);
+    window.addEventListener('resize', masoara);
+    return () => {
+      obs.disconnect();
+      window.removeEventListener('resize', masoara);
+      document.body.classList.remove('voice-dock-open');
+      root.style.removeProperty('--voice-dock-height');
+    };
+  }, [panel, deschis]);
+
+  /**
    * Iconița de sunet pe FIECARE secțiune delimitată (H2/H3).
    *
    * Se injectează în titlul din pagină, lângă text. La apăsare: deschide playerul

@@ -261,7 +261,6 @@
 /* Resetul explicit nu e redundant: panoul e frate cu headingul, iar unele teme
    dau lui `h2 + *` moșteniri de spațiere sau de literă. Aici vrem text de corp. */
 .panel {
-  margin: 0.6rem 0 1.35rem;
   font-size: 1rem;
   font-weight: 400;
   font-style: normal;
@@ -269,17 +268,63 @@
   letter-spacing: normal;
   text-transform: none;
   text-align: left;
-  /* SPLIT VIEW: player + transcript rămân LIPITE sus cât timp elevul derulează
-     lecția și vede conținutul dedesubt, în același timp. Se lipesc sub navbar;
-     `--edupasi-navbar-real` e marginea de jos măsurată a navbarului. */
-  position: sticky;
-  top: calc(var(--edupasi-navbar-real, var(--ifm-navbar-height, 4.25rem)) + 10px);
-  z-index: 50;
+
+  /* DOCK PERSISTENT — split-view real.
+     Fixat de VIEWPORT (nu sticky): playerul + transcriptul rămân pe ecran
+     indiferent cât derulează elevul lecția, pe mobil ȘI pe desktop. `fixed` nu
+     se desprinde când markdown-ul trece de el și nu e tăiat de overflow-ul
+     vreunui strămoș — exact ce rupea varianta sticky. Stă lipit DEASUPRA barei
+     de lecție (Înapoi · Cuprins · Înainte); înălțimea ei reală o citim din
+     --lessonbar-height (măsurată în LessonBar), deci nu se suprapun niciodată. */
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: var(--lessonbar-height, 58px);
+  z-index: 180;
+
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0.5rem clamp(0.5rem, 2vw, 1rem);
+  /* Suprafața dock-ului: crem opac + o linie fină sus + o umbră care urcă. Se
+     citește ca o poliță „ascultă acum" și acoperă curat textul din spate. */
+  background: var(--voice-crem);
+  border-top: 1px solid var(--voice-crem-linie);
+  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.12);
+  /* Plafon de siguranță: dock-ul nu urcă niciodată peste bara de sus; dacă
+     transcriptul + comenzile ar fi prea înalte, transcriptul derulează în cutia
+     lui. (vh întâi, ca rezervă pentru browserele fără dvh.) */
+  max-height: min(72vh, calc(100vh - var(--edupasi-navbar-real, 110px) - var(--lessonbar-height, 58px) - 12px));
+  max-height: min(72dvh, calc(100dvh - var(--edupasi-navbar-real, 110px) - var(--lessonbar-height, 58px) - 12px));
 }
 
-/* Pe EduPAȘI mai există o bară (contextBar, 68px) sub navbar; coborâm panoul sub ea. */
+/* Pe EduPAȘI mai există bara de context (68px) sub navbar: o scădem din plafon,
+   ca un dock înalt să nu ajungă sub ea. Accentul bleumarin rămâne dat tot de
+   atributul data-edupasi (regula de culoare de mai sus). */
 .panel[data-edupasi] {
-  top: calc(var(--edupasi-navbar-real, var(--ifm-navbar-height, 4.25rem)) + 68px + 10px);
+  max-height: min(72vh, calc(100vh - var(--edupasi-navbar-real, 110px) - 68px - var(--lessonbar-height, 58px) - 12px));
+  max-height: min(72dvh, calc(100dvh - var(--edupasi-navbar-real, 110px) - 68px - var(--lessonbar-height, 58px) - 12px));
+}
+
+/* Conținutul dock-ului: centrat, aliniat cu bara de lecție (inner 72rem). Panoul
+   E suprafața acum, deci playerul renunță la chenarul/fundalul lui, ca să nu iasă
+   „card în card". Transcriptul preia spațiul rămas și derulează în cutia lui. */
+.panel .player {
+  width: 100%;
+  max-width: 72rem;
+  min-height: 0;
+  flex: 1 1 auto;
+  margin-inline: auto;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+}
+
+.panel .subtitrare {
+  flex: 1 1 auto;
+  min-height: 0;
 }
 
 .waiting,
@@ -650,6 +695,15 @@
   .lessonTitle { font-size: 0.98rem; }
 }
 
+/* Viewport-uri scunde: dock-ul nu are voie să înghită tot ecranul. Micșorăm
+   transcriptul, dar comenzile (play/închide) rămân mereu vizibile. */
+@media (max-height: 700px) {
+  .subtitrare { max-height: 24dvh; }
+}
+@media (max-height: 560px) {
+  .subtitrare { max-height: 18dvh; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .spinner { animation-duration: 2s; }
   .speaker, .speakerOn, .speakerBusy { transition: none; }
@@ -725,6 +779,7 @@ details[open] .transcriptToggle::before { content: '▾ '; }
   /* Înălțime PRESTABILITĂ — nu tot textul deodată (e prea lung). Cutie cu
      derulare internă; cuvântul citit acum se aduce singur în mijloc. */
   max-height: 30vh;
+  max-height: 30dvh;
   overflow-y: auto;
   font-size: 1.06rem;
   line-height: 2;

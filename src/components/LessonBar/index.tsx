@@ -38,6 +38,7 @@ export default function LessonBar({ prev, next }: LessonBarProps) {
     ExecutionEnvironment.canUseDOM ? localStorage.getItem('hideUI') === 'true' : false
   );
   const [mounted, setMounted] = React.useState(false);
+  const barRef = React.useRef<HTMLElement>(null);
 
   React.useEffect(() => {
     setMounted(true);
@@ -50,12 +51,40 @@ export default function LessonBar({ prev, next }: LessonBarProps) {
     };
   }, []);
 
+  /**
+   * Înălțimea REALĂ a barei → variabilă globală, ca dock-ul playerului de voce
+   * să stea EXACT deasupra ei (fără suprapunere, fără gol) pe orice lățime
+   * (butoanele se pot rearanja) și la orice mărire de text din accesibilitate.
+   * Când bara lipsește (hideUI) sau se demontează, punem 0, ca dock-ul să
+   * coboare la marginea de jos.
+   */
+  React.useEffect(() => {
+    const root = document.documentElement;
+    const el = barRef.current;
+    if (!mounted || hideUI || !el) {
+      root.style.setProperty('--lessonbar-height', '0px');
+      return undefined;
+    }
+    const masoara = () => {
+      const h = Math.round(el.getBoundingClientRect().height);
+      root.style.setProperty('--lessonbar-height', `${h}px`);
+    };
+    masoara();
+    const obs = new ResizeObserver(masoara);
+    obs.observe(el);
+    window.addEventListener('resize', masoara);
+    return () => {
+      obs.disconnect();
+      window.removeEventListener('resize', masoara);
+    };
+  }, [mounted, hideUI]);
+
   if (!mounted || hideUI) return null;
 
   const cuprins = courseIndexFor(location.pathname);
 
   return (
-    <nav className={styles.bar} aria-label="Navigare între lecții">
+    <nav ref={barRef} className={styles.bar} aria-label="Navigare între lecții">
       <div className={styles.inner}>
         {prev ? (
           <Link className={styles.navBtn} to={prev.permalink} aria-label={`Lecția anterioară: ${prev.title}`}>
