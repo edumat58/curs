@@ -695,6 +695,7 @@ details[open] .transcriptToggle::before { content: '▾ '; }
 /* Subtitrare sincronizată: transcriptul rostit, cu cuvântul curent evidențiat.
    Cutie derulabilă cu mască de estompare sus/jos, ca la subtitrări. */
 .subtitrare {
+  position: relative; /* ca offsetTop al cuvintelor să fie față de cutie */
   margin-top: 12px;
   padding: 14px 16px;
   max-height: 30vh;
@@ -719,6 +720,19 @@ details[open] .transcriptToggle::before { content: '▾ '; }
 /* Cuvintele deja rostite: text normal, ca la o subtitrare care rămâne. */
 .cuvantCitit {
   color: var(--voice-text, #1c1a16);
+}
+
+/* Matematica reasamblată, randată KaTeX în subtitrare. Moștenește culoarea
+   jetonului (ștearsă / normală / albă când e activ), ca să se lumineze la fel
+   ca proza. KaTeX își pune singur culorile, deci le forțăm la `inherit`. */
+.cuvantMath { display: inline-block; }
+.cuvant :global(.katex),
+.cuvantCitit :global(.katex),
+.cuvantActiv :global(.katex),
+.cuvant :global(.katex *),
+.cuvantCitit :global(.katex *),
+.cuvantActiv :global(.katex *) {
+  color: inherit;
 }
 
 /* Cuvântul rostit ACUM: evidențiat pe accentul lecției (portocaliu/bleumarin). */
