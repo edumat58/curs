@@ -38,21 +38,49 @@ function courseLabel(course) {
   return COURSE_OPTIONS.find((option) => option.value === course)?.label || course;
 }
 
-// Pe localhost preferăm backend-ul local (scrie direct în fișierele repo-ului);
-// dacă nu rulează, cădem automat pe backend-ul din producție — validarea
-// EduConnect+ e aceeași (educonnect.users + scrypt) în ambele.
+const API_OVERRIDE_KEY = 'edumat-admin-api';
+
+/**
+ * Backend-ul cu care vorbește panoul, ales în ordinea asta:
+ *
+ * 1. Un parametru `?adminApi=…` din adresă — cum accesezi panoul PRIN TUNEL.
+ *    Când site-ul e servit printr-un tunel public (cloudflared), pagina nu mai e
+ *    pe `localhost`, deci ar cădea pe backend-ul de producție, care nu cunoaște
+ *    domeniul tunelului în CORS — de aici „backend nu a răspuns". Dând adresa
+ *    backend-ului (expus la rândul lui printr-un tunel) o dată în URL, o reținem
+ *    în localStorage și panoul o folosește de acolo încolo. Nimic hardcodat:
+ *    adresa vine din afară, nu din cod.
+ * 2. Ce am reținut deja în localStorage (dintr-un `?adminApi=` anterior).
+ * 3. Pe localhost, backend-ul local dacă răspunde (scrie direct în fișierele
+ *    repo-ului); altfel backend-ul de producție.
+ * 4. Backend-ul de producție.
+ */
 async function resolveApiBase() {
-  if (typeof window === 'undefined' || window.location.hostname !== 'localhost') {
-    return PROD_BACKEND;
-  }
+  if (typeof window === 'undefined') return PROD_BACKEND;
+
   try {
-    const ctl = new AbortController();
-    const timer = setTimeout(() => ctl.abort(), 1200);
-    const r = await fetch('http://localhost:3002/health', { signal: ctl.signal });
-    clearTimeout(timer);
-    if (r.ok) return 'http://localhost:3002';
+    const param = new URLSearchParams(window.location.search).get('adminApi');
+    if (param && /^https?:\/\//.test(param)) {
+      const curat = param.replace(/\/$/, '');
+      window.localStorage.setItem(API_OVERRIDE_KEY, curat);
+      return curat;
+    }
+    const salvat = window.localStorage.getItem(API_OVERRIDE_KEY);
+    if (salvat) return salvat;
   } catch {
-    // backend-ul local nu rulează
+    // localStorage indisponibil (mod privat) — mergem mai departe.
+  }
+
+  if (window.location.hostname === 'localhost') {
+    try {
+      const ctl = new AbortController();
+      const timer = setTimeout(() => ctl.abort(), 1200);
+      const r = await fetch('http://localhost:3002/health', { signal: ctl.signal });
+      clearTimeout(timer);
+      if (r.ok) return 'http://localhost:3002';
+    } catch {
+      // backend-ul local nu rulează
+    }
   }
   return PROD_BACKEND;
 }

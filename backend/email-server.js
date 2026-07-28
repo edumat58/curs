@@ -42,20 +42,34 @@ try {
 
 const app = express();
 
+// Originile fixe permise. Docusaurus pornește pe 3100 când 3000 e ocupat de alt
+// proiect Kulturosfera — fără portul ăsta, login-ul local pica cu „backend nu a
+// răspuns", deși backend-ul chiar răspundea (browserul bloca CORS).
+const ORIGINI_PERMISE = [
+  'https://edumat58.github.io',
+  'https://edumat58.kulturosfera.com',
+  'http://localhost:3000',
+  'http://localhost:3001',
+  'http://localhost:3002',
+  'http://localhost:3100',
+  'http://localhost:3200',
+  'http://localhost:3480',
+];
+
 app.use(cors({
-  origin: [
-    'https://edumat58.github.io',
-    'https://edumat58.kulturosfera.com',
-    'http://localhost:3000',
-    'http://localhost:3001',
-    'http://localhost:3002',
-    // Docusaurus pornește pe 3100 când 3000 e ocupat de alt proiect
-    // Kulturosfera — fără portul ăsta, login-ul local pica cu „backend nu a
-    // răspuns", deși backend-ul chiar răspundea (browserul bloca CORS).
-    'http://localhost:3100',
-    'http://localhost:3200',
-    'http://localhost:3480',
-  ],
+  /**
+   * Originea se decide printr-o funcție, ca să acceptăm și tunelurile de
+   * dezvoltare (cloudflared). Când site-ul e servit printr-un tunel public,
+   * originea browserului e un domeniu `*.trycloudflare.com` aleator — imposibil
+   * de pus într-o listă fixă. Îl acceptăm după sufix, ca administratorul să se
+   * poată loga în panou de pe orice rețea, fără router.
+   */
+  origin(origin, cb) {
+    if (!origin) return cb(null, true); // cereri fără origine (curl, healthchecks)
+    if (ORIGINI_PERMISE.includes(origin)) return cb(null, true);
+    if (/\.trycloudflare\.com$/.test(origin)) return cb(null, true);
+    return cb(null, false);
+  },
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
@@ -251,7 +265,43 @@ app.get('/admin/config', requireAdmin, (req, res) => {
     repo: REPO,
     branch: BRANCH,
     githubReady: Boolean(process.env.GITHUB_TOKEN) || Boolean(LOCAL_DOCS_DIR),
+    voiceReady: Boolean(process.env.VOICE_ADMIN_SECRET),
   });
+});
+
+// ---------------------------------------------------------------------------
+// Voce — proxy către serviciul de voce (EduPAȘI AI Voice Teacher)
+// ---------------------------------------------------------------------------
+//
+// Serviciul de voce e pe alt server (PC-ul, prin Synology). Panoul NU vorbește
+// direct cu el, ca secretul de administrare a vocii să nu ajungă niciodată în
+// browser. În loc de asta, panoul cheamă backend-ul cu tokenul lui de admin
+// obișnuit, iar backend-ul — care deține secretul — forwardează cererea. Un
+// singur loc știe secretul, iar accesul e păzit de aceeași autentificare ca
+// restul panoului.
+const VOICE_SERVICE_URL = (process.env.VOICE_SERVICE_URL || 'https://voce.asbrihome.synology.me').replace(/\/$/, '');
+const VOICE_ADMIN_SECRET = process.env.VOICE_ADMIN_SECRET || '';
+
+app.all('/admin/voice/*', requireAdmin, async (req, res) => {
+  if (!VOICE_ADMIN_SECRET) {
+    return res.status(503).json({ error: 'Serviciul de voce nu e configurat pe backend (VOICE_ADMIN_SECRET).' });
+  }
+  const trimiteCorp = req.method !== 'GET' && req.method !== 'DELETE' && req.method !== 'HEAD';
+  try {
+    // Generarea pe modelul local durează minute; nu impunem un timeout scurt.
+    const r = await fetch(`${VOICE_SERVICE_URL}${req.originalUrl}`, {
+      method: req.method,
+      headers: {
+        Authorization: `Bearer ${VOICE_ADMIN_SECRET}`,
+        ...(trimiteCorp ? { 'Content-Type': 'application/json' } : {}),
+      },
+      body: trimiteCorp ? JSON.stringify(req.body || {}) : undefined,
+    });
+    const text = await r.text();
+    res.status(r.status).set('Content-Type', r.headers.get('content-type') || 'application/json').send(text);
+  } catch (err) {
+    res.status(502).json({ error: `Serviciul de voce nu răspunde: ${err.message}` });
+  }
 });
 
 // GET /admin/lesson?path=docs/c5/modul-1/08.mdx → { raw, sha }
