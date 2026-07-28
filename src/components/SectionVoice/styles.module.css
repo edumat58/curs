@@ -295,16 +295,16 @@
   /* Plafon de siguranță: dock-ul nu urcă niciodată peste bara de sus; dacă
      transcriptul + comenzile ar fi prea înalte, transcriptul derulează în cutia
      lui. (vh întâi, ca rezervă pentru browserele fără dvh.) */
-  max-height: min(72vh, calc(100vh - var(--edupasi-navbar-real, 110px) - var(--lessonbar-height, 58px) - 12px));
-  max-height: min(72dvh, calc(100dvh - var(--edupasi-navbar-real, 110px) - var(--lessonbar-height, 58px) - 12px));
+  max-height: min(calc(50vh - var(--lessonbar-height, 58px)), calc(100vh - var(--edupasi-navbar-real, 110px) - var(--lessonbar-height, 58px) - 12px));
+  max-height: min(calc(50dvh - var(--lessonbar-height, 58px)), calc(100dvh - var(--edupasi-navbar-real, 110px) - var(--lessonbar-height, 58px) - 12px));
 }
 
 /* Pe EduPAȘI mai există bara de context (68px) sub navbar: o scădem din plafon,
    ca un dock înalt să nu ajungă sub ea. Accentul bleumarin rămâne dat tot de
    atributul data-edupasi (regula de culoare de mai sus). */
 .panel[data-edupasi] {
-  max-height: min(72vh, calc(100vh - var(--edupasi-navbar-real, 110px) - 68px - var(--lessonbar-height, 58px) - 12px));
-  max-height: min(72dvh, calc(100dvh - var(--edupasi-navbar-real, 110px) - 68px - var(--lessonbar-height, 58px) - 12px));
+  max-height: min(calc(50vh - var(--lessonbar-height, 58px)), calc(100vh - var(--edupasi-navbar-real, 110px) - 68px - var(--lessonbar-height, 58px) - 12px));
+  max-height: min(calc(50dvh - var(--lessonbar-height, 58px)), calc(100dvh - var(--edupasi-navbar-real, 110px) - 68px - var(--lessonbar-height, 58px) - 12px));
 }
 
 /* Conținutul dock-ului: centrat, aliniat cu bara de lecție (inner 72rem). Panoul
@@ -325,6 +325,9 @@
 .panel .subtitrare {
   flex: 1 1 auto;
   min-height: 0;
+  /* În dock, transcriptul umple spațiul rămas (dock-ul e plafonat la ~50% cu tot
+     cu bara de jos); nu-l mai limităm la 30vh — derulează în cutia lui. */
+  max-height: none;
 }
 
 .waiting,
@@ -424,6 +427,31 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 0.35rem;
+}
+
+/* Bara de AUDIO — mereu vizibilă, pe UN singur rând (nowrap): play + derulare +
+   colaps + ✕. Seek-ul (flex-1) ia tot spațiul rămas și NU mai e împins pe rândul
+   următor de celelalte butoane. */
+.audioBar {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* Rândul EXTRA de controale — apare doar extins, un rând deasupra barei audio. */
+.extraRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 0.45rem;
+}
+
+/* Pe bara nowrap, seek-ul se poate micșora (nu depăși) pe ecrane foarte înguste. */
+.audioBar .progress {
+  min-width: 0;
+  margin-left: 0;
 }
 
 .playBtn {

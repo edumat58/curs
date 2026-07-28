@@ -560,82 +560,43 @@ export default function AudioPlayer({
     <div className={styles.player} role="group" aria-label="Explicație audio">
       <audio ref={audioRef} src={src} preload="metadata" />
 
-      {/* Un singur rând: comenzile în stânga, derularea în dreapta. Pe telefon
-          derularea trece singură pe rândul următor, prin wrap — nu există o
-          variantă „redusă" de mobil, pentru că acolo sunt cei mai mulți elevi. */}
-      <div className={styles.mainRow}>
-        <button
-          type="button"
-          className={styles.playBtn}
-          onClick={toggle}
-          aria-label={playing ? 'Pauză' : 'Redă explicația'}
-        >
-          {playing ? (
-            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
-              <rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor" />
-              <rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor" />
+      {/* Rând EXTRA de controale — apare doar EXTINS, un rând DEASUPRA barei de
+          audio: ±10, stop, viteză. Restrâns, dispare de tot; rămâne doar bara de
+          audio de dedesubt. */}
+      {extins && (
+        <div className={styles.extraRow}>
+          <button
+            type="button"
+            className={styles.iconBtn}
+            onClick={() => skip(-10)}
+            aria-label="Înapoi 10 secunde"
+            title="Înapoi 10 secunde"
+          >
+            <SkipIcon forward={false} />
+          </button>
+
+          <button
+            type="button"
+            className={styles.iconBtn}
+            onClick={() => skip(10)}
+            aria-label="Înainte 10 secunde"
+            title="Înainte 10 secunde"
+          >
+            <SkipIcon forward />
+          </button>
+
+          <button
+            type="button"
+            className={styles.iconBtn}
+            onClick={stop}
+            aria-label="Oprește"
+            title="Oprește"
+          >
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+              <rect x="6" y="6" width="12" height="12" rx="2" fill="currentColor" />
             </svg>
-          ) : (
-            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
-              <path d="M7 4.5l13 7.5-13 7.5z" fill="currentColor" />
-            </svg>
-          )}
-        </button>
+          </button>
 
-        {extins && (
-          <>
-            <button
-              type="button"
-              className={styles.iconBtn}
-              onClick={() => skip(-10)}
-              aria-label="Înapoi 10 secunde"
-              title="Înapoi 10 secunde"
-            >
-              <SkipIcon forward={false} />
-            </button>
-
-            <button
-              type="button"
-              className={styles.iconBtn}
-              onClick={() => skip(10)}
-              aria-label="Înainte 10 secunde"
-              title="Înainte 10 secunde"
-            >
-              <SkipIcon forward />
-            </button>
-
-            <button
-              type="button"
-              className={styles.iconBtn}
-              onClick={stop}
-              aria-label="Oprește"
-              title="Oprește"
-            >
-              <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
-                <rect x="6" y="6" width="12" height="12" rx="2" fill="currentColor" />
-              </svg>
-            </button>
-          </>
-        )}
-
-        <div className={styles.progress}>
-          <span className={styles.time}>{fmt(current)}</span>
-          <input
-            className={styles.seek}
-            type="range"
-            min={0}
-            max={duration || 0}
-            step={0.1}
-            value={Math.min(current, duration || 0)}
-            onChange={seek}
-            aria-label="Poziția în explicație"
-          />
-          <span className={styles.time}>-{fmt(Math.max(0, (duration || 0) - current))}</span>
-        </div>
-
-        {/* Viteza stă acum într-un mic meniu de SETĂRI, nu pe un rând întreg — mai
-            mult loc lizibil pentru lecție. Meniul se deschide în SUS (dock jos). */}
-        {extins && (
           <div className={styles.setariWrap}>
             <button
               type="button"
@@ -664,11 +625,47 @@ export default function AudioPlayer({
               </div>
             )}
           </div>
-        )}
+        </div>
+      )}
 
-        {/* Restrânge / extinde MENIUL DE CONTROL. Restrâns: rămâne doar bara de
-            audio (play + derulare); butoanele extra se ascund. Transcriptul e
-            vizibil oricum, în ambele stări. */}
+      {/* Bara de AUDIO — MEREU vizibilă, pe UN SINGUR rând: play + derulare/timp +
+          colaps + închide. Seek-ul stă lângă play (nu mai e împins pe alt rând de
+          celelalte butoane), deci nu se mai rupe pe două rânduri pe mobil. */}
+      <div className={styles.audioBar}>
+        <button
+          type="button"
+          className={styles.playBtn}
+          onClick={toggle}
+          aria-label={playing ? 'Pauză' : 'Redă explicația'}
+        >
+          {playing ? (
+            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+              <rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor" />
+              <rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor" />
+            </svg>
+          ) : (
+            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+              <path d="M7 4.5l13 7.5-13 7.5z" fill="currentColor" />
+            </svg>
+          )}
+        </button>
+
+        <div className={styles.progress}>
+          <span className={styles.time}>{fmt(current)}</span>
+          <input
+            className={styles.seek}
+            type="range"
+            min={0}
+            max={duration || 0}
+            step={0.1}
+            value={Math.min(current, duration || 0)}
+            onChange={seek}
+            aria-label="Poziția în explicație"
+          />
+          <span className={styles.time}>-{fmt(Math.max(0, (duration || 0) - current))}</span>
+        </div>
+
+        {/* Restrânge / extinde meniul de control (rândul extra de sus). */}
         <button
           type="button"
           className={styles.colaps}
