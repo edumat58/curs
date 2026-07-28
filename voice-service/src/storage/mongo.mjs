@@ -188,6 +188,119 @@ export async function createStore(env = process.env) {
       return { total, ready, needsReview: review };
     },
 
+    /* ---- Flux de admin: text mai întâi, audio după revizuire ---- */
+
+    /**
+     * Salvează DRAFT-ul de text (fără audio, fără cost Azure).
+     *
+     * Prima fază a fluxului de admin: modelul local scrie explicația, dar nu se
+     * sintetizează încă. Administratorul o citește, o corectează (modelul e slab)
+     * și abia apoi aprobă sinteza. Așa nu se arde cotă Azure pe text neaprobat,
+     * iar greșelile de conținut nu ajung niciodată la elev.
+     */
+    async saveDraft(sectionHash, { route, sectionId, heading, lessonTitle, text, meta }) {
+      await col.updateOne(
+        { sectionHash },
+        {
+          $set: {
+            status: 'draft', explanationText: text, models: meta || {},
+            route: route || null, sectionId: sectionId || null,
+            heading: heading || null, lessonTitle: lessonTitle || null,
+            updatedAt: new Date(),
+          },
+          $setOnInsert: { sectionHash, createdAt: new Date() },
+        },
+        { upsert: true }
+      );
+      return col.findOne({ sectionHash });
+    },
+
+    /** Editarea manuală a textului de către administrator. */
+    async updateText(sectionHash, text) {
+      const res = await col.updateOne(
+        { sectionHash, status: { $in: ['draft', 'ready'] } },
+        // Un text editat după ce audio era gata redevine draft: sinteza veche nu
+        // mai corespunde, trebuie refăcută. Ștergem și audio-ul învechit.
+        { $set: { status: 'draft', explanationText: text, updatedAt: new Date() }, $unset: { audio: '' } }
+      );
+      return res.matchedCount > 0;
+    },
+
+    /** Atașează audio-ul sintetizat și marchează explicația gata de elev. */
+    async attachAudio(sectionHash, audio) {
+      const uploadId = await new Promise((resolve, reject) => {
+        const stream = bucket.openUploadStream(`${sectionHash}.${audio.codec}`, {
+          contentType: audio.contentType,
+          metadata: { sectionHash, voice: audio.voice, codec: audio.codec },
+        });
+        stream.on('error', reject);
+        stream.on('finish', () => resolve(stream.id));
+        stream.end(audio.buffer);
+      });
+      await col.updateOne(
+        { sectionHash },
+        {
+          $set: {
+            status: 'ready',
+            audio: {
+              fileId: uploadId, codec: audio.codec, contentType: audio.contentType,
+              bytes: audio.buffer.length, durationSec: audio.durationSec,
+              sampleRate: audio.sampleRate, voice: audio.voice,
+            },
+            updatedAt: new Date(),
+          },
+        }
+      );
+      return col.findOne({ sectionHash });
+    },
+
+    /** Șterge complet o explicație: document + audio din GridFS. */
+    async remove(sectionHash) {
+      const doc = await col.findOne({ sectionHash });
+      if (!doc) return false;
+      if (doc.audio && doc.audio.fileId) {
+        await bucket.delete(doc.audio.fileId).catch(() => {});
+      }
+      await col.deleteOne({ sectionHash });
+      return true;
+    },
+
+    /** Starea tuturor explicațiilor, indexată pe rută — pentru lista din admin. */
+    async listByRoute() {
+      const docs = await col.find({}, {
+        projection: {
+          sectionHash: 1, route: 1, heading: 1, status: 1, updatedAt: 1,
+          'audio.durationSec': 1, 'models.azureChars': 1, 'models.words': 1,
+          'quality.needsReview': 1,
+        },
+      }).toArray();
+      const dupaRuta = {};
+      for (const d of docs) if (d.route) dupaRuta[d.route] = d;
+      return dupaRuta;
+    },
+
+    /**
+     * Șterge datele de voce ale lecțiilor care NU mai există.
+     *
+     * Regula cerută: dacă FIȘIERUL lecției a fost șters din `docs/` (nu ascuns
+     * din admin), tot ce ține de vocea ei dispare automat — audio, text, consum.
+     * Primim rutele care CHIAR există (din `lesson-sources.json`); orice
+     * explicație pe altă rută e orfană și se curăță.
+     */
+    async purgeOrphans(validRoutes) {
+      const valide = new Set(validRoutes);
+      const docs = await col.find({}, { projection: { sectionHash: 1, route: 1, 'audio.fileId': 1 } }).toArray();
+      let sterse = 0;
+      for (const d of docs) {
+        if (d.route && !valide.has(d.route)) {
+          if (d.audio && d.audio.fileId) await bucket.delete(d.audio.fileId).catch(() => {});
+          await col.deleteOne({ sectionHash: d.sectionHash });
+          sterse += 1;
+        }
+      }
+      return sterse;
+    },
+
     /**
      * Înregistrează un apel de sinteză Azure în evidența de consum.
      *
@@ -209,7 +322,7 @@ export async function createStore(env = process.env) {
      * Reperul de reset e începutul lunii următoare — aproximare curată și
      * ușor de urmărit pentru administrator.
      */
-    async azureUsage(limit = 500000) {
+    async azureUsage(limit = null) {
       const acum = new Date();
       const inceputLuna = new Date(acum.getFullYear(), acum.getMonth(), 1);
       const resetLa = new Date(acum.getFullYear(), acum.getMonth() + 1, 1);
@@ -236,11 +349,13 @@ export async function createStore(env = process.env) {
       ]);
 
       const folosit = (totalLuna[0] && totalLuna[0].chars) || 0;
+      // Limita necunoscută rămâne necunoscută: `ramas` și `procent` sunt null,
+      // nu un procent calculat dintr-un număr inventat.
       return {
         folosit,
         limita: limit,
-        ramas: Math.max(0, limit - folosit),
-        procent: Math.round((folosit / limit) * 1000) / 10,
+        ramas: limit != null ? Math.max(0, limit - folosit) : null,
+        procent: limit ? Math.round((folosit / limit) * 1000) / 10 : null,
         seResetLa: resetLa.toISOString(),
         perLectie: perLectie.map((l) => ({
           route: l._id, heading: l.heading, chars: l.chars,

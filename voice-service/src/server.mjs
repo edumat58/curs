@@ -39,6 +39,7 @@ import { explainSection } from './pipeline/explain.mjs';
 import { speechBudget } from './pipeline/prompts.mjs';
 import { createStore } from './storage/mongo.mjs';
 import { encodeOpus } from './providers/encode.mjs';
+import { azureUsageLive } from './providers/azure-usage.mjs';
 
 const PORT = Number(process.env.PORT || 8099);
 const MAX_TEXT = Number(process.env.VOICE_MAX_TEXT || 20000);
@@ -129,16 +130,146 @@ export async function createServer(env = process.env) {
   });
 
   /**
+   * Guard pentru rutele de admin.
+   *
+   * Serviciul e public (voce.asbrihome.synology.me), deci generarea manuală,
+   * editarea și ștergerea trebuie protejate — altfel oricine ar putea arde cota
+   * Azure sau șterge lecții. Secretul se dă din mediu; dacă lipsește, rutele de
+   * admin sunt oprite complet (fail-closed), nu lăsate deschise din greșeală.
+   */
+  function cereAdmin(req, res, next) {
+    const secret = env.VOICE_ADMIN_SECRET;
+    if (!secret) return res.status(503).json({ error: 'Administrarea nu e configurată (lipsește VOICE_ADMIN_SECRET).' });
+    const dat = (req.get('authorization') || '').replace(/^Bearer\s+/i, '');
+    if (dat !== secret) return res.status(401).json({ error: 'Neautorizat.' });
+    return next();
+  }
+
+  /**
    * Consumul Azure: cât s-a folosit din cota lunară, cât a rămas, când se
    * resetează, și defalcarea pe lecție. Pentru evidența administratorului.
    */
-  app.get('/admin/voice/usage', async (_req, res) => {
+  app.get('/admin/voice/usage', cereAdmin, async (_req, res) => {
     try {
-      const limit = Number(env.AZURE_FREE_CHARS || 500000);
-      res.json({ provider: tts.name, ...(await store.azureUsage(limit)) });
+      // Sursa de adevăr e Azure. Dacă service principal-ul e configurat, luăm
+      // consumul și cota DIRECT de la Azure — nimic fix, se schimbă cu tierul.
+      const live = await azureUsageLive(env).catch((err) => {
+        console.warn('[voice] Azure usage live a eșuat:', err.message);
+        return null;
+      });
+      if (live) return res.json({ provider: tts.name, ...live });
+
+      // Fără ARM: raportăm consumul măsurat local, dar limita rămâne NECUNOSCUTĂ
+      // — nu inventăm un 500000. Limita se dă explicit din mediu doar dacă
+      // administratorul chiar o cunoaște.
+      const limitaConfig = env.AZURE_FREE_CHARS ? Number(env.AZURE_FREE_CHARS) : null;
+      const local = await store.azureUsage(limitaConfig);
+      return res.json({ provider: tts.name, ...local, sursa: 'local' });
+    } catch (err) {
+      return res.status(500).json({ error: String(err.message) });
+    }
+  });
+
+  /** Starea vocii pentru toate lecțiile, indexată pe rută (lista din admin). */
+  app.get('/admin/voice/lessons', cereAdmin, async (_req, res) => {
+    try {
+      res.json({ lessons: await store.listByRoute() });
     } catch (err) {
       res.status(500).json({ error: String(err.message) });
     }
+  });
+
+  /**
+   * Faza 1: generează DOAR textul (model local), fără sinteză, fără cost Azure.
+   * Administratorul îl va revizui înainte de a aproba audio-ul.
+   */
+  app.post('/admin/voice/text', cereAdmin, async (req, res) => {
+    let parsed;
+    try {
+      parsed = validatePayload(req.body);
+    } catch (err) {
+      return res.status(400).json({ error: String(err.message) });
+    }
+    const { sectionHash, section } = parsed;
+    try {
+      const result = await explainSection(section, llm, {});
+      const doc = await store.saveDraft(sectionHash, {
+        route: req.body.route || null,
+        sectionId: req.body.sectionId || null,
+        heading: section.heading,
+        lessonTitle: section.lessonTitle || null,
+        text: result.transcript,
+        meta: { ...result.meta, fidelity: result.fidelity },
+      });
+      return res.json({
+        sectionHash, status: 'draft', text: doc.explanationText,
+        fidelity: result.fidelity, meta: result.meta,
+      });
+    } catch (err) {
+      return res.status(502).json({ error: String(err.message), code: 'generation_failed' });
+    }
+  });
+
+  /** Textul curent (draft sau final) al unei explicații, pentru revizuire. */
+  app.get('/admin/voice/text/:hash', cereAdmin, async (req, res) => {
+    const doc = await store.findByHash(req.params.hash);
+    if (!doc) return res.status(404).json({ error: 'Inexistent.' });
+    return res.json({
+      sectionHash: doc.sectionHash, status: doc.status, route: doc.route,
+      heading: doc.heading, text: doc.explanationText || '', meta: doc.models || {},
+    });
+  });
+
+  /** Faza 1b: administratorul salvează textul editat manual. */
+  app.put('/admin/voice/text/:hash', cereAdmin, async (req, res) => {
+    const text = String(req.body && req.body.text || '').trim();
+    if (text.length < 10) return res.status(400).json({ error: 'Text prea scurt.' });
+    const ok = await store.updateText(req.params.hash, text);
+    if (!ok) return res.status(404).json({ error: 'Inexistent sau nu poate fi editat.' });
+    return res.json({ sectionHash: req.params.hash, status: 'draft', text });
+  });
+
+  /**
+   * Faza 2: sintetizează audio (Azure) din textul APROBAT și marchează gata.
+   * Abia aici se consumă cotă Azure — pe text pe care administratorul l-a văzut.
+   */
+  app.post('/admin/voice/audio/:hash', cereAdmin, async (req, res) => {
+    const doc = await store.findByHash(req.params.hash);
+    if (!doc || !doc.explanationText) return res.status(404).json({ error: 'Fără text de sintetizat.' });
+    try {
+      const audio = await tts.synthesize(doc.explanationText);
+      if (tts.name === 'azure' && audio.chars) {
+        store.recordAzureUsage(audio.chars, {
+          sectionHash: doc.sectionHash, heading: doc.heading, route: doc.route,
+        }).catch(() => {});
+      }
+      const encoded = await encodeOpus(audio.wav);
+      const gata = await store.attachAudio(doc.sectionHash, {
+        codec: 'opus', contentType: 'audio/ogg', buffer: encoded,
+        durationSec: audio.durationSec, sampleRate: audio.sampleRate, voice: audio.voice,
+      });
+      const baseUrl = env.VOICE_PUBLIC_URL || `${req.protocol}://${req.get('host')}`;
+      return res.json({ ...publicView(gata, baseUrl), status: 'ready' });
+    } catch (err) {
+      return res.status(502).json({ error: String(err.message) });
+    }
+  });
+
+  /** Șterge datele de voce ale unei lecții (document + audio). */
+  app.delete('/admin/voice/:hash', cereAdmin, async (req, res) => {
+    const ok = await store.remove(req.params.hash);
+    return res.json({ removed: ok });
+  });
+
+  /**
+   * Curăță orfanele: primește rutele care CHIAR există (din lesson-sources.json)
+   * și șterge tot ce e pe alte rute — lecții al căror fișier a fost șters.
+   */
+  app.post('/admin/voice/purge', cereAdmin, async (req, res) => {
+    const routes = Array.isArray(req.body && req.body.routes) ? req.body.routes : null;
+    if (!routes) return res.status(400).json({ error: 'Lipsește lista de rute valide.' });
+    const sterse = await store.purgeOrphans(routes);
+    return res.json({ purged: sterse });
   });
 
   app.post('/voice/section', async (req, res) => {
