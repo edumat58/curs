@@ -15,6 +15,8 @@
  *      VOICE_AZURE_RATE (ex. „-6%", ritm ceva mai calm, mai profesoral).
  */
 
+import sdk from 'microsoft-cognitiveservices-speech-sdk';
+
 /** XML-escape pentru textul pus în SSML. */
 function escapeXml(s) {
   return String(s)
@@ -78,33 +80,52 @@ export function createAzureTts(env = process.env) {
       if (!clean) throw new Error('Text gol pentru sinteză.');
       const ssml = construiesteSsml(clean, voice, rate);
 
-      const res = await fetch(endpoint, {
-        method: 'POST',
-        headers: {
-          'Ocp-Apim-Subscription-Key': key,
-          'Content-Type': 'application/ssml+xml',
-          // 24 kHz, 16-bit PCM mono — calitate bună, ușor de măsurat și de encodat.
-          'X-Microsoft-OutputFormat': 'riff-24khz-16bit-mono-pcm',
-          'User-Agent': 'edupasi-voice',
-        },
-        body: ssml,
+      /**
+       * Sinteză prin SDK, nu prin REST, ca să obținem GRANIȚELE DE CUVÂNT.
+       *
+       * REST-ul dă doar audio; SDK-ul emite pe lângă audio și evenimente
+       * `wordBoundary` cu marca de timp și durata fiecărui cuvânt rostit. Din
+       * ele construim subtitrarea sincronizată — fiecare cuvânt evidențiat exact
+       * când e citit, nu estimat. `audioOffset`/`duration` vin în „ticks" de
+       * 100 ns; le aducem în milisecunde.
+       */
+      const speechConfig = sdk.SpeechConfig.fromSubscription(key, region);
+      speechConfig.speechSynthesisOutputFormat = sdk.SpeechSynthesisOutputFormat.Riff24Khz16BitMonoPcm;
+      const synth = new sdk.SpeechSynthesizer(speechConfig, null);
+
+      const words = [];
+      synth.wordBoundary = (_s, e) => {
+        // Doar cuvinte: evenimentele de punctuație și de propoziție se ignoră.
+        if (String(e.boundaryType) === 'WordBoundary') {
+          words.push({
+            t: Math.round(e.audioOffset / 10000),
+            d: Math.round(e.duration / 10000),
+            w: e.text,
+          });
+        }
+      };
+
+      const wav = await new Promise((resolve, reject) => {
+        synth.speakSsmlAsync(
+          ssml,
+          (result) => {
+            synth.close();
+            if (result.reason === sdk.ResultReason.SynthesizingAudioCompleted) {
+              resolve(Buffer.from(result.audioData));
+            } else {
+              reject(new Error(`Azure TTS eșuat: ${result.errorDetails || result.reason}`));
+            }
+          },
+          (err) => { synth.close(); reject(new Error(`Azure TTS: ${err}`)); }
+        );
       });
-      if (!res.ok) {
-        const detaliu = await res.text().catch(() => '');
-        throw new Error(`Azure TTS ${res.status}: ${detaliu.slice(0, 200)}`);
-      }
-      const wav = Buffer.from(await res.arrayBuffer());
       if (onProgress) onProgress({ index: 0, total: 1 });
 
       const { sampleRate, durationSec } = durataWav(wav);
 
       /**
-       * Timpii pe propoziție, estimați proporțional cu lungimea.
-       *
-       * REST-ul Azure nu întoarce granițe de cuvânt (le dă doar SDK-ul prin
-       * websocket). Pentru evidențierea sincronizată e destul o estimare pe
-       * propoziție: vocea e fluentă, deci proporția cu numărul de caractere e
-       * apropiată de adevăr. Dacă vom vrea precizie la cuvânt, trecem pe SDK.
+       * Timpii pe propoziție rămân, ca rezervă, estimați proporțional cu
+       * lungimea — dar acum avem și `words`, sursa adevărată pentru subtitrare.
        */
       const fraze = propozitii(clean);
       const totalCar = fraze.reduce((s, f) => s + f.length, 0) || 1;
@@ -118,7 +139,7 @@ export function createAzureTts(env = process.env) {
       // `chars` = câte caractere au intrat în cota Azure la cererea asta.
       // Azure taxează per caracter de text sintetizat, la fiecare apel — de
       // aceea îl raportăm de fiecare dată, ca evidența să oglindească factura.
-      return { wav, durationSec, sampleRate, voice, sentences, chars: clean.length };
+      return { wav, durationSec, sampleRate, voice, sentences, words, chars: clean.length };
     },
   };
 }

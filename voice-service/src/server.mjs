@@ -99,6 +99,9 @@ function publicView(doc, baseUrl) {
     // sincronizate din player. Lipsesc la explicațiile generate înainte de a
     // exista această funcție, iar clientul le estimează atunci.
     sentences: doc.audio && doc.audio.sentences ? doc.audio.sentences : null,
+    // Cuvintele cu marcă de timp (t, d în ms) — subtitrarea sincronizată. Lipsesc
+    // la audio-ul generat înainte de a exista funcția; atunci nu se evidențiază.
+    words: doc.audio && doc.audio.words ? doc.audio.words : null,
     durationSec: doc.audio ? doc.audio.durationSec : null,
     voice: doc.audio ? doc.audio.voice : null,
     needsReview: doc.quality ? doc.quality.needsReview : null,
@@ -292,6 +295,8 @@ export async function createServer(env = process.env) {
       const gata = await store.attachAudio(doc.sectionHash, {
         codec: encoded.codec, contentType: encoded.contentType, buffer: encoded.buffer,
         durationSec: audio.durationSec, sampleRate: audio.sampleRate, voice: audio.voice,
+        // Cuvintele cu timing (din SDK-ul Azure) — subtitrarea sincronizată.
+        words: audio.words || null, sentences: audio.sentences || null,
       });
       const baseUrl = env.VOICE_PUBLIC_URL || `${req.protocol}://${req.get('host')}`;
       return res.json({ ...publicView(gata, baseUrl), status: 'ready' });

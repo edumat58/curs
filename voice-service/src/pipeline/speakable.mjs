@@ -380,6 +380,24 @@ export function toSpeakable(text) {
     .replace(/\s>\s/g, ' mai mare decât ')
     .replace(/(\d)\s*\*\s*(\d)/g, '$1 înmulțit cu $2');
 
+  /**
+   * Adunarea, scăderea și egalul scrise cu simboluri.
+   *
+   * Fără ele, o sumă lungă ca „3×10000+7×1000+5×100+…" se aude ca un singur
+   * număr lipit și grăbit: Azure înghite „+" și nu lasă nicio pauză, așa că
+   * ordinea termenilor se pierde (elevul aude „3 ori" apoi instant restul).
+   * Punem CUVÂNTUL („plus", „minus", „egal cu") ȘI, la adunare/scădere, o
+   * virgulă înainte — pauza scurtă face ca termenii unei sume lungi să fie
+   * rostiți pe rând, în ordine, ca la tablă. Operanzii pot fi cifre, paranteze,
+   * radical sau un exponent deja rostit (² ³), nu litere (ca să nu atingem
+   * „A+" sau enumerări). Scăderea între cifre lipite („7-3") o prindem aici;
+   * minusul dintr-un semn („rezultă -5") rămâne pentru `spokenMinus`.
+   */
+  out = out
+    .replace(/([\d)%²³])\s*\+\s*(?=[\d(√])/g, '$1, plus ')
+    .replace(/([\d)%²³])\s*=\s*(?=[\s\d(√+-]|minus|radical)/g, '$1 egal cu ')
+    .replace(/(\d)\s*[-−–]\s*(?=\d)/g, '$1, minus ');
+
   // Împărțirea scrisă cu două puncte cere spații de o parte și de alta: așa se
   // scrie la clasă („12 : 4"), și tot așa se deosebește de o oră („12:30") sau
   // de o enumerare („Pașii sunt: 1. aduni").

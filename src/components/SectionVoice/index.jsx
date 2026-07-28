@@ -381,6 +381,7 @@ function Panou({ state, fractie, error, data, onRetry, onClose, headingElement, 
           onUnavailable={raporteazaCadere}
           transcript={data.explanationText || ''}
           sentences={data.sentences || null}
+          words={data.words || null}
           headingElement={headingElement}
           contentRoot={contentRoot}
         />

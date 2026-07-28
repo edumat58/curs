@@ -691,3 +691,44 @@ details[open] .transcriptToggle::before { content: '▾ '; }
   overflow-y: auto;
   white-space: pre-wrap;
 }
+
+/* Subtitrare sincronizată: transcriptul rostit, cu cuvântul curent evidențiat.
+   Cutie derulabilă cu mască de estompare sus/jos, ca la subtitrări. */
+.subtitrare {
+  margin-top: 12px;
+  padding: 14px 16px;
+  max-height: 30vh;
+  overflow-y: auto;
+  font-size: 1.15rem;
+  line-height: 1.9;
+  text-align: center;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--voice-accent) 5%, transparent);
+  border: 1px solid var(--voice-hairline);
+  scroll-behavior: smooth;
+  -webkit-mask-image: linear-gradient(transparent, #000 18%, #000 82%, transparent);
+  mask-image: linear-gradient(transparent, #000 18%, #000 82%, transparent);
+}
+
+/* Cuvintele încă necitite: șterse, discrete. */
+.cuvant {
+  color: var(--voice-text-muted, #8b857a);
+  transition: color 120ms ease;
+}
+
+/* Cuvintele deja rostite: text normal, ca la o subtitrare care rămâne. */
+.cuvantCitit {
+  color: var(--voice-text, #1c1a16);
+}
+
+/* Cuvântul rostit ACUM: evidențiat pe accentul lecției (portocaliu/bleumarin). */
+.cuvantActiv {
+  color: var(--voice-on-accent, #fff);
+  background: var(--voice-accent);
+  border-radius: 5px;
+  padding: 1px 4px;
+  margin: 0 -1px;
+  font-weight: 600;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}

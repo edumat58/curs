@@ -125,9 +125,69 @@ function useEvidentiere(activ, blocuri, indexBloc, pilot) {
   }, []);
 }
 
+/**
+ * Indicele cuvântului rostit ACUM, din timpii măsurați la sinteză.
+ *
+ * Cel mai mare cuvânt al cărui început a trecut deja de momentul curent. Între
+ * două cuvinte (pauze, virgule) rămâne aprins ultimul început — natural, ca la
+ * karaoke. Căutare liniară: 300-400 de cuvinte, de patru ori pe secundă, e
+ * neglijabil.
+ */
+function indiceCuvant(words, ms) {
+  if (!words || !words.length) return -1;
+  let idx = -1;
+  for (let i = 0; i < words.length; i += 1) {
+    if (words[i].t <= ms) idx = i;
+    else break;
+  }
+  return idx;
+}
+
+/**
+ * Subtitrarea sincronizată: transcriptul rostit, cuvânt cu cuvânt, cu cel citit
+ * acum evidențiat. Cutia se derulează singură ca să țină cuvântul activ în
+ * mijloc, dar mișcă DOAR cutia, nu pagina.
+ */
+function Subtitrare({ words, currentMs }) {
+  const cutie = useRef(null);
+  const activ = useRef(null);
+  const idx = indiceCuvant(words, currentMs);
+
+  useEffect(() => {
+    const el = activ.current;
+    const box = cutie.current;
+    if (!el || !box) return;
+    const er = el.offsetTop - box.offsetTop;
+    const tinta = er - box.clientHeight / 2 + el.clientHeight / 2;
+    const departe = Math.abs(box.scrollTop - tinta) > 24;
+    if (departe) {
+      box.scrollTo({
+        top: Math.max(0, tinta),
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+      });
+    }
+  }, [idx]);
+
+  return (
+    <div className={styles.subtitrare} ref={cutie} aria-label="Transcript sincronizat">
+      {words.map((cuv, i) => (
+        <span
+          // eslint-disable-next-line react/no-array-index-key
+          key={i}
+          ref={i === idx ? activ : null}
+          className={i === idx ? styles.cuvantActiv : (i < idx ? styles.cuvantCitit : styles.cuvant)}
+        >
+          {cuv.w}
+          {' '}
+        </span>
+      ))}
+    </div>
+  );
+}
+
 export default function AudioPlayer({
   src, autoPlay = false, onClose, knownDuration = 0, onUnavailable,
-  transcript = '', sentences = null, headingElement = null, contentRoot = null,
+  transcript = '', sentences = null, words = null, headingElement = null, contentRoot = null,
 }) {
   const audioRef = useRef(null);
   const [playing, setPlaying] = useState(false);
@@ -442,7 +502,11 @@ export default function AudioPlayer({
         )}
       </div>
 
-      {transcript ? (
+      {/* Subtitrarea sincronizată când avem timpii pe cuvânt; altfel, transcriptul
+          static, pliabil (audio generat înainte de a exista funcția). */}
+      {Array.isArray(words) && words.length ? (
+        <Subtitrare words={words} currentMs={current * 1000} />
+      ) : transcript ? (
         <details className={styles.transcriptBox}>
           <summary className={styles.transcriptToggle}>Vezi transcriptul</summary>
           <div className={styles.transcriptText}>{transcript}</div>

@@ -266,6 +266,8 @@ export async function createStore(env = process.env) {
               fileId: uploadId, codec: audio.codec, contentType: audio.contentType,
               bytes: audio.buffer.length, durationSec: audio.durationSec,
               sampleRate: audio.sampleRate, voice: audio.voice,
+              // Subtitrarea sincronizată: cuvinte cu marcă de timp + granițe de frază.
+              words: audio.words || null, sentences: audio.sentences || null,
             },
             updatedAt: new Date(),
           },
