@@ -126,8 +126,10 @@ export function cleanForSpeech(text) {
  * Generează explicația unei secțiuni.
  * @returns {{transcript, analysis, fidelity, meta}}
  */
-export async function explainSection(section, llm, { signal, analysisLlm } = {}) {
+export async function explainSection(section, llm, { signal, analysisLlm, onStage } = {}) {
   const startedAt = Date.now();
+  const stage = (name) => { if (onStage) onStage(name); };
+  stage('analiza');
   // Trecerea de înțelegere este extragere structurată, nu pedagogie: o poate
   // face un model mai mic. Rulând-o pe alt model câștigăm și un buget separat
   // de tokeni pe minut (limitele furnizorului sunt per model), ceea ce dublează
@@ -145,6 +147,7 @@ export async function explainSection(section, llm, { signal, analysisLlm } = {})
   const analysis = parseJsonLoose(analysisRes.content);
   const analysisMs = Date.now() - startedAt;
 
+  stage('naratiune');
   const n = buildNarrationPrompt(section, analysis);
   const budget = speechBudget(section);
   /**
@@ -222,6 +225,7 @@ export async function explainSection(section, llm, { signal, analysisLlm } = {})
     if (!complaints.length) break;
 
     repairs += 1;
+    stage('reparare');
     const repairRes = await llm.chat(
       [
         { role: 'system', content: n.system },

@@ -12,6 +12,40 @@ function fmt(seconds) {
 const SPEEDS = [0.75, 1, 1.25, 1.5, 2];
 
 /**
+ * Săritura de zece secunde, ca o singură icoană.
+ *
+ * Problema formei vechi nu era săgeata, ci cifra: un `<span>` poziționat
+ * absolut la marginea de jos a butonului, care atârna sub arc ca o etichetă
+ * lipită. Săgeata rămâne aceeași — un inel gros, cu vârf lat, care se citește
+ * și la 20 de pixeli — iar „10" intră în golul din mijlocul ei, acolo unde îl
+ * pune orice player.
+ *
+ * Inelul are centrul în (12, 13) și rază interioară 6, deci un numeral de
+ * corp 7,4 stă înăuntru fără să atingă arcul.
+ */
+function SkipIcon({ forward }) {
+  return (
+    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+      <path
+        d={forward
+          ? 'M12 5V2l5 4-5 4V7a6 6 0 1 0 6 6h2a8 8 0 1 1-8-8z'
+          : 'M12 5V2L7 6l5 4V7a6 6 0 1 1-6 6H4a8 8 0 1 0 8-8z'}
+        fill="currentColor"
+      />
+      <text
+        x="12"
+        y="15.8"
+        textAnchor="middle"
+        fill="currentColor"
+        style={{ fontSize: '7.4px', fontWeight: 800, fontFamily: 'inherit' }}
+      >
+        10
+      </text>
+    </svg>
+  );
+}
+
+/**
  * Player complet: play/pauză/stop, derulare, sărituri, viteză, durate.
  * Aceleași controale pe desktop și pe mobil — fără versiune „redusă" pe telefon,
  * pentru că exact acolo sunt elevii.
@@ -133,10 +167,7 @@ export default function AudioPlayer({ src, autoPlay = false, onClose, knownDurat
           aria-label="Înapoi 10 secunde"
           title="Înapoi 10 secunde"
         >
-          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-            <path d="M12 5V2L7 6l5 4V7a6 6 0 1 1-6 6H4a8 8 0 1 0 8-8z" fill="currentColor" />
-          </svg>
-          <span className={styles.iconLabel}>10</span>
+          <SkipIcon forward={false} />
         </button>
 
         <button
@@ -146,10 +177,7 @@ export default function AudioPlayer({ src, autoPlay = false, onClose, knownDurat
           aria-label="Înainte 10 secunde"
           title="Înainte 10 secunde"
         >
-          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-            <path d="M12 5V2l5 4-5 4V7a6 6 0 1 0 6 6h2a8 8 0 1 1-8-8z" fill="currentColor" />
-          </svg>
-          <span className={styles.iconLabel}>10</span>
+          <SkipIcon forward />
         </button>
 
         <button

@@ -16,6 +16,7 @@ import { pathToFileURL } from 'node:url';
 import { createLlm } from './providers/llm.mjs';
 import { createPiperTts } from './providers/tts.mjs';
 import { explainSection } from './pipeline/explain.mjs';
+import { speechBudget } from './pipeline/prompts.mjs';
 import { createStore } from './storage/mongo.mjs';
 import { encodeOpus } from './providers/encode.mjs';
 
@@ -121,14 +122,22 @@ export async function createServer(env = process.env) {
           heading: section.heading,
           headingLevel: section.level || null,
           lessonTitle: section.lessonTitle || null,
+          // Cât va dura audio-ul, estimat din materialul sursă. Sinteza domină
+          // timpul de generare și e proporțională cu asta, deci e singura
+          // mărime cu care clientul poate scala o bară de progres onest.
+          expectedSpeechSec: speechBudget(section).seconds,
+          stage: 'analiza',
         });
         // Dacă rezervarea e la altcineva, nu așteptăm: clientul întreabă oricum
         // periodic de starea hash-ului și va vedea rezultatul când apare.
         if (!claimed) return null;
 
         try {
-          const result = await explainSection(section, llm, { analysisLlm });
+          const mark = (stage) => store.progress(sectionHash, stage).catch(() => {});
+          const result = await explainSection(section, llm, { analysisLlm, onStage: mark });
+          await mark('sinteza');
           const audio = await tts.synthesize(result.transcript);
+          await mark('audio');
           const encoded = await encodeOpus(audio.wav);
           return await store.complete(sectionHash, {
             transcript: result.transcript,
@@ -222,6 +231,11 @@ export async function createServer(env = process.env) {
       sectionHash: hash,
       startedAt: doc.createdAt,
       elapsedSec: doc.createdAt ? Math.round((Date.now() - new Date(doc.createdAt)) / 1000) : null,
+      // Cele două câmpuri din care clientul își construiește bara de progres:
+      // unde suntem, și cât de mare e bucata care urmează.
+      stage: doc.stage || null,
+      stageSec: doc.stageAt ? Math.round((Date.now() - new Date(doc.stageAt)) / 1000) : null,
+      expectedSpeechSec: doc.expectedSpeechSec || null,
     });
   });
 

@@ -79,6 +79,21 @@ export async function createStore(env = process.env) {
       }
     },
 
+    /**
+     * Etapa curentă a unei generări în curs.
+     *
+     * Există ca elevul să vadă o bară care înaintează pe fapte, nu pe un
+     * cronometru. Fără asta, singurul lucru pe care clientul îl putea afișa era
+     * timpul scurs — adică o animație care se mișcă la fel de repede și când
+     * serverul lucrează, și când s-a blocat.
+     */
+    async progress(sectionHash, stage) {
+      await col.updateOne(
+        { sectionHash, status: 'pending' },
+        { $set: { stage, stageAt: new Date() } }
+      );
+    },
+
     /** Salvează rezultatul complet: audio în GridFS, metadatele în colecție. */
     async complete(sectionHash, { transcript, analysis, fidelity, meta, audio }) {
       const uploadId = await new Promise((resolve, reject) => {

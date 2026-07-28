@@ -30,17 +30,48 @@ function serviceUrl() {
 }
 
 /**
- * Prima generare durează zeci de secunde: se citește secțiunea, se scrie
- * explicația, apoi se rostește. Un singur mesaj fix pe tot intervalul arată ca
- * o pagină blocată. Etapele de mai jos nu sunt măsurători reale de la server —
- * sunt repere de timp — dar spun elevului că ceva se întâmplă și cam ce anume.
+ * Bara de progres a generării.
+ *
+ * Fiecare etapă are o poziție până la care are dreptul să ajungă și un timp
+ * caracteristic. Înăuntrul etapei bara se apropie asimptotic de capătul ei —
+ * deci înaintează mereu, dar încetinește dacă durează mai mult decât de obicei,
+ * și nu ajunge niciodată în capăt înainte ca serverul să confirme etapa
+ * următoare. Nu poate nici să mintă că e gata, nici să pară blocată.
+ *
+ * Etapa de sinteză nu are timp fix: e proporțională cu lungimea explicației, pe
+ * care serverul o estimează din material și o trimite în `expectedSpeechSec`.
+ * O definiție scurtă și un capitol întreg nu pot împărți aceeași scală.
+ *
+ * Ponderile vin din măsurători pe serviciul real, nu din intuiție. Groq scrie
+ * explicația în două-trei secunde; rostirea ei durează zeci. Prima variantă
+ * dădea etapelor de model aproape jumătate din bară, iar aceea se umplea
+ * instantaneu și apoi se târa — adică exact impresia de blocaj pe care bara ar
+ * trebui să o evite.
  */
-const ETAPE = [
-  { after: 0, text: 'Citesc secțiunea…' },
-  { after: 6000, text: 'Pregătesc explicația…' },
-  { after: 20000, text: 'Înregistrez vocea…' },
-  { after: 90000, text: 'Secțiunea e lungă — o explic în întregime…' },
-];
+const ETAPE = {
+  analiza: { pana: 0.1, tau: 2.5 },
+  naratiune: { pana: 0.22, tau: 3 },
+  reparare: { pana: 0.3, tau: 4 },
+  sinteza: { pana: 0.95, tau: null },
+  audio: { pana: 0.99, tau: 2 },
+};
+const ORDINE = ['analiza', 'naratiune', 'reparare', 'sinteza', 'audio'];
+
+function fractieEtapa(stage, secundeInEtapa, expectedSpeechSec) {
+  const index = ORDINE.indexOf(stage);
+  if (index < 0) return 0;
+  const etapa = ETAPE[stage];
+  const start = index > 0 ? ETAPE[ORDINE[index - 1]].pana : 0;
+  /**
+   * Sinteza e singura etapă a cărei durată depinde de lungimea explicației:
+   * măsurat pe PC, aproape un sfert din durata audio-ului rezultat. Constanta
+   * de timp e aleasă ca bara să fie pe la patru cincimi când sinteza se termină
+   * de obicei — dacă mașina e mai lentă, bara doar înaintează mai încet, ceea ce
+   * e comportamentul corect, nu o eroare.
+   */
+  const tau = etapa.tau ?? Math.min(90, Math.max(4, (expectedSpeechSec || 40) * 0.18));
+  return start + (etapa.pana - start) * (1 - Math.exp(-Math.max(0, secundeInEtapa) / tau));
+}
 
 /**
  * Așteaptă terminarea unei generări pornite pe server.
@@ -50,7 +81,7 @@ const ETAPE = [
  * proxy-ul din fața lui închide conexiunile la 180 de secunde. Aici doar
  * întrebăm periodic dacă e gata — fără limită de timp impusă de rețea.
  */
-async function waitForReady(hash, signal) {
+async function waitForReady(hash, signal, onStatus) {
   const started = Date.now();
   const LIMITA_MS = 15 * 60 * 1000;
 
@@ -59,7 +90,10 @@ async function waitForReady(hash, signal) {
     if (signal.aborted) throw Object.assign(new Error('anulat'), { name: 'AbortError' });
 
     const res = await fetch(`${serviceUrl()}/voice/section/${hash}`, { signal });
-    if (res.status === 202) continue;
+    if (res.status === 202) {
+      if (onStatus) onStatus(await res.json().catch(() => null));
+      continue;
+    }
     if (res.status === 429) throw new Error('rate');
     if (res.ok) return res.json();
 
@@ -70,17 +104,53 @@ async function waitForReady(hash, signal) {
   throw new Error('Generarea durează neobișnuit de mult.');
 }
 
-function useProgressMessage(active) {
-  const [text, setText] = useState(ETAPE[0].text);
+/**
+ * Fracția de umplere a barei, actualizată local între interogări.
+ *
+ * Serverul e întrebat o dată la trei secunde; dacă bara ar aștepta răspunsul,
+ * ar înainta în salturi și ar părea înțepenită între ele. Aici ținem local
+ * momentul în care am văzut prima dată etapa curentă și recalculăm de zece ori
+ * pe secundă. Nu dăm niciodată înapoi: o etapă care se termină mai repede
+ * decât media ar face bara să sară în urmă, ceea ce arată a defecțiune.
+ */
+function useProgress(active, status) {
+  const [fractie, setFractie] = useState(0);
+  const reper = useRef({ stage: null, la: 0 });
+
+  useEffect(() => {
+    if (!active) {
+      setFractie(0);
+      reper.current = { stage: null, la: 0 };
+    }
+  }, [active]);
+
+  useEffect(() => {
+    // Prima interogare vine abia după trei secunde. Fără reperul ăsta, bara ar
+    // sta goală exact în secundele în care elevul se uită cel mai atent la ea.
+    if (active && !reper.current.stage) {
+      reper.current = { stage: 'analiza', la: Date.now() };
+    }
+    if (!active || !status || !status.stage) return;
+    if (reper.current.stage !== status.stage) {
+      // Prima dată când vedem etapa: pornim ceasul local din secundele deja
+      // raportate de server, ca să nu pierdem timpul scurs până la interogare.
+      reper.current = { stage: status.stage, la: Date.now() - (status.stageSec || 0) * 1000 };
+    }
+  }, [active, status]);
+
   useEffect(() => {
     if (!active) return undefined;
-    setText(ETAPE[0].text);
-    const timers = ETAPE.slice(1).map((etapa) =>
-      setTimeout(() => setText(etapa.text), etapa.after)
-    );
-    return () => timers.forEach(clearTimeout);
-  }, [active]);
-  return text;
+    const id = setInterval(() => {
+      const { stage, la } = reper.current;
+      if (!stage) return;
+      const secunde = (Date.now() - la) / 1000;
+      const tinta = fractieEtapa(stage, secunde, status && status.expectedSpeechSec);
+      setFractie((anterior) => Math.max(anterior, tinta));
+    }, 100);
+    return () => clearInterval(id);
+  }, [active, status]);
+
+  return fractie;
 }
 
 /**
@@ -92,9 +162,10 @@ function SectionButton({ section, route, headingElement }) {
   const [data, setData] = useState(null);
   const [error, setError] = useState('');
   const [panel, setPanel] = useState(null);
+  const [status, setStatus] = useState(null);
   const panelRef = useRef(null);
   const abortRef = useRef(null);
-  const progress = useProgressMessage(state === 'loading');
+  const fractie = useProgress(state === 'loading', status);
 
   useEffect(() => () => abortRef.current && abortRef.current.abort(), []);
 
@@ -138,6 +209,7 @@ function SectionButton({ section, route, headingElement }) {
     }
     setState('loading');
     setError('');
+    setStatus(null);
 
     try {
       // Formulele se rostesc determinist, nu le „citește" modelul caracter cu caracter.
@@ -196,7 +268,7 @@ function SectionButton({ section, route, headingElement }) {
       // trece printr-o conexiune deschisă, deci întrebăm din când în când.
       let json = res.ok ? await res.json() : null;
       if (res.status === 202) {
-        json = await waitForReady(hash, abortRef.current.signal);
+        json = await waitForReady(hash, abortRef.current.signal, setStatus);
       } else if (!res.ok) {
         throw new Error(`Serviciul a răspuns ${res.status}`);
       }
@@ -255,15 +327,26 @@ function SectionButton({ section, route, headingElement }) {
       {panel
         && createPortal(
           <>
+            {/* Doar bara. Progresul se citește dintr-o privire, fără cifre și
+                fără cronometru — pentru un elev care abia așteaptă explicația,
+                un procent care crește încet e o presiune în plus, nu o
+                informație. Textul rămâne doar pentru cititoarele de ecran,
+                care nu au ce face cu o bară. */}
             {state === 'loading' && (
-              <div className={styles.waiting} role="status">
-                <span className={styles.spinner} aria-hidden="true" />
-                <span className={styles.waitingText}>
-                  {progress}
-                  <span className={styles.waitingHint}>
-                    Prima dată se pregătește de la zero. Apoi pornește instant.
-                  </span>
-                </span>
+              <div className={styles.waiting}>
+                <div
+                  className={styles.bar}
+                  role="progressbar"
+                  aria-valuemin={0}
+                  aria-valuemax={100}
+                  aria-valuenow={Math.round(fractie * 100)}
+                  aria-label="Se pregătește explicația"
+                >
+                  {/* Lățime, nu `scaleX`: scalarea ar turti și dunga care
+                      traversează porțiunea umplută, cu atât mai mult cu cât
+                      bara e mai goală — adică exact la început. */}
+                  <span className={styles.barFill} style={{ width: `${fractie * 100}%` }} />
+                </div>
               </div>
             )}
 

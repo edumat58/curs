@@ -3,6 +3,28 @@
    separat, imediat sub titlu, ca să nu moștenească fontul mare al headingului,
    să nu se suprapună peste ancora „#" și să nu se lipească de text. */
 
+/* Culorile vin din paleta EduPAȘI, nu din culoarea principală a site-ului.
+   `--ifm-color-primary` e portocaliul edumat58 (#a05200) peste tot în afara
+   paginilor EduPAȘI, deci playerul ieșea portocaliu exact acolo unde nu
+   trebuia. Variabilele `--edupasi-*` există și în varianta pentru deficiențe
+   de percepție a culorilor și în cea de contrast ridicat, deci legându-ne de
+   ele playerul urmează automat setarea aleasă de elev. Valorile de rezervă
+   sunt paleta EduPAȘI implicită, pentru cazul în care componenta ajunge pe o
+   pagină fără atributul de paletă. */
+.slot,
+.panel {
+  --voice-accent: var(--edupasi-accent, #003058);
+  --voice-accent-strong: var(--edupasi-accent-strong, #003058);
+  --voice-accent-soft: var(--edupasi-accent-soft, #d9eef7);
+  --voice-on-accent: var(--edupasi-on-accent, #ffffff);
+  --voice-surface: var(--edupasi-surface, #ffffff);
+  --voice-text: var(--edupasi-text, #161616);
+  --voice-text-muted: var(--edupasi-text-muted, #5b5b5b);
+  --voice-border: var(--edupasi-border-subtle, #d7e5e0);
+  --voice-focus: var(--edupasi-focus, #0197b0);
+  --voice-danger: var(--edupasi-decoration-red, #b73528);
+}
+
 .slot {
   display: inline-flex;
   align-items: center;
@@ -13,7 +35,6 @@
 .speaker,
 .speakerOn,
 .speakerBusy {
-  --voice-accent: var(--ifm-color-primary, #005340);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -22,7 +43,7 @@
   padding: 0;
   color: var(--voice-accent);
   background: transparent;
-  border: 1.5px solid var(--ifm-color-emphasis-300, #d7e5e0);
+  border: 1.5px solid var(--voice-border);
   border-radius: 50%;
   cursor: pointer;
   transition: background 140ms ease, border-color 140ms ease, transform 80ms ease;
@@ -39,7 +60,7 @@
 }
 
 .speakerOn {
-  color: #fff;
+  color: var(--voice-on-accent);
   background: var(--voice-accent);
   border-color: var(--voice-accent);
 }
@@ -52,8 +73,8 @@
   flex: none;
   width: 14px;
   height: 14px;
-  border: 2px solid color-mix(in srgb, var(--ifm-color-primary, #005340) 30%, transparent);
-  border-top-color: var(--ifm-color-primary, #005340);
+  border: 2px solid color-mix(in srgb, var(--voice-accent) 30%, transparent);
+  border-top-color: var(--voice-accent);
   border-radius: 50%;
   animation: voice-spin 700ms linear infinite;
 }
@@ -84,41 +105,84 @@
   align-items: center;
   gap: 0.65rem;
   padding: 0.7rem 0.9rem;
-  background: var(--ifm-background-surface-color, #fff);
-  border: 1px solid var(--ifm-color-emphasis-200, #e6ecea);
-  border-left: 4px solid var(--ifm-color-primary, #005340);
+  background: var(--voice-surface);
+  border: 1px solid var(--voice-border);
+  border-left: 4px solid var(--voice-accent);
   border-radius: 12px;
 }
 
-.waitingText {
-  display: flex;
-  flex-direction: column;
-  color: var(--ifm-color-emphasis-800, #333);
-  font-size: 0.9rem;
-  font-weight: 600;
+/* Panoul de așteptare nu conține decât bara, deci nu are nevoie de aliniere pe
+   rânduri — o lăsăm să ocupe toată lățimea. */
+.waiting {
+  display: block;
+  padding: 0.95rem 0.9rem;
 }
 
-.waitingHint {
-  color: var(--ifm-color-emphasis-600, #5b5b5b);
-  font-size: 0.78rem;
-  font-weight: 400;
+.bar {
+  position: relative;
+  height: 8px;
+  overflow: hidden;
+  background: var(--voice-accent-soft);
+  border-radius: 999px;
+}
+
+.barFill {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  overflow: hidden;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--voice-accent) 72%, white) 0%,
+    var(--voice-accent) 100%
+  );
+  border-radius: 999px;
+  /* Puțin mai lungă decât intervalul de recalculare (100 ms), ca înaintarea să
+     fie continuă, nu în trepte de o zecime de secundă. */
+  transition: width 160ms linear;
+}
+
+/* Dunga care traversează porțiunea umplută. Sinteza unei secțiuni lungi poate
+   ține un minut, iar în minutul ăla bara înaintează prea încet ca ochiul să
+   prindă mișcarea. Fără ea, un progres real arată identic cu o pagină moartă. */
+.barFill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 45%;
+  background: linear-gradient(
+    100deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.5) 50%,
+    transparent 100%
+  );
+  animation: voice-sheen 1.7s ease-in-out infinite;
+}
+
+@keyframes voice-sheen {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(320%); }
 }
 
 .failure {
   flex-wrap: wrap;
-  border-left-color: #c0392b;
+  border-left-color: var(--voice-danger);
 }
 
 .failureText {
   flex: 1 1 200px;
-  color: var(--ifm-color-emphasis-800, #333);
+  color: var(--voice-text);
   font-size: 0.88rem;
 }
 
 .retry {
   padding: 0.35rem 0.8rem;
-  color: #fff;
-  background: #c0392b;
+  color: var(--voice-on-accent);
+  background: var(--voice-danger);
   border: 0;
   border-radius: 8px;
   cursor: pointer;
@@ -148,8 +212,8 @@
   width: 44px;
   height: 44px;
   margin-right: 0.15rem;
-  color: #fff;
-  background: var(--ifm-color-primary, #005340);
+  color: var(--voice-on-accent);
+  background: var(--voice-accent);
   border: 0;
   border-radius: 50%;
   cursor: pointer;
@@ -167,22 +231,20 @@
   justify-content: center;
   width: 38px;
   height: 38px;
-  color: var(--ifm-font-color-base, #161616);
+  color: var(--voice-text);
   background: transparent;
-  border: 1.5px solid var(--ifm-color-emphasis-300, #d7e5e0);
+  border: 1.5px solid var(--voice-border);
   border-radius: 50%;
   cursor: pointer;
+  transition: background 140ms ease, border-color 140ms ease, transform 80ms ease;
 }
 
 .iconBtn:hover {
-  background: var(--ifm-color-emphasis-100, #f2f5f4);
+  background: var(--voice-accent-soft);
 }
 
-.iconLabel {
-  position: absolute;
-  bottom: 4px;
-  font-size: 0.5rem;
-  font-weight: 800;
+.iconBtn:active {
+  transform: scale(0.94);
 }
 
 /* Bara de derulare împarte rândul cu butoanele pe ecran lat și trece pe rândul
@@ -198,7 +260,7 @@
 
 .time {
   min-width: 2.9rem;
-  color: var(--ifm-color-emphasis-700, #444);
+  color: var(--voice-text-muted);
   font-size: 0.76rem;
   font-variant-numeric: tabular-nums;
   text-align: center;
@@ -208,7 +270,7 @@
   flex: 1;
   height: 22px;
   min-width: 0;
-  accent-color: var(--ifm-color-primary, #005340);
+  accent-color: var(--voice-accent);
   cursor: pointer;
 }
 
@@ -218,11 +280,11 @@
   align-items: center;
   gap: 0.4rem;
   padding-top: 0.35rem;
-  border-top: 1px solid var(--ifm-color-emphasis-100, #f2f5f4);
+  border-top: 1px solid var(--voice-accent-soft);
 }
 
 .speedLabel {
-  color: var(--ifm-color-emphasis-600, #5b5b5b);
+  color: var(--voice-text-muted);
   font-size: 0.74rem;
 }
 
@@ -237,7 +299,7 @@
   min-width: 40px;
   min-height: 30px;
   padding: 0.2rem 0.4rem;
-  border: 1.5px solid var(--ifm-color-emphasis-300, #d7e5e0);
+  border: 1.5px solid var(--voice-border);
   border-radius: 8px;
   cursor: pointer;
   font-size: 0.74rem;
@@ -245,18 +307,18 @@
 }
 
 .speed {
-  color: var(--ifm-font-color-base, #161616);
+  color: var(--voice-text);
   background: transparent;
 }
 
 .speedOn {
-  color: #fff;
-  background: var(--ifm-color-primary, #005340);
-  border-color: var(--ifm-color-primary, #005340);
+  color: var(--voice-on-accent);
+  background: var(--voice-accent);
+  border-color: var(--voice-accent);
 }
 
 .hint {
-  color: var(--ifm-color-emphasis-600, #5b5b5b);
+  color: var(--voice-text-muted);
   font-size: 0.74rem;
 }
 
@@ -264,7 +326,7 @@
   margin-left: auto;
   min-width: 32px;
   min-height: 32px;
-  color: var(--ifm-color-emphasis-700, #444);
+  color: var(--voice-text-muted);
   background: transparent;
   border: 0;
   border-radius: 8px;
@@ -273,7 +335,7 @@
 }
 
 .close:hover {
-  background: var(--ifm-color-emphasis-100, #f2f5f4);
+  background: var(--voice-accent-soft);
 }
 
 /* Pe telefon ținta de atingere crește spre 44 px, minimul recomandat. */
@@ -287,4 +349,9 @@
 @media (prefers-reduced-motion: reduce) {
   .spinner { animation-duration: 2s; }
   .speaker, .speakerOn, .speakerBusy { transition: none; }
+  /* Bara continuă să înainteze — asta e informație, nu decor. Dispare doar
+     dunga care baleiază, singura parte pur vizuală. */
+  .barFill::after { animation: none; }
+  .barFill { transition: none; }
+  .iconBtn:active { transform: none; }
 }
