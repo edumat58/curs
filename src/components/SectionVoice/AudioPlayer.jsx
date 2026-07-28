@@ -7,7 +7,7 @@ import {
   imparteFraze,
   timpiFraze,
 } from '@site/src/lib/voice/sincronizare.mjs';
-import { construiesteTokeni } from '@site/src/lib/voice/subtitrareMath.mjs';
+import { construiesteTokeni, marcheazaSectiuni } from '@site/src/lib/voice/subtitrareMath.mjs';
 import styles from './styles.module.css';
 
 /** mm:ss — elevii citesc durata, nu secunde brute. */
@@ -150,9 +150,23 @@ function indiceToken(tokens, ms) {
  * ca „înmulțit cu". Cutia se derulează singură ca să țină jetonul activ în
  * mijloc, dar mișcă DOAR cutia, nu pagina.
  */
-function Subtitrare({ words, currentMs }) {
+function Subtitrare({ words, currentMs, contentRoot }) {
   const activ = useRef(null);
-  const tokens = useMemo(() => construiesteTokeni(words), [words]);
+  const tokens = useMemo(() => {
+    const baza = construiesteTokeni(words);
+    // Titlurile REALE ale lecției (H2/H3 din conținut) — după ele recunoaștem
+    // titlurile de secțiune rostite și le facem clicabile spre secțiune.
+    const root = contentRoot
+      || (typeof document !== 'undefined'
+        ? document.querySelector('.theme-doc-markdown') || document.querySelector('article')
+        : null);
+    const titluri = root
+      ? [...root.querySelectorAll('h2, h3')]
+        .map((el) => ({ nume: (el.textContent || '').replace(/#$/, '').trim(), el }))
+        .filter((h) => h.nume)
+      : [];
+    return marcheazaSectiuni(baza, titluri);
+  }, [words, contentRoot]);
   const idx = indiceToken(tokens, currentMs);
 
   useEffect(() => {
@@ -176,13 +190,37 @@ function Subtitrare({ words, currentMs }) {
 
   return (
     <div className={styles.subtitrare} aria-label="Transcript sincronizat">
-      {tokens.map((tok, i) => (
-        // eslint-disable-next-line react/no-array-index-key
-        <span key={i} ref={i === idx ? activ : null} className={i === idx ? styles.cuvantActiv : (i < idx ? styles.cuvantCitit : styles.cuvant)}>
-          {tok.text}
-          {' '}
-        </span>
-      ))}
+      {tokens.map((tok, i) => {
+        const clasa = i === idx ? styles.cuvantActiv : (i < idx ? styles.cuvantCitit : styles.cuvant);
+        const ref = i === idx ? activ : null;
+        // Titlu de secțiune: bold, pe rând propriu, clicabil — sare la secțiunea
+        // din lecție. Rămâne și evidențiat când e citit acum.
+        if (tok.titlu && tok.sectiune) {
+          return (
+            // eslint-disable-next-line react/no-array-index-key
+            <button
+              key={i}
+              type="button"
+              ref={ref}
+              className={`${styles.subtitluSectiune} ${clasa}`}
+              onClick={() => tok.sectiune.scrollIntoView({
+                behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+                block: 'start',
+              })}
+              title="Sari la această secțiune în lecție"
+            >
+              {tok.text}
+            </button>
+          );
+        }
+        return (
+          // eslint-disable-next-line react/no-array-index-key
+          <span key={i} ref={ref} className={clasa}>
+            {tok.text}
+            {' '}
+          </span>
+        );
+      })}
     </div>
   );
 }
@@ -507,7 +545,7 @@ export default function AudioPlayer({
       {/* Subtitrarea sincronizată când avem timpii pe cuvânt; altfel, transcriptul
           static, pliabil (audio generat înainte de a exista funcția). */}
       {Array.isArray(words) && words.length ? (
-        <Subtitrare words={words} currentMs={current * 1000} />
+        <Subtitrare words={words} currentMs={current * 1000} contentRoot={contentRoot} />
       ) : transcript ? (
         <details className={styles.transcriptBox}>
           <summary className={styles.transcriptToggle}>Vezi transcriptul</summary>

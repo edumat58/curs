@@ -719,6 +719,30 @@ details[open] .transcriptToggle::before { content: '▾ '; }
   border: 1px solid var(--voice-hairline);
 }
 
+/* Titlu de secțiune în subtitrare: pe rând propriu, bold, clicabil — sare la
+   secțiunea din lecție. Marcat discret ca link (subliniere la hover), nu ca
+   buton greoi. Primul titlu nu are spațiu mare deasupra. */
+.subtitluSectiune {
+  display: block;
+  width: fit-content;
+  margin: 1.1em 0 0.35em;
+  padding: 2px 0;
+  background: none;
+  border: 0;
+  font: inherit;
+  font-size: 1.02em;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  text-align: left;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: border-color 140ms ease, color 140ms ease;
+}
+.subtitluSectiune:first-child { margin-top: 0; }
+.subtitluSectiune:hover {
+  border-bottom-color: currentColor;
+}
+
 /* Cuvintele încă necitite: șterse, discrete (efect de teleprompter). */
 .cuvant {
   color: color-mix(in srgb, var(--voice-text, #1c1a16) 38%, transparent);

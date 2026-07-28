@@ -321,6 +321,11 @@ export function spokenMinus(text) {
  */
 export function toSpeakable(text) {
   let out = String(text == null ? '' : text).normalize('NFC').replace(INVIZIBILE, '');
+  // Titlurile de secțiune „[[Definiție]]" (marcajul cerut modelului): rostite ca
+  // un titlu — propoziție de sine stătătoare, cu pauze de o parte și de alta, ca
+  // profesorul care anunță pasul. Clientul le recunoaște în fluxul de cuvinte
+  // după titlurile H2 ale lecției și le face clicabile spre secțiune.
+  out = out.replace(/\[\[\s*([^\]]+?)\s*\]\]/g, '. $1. ');
   out = faraLatex(out);
 
   out = lipesteGrupeleDeCifre(out);

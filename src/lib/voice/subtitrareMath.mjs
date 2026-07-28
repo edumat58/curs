@@ -23,6 +23,73 @@ function esteNumar(w) {
   return /^-?\d[\d.,]*$/.test(String(w || '').trim());
 }
 
+/**
+ * Normalizează un titlu pentru comparație: scoate invizibilele (H2-urile din
+ * Docusaurus au un zero-width space de la ancoră — „Definiție​" ≠ „Definiție"),
+ * scoate un eventual „#" de ancoră, litere mici, un singur spațiu.
+ */
+function faraInvizibile(s) {
+  return String(s || '')
+    .replace(/[​‌‍⁠﻿­]/g, '')
+    .replace(/#+\s*$/, '')
+    .trim();
+}
+function normalizeazaTitlu(s) {
+  return faraInvizibile(s).toLowerCase().replace(/\s+/g, ' ').trim();
+}
+
+/**
+ * Marchează, în șirul de jetoane, TITLURILE de secțiune rostite.
+ *
+ * Modelul a pus „[[Definiție]]" înaintea fiecărei secțiuni, iar `toSpeakable` le-a
+ * rostit ca titluri de sine stătătoare — deci apar în cuvinte („Definiție",
+ * „Reprezentarea pozițională"…). Aici le recunoaștem după titlurile REALE ale
+ * lecției (H2/H3 din pagină) și le legăm de secțiunea lor: la clic, elevul sare
+ * exact acolo. Marcăm DOAR prima apariție a fiecărui titlu — anunțul secțiunii —
+ * ca să nu prindem o pomenire ulterioară din proză.
+ *
+ * @param tokens jetoanele din construiesteTokeni
+ * @param titluri [{nume, el}] — titlurile lecției, în ordine
+ */
+export function marcheazaSectiuni(tokens, titluri) {
+  if (!Array.isArray(tokens) || !tokens.length || !Array.isArray(titluri) || !titluri.length) {
+    return tokens;
+  }
+  const harta = titluri.map((t) => ({ ...t, cuvinte: normalizeazaTitlu(t.nume).split(' ') }));
+  const folosite = new Set();
+  const src = tokens.map((t) => ({ ...t }));
+  const out = [];
+
+  for (let i = 0; i < src.length; i += 1) {
+    let contopit = false;
+    for (const h of harta) {
+      if (folosite.has(h.nume)) continue;
+      const n = h.cuvinte.length;
+      if (n === 0 || i + n > src.length) continue;
+      const bucata = src.slice(i, i + n).map((t) => normalizeazaTitlu(t.text)).join(' ');
+      if (bucata === h.cuvinte.join(' ')) {
+        // Contopim cuvintele titlului într-UN jeton, cu textul real al H2-ului,
+        // ca să-l randăm ca un titlu-bloc clicabil. Timpul = uniunea lor.
+        const prim = src[i];
+        const ultim = src[i + n - 1];
+        out.push({
+          text: faraInvizibile(h.nume),
+          titlu: true,
+          sectiune: h.el,
+          t: prim.t,
+          d: Math.max(1, ultim.t + ultim.d - prim.t),
+        });
+        folosite.add(h.nume);
+        i += n - 1;
+        contopit = true;
+        break;
+      }
+    }
+    if (!contopit) out.push(src[i]);
+  }
+  return out;
+}
+
 const SUPERSCRIPT = {
   0: '⁰', 1: '¹', 2: '²', 3: '³', 4: '⁴', 5: '⁵', 6: '⁶', 7: '⁷', 8: '⁸', 9: '⁹',
 };
