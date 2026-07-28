@@ -560,6 +560,22 @@ export default function AudioPlayer({
     <div className={styles.player} role="group" aria-label="Explicație audio">
       <audio ref={audioRef} src={src} preload="metadata" />
 
+      {/* Închide — tab „punch-out" în colțul dreapta-sus, deasupra dock-ului, țintă
+          mare, ușor de apăsat (nu mai stă înghesuit lângă bara de derulare). */}
+      {onClose && (
+        <button
+          type="button"
+          className={styles.closeTab}
+          onClick={onClose}
+          aria-label="Închide"
+          title="Închide"
+        >
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+            <path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" />
+          </svg>
+        </button>
+      )}
+
       {/* Rând EXTRA de controale — apare doar EXTINS, un rând DEASUPRA barei de
           audio: ±10, stop, viteză. Restrâns, dispare de tot; rămâne doar bara de
           audio de dedesubt. */}
@@ -685,12 +701,6 @@ export default function AudioPlayer({
             />
           </svg>
         </button>
-
-        {onClose && (
-          <button type="button" className={styles.close} onClick={onClose} aria-label="Închide">
-            ✕
-          </button>
-        )}
       </div>
 
       {buffering && <span className={styles.hint}>se încarcă…</span>}

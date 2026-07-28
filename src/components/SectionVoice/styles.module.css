@@ -295,22 +295,23 @@
   /* Plafon de siguranță: dock-ul nu urcă niciodată peste bara de sus; dacă
      transcriptul + comenzile ar fi prea înalte, transcriptul derulează în cutia
      lui. (vh întâi, ca rezervă pentru browserele fără dvh.) */
-  max-height: min(calc(50vh - var(--lessonbar-height, 58px)), calc(100vh - var(--edupasi-navbar-real, 110px) - var(--lessonbar-height, 58px) - 12px));
-  max-height: min(calc(50dvh - var(--lessonbar-height, 58px)), calc(100dvh - var(--edupasi-navbar-real, 110px) - var(--lessonbar-height, 58px) - 12px));
+  max-height: min(calc(40vh - var(--lessonbar-height, 58px)), calc(100vh - var(--edupasi-navbar-real, 110px) - var(--lessonbar-height, 58px) - 12px));
+  max-height: min(calc(40dvh - var(--lessonbar-height, 58px)), calc(100dvh - var(--edupasi-navbar-real, 110px) - var(--lessonbar-height, 58px) - 12px));
 }
 
 /* Pe EduPAȘI mai există bara de context (68px) sub navbar: o scădem din plafon,
    ca un dock înalt să nu ajungă sub ea. Accentul bleumarin rămâne dat tot de
    atributul data-edupasi (regula de culoare de mai sus). */
 .panel[data-edupasi] {
-  max-height: min(calc(50vh - var(--lessonbar-height, 58px)), calc(100vh - var(--edupasi-navbar-real, 110px) - 68px - var(--lessonbar-height, 58px) - 12px));
-  max-height: min(calc(50dvh - var(--lessonbar-height, 58px)), calc(100dvh - var(--edupasi-navbar-real, 110px) - 68px - var(--lessonbar-height, 58px) - 12px));
+  max-height: min(calc(40vh - var(--lessonbar-height, 58px)), calc(100vh - var(--edupasi-navbar-real, 110px) - 68px - var(--lessonbar-height, 58px) - 12px));
+  max-height: min(calc(40dvh - var(--lessonbar-height, 58px)), calc(100dvh - var(--edupasi-navbar-real, 110px) - 68px - var(--lessonbar-height, 58px) - 12px));
 }
 
 /* Conținutul dock-ului: centrat, aliniat cu bara de lecție (inner 72rem). Panoul
    E suprafața acum, deci playerul renunță la chenarul/fundalul lui, ca să nu iasă
    „card în card". Transcriptul preia spațiul rămas și derulează în cutia lui. */
 .panel .player {
+  position: relative;
   width: 100%;
   max-width: 72rem;
   min-height: 0;
@@ -322,12 +323,39 @@
   border-radius: 0;
 }
 
+/* Închiderea ca TAB „punch-out": stă în colțul dreapta-sus al conținutului și
+   iese DEASUPRA marginii de sus a dock-ului (jumătate afară), ca o clapetă de
+   dosar. Țintă de 42px, ușor de nimerit cu degetul; nu mai e înghesuită lângă
+   bara de derulare. Se aliniază la marginea dreaptă a conținutului (centrat pe
+   desktop, lat pe mobil). */
+.panel .closeTab {
+  position: absolute;
+  top: -38px;
+  right: 2px;
+  z-index: 4;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  color: var(--voice-text);
+  background: var(--voice-crem);
+  border: 1px solid var(--voice-crem-linie);
+  border-radius: 50%;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.14);
+  cursor: pointer;
+  transition: background 140ms ease, transform 80ms ease;
+}
+.panel .closeTab:hover { background: var(--km-cream-3, #f1ecdf); }
+.panel .closeTab:active { transform: scale(0.94); }
+
 .panel .subtitrare {
-  flex: 1 1 auto;
   min-height: 0;
-  /* În dock, transcriptul umple spațiul rămas (dock-ul e plafonat la ~50% cu tot
-     cu bara de jos); nu-l mai limităm la 30vh — derulează în cutia lui. */
-  max-height: none;
+  /* Transcriptul e MĂRGINIT (nu umple tot dock-ul): la RESTRÂNGEREA controalelor,
+     dock-ul coboară cu un rând — mai multă lecție vizibilă. Înălțimea vine din
+     `.subtitrare` de bază (30vh, redusă pe ecrane scunde). Plafonul de 50% al
+     panoului rămâne o plasă de siguranță când transcriptul + controalele ar
+     depăși; atunci transcriptul derulează în cutia lui. */
 }
 
 .waiting,
