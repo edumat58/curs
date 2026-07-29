@@ -502,6 +502,35 @@ export default function AudioPlayer({
     if (el) el.playbackRate = speed;
   }, [speed]);
 
+  /**
+   * Poziția se citește pe CEAS PROPRIU cât timp se redă, nu din `timeupdate`.
+   *
+   * `timeupdate` sosește o dată la ~250 ms — între două evenimente, evidențierea
+   * arată un cuvânt rostit deja. Măsurat pe producție: la 138,5 s era luminat
+   * „Descompunerea", deși se auzea „unui". La cuvintele scurte, sfertul acela de
+   * secundă se vede ca o rămânere în urmă constantă.
+   *
+   * Cu un cadru de animație citim ceasul de câte ori repictează browserul, dar
+   * împrospătăm starea doar la ~60 ms: destul cât să nu se mai vadă întârzierea,
+   * rar cât să nu redesenăm transcriptul de șaizeci de ori pe secundă degeaba.
+   * `timeupdate` rămâne pentru cazurile în care nu se redă (derulare, salt).
+   */
+  useEffect(() => {
+    if (!playing) return undefined;
+    let raf = 0;
+    let ultima = 0;
+    const bate = () => {
+      const el = audioRef.current;
+      if (el && !el.paused) {
+        const acum = el.currentTime;
+        if (Math.abs(acum - ultima) > 0.06) { ultima = acum; setCurrent(acum); }
+      }
+      raf = requestAnimationFrame(bate);
+    };
+    raf = requestAnimationFrame(bate);
+    return () => cancelAnimationFrame(raf);
+  }, [playing]);
+
   useEffect(() => {
     if (!autoPlay) return;
     const el = audioRef.current;
