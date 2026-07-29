@@ -455,10 +455,68 @@ export function toSpeakable(text) {
    * propoziție, deci primește pauza obișnuită. Paradoxal, ștergând rândurile
    * câștigăm pauzele, nu le pierdem.
    */
-  return out
+  out = out
     .replace(/\s+/g, ' ')
     .replace(/\s+([,.;:!?])/g, '$1')
     .replace(/([,;:])(?=[^\s\d])/g, '$1 ')
     .replace(/\s+/g, ' ')
     .trim();
+
+  return marcheazaLitere(out);
+}
+
+/**
+ * Marcajul literelor-variabilă, pentru pronunție corectă la sinteză.
+ *
+ * Două greșeli auzite, amândouă de la faptul că motorul tratează o literă
+ * singură ca pe un cuvânt obișnuit:
+ *   • „coeficientul k" se auzea „che", nu „capa" (numele literei în română);
+ *   • în „numărul a înmulțit cu b", litera „a" trecea atât de repede încât
+ *     abia se distingea — un vocală singură nu apucă să sune.
+ *
+ * Nu putem trimite marcaj SSML de aici: textul e escapat XML la sinteză. Deci
+ * doar ÎNCONJURĂM litera cu un caracter santinelă, iar constructorul de SSML îl
+ * transformă, după escapare, în pronunția explicită (nume de literă + ritm mai
+ * rar). Verificat cu Azure: granițele de cuvânt rămân curate — transcriptul
+ * arată tot „k", „a", „b", nu numele rostit.
+ *
+ * Marcăm CONSERVATOR: doar literele care chiar sunt variabile, adică lipite de
+ * o operație („a înmulțit cu b") sau anunțate de un cuvânt de matematică
+ * („coeficientul k"). Altfel am prinde „a" din „a fost" sau prepoziții — în
+ * română, litere ca „a", „o", „e" sunt și cuvinte întregi.
+ */
+export const SANTINELA_LITERA = '';
+
+const OPERATII = 'înmulțit cu|împărțit la|plus|minus|egal cu|supra|la pătrat|la cub|la puterea|mai mic decât|mai mare decât';
+const SUBSTANTIVE = 'numărul|numarul|coeficientul|litera|punctul|segmentul|unghiul|vârful|varful|latura|dreapta|funcția|functia|variabila|termenul|valoarea|mulțimea|multimea';
+
+/**
+ * Granițele se scriu cu clase Unicode, NU cu `\b`.
+ *
+ * În JavaScript, `\b` se uită doar la [A-Za-z0-9_]: între spațiu și „î" nu vede
+ * nicio graniță, deci „înmulțit cu b" nu se potrivea deloc. Și potrivirea e
+ * insensibilă la majuscule, altfel „Coeficientul k" de la început de frază
+ * scăpa — exact cazul raportat.
+ */
+const INAINTE = '(^|[\\s(,;:])';
+const DUPA = '(?![\\p{L}\\d])';
+
+function marcheazaLitere(text) {
+  const S = SANTINELA_LITERA;
+  return String(text)
+    // literă ÎNAINTEA unei operații: „a înmulțit cu", „x plus"
+    .replace(
+      new RegExp(`${INAINTE}([a-zA-Z]) (?=(?:${OPERATII})${DUPA})`, 'giu'),
+      (_all, inainte, litera) => `${inainte}${S}${litera}${S} `
+    )
+    // literă DUPĂ o operație: „înmulțit cu b", „supra n"
+    .replace(
+      new RegExp(`${INAINTE}(${OPERATII}) ([a-zA-Z])${DUPA}`, 'giu'),
+      (_all, inainte, op, litera) => `${inainte}${op} ${S}${litera}${S}`
+    )
+    // literă anunțată de un cuvânt de matematică: „coeficientul k"
+    .replace(
+      new RegExp(`${INAINTE}(${SUBSTANTIVE}) ([a-zA-Z])${DUPA}`, 'giu'),
+      (_all, inainte, cuvant, litera) => `${inainte}${cuvant} ${S}${litera}${S}`
+    );
 }
