@@ -295,23 +295,22 @@
   /* Plafon de siguranță: dock-ul nu urcă niciodată peste bara de sus; dacă
      transcriptul + comenzile ar fi prea înalte, transcriptul derulează în cutia
      lui. (vh întâi, ca rezervă pentru browserele fără dvh.) */
-  max-height: min(calc(40vh - var(--lessonbar-height, 58px)), calc(100vh - var(--edupasi-navbar-real, 110px) - var(--lessonbar-height, 58px) - 12px));
-  max-height: min(calc(40dvh - var(--lessonbar-height, 58px)), calc(100dvh - var(--edupasi-navbar-real, 110px) - var(--lessonbar-height, 58px) - 12px));
+  max-height: min(calc(50vh - var(--lessonbar-height, 58px)), calc(100vh - var(--edupasi-navbar-real, 110px) - var(--lessonbar-height, 58px) - 12px));
+  max-height: min(calc(50dvh - var(--lessonbar-height, 58px)), calc(100dvh - var(--edupasi-navbar-real, 110px) - var(--lessonbar-height, 58px) - 12px));
 }
 
 /* Pe EduPAȘI mai există bara de context (68px) sub navbar: o scădem din plafon,
    ca un dock înalt să nu ajungă sub ea. Accentul bleumarin rămâne dat tot de
    atributul data-edupasi (regula de culoare de mai sus). */
 .panel[data-edupasi] {
-  max-height: min(calc(40vh - var(--lessonbar-height, 58px)), calc(100vh - var(--edupasi-navbar-real, 110px) - 68px - var(--lessonbar-height, 58px) - 12px));
-  max-height: min(calc(40dvh - var(--lessonbar-height, 58px)), calc(100dvh - var(--edupasi-navbar-real, 110px) - 68px - var(--lessonbar-height, 58px) - 12px));
+  max-height: min(calc(50vh - var(--lessonbar-height, 58px)), calc(100vh - var(--edupasi-navbar-real, 110px) - 68px - var(--lessonbar-height, 58px) - 12px));
+  max-height: min(calc(50dvh - var(--lessonbar-height, 58px)), calc(100dvh - var(--edupasi-navbar-real, 110px) - 68px - var(--lessonbar-height, 58px) - 12px));
 }
 
 /* Conținutul dock-ului: centrat, aliniat cu bara de lecție (inner 72rem). Panoul
    E suprafața acum, deci playerul renunță la chenarul/fundalul lui, ca să nu iasă
    „card în card". Transcriptul preia spațiul rămas și derulează în cutia lui. */
 .panel .player {
-  position: relative;
   width: 100%;
   max-width: 72rem;
   min-height: 0;
@@ -323,31 +322,49 @@
   border-radius: 0;
 }
 
-/* Închiderea ca TAB „punch-out": stă în colțul dreapta-sus al conținutului și
-   iese DEASUPRA marginii de sus a dock-ului (jumătate afară), ca o clapetă de
-   dosar. Țintă de 42px, ușor de nimerit cu degetul; nu mai e înghesuită lângă
-   bara de derulare. Se aliniază la marginea dreaptă a conținutului (centrat pe
-   desktop, lat pe mobil). */
+/* Închiderea ca TAB DE DOSAR: un dreptunghi cu colțuri rotunjite doar SUS, lipit
+   de marginea de sus a dock-ului (fără bordură jos, aceeași culoare crem) și
+   ieșind deasupra lui — exact bump-ul de la un folder. Poziționat față de `.panel`
+   (nu de player), deci se lipește de muchia reală a dock-ului, în colțul dreapta. */
 .panel .closeTab {
   position: absolute;
-  top: -38px;
-  right: 2px;
+  bottom: 100%;
+  margin-bottom: -1px;
+  right: clamp(10px, 3vw, 22px);
   z-index: 4;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 42px;
-  height: 42px;
+  height: 30px;
+  padding: 0 1.05rem;
   color: var(--voice-text);
   background: var(--voice-crem);
   border: 1px solid var(--voice-crem-linie);
+  border-bottom: none;
+  border-radius: 10px 10px 0 0;
+  box-shadow: 0 -3px 8px rgba(0, 0, 0, 0.07);
+  cursor: pointer;
+  transition: background 140ms ease;
+}
+.panel .closeTab:hover { background: var(--km-cream-3, #f1ecdf); }
+
+/* Starea ACTIVĂ a unui toggle de pe bară (controale / transcript deschis):
+   inversată — plin cu accent, ca să se vadă că e pornit. */
+.colapsOn {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  color: var(--voice-on-accent);
+  background: var(--voice-accent);
+  border: 1px solid var(--voice-accent);
   border-radius: 50%;
-  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.14);
   cursor: pointer;
   transition: background 140ms ease, transform 80ms ease;
 }
-.panel .closeTab:hover { background: var(--km-cream-3, #f1ecdf); }
-.panel .closeTab:active { transform: scale(0.94); }
+.colapsOn:active { transform: scale(0.94); }
 
 .panel .subtitrare {
   min-height: 0;

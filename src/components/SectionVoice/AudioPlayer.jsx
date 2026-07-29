@@ -547,14 +547,24 @@ export default function AudioPlayer({
   const [setari, setSetari] = useState(false);
 
   /**
-   * MENIUL DE CONTROL e colapsabil (cerut) — NU transcriptul. Transcriptul e
-   * exact ce vrea elevul să vadă, deci rămâne mereu.
-   *
-   * Extins (implicit): toate controalele (±10, stop, viteză). Restrâns: rămâne
-   * DOAR bara de audio (play + derulare + timp) — butoanele extra se ascund, ca
-   * dock-ul să fie curat. Transcriptul e vizibil în ambele stări.
+   * DOUĂ colapsuri INDEPENDENTE, pe bara de audio, AMBELE colapsate implicit
+   * (cerut): dock-ul se deschide ca o simplă bară de audio, iar elevul arată ce
+   * vrea. `extins` = rândul de controale extra (±10, stop, viteză), deasupra.
+   * `transcriptDeschis` = transcriptul, dedesubt.
    */
-  const [extins, setExtins] = useState(true);
+  const [extins, setExtins] = useState(false);
+  const [transcriptDeschis, setTranscriptDeschis] = useState(false);
+
+  /**
+   * Cât timp TRANSCRIPTUL e deschis, navbarul de sus (+ bara de context EduPAȘI)
+   * NU mai stă lipit — se derulează cu pagina, ca tot spațiul de sus să meargă în
+   * text. La închidere redevin persistente. Comutăm o clasă pe <body> (CSS global).
+   */
+  useEffect(() => {
+    if (typeof document === 'undefined') return undefined;
+    document.body.classList.toggle('voice-transcript-open', transcriptDeschis);
+    return () => document.body.classList.remove('voice-transcript-open');
+  }, [transcriptDeschis]);
 
   return (
     <div className={styles.player} role="group" aria-label="Explicație audio">
@@ -681,23 +691,44 @@ export default function AudioPlayer({
           <span className={styles.time}>-{fmt(Math.max(0, (duration || 0) - current))}</span>
         </div>
 
-        {/* Restrânge / extinde meniul de control (rândul extra de sus). */}
+        {/* Colaps/expand CONTROALE (rândul extra de sus) — iconiță de SETĂRI. */}
         <button
           type="button"
-          className={styles.colaps}
+          className={extins ? styles.colapsOn : styles.colaps}
           onClick={() => { setSetari(false); setExtins((v) => !v); }}
           aria-expanded={extins}
-          aria-label={extins ? 'Restrânge controalele' : 'Mai multe controale'}
+          aria-label={extins ? 'Ascunde controalele' : 'Mai multe controale'}
           title={extins ? 'Ascunde controalele extra' : 'Arată toate controalele'}
         >
           <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" strokeWidth="2" />
             <path
-              d={extins ? 'M6 9l6 6 6-6' : 'M6 15l6-6 6 6'}
+              d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"
               fill="none"
               stroke="currentColor"
-              strokeWidth="2.4"
+              strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
+            />
+          </svg>
+        </button>
+
+        {/* Colaps/expand TRANSCRIPT (dedesubt). Buton separat, pe aceeași bară. */}
+        <button
+          type="button"
+          className={transcriptDeschis ? styles.colapsOn : styles.colaps}
+          onClick={() => setTranscriptDeschis((v) => !v)}
+          aria-pressed={transcriptDeschis}
+          aria-label={transcriptDeschis ? 'Ascunde transcriptul' : 'Arată transcriptul'}
+          title={transcriptDeschis ? 'Ascunde transcriptul' : 'Arată transcriptul'}
+        >
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <path
+              d="M4 6h16M4 10h16M4 14h10M4 18h13"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
             />
           </svg>
         </button>
@@ -705,18 +736,16 @@ export default function AudioPlayer({
 
       {buffering && <span className={styles.hint}>se încarcă…</span>}
 
-      {/* Transcriptul rămâne MEREU vizibil — e exact ce vrea elevul să vadă.
-          Colapsul restrânge doar butoanele EXTRA (±10, stop, viteză), nu textul.
-          Subtitrare sincronizată când avem timpii pe cuvânt; altfel transcriptul
-          static, pliabil (audio generat înainte de a exista funcția). */}
-      {Array.isArray(words) && words.length ? (
-        <Subtitrare words={words} currentMs={current * 1000} contentRoot={contentRoot} onSeek={seekLaMs} />
-      ) : transcript ? (
-        <details className={styles.transcriptBox}>
-          <summary className={styles.transcriptToggle}>Vezi transcriptul</summary>
+      {/* Transcriptul apare doar când e DESCHIS (buton propriu pe bară). Implicit
+          colapsat. Subtitrare sincronizată când avem timpii pe cuvânt; altfel
+          transcriptul static (audio generat înainte de a exista funcția). */}
+      {transcriptDeschis && (
+        Array.isArray(words) && words.length ? (
+          <Subtitrare words={words} currentMs={current * 1000} contentRoot={contentRoot} onSeek={seekLaMs} />
+        ) : transcript ? (
           <div className={styles.transcriptText}>{transcript}</div>
-        </details>
-      ) : null}
+        ) : null
+      )}
     </div>
   );
 }

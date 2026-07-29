@@ -840,6 +840,19 @@ body.voice-dock-open .theme-doc-markdown {
   padding-bottom: calc(var(--lessonbar-height, 58px) + var(--voice-dock-height, 42vh) + 1.5rem);
 }
 
+/* Cât timp TRANSCRIPTUL vocii e deschis, navbarul EDUMAT nu mai stă lipit — se
+   derulează cu pagina, ca tot spațiul de sus să meargă în text (cerut). Închis la
+   loc, redevine persistent. */
+body.voice-transcript-open .navbar {
+  position: static !important;
+}
+
+/* EXCEPȚIE EduPAȘI: bara de context (cu Accesibilitatea) rămâne persistentă ORICE
+   ar fi; când navbarul edumat pleacă, ea urcă la top:0 în locul lui. */
+body.voice-transcript-open [data-edupasi-chrome] {
+  top: 0 !important;
+}
+
 .button--primary {
   background: var(--km-orange);
   border-color: var(--km-orange);
