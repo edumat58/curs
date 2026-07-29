@@ -19,6 +19,27 @@ import { PROMPT_VERSION, codLectie, identitateLectie, numeFisierAudio } from '@s
 import { construiesteTokeni, marcheazaSectiuni } from '@site/src/lib/voice/subtitrareMath.mjs';
 import styles from './styles.module.css';
 
+
+/**
+ * Codul canonic al unei lecții din listă — CU flagurile ei.
+ *
+ * `codLectie` primește flagurile ca argumente; dacă nu i le dai, ultimele două
+ * cifre ies mereu 0. Panoul le avea în listă (indexul lecțiilor le include), dar
+ * nu le trimitea, așa că voce afișa „…000" pentru o lecție marcată finală, adică
+ * alt cod decât cel din pagină. Un singur ajutor, folosit peste tot, ca să nu mai
+ * existe loc unde se uită.
+ */
+function codPentru(lectie) {
+  if (!lectie) return null;
+  return codLectie({
+    course: lectie.course,
+    title: lectie.title,
+    collection: lectie.collection,
+    final: Boolean(lectie.final),
+    vizibilPermanent: Boolean(lectie.vizibilPermanent),
+  });
+}
+
 /** Titlurile de secțiune, din marcajele „[[Titlu]]" ale textului generat. */
 function titluriDinMarcaje(text) {
   const out = [];
@@ -354,7 +375,7 @@ export default function VoiceAdmin({ token, apiBase }) {
     setMesaj('Generez textul — durează un minut sau două. Poți lăsa pagina deschisă.');
     try {
       const hash = await cheieLectie(identitate, PROMPT_VERSION);
-      const cod = codLectie({ course: lectie.course, title: lectie.title, collection: lectie.collection });
+      const cod = codPentru(lectie);
       const r = await authFetch('/admin/voice/text', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -495,7 +516,7 @@ export default function VoiceAdmin({ token, apiBase }) {
                 <span className={styles.rowTexts}>
                   <span className={styles.rowTitle}>{l.title}</span>
                   <span className={styles.rowCod}>
-                    {codLectie({ course: l.course, title: l.title, collection: l.collection }) || ''}
+                    {codPentru(l) || ''}
                   </span>
                 </span>
                 <span className={styles.rowMeta}>{CLASE[l.course]?.replace('Clasa a ', '')}</span>
@@ -516,7 +537,7 @@ export default function VoiceAdmin({ token, apiBase }) {
               <div className={styles.editorHead}>
                 <div>
                   <span className={styles.editorCod}>
-                    {codLectie({ course: selectat.course, title: selectat.title, collection: selectat.collection }) || ''}
+                    {codPentru(selectat) || ''}
                   </span>
                   <h3 className={styles.editorTitle}>{selectat.title}</h3>
                   <span className={`${styles.badge} ${styles[`badge_${staree(selectat.url)}`]}`}>
