@@ -158,6 +158,20 @@ function EditorStilizat({ text, onChange, placeholder, titluri }) {
   // Aceeași tăiere ca la elev: titlurile lecției devin secțiuni îngroșate.
   const bucati = taieSectiuni(text, titluri || []);
 
+  /**
+   * Proza se mai taie o dată, la marcajele de literă („<k>").
+   *
+   * Se colorează DOAR — culoarea nu schimbă lățimea glifelor, deci cele două
+   * straturi rămân aliniate la pixel și cursorul stă pe litere. Marcajul se vede
+   * cât scrii, ca să știi unde ai cerut pronunția pe nume.
+   */
+  const bucatiLitere = (bucata) => String(bucata).split(/(<[a-zA-Z]>)/g).map((parte, k) => (
+    /^<[a-zA-Z]>$/.test(parte)
+      // eslint-disable-next-line react/no-array-index-key
+      ? <span key={k} className={styles.editorLitera}>{parte}</span>
+      : parte
+  ));
+
   return (
     <div className={styles.editorWrap}>
       <pre className={styles.editorFundal} ref={fundal} aria-hidden="true">
@@ -169,7 +183,7 @@ function EditorStilizat({ text, onChange, placeholder, titluri }) {
           </span>
         ) : (
           // eslint-disable-next-line react/no-array-index-key
-          <span key={i}>{b.text}</span>
+          <span key={i}>{bucatiLitere(b.text)}</span>
         )))}
         {'\n'}
       </pre>

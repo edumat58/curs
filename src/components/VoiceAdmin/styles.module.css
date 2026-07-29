@@ -350,3 +350,11 @@
 /* Cele două bugete (Azure + Gemini): stivuite pe mobil, alături pe lat. */
 .usageGrid { display: grid; grid-template-columns: 1fr; gap: 12px; }
 @media (min-width: 720px) { .usageGrid { grid-template-columns: 1fr 1fr; } }
+
+/* Marcajul de literă-simbol („<k>") în editor: se COLOREAZĂ doar. Culoarea nu
+   schimbă lățimea glifelor, deci stratul stilizat rămâne aliniat la pixel cu
+   câmpul de editare și cursorul stă pe litere. */
+.editorLitera {
+  color: var(--km-orange-deep, #c2540a);
+  font-weight: 700;
+}
