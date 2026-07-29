@@ -35,7 +35,19 @@ function faraInvizibile(s) {
     .trim();
 }
 function normalizeazaTitlu(s) {
-  return faraInvizibile(s).toLowerCase().replace(/\s+/g, ' ').trim();
+  return faraInvizibile(s)
+    .toLowerCase()
+    /**
+     * Punctuația se ignoră la potrivire.
+     *
+     * De când semnele de punctuație de la Azure se lipesc de cuvânt (ca să se
+     * vadă în transcript), titlul rostit vine „definiție." iar H2-ul din pagină e
+     * „Definiție" — potrivirea pica și NICIUN titlu nu mai era clicabil. Comparăm
+     * fără semne, la ambele capete.
+     */
+    .replace(/[.,;:!?…]+/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
 }
 
 /**
@@ -114,7 +126,10 @@ const POSTFIX = [
 function potrivesteSecventa(words, i, cuv) {
   for (let k = 0; k < cuv.length; k += 1) {
     const w = words[i + k];
-    if (!w || String(w.w).trim().toLowerCase() !== cuv[k]) return false;
+    // Punctuația lipită de cuvânt („plus,", „cu.") nu strică potrivirea: de când
+    // semnele ajung în transcript, ele fac parte din jeton.
+    const brut = String(w ? w.w : '').trim().toLowerCase().replace(/[.,;:!?…]+$/, '');
+    if (!w || brut !== cuv[k]) return false;
   }
   return true;
 }
