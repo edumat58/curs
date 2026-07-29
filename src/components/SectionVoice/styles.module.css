@@ -1004,29 +1004,33 @@ details[open] .transcriptToggle::before { content: '▾ '; }
    Portocaliu pe lecțiile normale, bleumarin pe EduPAȘI (după data-edupasi-page).
    ============================================================ */
 .sectiuneAudio {
+  /* Mărime FIXĂ, nu în em: legată de corpul titlului, ajungea un disc uriaș
+     lângă un H2 și un punct lângă un H3 — de aici impresia de improvizat. */
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 1.55em;
-  height: 1.55em;
-  margin-left: 0.5rem;
+  width: 30px;
+  height: 30px;
+  margin: 0 0 0 0.5rem;
   padding: 0;
-  vertical-align: middle;
-  border: 1px solid var(--km-line, #d9d2c2);
+  /* Aliniat la mijlocul literelor, nu la linia de bază: lângă un titlu îngroșat
+     un buton pe linia de bază pare căzut. */
+  vertical-align: -0.18em;
+  /* Fără contur: conturul subțire pe crem arăta ca o bulină ștearsă. Fundalul
+     tușat cu accentul lecției se citește curat și pe alb, și pe crem. */
+  border: 0;
   border-radius: 50%;
-  background: var(--km-cream-2, #fffcf5);
-  color: var(--km-orange, #e8590c);
+  background: color-mix(in srgb, var(--km-orange, #e8590c) 12%, transparent);
+  color: var(--km-orange-deep, #c2540a);
   cursor: pointer;
-  opacity: 0.5;
-  transition: opacity 140ms ease, background 140ms ease, transform 100ms ease;
+  transition: background 140ms ease, transform 90ms ease;
 }
 .sectiuneAudio:hover,
 .sectiuneAudio:focus-visible {
-  opacity: 1;
-  background: color-mix(in srgb, var(--km-orange, #e8590c) 14%, var(--km-cream-2, #fffcf5));
-  transform: scale(1.08);
+  background: color-mix(in srgb, var(--km-orange, #e8590c) 26%, transparent);
   outline: none;
 }
+.sectiuneAudio:active { transform: scale(0.92); }
 .sectiuneAudio svg { display: block; }
 
 /* Pe EduPAȘI, accentul e bleumarinul temei. */

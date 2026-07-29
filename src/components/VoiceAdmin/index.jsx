@@ -58,10 +58,17 @@ const STARE_ETICHETA = {
   none: 'Negenerat', draft: 'Ciornă — de revizuit', ready: 'Gata', pending: 'Se generează…', error: 'Eroare',
 };
 
-/** Titlurile H2 ale lecției, din sursa MDX — exact lista pe care o vede elevul. */
+/**
+ * Titlurile de secțiune ale lecției, din sursa MDX.
+ *
+ * `##` ȘI `###`: playerul și iconițele din pagină recunosc de la început
+ * `h2, h3`, iar panoul citea doar `##`. De aici incoerența văzută pe C2 clasa a
+ * VI-a — „1. Demonstrația că un număr nu este prim" apărea ca secțiune în lecție,
+ * dar nu în admin. O singură definiție, aceeași în toate cele trei locuri.
+ */
 function titluriDinSursa(mdx) {
   const out = [];
-  const re = /^##\s+(.+?)\s*$/gm;
+  const re = /^#{2,3}\s+(.+?)\s*$/gm;
   let m = re.exec(String(mdx || ''));
   while (m) {
     const nume = m[1].replace(/[#*`_]/g, '').trim();

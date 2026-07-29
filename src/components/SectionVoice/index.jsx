@@ -501,7 +501,9 @@ function LessonButton({ section, route, host }) {
         'aria-label',
         `Ascultă explicația secțiunii: ${(el.textContent || '').replace(/#$/, '').trim()}`
       );
-      btn.innerHTML = '<svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M7 4.5l13 7.5-13 7.5z" fill="currentColor"/></svg>';
+      // Triunghiul e împins cu 1px la dreapta: centrat geometric, un „play" pare
+      // mereu tras spre stânga. Centrarea optică e ce vede ochiul.
+      btn.innerHTML = '<svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="margin-left:1px"><path d="M8 5l11 7-11 7z" fill="currentColor"/></svg>';
       const laClick = (e) => {
         e.preventDefault();
         e.stopPropagation();

@@ -29,13 +29,29 @@ function escapeXml(s) {
 
 /** Împarte în propoziții păstrând punctuația — pentru timpii de sincronizare. */
 function propozitii(text) {
-  return String(text)
-    // Santinela de pauză nu are voie să blocheze despărțirea: altfel titlul
-    // rămâne în aceeași propoziție cu fraza următoare, iar pauza lui ajunge
-    // în mijlocul frazei — exact cazul care corupe granițele de cuvânt.
+  const bucati = String(text)
     .split(/(?<=[.!?])\s+/)
-    .map((s) => s.trim())
+    .map((x) => x.trim())
     .filter(Boolean);
+
+  /**
+   * Numerotarea unui titlu NU e sfarsit de fraza.
+   *
+   * „2. Descompunerea unui numar..." se rupea in doua („2." si restul), pentru ca
+   * un punct urmat de spatiu arata exact ca finalul unei propozitii. Consecinta
+   * se vedea la elev: titlul fragmentat nu mai era recunoscut ca sectiune, iar
+   * pauzele cadeau in mijlocul lui si corupeau granitele de cuvant — evidentierea
+   * ramanea blocata pe un bloc intreg de text (masurat: o singura „granita" cu
+   * 90+ caractere). Lipim inapoi orice bucata care e doar un numar.
+   */
+  const out = [];
+  for (const b of bucati) {
+    if (/^\d{1,3}\.$/.test(b)) { out.push({ numar: b }); continue; }
+    const ultim = out[out.length - 1];
+    if (ultim && typeof ultim === 'object') { out[out.length - 1] = `${ultim.numar} ${b}`; continue; }
+    out.push(b);
+  }
+  return out.map((x) => (typeof x === 'string' ? x : x.numar)).filter(Boolean);
 }
 
 /**
@@ -64,7 +80,7 @@ function esteTitlu(fraza) {
   const t = String(fraza).trim();
   if (t.length > 60) return false;
   if (/[,;:!?]/.test(t)) return false;
-  return t.split(/\s+/).length <= 6;
+  return t.split(/\s+/).length <= 8;
 }
 
 
