@@ -33,7 +33,7 @@ function propozitii(text) {
     // Santinela de pauză nu are voie să blocheze despărțirea: altfel titlul
     // rămâne în aceeași propoziție cu fraza următoare, iar pauza lui ajunge
     // în mijlocul frazei — exact cazul care corupe granițele de cuvânt.
-    .split(/(?<=[.!?])[]*\s+/)
+    .split(/(?<=[.!?])\s+/)
     .map((s) => s.trim())
     .filter(Boolean);
 }
@@ -52,20 +52,46 @@ function propozitii(text) {
  * liniște. Titlul se aude ca un anunț, iar clicul pe secțiune are unde să
  * aterizeze fără să calce peste primul cuvânt.
  */
-function pauzeTitluri(escapat) {
-  return escapat
-    .replace(//g, '<break time="420ms"/>')
-    // Tăcerea scurtă din jurul unei litere-vocală: cât să se distingă
-    // litera, fără să rupă fraza. E silence, nu `prosody`.
-    .replace(//g, '<break time="130ms"/>');
+/**
+ * Un titlu de sectiune e o propozitie SCURTA, fara punctuatie interioara.
+ *
+ * Pauza din jurul lui se pune aici, la sinteza, nu prin semne puse in text:
+ * semnele acelea ajungeau in ce editeaza administratorul si se vedeau ca niste
+ * patratele. Regula e cea pe care o foloseste si ochiul — cateva cuvinte, un
+ * punct la capat, nimic altceva.
+ */
+function esteTitlu(fraza) {
+  const t = String(fraza).trim();
+  if (t.length > 60) return false;
+  if (/[,;:!?]/.test(t)) return false;
+  return t.split(/\s+/).length <= 6;
 }
 
 
 function construiesteSsml(text, voice, rate) {
   const fraze = propozitii(text);
-  const corp = fraze
-    .map((f) => `<s>${pauzeTitluri(escapeXml(f))}</s>`)
-    .join('<break time="220ms"/>');
+  /**
+   * Titlul stă în ACEEAȘI propoziție cu fraza care îl urmează, cu pauze în jur.
+   *
+   * Măsurat, pe rând: un `<break/>` între două `<s>`, unul lipit de `</s>` și
+   * unul la începutul propoziției următoare sunt toate ignorate — după titlu
+   * rămâneau 0 secunde. Singura formă care se aude e cea în care pauza are text
+   * de o parte și de alta, în interiorul aceleiași propoziții: 1,53 s înainte și
+   * 1,31 s după, măsurate. Corupția granițelor de cuvânt vine de la pauzele din
+   * MIJLOCUL unei fraze normale, nu de la cele lipite de un titlu.
+   */
+  const bucati = [];
+  for (let i = 0; i < fraze.length; i += 1) {
+    if (esteTitlu(fraze[i]) && fraze[i + 1]) {
+      bucati.push(
+        `<s><break time="400ms"/>${escapeXml(fraze[i])}<break time="400ms"/> ${escapeXml(fraze[i + 1])}</s>`
+      );
+      i += 1;
+    } else {
+      bucati.push(`<s>${escapeXml(fraze[i])}</s>`);
+    }
+  }
+  const corp = bucati.join('<break time="220ms"/>');
   return `<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="ro-RO">`
     + `<voice name="${voice}"><prosody rate="${rate}">${corp}</prosody></voice></speak>`;
 }

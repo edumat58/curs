@@ -325,7 +325,7 @@ export function toSpeakable(text) {
   // un titlu — propoziție de sine stătătoare, cu pauze de o parte și de alta, ca
   // profesorul care anunță pasul. Clientul le recunoaște în fluxul de cuvinte
   // după titlurile H2 ale lecției și le face clicabile spre secțiune.
-  out = out.replace(/\[\[\s*([^\]]+?)\s*\]\]/g, `. ${PAUZA}$1.${PAUZA} `);
+  out = out.replace(/\[\[\s*([^\]]+?)\s*\]\]/g, '. $1. ');
   out = marcheazaTitluriDeRand(out);
   /**
    * Punctul pe care tocmai l-am pus înaintea titlului se poate lipi de punctul
@@ -552,10 +552,7 @@ const MARCAJ_LITERA = /\s*<([a-zA-Z])>/g;
  * sau `phoneme`, nu obligă motorul să resintetizeze nimic, deci nu se aude
  * nicio cusătură.
  */
-export const PAUZA = '';
 
-/** Tăcere SCURTĂ, pentru litera-vocală: se aude, dar nu rupe fraza. */
-export const PAUZA_SCURTA = '';
 
 /**
  * Titlurile scrise pe rândul lor primesc pauze de o parte și de alta.
@@ -580,7 +577,7 @@ function marcheazaTitluriDeRand(text) {
       if (/[.!?:;,]$/.test(t)) return linie;
       if (t.split(/\s+/).length > 8) return linie;
       if (!gol(i - 1) || !gol(i + 1)) return linie;
-      return `${PAUZA}${t}.${PAUZA}`;
+      return `${t}.`;
     })
     .join('\n');
 }

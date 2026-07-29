@@ -306,7 +306,11 @@ export default function VoiceAdmin({ token, apiBase }) {
         const d = await r.json();
         // Textul primește STRUCTURA (titluri pe rând propriu) înainte de editare,
         // ca ce se vede în editor să fie ce vede elevul.
-        setText(structureazaText(d.text || '', titluriDinSursa(sources[selected])));
+        // Nimic invizibil în editor: dacă în text ajung vreodată caractere de
+        // control (semne de lucru ale sintezei), nu au ce căuta sub ochii
+        // administratorului — se afișează ca pătrățele și sperie degeaba.
+        const curat = String(d.text || '').replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g, '');
+        setText(structureazaText(curat, titluriDinSursa(sources[selected])));
         setWords(Array.isArray(d.words) && d.words.length ? d.words : null);
       }
     })();
