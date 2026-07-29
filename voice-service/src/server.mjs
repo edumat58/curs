@@ -35,7 +35,7 @@ function createTts(env) {
   }
   return createPiperTts(env);
 }
-import { explainSection } from './pipeline/explain.mjs';
+import { cleanForSpeech, explainSection } from './pipeline/explain.mjs';
 import { speechBudget } from './pipeline/prompts.mjs';
 import { createStore } from './storage/mongo.mjs';
 import { encodeOpus } from './providers/encode.mjs';
@@ -286,7 +286,17 @@ export async function createServer(env = process.env) {
     const doc = await store.findByHash(req.params.hash);
     if (!doc || !doc.explanationText) return res.status(404).json({ error: 'Fără text de sintetizat.' });
     try {
-      const audio = await tts.synthesize(doc.explanationText);
+      /**
+       * Textul aprobat trece prin ACELEAȘI pregătiri ca la generarea completă.
+       *
+       * Aici se sintetiza `explanationText` BRUT, deci calea din admin ocolea tot
+       * ce face `cleanForSpeech`: simbolurile matematice rostite în cuvinte,
+       * LaTeX-ul scos, numerele dezlipite, pauzele dintre termenii unei sume și
+       * numele literelor-variabilă („k" citit „capa", nu „chei"). Regulile erau
+       * scrise și testate, dar nu ajungeau niciodată la sinteză când audio-ul se
+       * genera din panou — adică exact în fluxul folosit.
+       */
+      const audio = await tts.synthesize(cleanForSpeech(doc.explanationText));
       if (tts.name === 'azure' && audio.chars) {
         store.recordAzureUsage(audio.chars, {
           sectionHash: doc.sectionHash, heading: doc.heading, route: doc.route,
