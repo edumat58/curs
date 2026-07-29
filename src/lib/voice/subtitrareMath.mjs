@@ -138,6 +138,17 @@ function potrivesteSecventa(words, i, cuv) {
  * Transformă lista de cuvinte în jetoane de afișat.
  * @returns {Array<{text:string, t:number, d:number}>}
  */
+/**
+ * Simbolul lipit de literă („a=") primește spațiu la AFIȘARE.
+ *
+ * Sinteza raportează uneori simbolul împreună cu cuvântul următor, iar după ce
+ * punem litera la loc rămâne „a=" — corect ca sunet, urât ca text. Aici e doar
+ * afișare, deci nu atinge nici audio, nici timpii.
+ */
+function aeriseste(text) {
+  return String(text).replace(/([\p{L}\d])([=+×÷−-])(?=$)/u, '$1 $2');
+}
+
 export function construiesteTokeni(words) {
   if (!Array.isArray(words) || !words.length) return [];
   const out = [];
@@ -187,7 +198,7 @@ export function construiesteTokeni(words) {
     if (gasit) continue;
 
     // Cuvânt obișnuit.
-    out.push({ text: words[i].w, t: words[i].t, d: words[i].d });
+    out.push({ text: aeriseste(words[i].w), t: words[i].t, d: words[i].d });
     i += 1;
   }
 

@@ -537,7 +537,13 @@ const NUME_LITERE = {
 const VOCALE_MARCATE = 'aeiou';
 
 /** Marcajul literelor-simbol: `<k>`, `<a>`, `<B>` — o singură literă. */
-const MARCAJ_LITERA = /<([a-zA-Z])>/g;
+/**
+ * Marcajul literelor-simbol: `<k>`, `<a>`, `<B>`.
+ *
+ * Inghite si spatiul dinaintea lui: virgula pusa pentru auz trebuie sa se
+ * lipeasca de cuvantul anterior, nu sa pluteasca intre cuvinte.
+ */
+const MARCAJ_LITERA = /\s*<([a-zA-Z])>/g;
 
 /**
  * Semnul de PAUZĂ, transformat la sinteză într-un `<break/>`.
@@ -630,13 +636,45 @@ export function repuneLitere(words, perechi) {
    * Despărțim ce e literă de ce e în jurul ei și punem la loc doar miezul.
    */
   const bucati = (brut) => /^([^\p{L}]*)(\p{L}+)([^\p{L}]*)$/u.exec(String(brut || '').trim());
-  return words.map((w) => {
+  const refacuteIdx = new Set();
+  const refacute = words.map((w, i) => {
     const p = bucati(w.w);
     if (!p) return w;
     const litera = dupaNume.get(p[2].toLowerCase());
     if (!litera) return w;
+    refacuteIdx.add(i);
     return { ...w, w: `${p[1]}${litera}${p[3]}` };
   });
+
+  /**
+   * Virgulele puse pentru auz nu au ce cauta in transcript — dar se sterg DOAR
+   * in jurul literelor pe care le-am marcat noi, nicaieri altundeva.
+   *
+   * O litera marcata se recunoaste sigur in doua feluri: fie e o consoana pe care
+   * tocmai am refacut-o din numele ei rostit, fie e o litera singura ROSTITA LUNG.
+   * Diferenta e masurata, nu presupusa: intr-o lectie reala, literele marcate
+   * (care primesc virgule) tin 399-439 ms, iar literele care sunt cuvinte
+   * obisnuite („a plecat", „o carte") tin 40-53 ms. Pragul de 200 ms le separa
+   * fara sa se atinga de virgulele scrise de om.
+   */
+  const PRAG_LITERA_ROSTITA = 200;
+  const doarLitera = (brut) => /^[^\p{L}]*(\p{L})[^\p{L}]*$/u.exec(String(brut || '').trim());
+  const eMarcata = (w, refacut) => {
+    if (!w) return false;
+    const p = doarLitera(w.w);
+    if (!p) return false;
+    return refacut || w.d >= PRAG_LITERA_ROSTITA;
+  };
+  const faraVirgula = (brut) => String(brut).replace(/,(?=\s*$)/, '').replace(/,(?=[^\p{L}\d]*$)/u, '');
+
+  return refacute.map((w, i) => {
+    const urmator = refacute[i + 1];
+    const aceasta = eMarcata(w, refacuteIdx.has(i));
+    const urmatoareaEMarcata = eMarcata(urmator, refacuteIdx.has(i + 1));
+    if (!aceasta && !urmatoareaEMarcata) return w;
+    return { ...w, w: faraVirgula(w.w) };
+  });
+
 }
 
 /**
@@ -667,18 +705,25 @@ function marcheazaLitere(text) {
    */
   return String(text).replace(MARCAJ_LITERA, (intreg, litera) => {
     const mic = litera.toLowerCase();
-    // Vocala rămâne literă, dar între două tăceri scurte: se aude, fără să lase
-    // virgule în transcript.
+    const nume = VOCALE_MARCATE.includes(mic) ? litera : NUME_LITERE[mic];
+    if (!nume) return intreg;
     /**
-     * Vocala rămâne litera goală, FĂRĂ pauze.
+     * VIRGULE, nu pauze SSML.
      *
-     * O tăcere în mijlocul frazei strică raportarea granițelor de cuvânt:
-     * măsurat, Azure întoarce atunci tot restul frazei ca un singur „cuvânt
-     * („cu a și be.A treia frază."), iar transcriptul se umple de fragmente
-     * repetate. Pauzele rămân doar la capăt de frază, unde sunt sigure.
+     * O literă singură trece altfel neauzită: măsurat, „a" ținea 80 ms într-o
+     * frază normală. Cu virgule ajunge la 386 ms — de aproape cinci ori — pentru
+     * că motorul pune el pauza, ca la orice enumerare.
+     *
+     * Nu folosim `<break/>`: măsurat, o tăcere în mijlocul frazei face sinteza
+     * să raporteze tot restul frazei ca un singur „cuvânt", iar transcriptul se
+     * umple de fragmente repetate. Virgulele nu au efectul ăsta — verificat,
+     * zero granițe corupte. Ele ajung însă în text, deci se curăță la refacere.
      */
-    if (VOCALE_MARCATE.includes(mic)) return litera;
-    const nume = NUME_LITERE[mic];
-    return nume || intreg;
-  });
+    return `, ${nume},`;
+  })
+    // Curatenie de forma, ca textul rostit sa arate a text scris:
+    .replace(/\s+([,.;:!?])/g, '$1')
+    .replace(/,\s*([.!?;:])/g, '$1')
+    .replace(/,{2,}/g, ',')
+    .replace(/\s{2,}/g, ' ');
 }
