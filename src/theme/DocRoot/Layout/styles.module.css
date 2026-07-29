@@ -4,7 +4,14 @@
    de accesibilitate (safe/contrast). În paleta standard rămân
    nedefiniți, de aceea fiecare token are aici o valoare de rezervă.
    ============================================================ */
-.edupasiShell {
+/* Tokenii stau ȘI pe `.contextBar`, nu doar pe `.edupasiShell`.
+   Shell-ul a fost desființat odată cu navigatorul, iar bara de context a rămas
+   în afara lui: tokenii nu se mai moșteneau, `--edupasi-shell-page` era
+   nedefinită, iar `background` cădea → bara ieșea TRANSPARENTĂ (se vedea lecția
+   prin ea la derulare). Declarându-i și aici, bara e albă indiferent de unde e
+   randată, și urmează în continuare paleta de accesibilitate când e activă. */
+.edupasiShell,
+.contextBar {
   --edupasi-shell-accent: var(--edupasi-accent, #003058);
   --edupasi-shell-accent-strong: var(--edupasi-accent-strong, #003058);
   --edupasi-shell-on-accent: var(--edupasi-on-accent, #ffffff);
@@ -20,7 +27,10 @@
   --edupasi-shell-soft: var(--edupasi-accent-soft, #D9EEF7);
   --edupasi-shell-focus: var(--edupasi-focus, #0197b0);
   --edupasi-shell-gold: var(--edupasi-decoration-gold, #9a7415);
+}
 
+/* Layout-ul rămâne DOAR al shell-ului (bara își are propriul layout mai jos). */
+.edupasiShell {
   display: flex;
   min-width: 0;
   flex: 1 0 auto;
