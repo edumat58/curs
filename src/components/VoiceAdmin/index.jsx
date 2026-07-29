@@ -40,6 +40,24 @@ function codPentru(lectie) {
   });
 }
 
+/**
+ * Cheia audio a unei lecții, derivată din IDENTITATEA ei canonică (MAT-GG-XTT-D).
+ *
+ * Nu din rută și nu din flaguri: identitatea e stabilă, deci o marcare „finală"
+ * sau o mutare de fișier nu rupe legătura cu audio-ul deja generat. `pv` intră
+ * în cheie ca la o schimbare de prompt lecțiile să se regenereze controlat.
+ */
+async function cheieLectie(identitate, promptVersion) {
+  return sha256Hex(`lectie|${identitate}|pv${promptVersion}`);
+}
+
+const MAX_CONTENT = 5800; // sub limita serverului (MAX_TEXT), cu marjă
+
+const CLASE = { c5: 'Clasa a V-a', c6: 'Clasa a VI-a', c7: 'Clasa a VII-a', c8: 'Clasa a VIII-a' };
+const STARE_ETICHETA = {
+  none: 'Negenerat', draft: 'Ciornă — de revizuit', ready: 'Gata', pending: 'Se generează…', error: 'Eroare',
+};
+
 /** Titlurile H2 ale lecției, din sursa MDX — exact lista pe care o vede elevul. */
 function titluriDinSursa(mdx) {
   const out = [];
