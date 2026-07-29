@@ -69,35 +69,31 @@ export function marcheazaSectiuni(tokens, titluri) {
   }
   const harta = titluri.map((t) => ({ ...t, cuvinte: normalizeazaTitlu(t.nume).split(' ') }));
   const folosite = new Set();
-  const src = tokens.map((t) => ({ ...t }));
-  const out = [];
+  const out = tokens.map((t) => ({ ...t }));
 
-  for (let i = 0; i < src.length; i += 1) {
-    let contopit = false;
+  for (let i = 0; i < out.length; i += 1) {
     for (const h of harta) {
       if (folosite.has(h.nume)) continue;
       const n = h.cuvinte.length;
-      if (n === 0 || i + n > src.length) continue;
-      const bucata = src.slice(i, i + n).map((t) => normalizeazaTitlu(t.text)).join(' ');
-      if (bucata === h.cuvinte.join(' ')) {
-        // Contopim cuvintele titlului într-UN jeton, cu textul real al H2-ului,
-        // ca să-l randăm ca un titlu-bloc clicabil. Timpul = uniunea lor.
-        const prim = src[i];
-        const ultim = src[i + n - 1];
-        out.push({
-          text: faraInvizibile(h.nume),
-          titlu: true,
-          sectiune: h.el,
-          t: prim.t,
-          d: Math.max(1, ultim.t + ultim.d - prim.t),
-        });
-        folosite.add(h.nume);
-        i += n - 1;
-        contopit = true;
-        break;
-      }
+      if (n === 0 || i + n > out.length) continue;
+      const bucata = out.slice(i, i + n).map((t) => normalizeazaTitlu(t.text)).join(' ');
+      if (bucata !== h.cuvinte.join(' ')) continue;
+
+      /**
+       * Cuvintele titlului se ADNOTEAZĂ, nu se contopesc.
+       *
+       * Contopite într-un singur jeton, tot titlul rămânea evidențiat ca un bloc
+       * cât era rostit — două-trei secunde în care vocea înainta și evidențierea
+       * stătea. Se citea exact ca o desincronizare, deși timpii erau corecți.
+       * Adnotate, cuvintele își păstrează fiecare timpul lui, iar afișarea le
+       * strânge într-un titlu clicabil.
+       */
+      const grup = { nume: faraInvizibile(h.nume), sectiune: h.el, t: out[i].t };
+      for (let k = 0; k < n; k += 1) out[i + k].grupTitlu = grup;
+      folosite.add(h.nume);
+      i += n - 1;
+      break;
     }
-    if (!contopit) out.push(src[i]);
   }
   return out;
 }

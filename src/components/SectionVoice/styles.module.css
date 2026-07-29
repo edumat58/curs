@@ -1041,3 +1041,15 @@ details[open] .transcriptToggle::before { content: '▾ '; }
 :global(html[data-edupasi-page='true']) .sectiuneAudio:focus-visible {
   background: color-mix(in srgb, var(--edupasi-accent, #003058) 12%, var(--km-cream-2, #fffcf5));
 }
+
+/* Cuvântul rostit ACUM dintr-un titlu de secțiune: titlul rămâne negru și
+   îngroșat, doar cuvântul curent primește tușul de accent — altfel evidențierea
+   ar rescrie culoarea titlului, iar acesta trebuie să arate mereu la fel. */
+.titluActiv {
+  background: color-mix(in srgb, var(--voice-accent) 16%, transparent);
+  border-radius: 4px;
+  padding: 0 2px;
+  margin: 0 -1px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}

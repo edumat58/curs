@@ -258,55 +258,68 @@ function Subtitrare({ words, currentMs, contentRoot, onSeek }) {
 
   return (
     <div ref={cutie} className={styles.subtitrare} aria-label="Transcript sincronizat">
-      {tokens.map((tok, i) => {
-        const clasa = i === idx ? styles.cuvantActiv : (i < idx ? styles.cuvantCitit : styles.cuvant);
-        const ref = i === idx ? activ : null;
-        // Titlu de secțiune: MEREU negru + bold (niciodată estompat sau evidențiat
-        // ca proza), cu o săgeată care spune „e apăsabil". La clic: sare AUDIO la
-        // momentul secțiunii ȘI derulează pagina la ea.
-        if (tok.titlu && tok.sectiune) {
+      {(() => {
+        /**
+         * Randarea merge pe GRUPURI: cuvintele unui titlu intră împreună într-un
+         * singur buton (deci arată și se apasă ca un titlu), dar fiecare rămâne
+         * propriul jeton, cu timpul lui — așa evidențierea avansează prin titlu
+         * în loc să stea blocată pe tot blocul.
+         */
+        const bucati = [];
+        let i = 0;
+        while (i < tokens.length) {
+          const grup = tokens[i].grupTitlu;
+          if (!grup) { bucati.push({ tip: 'cuvant', tok: tokens[i], i }); i += 1; continue; }
+          const start = i;
+          while (i < tokens.length && tokens[i].grupTitlu === grup) i += 1;
+          bucati.push({ tip: 'titlu', grup, tokens: tokens.slice(start, i), start });
+        }
+        return bucati.map((b) => {
+          if (b.tip === 'cuvant') {
+            const clasa = b.i === idx ? styles.cuvantActiv : (b.i < idx ? styles.cuvantCitit : styles.cuvant);
+            return (
+              // eslint-disable-next-line react/no-array-index-key
+              <span key={b.i} ref={b.i === idx ? activ : null} data-activ={b.i === idx ? '' : undefined} className={clasa}>
+                {b.tok.text}
+                {' '}
+              </span>
+            );
+          }
           return (
-            // eslint-disable-next-line react/no-array-index-key
             <button
-              key={i}
+              key={`t${b.start}`}
               type="button"
-              ref={ref}
-              data-activ={i === idx ? '' : undefined}
               className={styles.subtitluSectiune}
               onClick={() => {
-                if (onSeek && Number.isFinite(tok.t)) onSeek(tok.t);
-                scrollPaginaLaSectiune(tok.sectiune);
+                if (onSeek && Number.isFinite(b.grup.t)) onSeek(b.grup.t);
+                scrollPaginaLaSectiune(b.grup.sectiune);
               }}
               title="Sari aici — audio și pagină"
             >
-              <span>{tok.text}</span>
-              <svg
-                className={styles.subtitluSageata}
-                viewBox="0 0 24 24"
-                width="15"
-                height="15"
-                aria-hidden="true"
-              >
-                <path
-                  d="M5 12h13m-6-6l6 6-6 6"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.4"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
+              <span>
+                {b.tokens.map((tok, k) => {
+                  const poz = b.start + k;
+                  return (
+                    // eslint-disable-next-line react/no-array-index-key
+                    <span
+                      key={poz}
+                      ref={poz === idx ? activ : null}
+                      data-activ={poz === idx ? '' : undefined}
+                      className={poz === idx ? styles.titluActiv : undefined}
+                    >
+                      {tok.text}
+                      {k < b.tokens.length - 1 ? ' ' : ''}
+                    </span>
+                  );
+                })}
+              </span>
+              <svg className={styles.subtitluSageata} viewBox="0 0 24 24" width="15" height="15" aria-hidden="true">
+                <path d="M5 12h13m-6-6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </button>
           );
-        }
-        return (
-          // eslint-disable-next-line react/no-array-index-key
-          <span key={i} ref={ref} data-activ={i === idx ? '' : undefined} className={clasa}>
-            {tok.text}
-            {' '}
-          </span>
-        );
-      })}
+        });
+      })()}
     </div>
   );
 }
