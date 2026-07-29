@@ -186,7 +186,16 @@ function Subtitrare({ words, currentMs, contentRoot, onSeek }) {
       : [];
     return marcheazaSectiuni(baza, titluri);
   }, [words, contentRoot]);
-  const idx = indiceToken(tokens, currentMs);
+  /**
+   * Evidențierea ia un mic AVANS față de ceas (80 ms).
+   *
+   * Între momentul în care citim poziția și clipa în care pixelii ajung pe ecran
+   * trec randarea și un cadru de afișare — măsurat pe producție, cuvântul se
+   * aprindea cu ~90-150 ms după ce începea să fie rostit, și exact atât se vede
+   * ca „rămâne în urmă". Avansul anulează întârzierea; e sub pragul la care
+   * ochiul ar sesiza că textul o ia înainte.
+   */
+  const idx = indiceToken(tokens, currentMs + 80);
 
   useEffect(() => {
     // Cutia are înălțime PRESTABILITĂ și derulare proprie: aducem cuvântul rostit
@@ -523,7 +532,7 @@ export default function AudioPlayer({
       const el = audioRef.current;
       if (el && !el.paused) {
         const acum = el.currentTime;
-        if (Math.abs(acum - ultima) > 0.06) { ultima = acum; setCurrent(acum); }
+        if (Math.abs(acum - ultima) > 0.04) { ultima = acum; setCurrent(acum); }
       }
       raf = requestAnimationFrame(bate);
     };
