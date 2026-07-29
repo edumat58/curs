@@ -201,10 +201,28 @@ function Subtitrare({ words, currentMs, contentRoot, onSeek }) {
     //     cuvântul corect rămânea în afara cutiei: părea că „nu urmărește".
     const salt = Math.abs(idx - idxAnterior.current);
     idxAnterior.current = idx;
-    const raf = requestAnimationFrame(() => {
+    let raf = 0;
+    let incercari = 0;
+    /**
+     * Elementul activ se caută în DOM după `data-activ`, NU printr-un ref.
+     *
+     * Cu ref, `activ.current` ajungea null exact când conta: React detașează
+     * ref-ul vechi și îl atașează pe cel nou în aceeași commit, iar când noul
+     * cuvânt e ÎNAINTEA celui vechi în arbore (orice salt înapoi), detașarea se
+     * întâmpla DUPĂ atașare și anula referința. Efectul ieșea devreme și cutia
+     * nu mai derula deloc — transcriptul rămânea la început în timp ce vocea
+     * citea din mijloc: exact „textul și cititul nu mai sunt sincronizate".
+     * Interogarea din DOM nu are ordinea asta de detașare.
+     */
+    const centreaza = () => {
       const box = cutie.current;
-      const el = activ.current;
-      if (!box || !el) return;
+      if (!box) return;
+      const el = box.querySelector('[data-activ]');
+      if (!el) {
+        // Randarea încă nu a ajuns la noul cuvânt: mai încercăm câteva cadre.
+        if (incercari < 5) { incercari += 1; raf = requestAnimationFrame(centreaza); }
+        return;
+      }
       const rBox = box.getBoundingClientRect();
       const rEl = el.getBoundingClientRect();
       const centru = (rEl.top - rBox.top) - (box.clientHeight / 2 - rEl.height / 2);
@@ -213,7 +231,8 @@ function Subtitrare({ words, currentMs, contentRoot, onSeek }) {
       const redus = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const departe = redus || salt > 8 || Math.abs(centru) > box.clientHeight;
       box.scrollTo({ top: box.scrollTop + centru, behavior: departe ? 'auto' : 'smooth' });
-    });
+    };
+    raf = requestAnimationFrame(centreaza);
     return () => cancelAnimationFrame(raf);
   }, [idx]);
 
@@ -252,6 +271,7 @@ function Subtitrare({ words, currentMs, contentRoot, onSeek }) {
               key={i}
               type="button"
               ref={ref}
+              data-activ={i === idx ? '' : undefined}
               className={styles.subtitluSectiune}
               onClick={() => {
                 if (onSeek && Number.isFinite(tok.t)) onSeek(tok.t);
@@ -281,7 +301,7 @@ function Subtitrare({ words, currentMs, contentRoot, onSeek }) {
         }
         return (
           // eslint-disable-next-line react/no-array-index-key
-          <span key={i} ref={ref} className={clasa}>
+          <span key={i} ref={ref} data-activ={i === idx ? '' : undefined} className={clasa}>
             {tok.text}
             {' '}
           </span>

@@ -857,6 +857,15 @@ body.voice-transcript-open [data-edupasi-chrome] {
   top: 0 !important;
 }
 
+/* Doamna Căpșunică stă la bottom:5.5rem — adică EXACT peste butonul de play al
+   dock-ului de voce. Cât timp dock-ul e deschis, o ridicăm deasupra lui:
+   înălțimea măsurată a dock-ului (--voice-dock-height) + bara de lecție + aer.
+   Se mișcă lin, ca să se vadă că e aceeași pastilă, nu alta. */
+body.voice-dock-open [class*='fab_'] {
+  bottom: calc(var(--lessonbar-height, 58px) + var(--voice-dock-height, 120px) + 0.75rem) !important;
+  transition: bottom 200ms ease;
+}
+
 .button--primary {
   background: var(--km-orange);
   border-color: var(--km-orange);
