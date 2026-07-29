@@ -32,6 +32,61 @@ function titluriDinMarcaje(text) {
 }
 
 /**
+ * Editorul care arată textul STILIZAT chiar în timp ce scrii.
+ *
+ * Un `<textarea>` simplu arăta marcajele brute („[[Definiție]]") ca text
+ * oarecare: nu se vedea ce e titlu de secțiune și ce e proză decât citind cu
+ * atenție. Aici punem un strat de randare EXACT sub cursor: aceleași font,
+ * corp, interlinie și margini, cu titlurile îngroșate, iar `<textarea>`-ul stă
+ * peste el cu textul transparent (rămâne doar cursorul și selecția).
+ *
+ * De ce nu un câmp editabil bogat (`contentEditable`): acolo se pierd lucrurile
+ * pe care le are gratis o zonă de text — anulare/refacere, dictare, corector,
+ * comportamentul de tastatură pe telefon. Aici editarea rămâne nativă, se
+ * schimbă doar ce se VEDE.
+ */
+function EditorStilizat({ text, onChange, placeholder }) {
+  const fundal = useRef(null);
+  const camp = useRef(null);
+
+  // Stratul de dedesubt trebuie să urmeze derularea câmpului, altfel textul
+  // stilizat rămâne în urmă când scrii dincolo de marginea de jos.
+  const sincronizeaza = useCallback(() => {
+    if (fundal.current && camp.current) {
+      fundal.current.scrollTop = camp.current.scrollTop;
+      fundal.current.scrollLeft = camp.current.scrollLeft;
+    }
+  }, []);
+
+  // „[[Titlu]]" → titlu îngroșat, pe rând propriu; restul rămâne proză.
+  const bucati = String(text || '').split(/\[\[\s*([^\]]+?)\s*\]\]/g);
+
+  return (
+    <div className={styles.editorWrap}>
+      <pre className={styles.editorFundal} ref={fundal} aria-hidden="true">
+        {bucati.map((bucata, i) => (i % 2 === 1 ? (
+          // eslint-disable-next-line react/no-array-index-key
+          <strong key={i} className={styles.editorTitlu}>{bucata}</strong>
+        ) : (
+          // eslint-disable-next-line react/no-array-index-key
+          <span key={i}>{bucata}</span>
+        )))}
+        {'\n'}
+      </pre>
+      <textarea
+        ref={camp}
+        className={styles.editorCamp}
+        value={text}
+        onChange={(e) => onChange(e.target.value)}
+        onScroll={sincronizeaza}
+        placeholder={placeholder}
+        spellCheck
+      />
+    </div>
+  );
+}
+
+/**
  * Transcriptul EXACT cum îl vede elevul.
  *
  * Elevul nu vede textul brut: vede cuvintele rostite (cu timpii de la Azure),
@@ -435,12 +490,10 @@ export default function VoiceAdmin({ token, apiBase }) {
               {previzualizare ? (
                 <Previzualizare text={text} words={words} />
               ) : (
-                <textarea
-                  className={styles.textarea}
-                  value={text}
-                  onChange={(e) => setText(e.target.value)}
+                <EditorStilizat
+                  text={text}
+                  onChange={setText}
                   placeholder={status[selectat.url] ? 'Textul explicației — corectează-l aici.' : 'Generează textul mai întâi.'}
-                  spellCheck
                 />
               )}
               <div className={styles.count}>{text.trim() ? `${text.trim().split(/\s+/).length} cuvinte` : ''}</div>
