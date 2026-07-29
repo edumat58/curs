@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useLocation } from '@docusaurus/router';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 import { collectLessonSections } from '@site/src/components/EduPasiAccessibility/lessonSections.mjs';
 import { sha256Hex } from '@site/src/lib/voice/canonical.mjs';
 import { PROMPT_VERSION, codLectie, identitateLectie } from '@site/src/lib/voice/cod.mjs';
@@ -72,16 +73,46 @@ function contextLectie(route) {
 }
 
 /**
- * Codul canonic al lecției curente, calculat din adresă + titlu.
+ * Codul canonic al lecției curente, calculat din adresă + titlu + flaguri.
  *
- * Flagul „finală" (V) nu se știe în pagină — se marchează din admin și stă în
- * baza de voce; aici e 0 până la o eventuală citire. Restul flagurilor se
- * cunosc: adaptată din cale, vizibil implicit 0 (lecțiile pot fi ascunse).
+ * Materia, clasa, capitolul, subdiviziunea și „adaptată" se DEDUC (din cale și
+ * titlu) — de aceea nu se pot edita altfel decât mutând sau redenumind lecția,
+ * ceea ce e corect: codul trebuie să urmeze realitatea. Ultimele două, „finală"
+ * (V) și „vizibilă permanent" (L), sunt decizii ale administratorului: le scrie
+ * din panou în frontmatter, build-ul le strânge în `lesson-flags.json`.
  */
-function codPagina(route, h1) {
+function codPagina(route, h1, flaguri) {
   const ctx = contextLectie(route);
   if (!ctx || !h1) return null;
-  return codLectie({ course: ctx.course, title: h1.textContent || '', edupasi: ctx.edupasi });
+  // Flagurile V (finală) și L (vizibilă permanent) sunt singurele care nu se pot
+  // deduce din cale sau titlu: le scrie administratorul în frontmatter, iar
+  // build-ul le adună în `lesson-flags.json`.
+  const f = (flaguri && flaguri[route]) || {};
+  return codLectie({
+    course: ctx.course,
+    title: h1.textContent || '',
+    edupasi: ctx.edupasi,
+    final: f.final,
+    vizibilPermanent: f.vizibilPermanent,
+  });
+}
+
+/**
+ * Flagurile lecțiilor, aduse o singură dată pe sesiune.
+ *
+ * Fișierul conține doar rutele care chiar au un flag pornit, deci e minuscul;
+ * dacă lipsește (n-a fost încă generat), codul se afișează cu 0, ca înainte.
+ */
+let cacheFlaguri = null;
+async function incarcaFlaguri(baseUrl) {
+  if (cacheFlaguri) return cacheFlaguri;
+  try {
+    const res = await fetch(`${baseUrl}lesson-flags.json`, { cache: 'force-cache' });
+    cacheFlaguri = res.ok ? await res.json() : {};
+  } catch {
+    cacheFlaguri = {};
+  }
+  return cacheFlaguri;
 }
 
 /**
@@ -580,6 +611,9 @@ export default function SectionVoice() {
   // navigarea SPA din sidebar și re-injectează codul + butonul pe fiecare
   // lecție, fără reload. Citind direct din window, rămânea pe ruta veche.
   const { pathname: route } = useLocation();
+  // Flagurile V/L, pentru codul complet de deasupra titlului.
+  const [flaguri, setFlaguri] = useState(cacheFlaguri);
+  const bazaSite = useBaseUrl('/');
 
   useEffect(() => {
     setDisponibil(stareCurenta());
@@ -590,6 +624,12 @@ export default function SectionVoice() {
       opresteSupravegherea();
     };
   }, []);
+
+  useEffect(() => {
+    let viu = true;
+    incarcaFlaguri(bazaSite).then((f) => { if (viu) setFlaguri(f); });
+    return () => { viu = false; };
+  }, [bazaSite]);
 
   useEffect(() => {
     let anulat = false;
@@ -626,7 +666,7 @@ export default function SectionVoice() {
       const created = [];
 
       // Codul canonic, etichetă discretă sus-stânga deasupra titlului.
-      const cod = codPagina(route, h1);
+      const cod = codPagina(route, h1, flaguri);
       let etichetaCod = null;
       if (cod && !h1.previousElementSibling?.hasAttribute?.('data-edupasi-cod')) {
         etichetaCod = document.createElement('div');
@@ -665,7 +705,7 @@ export default function SectionVoice() {
       setMounts([]);
       setLesson(null);
     };
-  }, [route, disponibil]);
+  }, [route, disponibil, flaguri]);
 
   return (
     <>

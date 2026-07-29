@@ -103,6 +103,16 @@ function walk(dir) {
       collection,
       course,
       module: moduleSeg,
+      /**
+       * Flagurile V și L din codul canonic (`MAT-GG-XTT-D-FVL`), scrise de
+       * administrator în frontmatter — singurele două care nu se pot deduce din
+       * cale sau din titlu:
+       *   final: lecția e încheiată, nu se mai schimbă;
+       *   vizibil_permanent: rămâne afișată, nu poate fi ascunsă.
+       * Stau lângă lecție (în git, cu istoric), la fel ca `hide`.
+       */
+      final: fm.final === 'true' || fm.final === 'True',
+      vizibilPermanent: fm.vizibil_permanent === 'true' || fm.vizibil_permanent === 'True',
       keywords: [
         CLASS_LABEL[course] || '',
         moduleSeg.replace('-', ' '),
@@ -125,4 +135,24 @@ fs.writeFileSync(
   JSON.stringify(surse),
   'utf8'
 );
-console.log(`lessons-index: ${lessons.length} lecții → ${path.relative(ROOT, OUT)}`);
+
+/**
+ * Flagurile V și L, într-un fișier SEPARAT și mic.
+ *
+ * Pagina lecției are nevoie de ele ca să afișeze codul complet, dar indexul e de
+ * o jumătate de megaoctet (conține textul tuturor lecțiilor, pentru căutare) —
+ * n-are sens să-l descarce fiecare elev pentru două valori de adevăr. Aici intră
+ * doar rutele care chiar au un flag pornit, deci fișierul rămâne minuscul.
+ */
+const flaguri = {};
+lessons.forEach((l) => {
+  if (l.final || l.vizibilPermanent) {
+    flaguri[l.url] = { final: !!l.final, vizibilPermanent: !!l.vizibilPermanent };
+  }
+});
+fs.writeFileSync(
+  OUT.replace('lessons-index.json', 'lesson-flags.json'),
+  JSON.stringify(flaguri),
+  'utf8'
+);
+console.log(`lessons-index: ${lessons.length} lecții → ${path.relative(ROOT, OUT)} (${Object.keys(flaguri).length} cu flaguri)`);

@@ -320,6 +320,26 @@ function removeHide(raw) {
   return raw.replace(/^hide:\s*true\s*\r?\n/m, '');
 }
 
+/**
+ * Flagurile V și L din codul canonic (`MAT-GG-XTT-D-FVL`).
+ *
+ * Restul codului se DEDUCE din cale și din titlu (materie, clasă, capitol,
+ * subdiviziune, adaptată) — se schimbă mutând sau redenumind lecția. Astea două
+ * sunt decizii, nu deducții, deci se scriu explicit în frontmatter, lângă lecție:
+ * rămân în git, cu istoric, exact ca `hide`.
+ */
+const FLAG_CHEIE = { final: 'final', vizibil: 'vizibil_permanent' };
+
+function citesteFlag(raw, cheie) {
+  return new RegExp(`^${cheie}:\\s*true\\s*$`, 'm').test(String(raw || ''));
+}
+
+function setFlag(raw, cheie, pornit) {
+  const fara = String(raw || '').replace(new RegExp(`^${cheie}:\\s*true\\s*\\r?\\n`, 'm'), '');
+  if (!pornit) return fara;
+  return fara.replace(/^---\r?\n/, (m) => `${m}${cheie}: true\n`);
+}
+
 function LessonManager({ token, name, onLogout, apiBase }) {
   const manifestUrl = useBaseUrl('/admin-manifest.json');
   const docsBase = useBaseUrl('/docs/');
@@ -657,6 +677,29 @@ function LessonManager({ token, name, onLogout, apiBase }) {
         <p style={{ marginTop: '0.5rem', marginBottom: 0, fontSize: '0.75rem', color: 'var(--km-ink3)', fontVariantNumeric: 'tabular-nums' }}>
           {editing.path}
         </p>
+
+        {/* Flagurile din codul canonic pe care le decide OMUL. Restul codului se
+            deduce din cale și titlu, deci nu are comutator: se schimbă mutând sau
+            redenumind lecția. */}
+        <div style={{ marginTop: '0.6rem', display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center' }}>
+          <span style={{ fontSize: '0.75rem', color: 'var(--km-ink3)' }}>Cod canonic:</span>
+          <label style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.85rem', cursor: 'pointer' }}>
+            <input
+              type="checkbox"
+              checked={citesteFlag(raw, FLAG_CHEIE.final)}
+              onChange={(e) => { setRaw(setFlag(raw, FLAG_CHEIE.final, e.target.checked)); setDirty(true); }}
+            />
+            Finală <span style={{ color: 'var(--km-ink3)' }}>(V — lecția nu se mai schimbă)</span>
+          </label>
+          <label style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.85rem', cursor: 'pointer' }}>
+            <input
+              type="checkbox"
+              checked={citesteFlag(raw, FLAG_CHEIE.vizibil)}
+              onChange={(e) => { setRaw(setFlag(raw, FLAG_CHEIE.vizibil, e.target.checked)); setDirty(true); }}
+            />
+            Vizibilă permanent <span style={{ color: 'var(--km-ink3)' }}>(L — nu poate fi ascunsă)</span>
+          </label>
+        </div>
         {notice ? (
           <p className={notice.startsWith('Salvat') || notice.startsWith('„') ? styles.success : styles.error} style={{ marginTop: '0.5rem', marginBottom: 0 }}>
             {notice}
