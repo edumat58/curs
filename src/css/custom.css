@@ -842,9 +842,13 @@ body.voice-dock-open .theme-doc-markdown {
 
 /* Cât timp TRANSCRIPTUL vocii e deschis, navbarul EDUMAT nu mai stă lipit — se
    derulează cu pagina, ca tot spațiul de sus să meargă în text (cerut). Închis la
-   loc, redevine persistent. */
+   loc, redevine persistent.
+   `relative`, NU `static`: butonul „Meniu" din navbar e `position:absolute` față
+   de navbar; pe `static` scăpa la alt părinte și ateriza peste titlu. `relative`
+   îl derulează la fel, dar păstrează contextul de poziționare. */
 body.voice-transcript-open .navbar {
-  position: static !important;
+  position: relative !important;
+  top: auto !important;
 }
 
 /* EXCEPȚIE EduPAȘI: bara de context (cu Accesibilitatea) rămâne persistentă ORICE
