@@ -465,11 +465,8 @@ export function toSpeakable(text) {
   return marcheazaLitere(out);
 }
 
-/**
- * Marcajul literelor-variabilă, pentru pronunție corectă la sinteză.
- *
- * Două greșeli auzite, amândouă de la faptul că motorul tratează o literă
- * singură ca pe un cuvânt obișnuit:
+/* (înlocuit de marcajul explicit `<k>`)
+ * 
  *   • „coeficientul k" se auzea „che", nu „capa" (numele literei în română);
  *   • în „numărul a înmulțit cu b", litera „a" trecea atât de repede încât
  *     abia se distingea — un vocală singură nu apucă să sune.
@@ -485,15 +482,74 @@ export function toSpeakable(text) {
  * („coeficientul k"). Altfel am prinde „a" din „a fost" sau prepoziții — în
  * română, litere ca „a", „o", „e" sunt și cuvinte întregi.
  */
-export const SANTINELA_LITERA = '';
-
-const OPERATII = 'înmulțit cu|împărțit la|plus|minus|egal cu|supra|la pătrat|la cub|la puterea|mai mic decât|mai mare decât';
-const SUBSTANTIVE = 'numărul|numarul|număr|numar|întreg|intreg|întregi|intregi|coeficientul|coeficient'
-  + '|litera|punctul|punctele|segmentul|unghiul|vârful|varful|latura|laturile|dreapta|funcția|functia'
-  + '|variabila|termenul|valoarea|mulțimea|multimea|fie|notăm|notam|lui|cifra|divizor|multiplu';
-
 /** Vocalele sunt și cuvinte în română („a plecat", „o carte"); consoanele, nu. */
 const VOCALE = 'aeiou';
+
+/**
+ * Numele literelor, așa cum se rostesc în română la matematică.
+ *
+ * Se scriu ca TEXT OBIȘNUIT, nu ca marcaj SSML. Orice insulă `<phoneme>` sau
+ * `<prosody>` de un caracter obligă vocea neurală să resintetizeze bucata
+ * separat, iar cusătura se aude — timbrul sare la fiecare literă. Măsurat pe
+ * aceeași frază cu șase litere: 10,6 s ca text, 12,5 s cu `phoneme`, 13,1 s cu
+ * `phoneme` și `prosody`. Diferența nu e vorbire, sunt îmbinările.
+ *
+ * Vocalele își păstrează litera (numele lor E litera), dar primesc virgule: o
+ * vocală singură trece altfel prea repede ca s-o distingi, iar virgula e o pauză
+ * naturală, nu un artificiu de sinteză.
+ */
+const NUME_LITERE = {
+  a: ', a,', b: 'be', c: 'ce', d: 'de', e: ', e,', f: 'ef', g: 'ge', h: 'haș',
+  i: ', i,', j: 'je', k: 'capa', l: 'el', m: 'em', n: 'en', o: ', o,', p: 'pe',
+  q: 'chiu', r: 'er', s: 'es', t: 'te', u: ', u,', v: 've', w: 'dublu ve',
+  x: 'ics', y: 'igrec', z: 'zet',
+};
+
+/** Marcajul literelor-simbol: `<k>`, `<a>`, `<B>` — o singură literă. */
+const MARCAJ_LITERA = /<([a-zA-Z])>/g;
+
+/**
+ * Perechile (nume rostit → literă), în ORDINEA din text.
+ *
+ * Cu ele, după sinteză, punem înapoi litera în lista de cuvinte: vocea spune
+ * „capa", dar transcriptul afișează „k". Ordinea contează pentru că unele nume
+ * sunt și cuvinte curente („de", „ce", „pe") — nu le putem recunoaște după cum
+ * arată, doar după rând.
+ */
+export function litereMarcate(text) {
+  const out = [];
+  String(text || '').replace(MARCAJ_LITERA, (_all, litera) => {
+    const nume = NUME_LITERE[litera.toLowerCase()];
+    if (nume) out.push({ nume: nume.replace(/[,\s]/g, ''), litera });
+    return '';
+  });
+  return out;
+}
+
+/**
+ * Pune literele înapoi în cuvintele raportate de sinteză.
+ *
+ * Azure raportează ce a ROSTIT („capa"); elevul trebuie să vadă ce SCRIE lecția
+ * („k"). Parcurgem cuvintele o dată, în ordine, și înlocuim a n-a apariție a
+ * fiecărui nume cu litera lui — așa „de" dintr-o propoziție obișnuită rămâne
+ * neatins, pentru că nu e la rândul unei marcări.
+ */
+export function repuneLitere(words, perechi) {
+  if (!Array.isArray(words) || !words.length || !perechi || !perechi.length) return words;
+  const curat = (w) => String(w || '').toLowerCase().replace(/[.,;:!?…\s]/g, '');
+  let idx = 0;
+  return words.map((w) => {
+    if (idx >= perechi.length) return w;
+    if (curat(w.w) === perechi[idx].nume) {
+      const litera = perechi[idx].litera;
+      idx += 1;
+      // Punctuația lipită de cuvânt se păstrează („capa." → „k.").
+      const semne = String(w.w).match(/[.,;:!?…]+$/);
+      return { ...w, w: litera + (semne ? semne[0] : '') };
+    }
+    return w;
+  });
+}
 
 /**
  * Marchează literele-variabilă, în ORICE context matematic.
@@ -511,36 +567,18 @@ const VOCALE = 'aeiou';
  *      „o", „e" sunt cuvinte curente („a plecat", „o carte", „e bine").
  */
 function marcheazaLitere(text) {
-  const S = SANTINELA_LITERA;
-  const pune = (litera) => `${S}${litera}${S}`;
-  const reOperatii = new RegExp(`(?:${OPERATII})`, 'i');
-  const reSubstantive = new RegExp(`(?:${SUBSTANTIVE})\\s*$`, 'i');
-
-  let out = String(text);
-
-  // 1. Între ghilimele (drepte sau tipografice).
-  out = out.replace(
-    /(["'«»„“”‚’])\s*([a-zA-Z])\s*(["'«»„“”‚’])/g,
-    (_all, q1, litera, q2) => `${q1}${pune(litera)}${q2}`
-  );
-
-  // 2 și 3. Literă de sine stătătoare, cu decizia luată din context.
-  out = out.replace(
-    /(^|[\s(\[{])([a-zA-Z])(?=$|[\s).,;:!?\]}])/g,
-    (all, inainte, litera, pozitie, intreg) => {
-      const stanga = intreg.slice(Math.max(0, pozitie - 42), pozitie);
-      const dreapta = intreg.slice(pozitie + all.length, pozitie + all.length + 42);
-      // Deja marcată la pasul 1 (santinela e chiar lângă) — nu o atingem.
-      if (stanga.endsWith(S) || dreapta.startsWith(S)) return all;
-      // „5 m", „12 l" — unitate de măsură, nu variabilă.
-      if (/\d\s*$/.test(stanga)) return all;
-      if (!VOCALE.includes(litera.toLowerCase())) return `${inainte}${pune(litera)}`;
-      const contextMatematic = reSubstantive.test(stanga)
-        || reOperatii.test(stanga.slice(-24))
-        || reOperatii.test(dreapta.slice(0, 24));
-      return contextMatematic ? `${inainte}${pune(litera)}` : all;
-    }
-  );
-
-  return out;
+  /**
+   * Literele-simbol se marchează EXPLICIT în text: `<k>`, `<a>`, `<b>`.
+   *
+   * Varianta anterioară le ghicea din context (ghilimele, cuvinte de
+   * matematică). Ghicitul e mereu ori prea larg — „a" din „a plecat" —, ori
+   * prea îngust: pe textul real n-a prins nimic, pentru că modelul scria
+   * literele altfel decât presupusesem. Marcajul mută decizia acolo unde se
+   * cunoaște: la cel care scrie lecția (om sau model). Ce nu e marcat se
+   * rostește ca până acum.
+   */
+  return String(text).replace(MARCAJ_LITERA, (intreg, litera) => {
+    const nume = NUME_LITERE[litera.toLowerCase()];
+    return nume || intreg;
+  });
 }

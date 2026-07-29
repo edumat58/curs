@@ -36,6 +36,7 @@ function createTts(env) {
   return createPiperTts(env);
 }
 import { cleanForSpeech, explainSection } from './pipeline/explain.mjs';
+import { litereMarcate, repuneLitere } from './pipeline/speakable.mjs';
 import { speechBudget } from './pipeline/prompts.mjs';
 import { createStore } from './storage/mongo.mjs';
 import { encodeOpus } from './providers/encode.mjs';
@@ -297,6 +298,12 @@ export async function createServer(env = process.env) {
        * genera din panou — adică exact în fluxul folosit.
        */
       const audio = await tts.synthesize(cleanForSpeech(doc.explanationText));
+      /**
+       * Vocea spune numele literei („capa"), transcriptul arată litera („k").
+       * Marcajele `<k>` din text dau ordinea; după ea punem literele înapoi în
+       * cuvintele raportate de sinteză.
+       */
+      audio.words = repuneLitere(audio.words, litereMarcate(doc.explanationText));
       if (tts.name === 'azure' && audio.chars) {
         store.recordAzureUsage(audio.chars, {
           sectionHash: doc.sectionHash, heading: doc.heading, route: doc.route,

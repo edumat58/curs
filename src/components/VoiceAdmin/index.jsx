@@ -40,18 +40,6 @@ function codPentru(lectie) {
   });
 }
 
-/** Titlurile de secțiune, din marcajele „[[Titlu]]" ale textului generat. */
-function titluriDinMarcaje(text) {
-  const out = [];
-  const re = /\[\[\s*([^\]]+?)\s*\]\]/g;
-  let m = re.exec(String(text || ''));
-  while (m) {
-    if (!out.some((t) => t.nume === m[1])) out.push({ nume: m[1], el: null });
-    m = re.exec(String(text || ''));
-  }
-  return out;
-}
-
 /** Titlurile H2 ale lecției, din sursa MDX — exact lista pe care o vede elevul. */
 function titluriDinSursa(mdx) {
   const out = [];
@@ -198,77 +186,6 @@ function EditorStilizat({ text, onChange, placeholder, titluri }) {
   );
 }
 
-/**
- * Transcriptul EXACT cum îl vede elevul.
- *
- * Elevul nu vede textul brut: vede cuvintele rostite (cu timpii de la Azure),
- * trecute prin aceeași conversie ca în player — matematica devine SIMBOLURI
- * („înmulțit cu" → ×) — iar titlurile de secțiune apar îngroșate, pe rând
- * propriu. Aici rulăm exact aceleași funcții, ca previzualizarea din admin să
- * nu poată devia de la ce se afișează în lecție.
- *
- * Fără audio (ciornă) nu există cuvinte rostite; atunci arătăm textul cu
- * marcajele [[...]] transformate în titluri îngroșate, ca structura să se vadă.
- */
-function Previzualizare({ text, words }) {
-  const titluri = useMemo(() => titluriDinMarcaje(text), [text]);
-
-  const tokens = useMemo(() => {
-    if (!Array.isArray(words) || !words.length) return null;
-    return marcheazaSectiuni(construiesteTokeni(words), titluri);
-  }, [words, titluri]);
-
-  if (tokens) {
-    return (
-      <div className={styles.previzualizare}>
-        {tokens.map((tok, i) => (tok.titlu ? (
-          // eslint-disable-next-line react/no-array-index-key
-          <strong key={i} className={styles.previzTitlu}>{tok.text}</strong>
-        ) : (
-          // eslint-disable-next-line react/no-array-index-key
-          <span key={i}>{tok.text}{' '}</span>
-        )))}
-      </div>
-    );
-  }
-
-  // Ciornă: încă nu s-a sintetizat audio, deci nu avem cuvintele rostite.
-  const bucati = String(text || '').split(/\[\[\s*([^\]]+?)\s*\]\]/g);
-  return (
-    <div className={styles.previzualizare}>
-      <div className={styles.previzNota}>
-        Ciornă — încă fără audio. După sinteză, aici apare exact transcriptul elevului
-        (cu matematica în simboluri).
-      </div>
-      {bucati.map((bucata, i) => (i % 2 === 1 ? (
-        // eslint-disable-next-line react/no-array-index-key
-        <strong key={i} className={styles.previzTitlu}>{bucata}</strong>
-      ) : (
-        // eslint-disable-next-line react/no-array-index-key
-        <span key={i}>{bucata}</span>
-      )))}
-    </div>
-  );
-}
-
-/**
- * Cheia audio a unei lecții, derivată din IDENTITATEA ei canonică (MAT-GG-XTT-D).
- *
- * Nu din rută și nu din flaguri: identitatea e stabilă, deci o marcare „finală"
- * sau o mutare de fișier nu rupe legătura cu audio-ul deja generat. `pv` intră
- * în cheie ca la o schimbare de prompt lecțiile să se regenereze controlat.
- */
-async function cheieLectie(identitate, promptVersion) {
-  return sha256Hex(`lectie|${identitate}|pv${promptVersion}`);
-}
-
-const MAX_CONTENT = 5800; // sub limita serverului (MAX_TEXT), cu marjă
-
-const CLASE = { c5: 'Clasa a V-a', c6: 'Clasa a VI-a', c7: 'Clasa a VII-a', c8: 'Clasa a VIII-a' };
-const STARE_ETICHETA = {
-  none: 'Negenerat', draft: 'Ciornă — de revizuit', ready: 'Gata', pending: 'Se generează…', error: 'Eroare',
-};
-
 /** Text curat din sursa MDX, pentru câmpul cu limită de mărime al serverului. */
 function textDinSursa(mdx) {
   return String(mdx || '')
@@ -292,7 +209,6 @@ export default function VoiceAdmin({ token, apiBase }) {
   // Cuvintele rostite (cu timpi) ale lecției selectate — cu ele previzualizarea
   // arată exact transcriptul elevului. Lipsesc cât timp lecția e doar ciornă.
   const [words, setWords] = useState(null);
-  const [previzualizare, setPrevizualizare] = useState(false);
   const [busy, setBusy] = useState(''); // ce operație rulează
   const [mesaj, setMesaj] = useState('');
   const [filtruClasa, setFiltruClasa] = useState('toate');
@@ -578,39 +494,12 @@ export default function VoiceAdmin({ token, apiBase }) {
                 </div>
               ) : null}
 
-              {/* Editează textul SAU vezi-l exact cum îl vede elevul (aceleași
-                  funcții ca în player: matematica în simboluri, secțiunile bold). */}
-              <div className={styles.taburi} role="tablist" aria-label="Mod de vizualizare">
-                <button
-                  type="button"
-                  role="tab"
-                  aria-selected={!previzualizare}
-                  className={previzualizare ? styles.tab : styles.tabOn}
-                  onClick={() => setPrevizualizare(false)}
-                >
-                  Editează
-                </button>
-                <button
-                  type="button"
-                  role="tab"
-                  aria-selected={previzualizare}
-                  className={previzualizare ? styles.tabOn : styles.tab}
-                  onClick={() => setPrevizualizare(true)}
-                >
-                  Cum vede elevul
-                </button>
-              </div>
-
-              {previzualizare ? (
-                <Previzualizare text={text} words={words} />
-              ) : (
-                <EditorStilizat
-                  text={text}
-                  onChange={setText}
-                  titluri={titluriDinSursa(sources[selectat.url])}
-                  placeholder={status[selectat.url] ? 'Textul explicației — corectează-l aici.' : 'Generează textul mai întâi.'}
-                />
-              )}
+              <EditorStilizat
+                text={text}
+                onChange={setText}
+                titluri={titluriDinSursa(sources[selectat.url])}
+                placeholder={status[selectat.url] ? 'Textul explicației — corectează-l aici.' : 'Generează textul mai întâi.'}
+              />
               <div className={styles.count}>{text.trim() ? `${text.trim().split(/\s+/).length} cuvinte` : ''}</div>
             </>
           )}

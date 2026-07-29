@@ -69,7 +69,17 @@ function pronuntaLitere(escapat) {
   return escapat.replace(/([a-zA-Z])/g, (intreg, litera) => {
     const ipa = NUME_LITERE[litera.toLowerCase()];
     if (!ipa) return litera;
-    return `<prosody rate="-22%"><phoneme alphabet="ipa" ph="${ipa}">${litera}</phoneme></prosody>`;
+    /**
+     * FĂRĂ `prosody` pe litera singură.
+     *
+     * Încetinirea unei insule de un caracter obliga vocea neurală să resintetizeze
+     * bucata separat, iar cusătura se AUDE: timbrul sare la fiecare literă. Cu
+     * treizeci și șase de litere într-o lecție, rezultatul e mai rău decât
+     * pronunția greșită de la care am plecat. Măsurat pe aceeași frază: 10,6 s
+     * fără nimic, 12,5 s doar cu `phoneme`, 13,1 s cu `phoneme` și `prosody` —
+     * diferența nu e vorbire, sunt îmbinările.
+     */
+    return `<phoneme alphabet="ipa" ph="${ipa}">${litera}</phoneme>`;
   });
 }
 
