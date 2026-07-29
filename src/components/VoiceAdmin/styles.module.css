@@ -217,7 +217,26 @@
 .editorCamp::selection { background: color-mix(in srgb, var(--km-orange, #e8590c) 28%, transparent); }
 .editorCamp:focus { outline: none; border-color: var(--km-orange); }
 .editorCamp::placeholder { color: var(--km-ink3); }
-.editorTitlu { font-weight: 800; }
+/* Titlul de secțiune în editor: îngroșat, dar cu ACELEAȘI metrici.
+   `font-weight: 800` ar lăți glifele, textul stilizat s-ar rupe altfel decât cel
+   din câmp și cursorul ar ajunge lângă litere, nu pe ele. Îngroșarea se face cu
+   contur pe literă (`text-stroke`), care nu schimbă lățimile. */
+.editorTitlu {
+  position: relative;
+  -webkit-text-stroke: 0.42px currentColor;
+  text-stroke: 0.42px currentColor;
+}
+/* Săgeata e ORNAMENT: scoasă din flux, deci nu deplasează niciun caracter.
+   Titlul stă pe rândul lui, așa că nu se suprapune peste nimic. */
+.editorSageata {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  white-space: pre;
+  color: var(--km-orange, #e8590c);
+  -webkit-text-stroke: 0;
+  text-stroke: 0;
+}
 
 /* ---- Editează / Cum vede elevul ---- */
 .taburi {

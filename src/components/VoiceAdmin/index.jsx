@@ -31,6 +31,94 @@ function titluriDinMarcaje(text) {
   return out;
 }
 
+/** Titlurile H2 ale lecției, din sursa MDX — exact lista pe care o vede elevul. */
+function titluriDinSursa(mdx) {
+  const out = [];
+  const re = /^##\s+(.+?)\s*$/gm;
+  let m = re.exec(String(mdx || ''));
+  while (m) {
+    const nume = m[1].replace(/[#*`_]/g, '').trim();
+    if (nume && !out.includes(nume)) out.push(nume);
+    m = re.exec(String(mdx || ''));
+  }
+  return out;
+}
+
+/** Fără punctuație și diacritice-invizibile, pentru potrivirea titlurilor. */
+function normalizeaza(s) {
+  return String(s || '')
+    .replace(/[​‌‍⁠﻿­]/g, '')
+    .replace(/[.,;:!?…]+/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .toLowerCase();
+}
+
+/**
+ * Textul, tăiat în TITLURI DE SECȚIUNE și proză — exact cum îl taie elevul.
+ *
+ * Modelul nu marchează secțiunile în text: le scrie ca proză („… să le
+ * folosești. Numere prime. Un număr prim este …"). În lecție ele se văd totuși
+ * îngroșate, pentru că acolo se potrivesc cu titlurile H2 REALE ale paginii.
+ * Aici facem la fel — cu aceeași listă de titluri și aceeași normalizare — ca
+ * ce se vede în editor să fie ce vede elevul.
+ *
+ * Doar PRIMA apariție a fiecărui titlu devine secțiune (anunțul ei); o pomenire
+ * ulterioară în proză rămâne proză, ca în player.
+ */
+function taieSectiuni(text, titluri) {
+  const brut = String(text || '');
+  if (!titluri.length) return [{ tip: 'proza', text: brut }];
+
+  const sortate = [...titluri].sort((a, b) => b.length - a.length);
+  const model = sortate.map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|');
+  // Titlul poate veni gol, între paranteze duble, sau urmat de punct.
+  const re = new RegExp(`(?:\\[\\[\\s*)?(${model})(?:\\s*\\]\\])?\\.?`, 'gi');
+
+  const folosite = new Set();
+  const bucati = [];
+  let ultim = 0;
+  let m = re.exec(brut);
+  while (m) {
+    const cheie = normalizeaza(m[1]);
+    if (!folosite.has(cheie)) {
+      folosite.add(cheie);
+      if (m.index > ultim) bucati.push({ tip: 'proza', text: brut.slice(ultim, m.index) });
+      bucati.push({ tip: 'titlu', text: m[1].trim() });
+      ultim = m.index + m[0].length;
+    }
+    m = re.exec(brut);
+  }
+  if (ultim < brut.length) bucati.push({ tip: 'proza', text: brut.slice(ultim) });
+  return bucati;
+}
+
+/**
+ * Pune STRUCTURA în text: fiecare titlu de secțiune pe rândul lui, cu un rând
+ * liber înainte și după.
+ *
+ * Modelul scrie totul într-un singur bloc, cu titlurile îngropate în proză
+ * („… să le folosești. Numere prime. Un număr prim este …"). Așa, nici editorul
+ * nu are ce alinia, nici administratorul nu vede unde începe o secțiune. Odată
+ * ce structura e ÎN text, editorul o arată exact ca lecția, iar cel care scrie
+ * poate muta paragrafe ca în orice fișier.
+ *
+ * Punctul de după titlu se scoate: în lecție titlul e antet, nu propoziție.
+ * Rândurile nu ajung la sinteză — `toSpeakable` le strânge oricum în spații.
+ */
+function structureazaText(text, titluri) {
+  const bucati = taieSectiuni(text, titluri);
+  if (bucati.length < 2) return String(text || '');
+  return bucati
+    .map((b) => (b.tip === 'titlu' ? `\n\n${b.text}\n\n` : b.text))
+    .join('')
+    .replace(/[ \t]+\n/g, '\n')
+    .replace(/\n{3,}/g, '\n\n')
+    .replace(/^\n+/, '')
+    .replace(/[ \t]{2,}/g, ' ')
+    .trim();
+}
+
 /**
  * Editorul care arată textul STILIZAT chiar în timp ce scrii.
  *
@@ -45,7 +133,7 @@ function titluriDinMarcaje(text) {
  * comportamentul de tastatură pe telefon. Aici editarea rămâne nativă, se
  * schimbă doar ce se VEDE.
  */
-function EditorStilizat({ text, onChange, placeholder }) {
+function EditorStilizat({ text, onChange, placeholder, titluri }) {
   const fundal = useRef(null);
   const camp = useRef(null);
 
@@ -58,18 +146,21 @@ function EditorStilizat({ text, onChange, placeholder }) {
     }
   }, []);
 
-  // „[[Titlu]]" → titlu îngroșat, pe rând propriu; restul rămâne proză.
-  const bucati = String(text || '').split(/\[\[\s*([^\]]+?)\s*\]\]/g);
+  // Aceeași tăiere ca la elev: titlurile lecției devin secțiuni îngroșate.
+  const bucati = taieSectiuni(text, titluri || []);
 
   return (
     <div className={styles.editorWrap}>
       <pre className={styles.editorFundal} ref={fundal} aria-hidden="true">
-        {bucati.map((bucata, i) => (i % 2 === 1 ? (
+        {bucati.map((b, i) => (b.tip === 'titlu' ? (
           // eslint-disable-next-line react/no-array-index-key
-          <strong key={i} className={styles.editorTitlu}>{bucata}</strong>
+          <span key={i} className={styles.editorTitlu}>
+            {b.text}
+            <span className={styles.editorSageata}> →</span>
+          </span>
         ) : (
           // eslint-disable-next-line react/no-array-index-key
-          <span key={i}>{bucata}</span>
+          <span key={i}>{b.text}</span>
         )))}
         {'\n'}
       </pre>
@@ -244,12 +335,14 @@ export default function VoiceAdmin({ token, apiBase }) {
       const r = await authFetch(`/admin/voice/text/${doc.sectionHash}`).catch(() => null);
       if (viu && r && r.ok) {
         const d = await r.json();
-        setText(d.text || '');
+        // Textul primește STRUCTURA (titluri pe rând propriu) înainte de editare,
+        // ca ce se vede în editor să fie ce vede elevul.
+        setText(structureazaText(d.text || '', titluriDinSursa(sources[selected])));
         setWords(Array.isArray(d.words) && d.words.length ? d.words : null);
       }
     })();
     return () => { viu = false; };
-  }, [selected, status, authFetch]);
+  }, [selected, status, authFetch, sources]);
 
   async function genereazaText(url) {
     const lectie = lessons.find((l) => l.url === url);
@@ -493,6 +586,7 @@ export default function VoiceAdmin({ token, apiBase }) {
                 <EditorStilizat
                   text={text}
                   onChange={setText}
+                  titluri={titluriDinSursa(sources[selectat.url])}
                   placeholder={status[selectat.url] ? 'Textul explicației — corectează-l aici.' : 'Generează textul mai întâi.'}
                 />
               )}
