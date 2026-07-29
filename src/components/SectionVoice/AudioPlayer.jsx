@@ -247,7 +247,8 @@ function Subtitrare({ words, currentMs, contentRoot, onSeek }) {
     if (idx < 0) return;
     let sect = null;
     for (let j = idx; j >= 0; j -= 1) {
-      if (tokens[j] && tokens[j].titlu && tokens[j].sectiune) { sect = tokens[j].sectiune; break; }
+      const g = tokens[j] && tokens[j].grupTitlu;
+      if (g && g.sectiune) { sect = g.sectiune; break; }
     }
     if (sect && sect !== sectiuneCurenta.current) {
       const prima = sectiuneCurenta.current === null;

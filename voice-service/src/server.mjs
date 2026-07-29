@@ -457,6 +457,16 @@ export async function createServer(env = process.env) {
    * niciun timeout de rețea.
    */
   app.get('/voice/section/:hash', async (req, res) => {
+    /**
+     * Răspunsul ăsta NU se ține în cache, niciodată.
+     *
+     * El conține cuvintele cu timpi ȘI adresa audio — o pereche care are sens
+     * doar dacă vine din aceeași generare. Păstrat de browser, rămânea cu
+     * cuvintele vechi în timp ce audio-ul se lua proaspăt, iar elevul auzea o
+     * lecție și vedea evidențiat altceva. Antetul e pus pe server tocmai ca să
+     * repare și clienții care încă rulează o versiune veche de pagină.
+     */
+    res.setHeader('Cache-Control', 'no-store, must-revalidate');
     const hash = String(req.params.hash);
     if (!/^[a-f0-9]{64}$/.test(hash)) {
       res.status(400).json({ error: 'hash invalid' });

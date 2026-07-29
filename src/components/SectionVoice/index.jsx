@@ -33,9 +33,18 @@ function momenteSectiuni(words, root) {
     .filter((h) => h.nume);
   if (!titluri.length) return [];
   const tokens = marcheazaSectiuni(construiesteTokeni(words), titluri);
+  /**
+   * Cuvintele unui titlu poartă acum ACELAȘI obiect `grupTitlu` (adnotate, nu
+   * contopite, ca evidențierea să avanseze prin titlu). Deci luăm fiecare grup o
+   * singură dată — de identitatea obiectului, nu de text.
+   */
   const out = [];
+  const vazute = new Set();
   tokens.forEach((t) => {
-    if (t.titlu && t.sectiune && Number.isFinite(t.t)) out.push({ el: t.sectiune, ms: t.t });
+    const g = t.grupTitlu;
+    if (!g || vazute.has(g) || !g.sectiune || !Number.isFinite(g.t)) return;
+    vazute.add(g);
+    out.push({ el: g.sectiune, ms: g.t });
   });
   return out;
 }
