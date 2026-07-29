@@ -706,7 +706,7 @@
    "collection": "standard",
    "course": "c6",
    "module": "modul-1",
-   "final": false,
+   "final": true,
    "vizibilPermanent": false,
    "keywords": [
     "clasa 6 a sasea VI",
