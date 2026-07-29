@@ -409,6 +409,12 @@ export function toSpeakable(text) {
   out = out
     .replace(/([\d)%²³])\s*\+\s*(?=[\d(√])/g, '$1, plus ')
     .replace(/([\d)%²³])\s*=\s*(?=[\s\d(√+-]|minus|radical)/g, '$1 egal cu ')
+    /**
+     * Egalul dintre LITERE („a = b") rămânea nerostit: regula de mai sus cere
+     * operanzi numerici. Aici îl prindem când de o parte și de alta stă o
+     * literă singură — cazul formulelor cu variabile.
+     */
+    .replace(/(^|\s)([\p{L}])\s*=\s*(?=[\p{L}\d(√])/gu, '$1$2 egal cu ')
     .replace(/(\d)\s*[-−–]\s*(?=\d)/g, '$1, minus ');
 
   // Împărțirea scrisă cu două puncte cere spații de o parte și de alta: așa se
@@ -500,11 +506,35 @@ const VOCALE = 'aeiou';
  * naturală, nu un artificiu de sinteză.
  */
 const NUME_LITERE = {
-  a: ', a,', b: 'be', c: 'ce', d: 'de', e: ', e,', f: 'ef', g: 'ge', h: 'haș',
-  i: ', i,', j: 'je', k: 'capa', l: 'el', m: 'em', n: 'en', o: ', o,', p: 'pe',
-  q: 'chiu', r: 'er', s: 'es', t: 'te', u: ', u,', v: 've', w: 'dublu ve',
-  x: 'ics', y: 'igrec', z: 'zet',
+  b: 'be', f: 'ef', g: 'ge', h: 'haș', j: 'je', k: 'capa', m: 'em', n: 'en',
+  q: 'chiu', r: 'er', s: 'es', v: 've', w: 'dublu ve', x: 'ics', y: 'igrec',
+  z: 'zet',
 };
+
+/**
+ * Literele al căror nume ar fi un CUVÂNT curent nu se rescriu.
+ *
+ * „ce", „de", „pe", „te", „el" apar în orice frază românească. Dacă am rosti
+ * litera așa, n-am mai putea spune, la refacerea transcriptului, care apariție
+ * vine dintr-un marcaj și care e vorbire obișnuită — iar o potrivire greșită
+ * schimbă un cuvânt din lecție. Literele astea rămân scrise ca literă; pronunția
+ * lor nu e perfectă, dar textul rămâne corect.
+ */
+
+/**
+ * Vocalele NU se rescriu: numele lor E litera.
+ *
+ * Le încadram cu virgule, ca să nu treacă neauzite — dar virgulele ajungeau în
+ * transcript („Faptul că, a, este un multiplu"), pentru că punctuația se lipește
+ * de cuvinte. Acum primesc două tăceri scurte, care se aud la fel de bine și nu
+ * lasă nicio urmă în text.
+ *
+ * E și motivul pentru care refacerea literelor se strica: numele unei vocale e
+ * un cuvânt curent („a"), iar potrivirea în ordine îl consuma la prima apariție
+ * obișnuită din frază, decalând tot ce urma („be" și „capa" rămâneau nerefăcute).
+ * Fără vocale în listă, ambiguitatea dispare.
+ */
+const VOCALE_MARCATE = 'aeiou';
 
 /** Marcajul literelor-simbol: `<k>`, `<a>`, `<B>` — o singură literă. */
 const MARCAJ_LITERA = /<([a-zA-Z])>/g;
@@ -517,6 +547,9 @@ const MARCAJ_LITERA = /<([a-zA-Z])>/g;
  * nicio cusătură.
  */
 export const PAUZA = '';
+
+/** Tăcere SCURTĂ, pentru litera-vocală: se aude, dar nu rupe fraza. */
+export const PAUZA_SCURTA = '';
 
 /**
  * Titlurile scrise pe rândul lor primesc pauze de o parte și de alta.
@@ -556,10 +589,14 @@ function marcheazaTitluriDeRand(text) {
  */
 export function litereMarcate(text) {
   const out = [];
-  String(text || '').replace(MARCAJ_LITERA, (_all, litera) => {
-    const nume = NUME_LITERE[litera.toLowerCase()];
-    if (nume) out.push({ nume: nume.replace(/[,\s]/g, ''), litera });
-    return '';
+  String(text || '').replace(MARCAJ_LITERA, (intreg, litera) => {
+    const mic = litera.toLowerCase();
+    // Vocalele se rostesc chiar ca litera lor, deci nu au ce reface — iar numele
+    // lor fiind cuvinte curente, ar strica potrivirea în ordine.
+    if (!VOCALE_MARCATE.includes(mic) && NUME_LITERE[mic]) {
+      out.push({ nume: NUME_LITERE[mic], litera });
+    }
+    return intreg;
   });
   return out;
 }
@@ -574,18 +611,31 @@ export function litereMarcate(text) {
  */
 export function repuneLitere(words, perechi) {
   if (!Array.isArray(words) || !words.length || !perechi || !perechi.length) return words;
-  const curat = (w) => String(w || '').toLowerCase().replace(/[.,;:!?…\s]/g, '');
-  let idx = 0;
+  /**
+   * Deterministă, NU în ordine.
+   *
+   * Prima variantă potrivea perechile una câte una, în ordinea marcajelor: la
+   * prima nepotrivire sărea peste restul. Măsurat pe o lecție reală: din 11
+   * marcaje, 8 refăcute și 3 rămase „be"/„capa" în transcript.
+   *
+   * Numele rostite sunt alese acum ca să nu fie cuvinte românești, deci orice
+   * apariție a lor vine sigur dintr-un marcaj și se poate reface direct. Nu mai
+   * există ordine de ținut, deci nici cum să se decaleze.
+   */
+  const dupaNume = new Map();
+  perechi.forEach((p) => dupaNume.set(p.nume.toLowerCase(), p.litera));
+  /**
+   * Sinteza lipește uneori un simbol de cuvânt și le raportează împreună:
+   * măsurat, „= be" a venit ca un singur cuvânt, iar potrivirea exactă a ratat-o.
+   * Despărțim ce e literă de ce e în jurul ei și punem la loc doar miezul.
+   */
+  const bucati = (brut) => /^([^\p{L}]*)(\p{L}+)([^\p{L}]*)$/u.exec(String(brut || '').trim());
   return words.map((w) => {
-    if (idx >= perechi.length) return w;
-    if (curat(w.w) === perechi[idx].nume) {
-      const litera = perechi[idx].litera;
-      idx += 1;
-      // Punctuația lipită de cuvânt se păstrează („capa." → „k.").
-      const semne = String(w.w).match(/[.,;:!?…]+$/);
-      return { ...w, w: litera + (semne ? semne[0] : '') };
-    }
-    return w;
+    const p = bucati(w.w);
+    if (!p) return w;
+    const litera = dupaNume.get(p[2].toLowerCase());
+    if (!litera) return w;
+    return { ...w, w: `${p[1]}${litera}${p[3]}` };
   });
 }
 
@@ -616,7 +666,19 @@ function marcheazaLitere(text) {
    * rostește ca până acum.
    */
   return String(text).replace(MARCAJ_LITERA, (intreg, litera) => {
-    const nume = NUME_LITERE[litera.toLowerCase()];
+    const mic = litera.toLowerCase();
+    // Vocala rămâne literă, dar între două tăceri scurte: se aude, fără să lase
+    // virgule în transcript.
+    /**
+     * Vocala rămâne litera goală, FĂRĂ pauze.
+     *
+     * O tăcere în mijlocul frazei strică raportarea granițelor de cuvânt:
+     * măsurat, Azure întoarce atunci tot restul frazei ca un singur „cuvânt
+     * („cu a și be.A treia frază."), iar transcriptul se umple de fragmente
+     * repetate. Pauzele rămân doar la capăt de frază, unde sunt sigure.
+     */
+    if (VOCALE_MARCATE.includes(mic)) return litera;
+    const nume = NUME_LITERE[mic];
     return nume || intreg;
   });
 }

@@ -30,7 +30,10 @@ function escapeXml(s) {
 /** Împarte în propoziții păstrând punctuația — pentru timpii de sincronizare. */
 function propozitii(text) {
   return String(text)
-    .split(/(?<=[.!?])\s+/)
+    // Santinela de pauză nu are voie să blocheze despărțirea: altfel titlul
+    // rămâne în aceeași propoziție cu fraza următoare, iar pauza lui ajunge
+    // în mijlocul frazei — exact cazul care corupe granițele de cuvânt.
+    .split(/(?<=[.!?])[]*\s+/)
     .map((s) => s.trim())
     .filter(Boolean);
 }
@@ -50,7 +53,11 @@ function propozitii(text) {
  * aterizeze fără să calce peste primul cuvânt.
  */
 function pauzeTitluri(escapat) {
-  return escapat.replace(//g, '<break time="420ms"/>');
+  return escapat
+    .replace(//g, '<break time="420ms"/>')
+    // Tăcerea scurtă din jurul unei litere-vocală: cât să se distingă
+    // litera, fără să rupă fraza. E silence, nu `prosody`.
+    .replace(//g, '<break time="130ms"/>');
 }
 
 
