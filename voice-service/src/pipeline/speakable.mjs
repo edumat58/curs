@@ -488,35 +488,59 @@ export function toSpeakable(text) {
 export const SANTINELA_LITERA = '';
 
 const OPERATII = 'înmulțit cu|împărțit la|plus|minus|egal cu|supra|la pătrat|la cub|la puterea|mai mic decât|mai mare decât';
-const SUBSTANTIVE = 'numărul|numarul|coeficientul|litera|punctul|segmentul|unghiul|vârful|varful|latura|dreapta|funcția|functia|variabila|termenul|valoarea|mulțimea|multimea';
+const SUBSTANTIVE = 'numărul|numarul|număr|numar|întreg|intreg|întregi|intregi|coeficientul|coeficient'
+  + '|litera|punctul|punctele|segmentul|unghiul|vârful|varful|latura|laturile|dreapta|funcția|functia'
+  + '|variabila|termenul|valoarea|mulțimea|multimea|fie|notăm|notam|lui|cifra|divizor|multiplu';
+
+/** Vocalele sunt și cuvinte în română („a plecat", „o carte"); consoanele, nu. */
+const VOCALE = 'aeiou';
 
 /**
- * Granițele se scriu cu clase Unicode, NU cu `\b`.
+ * Marchează literele-variabilă, în ORICE context matematic.
  *
- * În JavaScript, `\b` se uită doar la [A-Za-z0-9_]: între spațiu și „î" nu vede
- * nicio graniță, deci „înmulțit cu b" nu se potrivea deloc. Și potrivirea e
- * insensibilă la majuscule, altfel „Coeficientul k" de la început de frază
- * scăpa — exact cazul raportat.
+ * Prima variantă cerea ca litera să fie lipită de o operație sau de un cuvânt de
+ * matematică, cu spații de o parte și de alta. Pe text real n-a marcat nimic:
+ * modelul scrie literele ÎNTRE GHILIMELE — „un număr întreg «a» la un număr
+ * întreg «b»", „spunem că «b» este un divizor al lui «a»" — iar ghilimelele nu
+ * erau recunoscute ca delimitator. Trei reguli, de la sigur la prudent:
+ *
+ *   1. Literă între ghilimele → simbol, întotdeauna. Ghilimelele SUNT semnalul.
+ *   2. Consoană de sine stătătoare → variabilă. În română nicio consoană nu e
+ *      cuvânt, deci nu avem ce strica (excepție: unitățile după cifră, „5 m").
+ *   3. Vocală de sine stătătoare → doar în context matematic, pentru că „a",
+ *      „o", „e" sunt cuvinte curente („a plecat", „o carte", „e bine").
  */
-const INAINTE = '(^|[\\s(,;:])';
-const DUPA = '(?![\\p{L}\\d])';
-
 function marcheazaLitere(text) {
   const S = SANTINELA_LITERA;
-  return String(text)
-    // literă ÎNAINTEA unei operații: „a înmulțit cu", „x plus"
-    .replace(
-      new RegExp(`${INAINTE}([a-zA-Z]) (?=(?:${OPERATII})${DUPA})`, 'giu'),
-      (_all, inainte, litera) => `${inainte}${S}${litera}${S} `
-    )
-    // literă DUPĂ o operație: „înmulțit cu b", „supra n"
-    .replace(
-      new RegExp(`${INAINTE}(${OPERATII}) ([a-zA-Z])${DUPA}`, 'giu'),
-      (_all, inainte, op, litera) => `${inainte}${op} ${S}${litera}${S}`
-    )
-    // literă anunțată de un cuvânt de matematică: „coeficientul k"
-    .replace(
-      new RegExp(`${INAINTE}(${SUBSTANTIVE}) ([a-zA-Z])${DUPA}`, 'giu'),
-      (_all, inainte, cuvant, litera) => `${inainte}${cuvant} ${S}${litera}${S}`
-    );
+  const pune = (litera) => `${S}${litera}${S}`;
+  const reOperatii = new RegExp(`(?:${OPERATII})`, 'i');
+  const reSubstantive = new RegExp(`(?:${SUBSTANTIVE})\\s*$`, 'i');
+
+  let out = String(text);
+
+  // 1. Între ghilimele (drepte sau tipografice).
+  out = out.replace(
+    /(["'«»„“”‚’])\s*([a-zA-Z])\s*(["'«»„“”‚’])/g,
+    (_all, q1, litera, q2) => `${q1}${pune(litera)}${q2}`
+  );
+
+  // 2 și 3. Literă de sine stătătoare, cu decizia luată din context.
+  out = out.replace(
+    /(^|[\s(\[{])([a-zA-Z])(?=$|[\s).,;:!?\]}])/g,
+    (all, inainte, litera, pozitie, intreg) => {
+      const stanga = intreg.slice(Math.max(0, pozitie - 42), pozitie);
+      const dreapta = intreg.slice(pozitie + all.length, pozitie + all.length + 42);
+      // Deja marcată la pasul 1 (santinela e chiar lângă) — nu o atingem.
+      if (stanga.endsWith(S) || dreapta.startsWith(S)) return all;
+      // „5 m", „12 l" — unitate de măsură, nu variabilă.
+      if (/\d\s*$/.test(stanga)) return all;
+      if (!VOCALE.includes(litera.toLowerCase())) return `${inainte}${pune(litera)}`;
+      const contextMatematic = reSubstantive.test(stanga)
+        || reOperatii.test(stanga.slice(-24))
+        || reOperatii.test(dreapta.slice(0, 24));
+      return contextMatematic ? `${inainte}${pune(litera)}` : all;
+    }
+  );
+
+  return out;
 }
