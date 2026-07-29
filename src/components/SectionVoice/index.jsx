@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useLocation } from '@docusaurus/router';
-import useBaseUrl from '@docusaurus/useBaseUrl';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import { collectLessonSections } from '@site/src/components/EduPasiAccessibility/lessonSections.mjs';
 import { sha256Hex } from '@site/src/lib/voice/canonical.mjs';
 import { PROMPT_VERSION, codLectie, identitateLectie } from '@site/src/lib/voice/cod.mjs';
@@ -95,24 +95,6 @@ function codPagina(route, h1, flaguri) {
     final: f.final,
     vizibilPermanent: f.vizibilPermanent,
   });
-}
-
-/**
- * Flagurile lecțiilor, aduse o singură dată pe sesiune.
- *
- * Fișierul conține doar rutele care chiar au un flag pornit, deci e minuscul;
- * dacă lipsește (n-a fost încă generat), codul se afișează cu 0, ca înainte.
- */
-let cacheFlaguri = null;
-async function incarcaFlaguri(baseUrl) {
-  if (cacheFlaguri) return cacheFlaguri;
-  try {
-    const res = await fetch(`${baseUrl}lesson-flags.json`, { cache: 'force-cache' });
-    cacheFlaguri = res.ok ? await res.json() : {};
-  } catch {
-    cacheFlaguri = {};
-  }
-  return cacheFlaguri;
 }
 
 /**
@@ -611,9 +593,12 @@ export default function SectionVoice() {
   // navigarea SPA din sidebar și re-injectează codul + butonul pe fiecare
   // lecție, fără reload. Citind direct din window, rămânea pe ruta veche.
   const { pathname: route } = useLocation();
-  // Flagurile V/L, pentru codul complet de deasupra titlului.
-  const [flaguri, setFlaguri] = useState(cacheFlaguri);
-  const bazaSite = useBaseUrl('/');
+  /**
+   * Flagurile V/L vin din CONFIGURAȚIE (puse acolo la build), nu dintr-un fetch:
+   * aceeași valoare pe server și în browser, disponibilă din prima randare.
+   */
+  const { siteConfig } = useDocusaurusContext();
+  const flaguri = (siteConfig && siteConfig.customFields && siteConfig.customFields.lessonFlags) || {};
 
   useEffect(() => {
     setDisponibil(stareCurenta());
@@ -625,11 +610,6 @@ export default function SectionVoice() {
     };
   }, []);
 
-  useEffect(() => {
-    let viu = true;
-    incarcaFlaguri(bazaSite).then((f) => { if (viu) setFlaguri(f); });
-    return () => { viu = false; };
-  }, [bazaSite]);
 
   useEffect(() => {
     let anulat = false;

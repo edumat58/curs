@@ -10,10 +10,38 @@ const katex = require('rehype-katex');
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
+/**
+ * Flagurile V/L ale lecțiilor, citite la BUILD și puse în pachet.
+ *
+ * Înainte se aduceau din `lesson-flags.json` cu un fetch în client. Două
+ * probleme, amândouă văzute pe viu: fișierul lipsea înainte să existe funcția,
+ * iar browserul a memorat 404-ul (cerere `force-cache`) și nu l-a mai cerut
+ * niciodată — codul rămânea „…000" oricâte publicări urmau. Și, pentru că
+ * valoarea diferea între server (goală) și client (după fetch), React semnala
+ * nepotrivire de hidratare (#418).
+ *
+ * Citite aici, valoarea e ACEEAȘI la randarea de pe server și în browser, e
+ * disponibilă instantaneu și nu depinde de rețea sau de cache. Fișierul e
+ * generat de `prebuild`, deci există deja când se încarcă această configurație.
+ */
+function flagurileLectiilor() {
+  try {
+    const fs = require('fs');
+    const cale = require('path').join(__dirname, 'static', 'lesson-flags.json');
+    return fs.existsSync(cale) ? JSON.parse(fs.readFileSync(cale, 'utf8')) : {};
+  } catch {
+    return {};
+  }
+}
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Edumat58',
   favicon: 'img/logo.jpg',
+
+  customFields: {
+    lessonFlags: flagurileLectiilor(),
+  },
 
   // Set the production url of your site here
   url: 'https://edumat58.github.io',
@@ -224,7 +252,7 @@ const config = {
                 <circle cx="12" cy="12" r="9"></circle>
                 <polyline points="12 7 12 12 15.5 14"></polyline>
               </svg>
-              <span class="nav-update-date">28.07.2026, 20:40</span>
+              <span class="nav-update-date">29.07.2026, 15:37</span>
             </span>
           `,
         },
