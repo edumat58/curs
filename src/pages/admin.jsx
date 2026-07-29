@@ -4,6 +4,7 @@ import Link from '@docusaurus/Link';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import { KulturosferaLine } from '@site/src/components/Brand';
 import VoiceAdmin from '@site/src/components/VoiceAdmin';
+import AdminPreview from '@site/src/components/AdminPreview';
 import styles from './admin.module.css';
 
 /**
@@ -353,6 +354,8 @@ function LessonManager({ token, name, onLogout, apiBase }) {
   const [config, setConfig] = React.useState(null);
 
   const [editing, setEditing] = React.useState(null); // { id, path }
+  // Previzualizarea e PORNITĂ implicit: cine deschide o lecție vrea s-o vadă.
+  const [preview, setPreview] = React.useState(true);
   const [raw, setRaw] = React.useState('');
   const [sha, setSha] = React.useState(null);
   const [dirty, setDirty] = React.useState(false);
@@ -669,6 +672,15 @@ function LessonManager({ token, name, onLogout, apiBase }) {
                 Vezi lecția
               </Link>
             ) : null}
+            <button
+              type="button"
+              className={styles.backBtn}
+              onClick={() => setPreview((v) => !v)}
+              aria-pressed={preview}
+              title="Vezi lecția randată, pe loc, fără publicare"
+            >
+              {preview ? 'Ascunde previzualizarea' : 'Previzualizare'}
+            </button>
             <button className={styles.btn} onClick={save} disabled={saving || !dirty}>
               {saving ? 'Se salvează…' : dirty ? 'Salvează' : 'Salvat'}
             </button>
@@ -705,15 +717,20 @@ function LessonManager({ token, name, onLogout, apiBase }) {
             {notice}
           </p>
         ) : null}
-        <textarea
-          className={styles.editorTextarea}
-          value={raw}
-          spellCheck={false}
-          onChange={(e) => {
-            setRaw(e.target.value);
-            setDirty(true);
-          }}
-        />
+        {/* Editor + previzualizare. Pe ecran lat stau ALĂTURI: scrii în stânga,
+            vezi în dreapta, fără să comuți și fără să aștepți publicarea. */}
+        <div className={preview ? styles.editorSplit : undefined}>
+          <textarea
+            className={styles.editorTextarea}
+            value={raw}
+            spellCheck={false}
+            onChange={(e) => {
+              setRaw(e.target.value);
+              setDirty(true);
+            }}
+          />
+          {preview ? <AdminPreview raw={raw} path={editing.path} /> : null}
+        </div>
       </div>
     );
   }

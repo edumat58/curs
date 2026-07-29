@@ -231,6 +231,27 @@
   background: #ffffff;
 }
 
+/* Editor + previzualizare, alături pe ecran lat; una sub alta pe telefon, ca să
+   rămână amândouă utilizabile. Previzualizarea se lipește sus, deci rămâne în
+   dreptul textului cât derulezi editorul. */
+.editorSplit {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  align-items: start;
+}
+
+@media (min-width: 1100px) {
+  .editorSplit {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+  .editorSplit > :last-child {
+    position: sticky;
+    top: 1rem;
+    margin-top: 0.75rem;
+  }
+}
+
 .badge {
   border-radius: 999px;
   padding: 0.15rem 0.55rem;
