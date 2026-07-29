@@ -319,7 +319,13 @@ function useLessonAudio(route, section) {
     (async () => {
       try {
         const hash = await sha256Hex(`lectie|${identitate}|pv${PROMPT_VERSION}`);
-        const res = await fetch(`${serviceUrl()}/voice/section/${hash}`);
+        /**
+         * Fără cache: cuvintele și adresa audio trebuie să vină din ACEEAȘI
+         * generare. Răspunsul păstrat de browser putea rămâne cu cuvintele vechi
+         * după o regenerare, iar audio-ul se lua proaspăt — se auzea o lecție și
+         * se evidenția alta.
+         */
+        const res = await fetch(`${serviceUrl()}/voice/section/${hash}`, { cache: 'no-store' });
         if (!res.ok) return;
         const json = await res.json();
         if (viu && json && json.status === 'ready' && json.audioUrl) {

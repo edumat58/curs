@@ -325,7 +325,8 @@ export function toSpeakable(text) {
   // un titlu — propoziție de sine stătătoare, cu pauze de o parte și de alta, ca
   // profesorul care anunță pasul. Clientul le recunoaște în fluxul de cuvinte
   // după titlurile H2 ale lecției și le face clicabile spre secțiune.
-  out = out.replace(/\[\[\s*([^\]]+?)\s*\]\]/g, '. $1. ');
+  out = out.replace(/\[\[\s*([^\]]+?)\s*\]\]/g, `. ${PAUZA}$1.${PAUZA} `);
+  out = marcheazaTitluriDeRand(out);
   /**
    * Punctul pe care tocmai l-am pus înaintea titlului se poate lipi de punctul
    * cu care se termina fraza dinainte („…pozițional.. Definiție."). Nu se auzea
@@ -507,6 +508,43 @@ const NUME_LITERE = {
 
 /** Marcajul literelor-simbol: `<k>`, `<a>`, `<B>` — o singură literă. */
 const MARCAJ_LITERA = /<([a-zA-Z])>/g;
+
+/**
+ * Semnul de PAUZĂ, transformat la sinteză într-un `<break/>`.
+ *
+ * O pauză e silence curat, nu o schimbare de voce: spre deosebire de `prosody`
+ * sau `phoneme`, nu obligă motorul să resintetizeze nimic, deci nu se aude
+ * nicio cusătură.
+ */
+export const PAUZA = '';
+
+/**
+ * Titlurile scrise pe rândul lor primesc pauze de o parte și de alta.
+ *
+ * Modelul nu marchează titlurile cu `[[...]]`; le lasă pe un rând singur, între
+ * rânduri goale. Fără punct la capăt, titlul se lipea de fraza următoare
+ * („Vocabular Când restul împărțirii…"), era rostit în goană — 718 ms măsurate —
+ * și, la un clic pe secțiune, saltul cădea practic peste el. Aici îl facem
+ * propoziție de sine stătătoare, cu tăcere înainte și după: se aude ca un anunț
+ * și clicul are unde să aterizeze.
+ *
+ * Un titlu e un rând scurt, fără punctuație de final, singur între rânduri
+ * goale — regula prin care îl recunoaște și cititorul.
+ */
+function marcheazaTitluriDeRand(text) {
+  const linii = String(text).split(/\r?\n/);
+  const gol = (i) => i < 0 || i >= linii.length || !linii[i].trim();
+  return linii
+    .map((linie, i) => {
+      const t = linie.trim();
+      if (!t || t.length > 60) return linie;
+      if (/[.!?:;,]$/.test(t)) return linie;
+      if (t.split(/\s+/).length > 8) return linie;
+      if (!gol(i - 1) || !gol(i + 1)) return linie;
+      return `${PAUZA}${t}.${PAUZA}`;
+    })
+    .join('\n');
+}
 
 /**
  * Perechile (nume rostit → literă), în ORDINEA din text.

@@ -43,50 +43,21 @@ function propozitii(text) {
  * să sune a profesor răbdător, nu a robot grăbit.
  */
 /**
- * Numele literelor în română, pentru literele folosite ca variabile.
+ * Semnul de pauză pus în jurul titlurilor devine tăcere adevărată.
  *
- * Fără ele, motorul citește litera ca pe un cuvânt: „k" se auzea „che", nu
- * „capa", iar vocalele singure („numărul a înmulțit cu b") treceau atât de
- * repede încât abia se distingeau. Pronunția o dăm în IPA, ca să fie aceeași de
- * fiecare dată, iar ritmul mai rar face litera audibilă.
- *
- * Textul rămâne litera: granițele de cuvânt de la Azure raportează tot „k",
- * „a", „b" (verificat), deci transcriptul elevului nu se schimbă.
+ * O pauză nu schimbă vocea: motorul nu resintetizează nimic, doar inserează
+ * liniște. Titlul se aude ca un anunț, iar clicul pe secțiune are unde să
+ * aterizeze fără să calce peste primul cuvânt.
  */
-const NUME_LITERE = {
-  a: 'ˈa', b: 'ˈbe', c: 'ˈt͡ʃe', d: 'ˈde', e: 'ˈe', f: 'ˈef', g: 'ˈd͡ʒe',
-  h: 'ˈhaʃ', i: 'ˈi', j: 'ˈʒe', k: 'ˈka.pa', l: 'ˈel', m: 'ˈem', n: 'ˈen',
-  o: 'ˈo', p: 'ˈpe', q: 'ˈkju', r: 'ˈer', s: 'ˈes', t: 'ˈte', u: 'ˈu',
-  v: 'ˈve', w: 'ˈdu.blu ˈve', x: 'ˈiks', y: 'ˈi.ɡrek', z: 'ˈzet',
-};
-
-/**
- * Santinelele puse de `toSpeakable` în jurul literelor-variabilă devin, DUPĂ
- * escapare, pronunție explicită. Ordinea contează: dacă am insera markup înainte
- * de escapare, l-ar transforma în text vizibil.
- */
-function pronuntaLitere(escapat) {
-  return escapat.replace(/([a-zA-Z])/g, (intreg, litera) => {
-    const ipa = NUME_LITERE[litera.toLowerCase()];
-    if (!ipa) return litera;
-    /**
-     * FĂRĂ `prosody` pe litera singură.
-     *
-     * Încetinirea unei insule de un caracter obliga vocea neurală să resintetizeze
-     * bucata separat, iar cusătura se AUDE: timbrul sare la fiecare literă. Cu
-     * treizeci și șase de litere într-o lecție, rezultatul e mai rău decât
-     * pronunția greșită de la care am plecat. Măsurat pe aceeași frază: 10,6 s
-     * fără nimic, 12,5 s doar cu `phoneme`, 13,1 s cu `phoneme` și `prosody` —
-     * diferența nu e vorbire, sunt îmbinările.
-     */
-    return `<phoneme alphabet="ipa" ph="${ipa}">${litera}</phoneme>`;
-  });
+function pauzeTitluri(escapat) {
+  return escapat.replace(//g, '<break time="420ms"/>');
 }
+
 
 function construiesteSsml(text, voice, rate) {
   const fraze = propozitii(text);
   const corp = fraze
-    .map((f) => `<s>${pronuntaLitere(escapeXml(f))}</s>`)
+    .map((f) => `<s>${pauzeTitluri(escapeXml(f))}</s>`)
     .join('<break time="220ms"/>');
   return `<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="ro-RO">`
     + `<voice name="${voice}"><prosody rate="${rate}">${corp}</prosody></voice></speak>`;
