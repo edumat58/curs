@@ -16,7 +16,73 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import { sha256Hex } from '@site/src/lib/voice/canonical.mjs';
 import { PROMPT_VERSION, codLectie, identitateLectie, numeFisierAudio } from '@site/src/lib/voice/cod.mjs';
+import { construiesteTokeni, marcheazaSectiuni } from '@site/src/lib/voice/subtitrareMath.mjs';
 import styles from './styles.module.css';
+
+/** Titlurile de secțiune, din marcajele „[[Titlu]]" ale textului generat. */
+function titluriDinMarcaje(text) {
+  const out = [];
+  const re = /\[\[\s*([^\]]+?)\s*\]\]/g;
+  let m = re.exec(String(text || ''));
+  while (m) {
+    if (!out.some((t) => t.nume === m[1])) out.push({ nume: m[1], el: null });
+    m = re.exec(String(text || ''));
+  }
+  return out;
+}
+
+/**
+ * Transcriptul EXACT cum îl vede elevul.
+ *
+ * Elevul nu vede textul brut: vede cuvintele rostite (cu timpii de la Azure),
+ * trecute prin aceeași conversie ca în player — matematica devine SIMBOLURI
+ * („înmulțit cu" → ×) — iar titlurile de secțiune apar îngroșate, pe rând
+ * propriu. Aici rulăm exact aceleași funcții, ca previzualizarea din admin să
+ * nu poată devia de la ce se afișează în lecție.
+ *
+ * Fără audio (ciornă) nu există cuvinte rostite; atunci arătăm textul cu
+ * marcajele [[...]] transformate în titluri îngroșate, ca structura să se vadă.
+ */
+function Previzualizare({ text, words }) {
+  const titluri = useMemo(() => titluriDinMarcaje(text), [text]);
+
+  const tokens = useMemo(() => {
+    if (!Array.isArray(words) || !words.length) return null;
+    return marcheazaSectiuni(construiesteTokeni(words), titluri);
+  }, [words, titluri]);
+
+  if (tokens) {
+    return (
+      <div className={styles.previzualizare}>
+        {tokens.map((tok, i) => (tok.titlu ? (
+          // eslint-disable-next-line react/no-array-index-key
+          <strong key={i} className={styles.previzTitlu}>{tok.text}</strong>
+        ) : (
+          // eslint-disable-next-line react/no-array-index-key
+          <span key={i}>{tok.text}{' '}</span>
+        )))}
+      </div>
+    );
+  }
+
+  // Ciornă: încă nu s-a sintetizat audio, deci nu avem cuvintele rostite.
+  const bucati = String(text || '').split(/\[\[\s*([^\]]+?)\s*\]\]/g);
+  return (
+    <div className={styles.previzualizare}>
+      <div className={styles.previzNota}>
+        Ciornă — încă fără audio. După sinteză, aici apare exact transcriptul elevului
+        (cu matematica în simboluri).
+      </div>
+      {bucati.map((bucata, i) => (i % 2 === 1 ? (
+        // eslint-disable-next-line react/no-array-index-key
+        <strong key={i} className={styles.previzTitlu}>{bucata}</strong>
+      ) : (
+        // eslint-disable-next-line react/no-array-index-key
+        <span key={i}>{bucata}</span>
+      )))}
+    </div>
+  );
+}
 
 /**
  * Cheia audio a unei lecții, derivată din IDENTITATEA ei canonică (MAT-GG-XTT-D).
@@ -56,6 +122,10 @@ export default function VoiceAdmin({ token, apiBase }) {
   const [llmUsage, setLlmUsage] = useState(null);
   const [selected, setSelected] = useState(null); // url selectat
   const [text, setText] = useState('');
+  // Cuvintele rostite (cu timpi) ale lecției selectate — cu ele previzualizarea
+  // arată exact transcriptul elevului. Lipsesc cât timp lecția e doar ciornă.
+  const [words, setWords] = useState(null);
+  const [previzualizare, setPrevizualizare] = useState(false);
   const [busy, setBusy] = useState(''); // ce operație rulează
   const [mesaj, setMesaj] = useState('');
   const [filtruClasa, setFiltruClasa] = useState('toate');
@@ -112,12 +182,16 @@ export default function VoiceAdmin({ token, apiBase }) {
   // La selectarea unei lecții, aducem textul curent (ciornă/final) dacă există.
   useEffect(() => {
     let viu = true;
-    if (!selected) { setText(''); return undefined; }
+    if (!selected) { setText(''); setWords(null); return undefined; }
     const doc = status[selected];
-    if (!doc) { setText(''); return undefined; }
+    if (!doc) { setText(''); setWords(null); return undefined; }
     (async () => {
       const r = await authFetch(`/admin/voice/text/${doc.sectionHash}`).catch(() => null);
-      if (viu && r && r.ok) { const d = await r.json(); setText(d.text || ''); }
+      if (viu && r && r.ok) {
+        const d = await r.json();
+        setText(d.text || '');
+        setWords(Array.isArray(d.words) && d.words.length ? d.words : null);
+      }
     })();
     return () => { viu = false; };
   }, [selected, status, authFetch]);
@@ -335,13 +409,40 @@ export default function VoiceAdmin({ token, apiBase }) {
                 </div>
               ) : null}
 
-              <textarea
-                className={styles.textarea}
-                value={text}
-                onChange={(e) => setText(e.target.value)}
-                placeholder={status[selectat.url] ? 'Textul explicației — corectează-l aici.' : 'Generează textul mai întâi.'}
-                spellCheck
-              />
+              {/* Editează textul SAU vezi-l exact cum îl vede elevul (aceleași
+                  funcții ca în player: matematica în simboluri, secțiunile bold). */}
+              <div className={styles.taburi} role="tablist" aria-label="Mod de vizualizare">
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={!previzualizare}
+                  className={previzualizare ? styles.tab : styles.tabOn}
+                  onClick={() => setPrevizualizare(false)}
+                >
+                  Editează
+                </button>
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={previzualizare}
+                  className={previzualizare ? styles.tabOn : styles.tab}
+                  onClick={() => setPrevizualizare(true)}
+                >
+                  Cum vede elevul
+                </button>
+              </div>
+
+              {previzualizare ? (
+                <Previzualizare text={text} words={words} />
+              ) : (
+                <textarea
+                  className={styles.textarea}
+                  value={text}
+                  onChange={(e) => setText(e.target.value)}
+                  placeholder={status[selectat.url] ? 'Textul explicației — corectează-l aici.' : 'Generează textul mai întâi.'}
+                  spellCheck
+                />
+              )}
               <div className={styles.count}>{text.trim() ? `${text.trim().split(/\s+/).length} cuvinte` : ''}</div>
             </>
           )}

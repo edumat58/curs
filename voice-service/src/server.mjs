@@ -263,6 +263,9 @@ export async function createServer(env = process.env) {
     return res.json({
       sectionHash: doc.sectionHash, status: doc.status, route: doc.route,
       heading: doc.heading, text: doc.explanationText || '', meta: doc.models || {},
+      // Cuvintele cu timpi (când există audio): cu ele panoul de admin poate arăta
+      // transcriptul EXACT cum îl vede elevul, nu textul brut cu marcaje [[...]].
+      words: (doc.audio && doc.audio.words) || null,
     });
   });
 
