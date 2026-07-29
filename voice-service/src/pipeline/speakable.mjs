@@ -326,6 +326,13 @@ export function toSpeakable(text) {
   // profesorul care anunță pasul. Clientul le recunoaște în fluxul de cuvinte
   // după titlurile H2 ale lecției și le face clicabile spre secțiune.
   out = out.replace(/\[\[\s*([^\]]+?)\s*\]\]/g, '. $1. ');
+  /**
+   * Punctul pe care tocmai l-am pus înaintea titlului se poate lipi de punctul
+   * cu care se termina fraza dinainte („…pozițional.. Definiție."). Nu se auzea
+   * cât punctuația era aruncată la sinteză; acum ea ajunge în transcript, deci
+   * s-ar și VEDEA. Strângem orice serie de puncte separate de spații la unul.
+   */
+  out = out.replace(/([.!?])\s*\.(?=\s)/g, '$1');
   out = faraLatex(out);
 
   out = lipesteGrupeleDeCifre(out);

@@ -95,13 +95,27 @@ export function createAzureTts(env = process.env) {
 
       const words = [];
       synth.wordBoundary = (_s, e) => {
-        // Doar cuvinte: evenimentele de punctuație și de propoziție se ignoră.
-        if (String(e.boundaryType) === 'WordBoundary') {
+        const tip = String(e.boundaryType);
+        if (tip === 'WordBoundary') {
           words.push({
             t: Math.round(e.audioOffset / 10000),
             d: Math.round(e.duration / 10000),
             w: e.text,
           });
+          return;
+        }
+        /**
+         * PUNCTUAȚIA se LIPEȘTE de cuvântul dinainte, nu se aruncă.
+         *
+         * Aruncată (cum era), transcriptul afișat elevului ieșea ca un șir de
+         * cuvinte fără virgule și fără puncte — altfel decât textul din admin,
+         * și greu de citit („…fracționară Tot astăzi înveți…"). Ca jeton separat
+         * ar strica sincronizarea (ar primi un rând propriu în subtitrare), deci
+         * o alipim la cuvântul precedent: același timp, aceeași evidențiere.
+         */
+        if (tip === 'PunctuationBoundary' && words.length) {
+          const semn = String(e.text || '').trim();
+          if (semn) words[words.length - 1].w += semn;
         }
       };
 
