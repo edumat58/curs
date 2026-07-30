@@ -789,30 +789,57 @@ export function litereMarcate(text) {
  */
 export function calculeazaFormule(text, words, rosteste) {
   if (!Array.isArray(words) || !words.length) return [];
-  const formule = [...String(text || '').matchAll(/\$([^$\n]+)\$/g)].map((m) => m[1].trim()).filter(Boolean);
+  const src = String(text || '');
+  const formule = [...src.matchAll(/\$([^$\n]+)\$/g)].map((m) => m[1].trim());
   if (!formule.length) return [];
 
-  const norm = (w) => String(w || '').toLowerCase().replace(/[^\p{L}\d]/gu, '');
-  const cuvinteNorm = words.map((w) => norm(w.w));
+  /**
+   * DETERMINIST, cu text rostit ÎNTREG — nu pe bucăți, nu prin căutare.
+   *
+   * Două încercări au eșuat înainte, fiecare instructiv: căutarea formei rostite
+   * ca subsecvență rata când rostirea unei formule diferea subtil în context
+   * („:" între cifre dispărea), iar numărarea pe segmente separate nu cădea pe
+   * numărul real de cuvinte, fiindcă normalizările lucrează altfel la granițe.
+   *
+   * Aici textul se rostește O SINGURĂ DATĂ, întreg, cu formulele înlocuite de un
+   * cuvânt-martor. Poziția fiecărui martor în rostire dă indicele de start; câte
+   * cuvinte ocupă formula aflăm rostind-o separat. Restul e adunare. Verificarea
+   * finală compară totalul cu numărul real de cuvinte al sintezei: dacă nu se
+   * potrivesc, întoarcem lista goală — mai bine transcript fără formule randate
+   * decât unul desincronizat.
+   */
+  const MARTOR = 'qformulaq';
+  /**
+   * Se numără doar jetoanele care AJUNG rostite.
+   *
+   * Sinteza raportează granițe doar pentru cuvinte adevărate: o liniuță izolată
+   * („G1 - Unghiuri") sau un semn singur nu produce niciun eveniment. Numărând
+   * naiv pe spații ieșeau 571 de „cuvinte" față de 565 raportate — șase jetoane
+   * fantomă, destule cât să deplaseze fiecare formulă și să rupă sincronizarea.
+   */
+  const rostibile = (x) => String(x || '').split(/\s+/).filter((w) => /[\p{L}\d]/u.test(w));
+  const cuMartori = src.replace(/\$[^$\n]+\$/g, ` ${MARTOR} `);
+  const cuvintePH = rostibile(rosteste(cuMartori));
+  const lungimi = formule.map((f) => rostibile(rosteste(`$${f}$`)).length);
 
+  const curat = (w) => String(w).toLowerCase().replace(/[^a-z]/g, '');
   const out = [];
-  let cursor = 0;
-  for (const tex of formule) {
-    const rostit = String(rosteste(tex)).split(/\s+/).map(norm).filter(Boolean);
-    if (!rostit.length) continue;
-    let gasit = -1;
-    for (let i = cursor; i <= cuvinteNorm.length - rostit.length; i += 1) {
-      let ok = true;
-      for (let k = 0; k < rostit.length; k += 1) {
-        if (cuvinteNorm[i + k] !== rostit[k]) { ok = false; break; }
-      }
-      if (ok) { gasit = i; break; }
+  let index = 0;
+  let k = 0;
+  for (const w of cuvintePH) {
+    if (curat(w) === MARTOR) {
+      const n = lungimi[k] || 0;
+      if (n > 0) out.push({ s: index, e: index + n - 1, tex: formule[k] });
+      index += n;
+      k += 1;
+      continue;
     }
-    if (gasit < 0) continue; // formula nerecunoscută în rostire: rămâne text simplu
-    out.push({ s: gasit, e: gasit + rostit.length - 1, tex });
-    cursor = gasit + rostit.length;
+    index += 1;
   }
-  return out;
+
+  if (k !== formule.length) return [];
+  if (Math.abs(index - words.length) > 2) return [];
+  return out.filter((f) => f.e < words.length);
 }
 
 export function repuneLitere(words, perechi) {
