@@ -450,7 +450,15 @@ export function spokenMinus(text) {
  * este exact ce se aude, ca o explicație suspectă să poată fi verificată fără
  * să fie reascultată.
  */
-export function toSpeakable(text) {
+/**
+ * @param {object} [optiuni]
+ * @param {boolean} [optiuni.litere=true] Convertește marcajele `<x>` în numele
+ *   rostit al literei. La STOCARE se dă `false`: textul păstrat trebuie să
+ *   rămână cu marcaje, altfel refacerea transcriptului („be"→„b") nu mai are
+ *   după ce să se ghideze — exact defectul văzut pe G1, unde elevul vedea
+ *   „punctele, a, și, be" în loc de „punctele A și B".
+ */
+export function toSpeakable(text, optiuni = {}) {
   let out = String(text == null ? '' : text).normalize('NFC').replace(INVIZIBILE, '');
   // Titlurile de secțiune „[[Definiție]]" (marcajul cerut modelului): rostite ca
   // un titlu — propoziție de sine stătătoare, cu pauze de o parte și de alta, ca
@@ -601,7 +609,8 @@ export function toSpeakable(text) {
     .trim();
 
   out = desfaNumeGeometrice(out);
-  return marcheazaLitere(desfaGrupuriDeLitere(out));
+  out = desfaGrupuriDeLitere(out);
+  return optiuni.litere === false ? out : marcheazaLitere(out);
 }
 
 /* (înlocuit de marcajul explicit `<k>`)

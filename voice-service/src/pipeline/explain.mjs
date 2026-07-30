@@ -142,9 +142,9 @@ export function titluriAcoperite(section, text) {
   return titluri.filter((h) => h && t.includes(norm(h))).length;
 }
 
-export function cleanForSpeech(text) {
+export function cleanForSpeech(text, optiuni = {}) {
   return fixRomanianArticles(
-    toSpeakable(fixDiacritics(text).replace(/\[([^\]]*)\]\([^)]*\)/g, '$1'))
+    toSpeakable(fixDiacritics(text).replace(/\[([^\]]*)\]\([^)]*\)/g, '$1'), optiuni)
   );
 }
 
@@ -333,7 +333,15 @@ export async function explainSection(section, llm, { signal, onStage } = {}) {
     }
   }
 
-  let transcript = trimToCompleteSentence(cleanForSpeech(raw));
+  /**
+   * La stocare, marcajele de literă RĂMÂN în text (`litere:false`).
+   *
+   * Convertite aici, numele fonetice („be") se coceau în textul salvat, iar la
+   * sinteză refacerea transcriptului nu mai găsea niciun marcaj — elevul vedea
+   * „punctele, a, și, be". Conversia se face O SINGURĂ DATĂ, la sinteză, unde
+   * perechea nume→literă se construiește din marcajele încă prezente.
+   */
+  let transcript = trimToCompleteSentence(cleanForSpeech(raw, { litere: false }));
   let fidelity = checkFidelity(section, transcript);
   let repairs = 0;
 

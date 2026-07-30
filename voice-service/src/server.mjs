@@ -126,11 +126,36 @@ function verificaTextPentruAudio(text, titluriLectie) {
   const grupuri = t.match(/<[A-Za-z]{5,}>/g);
   if (grupuri) probleme.push(`marcaje nepermise (${[...new Set(grupuri)].slice(0, 3).join(', ')})`);
   if (/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/.test(t)) probleme.push('caractere de control invizibile');
+  /**
+   * Numele fonetice ale literelor scrise ca text („be", „capa") — modelul a
+   * ocolit marcajul `<b>`, iar transcriptul le-ar AFIȘA așa. Se verifică doar
+   * numele care nu sunt cuvinte românești („ce", „de", „pe", „te" scapă
+   * intenționat — sunt cuvinte curente).
+   */
+  const fonetice = t.match(/\b(be|ef|ge|haș|je|capa|em|en|es|ve|ics|igrec|zet)\b/gi);
+  if (fonetice) probleme.push(`nume fonetice de litere scrise ca text (${[...new Set(fonetice.map((x) => x.toLowerCase()))].slice(0, 4).join(', ')}) — folosește marcajul <literă>`);
+
   if (titluriLectie.length) {
     const norm = (x) => String(x).toLowerCase().replace(/[^\p{L}\d ]/gu, ' ').replace(/\s+/g, ' ').trim();
     const corp = norm(t);
     const lipsa = titluriLectie.filter((titlu) => titlu && !corp.includes(norm(titlu)));
     if (lipsa.length) probleme.push(`secțiuni neacoperite: ${lipsa.slice(0, 3).join(' | ')}${lipsa.length > 3 ? '…' : ''}`);
+
+    /**
+     * ORDINEA secțiunilor, nu doar prezența: pe G1 „Bisectoarea unui unghi" a
+     * ajuns după „Unghiuri adiacente" deși în material e altfel — promptul
+     * cerea ordinea și tot a fost ignorat. O regulă în prompt e o rugăminte;
+     * verificarea de aici e o garanție.
+     */
+    if (!lipsa.length) {
+      const pozitii = titluriLectie.map((titlu) => corp.indexOf(norm(titlu)));
+      for (let i = 1; i < pozitii.length; i += 1) {
+        if (pozitii[i] >= 0 && pozitii[i - 1] >= 0 && pozitii[i] < pozitii[i - 1]) {
+          probleme.push(`secțiuni în ordine greșită: „${titluriLectie[i]}" apare înaintea „${titluriLectie[i - 1]}"`);
+          break;
+        }
+      }
+    }
   }
   return probleme;
 }
