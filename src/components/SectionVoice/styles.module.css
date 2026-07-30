@@ -1053,3 +1053,23 @@ details[open] .transcriptToggle::before { content: '▾ '; }
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
 }
+
+/* Formulă în transcript: randată KaTeX, clicabilă (seek), evidențiată cât e
+   rostită. Fundalul discret o separă de proză fără să strige. */
+.formula, .formulaActiva {
+  display: inline-block;
+  border: 0;
+  margin: 0 2px;
+  padding: 1px 7px;
+  border-radius: 7px;
+  background: color-mix(in srgb, var(--km-orange, #e8590c) 7%, transparent);
+  font: inherit;
+  cursor: pointer;
+  vertical-align: baseline;
+  transition: background 140ms ease;
+}
+.formulaActiva {
+  background: color-mix(in srgb, var(--voice-accent, #e8590c) 22%, transparent);
+}
+.formula:hover { background: color-mix(in srgb, var(--km-orange, #e8590c) 14%, transparent); }
+.formula :global(.katex), .formulaActiva :global(.katex) { font-size: 1em; }

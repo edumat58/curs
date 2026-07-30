@@ -55,7 +55,7 @@ function createProviders(env) {
   return { providers, implicit };
 }
 import { cleanForSpeech, explainSection } from './pipeline/explain.mjs';
-import { litereMarcate, repuneLitere } from './pipeline/speakable.mjs';
+import { litereMarcate, repuneLitere, calculeazaFormule } from './pipeline/speakable.mjs';
 import { speechBudget } from './pipeline/prompts.mjs';
 import { createStore } from './storage/mongo.mjs';
 import { encodeOpus } from './providers/encode.mjs';
@@ -121,7 +121,9 @@ function audioUrl(doc, baseUrl) {
 function verificaTextPentruAudio(text, titluriLectie) {
   const t = String(text || '');
   const probleme = [];
-  const latexRamas = t.match(/\\[a-zA-Z]{2,}/g);
+  // Formulele $...$ sunt PERMISE (se randează KaTeX); verificăm doar restul.
+  const faraFormule = t.replace(/\$[^$\n]+\$/g, ' ');
+  const latexRamas = faraFormule.match(/\\[a-zA-Z]{2,}/g);
   if (latexRamas) probleme.push(`notație LaTeX rămasă (${[...new Set(latexRamas)].slice(0, 4).join(', ')})`);
   const grupuri = t.match(/<[A-Za-z]{5,}>/g);
   if (grupuri) probleme.push(`marcaje nepermise (${[...new Set(grupuri)].slice(0, 3).join(', ')})`);
@@ -182,6 +184,8 @@ function publicView(doc, baseUrl) {
     // Cuvintele cu marcă de timp (t, d în ms) — subtitrarea sincronizată. Lipsesc
     // la audio-ul generat înainte de a exista funcția; atunci nu se evidențiază.
     words: doc.audio && doc.audio.words ? doc.audio.words : null,
+    // Formulele $...$ cu intervalele lor de cuvinte — clientul le randează KaTeX.
+    formule: doc.audio && doc.audio.formule ? doc.audio.formule : null,
     durationSec: doc.audio ? doc.audio.durationSec : null,
     voice: doc.audio ? doc.audio.voice : null,
     // Providerul + viteza lui firească: clientul pornește la 1× pentru Callirrhoe,
@@ -429,6 +433,8 @@ export async function createServer(env = process.env) {
        * cuvintele raportate de sinteză.
        */
       audio.words = repuneLitere(audio.words, litereMarcate(doc.explanationText));
+      // Reprezentarea dublă: intervalele de cuvinte ale fiecărei formule $...$.
+      audio.formule = calculeazaFormule(doc.explanationText, audio.words, (x) => cleanForSpeech(x));
       recordUsage(engine.name, audio.chars, { sectionHash: doc.sectionHash, heading: doc.heading, route: doc.route });
       // encodeOpus întoarce {buffer, codec, contentType} — folosim câmpurile lui,
       // nu obiectul întreg (altfel GridFS primește un Object, nu un Buffer).
@@ -439,6 +445,7 @@ export async function createServer(env = process.env) {
         provider: engine.name, defaultRate: VITEZA_IMPLICITA[engine.name] || 1,
         // Cuvintele cu timing — subtitrarea sincronizată (Azure nativ, Gemini prin aliniere).
         words: audio.words || null, sentences: audio.sentences || null,
+        formule: audio.formule || null,
       });
       // Reținem providerul pe lecție, ca regenerările viitoare să-l păstreze.
       store.setVoiceProvider(doc.sectionHash, engine.name).catch(() => {});

@@ -270,6 +270,7 @@ export async function createStore(env = process.env) {
               provider: audio.provider || null, defaultRate: audio.defaultRate || 1,
               // Subtitrarea sincronizată: cuvinte cu marcă de timp + granițe de frază.
               words: audio.words || null, sentences: audio.sentences || null,
+              formule: audio.formule || null,
             },
             updatedAt: new Date(),
           },

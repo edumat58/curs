@@ -63,37 +63,92 @@ function normalizeazaTitlu(s) {
  * @param tokens jetoanele din construiesteTokeni
  * @param titluri [{nume, el}] — titlurile lecției, în ordine
  */
-export function marcheazaSectiuni(tokens, titluri) {
-  if (!Array.isArray(tokens) || !tokens.length || !Array.isArray(titluri) || !titluri.length) {
-    return tokens;
+/**
+ * Un cuvânt rostit e „egal" cu un cuvânt de titlu și când diferă printr-o
+ * SINGURĂ literă (cuvinte de 5+): administratorul corectează manual texte și o
+ * greșeală măruntă de tastare nu are voie să rupă navigarea pe secțiuni.
+ */
+function cuvinteEgale(a, b) {
+  if (a === b) return true;
+  if (a.length < 5 || b.length < 5 || Math.abs(a.length - b.length) > 1) return false;
+  // distanță de editare ≤ 1 (înlocuire, inserare sau ștergere)
+  if (a.length === b.length) {
+    let dif = 0;
+    for (let i = 0; i < a.length; i += 1) if (a[i] !== b[i]) { dif += 1; if (dif > 1) return false; }
+    return true;
   }
-  const harta = titluri.map((t) => ({ ...t, cuvinte: normalizeazaTitlu(t.nume).split(' ') }));
-  const folosite = new Set();
+  const [scurt, lung] = a.length < b.length ? [a, b] : [b, a];
+  let i = 0; let j = 0; let sarite = 0;
+  while (i < scurt.length && j < lung.length) {
+    if (scurt[i] === lung[j]) { i += 1; j += 1; continue; }
+    sarite += 1; if (sarite > 1) return false;
+    j += 1;
+  }
+  return true;
+}
+
+/** Jetonul închide o propoziție? (punctuația e lipită de cuvânt la sinteză) */
+function inchidePropozitia(text) {
+  return /[.!?…]["”»)]?$/.test(String(text || '').trim());
+}
+
+export function marcheazaSectiuni(tokens, titluri, titluLectie) {
+  if (!Array.isArray(tokens) || !tokens.length) return tokens;
   const out = tokens.map((t) => ({ ...t }));
 
-  for (let i = 0; i < out.length; i += 1) {
-    for (const h of harta) {
-      if (folosite.has(h.nume)) continue;
-      const n = h.cuvinte.length;
-      if (n === 0 || i + n > out.length) continue;
-      const bucata = out.slice(i, i + n).map((t) => normalizeazaTitlu(t.text)).join(' ');
-      if (bucata !== h.cuvinte.join(' ')) continue;
-
-      /**
-       * Cuvintele titlului se ADNOTEAZĂ, nu se contopesc.
-       *
-       * Contopite într-un singur jeton, tot titlul rămânea evidențiat ca un bloc
-       * cât era rostit — două-trei secunde în care vocea înainta și evidențierea
-       * stătea. Se citea exact ca o desincronizare, deși timpii erau corecți.
-       * Adnotate, cuvintele își păstrează fiecare timpul lui, iar afișarea le
-       * strânge într-un titlu clicabil.
-       */
-      const grup = { nume: faraInvizibile(h.nume), sectiune: h.el, t: out[i].t };
-      for (let k = 0; k < n; k += 1) out[i + k].grupTitlu = grup;
-      folosite.add(h.nume);
-      i += n - 1;
-      break;
+  // liniuțele din titlu („G1 - Unghiuri…") nu se rostesc — afară înainte de split
+  const cuvinteDin = (nume) => normalizeazaTitlu(nume).replace(/[-–—]/g, ' ').split(' ').filter(Boolean);
+  const potriveste = (i, cuvinte) => {
+    if (i + cuvinte.length > out.length) return false;
+    for (let k = 0; k < cuvinte.length; k += 1) {
+      if (!cuvinteEgale(normalizeazaTitlu(out[i + k].text), cuvinte[k])) return false;
     }
+    return true;
+  };
+  const marcheaza = (i, n, nume, el) => {
+    const grup = { nume: faraInvizibile(nume), sectiune: el, t: out[i].t };
+    for (let k = 0; k < n; k += 1) out[i + k].grupTitlu = grup;
+    return i + n;
+  };
+
+  /**
+   * ORDONAT și PE GRANIȚE — lecția a dovedit de ce.
+   *
+   * Titlul lecției („G1 - Unghiuri adiacente și bisectoarea unui unghi") conține
+   * numele secțiunilor, iar introducerea le pomenește și ea. Vechiul algoritm
+   * marca PRIMA apariție a fiecărui titlu, oriunde: bucăți din titlul lecției
+   * deveneau „secțiuni" clicabile, iar secțiunea reală — deja „folosită" — rămânea
+   * text simplu. Acum:
+   *   1. titlul LECȚIEI se potrivește întâi, la început, și consumă cuvintele lui;
+   *   2. titlurile de secțiune se caută ÎN ORDINEA lor din lecție, fiecare DUPĂ
+   *      precedentul (cursor monoton);
+   *   3. un titlu se acceptă doar la GRANIȚĂ de propoziție — în text generat el e
+   *      mereu propoziție de sine stătătoare; mențiunile din proză nu sunt.
+   */
+  let cursor = 0;
+  if (titluLectie && titluLectie.nume) {
+    const cuvinte = cuvinteDin(titluLectie.nume);
+    for (let i = 0; i < Math.min(4, out.length) && cuvinte.length; i += 1) {
+      if (potriveste(i, cuvinte)) { cursor = marcheaza(i, cuvinte.length, titluLectie.nume, titluLectie.el); break; }
+    }
+  }
+
+  for (const h of (Array.isArray(titluri) ? titluri : [])) {
+    const cuvinte = cuvinteDin(h.nume);
+    if (!cuvinte.length) continue;
+    let gasit = -1;
+    // trecerea 1: doar pe granițe de propoziție
+    for (let i = cursor; i < out.length; i += 1) {
+      const inceputBun = i === 0 || inchidePropozitia(out[i - 1].text);
+      if (inceputBun && potriveste(i, cuvinte) && inchidePropozitia(out[i + cuvinte.length - 1].text)) { gasit = i; break; }
+    }
+    // trecerea 2 (text editat manual, punctuație lipsă): fără granițe, tot ordonat
+    if (gasit < 0) {
+      for (let i = cursor; i < out.length; i += 1) {
+        if (potriveste(i, cuvinte)) { gasit = i; break; }
+      }
+    }
+    if (gasit >= 0) cursor = marcheaza(gasit, cuvinte.length, h.nume, h.el);
   }
   return out;
 }

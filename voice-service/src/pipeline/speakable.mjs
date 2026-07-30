@@ -753,6 +753,49 @@ export function litereMarcate(text) {
  * fiecărui nume cu litera lui — așa „de" dintr-o propoziție obișnuită rămâne
  * neatins, pentru că nu e la rândul unei marcări.
  */
+/**
+ * Intervalele de cuvinte rostite ale fiecărei formule `$...$` din text.
+ *
+ * Reprezentarea dublă: elevul VEDE formula randată (KaTeX), vocea o CITEȘTE în
+ * cuvinte. Ca evidențierea să curgă prin formulă și clicul să sară la ea, avem
+ * nevoie de maparea formulă → [primul, ultimul] cuvânt rostit. O calculăm după
+ * sinteză, pe cuvintele REALE raportate: forma rostită a fiecărei formule se
+ * caută ca subsecvență monotonă în lista de cuvinte — aceeași tehnică folosită
+ * la titluri, robustă la felul în care motorul desparte cuvintele.
+ *
+ * @param {string} text Textul stocat, cu `$...$` intacte.
+ * @param {Array} words Cuvintele sintezei ({t,d,w}).
+ * @param {(s: string) => string} rosteste cleanForSpeech-ul serverului.
+ * @returns {Array<{s:number,e:number,tex:string}>}
+ */
+export function calculeazaFormule(text, words, rosteste) {
+  if (!Array.isArray(words) || !words.length) return [];
+  const formule = [...String(text || '').matchAll(/\$([^$\n]+)\$/g)].map((m) => m[1].trim()).filter(Boolean);
+  if (!formule.length) return [];
+
+  const norm = (w) => String(w || '').toLowerCase().replace(/[^\p{L}\d]/gu, '');
+  const cuvinteNorm = words.map((w) => norm(w.w));
+
+  const out = [];
+  let cursor = 0;
+  for (const tex of formule) {
+    const rostit = String(rosteste(tex)).split(/\s+/).map(norm).filter(Boolean);
+    if (!rostit.length) continue;
+    let gasit = -1;
+    for (let i = cursor; i <= cuvinteNorm.length - rostit.length; i += 1) {
+      let ok = true;
+      for (let k = 0; k < rostit.length; k += 1) {
+        if (cuvinteNorm[i + k] !== rostit[k]) { ok = false; break; }
+      }
+      if (ok) { gasit = i; break; }
+    }
+    if (gasit < 0) continue; // formula nerecunoscută în rostire: rămâne text simplu
+    out.push({ s: gasit, e: gasit + rostit.length - 1, tex });
+    cursor = gasit + rostit.length;
+  }
+  return out;
+}
+
 export function repuneLitere(words, perechi) {
   if (!Array.isArray(words) || !words.length || !perechi || !perechi.length) return words;
   /**

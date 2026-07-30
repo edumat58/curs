@@ -166,13 +166,33 @@ function scrollPaginaLaSectiune(el) {
   window.scrollTo({ top: Math.max(0, y), behavior: redus ? 'auto' : 'smooth' });
 }
 
-function Subtitrare({ words, currentMs, contentRoot, onSeek }) {
+function Subtitrare({ words, currentMs, contentRoot, onSeek, formule }) {
   const activ = useRef(null);
   const cutie = useRef(null);
   const idxAnterior = useRef(-1);
   const sectiuneCurenta = useRef(null);
   const tokens = useMemo(() => {
-    const baza = construiesteTokeni(words);
+    /**
+     * Reprezentarea dublă: cuvintele unei formule se STRÂNG într-un singur jeton
+     * care poartă LaTeX-ul de afișat. Vocea citește cuvintele („A egal cu b
+     * înmulțit cu h supra 2"), elevul vede formula randată — iar jetonul rămâne
+     * evidențiat exact cât durează rostirea lui, pentru că următorul jeton
+     * începe abia după ultimul cuvânt al formulei.
+     */
+    const cuFormule = (lista) => {
+      if (!Array.isArray(formule) || !formule.length) return construiesteTokeni(lista);
+      const out = [];
+      let poz = 0;
+      for (const f of [...formule].sort((a, b) => a.s - b.s)) {
+        if (!Number.isFinite(f.s) || !Number.isFinite(f.e) || f.s < poz || f.e >= lista.length) continue;
+        if (f.s > poz) out.push(...construiesteTokeni(lista.slice(poz, f.s)));
+        out.push({ t: lista[f.s].t, text: '', formula: f.tex });
+        poz = f.e + 1;
+      }
+      if (poz < lista.length) out.push(...construiesteTokeni(lista.slice(poz)));
+      return out;
+    };
+    const baza = cuFormule(words);
     // Titlurile REALE ale lecției (H2/H3 din conținut) — după ele recunoaștem
     // titlurile de secțiune rostite și le facem clicabile spre secțiune.
     const root = contentRoot
@@ -184,8 +204,10 @@ function Subtitrare({ words, currentMs, contentRoot, onSeek }) {
         .map((el) => ({ nume: (el.textContent || '').replace(/#$/, '').trim(), el }))
         .filter((h) => h.nume)
       : [];
-    return marcheazaSectiuni(baza, titluri);
-  }, [words, contentRoot]);
+    const h1 = root ? root.querySelector('h1') : null;
+    const titluLectie = h1 ? { nume: (h1.textContent || '').replace(/#$/, '').trim(), el: h1 } : null;
+    return marcheazaSectiuni(baza, titluri, titluLectie);
+  }, [words, contentRoot, formule]);
   /**
    * Evidențierea ia un mic AVANS față de ceas (80 ms).
    *
@@ -195,6 +217,22 @@ function Subtitrare({ words, currentMs, contentRoot, onSeek }) {
    * ca „rămâne în urmă". Avansul anulează întârzierea; e sub pragul la care
    * ochiul ar sesiza că textul o ia înainte.
    */
+  /**
+   * KaTeX se încarcă DOAR când transcriptul chiar are formule: biblioteca nu e
+   * mică, iar majoritatea lecțiilor vorbite nu au nevoie de ea. Până se încarcă,
+   * formula se vede ca text simplu — o clipă, la prima lecție cu formule.
+   */
+  const [katexLib, setKatexLib] = useState(null);
+  const areFormule = tokens.some((t) => t.formula);
+  useEffect(() => {
+    if (!areFormule || katexLib) return;
+    import('katex').then((m) => setKatexLib(() => m.default || m)).catch(() => {});
+  }, [areFormule, katexLib]);
+  const randeazaFormula = (tex) => {
+    if (!katexLib) return null;
+    try { return katexLib.renderToString(tex, { throwOnError: false, strict: false }); } catch { return null; }
+  };
+
   const idx = indiceToken(tokens, currentMs + 80);
 
   useEffect(() => {
@@ -296,6 +334,27 @@ function Subtitrare({ words, currentMs, contentRoot, onSeek }) {
         }
         return bucati.map((b) => {
           if (b.tip === 'cuvant') {
+            if (b.tok.formula) {
+              const html = randeazaFormula(b.tok.formula);
+              const activa = b.i === idx;
+              return (
+                // eslint-disable-next-line react/no-array-index-key
+                <button
+                  key={b.i}
+                  type="button"
+                  ref={activa ? activ : null}
+                  data-activ={activa ? '' : undefined}
+                  className={activa ? styles.formulaActiva : styles.formula}
+                  onClick={() => { if (onSeek && Number.isFinite(b.tok.t)) onSeek(b.tok.t); }}
+                  title="Sari la această formulă"
+                >
+                  {html
+                    // eslint-disable-next-line react/no-danger
+                    ? <span dangerouslySetInnerHTML={{ __html: html }} />
+                    : <code>{b.tok.formula}</code>}
+                </button>
+              );
+            }
             const clasa = b.i === idx ? styles.cuvantActiv : (b.i < idx ? styles.cuvantCitit : styles.cuvant);
             return (
               // eslint-disable-next-line react/no-array-index-key
@@ -351,7 +410,7 @@ function Subtitrare({ words, currentMs, contentRoot, onSeek }) {
 export default function AudioPlayer({
   src, autoPlay = false, onClose, knownDuration = 0, onUnavailable,
   transcript = '', sentences = null, words = null, headingElement = null, contentRoot = null,
-  seekTo = null, defaultRate = null,
+  seekTo = null, defaultRate = null, formule = null,
 }) {
   const audioRef = useRef(null);
   const [playing, setPlaying] = useState(false);
@@ -838,7 +897,7 @@ export default function AudioPlayer({
           transcriptul static (audio generat înainte de a exista funcția). */}
       {transcriptDeschis && (
         Array.isArray(words) && words.length ? (
-          <Subtitrare words={words} currentMs={current * 1000} contentRoot={contentRoot} onSeek={seekLaMs} />
+          <Subtitrare words={words} currentMs={current * 1000} contentRoot={contentRoot} onSeek={seekLaMs} formule={formule} />
         ) : transcript ? (
           <div className={styles.transcriptText}>{transcript}</div>
         ) : null

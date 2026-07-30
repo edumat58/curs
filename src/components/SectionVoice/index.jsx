@@ -32,7 +32,9 @@ function momenteSectiuni(words, root) {
     .map((el) => ({ nume: (el.textContent || '').replace(/#$/, '').trim(), el }))
     .filter((h) => h.nume);
   if (!titluri.length) return [];
-  const tokens = marcheazaSectiuni(construiesteTokeni(words), titluri);
+  const h1 = root.querySelector('h1');
+  const titluLectie = h1 ? { nume: (h1.textContent || '').replace(/#$/, '').trim(), el: h1 } : null;
+  const tokens = marcheazaSectiuni(construiesteTokeni(words), titluri, titluLectie);
   /**
    * Cuvintele unui titlu poartă acum ACELAȘI obiect `grupTitlu` (adnotate, nu
    * contopite, ca evidențierea să avanseze prin titlu). Deci luăm fiecare grup o
@@ -433,6 +435,7 @@ function Panou({ state, fractie, error, data, onRetry, onClose, headingElement, 
           transcript={data.explanationText || ''}
           sentences={data.sentences || null}
           words={data.words || null}
+          formule={data.formule || null}
           headingElement={headingElement}
           contentRoot={contentRoot}
           seekTo={seekTo}
@@ -549,9 +552,9 @@ function LessonButton({ section, route, host }) {
             </svg>
           </span>
           <span className={styles.lessonText}>
-            <span className={styles.lessonTitle}>Ascultă lecția explicată</span>
+            <span className={styles.lessonTitle}>Ascultă lecția explicată de tutorele Kulturosfera!</span>
             <span className={styles.lessonHint}>
-              Un profesor îți parcurge toată lecția, pas cu pas.
+              Redarea audio poate avea diferențe de pronunție/conținut. 
             </span>
           </span>
         </button>
