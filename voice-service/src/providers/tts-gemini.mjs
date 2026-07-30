@@ -48,7 +48,18 @@ function pcmToWav(pcm, sampleRate = 24000) {
  * unde intonația poate porni altfel.
  */
 function bucatiText(text, maxChars = 3500) {
-  const fraze = String(text).split(/(?<=[.!?])\s+/).map((s) => s.trim()).filter(Boolean);
+  /**
+   * Numerotarea unui titlu („2." sau „3.1.") NU e sfârșit de frază — aceeași
+   * regulă ca pe calea Azure. Fără ea, o bucată se putea termina cu „2."
+   * suspendat, iar titlul începea în bucata următoare cu altă intonație.
+   */
+  const brute = String(text).split(/(?<=[.!?])\s+/).map((s) => s.trim()).filter(Boolean);
+  const fraze = [];
+  for (const b of brute) {
+    const ultima = fraze[fraze.length - 1];
+    if (ultima && /(?:^|\s)\d{1,3}(?:\.\d{1,3})*\.$/.test(ultima)) fraze[fraze.length - 1] = `${ultima} ${b}`;
+    else fraze.push(b);
+  }
   const out = [];
   let curent = '';
   for (const f of fraze) {

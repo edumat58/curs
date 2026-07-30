@@ -46,7 +46,7 @@ function propozitii(text) {
    */
   const out = [];
   for (const b of bucati) {
-    if (/^\d{1,3}\.$/.test(b)) { out.push({ numar: b }); continue; }
+    if (/^\d{1,3}(?:\.\d{1,3})*\.$/.test(b)) { out.push({ numar: b }); continue; }
     const ultim = out[out.length - 1];
     if (ultim && typeof ultim === 'object') { out[out.length - 1] = `${ultim.numar} ${b}`; continue; }
     out.push(b);

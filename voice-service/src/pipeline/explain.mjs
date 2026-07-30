@@ -9,6 +9,7 @@ import {
   imparteLectia,
   speechBudget,
   PROMPT_VERSION,
+  curataSursa,
 } from './prompts.mjs';
 import { checkFidelity } from './fidelity.mjs';
 import { toSpeakable } from './speakable.mjs';
@@ -176,6 +177,14 @@ export async function explainSection(section, llm, { signal, onStage } = {}) {
   const analysis = {};
 
   stage('naratiune');
+  /**
+   * Sursa se curăță O SINGURĂ DATĂ, înainte de orice: frontmatter și importuri
+   * afară, figurile înlocuite cu geometria citită. Abia APOI se segmentează —
+   * altfel segmentele tăiau SVG-urile în două și modelul primea markup rupt
+   * drept „codul sursă exact al lecției" (auditul: ~29% din material).
+   */
+  section = { ...section, sourceCode: curataSursa(section.sourceCode) };
+
   const budget = speechBudget(section);
 
   /**

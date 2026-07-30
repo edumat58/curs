@@ -71,11 +71,49 @@ function citesteArgument(text, start) {
 }
 
 /** Comenzile cu argumente, și ce rămâne rostit din ele. */
+/** Literele unui nume geometric („AB", „MON"), rostite separat: „A B", „M O N". */
+function litereSpatiate(grup) {
+  const t = String(grup).replace(/[{}\\]/g, '').trim();
+  return t.split('').map((c) => c.trim()).filter(Boolean).join(' ');
+}
+
 const COMENZI = [
   // Fracțiile devin forma „3/4", pe care regula de mai jos o rostește „3 supra 4".
   { nume: ['frac', 'dfrac', 'tfrac'], argumente: 2, iesire: (a, b) => `${a}/${b}` },
   { nume: ['sqrt'], argumente: 1, iesire: (a) => `√${a}` },
+  // Radicalul cu ordin, adus aici de pre-pasul care rescrie `\sqrt[3]{54}`.
+  { nume: ['radord'], argumente: 2, iesire: (ord, x) => ` radical de ordinul ${ord} din ${x} ` },
   { nume: ['text', 'textrm', 'mathrm', 'mathbf', 'mathit', 'operatorname'], argumente: 1, iesire: (a) => a },
+  /**
+   * Mulțimile de numere: „x ∈ ℝ" trebuie AUZIT ca apartenența la o mulțime cu
+   * nume, nu ca o literă orfană. Audit: 242 de apariții \mathbb.
+   */
+  {
+    nume: ['mathbb'],
+    argumente: 1,
+    iesire: (a) => ({
+      N: ' mulțimea numerelor naturale ', Z: ' mulțimea numerelor întregi ',
+      Q: ' mulțimea numerelor raționale ', R: ' mulțimea numerelor reale ',
+      C: ' mulțimea numerelor complexe ',
+    }[a.trim()] || ` ${a} `),
+  },
+  /**
+   * Decorațiile geometrice poartă NUMELE obiectului: fără ele, „\overline{AB}"
+   * rămânea „AB" citit ca un cuvânt. Audit: 300+ apariții pe clasa asta.
+   */
+  { nume: ['overline'], argumente: 1, iesire: (a) => ` segmentul ${litereSpatiate(a)} ` },
+  { nume: ['overrightarrow', 'vec'], argumente: 1, iesire: (a) => ` semidreapta ${litereSpatiate(a)} ` },
+  { nume: ['widehat', 'hat'], argumente: 1, iesire: (a) => ` unghiul ${litereSpatiate(a)} ` },
+  /**
+   * \overset{deasupra}{bază}: decorul de deasupra se aruncă — EXCEPTÂND arcul
+   * (`\frown`), unde chiar decorul e sensul: „arcul B C".
+   */
+  {
+    nume: ['overset', 'stackrel'],
+    argumente: 2,
+    iesire: (sus, baza) => (/frown/.test(sus) ? ` arcul ${litereSpatiate(baza)} ` : baza),
+  },
+  { nume: ['underset', 'underbrace'], argumente: 2, iesire: (_jos, baza) => baza },
   /**
    * Culoarea nu se rostește, dar conținutul ei DA.
    *
@@ -83,20 +121,84 @@ const COMENZI = [
    * oarecare, rămâneau două acolade lipite și codul culorii ajungea în text:
    * „#FF6B6B37540". Culoarea e formatare; numărul dinăuntru e lecția.
    */
-  { nume: ['color'], argumente: 2, iesire: (_culoare, continut) => continut },
-  { nume: ['textcolor', 'colorbox'], argumente: 2, iesire: (_culoare, continut) => continut },
 ];
 
-/** Simbolurile fără argumente au deja echivalent rostit în `simboluriMatematice`. */
+/**
+ * Simbolurile fără argumente — fiecare fie spre Unicode-ul deja rostit de
+ * `SIMBOLURI`, fie direct spre cuvinte.
+ *
+ * Tabelul e rezultatul auditului pe toate cele 158 de lecții: 106 comenzi LaTeX
+ * unice, din care ~65 cădeau pe ștergerea generică. Consecințele nu erau doar
+ * estetice: „x = \\pm 3" devenea „x egal cu 3" (FALS — soluția negativă
+ * dispărea), „f(x) = \\sin x" devenea „f(x) = x", iar „d \\nparallel α"
+ * devenea „d." — relația, adică lecția însăși, se pierdea în tăcere.
+ */
 const SIMBOLURI_LATEX = [
+  // aritmetică și relații
   [/\\(?:cdot|times)(?![a-zA-Z])/g, '×'],
   [/\\div(?![a-zA-Z])/g, '÷'],
-  [/\\(?:le|leq)(?![a-zA-Z])/g, '≤'],
-  [/\\(?:ge|geq)(?![a-zA-Z])/g, '≥'],
+  [/\\(?:le|leq|leqslant)(?![a-zA-Z])/g, '≤'],
+  [/\\(?:ge|geq|geqslant)(?![a-zA-Z])/g, '≥'],
   [/\\(?:ne|neq)(?![a-zA-Z])/g, '≠'],
   [/\\approx(?![a-zA-Z])/g, '≈'],
+  [/\\pm(?![a-zA-Z])/g, '±'],
+  [/\\mp(?![a-zA-Z])/g, '∓'],
+  [/\\lt(?![a-zA-Z])/g, ' mai mic decât '],
+  [/\\gt(?![a-zA-Z])/g, ' mai mare decât '],
+  [/\\(?:dots|ldots|cdots|vdots|ddots)(?![a-zA-Z])/g, ' și așa mai departe '],
+  [/\\%/g, ' la sută '],
+  [/\\(?:min)(?![a-zA-Z])/g, ' minimul '],
+  [/\\(?:max)(?![a-zA-Z])/g, ' maximul '],
+  // mulțimi și logică
+  [/\\in(?![a-zA-Z])/g, '∈'],
+  [/\\notin(?![a-zA-Z])/g, '∉'],
+  [/\\cap(?![a-zA-Z])/g, '∩'],
+  [/\\cup(?![a-zA-Z])/g, '∪'],
+  [/\\setminus(?![a-zA-Z])/g, ' fără '],
+  [/\\(?:subset|subseteq|subsetneq)(?![a-zA-Z])/g, ' inclus în '],
+  [/\\(?:supset|supseteq)(?![a-zA-Z])/g, ' include pe '],
+  [/\\(?:emptyset|varnothing)(?![a-zA-Z])/g, '∅'],
+  [/\\infty(?![a-zA-Z])/g, '∞'],
+  [/\\mid(?![a-zA-Z])/g, ' astfel încât '],
+  [/\\forall(?![a-zA-Z])/g, ' oricare ar fi '],
+  [/\\exists(?![a-zA-Z])/g, ' există '],
+  [/\\(?:Rightarrow|implies|Longrightarrow)(?![a-zA-Z])/g, '⇒'],
+  [/\\(?:Leftrightarrow|iff|Longleftrightarrow)(?![a-zA-Z])/g, '⇔'],
+  [/\\(?:rightarrow|to|mapsto)(?![a-zA-Z])/g, '→'],
+  // geometrie
+  [/\\(?:parallel)(?![a-zA-Z])/g, '∥'],
+  [/\\nparallel(?![a-zA-Z])/g, ' neparalel cu '],
+  [/\\perp(?![a-zA-Z])/g, '⊥'],
+  [/\\equiv(?![a-zA-Z])/g, ' congruent cu '],
+  [/\\(?:cong|simeq)(?![a-zA-Z])/g, ' congruent cu '],
+  [/\\sim(?![a-zA-Z])/g, ' asemenea cu '],
+  [/\\(?:measuredangle|sphericalangle|angle)(?![a-zA-Z])/g, '∡'],
+  [/\\triangle(?![a-zA-Z])/g, ' triunghiul '],
+  // trigonometrie — glosarul cere „tg"/„ctg", nu „tan"/„cot"
+  [/\\sin(?![a-zA-Z])/g, ' sinus de '],
+  [/\\cos(?![a-zA-Z])/g, ' cosinus de '],
+  [/\\(?:tg|tan)(?![a-zA-Z])/g, ' tangenta de '],
+  [/\\(?:ctg|cot)(?![a-zA-Z])/g, ' cotangenta de '],
+  // litere grecești — subiectul propoziției în geometrie și la gradul 2
+  [/\\alpha(?![a-zA-Z])/g, ' alfa '],
+  [/\\beta(?![a-zA-Z])/g, ' beta '],
+  [/\\gamma(?![a-zA-Z])/g, ' gama '],
+  [/\\Delta(?![a-zA-Z])/g, ' delta '],
+  [/\\delta(?![a-zA-Z])/g, ' delta '],
+  [/\\(?:rho|varrho)(?![a-zA-Z])/g, ' ro '],
+  [/\\mu(?![a-zA-Z])/g, ' miu '],
+  [/\\(?:phi|varphi)(?![a-zA-Z])/g, ' fi '],
+  [/\\lambda(?![a-zA-Z])/g, ' lambda '],
+  [/\\theta(?![a-zA-Z])/g, ' teta '],
+  [/\\omega(?![a-zA-Z])/g, ' omega '],
+  [/\\sigma(?![a-zA-Z])/g, ' sigma '],
+  [/\\(?:epsilon|varepsilon)(?![a-zA-Z])/g, ' epsilon '],
+  [/\\ell(?![a-zA-Z])/g, ' l '],
+  // constante
   [/\\pi(?![a-zA-Z])/g, 'π'],
   [/\\circ(?![a-zA-Z])/g, '°'],
+  // negarea rămasă („\not" + simbol deja tradus) devine „nu"
+  [/\\not(?![a-zA-Z])\s*/g, ' nu '],
 ];
 
 /**
@@ -139,7 +241,32 @@ function faraLatex(text) {
     // spațiile fine din formule: \, \; \: \!
     .replace(/\\[,;:!]/g, '')
     // virgula zecimală protejată de acolade
-    .replace(/\{\s*,\s*\}/g, ',');
+    .replace(/\{\s*,\s*\}/g, ',')
+    /**
+     * Mediile (`\begin{aligned}` … `\end{aligned}`) se șterg cu TOT cu nume.
+     *
+     * Șterse generic, comanda pierea dar `{aligned}` rămânea, acoladele deveneau
+     * spațiu și „aligned" ajungea ROSTIT — de două ori pe bloc. Audit: 100 de
+     * blocuri `\begin` în lecții.
+     */
+    .replace(/\\begin\{[a-zA-Z*]+\}(\[[^\]]*\])?/g, ' ')
+    .replace(/\\end\{[a-zA-Z*]+\}/g, ' ')
+    /**
+     * Separatorul de rând `\\` (cu sau fără `[10pt]`) închide propoziția:
+     * într-un `aligned`, fiecare rând e o afirmație de sine stătătoare.
+     */
+    .replace(/\\\\(\[[^\]]*\])?/g, '. ')
+    // marcatorii de aliniere & nu se rostesc
+    .replace(/&&?/g, ' ')
+    /**
+     * Culoarea, în AMBELE forme. Forma-comutator (`{\color{red} text}`) nu are
+     * al doilea argument, deci intrarea din COMENZI nu o prindea și „orangered"
+     * ajungea rostit. Ștergând doar comanda + culoarea, conținutul rămâne în
+     * ambele forme (la cea cu două argumente, acoladele devin spațiu mai jos).
+     */
+    .replace(/\\(?:color|textcolor|colorbox)\{[^}]*\}/g, '')
+    // radicalul cu ordin: `\sqrt[3]{54}` → comanda radord, tradusă în COMENZI
+    .replace(/\\sqrt\[([^\]]+)\]/g, '\\radord{$1}');
 
   /**
    * Punct fix: `\dfrac{1}{\sqrt{2}}` are nevoie de două treceri — una pentru
@@ -240,7 +367,7 @@ const SIMBOLURI = [
   [/[≥⩾]/g, ' mai mare sau egal cu '],
   [/[∥‖]/g, ' paralel cu '],
   [/⊥/g, ' perpendicular pe '],
-  [/[∠∡]/g, ' unghiul '],
+  [/[∠∡∢]/g, ' unghiul '],
   [/[∆Δ△](?=[A-Z])/g, ' triunghiul '],
   [/∈/g, ' aparține lui '],
   [/∉/g, ' nu aparține lui '],
@@ -252,6 +379,10 @@ const SIMBOLURI = [
   [/[→↦]/g, ' tinde spre '],
   [/±/g, ' plus sau minus '],
   [/∓/g, ' minus sau plus '],
+  [/[⊂⊆]/g, ' inclus în '],
+  [/[⊃⊇]/g, ' include pe '],
+  [/≡/g, ' congruent cu '],
+  [/∖/g, ' fără '],
 ];
 
 /** Fracțiile scrise cu un singur caracter — espeak le citește în engleză. */
@@ -469,6 +600,7 @@ export function toSpeakable(text) {
     .replace(/\s+/g, ' ')
     .trim();
 
+  out = desfaNumeGeometrice(out);
   return marcheazaLitere(desfaGrupuriDeLitere(out));
 }
 
@@ -697,6 +829,26 @@ export function repuneLitere(words, perechi) {
  * rămânea în text și se rostea ca un cuvânt inventat. Aici îl desfacem în litere
  * separate prin spațiu — exact cum se citește „unghiul M O N" la tablă.
  */
+/**
+ * Numele geometrice din litere lipite („unghiul DAB", „segmentele OP și ON")
+ * se rostesc literă cu literă: „unghiul D A B".
+ *
+ * După traducerea notațiilor de unghi, literele rămâneau lipite și sinteza le
+ * citea ca pe un cuvânt inventat. Se desfac DOAR grupurile care nu pot fi
+ * altceva: fie după un cuvânt geometric, fie orfane — dar niciodată numeralele
+ * romane („clasa a VI-a" rămâne neatinsă).
+ */
+function desfaNumeGeometrice(text) {
+  const spatiat = (g) => g.split('').join(' ');
+  let out = String(text).replace(
+    /\b(unghiul|unghiurile|triunghiul|triunghiurile|segmentul|segmentele|arcul|arcele|semidreapta|semidreptele|dreapta|dreptele|punctele|patrulaterul|paralelogramul|trapezul|rombul|dreptunghiul|laturile|latura|cercul|diagonala|diagonalele|mediana|medianele|planul|planele)\s+([A-Z]{2,4})\b/g,
+    (_a, cuvant, grup) => `${cuvant} ${spatiat(grup)}`
+  );
+  // grupurile orfane (2-4 majuscule) care nu sunt numerale romane
+  out = out.replace(/\b([A-Z]{2,4})\b/g, (tot, grup) => (/^[IVX]+$/.test(grup) ? tot : spatiat(grup)));
+  return out;
+}
+
 function desfaGrupuriDeLitere(text) {
   return String(text).replace(/<([A-Za-z]{2,4})>/g, (_all, grup) => grup.split('').join(' '));
 }

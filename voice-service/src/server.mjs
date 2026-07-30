@@ -109,6 +109,32 @@ function audioUrl(doc, baseUrl) {
   return `${baseUrl}/voice/audio/${doc.sectionHash}?v=${versiune}`;
 }
 
+/**
+ * Verificările gate-ului: ce NU are voie să conțină un text înainte de sinteză.
+ *
+ * Fiecare verificare corespunde unei clase de defect văzute pe viu: comenzi
+ * LaTeX rămase (se rosteau literal), grupuri lungi în paranteze unghiulare
+ * (marcajul de literă generalizat greșit de model), caractere de control
+ * (pătrățele în admin), titluri de secțiune lipsă (lecție ciuntită — cazul G1,
+ * unde explicația se oprea la a cincea secțiune din șapte).
+ */
+function verificaTextPentruAudio(text, titluriLectie) {
+  const t = String(text || '');
+  const probleme = [];
+  const latexRamas = t.match(/\\[a-zA-Z]{2,}/g);
+  if (latexRamas) probleme.push(`notație LaTeX rămasă (${[...new Set(latexRamas)].slice(0, 4).join(', ')})`);
+  const grupuri = t.match(/<[A-Za-z]{5,}>/g);
+  if (grupuri) probleme.push(`marcaje nepermise (${[...new Set(grupuri)].slice(0, 3).join(', ')})`);
+  if (/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/.test(t)) probleme.push('caractere de control invizibile');
+  if (titluriLectie.length) {
+    const norm = (x) => String(x).toLowerCase().replace(/[^\p{L}\d ]/gu, ' ').replace(/\s+/g, ' ').trim();
+    const corp = norm(t);
+    const lipsa = titluriLectie.filter((titlu) => titlu && !corp.includes(norm(titlu)));
+    if (lipsa.length) probleme.push(`secțiuni neacoperite: ${lipsa.slice(0, 3).join(' | ')}${lipsa.length > 3 ? '…' : ''}`);
+  }
+  return probleme;
+}
+
 function publicView(doc, baseUrl) {
   return {
     status: doc.status,
@@ -342,6 +368,22 @@ export async function createServer(env = process.env) {
        * scrise și testate, dar nu ajungeau niciodată la sinteză când audio-ul se
        * genera din panou — adică exact în fluxul folosit.
        */
+      /**
+       * GATE DE CALITATE: audio nu se generează pe un text cu probleme.
+       *
+       * Sinteza costă cereri din cota zilnică și minute de așteptare; un text cu
+       * resturi de notație sau cu secțiuni lipsă ar produce un audio care trebuie
+       * oricum refăcut. Mai bine un refuz imediat, cu lista exactă a problemelor,
+       * decât un audio greșit descoperit la ascultare.
+       */
+      const probleme = verificaTextPentruAudio(doc.explanationText, doc.titluriLectie || []);
+      if (probleme.length && !req.body?.forta) {
+        return res.status(422).json({
+          error: `Textul nu e gata de audio: ${probleme.join('; ')}. Corectează-l sau trimite forta:true.`,
+          probleme,
+        });
+      }
+
       // Providerul ales pentru ACEASTĂ lecție: din cerere, altfel cel salvat pe
       // lecție, altfel implicitul (Callirrhoe).
       const providerNume = String(req.body?.provider || doc.voiceProvider || ttsImplicit).toLowerCase();
@@ -416,7 +458,13 @@ export async function createServer(env = process.env) {
       }
 
       const work = (async () => {
+        // Titlurile lecției, extrase din sursă: reperul obiectiv al gate-ului de
+        // mai jos — audio nu se generează pe un text care sare secțiuni.
+        const titluriLectie = [...String(section.sourceCode || '').matchAll(/^#{2,3}\s+(.+?)\s*$/gm)]
+          .map((m) => m[1].replace(/[#*`_$\\{}]/g, '').replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim())
+          .filter(Boolean);
         const { claimed } = await store.claim(sectionHash, {
+          titluriLectie,
           route: req.body.route || null,
           sectionId: req.body.sectionId || null,
           heading: section.heading,

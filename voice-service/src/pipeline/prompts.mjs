@@ -186,7 +186,24 @@ export function imparteLectia(source, maxChars) {
     adauga(rest);
   }
   if (curent) bucati.push(curent);
-  return bucati;
+
+  /**
+   * Fără segmente-fantomă: o bucată sub 500 de caractere nu justifică o cerere
+   * LLM întreagă — auditul a găsit segmente de 12-374 de caractere care primeau
+   * fiecare un prompt complet, iar pe unul modelul a COPIAT titlurile-exemplu
+   * din prompt în loc să predea. Se lipesc de vecina lor; o mică depășire a
+   * plafonului e mai ieftină decât o cerere-fantomă.
+   */
+  const pline = [];
+  for (const b of bucati) {
+    if (pline.length && b.length < 500) pline[pline.length - 1] += `\n${b}`;
+    else pline.push(b);
+  }
+  if (pline.length >= 2 && pline[pline.length - 1].length < 500) {
+    const mic = pline.pop();
+    pline[pline.length - 1] += `\n${mic}`;
+  }
+  return pline;
 }
 
 /** Materialul sursă, identic pentru ambele treceri — singura realitate permisă. */
@@ -199,14 +216,34 @@ export function imparteLectia(source, maxChars) {
  * ajunge la model ca INFORMAȚIE, nu ca gunoi de coordonate, iar restul lecției
  * încape lângă ea. Un desen decorativ (fără conținut) dispare complet.
  */
-function inlocuiesteFiguri(mdx) {
-  return String(mdx).replace(/<svg[\s\S]*?<\/svg>/gi, (svg) => {
-    const fig = describeFigure(svg);
-    if (fig.meaningful && fig.facts.length) {
-      return `\n[FIGURĂ — ce se vede în desen:\n${fig.facts.map((f) => `  - ${f}`).join('\n')}\n]\n`;
-    }
-    return '[figură decorativă — se ignoră]';
-  });
+/**
+ * Sursa lecției, PREGĂTITĂ pentru model: fără frontmatter, fără importuri, cu
+ * figurile deja înlocuite de geometria citită.
+ *
+ * Ordinea contează — auditul a arătat că segmentarea rula pe sursa BRUTĂ:
+ * SVG-urile (275 în 61 de lecții) erau tăiate în două la granițele segmentelor,
+ * iar modelul primea „supă de coordonate" prezentată drept lecție — ~29% din tot
+ * materialul trimis. Curățată O DATĂ aici, aceeași sursă alimentează segmentarea,
+ * prompturile, repararea și garda de fidelitate — o singură realitate.
+ */
+export function curataSursa(mdx) {
+  return String(mdx || '')
+    .replace(/^---[\s\S]*?---\s*/, '')
+    .replace(/^\s*import\s.+$/gm, '')
+    .replace(/<svg[\s\S]*?<\/svg>/gi, (svg) => descrieFigura(svg))
+    .replace(/\n{3,}/g, '\n\n');
+}
+
+function descrieFigura(svg) {
+  const fig = describeFigure(svg);
+  if (fig.meaningful && fig.facts.length) {
+    return `\n[FIGURĂ — ce se vede în desen:\n${fig.facts.map((f) => `  - ${f}`).join('\n')}\n]\n`;
+  }
+  return '[figură decorativă — se ignoră]';
+}
+
+export function inlocuiesteFiguri(mdx) {
+  return String(mdx).replace(/<svg[\s\S]*?<\/svg>/gi, (svg) => descrieFigura(svg));
 }
 
 export function renderSource(section, maxChars = 12000) {
@@ -457,6 +494,13 @@ Predai LECȚIA ÎNTREAGĂ, ca la clasă, într-o singură oră:
  * @param {object} [segment] Bucata de lecție de predat acum, când lecția nu
  *   încape într-o singură cerere: `{index, total, sursa, dinainte}`.
  */
+/** Titlurile ##/### dintr-o bucată de sursă, curățate de marcaje. */
+function titlurileDin(sursa) {
+  return [...String(sursa || '').matchAll(/^#{2,3}\s+(.+?)\s*$/gm)]
+    .map((m) => m[1].replace(/[#*`_$\\{}]/g, '').replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim())
+    .filter(Boolean);
+}
+
 export function buildNarrationPrompt(section, analysis, segment) {
   const budget = speechBudget(section);
   const narratable = narratableAnalysis(analysis, section);
@@ -472,7 +516,7 @@ Cum vorbești — asta contează cel mai mult, textul tău e AUZIT, nu citit:
 - Legi ideile cu vorbe de trecere: „așadar", „hai să vedem", „acum că știi asta", „ai grijă aici". Fără ele, frazele sună tăiate una de alta, robotic.
 - NU citești lecția cuvânt cu cuvânt. O explici cu vorbele tale, simplu.
 - NU spui „în această secțiune", „după cum se observă", „vom analiza". Vorbește direct.
-- ORGANIZEZI explicația PE SECȚIUNILE lecției. Fiecare titlu de secțiune din material devine un pas — ATÂT titlurile „## Titlu", CÂT ȘI subtitlurile „### 1. Titlu". Un subtitlu e o secțiune la fel de mult ca un titlu. Înaintea fiecărei secțiuni pui titlul EI pe un rând singur, între paranteze duble, EXACT cum e în material: „[[Definiție]]", „[[Reprezentarea pozițională]]", „[[Cifră vs Număr]]", „[[Aproximări]]". Apoi explici acea secțiune. Titlurile în paranteze duble sunt SINGURELE marcaje permise.
+- ORGANIZEZI explicația PE SECȚIUNILE lecției. Fiecare titlu de secțiune din material devine un pas — ATÂT titlurile „## Titlu", CÂT ȘI subtitlurile „### 1. Titlu". Înaintea fiecărei secțiuni pui titlul EI pe un rând singur, între paranteze duble: [[Titlul secțiunii]]. Folosești DOAR titlurile din LISTA DE TITLURI de mai jos, exact cum sunt scrise acolo, în ordinea lor — nu inventezi titluri noi și nu copiezi titluri din alte lecții. Dacă lista e goală, nu pui NICIUN marcaj. Titlurile în paranteze duble sunt SINGURELE marcaje permise.
 - CHIAR ȘI ultimele secțiuni primesc titlul lor [[...]] și explicația lor completă, cu exemplele lor. Nu le comasa și nu le arunca într-o încheiere.
 - FĂRĂ recapitulare, rezumat sau concluzie la final. NU scrii „ai învățat", „am parcurs", „în concluzie", „așadar ai văzut". După ultima secțiune ([[Aproximări]] sau oricare e ultima în lecție), explicată integral cu exemplele ei, te OPREȘTI. Ultima secțiune e ultimul lucru, nu un rezumat al tuturor.
 - În rest: fără liste, fără alte titluri, fără emoji. Sub fiecare titlu, doar proză vorbită, curgătoare.
@@ -543,6 +587,13 @@ Răspunzi NUMAI cu textul de rostit. Fără introducere, fără comentarii, făr
     user: lectie
       ? `Iată ${segment && segment.total > 1 ? `partea ${segment.index + 1} din ${segment.total} a lecției` : 'lecția'}, exact așa cum e scrisă de profesor. Ea este singura ta sursă.
 
+${(() => {
+  const titluri = titlurileDin(segment ? segment.sursa : section.sourceCode);
+  return titluri.length
+    ? `LISTA DE TITLURI (doar acestea, în această ordine, fiecare o singură dată):\n${titluri.map((t) => `[[${t}]]`).join('\n')}`
+    : 'LISTA DE TITLURI: goală — această parte nu are titluri noi. NU pui niciun marcaj [[...]]; continui direct proza.';
+})()}
+
 --- MATERIAL SURSĂ ---
 ${
   segment
@@ -570,7 +621,7 @@ CONTINUITATE — ești la mijlocul aceleiași ore de curs:
 ${segment.index === 0
   ? '- Ești la ÎNCEPUT: deschizi lecția, spui în două fraze ce va ști elevul la final, apoi intri în materialul de mai sus. NU încheia lecția — mai urmează.'
   : segment.index === segment.total - 1
-    ? `- Ești la FINAL. Ultimele tale cuvinte au fost: „…${segment.dinainte}"\n- Continui de acolo, fără să te prezinți din nou și fără să reiei ce ai spus. La sfârșit strângi firul întregii lecții în trei-patru propoziții.`
+    ? `- Ești la FINAL. Ultimele tale cuvinte au fost: „…${segment.dinainte}"\n- Continui de acolo, fără să te prezinți din nou și fără să reiei ce ai spus. La sfârșit închei natural, cu o singură frază de încheiere — fără recapitulare lungă.`
     : `- Ești la MIJLOC. Ultimele tale cuvinte au fost: „…${segment.dinainte}"\n- Continui de acolo, legând ideea nouă de cea tocmai încheiată. NU deschizi și NU închei lecția — mai urmează.`}
 `
     : ''
