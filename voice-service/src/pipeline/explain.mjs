@@ -342,6 +342,31 @@ export async function explainSection(section, llm, { signal, onStage } = {}) {
    * perechea nume→literă se construiește din marcajele încă prezente.
    */
   let transcript = trimToCompleteSentence(cleanForSpeech(raw, { litere: false }));
+
+  /**
+   * TITLUL COMPLET al lecției, garantat — nu rugat.
+   *
+   * Promptul cere titlul primul, dar modelul îl scurtează (a lăsat „G1 -" pe
+   * dinafară la prima încercare). Regula devine cod: dacă transcriptul nu începe
+   * cu titlul întreg, îl potrivim noi. Dacă modelul a scris varianta fără cod
+   * („Unghiuri adiacente…"), o înlocuim cu titlul complet; dacă n-a scris nimic,
+   * îl antepunem.
+   */
+  const titluLectie = String(section.heading || section.lessonTitle || '').trim();
+  if (titluLectie) {
+    const normT = (x) => String(x).toLowerCase().replace(/[^\p{L}\d ]/gu, ' ').replace(/\s+/g, ' ').trim();
+    const faraCod = titluLectie.replace(/^[A-Za-z]{0,2}\d+(?:\.\d+)?\s*[-–—]\s*/, '');
+    const inceput = normT(transcript.slice(0, titluLectie.length + 20));
+    if (!inceput.startsWith(normT(titluLectie))) {
+      if (faraCod !== titluLectie && inceput.startsWith(normT(faraCod))) {
+        // varianta fără cod, scrisă de model → o înlocuim cu titlul întreg
+        const idx = transcript.toLowerCase().indexOf(faraCod.toLowerCase().slice(0, 12));
+        transcript = `${titluLectie}.${transcript.slice(idx >= 0 ? idx + faraCod.length : 0).replace(/^[.\s]+/, ' ')}`;
+      } else {
+        transcript = `${titluLectie}. ${transcript}`;
+      }
+    }
+  }
   let fidelity = checkFidelity(section, transcript);
   let repairs = 0;
 

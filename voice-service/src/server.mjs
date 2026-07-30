@@ -148,12 +148,21 @@ function verificaTextPentruAudio(text, titluriLectie) {
      * verificarea de aici e o garanție.
      */
     if (!lipsa.length) {
-      const pozitii = titluriLectie.map((titlu) => corp.indexOf(norm(titlu)));
-      for (let i = 1; i < pozitii.length; i += 1) {
-        if (pozitii[i] >= 0 && pozitii[i - 1] >= 0 && pozitii[i] < pozitii[i - 1]) {
-          probleme.push(`secțiuni în ordine greșită: „${titluriLectie[i]}" apare înaintea „${titluriLectie[i - 1]}"`);
+      /**
+       * Potrivire MONOTONĂ, nu „prima apariție": titlul lecției și introducerea
+       * pot pomeni numele secțiunilor („vom aborda… bisectoarea unui unghi")
+       * înainte ca secțiunile să înceapă — prima apariție dădea fals pozitiv.
+       * Căutăm fiecare titlu DUPĂ poziția precedentului; dacă un titlu nu se mai
+       * găsește după cel dinainte, ordinea chiar e ruptă.
+       */
+      let cursor = 0;
+      for (let i = 0; i < titluriLectie.length; i += 1) {
+        const poz = corp.indexOf(norm(titluriLectie[i]), cursor);
+        if (poz < 0) {
+          probleme.push(`secțiuni în ordine greșită: „${titluriLectie[i]}" nu apare după „${titluriLectie[i - 1] || 'început'}"`);
           break;
         }
+        cursor = poz + 1;
       }
     }
   }
