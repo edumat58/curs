@@ -266,6 +266,8 @@ export async function createStore(env = process.env) {
               fileId: uploadId, codec: audio.codec, contentType: audio.contentType,
               bytes: audio.buffer.length, durationSec: audio.durationSec,
               sampleRate: audio.sampleRate, voice: audio.voice,
+              // Providerul care a produs audio-ul + viteza lui firească de redare.
+              provider: audio.provider || null, defaultRate: audio.defaultRate || 1,
               // Subtitrarea sincronizată: cuvinte cu marcă de timp + granițe de frază.
               words: audio.words || null, sentences: audio.sentences || null,
             },
@@ -378,12 +380,26 @@ export async function createStore(env = process.env) {
      * O intrare per APEL, nu per lecție: Azure taxează fiecare sinteză, deci o
      * regenerare consumă din nou. Așa evidența noastră oglindește factura.
      */
-    async recordAzureUsage(chars, { sectionHash, heading, route } = {}) {
+    async recordAzureUsage(chars, ctx = {}) { return this.recordUsage('azure', chars, ctx); },
+    async recordGeminiUsage(chars, ctx = {}) { return this.recordUsage('gemini', chars, ctx); },
+
+    /**
+     * O intrare de consum, etichetată cu providerul.
+     *
+     * Înregistrările vechi nu au câmpul `provider`; le tratăm ca Azure, fiindcă
+     * atunci Azure era singurul. Așa cifra istorică rămâne corectă fără migrare.
+     */
+    async recordUsage(provider, chars, { sectionHash, heading, route } = {}) {
       if (!chars || chars <= 0) return;
       await db.collection(USAGE).insertOne({
-        chars, sectionHash: sectionHash || null, heading: heading || null,
+        provider, chars, sectionHash: sectionHash || null, heading: heading || null,
         route: route || null, at: new Date(),
       });
+    },
+
+    /** Salvează providerul ales pe lecție, ca regenerările să-l păstreze. */
+    async setVoiceProvider(sectionHash, provider) {
+      await col.updateOne({ sectionHash }, { $set: { voiceProvider: provider } });
     },
 
     /**
@@ -393,19 +409,26 @@ export async function createStore(env = process.env) {
      * Reperul de reset e începutul lunii următoare — aproximare curată și
      * ușor de urmărit pentru administrator.
      */
-    async azureUsage(limit = null) {
+    async azureUsage(limit = null) { return this.usageForProvider('azure', limit); },
+    async geminiUsage(limit = null) { return this.usageForProvider('gemini', limit); },
+
+    async usageForProvider(provider, limit = null) {
       const acum = new Date();
       const inceputLuna = new Date(acum.getFullYear(), acum.getMonth(), 1);
       const resetLa = new Date(acum.getFullYear(), acum.getMonth() + 1, 1);
       const usageCol = db.collection(USAGE);
+      // Azure „înghite" și înregistrările vechi fără câmp `provider` (istoric).
+      const filtruProvider = provider === 'azure'
+        ? { $or: [{ provider: 'azure' }, { provider: { $exists: false } }] }
+        : { provider };
 
       const [totalLuna, perLectie] = await Promise.all([
         usageCol.aggregate([
-          { $match: { at: { $gte: inceputLuna } } },
+          { $match: { at: { $gte: inceputLuna }, ...filtruProvider } },
           { $group: { _id: null, chars: { $sum: '$chars' } } },
         ]).toArray(),
         usageCol.aggregate([
-          { $match: { at: { $gte: inceputLuna } } },
+          { $match: { at: { $gte: inceputLuna }, ...filtruProvider } },
           {
             $group: {
               _id: '$route',

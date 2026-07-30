@@ -461,7 +461,9 @@
   z-index: 20;
   padding: 0.6rem 0;
   margin-bottom: 0.5rem;
-  background: var(--km-cream);
+  /* Fără fundal crem: butoanele au propria pastilă, deci rămân lizibile, iar
+     bara nu mai taie o dungă crem peste conținut. */
+  background: transparent;
 }
 .tabs {
   display: inline-flex;

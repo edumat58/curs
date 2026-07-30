@@ -351,7 +351,7 @@ function Subtitrare({ words, currentMs, contentRoot, onSeek }) {
 export default function AudioPlayer({
   src, autoPlay = false, onClose, knownDuration = 0, onUnavailable,
   transcript = '', sentences = null, words = null, headingElement = null, contentRoot = null,
-  seekTo = null,
+  seekTo = null, defaultRate = null,
 }) {
   const audioRef = useRef(null);
   const [playing, setPlaying] = useState(false);
@@ -360,7 +360,9 @@ export default function AudioPlayer({
   // citească metadatele fișierului: pe conexiuni lente asta durează, iar până
   // atunci bara de derulare are lungime zero și elevul nu poate sări nicăieri.
   const [duration, setDuration] = useState(knownDuration || 0);
-  const [speed, setSpeed] = useState(0.9);
+  // Viteza implicită ține de VOCE: Callirrhoe (Google) sună firesc la 1×, Azure
+  // la 0,9×. Serverul o trimite în `defaultRate`; fără ea rămânem la 0,9×.
+  const [speed, setSpeed] = useState(() => defaultRate || 0.9);
   const [buffering, setBuffering] = useState(true);
   const [sincron, setSincron] = useState(false);
   /**

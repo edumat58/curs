@@ -436,6 +436,7 @@ function Panou({ state, fractie, error, data, onRetry, onClose, headingElement, 
           headingElement={headingElement}
           contentRoot={contentRoot}
           seekTo={seekTo}
+          defaultRate={Number(data.defaultRate) || null}
         />
       )}
     </>

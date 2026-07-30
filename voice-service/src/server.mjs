@@ -16,6 +16,7 @@ import { pathToFileURL } from 'node:url';
 import { createLlm } from './providers/llm.mjs';
 import { createPiperTts } from './providers/tts.mjs';
 import { createAzureTts } from './providers/tts-azure.mjs';
+import { createGeminiTts } from './providers/tts-gemini.mjs';
 
 /**
  * Alege motorul de voce din configurație.
@@ -24,16 +25,34 @@ import { createAzureTts } from './providers/tts-azure.mjs';
  * elegant pe Piper (local, robotic, dar funcțional) ca serviciul să nu se
  * oprească. `VOICE_TTS_PROVIDER=piper` forțează Piper explicit.
  */
-function createTts(env) {
-  const alegere = (env.VOICE_TTS_PROVIDER || (env.AZURE_SPEECH_KEY ? 'azure' : 'piper')).toLowerCase();
-  if (alegere === 'azure') {
-    try {
-      return createAzureTts(env);
-    } catch (err) {
-      console.warn(`[voice] Azure indisponibil (${err.message}); folosesc Piper.`);
-    }
+/**
+ * Toți providerii de voce disponibili, plus care e implicit.
+ *
+ * Se pot folosi mai mulți DEODATĂ, ales per lecție din admin: `gemini`
+ * (Callirrhoe, natural, ales de utilizator) și `azure` (uman, cu granițe de
+ * cuvânt native). Implicit e Gemini când cheia există — vocea preferată —, cu
+ * Azure ca alternativă selectabilă. Piper rămâne plasa de siguranță dacă lipsesc
+ * amândouă, ca serviciul să nu cadă.
+ *
+ * Viteza implicită de redare ține de voce, nu de player: Callirrhoe sună firesc
+ * la 1×, Azure la 0,9× (cerut). O ducem la client prin metadatele audio.
+ */
+const VITEZA_IMPLICITA = { gemini: 1, azure: 0.9, piper: 0.9 };
+
+function createProviders(env) {
+  const providers = {};
+  if (env.GEMINI_API_KEY) {
+    try { providers.gemini = createGeminiTts(env); } catch (err) { console.warn(`[voice] Gemini TTS indisponibil: ${err.message}`); }
   }
-  return createPiperTts(env);
+  if (env.AZURE_SPEECH_KEY) {
+    try { providers.azure = createAzureTts(env); } catch (err) { console.warn(`[voice] Azure indisponibil: ${err.message}`); }
+  }
+  if (!providers.gemini && !providers.azure) providers.piper = createPiperTts(env);
+
+  const fortat = (env.VOICE_TTS_PROVIDER || '').toLowerCase();
+  const implicit = (fortat && providers[fortat]) ? fortat
+    : (providers.gemini ? 'gemini' : (providers.azure ? 'azure' : 'piper'));
+  return { providers, implicit };
 }
 import { cleanForSpeech, explainSection } from './pipeline/explain.mjs';
 import { litereMarcate, repuneLitere } from './pipeline/speakable.mjs';
@@ -105,6 +124,10 @@ function publicView(doc, baseUrl) {
     words: doc.audio && doc.audio.words ? doc.audio.words : null,
     durationSec: doc.audio ? doc.audio.durationSec : null,
     voice: doc.audio ? doc.audio.voice : null,
+    // Providerul + viteza lui firească: clientul pornește la 1× pentru Callirrhoe,
+    // la 0,9× pentru Azure, fără să le codeze el.
+    provider: doc.audio ? doc.audio.provider : null,
+    defaultRate: doc.audio && doc.audio.defaultRate ? doc.audio.defaultRate : null,
     needsReview: doc.quality ? doc.quality.needsReview : null,
     generatedAt: doc.updatedAt,
   };
@@ -115,7 +138,16 @@ export async function createServer(env = process.env) {
   // UN SINGUR model, pentru tot. Fără al doilea model de „analiză" și fără lanț
   // de rezerve: aceeași calitate la fiecare lecție, previzibilă.
   const llm = createLlm(env);
-  const tts = createTts(env);
+  const { providers: ttsProviders, implicit: ttsImplicit } = createProviders(env);
+  const tts = ttsProviders[ttsImplicit];
+  /** Providerul cerut (per lecție), cu revenire la cel implicit dacă lipsește. */
+  const ttsFor = (nume) => ttsProviders[String(nume || '').toLowerCase()] || tts;
+  /** Evidența consumului, per provider (Azure și Gemini numără caractere la fel). */
+  const recordUsage = (nume, chars, ctx) => {
+    if (!chars) return;
+    if (nume === 'azure') store.recordAzureUsage(chars, ctx).catch(() => {});
+    else if (nume === 'gemini') store.recordGeminiUsage(chars, ctx).catch(() => {});
+  };
 
   const app = express();
   app.disable('x-powered-by');
@@ -155,20 +187,33 @@ export async function createServer(env = process.env) {
    */
   app.get('/admin/voice/usage', cereAdmin, async (_req, res) => {
     try {
-      // Sursa de adevăr e Azure. Dacă service principal-ul e configurat, luăm
-      // consumul și cota DIRECT de la Azure — nimic fix, se schimbă cu tierul.
+      // AZURE: dacă service principal-ul e configurat, consumul și cota vin DIRECT
+      // de la Azure (nimic fix); altfel numărăm local, iar limita rămâne cea din
+      // mediu sau necunoscută (nu inventăm 500.000).
       const live = await azureUsageLive(env).catch((err) => {
         console.warn('[voice] Azure usage live a eșuat:', err.message);
         return null;
       });
-      if (live) return res.json({ provider: tts.name, ...live });
+      const azure = live
+        ? { ...live, sursa: 'azure' }
+        : { ...(await store.azureUsage(env.AZURE_FREE_CHARS ? Number(env.AZURE_FREE_CHARS) : 500000)), sursa: 'local' };
 
-      // Fără ARM: raportăm consumul măsurat local, dar limita rămâne NECUNOSCUTĂ
-      // — nu inventăm un 500000. Limita se dă explicit din mediu doar dacă
-      // administratorul chiar o cunoaște.
-      const limitaConfig = env.AZURE_FREE_CHARS ? Number(env.AZURE_FREE_CHARS) : null;
-      const local = await store.azureUsage(limitaConfig);
-      return res.json({ provider: tts.name, ...local, sursa: 'local' });
+      // GEMINI TTS: numărat local. Free tier-ul Gemini e limitat pe cereri/zi, nu
+      // pe caractere/lună — deci arătăm consumul real în caractere, cu limita
+      // configurabilă doar dacă administratorul o cunoaște.
+      const gemini = ttsProviders.gemini
+        ? { ...(await store.geminiUsage(env.GEMINI_TTS_CHARS_LIMIT ? Number(env.GEMINI_TTS_CHARS_LIMIT) : null)), sursa: 'local' }
+        : null;
+
+      return res.json({
+        implicit: ttsImplicit,
+        disponibili: Object.keys(ttsProviders),
+        azure,
+        gemini,
+        // păstrat pentru compatibilitate cu clientul vechi (citea câmpurile Azure la rădăcină)
+        provider: 'azure',
+        ...azure,
+      });
     } catch (err) {
       return res.status(500).json({ error: String(err.message) });
     }
@@ -297,27 +342,30 @@ export async function createServer(env = process.env) {
        * scrise și testate, dar nu ajungeau niciodată la sinteză când audio-ul se
        * genera din panou — adică exact în fluxul folosit.
        */
-      const audio = await tts.synthesize(cleanForSpeech(doc.explanationText));
+      // Providerul ales pentru ACEASTĂ lecție: din cerere, altfel cel salvat pe
+      // lecție, altfel implicitul (Callirrhoe).
+      const providerNume = String(req.body?.provider || doc.voiceProvider || ttsImplicit).toLowerCase();
+      const engine = ttsFor(providerNume);
+      const audio = await engine.synthesize(cleanForSpeech(doc.explanationText));
       /**
        * Vocea spune numele literei („capa"), transcriptul arată litera („k").
        * Marcajele `<k>` din text dau ordinea; după ea punem literele înapoi în
        * cuvintele raportate de sinteză.
        */
       audio.words = repuneLitere(audio.words, litereMarcate(doc.explanationText));
-      if (tts.name === 'azure' && audio.chars) {
-        store.recordAzureUsage(audio.chars, {
-          sectionHash: doc.sectionHash, heading: doc.heading, route: doc.route,
-        }).catch(() => {});
-      }
+      recordUsage(engine.name, audio.chars, { sectionHash: doc.sectionHash, heading: doc.heading, route: doc.route });
       // encodeOpus întoarce {buffer, codec, contentType} — folosim câmpurile lui,
       // nu obiectul întreg (altfel GridFS primește un Object, nu un Buffer).
       const encoded = await encodeOpus(audio.wav);
       const gata = await store.attachAudio(doc.sectionHash, {
         codec: encoded.codec, contentType: encoded.contentType, buffer: encoded.buffer,
         durationSec: audio.durationSec, sampleRate: audio.sampleRate, voice: audio.voice,
-        // Cuvintele cu timing (din SDK-ul Azure) — subtitrarea sincronizată.
+        provider: engine.name, defaultRate: VITEZA_IMPLICITA[engine.name] || 1,
+        // Cuvintele cu timing — subtitrarea sincronizată (Azure nativ, Gemini prin aliniere).
         words: audio.words || null, sentences: audio.sentences || null,
       });
+      // Reținem providerul pe lecție, ca regenerările viitoare să-l păstreze.
+      store.setVoiceProvider(doc.sectionHash, engine.name).catch(() => {});
       const baseUrl = env.VOICE_PUBLIC_URL || `${req.protocol}://${req.get('host')}`;
       return res.json({ ...publicView(gata, baseUrl), status: 'ready' });
     } catch (err) {
@@ -391,16 +439,12 @@ export async function createServer(env = process.env) {
           const mark = (stage) => store.progress(sectionHash, stage).catch(() => {});
           const result = await explainSection(section, llm, { onStage: mark });
           await mark('sinteza');
-          const audio = await tts.synthesize(result.transcript);
+          const engine = ttsFor(req.body.provider || ttsImplicit);
+          const audio = await engine.synthesize(result.transcript);
           await mark('audio');
-          // Consumul Azure se scrie în evidență la fiecare sinteză reușită.
-          if (tts.name === 'azure' && audio.chars) {
-            store.recordAzureUsage(audio.chars, {
-              sectionHash,
-              heading: section.heading,
-              route: req.body.route || null,
-            }).catch(() => {});
-          }
+          recordUsage(engine.name, audio.chars, {
+            sectionHash, heading: section.heading, route: req.body.route || null,
+          });
           const encoded = await encodeOpus(audio.wav);
           return await store.complete(sectionHash, {
             transcript: result.transcript,
@@ -408,9 +452,9 @@ export async function createServer(env = process.env) {
             fidelity: result.fidelity,
             meta: {
               ...result.meta,
-              ttsProvider: tts.name,
+              ttsProvider: engine.name,
               ttsVoice: audio.voice,
-              azureChars: tts.name === 'azure' ? audio.chars : undefined,
+              usageChars: audio.chars,
               repairs: result.repairs,
             },
             audio: {
@@ -420,6 +464,10 @@ export async function createServer(env = process.env) {
               durationSec: audio.durationSec,
               sampleRate: audio.sampleRate,
               voice: audio.voice,
+              provider: engine.name,
+              defaultRate: VITEZA_IMPLICITA[engine.name] || 1,
+              words: audio.words || null,
+              sentences: audio.sentences || null,
             },
           });
         } catch (err) {
