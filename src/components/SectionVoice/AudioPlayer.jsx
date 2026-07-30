@@ -468,7 +468,14 @@ export default function AudioPlayer({
   useEffect(() => {
     const el = audioRef.current;
     if (!el) return undefined;
-    const onTime = () => setCurrent(el.currentTime);
+    /**
+     * În timpul unui seek, iOS Safari continuă să trimită `timeupdate` cu poziția
+     * VECHE până termină saltul — dacă o luăm de bună, evidențierea sare înapoi la
+     * cuvântul de dinainte de clic și pare desincronizată. O ignorăm cât `seeking`
+     * e adevărat; `onSeeked` pune poziția corectă când saltul s-a încheiat.
+     */
+    const onTime = () => { if (!el.seeking) setCurrent(el.currentTime); };
+    const onSeeked = () => setCurrent(el.currentTime);
     const onMeta = () => {
       // Metadatele reale au prioritate; valoarea de la server e doar punctul
       // de plecare, ca bara să fie utilizabilă din prima secundă.
@@ -491,6 +498,7 @@ export default function AudioPlayer({
     };
 
     el.addEventListener('timeupdate', onTime);
+    el.addEventListener('seeked', onSeeked);
     el.addEventListener('loadedmetadata', onMeta);
     el.addEventListener('ended', onEnd);
     el.addEventListener('waiting', onWait);
@@ -498,6 +506,7 @@ export default function AudioPlayer({
     el.addEventListener('error', onError);
     return () => {
       el.removeEventListener('timeupdate', onTime);
+      el.removeEventListener('seeked', onSeeked);
       el.removeEventListener('loadedmetadata', onMeta);
       el.removeEventListener('ended', onEnd);
       el.removeEventListener('waiting', onWait);
@@ -530,7 +539,7 @@ export default function AudioPlayer({
     let ultima = 0;
     const bate = () => {
       const el = audioRef.current;
-      if (el && !el.paused) {
+      if (el && !el.paused && !el.seeking) {
         const acum = el.currentTime;
         if (Math.abs(acum - ultima) > 0.04) { ultima = acum; setCurrent(acum); }
       }
