@@ -78,7 +78,17 @@ function inline(text) {
     /&lt;Katex&gt;\{String\.raw`([\s\S]*?)`\}&lt;\/Katex&gt;/g,
     (_all, tex) => formula(tex, true)
   );
-  // Orice altă componentă proprie: o arătăm ca reper, nu o executăm.
+  // <HighlightText color="x">…</HighlightText> — text subliniat colorat, EXACT
+  // ca pe pagina reală (aceleași culori și stiluri de subliniere), nu un reper.
+  s = s.replace(
+    /&lt;HighlightText\b([^&]*?)&gt;([\s\S]*?)&lt;\/HighlightText&gt;/g,
+    (_all, attrs, inner) => {
+      const cm = /color=["']?(\w+)["']?/.exec(attrs);
+      const color = cm ? cm[1] : 'red';
+      return `<span class="${styles.hl}" data-color="${color}">${inner}</span>`;
+    }
+  );
+  // Orice ALTĂ componentă proprie (desene etc.): o arătăm ca reper, nu o executăm.
   s = s.replace(
     /&lt;([A-Z][A-Za-z0-9]*)\b[^]*?(?:\/&gt;|&lt;\/\1&gt;)/g,
     (_all, nume) => `<span class="${styles.componenta}">&lt;${nume}&gt;</span>`
@@ -139,6 +149,31 @@ function randeaza(mdx) {
       while (i < linii.length && !/^\$\$\s*$/.test(linii[i])) { corp.push(linii[i]); i += 1; }
       i += 1;
       out.push(formula(corp.join('\n'), true));
+      continue;
+    }
+
+    // Bloc <Katex> … </Katex> — formula din lecții, de obicei pe mai multe rânduri
+    // și cu `{String.raw`…`}`. Se randează ca formulă, exact ca pe pagina reală.
+    if (/^\s*<Katex>/.test(l)) {
+      paragraf(buf);
+      const corp = [];
+      let rest = l.replace(/^\s*<Katex>/, '');
+      const inchisAici = /<\/Katex>/.test(rest);
+      if (inchisAici) rest = rest.replace(/<\/Katex>[\s\S]*/, '');
+      if (rest.trim()) corp.push(rest);
+      i += 1;
+      if (!inchisAici) {
+        while (i < linii.length && !/<\/Katex>/.test(linii[i])) { corp.push(linii[i]); i += 1; }
+        if (i < linii.length) {
+          const ultim = linii[i].replace(/<\/Katex>[\s\S]*/, '');
+          if (ultim.trim()) corp.push(ultim);
+          i += 1;
+        }
+      }
+      let tex = corp.join('\n');
+      const sr = /\{String\.raw`([\s\S]*?)`\}/.exec(tex);
+      if (sr) tex = sr[1];
+      out.push(formula(tex, true));
       continue;
     }
 
