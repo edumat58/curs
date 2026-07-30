@@ -266,16 +266,26 @@ function Subtitrare({ words, currentMs, contentRoot, onSeek }) {
     }
   }, [idx, tokens]);
 
-  return (
-    <div ref={cutie} className={styles.subtitrare} aria-label="Transcript sincronizat">
-      {(() => {
-        /**
-         * Randarea merge pe GRUPURI: cuvintele unui titlu intră împreună într-un
-         * singur buton (deci arată și se apasă ca un titlu), dar fiecare rămâne
-         * propriul jeton, cu timpul lui — așa evidențierea avansează prin titlu
-         * în loc să stea blocată pe tot blocul.
-         */
-        const bucati = [];
+  /**
+   * Randarea transcriptului se recalculează DOAR când se schimbă cuvântul activ.
+   *
+   * Ceasul bate la ~40 ms, dar `idx` (cuvântul evidențiat) se schimbă abia la
+   * graniță de cuvânt — de câteva ori pe secundă. Fără memoizare, tot transcriptul
+   * (sute de jetoane) se re-randa de douăzeci și cinci de ori pe secundă: pe
+   * desktop trece neobservat, pe telefon satura firul principal și evidențierea
+   * rămânea în urmă cu un cuvânt întreg. Măsurat: exact simptomul „highlight cu un
+   * cuvânt în urmă" de pe iPhone, invizibil la testele pe desktop. Legat de `idx`,
+   * maparea rulează o dată per cuvânt, iar între tic-uri React primește aceleași
+   * noduri și nu mai reconciliază nimic.
+   */
+  const continut = useMemo(() => {
+    /**
+     * Randarea merge pe GRUPURI: cuvintele unui titlu intră împreună într-un
+     * singur buton (deci arată și se apasă ca un titlu), dar fiecare rămâne
+     * propriul jeton, cu timpul lui — așa evidențierea avansează prin titlu
+     * în loc să stea blocată pe tot blocul.
+     */
+    const bucati = [];
         let i = 0;
         while (i < tokens.length) {
           const grup = tokens[i].grupTitlu;
@@ -328,8 +338,12 @@ function Subtitrare({ words, currentMs, contentRoot, onSeek }) {
               </svg>
             </button>
           );
-        });
-      })()}
+    });
+  }, [tokens, idx, onSeek]);
+
+  return (
+    <div ref={cutie} className={styles.subtitrare} aria-label="Transcript sincronizat">
+      {continut}
     </div>
   );
 }
