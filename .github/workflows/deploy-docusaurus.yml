@@ -10,6 +10,15 @@ permissions:
   contents: write
   pages: write
 
+# Un singur deploy odată. Când se împing mai multe commit-uri la rând, rulările
+# se puneau în cursă și scriau simultan în gh-pages — a doua primea „remote
+# rejected (cannot lock ref)" și pica, deși build-ul reușise. Cu grupul de
+# concurență, deploy-urile se pun la coadă: cel nou îl anulează pe cel în curs
+# și publică singur, fără curse.
+concurrency:
+  group: deploy-gh-pages
+  cancel-in-progress: true
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
