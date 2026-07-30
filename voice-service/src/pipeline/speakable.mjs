@@ -459,6 +459,25 @@ export function spokenMinus(text) {
  *   „punctele, a, și, be" în loc de „punctele A și B".
  */
 export function toSpeakable(text, optiuni = {}) {
+  /**
+   * Formulele `$...$` se PROTEJEAZĂ la stocare (`formule:false`).
+   *
+   * Textul stocat e și cel afișat elevului: dacă LaTeX-ul e convertit aici în
+   * cuvinte, formula nu mai poate fi randată niciodată — exact ce se întâmpla,
+   * modelul le scria corect și pipeline-ul le desfăcea. Le scoatem înainte de
+   * orice prelucrare și le punem la loc la final; la SINTEZĂ (implicit) trec
+   * normal prin conversie, ca vocea să le citească în cuvinte.
+   */
+  if (optiuni.formule === false) {
+    const pastrate = [];
+    const cuSemne = String(text).replace(/\$[^$\n]+\$/g, (f) => {
+      pastrate.push(f);
+      return `\u0011${pastrate.length - 1}\u0011`;
+    });
+    const prelucrat = toSpeakable(cuSemne, { ...optiuni, formule: true });
+    return prelucrat.replace(/\u0011(\d+)\u0011/g, (_a, i) => pastrate[Number(i)] || '');
+  }
+
   let out = String(text == null ? '' : text).normalize('NFC').replace(INVIZIBILE, '');
   // Titlurile de secțiune „[[Definiție]]" (marcajul cerut modelului): rostite ca
   // un titlu — propoziție de sine stătătoare, cu pauze de o parte și de alta, ca

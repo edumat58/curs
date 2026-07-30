@@ -341,7 +341,7 @@ export async function explainSection(section, llm, { signal, onStage } = {}) {
    * „punctele, a, și, be". Conversia se face O SINGURĂ DATĂ, la sinteză, unde
    * perechea nume→literă se construiește din marcajele încă prezente.
    */
-  let transcript = trimToCompleteSentence(cleanForSpeech(raw, { litere: false }));
+  let transcript = trimToCompleteSentence(cleanForSpeech(raw, { litere: false, formule: false }));
 
   /**
    * TITLUL COMPLET al lecției, garantat — nu rugat.
@@ -428,7 +428,8 @@ Păstrează același ton și aceeași lungime, și acoperă în continuare toate
      * arăta chiar mai bine după. Păstrăm ce e mai bun, nu ce e mai nou.
      */
     tokeniTotal += repairRes.usage?.total_tokens || 0;
-    const candidat = trimToCompleteSentence(cleanForSpeech(repairRes.content));
+    // Rescrierea păstrează aceleași forme ca originalul: marcaje de literă și formule.
+    const candidat = trimToCompleteSentence(cleanForSpeech(repairRes.content, { litere: false, formule: false }));
     const fidelitateNoua = checkFidelity(section, candidat);
     const cuvinteVechi = transcript.split(/\s+/).filter(Boolean).length;
     const cuvinteNoi = candidat.split(/\s+/).filter(Boolean).length;

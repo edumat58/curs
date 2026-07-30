@@ -260,8 +260,10 @@ export function renderSource(section, maxChars = 12000) {
   if (section.sourceCode && String(section.sourceCode).trim().length > 40) {
     return [
       'Acesta este codul sursă EXACT al lecției, așa cum e scris de profesor.',
-      'Notația din el se păstrează întocmai: dacă scrie 0{,}1, spui „zero virgulă unu",',
-      'nu o rescrii ca „zece la puterea minus unu". Ordinea titlurilor este ordinea lecției.',
+      'NUMERELE le scrii cu cifre („0,1", „37540,85") — nu le rostești în cuvinte și nu le',
+      'rescrii în altă formă („zece la puterea minus unu"). FORMULELE cu notație matematică',
+      '(cele dintre $...$ sau din blocurile de formule) le COPIEZI între dolari, cu LaTeX-ul lor',
+      'exact — elevul le vede randate, iar vocea le citește singură. Ordinea titlurilor este ordinea lecției.',
       'Blocurile [FIGURĂ — ...] sunt desene din lecție, citite pentru tine: spui direct ce',
       'arată desenul (punctele, laturile, unghiurile), fără să pomenești că există o figură.',
       '',
@@ -495,6 +497,18 @@ Predai LECȚIA ÎNTREAGĂ, ca la clasă, într-o singură oră:
  * @param {object} [segment] Bucata de lecție de predat acum, când lecția nu
  *   încape într-o singură cerere: `{index, total, sursa, dinainte}`.
  */
+/**
+ * Formulele `$...$` dintr-o bucată de sursă, unice și scurte.
+ *
+ * Se dau modelului ca LISTĂ, nu ca regulă în proză: la titluri, lista concretă a
+ * funcționat acolo unde trei propoziții de instrucțiuni nu — modelul copiază ce
+ * vede enumerat, dar ignoră ce i se cere abstract.
+ */
+function formuleleDin(sursa) {
+  const gasite = [...String(sursa || '').matchAll(/\$([^$\n]{2,80})\$/g)].map((m) => m[1].trim());
+  return [...new Set(gasite)].filter((f) => /[\\^_{}]|\d/.test(f)).slice(0, 25);
+}
+
 /** Titlurile ##/### dintr-o bucată de sursă, curățate de marcaje. */
 function titlurileDin(sursa) {
   return [...String(sursa || '').matchAll(/^#{2,3}\s+(.+?)\s*$/gm)]
@@ -549,16 +563,16 @@ Acoperire — a doua regulă ca importanță:
 
 Nu comenta materialul, predă-l:
 - NU vorbi despre lecție ca obiect: fără „definiția spune", „materialul arată", „formula din material", „noi vorbim despre ce scrie".
-- NU menționa că există figuri, desene, imagini sau formule. Dacă un desen transmite ceva, spui direct informația: „unghiul din O este drept", nu „figura arată un unghi drept".
+- NU menționa că există figuri, desene sau imagini ca obiecte („figura arată", „în imagine vedem"). Dacă un desen transmite ceva, spui direct informația: „unghiul din O este drept". ATENȚIE: asta NU înseamnă să eviți formulele — o formulă scrisă între dolari e conținut matematic, nu o referire la material; ea se scrie normal, în fraza ta.
 - NU EVALUA materialul. Nu spui că ceva e bine sau prost făcut, clar sau neclar, complet sau incomplet, că lipsește ceva sau că nu se explică în detaliu. Nu ești corector, ești profesor: elevul are nevoie de conținut, nu de părerea ta despre lecție. Dacă ceva chiar lipsește din material, pur și simplu nu vorbești despre acel lucru.
 - NU te povesti pe tine: fără „am parcurs", „am explicat", „închei cu speranța că", „sper că e clar", „în cele ce urmează". Ultima frază spune ultimul lucru de spus, apoi te oprești.
 - NU repeta aceeași idee cu alte cuvinte. Spui lucrul o dată, clar, și mergi mai departe.
 
-Cum scrii numerele (textul tău e trimis mai departe la sinteza vocală):
+Cum scrii matematica (textul tău merge și la sinteza vocală, și pe ecran):
 - Cu cifre și virgulă zecimală: „12,4", nu „12 virgulă 4" și nu „doisprezece virgulă patru".
 - Fără separator de mii: „37540", „1000" — nu „37 540" și nu „1 000".
-- Fără simboluri matematice: scrii „înmulțit cu", „împărțit la", „minus", „la pătrat", nu „×", „÷", „−", „²".
-- FORMULELE se scriu între dolari, cu LaTeX-ul EXACT din material: „aria este $A = \\dfrac{b \\cdot h}{2}$". Elevul le va VEDEA randate frumos, iar vocea le va citi în cuvinte — nu tu. Regulile: (1) doar formule adevărate între dolari — numerele simple („37540,85"), procentele și cuvintele rămân proză normală, fără dolari și fără acolade; (2) LaTeX-ul din interiorul dolarilor se copiază întocmai din material, nu îl inventezi; (3) în afara dolarilor, NICIODATĂ notație — fără bare oblice inversate, fără acolade.
+- În PROZĂ, fără simboluri matematice: scrii „înmulțit cu", „împărțit la", „minus", „la pătrat", nu „×", „÷", „−", „²". (Între dolari, în formule, notația rămâne exact cum e — vezi regula formulelor.)
+- FORMULELE: când materialul conține o formulă cu notație matematică ($\\measuredangle MON$, $m(\\measuredangle AOB) = 80^\\circ$, $A = \\dfrac{b \\cdot h}{2}$), o COPIEZI între dolari, cu LaTeX-ul ei exact — NU o parafrazezi în cuvinte. Elevul o va VEDEA randată frumos, iar vocea o va citi în cuvinte automat — nu e treaba ta să o rostești. Exemplu corect: „Măsurăm unghiul: $m(\\measuredangle MON) = 70^\\circ$. Calculăm jumătate din măsură." Reguli: (1) doar notație adevărată între dolari — numerele simple („37540,85"), procentele și cuvintele rămân proză, fără dolari; literele-simbol singure folosesc marcajul <x>, nu dolari; (2) LaTeX-ul dintre dolari e cel din material (poți păstra doar bucata relevantă), nu inventat; (3) în afara dolarilor, NICIODATĂ notație — fără bare oblice inversate, fără acolade.
 
 Explici, nu recitești:
 - NU relua definiția cuvânt cu cuvânt. Desfă-o în pași: ce este, din ce e alcătuită, cum recunoști, la ce folosește — dar numai cu informația din material.
@@ -593,6 +607,13 @@ ${(() => {
   return titluri.length
     ? `LISTA DE TITLURI (doar acestea, în această ordine, fiecare o singură dată):\n${titluri.map((t) => `[[${t}]]`).join('\n')}`
     : 'LISTA DE TITLURI: goală — această parte nu are titluri noi. NU pui niciun marcaj [[...]]; continui direct proza.';
+})()}
+
+${(() => {
+  const formule = formuleleDin(segment ? segment.sursa : section.sourceCode);
+  return formule.length
+    ? `LISTA DE FORMULE (le SCRII în text exact așa, între dolari, acolo unde vorbești despre ele — nu le transformi în cuvinte; vocea le citește singură):\n${formule.map((f) => `$${f}$`).join('\n')}`
+    : 'LISTA DE FORMULE: goală — lecția nu are notație matematică de afișat.';
 })()}
 
 --- MATERIAL SURSĂ ---
