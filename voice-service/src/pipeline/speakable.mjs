@@ -469,7 +469,7 @@ export function toSpeakable(text) {
     .replace(/\s+/g, ' ')
     .trim();
 
-  return marcheazaLitere(out);
+  return marcheazaLitere(desfaGrupuriDeLitere(out));
 }
 
 /* (înlocuit de marcajul explicit `<k>`)
@@ -689,6 +689,18 @@ export function repuneLitere(words, perechi) {
  *   3. Vocală de sine stătătoare → doar în context matematic, pentru că „a",
  *      „o", „e" sunt cuvinte curente („a plecat", „o carte", „e bine").
  */
+/**
+ * Grupurile de litere puse din greșeală în paranteze unghiulare („<MON>", „<AB>").
+ *
+ * Modelul a generalizat marcajul de literă și a început să scrie așa numele
+ * unghiurilor și segmentelor. Marcajul recunoaște doar o literă, deci „<MON>"
+ * rămânea în text și se rostea ca un cuvânt inventat. Aici îl desfacem în litere
+ * separate prin spațiu — exact cum se citește „unghiul M O N" la tablă.
+ */
+function desfaGrupuriDeLitere(text) {
+  return String(text).replace(/<([A-Za-z]{2,4})>/g, (_all, grup) => grup.split('').join(' '));
+}
+
 function marcheazaLitere(text) {
   /**
    * Literele-simbol se marchează EXPLICIT în text: `<k>`, `<a>`, `<b>`.

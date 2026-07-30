@@ -31,15 +31,23 @@ function pcmToWav(pcm, sampleRate = 24000) {
 }
 
 /**
- * Textul, grupat în bucăți de cel mult ~1200 de caractere, tăiate la propoziție.
+ * Textul, grupat în bucăți de cel mult ~3500 de caractere, tăiate la propoziție.
  *
  * NU sintetizăm per propoziție: o lecție are ~25 și ar însemna 25 de cereri
  * secvențiale (~40 s doar pe trei, plus riscul de 429 pe free tier). NU
  * sintetizăm nici tot deodată: textul lung poate depăși limita unei cereri.
- * Bucăți de ~1200 de caractere aduc o lecție la 2-3 cereri, fiecare cu prozodie
- * de sine stătătoare, iar alinierea lucrează oricum pe audio-ul întreg.
+ * Mărimea e MĂSURATĂ, nu presupusă: pe text real din lecție am sintetizat bucăți
+ * de 1200, 2000, 3000, 4000 și 5000 de caractere, iar fiecare a ieșit COMPLETĂ —
+ * aliniind audio-ul cu textul, ultimul cuvânt rostit coincide cu ultimul din text
+ * la toate, cu acoperire 100%. Am ales 3500, sub pragul de ~4000 peste care
+ * modelul începe să refuze intrarea.
+ *
+ * Bucata mare aduce două câștiguri deodată: mai puține cereri (cota gratuită se
+ * numără în CERERI, nu în caractere — o lecție de 6800 de caractere trece de la
+ * șase cereri la două) și mai puține îmbinări între bucăți, deci mai puține locuri
+ * unde intonația poate porni altfel.
  */
-function bucatiText(text, maxChars = 1200) {
+function bucatiText(text, maxChars = 3500) {
   const fraze = String(text).split(/(?<=[.!?])\s+/).map((s) => s.trim()).filter(Boolean);
   const out = [];
   let curent = '';
@@ -108,16 +116,17 @@ export function createGeminiTts(env = process.env) {
   ].filter(Boolean).filter((k, i, a) => a.indexOf(k) === i);
   const key = chei[0];
   /**
-   * Modelul 2.5, nu 3.1 — pentru COTĂ, nu pentru calitate.
+   * Modelul 3.1 — vocea pe care a ales-o utilizatorul.
    *
-   * Cotele gratuite sunt per MODEL, iar măsurat pe cheia reală:
-   * `gemini-3.1-flash-tts-preview` are 10 cereri pe zi
-   * (GenerateRequestsPerDayPerProjectPerModel-FreeTier = 10), adică ~5 lecții,
-   * pe când `gemini-2.5-flash-preview-tts` are găleata lui, cu limită mult mai
-   * largă. Vocea Callirrhoe există în amândouă și sună la fel, deci mutarea nu
-   * costă nimic la ureche și dublează practic ce se poate genera pe zi.
+   * „Callirrhoe" există în amândouă modelele, dar NU sună la fel: pe aceeași
+   * frază, 3.1 dă 10,6 s și 2.5 dă 8,9 s, cu ritm și timbru diferite. Sample-ul
+   * din care s-a ales vocea venea de la 3.1, deci ăsta e reperul.
+   *
+   * Trecusem pe 2.5 ca să câștig cotă — dar câștigul real a venit din bucățile
+   * mai mari (o lecție cere ~2 cereri în loc de ~6), nu din schimbarea modelului.
+   * Cota se rezolvă cu chei, nu cu vocea: vocea o alege omul.
    */
-  const model = env.VOICE_GEMINI_MODEL || 'gemini-2.5-flash-preview-tts';
+  const model = env.VOICE_GEMINI_MODEL || 'gemini-3.1-flash-tts-preview';
   const voice = env.VOICE_GEMINI_VOICE || 'Callirrhoe';
   if (!key) throw new Error('Lipsește VOICE_GEMINI_API_KEY / GEMINI_API_KEY pentru vocea Google.');
 
@@ -226,7 +235,7 @@ export function createGeminiTts(env = process.env) {
        * dacă textul întreg e prea lung pentru o cerere.
        */
       let pcm;
-      if (clean.length <= 1400) {
+      if (clean.length <= 3500) {
         pcm = await sintetizeazaBucata(clean);
         if (onProgress) onProgress({ index: 1, total: 1 });
       } else {
