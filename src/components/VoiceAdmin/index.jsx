@@ -250,6 +250,9 @@ export default function VoiceAdmin({ token, apiBase }) {
   const [words, setWords] = useState(null);
   const [busy, setBusy] = useState(''); // ce operație rulează
   const [mesaj, setMesaj] = useState('');
+  // Vocea aleasă pentru ACEASTĂ lecție, MANUAL — fără comutări automate. Implicit
+  // Callirrhoe (Google), aleasă de administrator; Azure rămâne o opțiune.
+  const [provider, setProvider] = useState('gemini');
   const [filtruClasa, setFiltruClasa] = useState('toate');
   const [cauta, setCauta] = useState('');
 
@@ -302,6 +305,14 @@ export default function VoiceAdmin({ token, apiBase }) {
   const selectat = lessons.find((l) => l.url === selected) || null;
 
   // La selectarea unei lecții, aducem textul curent (ciornă/final) dacă există.
+  // La selectarea unei lecții, selectorul pornește de la vocea ei deja generată
+  // (dacă are una); altfel de la Callirrhoe. Nu se schimbă singur mai departe.
+  useEffect(() => {
+    const doc = status[selected];
+    const p = doc?.audio?.provider || doc?.voiceProvider;
+    setProvider(p === 'azure' ? 'azure' : 'gemini');
+  }, [selected, status]);
+
   useEffect(() => {
     let viu = true;
     if (!selected) { setText(''); setWords(null); return undefined; }
@@ -402,13 +413,17 @@ export default function VoiceAdmin({ token, apiBase }) {
   async function genereazaAudio() {
     const doc = status[selected];
     if (!doc) return;
-    setBusy('audio'); setMesaj('Sintetizez audio (Azure)…');
+    const numeVoce = provider === 'azure' ? 'Azure · Alina' : 'Google · Callirrhoe';
+    setBusy('audio'); setMesaj(`Sintetizez audio (${numeVoce})…`);
     try {
       // Salvăm întâi textul curent din editor, ca sinteza să folosească ce vezi.
       await authFetch(`/admin/voice/text/${doc.sectionHash}`, {
         method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text }),
       }).catch(() => {});
-      const r = await authFetch(`/admin/voice/audio/${doc.sectionHash}`, { method: 'POST' });
+      // Trimitem EXACT vocea aleasă manual. Serverul nu comută singur pe alta.
+      const r = await authFetch(`/admin/voice/audio/${doc.sectionHash}`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ provider }),
+      });
       const d = await r.json().catch(() => ({}));
       if (!r.ok) throw new Error(d.error || `${r.status}`);
       setMesaj('Audio generat — lecția e gata pentru elevi.');
@@ -434,7 +449,10 @@ export default function VoiceAdmin({ token, apiBase }) {
   return (
     <div className={styles.wrap}>
       <div className={styles.usageGrid}>
-        <UsageBar usage={usage} />
+        <UsageBar data={usage?.azure || usage} label="Consum voce Azure" provider="azure" />
+        {usage?.gemini ? (
+          <UsageBar data={usage.gemini} label="Consum voce Google · Callirrhoe" provider="gemini" />
+        ) : null}
         <GeminiBar llm={llmUsage} />
       </div>
 
@@ -520,8 +538,31 @@ export default function VoiceAdmin({ token, apiBase }) {
                     <button type="button" className={styles.btn} disabled={Boolean(busy) || !text.trim()} onClick={salveazaText}>
                       {busy === 'save' ? 'Se salvează…' : 'Salvează textul'}
                     </button>
+                    {/* Selector de VOCE, ales manual per lecție. Fără comutări
+                        automate: se sintetizează exact vocea de aici. */}
+                    <div className={styles.voceSelect} role="group" aria-label="Vocea lecției">
+                      <button
+                        type="button"
+                        className={provider === 'gemini' ? styles.voceOn : styles.voce}
+                        aria-pressed={provider === 'gemini'}
+                        disabled={Boolean(busy)}
+                        onClick={() => setProvider('gemini')}
+                      >
+                        Google · Callirrhoe
+                      </button>
+                      <button
+                        type="button"
+                        className={provider === 'azure' ? styles.voceOn : styles.voce}
+                        aria-pressed={provider === 'azure'}
+                        disabled={Boolean(busy)}
+                        onClick={() => setProvider('azure')}
+                      >
+                        Azure · Alina
+                      </button>
+                    </div>
                     <button type="button" className={styles.btnAccent} disabled={Boolean(busy) || !text.trim()} onClick={genereazaAudio}>
-                      {busy === 'audio' ? 'Se sintetizează…' : 'Aprobă → generează audio'}
+                      {busy === 'audio' ? 'Se sintetizează…'
+                        : `Aprobă → generează audio (${provider === 'azure' ? 'Azure' : 'Callirrhoe'})`}
                     </button>
                     <button type="button" className={styles.btnGhost} disabled={Boolean(busy)} onClick={() => sterge(selectat.url)}>
                       Șterge
@@ -552,15 +593,15 @@ export default function VoiceAdmin({ token, apiBase }) {
   );
 }
 
-function UsageBar({ usage }) {
-  if (!usage) return null;
-  const { folosit, limita, ramas, procent, seResetLa, sursa } = usage;
+function UsageBar({ data, label, provider }) {
+  if (!data) return null;
+  const { folosit, limita, ramas, procent, seResetLa, sursa } = data;
   const reset = seResetLa ? new Date(seResetLa).toLocaleDateString('ro-RO', { day: 'numeric', month: 'long' }) : null;
   const pct = procent != null ? Math.min(100, procent) : null;
   return (
     <div className={styles.usage}>
       <div className={styles.usageTop}>
-        <span className={styles.usageLabel}>Consum voce Azure</span>
+        <span className={styles.usageLabel}>{label}</span>
         <span className={styles.usageNums}>
           {folosit?.toLocaleString('ro-RO')} {limita != null ? `/ ${limita.toLocaleString('ro-RO')}` : ''} caractere
         </span>
@@ -569,7 +610,9 @@ function UsageBar({ usage }) {
         <div className={styles.bar}><div className={styles.barFill} style={{ width: `${pct}%` }} /></div>
       ) : (
         <div className={styles.usageHint}>
-          Limita nu e cunoscută încă {sursa === 'local' ? '(configurează accesul Azure pentru cifra reală)' : ''}.
+          {provider === 'gemini'
+            ? 'Free tier limitat pe cereri/zi, nu pe caractere — arătăm consumul real.'
+            : `Limita nu e cunoscută încă ${sursa === 'local' ? '(configurează accesul Azure pentru cifra reală)' : ''}.`}
         </div>
       )}
       <div className={styles.usageFoot}>

@@ -358,3 +358,29 @@
   color: var(--km-orange-deep, #c2540a);
   font-weight: 700;
 }
+
+/* Selector de voce per lecție (ales MANUAL, fără comutări automate). */
+.voceSelect {
+  display: inline-flex;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 999px;
+  background: var(--km-cream-3, #f3ede3);
+  border: 1px solid var(--km-line, #e4dccd);
+}
+.voce, .voceOn {
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  color: var(--km-ink2, #6b6455);
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 120ms ease, color 120ms ease;
+}
+.voce:disabled, .voceOn:disabled { cursor: default; opacity: 0.7; }
+.voceOn {
+  background: var(--km-ink, #2a2622);
+  color: #fff;
+}
