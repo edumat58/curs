@@ -89,7 +89,24 @@ export function createGeminiTts(env = process.env) {
   // Cheie SEPARATĂ pentru voce, dacă e configurată: pe free tier vocea împarte
   // altfel bugetul de cereri cu modelul de text (aceeași cheie) și se blochează
   // repede. Cu `VOICE_GEMINI_API_KEY`, vocea are cotă proprie și consum separat.
-  const key = env.VOICE_GEMINI_API_KEY || env.GEMINI_API_KEY;
+  /**
+   * MAI MULTE chei, rotite când una își epuizează cota zilnică.
+   *
+   * Cotele gratuite se numără per proiect și per model (10 cereri pe zi,
+   * măsurat). O lecție cere 2-5 sinteze, deci o singură cheie ajunge pentru
+   * două-trei lecții pe zi. Cheile suplimentare, fiecare din alt proiect, adaugă
+   * fiecare încă o găleată — fără să schimbe nimic la voce, e tot Callirrhoe.
+   *
+   * Ordinea: cheia dedicată vocii prima, apoi cea de text (TTS-ul nu concurează
+   * cu generarea de text, sunt modele diferite deci găleți diferite), apoi orice
+   * cheie în plus din `VOICE_GEMINI_API_KEYS`, separate prin virgulă.
+   */
+  const chei = [
+    env.VOICE_GEMINI_API_KEY,
+    ...(env.VOICE_GEMINI_API_KEYS || '').split(',').map((k) => k.trim()),
+    env.GEMINI_API_KEY,
+  ].filter(Boolean).filter((k, i, a) => a.indexOf(k) === i);
+  const key = chei[0];
   /**
    * Modelul 2.5, nu 3.1 — pentru COTĂ, nu pentru calitate.
    *
@@ -137,9 +154,11 @@ export function createGeminiTts(env = process.env) {
       contents: [{ parts: [{ text }] }],
       generationConfig: { responseModalities: ['AUDIO'], speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName: voice } } } },
     };
-    // Reîncercări scurte: free tier-ul Gemini TTS dă 429/503 sub sarcină.
+    // Reîncercări: 429 pe minut se așteaptă, 429 pe zi trece la cheia următoare.
+    let cheieIdx = 0;
     for (let incercare = 0; incercare < 5; incercare += 1) {
-      const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`,
+      const cheieCurenta = chei[cheieIdx] || key;
+      const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${cheieCurenta}`,
         { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
       if (r.ok) {
         const d = await r.json();
@@ -147,10 +166,42 @@ export function createGeminiTts(env = process.env) {
         if (part) return Buffer.from(part.inlineData.data, 'base64');
         throw new Error('Gemini TTS: răspuns fără audio.');
       }
-      if (r.status === 429 || r.status === 503) { await new Promise((res) => setTimeout(res, 4000 * (incercare + 1))); continue; }
+      if (r.status === 429 || r.status === 503) {
+        /**
+         * Limita ZILNICĂ nu se recuperează prin așteptare — se dă un mesaj clar.
+         *
+         * Reîncercarea are sens doar pentru limita pe MINUT. La cea pe zi (10
+         * cereri, măsurat pe amândouă modelele TTS), oricâte reîncercări am face
+         * primim același 429, iar administratorul rămâne cu „limită de rată
+         * depășită", fără să afle că trebuie să aștepte până mâine.
+         */
+        const detalii = await r.json().catch(() => null);
+        const violari = (detalii?.error?.details || [])
+          .filter((d) => /QuotaFailure/.test(d['@type'] || ''))
+          .flatMap((d) => d.violations || []);
+        const zilnica = violari.find((v) => /PerDay/i.test(v.quotaId || ''));
+        if (zilnica) {
+          // Cheia asta e terminată pe ziua de azi: trecem la următoarea, dacă există.
+          if (cheieIdx + 1 < chei.length) {
+            cheieIdx += 1;
+            console.warn(`[voice] cheia ${cheieIdx} și-a epuizat cota zilnică; trec la următoarea`);
+            continue;
+          }
+          throw new Error(
+            `Cota zilnică Google TTS epuizată pe toate cele ${chei.length} chei `
+            + `(${zilnica.quotaValue || '?'} cereri/zi de cheie, pe modelul ${model}). `
+            + 'Se reînnoiește după miezul nopții, ora Pacific.'
+          );
+        }
+        // Limita pe minut: așteptăm cât cere serverul, nu o valoare inventată.
+        const retry = (detalii?.error?.details || []).find((d) => /RetryInfo/.test(d['@type'] || ''));
+        const secunde = retry ? Number(String(retry.retryDelay).replace('s', '')) || 25 : 25;
+        await new Promise((res) => setTimeout(res, secunde * 1000));
+        continue;
+      }
       throw new Error(`Gemini TTS eșuat: ${r.status} ${(await r.text()).slice(0, 120)}`);
     }
-    throw new Error('Gemini TTS: limită de rată depășită după reîncercări.');
+    throw new Error('Gemini TTS: limita pe minut nu s-a eliberat după reîncercări.');
   }
 
   return {
