@@ -740,7 +740,7 @@
     "clasa 6 a sasea VI",
     "modul 1"
    ],
-   "text": "# C3 - Mulțimi. Mulțimea numerelor naturale N\n\n---\n\n## Ce este o mulțime?\n\nO **mulțime** este o colecție de obiecte distincte, numite elemente ale mulțimii.\n\n**Exemple:**\n- Mulțimea zilelor săptămânii: $\\{luni, marți, miercuri, joi, vineri, sâmbătă, duminică\\}$\n- Mulțimea cifrelor: $\\{0, 1, 2, 3, 4, 5, 6, 7, 8, 9\\}$\n\nElementele unei mulțimi sunt distincte și nu se repetă.\n\n---\n\n## Reprezentarea mulțimilor\n\nMulțimile se pot reprezenta în mai multe moduri:\n\n1. **Prin enumerarea elementelor** (metoda extensivă): $\\{1, 2, 3, 4, 5\\}$\n2. **Prin proprietăți** (metoda intensivă): $\\{x | \\text{x este un număr natural mai mic decât 6}\\}$\n\nSimboluri:\n- ∈ înseamnă \"aparține\"\n- ∉ înseamnă \"nu aparține\"\n- ∅ reprezintă mulțimea vidă (fără elemente)\n\n**Exemple:**\n- 3 ∈ $\\{1, 2, 3, 4, 5\\}$\n- 7 ∉ $\\{1, 2, 3, 4, 5\\}$\n\n---\n\n## Mulțimea numerelor naturale N\n\n**Mulțimea numerelor naturale** N este mulțimea tuturor numerelor întregi nenegative: $\\mathbb{N} = \\{0, 1, 2, 3, 4, ...\\}$\n\n**Proprietăți ale lui N:**\n- Este infinită (are infinit de multe elemente)\n- Conține pe 0\n- Este închisă la adunare și înmulțire\n\n**Exemple:**\n- 5 ∈ N\n- -1 ∉ N\n- 100 ∈ N\n\n---"
+   "text": "# C3 - Mulțimi. Mulțimea numerelor naturale N\n\n---\n\n## Ce este o mulțime?\n\nO **mulțime** este o colecție de obiecte distincte, numite elemente ale mulțimii.\n\n**Exemple:**\n- Mulțimea zilelor săptămânii: $\\{luni, marți, miercuri, joi, vineri, sâmbătă, duminică\\}$\n- Mulțimea cifrelor: $\\{0, 1, 2, 3, 4, 5, 6, 7, 8, 9\\}$\n\nElementele unei mulțimi sunt distincte și nu se repetă.\n\n---\n\n## Reprezentarea mulțimilor\n\nMulțimile se pot reprezenta în mai multe moduri:\n\n1. **Prin enumerarea elementelor** (metoda extensivă): $\\{0, 1, 2, 3, 4, 5\\}$\n2. **Prin proprietăți** (metoda intensivă): $\\{x | \\text{x este un număr natural mai mic decât 6}\\}$\n\nSimboluri:\n- ∈ înseamnă \"aparține\"\n- ∉ înseamnă \"nu aparține\"\n- ∅ reprezintă mulțimea vidă (fără elemente)\n\n**Exemple:**\n- 3 ∈ $\\{0, 1, 2, 3, 4, 5\\}$\n- 7 ∉ $\\{0, 1, 2, 3, 4, 5\\}$\n\n---\n\n## Mulțimea numerelor naturale\n\n**Mulțimea numerelor naturale** N este mulțimea tuturor numerelor întregi nenegative (pozitive): $\\mathbb{N} = \\{0, 1, 2, 3, 4, ...\\}$\n\n**Proprietăți ale lui N:**\n- Este infinită (are infinit de multe elemente)\n- Conține pe 0\n\n**Exemple:**\n- 5 ∈ N\n- -1 ∉ N\n- 100 ∈ N\n\n---"
   },
   {
    "title": "C4 - Multimea nr. intregi Z",
@@ -2434,108 +2434,6 @@
     "EduPASI lectie adaptata accesibila"
    ],
    "text": "# C2 - Adunarea și scăderea nr. zecimale\n\n---\n\n## Generalități\n\nUn ** număr zecimal ** este un număr pe care îl putem scrie cu un număr finit de cifre și o virgulă.\n\n**Exemple:**\n- 2,37 și 5 (=5,0) sunt numere zecimale.\n\nRezultatul unei adunări se numește ** sumă **; rezultatul unei scăderi se numește ** diferență **.\n\n**Exemple:**\n- 5,7 + 3,12 = 8,82 ; 5,32 – 2,5 = 2,82.\n\n```\ntermeni: 5,7 și 3,12 ➝ sumă: 8,82\ntermeni: 5,32 şi 2,5 ➝ diferență: 2,82\n```\n\nÎntr-o suită de adunări, putem efectua calculele în ordinea pe care o dorim.\n\nAceastă proprietate este **valabilă pentru adunare**! Scăderea **NU** este comutativă.\n\n**Exemplu:**\n- 8 - 3 = 5\n- 3 - 8 = -5\n\nOrdinea termenilor **schimbă rezultatul**!\n\n**Exemplu:** Pentru a efectua 12,4 + 3,9 + 2,6, putem:\n- începe prin a efectua 12,4 + 3,9;\n- sau începe prin a efectua 3,9 + 2,6;\n- sau începe prin a efectua 12,4 + 2,6.\n\nAceastă ultimă grupare facilitează calculul, deoarece 12,4 + 2,6 = 15.\n\nObținem deci:\n12,4 + 3,9 + 2,6 = (12,4 + 2,6) + 3,9 = 15 + 3,9 = 18,9.\n\n---\n\nPutem schimba locurile... nu schimbă rezultatul!\n\n $$12{,}4 + 3{,}9 + 2{,}6 = 12{,}4 + 2{,}6 + 3{,}9$$ \n\n---\n\n## Metoda\n\n### Adunarea și scăderea numerelor zecimale prin poziționare\n\n** PASUL 1. ** Scriem termenii adunării sau scăderii, unii sub alții (în coloană), aliniind vertical virgulele, cifrele unităților, etc.\n\n** PASUL 2. ** Efectuăm adunarea sau scăderea cifrelor, fără a uita ce ținem minte sau împrumutǎm.\n\n**Notă:** *Adăugăm dacă este necesar o virgulă și zerouri la sfârșitul părții zecimale.*\n\n** PASUL 3. ** Plasăm virgula la rezultat.\n\n---\n\n## Exemple practice\n\n**Calculați 345,20 + 7,92 și 125 – 6,21.**\n\n### Reținutul\n\n**Adunare:** Când suma cifrelor > 9, ținem minte 1 la ordinul superior\n\n**Scădere:** Când cifra de sus < cifra de jos, împrumutăm 1 de la ordinul superior\n\n### Operații\n\n \n \n ➕ Adunare \n $$\\Large\\begin{array}{r}345{,}20 \\\\ +\\ 7{,}92 \\\\ \\hline 353{,}12\\end{array}$$ \n \n\n \n\n \n ➖ Scădere \n $$\\Large\\begin{array}{r}125{,}00 \\\\ -\\ 6{,}21 \\\\ \\hline 118{,}79\\end{array}$$ \n \n \n\n---"
-  },
-  {
-   "title": "C",
-   "url": "/curs/docs/edupasi/c5/modul-2/01",
-   "collection": "edupasi",
-   "course": "c5",
-   "module": "modul-2",
-   "final": false,
-   "vizibilPermanent": false,
-   "keywords": [
-    "clasa 5 a cincea V",
-    "modul 2",
-    "EduPASI lectie adaptata accesibila"
-   ],
-   "text": "# C\n\n---"
-  },
-  {
-   "title": "C",
-   "url": "/curs/docs/edupasi/c5/modul-3/01",
-   "collection": "edupasi",
-   "course": "c5",
-   "module": "modul-3",
-   "final": false,
-   "vizibilPermanent": false,
-   "keywords": [
-    "clasa 5 a cincea V",
-    "modul 3",
-    "EduPASI lectie adaptata accesibila"
-   ],
-   "text": "# C\n\n---"
-  },
-  {
-   "title": "C",
-   "url": "/curs/docs/edupasi/c5/modul-4/01",
-   "collection": "edupasi",
-   "course": "c5",
-   "module": "modul-4",
-   "final": false,
-   "vizibilPermanent": false,
-   "keywords": [
-    "clasa 5 a cincea V",
-    "modul 4",
-    "EduPASI lectie adaptata accesibila"
-   ],
-   "text": "# C\n\n---"
-  },
-  {
-   "title": "C",
-   "url": "/curs/docs/edupasi/c5/modul-5/01",
-   "collection": "edupasi",
-   "course": "c5",
-   "module": "modul-5",
-   "final": false,
-   "vizibilPermanent": false,
-   "keywords": [
-    "clasa 5 a cincea V",
-    "modul 5",
-    "EduPASI lectie adaptata accesibila"
-   ],
-   "text": "# C\n\n---"
-  },
-  {
-   "title": "EduPAȘI — Clasa a VI-a",
-   "url": "/curs/docs/edupasi/c6/01",
-   "collection": "edupasi",
-   "course": "c6",
-   "module": "",
-   "final": false,
-   "vizibilPermanent": false,
-   "keywords": [
-    "clasa 6 a sasea VI",
-    "EduPASI lectie adaptata accesibila"
-   ],
-   "text": "# EduPAȘI — Clasa a VI-a\n\nLecții adaptate de matematică pas cu pas pentru clasa a VI-a."
-  },
-  {
-   "title": "EduPAȘI — Clasa a VII-a",
-   "url": "/curs/docs/edupasi/c7/01",
-   "collection": "edupasi",
-   "course": "c7",
-   "module": "",
-   "final": false,
-   "vizibilPermanent": false,
-   "keywords": [
-    "clasa 7 a saptea VII",
-    "EduPASI lectie adaptata accesibila"
-   ],
-   "text": "# EduPAȘI — Clasa a VII-a\n\nLecții adaptate de matematică pas cu pas pentru clasa a VII-a."
-  },
-  {
-   "title": "EduPAȘI — Clasa a VIII-a",
-   "url": "/curs/docs/edupasi/c8/01",
-   "collection": "edupasi",
-   "course": "c8",
-   "module": "",
-   "final": false,
-   "vizibilPermanent": false,
-   "keywords": [
-    "clasa 8 a opta VIII",
-    "EduPASI lectie adaptata accesibila"
-   ],
-   "text": "# EduPAȘI — Clasa a VIII-a\n\nLecții adaptate de matematică pas cu pas pentru clasa a VIII-a."
   }
  ]
 }
