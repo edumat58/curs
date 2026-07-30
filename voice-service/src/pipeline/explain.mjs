@@ -124,6 +124,23 @@ export function trimToCompleteSentence(text) {
  * matematice, unități — ține de ce poate rosti espeak-ng și stă în
  * `speakable.mjs`, împreună cu măsurătorile care justifică fiecare regulă.
  */
+/**
+ * Câte titluri ale lecției sunt atinse de un text — măsură obiectivă a acoperirii.
+ *
+ * Se compară pe formă normalizată (fără diacritice-invizibile, fără punctuație),
+ * fiindcă modelul rostește titlul, nu îl copiază literal. Servește ca gardă la
+ * reparare: o rescriere care atinge mai puține secțiuni a pierdut din lecție,
+ * oricât de bine ar arăta la scorul de fidelitate.
+ */
+export function titluriAcoperite(section, text) {
+  const sursa = String(section?.sourceCode || '');
+  const titluri = [...sursa.matchAll(/^#{2,3}\s+(.+?)\s*$/gm)].map((m) => m[1].trim());
+  if (!titluri.length) return 0;
+  const norm = (s) => String(s).toLowerCase().replace(/[^\p{L}\d ]/gu, ' ').replace(/\s+/g, ' ').trim();
+  const t = norm(text);
+  return titluri.filter((h) => h && t.includes(norm(h))).length;
+}
+
 export function cleanForSpeech(text) {
   return fixRomanianArticles(
     toSpeakable(fixDiacritics(text).replace(/\[([^\]]*)\]\([^)]*\)/g, '$1'))
@@ -373,11 +390,30 @@ Păstrează același ton și aceeași lungime, și acoperă în continuare toate
     const fidelitateNoua = checkFidelity(section, candidat);
     const cuvinteVechi = transcript.split(/\s+/).filter(Boolean).length;
     const cuvinteNoi = candidat.split(/\s+/).filter(Boolean).length;
-    const ciuntita = repairRes.finishReason === 'length' || cuvinteNoi < cuvinteVechi * 0.6;
 
-    if (ciuntita && fidelitateNoua.score <= fidelity.score) {
+    /**
+     * O rescriere nu are voie să PIARDĂ din lecție, oricât de bine ar scora.
+     *
+     * Condiția de dinainte cerea și „scor mai slab" ca să respingă o rescriere
+     * ciuntită — dar tocmai tăierea unei secțiuni ridică scorul: dispar odată cu
+     * ea și numerele reproșate, și frazele meta. Deci varianta scurtă ieșea
+     * mereu „mai bună" și era acceptată. Măsurat pe G1 clasa a VI-a: narațiunea
+     * completă avea 3294 de caractere și acoperea toate cele șapte titluri, dar
+     * ce ajungea la elev avea 1341 și se oprea la „a) Cu ajutorul raportorului".
+     *
+     * Acoperirea titlurilor e o măsură obiectivă și independentă de scor: dacă
+     * rescrierea atinge mai puține secțiuni ale lecției, e o pierdere, nu o
+     * reparație — indiferent ce spune fidelitatea.
+     */
+    const acoperireVeche = titluriAcoperite(section, transcript);
+    const acoperireNoua = titluriAcoperite(section, candidat);
+    const pierdeSectiuni = acoperireNoua < acoperireVeche;
+    const ciuntita = repairRes.finishReason === 'length' || cuvinteNoi < cuvinteVechi * 0.75;
+
+    if (pierdeSectiuni || (ciuntita && fidelitateNoua.score <= fidelity.score)) {
       console.warn(
-        `[voice] rescrierea ${repairs} a ieșit mai scurtă (${cuvinteNoi} din ${cuvinteVechi}) fără câștig; păstrez varianta dinainte`
+        `[voice] rescrierea ${repairs} respinsă: ${cuvinteNoi} cuvinte (din ${cuvinteVechi}), `
+        + `${acoperireNoua} secțiuni acoperite (din ${acoperireVeche}); păstrez varianta dinainte`
       );
       break;
     }
