@@ -208,8 +208,17 @@ export async function explainSection(section, llm, { signal, onStage } = {}) {
       dinainte: raw.trim().slice(-220),
     };
     const p = segment ? buildNarrationPrompt(section, analysis, segment) : n;
+    /**
+     * Plafonul unei bucăți urmează MATERIALUL ei, cu o rezervă de o cincime.
+     *
+     * Împărțit strict proporțional din plafonul total, o bucată de 2800 de
+     * caractere primea 358 de cuvinte — prea puțin ca să-i explice conținutul,
+     * deci modelul era retezat. Măsurat pe G1 (5 bucăți): secțiuni întregi din
+     * lecție lipseau din explicație. Rezerva acoperă cazul lung fără să umfle
+     * cererea, iar pragul de jos ține fraza să se poată încheia.
+     */
     const plafon = segmente.length > 1
-      ? Math.max(700, Math.round(tokenCeiling * (bucata.length / totalCaractere)))
+      ? Math.max(900, Math.round(tokenCeiling * (bucata.length / totalCaractere) * 1.2))
       : tokenCeiling;
 
     if (i > 0) stage(`naratiune ${i + 1}/${segmente.length}`);
@@ -222,8 +231,42 @@ export async function explainSection(section, llm, { signal, onStage } = {}) {
     );
     narrationRes = res;
     tokeniTotal += res.usage?.total_tokens || 0;
-    raw = raw ? `${raw.replace(/\s+$/, '')} ${res.content.replace(/^\s+/, '')}` : res.content;
-    truncated = res.finishReason === 'length';
+    let bucataText = res.content;
+
+    /**
+     * Bucata retezată se continuă PE LOC, nu la sfârșitul lecției.
+     *
+     * `truncated` se suprascria la fiecare iterație, deci conta doar ultima
+     * bucată: dacă una din mijloc era tăiată, pierderea nu se mai recupera
+     * niciodată — exact cazul văzut, unde lecția se oprea după „a) Cu ajutorul
+     * raportorului" și lipseau ultimele două secțiuni. Continuarea trebuie
+     * oricum cerută AICI: cerută la final, ar continua altă parte a lecției.
+     */
+    if (res.finishReason === 'length') {
+      try {
+        const cont = await llm.chat(
+          [
+            { role: 'system', content: p.system },
+            { role: 'user', content: p.user },
+            { role: 'assistant', content: bucataText },
+            {
+              role: 'user',
+              content:
+                'Ai fost întrerupt înainte să termini. Continuă exact de unde ai rămas, fără să reiei ce ai spus deja și fără nicio introducere. Termină ideile rămase și încheie cu o frază completă.',
+            },
+          ],
+          { maxTokens: plafon, signal }
+        );
+        tokeniTotal += cont.usage?.total_tokens || 0;
+        bucataText = `${bucataText.replace(/\s+$/, '')} ${cont.content.replace(/^\s+/, '')}`;
+        truncated = cont.finishReason === 'length';
+      } catch (err) {
+        console.warn(`[voice] continuarea bucății ${i + 1} a eșuat: ${err.message.slice(0, 100)}`);
+        truncated = true;
+      }
+    }
+
+    raw = raw ? `${raw.replace(/\s+$/, '')} ${bucataText.replace(/^\s+/, '')}` : bucataText;
   }
 
   /**

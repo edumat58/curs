@@ -86,12 +86,53 @@ function cuvinteDinTimeline(res, sursa) {
 }
 
 export function createGeminiTts(env = process.env) {
-  const key = env.GEMINI_API_KEY;
-  const model = env.VOICE_GEMINI_MODEL || 'gemini-3.1-flash-tts-preview';
+  // Cheie SEPARATĂ pentru voce, dacă e configurată: pe free tier vocea împarte
+  // altfel bugetul de cereri cu modelul de text (aceeași cheie) și se blochează
+  // repede. Cu `VOICE_GEMINI_API_KEY`, vocea are cotă proprie și consum separat.
+  const key = env.VOICE_GEMINI_API_KEY || env.GEMINI_API_KEY;
+  /**
+   * Modelul 2.5, nu 3.1 — pentru COTĂ, nu pentru calitate.
+   *
+   * Cotele gratuite sunt per MODEL, iar măsurat pe cheia reală:
+   * `gemini-3.1-flash-tts-preview` are 10 cereri pe zi
+   * (GenerateRequestsPerDayPerProjectPerModel-FreeTier = 10), adică ~5 lecții,
+   * pe când `gemini-2.5-flash-preview-tts` are găleata lui, cu limită mult mai
+   * largă. Vocea Callirrhoe există în amândouă și sună la fel, deci mutarea nu
+   * costă nimic la ureche și dublează practic ce se poate genera pe zi.
+   */
+  const model = env.VOICE_GEMINI_MODEL || 'gemini-2.5-flash-preview-tts';
   const voice = env.VOICE_GEMINI_VOICE || 'Callirrhoe';
-  if (!key) throw new Error('Lipsește GEMINI_API_KEY pentru vocea Google.');
+  if (!key) throw new Error('Lipsește VOICE_GEMINI_API_KEY / GEMINI_API_KEY pentru vocea Google.');
+
+  /**
+   * Ritmare între cereri: cel puțin 6 secunde, adică ~10 pe minut.
+   *
+   * Limita pe minut e a doua barieră a nivelului gratuit, separată de cea zilnică.
+   * Fără pauză, două bucăți consecutive ale aceleiași lecții pleacă una după alta
+   * și a doua primește 429 — apoi reîncercarea așteaptă oricum, doar că după o
+   * eroare. Mai bine ritmăm din start.
+   */
+  let ultimaCerere = 0;
+  /**
+   * 21 de secunde între cereri, adică sub 3 pe minut — valoarea MĂSURATĂ.
+   *
+   * Nivelul gratuit al modelului 2.5 TTS raportează
+   * `GenerateRequestsPerMinutePerProjectPerModel-FreeTier = 3`, verificat direct
+   * pe cheia reală: a șasea cerere rapidă a primit 429, cu „retry după 24s".
+   * Documentația publică vorbește de 10-15 pe minut, dar aia e limita modelului
+   * de TEXT; TTS-ul preview e mult mai strâns.
+   */
+  const PAUZA_INTRE_CERERI = Number(env.VOICE_GEMINI_MIN_GAP_MS || 21000);
+  async function asteaptaRandul() {
+    const trecut = Date.now() - ultimaCerere;
+    if (ultimaCerere && trecut < PAUZA_INTRE_CERERI) {
+      await new Promise((r) => setTimeout(r, PAUZA_INTRE_CERERI - trecut));
+    }
+    ultimaCerere = Date.now();
+  }
 
   async function sintetizeazaBucata(text) {
+    await asteaptaRandul();
     const body = {
       contents: [{ parts: [{ text }] }],
       generationConfig: { responseModalities: ['AUDIO'], speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName: voice } } } },
