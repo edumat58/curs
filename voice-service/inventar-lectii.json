@@ -1,0 +1,2500 @@
+[
+ {
+  "sursa": "docs/c5/modul-1/01.md",
+  "transcript": "transcripts/c5/modul-1/01.md",
+  "ruta": "/docs/c5/modul-1/01",
+  "identitate": "MAT-05-C01-0-0",
+  "titlu": "C1 - Scrierea sub forma zecimala",
+  "titluri": [
+   "Definiție",
+   "Reprezentarea pozițională",
+   "Citirea numerelor zecimale",
+   "Scrierea numerelor zecimale",
+   "Conversii",
+   "Cifră vs Număr",
+   "Operații cu puteri zecimale",
+   "Aproximări"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c5/modul-1/02.md",
+  "transcript": "transcripts/c5/modul-1/02.md",
+  "ruta": "/docs/c5/modul-1/02",
+  "identitate": "MAT-05-C02-0-0",
+  "titlu": "C2 - Adunarea și scăderea nr. zecimale",
+  "titluri": [
+   "Generalități",
+   "Metoda",
+   "Adunarea și scăderea numerelor zecimale prin poziționare",
+   "Exemple practice",
+   "Reținutul",
+   "Operații"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c5/modul-1/03.md",
+  "transcript": "transcripts/c5/modul-1/03.md",
+  "ruta": "/docs/c5/modul-1/03",
+  "identitate": "MAT-05-C03-0-0",
+  "titlu": "C3 - Înmulțirea nr. zecimale",
+  "titluri": [
+   "Vocabular",
+   "Metode",
+   "1. Înmulțirea a două numere zecimale",
+   "2. Înmulțirea unui număr zecimal cu 10, 100 sau 1000",
+   "3. Înmulțirea unui număr zecimal cu 0,1; 0,01 sau 0,001"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c5/modul-1/04.mdx",
+  "transcript": "transcripts/c5/modul-1/04.md",
+  "ruta": "/docs/c5/06",
+  "identitate": "MAT-05-C04-0-0",
+  "titlu": "C4 - Împărțirea Euclidiană. Împărțirea nr. zecimale",
+  "titluri": [],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c5/modul-1/05.mdx",
+  "transcript": "transcripts/c5/modul-1/05.md",
+  "ruta": "/docs/c5/modul-1/05",
+  "identitate": "MAT-05-C05-0-0",
+  "titlu": "C5 - Semidreapta gradată",
+  "titluri": [
+   "Definiție",
+   "Exemple",
+   "Metodă",
+   "Gradarea unei semidrepte și plasarea reperelor"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c5/modul-1/06.mdx",
+  "transcript": "transcripts/c5/modul-1/06.md",
+  "ruta": "/docs/c5/modul-1/06",
+  "identitate": "MAT-05-C06-1-0",
+  "titlu": "C6.1 - Mulțimi. Mulțimea nr. naturale",
+  "titluri": [
+   "Mulțimi",
+   "Mulțimea nr. naturale",
+   "Definirea unei mulțimi matematice"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c5/modul-1/07.mdx",
+  "transcript": "transcripts/c5/modul-1/07.md",
+  "ruta": "/docs/c5/modul-1/07",
+  "identitate": "MAT-05-C06-2-0",
+  "titlu": "C6.2 - Scrierea si citirea nr. naturale",
+  "titluri": [
+   "Ne reamintim",
+   "Scrierea cu cifre arabe",
+   "Descompunerea unui nr. natural",
+   "Metode",
+   "Pasul II: Încercăm valori",
+   "Pasul II: Încercăm valori"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c5/modul-1/08.mdx",
+  "transcript": "transcripts/c5/modul-1/08.md",
+  "ruta": "/docs/c5/modul-1/08",
+  "identitate": "MAT-05-C07-1-0",
+  "titlu": "C7.1 – Ilustrarea fracţiilor echiunitare, subunitare și supraunitare",
+  "titluri": [
+   "Introducere",
+   "Reprezentări grafice variate",
+   "Reprezentarea circulară",
+   "Reprezentarea dreptunghiulară",
+   "Reprezentarea pe axa numerelor",
+   "Exemple detaliate",
+   "Exemplul 1 – Fracție subunitară $ \\dfrac{2}{5} $",
+   "Exemplul 2 – Fracție supraunitară $ \\dfrac{4}{3} $"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c5/modul-1/09.mdx",
+  "transcript": "transcripts/c5/modul-1/09.md",
+  "ruta": "/docs/c5/modul-1/09",
+  "identitate": "MAT-05-C07-2-0",
+  "titlu": "C7.2 – Fracții și scrierea procentuală",
+  "titluri": [
+   "Introducere",
+   "Scrierea unui procent sub formă de fracție ordinară",
+   "Exemple",
+   "Reprezentări grafice",
+   "Verificarea echivalenţei a două fracţii prin diferite reprezentări",
+   "Metode de verificare",
+   "1. Reprezentare vizuală",
+   "2. Calcul matematic"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c5/modul-1/10.mdx",
+  "transcript": "transcripts/c5/modul-1/10.md",
+  "ruta": "/docs/c5/modul-1/10",
+  "identitate": "MAT-05-C08-0-0",
+  "titlu": "C8 - Proprietăți ale înmulțirii",
+  "titluri": [
+   "Reprezentarea grafică",
+   "Utilizând proprietatea asociativității:",
+   ":::note Enunț",
+   "Reprezentarea pe dreapta numerică",
+   "Reprezentarea în bază 10",
+   "Calcul folosind fracții zecimale",
+   "Calcul folosind descompunerea zecimalǎ",
+   "METODA 1 - Înmulțiri folosind regula descompunerii",
+   "METODA 2 - Calculul mental și algoritm",
+   "METODA 3 — Descompunerea în factori și asociativitatea"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c5/modul-1/11.mdx",
+  "transcript": "transcripts/c5/modul-1/11.md",
+  "ruta": "/docs/c5/modul-1/11",
+  "identitate": "MAT-05-C09-0-0",
+  "titlu": "C9 - Proprietăți puteri cu exponent natural",
+  "titluri": [
+   "Introducere",
+   "1. Puteri ale unui număr",
+   "Exponent pozitiv",
+   "Produsul al două puteri cu aceeași bază",
+   "Puterea cu exponent zero",
+   "Puterea unei puteri",
+   "Câtul a două puteri cu aceeași bază",
+   "Puterea unui produs și a unui cât",
+   "2. Puterile lui 10",
+   "Exemple de bază",
+   "Reguli de calcul",
+   "Deplasarea virgulei",
+   "3. Scrierea (notația) științifică",
+   "Compararea numerelor scrise științific",
+   "Tabel – Reguli de calcul pentru puterile lui $10$"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c5/modul-1/12.mdx",
+  "transcript": "transcripts/c5/modul-1/12.md",
+  "ruta": "/docs/c5/modul-1/12",
+  "identitate": "MAT-05-C10-0-0",
+  "titlu": "C10 - Factor comun",
+  "titluri": [
+   "Definiție",
+   "Distributivitatea simplă",
+   "Exemplu – Dezvoltarea cu distributivitate simplă",
+   "Metoda",
+   "Distribuirea înmulțirii",
+   "Cazuri de aplicare",
+   "Exemplul 1",
+   "Exemplul 2",
+   "Exemplul 3",
+   "Exemplul 4"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c5/modul-1/13.mdx",
+  "transcript": "transcripts/c5/modul-1/13.md",
+  "ruta": "/docs/c5/modul-1/13",
+  "identitate": "MAT-05-C11-0-0",
+  "titlu": "C11 - Compararea nr. ridicate la o putere și pătratul perfect",
+  "titluri": [
+   "Exemple",
+   "Exemple",
+   "Compararea puterilor",
+   "Puteri cu aceeași bază",
+   "Puteri cu același exponent",
+   "Puteri cu baze și exponenți diferiți",
+   "Pătrat perfect"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c5/modul-1/14.mdx",
+  "transcript": "transcripts/c5/modul-1/14.md",
+  "ruta": "/docs/c5/modul-1/14",
+  "identitate": "MAT-05-C12-0-0",
+  "titlu": "C12 - Scrierea în baza 10 și baza 2",
+  "titluri": [
+   "Proprietăți",
+   "Sistemul de numerație binar",
+   "Trecerea între baze",
+   "1) Trecerea de la baza 10 la baza 2",
+   "2) Trecerea de la baza 2 la baza 10",
+   "Exemplu",
+   "Aplicații rezolvate",
+   "Rezolvare:",
+   "Rezolvare:"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c5/modul-1/15.mdx",
+  "transcript": "transcripts/c5/modul-1/15.md",
+  "ruta": "/docs/c5/modul-1/15",
+  "identitate": "MAT-05-C13-0-0",
+  "titlu": "C13 - Ordinea efectuării operațiilor",
+  "titluri": [
+   "Ordin de calcul",
+   "Reguli de calcul",
+   "Exemple"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c5/modul-1/16.mdx",
+  "transcript": "transcripts/c5/modul-1/16.md",
+  "ruta": "/docs/c5/modul-1/16",
+  "identitate": "MAT-05-C14-0-0",
+  "titlu": "C14 - Media aritmetică",
+  "titluri": [
+   "Media aritmetică a două numere naturale",
+   "Media aritmetică a trei numere naturale",
+   "Media aritmetică a n numere naturale"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c5/modul-2/01.mdx",
+  "transcript": "transcripts/c5/modul-2/01.md",
+  "ruta": "/docs/c5/modul-2/01",
+  "identitate": "MAT-05-C15-1-0",
+  "titlu": "C15.1 - Metoda reducerii la unitate",
+  "titluri": [
+   "Tipuri de probleme",
+   "Exemple",
+   "Tipul I — Dependență direct proporțională",
+   "I. Rezolvarea cu plan",
+   "II. Rezolvare cu metoda reducerii la unitate",
+   "I. Rezolvarea cu plan",
+   "II. Rezolvare cu metoda reducerii la unitate",
+   "Tipul II — Dependență invers proporțională",
+   "I. Rezolvarea cu plan",
+   "II. Rezolvare prin metoda reducerii la unitate",
+   "I. Rezolvarea cu plan",
+   "II. Rezolvare prin metoda reducerii la unitate"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c5/modul-2/02.mdx",
+  "transcript": "transcripts/c5/modul-2/02.md",
+  "ruta": "/docs/c5/modul-2/02",
+  "identitate": "MAT-05-C15-2-0",
+  "titlu": "C15.2 - Metoda comparației",
+  "titluri": [
+   "Situații posibile",
+   "Exemple",
+   "Rezolvare:",
+   "Rezolvare:",
+   "Rezolvare:"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c5/modul-2/03.mdx",
+  "transcript": "transcripts/c5/modul-2/03.md",
+  "ruta": "/docs/c5/modul-2/03",
+  "identitate": "MAT-05-C15-3-0",
+  "titlu": "C15.3 - Metoda figurativă",
+  "titluri": [
+   "Exemple",
+   "Rezolvare:",
+   "Rezolvare:",
+   "Rezolvare:",
+   "Rezolvare:"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c5/modul-2/04.mdx",
+  "transcript": "transcripts/c5/modul-2/04.md",
+  "ruta": "/docs/c5/modul-2/04",
+  "identitate": "MAT-05-C15-4-0",
+  "titlu": "C15.4 - Metoda mersului invers",
+  "titluri": [
+   "Exemple",
+   "Analiză",
+   "Rezolvare prin mers invers",
+   "Rezolvare"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c5/modul-2/05.mdx",
+  "transcript": "transcripts/c5/modul-2/05.md",
+  "ruta": "/docs/c5/modul-2/05",
+  "identitate": "MAT-05-G01-0-0",
+  "titlu": "G1 - Punct, dreaptă și plan",
+  "titluri": [
+   "Punctul",
+   "Reprezentări",
+   "Puncte identice și puncte distincte",
+   "Dreapta",
+   "Poziția unui punct față de o dreaptă",
+   "Puncte coliniare și necoliniare",
+   "Planul"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c5/modul-2/06.mdx",
+  "transcript": "transcripts/c5/modul-2/06.md",
+  "ruta": "/docs/c5/modul-2/06",
+  "identitate": "MAT-05-G02-0-0",
+  "titlu": "G2 - Semiplan, semidreaptă și segment",
+  "titluri": [
+   "Semiplanul",
+   "Semidreapta",
+   "Tipuri de semidrepte",
+   "Segmentul de dreaptă",
+   "Tipuri de segmente"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c5/modul-2/07.mdx",
+  "transcript": "transcripts/c5/modul-2/07.md",
+  "ruta": "/docs/c5/modul-2/07",
+  "identitate": "MAT-05-C15-5-0",
+  "titlu": "C15.5 - Metoda falsei ipoteze",
+  "titluri": [
+   "Exemple"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c5/modul-2/08.mdx",
+  "transcript": "transcripts/c5/modul-2/08.md",
+  "ruta": "/docs/c5/modul-2/08",
+  "identitate": "MAT-05-C16-0-0",
+  "titlu": "C16 - Divizori și multiplii",
+  "titluri": [
+   "Notații",
+   "Exemple",
+   "Observații importante",
+   "Divizori ai unui număr",
+   "Multiplul unui număr",
+   "Verificarea multiplicității"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c5/modul-2/09.mdx",
+  "transcript": "transcripts/c5/modul-2/09.md",
+  "ruta": "/docs/c5/modul-2/09",
+  "identitate": "MAT-05-C17-0-0",
+  "titlu": "C17 - Criterii de divizibilitate",
+  "titluri": [
+   "1. Criteriul de divizibilitate cu 2 și 5",
+   "2. Criteriul de divizibilitate cu 3",
+   "3. Criteriul de divizibilitate cu 4",
+   "4. Criteriul de divizibilitate cu 6",
+   "5. Criteriul de divizibilitate cu 9",
+   "6. Criteriul de divizibilitate cu 10",
+   "7. Criteriul de divizibilitate cu 25"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c5/modul-2/10.mdx",
+  "transcript": "transcripts/c5/modul-2/10.md",
+  "ruta": "/docs/c5/modul-2/10",
+  "identitate": "MAT-05-C18-0-0",
+  "titlu": "C18 - Număr prim, număr compus",
+  "titluri": [
+   "Numere prime",
+   "Ciurul lui Eratostene",
+   "Descompunerea în factori primi",
+   "Numere compuse"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c5/modul-3/01.mdx",
+  "transcript": "transcripts/c5/modul-3/01.md",
+  "ruta": "/docs/c5/modul-3/01",
+  "identitate": "MAT-05-C19-1-0",
+  "titlu": "C19.1 - Fracții subunitare, echiunitare şi supraunitare",
+  "titluri": [
+   "Fracții ordinare. Noțiuni introductive",
+   "<span style={{backgroundColor: '#e65100', color: 'white', padding: '4px 8px', borderRadius: '4px'}}>Important</span>",
+   "Clasificarea fracțiilor",
+   "<span style={{backgroundColor: '#e65100', color: 'white', padding: '4px 8px', borderRadius: '4px'}}>Observă și descoperă!</span>"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c5/modul-3/02.mdx",
+  "transcript": "transcripts/c5/modul-3/02.md",
+  "ruta": "/docs/c5/modul-3/02",
+  "identitate": "MAT-05-C19-2-0",
+  "titlu": "C19.2 - Procente şi fracții echivalente",
+  "titluri": [
+   "Calcul procentual",
+   "Proprietăți",
+   "Metode de calcul",
+   "Aplicarea unui procent",
+   "Metoda 1 – Tabel de proporționalitate",
+   "Metoda 2 – Calcul direct folosind fracția $\\dfrac{a}{100}$",
+   "Calcularea unui procent",
+   "Fracții echivalente"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c5/modul-3/03.mdx",
+  "transcript": "transcripts/c5/modul-3/03.md",
+  "ruta": "/docs/c5/modul-3/03",
+  "identitate": "MAT-05-C19-3-0",
+  "titlu": "C19.3 - Compararea fracțiilor cu același numitor sau numărător",
+  "titluri": [
+   "Proprietăți ale fracțiilor",
+   "Observație",
+   "<span style={{backgroundColor: '#e65100', color: 'white', padding: '4px 8px', borderRadius: '4px'}}>Exersează!</span>"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c5/modul-3/04.mdx",
+  "transcript": "transcripts/c5/modul-3/04.md",
+  "ruta": "/docs/c5/modul-3/04",
+  "identitate": "MAT-05-C19-4-0",
+  "titlu": "C19.4 - Reprezentarea pe axa numerelor a unei fracții ordinare",
+  "titluri": [
+   "Definitie",
+   "<span style={{backgroundColor: '#e65100', color: 'white', padding: '4px 8px', borderRadius: '4px'}}>Observă și descoperă!</span>",
+   "<span style={{backgroundColor: '#e65100', color: 'white', padding: '4px 8px', borderRadius: '4px'}}>Exersează!</span>"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c5/modul-3/05.mdx",
+  "transcript": "transcripts/c5/modul-3/05.md",
+  "ruta": "/docs/c5/modul-3/05",
+  "identitate": "MAT-05-C19-5-0",
+  "titlu": "C19.5 - Introducerea și scoaterea întregilor dintr-o fracție",
+  "titluri": [
+   "Introducere",
+   "Definiție",
+   "<span style={{backgroundColor: '#e65100', color: 'white', padding: '4px 8px', borderRadius: '4px'}}>Exersează!</span>"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c5/modul-3/06.mdx",
+  "transcript": "transcripts/c5/modul-3/06.md",
+  "ruta": "/docs/c5/modul-3/06",
+  "identitate": "MAT-05-C20-1-0",
+  "titlu": "C20.1 - Cel mai mare divizor comun a două numere naturale",
+  "titluri": [
+   "Algoritmul de determinare",
+   "<span style={{backgroundColor: '#ff9800', color: 'white', padding: '4px 8px', borderRadius: '4px'}}>Observă și descoperă!</span>",
+   "<span style={{backgroundColor: '#e65100', color: 'white', padding: '4px 8px', borderRadius: '4px'}}>Exersează!</span>"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c5/modul-3/07.mdx",
+  "transcript": "transcripts/c5/modul-3/07.md",
+  "ruta": "/docs/c5/modul-3/07",
+  "identitate": "MAT-05-C20-2-0",
+  "titlu": "C20.2 - Amplificarea și simplificarea fracțiilor",
+  "titluri": [
+   "Definiție",
+   "<span style={{backgroundColor: '#e65100', color: 'white', padding: '4px 8px', borderRadius: '4px'}}>Exersează!</span>"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c5/modul-3/08.mdx",
+  "transcript": "transcripts/c5/modul-3/08.md",
+  "ruta": "/docs/c5/modul-3/08",
+  "identitate": "MAT-05-C21-1-0",
+  "titlu": "C21.1 - Cel mai mic multiplu comun a două numere naturale",
+  "titluri": [
+   "Algoritmul de determinare",
+   "<span style={{backgroundColor: '#e65100', color: 'white', padding: '4px 8px', borderRadius: '4px'}}>Amintește-ți!</span>",
+   "<span style={{backgroundColor: '#e65100', color: 'white', padding: '4px 8px', borderRadius: '4px'}}>Exersează!</span>"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c5/modul-3/09.mdx",
+  "transcript": "transcripts/c5/modul-3/09.md",
+  "ruta": "/docs/c5/modul-3/09",
+  "identitate": "MAT-05-C21-2-0",
+  "titlu": "C21.2 - Aducerea fracțiilor la un numitor comun",
+  "titluri": [
+   "Definiție",
+   "Compararea fracțiilor",
+   "Problemă rezolvată",
+   "<span style={{backgroundColor: '#e65100', color: 'white', padding: '4px 8px', borderRadius: '4px'}}>Exersează!</span>"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c5/modul-4/00.mdx",
+  "transcript": "transcripts/c5/modul-4/00.md",
+  "ruta": "/docs/arhiva/an-scolar-2025-2026/c5/modul-4/00",
+  "identitate": "MAT-05-C22-0-0",
+  "titlu": "C22 - Adunarea și scăderea fracțiilor ordinare",
+  "titluri": [
+   "Adunarea și Scăderea Fracțiilor",
+   "Fracții cu același numitor",
+   "Fracții cu numitori diferiți",
+   "Operații între un număr natural și o fracție",
+   "Proprietățile adunării"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c5/modul-4/01.mdx",
+  "transcript": "transcripts/c5/modul-4/01.md",
+  "ruta": "/docs/arhiva/an-scolar-2025-2026/c5/modul-4/01",
+  "identitate": "MAT-05-C23-1-0",
+  "titlu": "C23.1 - Înumlțirea fracțiilor ordinare",
+  "titluri": [
+   "Înmulțirea a două fracții ordinare",
+   "Înmulțirea între un număr natural și o fracție",
+   "Proprietățile înmulțirii"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c5/modul-4/02.mdx",
+  "transcript": "transcripts/c5/modul-4/02.md",
+  "ruta": "/docs/arhiva/an-scolar-2025-2026/c5/modul-4/02",
+  "identitate": "MAT-05-C23-2-0",
+  "titlu": "C23.2 - Împarțirea fracțiilor ordinare",
+  "titluri": [
+   "Observă și descoperă!",
+   "A. Model vizual",
+   "B. Justificare prin probă",
+   "Regulă Importantă",
+   "Problemă rezolvată"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c5/modul-4/03.mdx",
+  "transcript": "transcripts/c5/modul-4/03.md",
+  "ruta": "/docs/arhiva/an-scolar-2025-2026/c5/modul-4/03",
+  "identitate": "MAT-05-C24-0-0",
+  "titlu": "C24 - Ridicarea la putere a fracțiilor ordinare",
+  "titluri": [
+   "Ridicarea la putere a unei fracții",
+   "Reguli de calcul",
+   "1. Înmulțirea puterilor cu aceeași bază",
+   "2. Împărțirea puterilor cu aceeași bază",
+   "3. Puterea unei puteri",
+   "4. Puterea unui produs",
+   "Produsul a două puteri cu același exponent",
+   "5. Puterea unui cât",
+   "Câtul a două puteri cu același exponent"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c5/modul-4/04.mdx",
+  "transcript": "transcripts/c5/modul-4/04.md",
+  "ruta": "/docs/arhiva/an-scolar-2025-2026/c5/modul-4/04",
+  "identitate": "MAT-05-C25-0-0",
+  "titlu": "C25 - Scrierea numerelor zecimale neperiodice sub formă de fracții ordinare",
+  "titluri": [
+   "Observă și descoperă!",
+   "1. Înmulțirea și împărțirea cu puteri ale lui 10",
+   "Formarea fracțiilor zecimale",
+   "Echivalențe importante:",
+   "Structura unei fracții zecimale",
+   "Citirea numerelor zecimale:",
+   "Transformări",
+   "1. Din fracție ordinară în fracție zecimală",
+   "2. Din fracție zecimală în fracție ordinară"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c5/modul-4/10.mdx",
+  "transcript": "transcripts/c5/modul-4/10.md",
+  "ruta": "/docs/arhiva/an-scolar-2025-2026/c5/modul-3/10",
+  "identitate": "MAT-05-G03-0-0",
+  "titlu": "G3 - Distanţa dintre două puncte",
+  "titluri": [
+   "Ce este distanța dintre două puncte?",
+   "Măsurarea distanței cu rigla",
+   "Distanțe pe o dreaptă (puncte coliniare)",
+   "Calcule cu distanțe"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c5/modul-4/11.mdx",
+  "transcript": "transcripts/c5/modul-4/11.md",
+  "ruta": "/docs/arhiva/an-scolar-2025-2026/c5/modul-3/11",
+  "identitate": "MAT-05-G04-0-0",
+  "titlu": "G4 - Mijlocul unui segment și simetricul unui punct",
+  "titluri": [
+   "Mijlocul unui segment",
+   "Simetricul unui punct față de un punct",
+   "Calcule cu mijloc și simetric"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c5/modul-5/01.mdx",
+  "transcript": "transcripts/c5/modul-5/01.md",
+  "ruta": "/docs/arhiva/an-scolar-2025-2026/c5/modul-5/01",
+  "identitate": "MAT-05-G05-0-0",
+  "titlu": "G5 - Unități de măsură. Perimetre și arii",
+  "titluri": [
+   "Măsurarea lungimii",
+   "Schema transformărilor",
+   "Perimetrul unui poligon",
+   "Perimetrul pătratului",
+   "Perimetrul dreptunghiului",
+   "Perimetrul triunghiului",
+   "Măsurarea ariei",
+   "Schema transformărilor pentru arie",
+   "Unități de măsură agricole",
+   "Aria pătratului și a dreptunghiului",
+   "Aria pătratului",
+   "Aria dreptunghiului"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c5/modul-5/02.mdx",
+  "transcript": "transcripts/c5/modul-5/02.md",
+  "ruta": "/docs/arhiva/an-scolar-2025-2026/c5/modul-5/02",
+  "identitate": "MAT-05-G06-0-0",
+  "titlu": "G6 - Măsurarea volumului și a capacității",
+  "titluri": [
+   "Măsurarea volumului",
+   "Schema transformărilor pentru volum",
+   "Volumul cubului",
+   "Volumul paralelipipedului dreptunghic",
+   "Aria laterală și aria totală",
+   "Aria cubului",
+   "Aria paralelipipedului dreptunghic",
+   "Măsurarea capacității (volumul lichidelor)",
+   "Legătura dintre volum și capacitate"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c5/modul-5/03.mdx",
+  "transcript": "transcripts/c5/modul-5/03.md",
+  "ruta": "/docs/arhiva/an-scolar-2025-2026/c5/modul-5/03",
+  "identitate": "MAT-05-G07-0-0",
+  "titlu": "G7 - Tipuri de unghiuri. Măsura unghiurilor",
+  "titluri": [
+   "Ce este un unghi?",
+   "Măsura unghiurilor",
+   "Tipuri de unghiuri după măsură",
+   "Perechi remarcabile de unghiuri",
+   "Unghiuri complementare",
+   "Unghiuri suplementare",
+   "Unghiuri opuse la vârf",
+   "Calcule cu unghiuri",
+   "Adunarea și scăderea măsurilor",
+   "Aflarea complementului și a suplementului"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c6/modul-1/03.md",
+  "transcript": "transcripts/c6/modul-1/03.md",
+  "ruta": "/docs/c6/modul-1/03",
+  "identitate": "MAT-06-C03-0-0",
+  "titlu": "C3 - Mulțimi. Mulțimea numerelor naturale N",
+  "titluri": [
+   "Ce este o mulțime?",
+   "Reprezentarea mulțimilor",
+   "Mulțimea numerelor naturale"
+  ],
+  "stare": "cu-probleme"
+ },
+ {
+  "sursa": "docs/c6/modul-1/06.mdx",
+  "transcript": "transcripts/c6/modul-1/06.md",
+  "ruta": "/docs/c6/modul-1/06",
+  "identitate": "MAT-06-C05-2-0",
+  "titlu": "C5.2 - Diagrame circulare",
+  "titluri": [
+   "Citirea unei diagrame circulare",
+   "Construirea unei diagrame circulare",
+   "Tabelul 1",
+   "Tabelul 2"
+  ],
+  "stare": "cu-probleme"
+ },
+ {
+  "sursa": "docs/c6/modul-1/08.mdx",
+  "transcript": "transcripts/c6/modul-1/08.md",
+  "ruta": "/docs/c6/modul-1/08",
+  "identitate": "MAT-06-C05-4-0",
+  "titlu": "C5.4 – Procente de mărire și micșorare",
+  "titluri": [
+   "Calcul cu procente de mărire și micșorare",
+   "Proprietăți",
+   "Metoda 1 — Calculul cantității finale",
+   "Metoda 2 — Calculul procentului de mărire/micșorare"
+  ],
+  "stare": "cu-probleme"
+ },
+ {
+  "sursa": "docs/c6/modul-1/11.mdx",
+  "transcript": "transcripts/c6/modul-1/11.md",
+  "ruta": "/docs/c6/modul-1/11",
+  "identitate": "MAT-06-C05-7-0",
+  "titlu": "C5.7 - Proporții",
+  "titluri": [
+   "Generalități",
+   "Proprietăți ale proporționalității",
+   "Proprietatea multiplicativă",
+   "Proprietatea aditivă",
+   "Exemplu de tabel proporțional",
+   "Metode",
+   "Recunoașterea a două mărimi proporționale",
+   "Metoda 1 – Coeficient constant",
+   "Metoda 2 – Verificarea coeficientului"
+  ],
+  "stare": "cu-probleme"
+ },
+ {
+  "sursa": "docs/c6/modul-1/13.mdx",
+  "transcript": "transcripts/c6/modul-1/13.md",
+  "ruta": "/docs/c6/modul-1/13",
+  "identitate": "MAT-06-C06-2-0",
+  "titlu": "C6.2 - Mărimi invers proporționale",
+  "titluri": [
+   "Definiție",
+   "Proprietăți",
+   "Mulțimi de numere",
+   "Probleme rezolvate"
+  ],
+  "stare": "cu-probleme"
+ },
+ {
+  "sursa": "docs/c6/modul-1/15.mdx",
+  "transcript": "transcripts/c6/modul-1/15.md",
+  "ruta": "/docs/c6/modul-1/15",
+  "identitate": "MAT-06-C07-0-0",
+  "titlu": "C7 - Probabilități",
+  "titluri": [
+   "Noțiunea probabilității",
+   "Proprietăți",
+   "Situația echiprobabilă",
+   "Probabilitatea unui eveniment",
+   "Denumărare",
+   "Tabelul cu intrări multiple",
+   "Arbore"
+  ],
+  "stare": "cu-probleme"
+ },
+ {
+  "sursa": "docs/c6/modul-1/16.mdx",
+  "transcript": "transcripts/c6/modul-1/16.md",
+  "ruta": "/docs/c6/modul-1/16",
+  "identitate": "MAT-06-C08-1-0",
+  "titlu": "C8.1 - Cel mai mare divizor comun",
+  "titluri": [
+   "Algoritmul de determinare",
+   "Observații"
+  ],
+  "stare": "cu-probleme"
+ },
+ {
+  "sursa": "docs/c6/modul-1/17.mdx",
+  "transcript": "transcripts/c6/modul-1/17.md",
+  "ruta": "/docs/c6/modul-1/17",
+  "identitate": "MAT-06-C08-2-0",
+  "titlu": "C8.2 - Cel mai mic multiplu comun",
+  "titluri": [
+   "Algoritmul de determinare",
+   "Observații",
+   "Relația dintre c.m.m.d.c. și c.m.m.m.c."
+  ],
+  "stare": "cu-probleme"
+ },
+ {
+  "sursa": "docs/c6/modul-1/18.mdx",
+  "transcript": "transcripts/c6/modul-1/18.md",
+  "ruta": "/docs/c6/modul-1/18",
+  "identitate": "MAT-06-C09-0-0",
+  "titlu": "C9 - Relații și operații între mulțimi",
+  "titluri": [
+   "Relații între mulțimi",
+   "Submulțimi",
+   "Mulțimea vidă și submulțimile improprii",
+   "Mulțimea părților",
+   "Operații cu mulțimi",
+   "Intersecția mulțimilor",
+   "Reuniunea mulțimilor",
+   "Diferența a două mulțimi",
+   "Aplicație"
+  ],
+  "stare": "cu-probleme"
+ },
+ {
+  "sursa": "docs/c6/modul-2/01.mdx",
+  "transcript": "transcripts/c6/modul-2/01.md",
+  "ruta": "/docs/c6/modul-2/01",
+  "identitate": "MAT-06-C10-0-0",
+  "titlu": "C10 - Modulul unui număr întreg (valoarea absolută)",
+  "titluri": [
+   "Proprietăți fundamentale",
+   "Cum se calculează modulul unui număr întreg",
+   "Exemple rapide",
+   "Exemplu de rezolvare exercițiu",
+   "Observații importante"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c6/modul-2/02.mdx",
+  "transcript": "transcripts/c6/modul-2/02.md",
+  "ruta": "/docs/c6/modul-2/02",
+  "identitate": "MAT-06-C11-0-0",
+  "titlu": "C11 - Compararea și ordonarea numerelor întregi",
+  "titluri": [
+   "Compararea numerelor întregi",
+   "Aplicații",
+   "Exercițiul 1 — Compararea numerelor întregi",
+   "Exercițiul 2 — Ordonare crescătoare",
+   "Exercițiul 3 — Ordonare descrescătoare"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c6/modul-2/03.mdx",
+  "transcript": "transcripts/c6/modul-2/03.md",
+  "ruta": "/docs/c6/modul-2/03",
+  "identitate": "MAT-06-C12-1-0",
+  "titlu": "C12.1 - Adunarea și scăderea numerelor întregi",
+  "titluri": [
+   "1. Adunarea numerelor întregi",
+   "Cazul I — $a, b \\ge 0$",
+   "Cazul II — $a, b \\lt 0$",
+   "Cazul III — $a \\ge 0, \\ b \\lt 0$",
+   "Reprezentare vizuală (model cu pătrățele)",
+   "2. Proprietățile adunării numerelor întregi",
+   "Exerciții",
+   "3. Scăderea numerelor întregi",
+   "4. Reguli de desfacere a parantezelor",
+   "Regula 1",
+   "Regula 2"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c6/modul-2/04.mdx",
+  "transcript": "transcripts/c6/modul-2/04.md",
+  "ruta": "/docs/c6/modul-2/04",
+  "identitate": "MAT-06-C12-2-0",
+  "titlu": "C12.2 - Înmulțirea și împărțirea numerelor întregi",
+  "titluri": [
+   "Regula semnelor",
+   "Exemple",
+   "Proprietățile înmulțirii numerelor întregi",
+   "Exemple de aplicare a proprietăților",
+   "Calculați în două moduri:",
+   "Multiplii unui număr întreg",
+   "Exemple",
+   "Împărțirea numerelor întregi",
+   "Observații",
+   "Exemple",
+   "Divizorii unui număr întreg",
+   "Exemple"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c6/modul-2/05.mdx",
+  "transcript": "transcripts/c6/modul-2/05.md",
+  "ruta": "/docs/c6/modul-2/05",
+  "identitate": "MAT-06-G01-0-0",
+  "titlu": "G1 - Unghiuri adiacente și bisectoarea unui unghi",
+  "titluri": [
+   "Unghiuri adiacente",
+   "Exemple",
+   "Bisectoarea unui unghi",
+   "Construcția bisectoarei unui unghi",
+   "a) Cu ajutorul raportorului",
+   "b) Cu rigla negradată și compasul",
+   "4. Aplicație",
+   "Rezolvare"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c6/modul-2/06.mdx",
+  "transcript": "transcripts/c6/modul-2/06.md",
+  "ruta": "/docs/c6/modul-2/06",
+  "identitate": "MAT-06-G02-0-0",
+  "titlu": "G2 - Unghiuri opuse la vârf și unghiuri formate în jurul unui punct",
+  "titluri": [
+   "Unghiuri opuse la vârf",
+   "Exemplu",
+   "Unghiuri formate în jurul unui punct",
+   "Exemplu",
+   "Aplicații",
+   "Problema 1",
+   "Problema 2",
+   "Problema 3"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c6/modul-2/07.mdx",
+  "transcript": "transcripts/c6/modul-2/07.md",
+  "ruta": "/docs/c6/modul-2/07",
+  "identitate": "MAT-06-G03-0-0",
+  "titlu": "G3 - Unghiul. Clasificare și măsurarea unghiurilor",
+  "titluri": [
+   "Definiție",
+   "Notații",
+   "Construcția imaginii unui punct prin rotație",
+   "Interiorul unui unghi",
+   "Clasificarea unghiurilor",
+   "Unghiuri congruente",
+   "Unghiuri suplementare",
+   "Unghiuri complementare"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c6/modul-2/08.mdx",
+  "transcript": "transcripts/c6/modul-2/08.md",
+  "ruta": "/docs/c6/modul-2/08",
+  "identitate": "MAT-06-C13-0-0",
+  "titlu": "C13 - Mărimi și unități de măsură",
+  "titluri": [
+   "Mărimi compuse",
+   "Mărimi compuse – 2 unități asociate",
+   "Mărimi produs",
+   "Exemplu",
+   "Volumul unui paralelipiped",
+   "Exemplu:",
+   "Mărimi fracționale – Viteză medie",
+   "Exemplu:",
+   "Debit (Q) – Volum în timp",
+   "Atenție!",
+   "Exemplu:",
+   "Volum de masă (densitate)",
+   "Densitatea populației",
+   "Exemplu:"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c6/modul-2/09.mdx",
+  "transcript": "transcripts/c6/modul-2/09.md",
+  "ruta": "/docs/c6/modul-2/09",
+  "identitate": "MAT-06-C14-0-0",
+  "titlu": "C14 - Puterea cu exponent număr natural a unui număr întreg nenul",
+  "titluri": [
+   "Exemple",
+   "3.1. Dacă baza este pozitivă",
+   "3.2. Dacă baza este negativă",
+   "3.3. Atenție la notații!",
+   "Cazuri speciale pentru $(-1)^n$",
+   "4.1. Înmulțirea puterilor cu aceeași bază",
+   "4.2. Împărțirea puterilor cu aceeași bază",
+   "4.3. Puterea unei puteri",
+   "4.4. Puterea unui produs",
+   "4.5. Puterea unui cât",
+   "Exemplul 1",
+   "Exemplul 2",
+   "Exemplul 3",
+   "Exemplul 4",
+   "a) $(-3)^{13}$ și $(-3)^9$",
+   "b) $(-7)^5$ și $(-7)^4$",
+   "c) $(-5)^5$ și $(-6)^5$",
+   "d) $(-11)^3$ și $9^3$",
+   "1. Scrieți produsul ca putere și identificați baza și exponentul",
+   "2. Calculați",
+   "3. Completați tabelul",
+   "4. Scrieți",
+   "5. Scrieți rezultatele ca puteri",
+   "6. Asociați calculele cu rezultatele (săgeți)",
+   "7. Determinați numerele întregi n pentru care",
+   "8. Efectuați și exprimați rezultatele ca puteri",
+   "9. Comparați puterile fără a calcula rezultatele"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c6/modul-2/10.mdx",
+  "transcript": "transcripts/c6/modul-2/10.md",
+  "ruta": "/docs/c6/modul-2/10",
+  "identitate": "MAT-06-C15-0-0",
+  "titlu": "C15 - Reguli de calcul cu puteri",
+  "titluri": [
+   "Noțiuni de bază",
+   "(re) | Opusul și inversul unui număr",
+   "Reguli fundamentale",
+   "R1. Înmulțirea a două puteri cu aceeași bază",
+   "R2. Împărțirea a două puteri cu aceeași bază",
+   "R3. Puterea unui număr ridicat la putere",
+   "R4. Puterea unui produs",
+   "R5. Ridicarea la putere negativă",
+   "R5.1. Un număr înmulțit cu o putere negativă",
+   "R6. Puterea unui raport"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c6/modul-3/01.mdx",
+  "transcript": "transcripts/c6/modul-3/01.md",
+  "ruta": "/docs/c6/modul-3/01",
+  "identitate": "MAT-06-C16-0-0",
+  "titlu": "C16 - Ecuații în mulțimea numerelor întregi",
+  "titluri": [
+   "<span style={{color: '#e65100', fontWeight: 'bold'}}>Rezolvarea ecuațiilor</span>",
+   "Ecuații echivalente",
+   "<span style={{backgroundColor: '#e65100', color: 'white', padding: '4px 8px', borderRadius: '4px'}}>Exemple rezolvate</span>",
+   "<span style={{backgroundColor: '#e65100', color: 'white', padding: '4px 8px', borderRadius: '4px'}}>Observații</span>",
+   "1. Există ecuații care nu au nici o soluție ($S = \\emptyset$)",
+   "2. Există ecuații care au o infinitate de soluții ($S = \\mathbb{Z}$)",
+   "<span style={{backgroundColor: '#e65100', color: 'white', padding: '4px 8px', borderRadius: '4px'}}>Aplicații în geometrie</span>"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c6/modul-3/02.mdx",
+  "transcript": "transcripts/c6/modul-3/02.md",
+  "ruta": "/docs/c6/modul-3/02",
+  "identitate": "MAT-06-C17-0-0",
+  "titlu": "C17 - Inecuații în mulțimea numerelor întregi",
+  "titluri": [
+   "<span style={{color: '#e65100', fontWeight: 'bold'}}>Definiții și proprietăți</span>",
+   "<span style={{color: '#d32f2f', fontWeight: 'bold'}}>Proprietățile inecuațiilor</span>",
+   "<span style={{color: '#d32f2f', fontWeight: 'bold'}}>Etapele de rezolvare ale inecuațiilor:</span>",
+   "<span style={{color: '#e65100', fontWeight: 'bold'}}>Exemple rezolvate</span>"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c6/modul-3/03.mdx",
+  "transcript": "transcripts/c6/modul-3/03.md",
+  "ruta": "/docs/c6/modul-3/03",
+  "identitate": "MAT-06-C18-1-0",
+  "titlu": "C18.1 - Mulțimea numerelor raționale",
+  "titluri": [
+   "<span style={{color: '#e65100', fontWeight: 'bold'}}>Definiție și notație</span>",
+   "<span style={{color: '#1565c0', textDecoration: 'underline'}}>Observații:</span>",
+   "<span style={{color: '#e65100', fontWeight: 'bold'}}>Forme de scriere a numerelor raționale</span>",
+   "<span style={{color: '#e65100', fontWeight: 'bold'}}>1. Transformarea fracțiilor ordinare în fracții zecimale</span>",
+   "<span style={{color: '#7b1fa2'}}>a) Fracții zecimale finite</span>",
+   "<span style={{color: '#7b1fa2'}}>b) Fracții zecimale infinite periodice simple</span>",
+   "<span style={{color: '#7b1fa2'}}>c) Fracții zecimale infinite periodice mixte</span>",
+   "<span style={{color: '#e65100', fontWeight: 'bold'}}>2. Transformarea fracțiilor zecimale în fracții ordinare</span>",
+   "<span style={{textDecoration: 'underline'}}>a) Fracție zecimală finită</span>",
+   "<span style={{textDecoration: 'underline'}}>b) Fracție zecimală infinită periodică simplă</span>",
+   "<span style={{textDecoration: 'underline'}}>c) Fracție zecimală infinită periodică mixtă</span>"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c6/modul-3/04.mdx",
+  "transcript": "transcripts/c6/modul-3/04.md",
+  "ruta": "/docs/c6/modul-3/04",
+  "identitate": "MAT-06-C18-2-0",
+  "titlu": "C18.2 - Opusul, modulul și compararea numerelor raționale",
+  "titluri": [
+   "<span style={{color: '#e65100', fontWeight: 'bold'}}>Reprezentarea pe axa numerelor</span>",
+   "<span style={{color: '#e65100', fontWeight: 'bold'}}>Opusul unui număr rațional</span>",
+   "<span style={{color: '#e65100', fontWeight: 'bold'}}>Modulul unui număr rațional</span>",
+   "<span style={{color: '#e65100', fontWeight: 'bold'}}>Compararea și ordonarea numerelor raționale</span>",
+   "<span style={{color: '#1565c0', textDecoration: 'underline'}}>Observații:</span>"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c6/modul-3/05.mdx",
+  "transcript": "transcripts/c6/modul-3/05.md",
+  "ruta": "/docs/c6/modul-3/05",
+  "identitate": "MAT-06-C19-1-0",
+  "titlu": "C19.1 - Adunarea și scăderea numerelor raționale",
+  "titluri": [
+   "<span style={{color: '#e65100', fontWeight: 'bold'}}>Proprietățile adunării numerelor raționale</span>",
+   "<span style={{color: 'red', fontWeight: 'bold'}}>Reguli de eliminare a parantezelor</span>",
+   "<span style={{color: '#e65100', fontWeight: 'bold'}}>1. Adunarea/Scăderea fracțiilor ordinare</span>",
+   "<span style={{color: '#e65100', fontWeight: 'bold'}}>2. Adunarea/Scăderea fracțiilor zecimale finite</span>",
+   "<span style={{color: '#e65100', fontWeight: 'bold'}}>3. Adunarea/Scăderea combinată (fracții ordinare și zecimale)</span>"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c6/modul-3/06.mdx",
+  "transcript": "transcripts/c6/modul-3/06.md",
+  "ruta": "/docs/c6/modul-3/06",
+  "identitate": "MAT-06-C19-2-0",
+  "titlu": "C19.2 - Inmulțirea și împărțirea numerelor raționale",
+  "titluri": [
+   "<span style={{color: '#e65100', fontWeight: 'bold'}}>1. Înmulțirea numerelor raționale. Proprietăți</span>",
+   "<span style={{color: '#333', fontWeight: 'bold'}}>Proprietățile înmulțirii:</span>",
+   "<span style={{color: '#e65100', fontWeight: 'bold'}}>2. Împărțirea numerelor raționale</span>"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c6/modul-3/07.mdx",
+  "transcript": "transcripts/c6/modul-3/07.md",
+  "ruta": "/docs/c6/modul-3/07",
+  "identitate": "MAT-06-C19-3-0",
+  "titlu": "C19.3 - Ridicarea la putere a numerelor raționale",
+  "titluri": [
+   "<span style={{color: '#e65100', fontWeight: 'bold'}}>Puterea cu exponent număr întreg a unui număr rațional</span>",
+   "<span style={{color: '#e65100', fontWeight: 'bold'}}>Reguli de calcul cu puteri</span>",
+   "<span style={{color: '#1565c0', fontWeight: 'bold', textDecoration: 'underline'}}>1) Înmulțirea puterilor care au aceeași bază:</span>",
+   "<span style={{color: '#1565c0', fontWeight: 'bold', textDecoration: 'underline'}}>2) Împărțirea puterilor care au aceeași bază:</span>",
+   "<span style={{color: '#1565c0', fontWeight: 'bold', textDecoration: 'underline'}}>3) Puterea unei puteri:</span>",
+   "<span style={{color: '#1565c0', fontWeight: 'bold', textDecoration: 'underline'}}>4) Puterea unui produs:</span>"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c6/modul-3/08.mdx",
+  "transcript": "transcripts/c6/modul-3/08.md",
+  "ruta": "/docs/c6/modul-3/08",
+  "identitate": "MAT-06-G04-0-0",
+  "titlu": "G4 - Drepte paralele",
+  "titluri": [
+   "<span style={{color: '#d32f2f', fontWeight: 'bold'}}>Definiție și notație</span>",
+   "<span style={{color: '#d32f2f', fontWeight: 'bold'}}>Axioma paralelelor (Axioma lui Euclid)</span>",
+   "<span style={{color: '#d32f2f', fontWeight: 'bold'}}>Proprietăți</span>",
+   "Criterii de paralelism",
+   "<span style={{color: '#e65100', fontWeight: 'bold'}}>Unghiuri formate de două drepte cu o secantă</span>",
+   "<span style={{color: '#e65100', fontWeight: 'bold'}}>Teoreme de paralelism</span>",
+   "<span style={{color: '#d32f2f', fontWeight: 'bold'}}>Teoremă (1)</span>",
+   "<span style={{color: '#d32f2f', fontWeight: 'bold'}}>Teoremă (2) - Criterii de paralelism</span>"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c6/modul-3/09.mdx",
+  "transcript": "transcripts/c6/modul-3/09.md",
+  "ruta": "/docs/c6/modul-3/09",
+  "identitate": "MAT-06-G05-0-0",
+  "titlu": "G5 - Drepte perpendiculare și drepte oblice",
+  "titluri": [
+   "<span style={{color: '#d32f2f', fontWeight: 'bold'}}>Definiție și notație</span>",
+   "<span style={{color: '#1565c0', fontWeight: 'bold'}}>Construcția cu echerul și cu rigla</span>",
+   "<span style={{color: '#1565c0', fontWeight: 'bold'}}>Aplicație</span>"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c7/modul-1/01.mdx",
+  "transcript": "transcripts/c7/modul-1/01.md",
+  "ruta": "/docs/c7/modul-1/01",
+  "identitate": "MAT-07-C01-0-0",
+  "titlu": "C1 – Definiția și utilizarea puterilor",
+  "titluri": [
+   "Reguli de calcul cu exponenți pozitivi",
+   "Reguli de calcul cu exponenți negativi",
+   "Prefixe uzuale"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c7/modul-1/02.mdx",
+  "transcript": "transcripts/c7/modul-1/02.md",
+  "ruta": "/docs/c7/modul-1/02",
+  "identitate": "MAT-07-C02-0-0",
+  "titlu": "C2 – Reguli de calcul cu puteri",
+  "titluri": [
+   "Noțiuni de bază",
+   "Reguli fundamentale",
+   "R1. Înmulțirea a două puteri cu aceeași bază",
+   "R2. Împărțirea a două puteri cu aceeași bază",
+   "R3. Puterea unui număr ridicat la putere",
+   "R4. Puterea unui produs",
+   "R5. Ridicarea la putere negativă",
+   "R5.1. Un număr înmulțit cu o putere negativă",
+   "R6. Puterea unui raport"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c7/modul-1/03.mdx",
+  "transcript": "transcripts/c7/modul-1/03.md",
+  "ruta": "/docs/c7/modul-1/03",
+  "identitate": "MAT-07-C03-0-0",
+  "titlu": "C3 – Calcul cu radicali și proprietăți",
+  "titluri": [
+   "Noțiuni",
+   "Tabel de valori",
+   "Aplicații curs",
+   "1 – Operații cu radicali",
+   "2 – Exerciții suplimentare",
+   "Conform regulilor de calcul cu puteri"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c7/modul-1/04.mdx",
+  "transcript": "transcripts/c7/modul-1/04.md",
+  "ruta": "/docs/c7/modul-1/04",
+  "identitate": "MAT-07-C04-1-0",
+  "titlu": "C4.1 – Notația științifică și simplificarea puterilor",
+  "titluri": [
+   "Notație științifică a unui număr zecimal pozitiv",
+   "Metodele",
+   "Simplificarea produselor de puteri",
+   "Trecerea de la o notație științifică la o scriere zecimală",
+   "Determinarea notației științifice a unui număr zecimal"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c7/modul-1/05.mdx",
+  "transcript": "transcripts/c7/modul-1/05.md",
+  "ruta": "/docs/c7/modul-1/05",
+  "identitate": "MAT-07-C04-2-0",
+  "titlu": "C4.2 – Puteri: prioritatea operațiilor și notația științifică",
+  "titluri": [
+   "Prioritatea operațiilor",
+   "Exemple",
+   "Notația științifică",
+   "Exemple și contraexemple",
+   "Cum obținem o notație științifică",
+   "Cazul I – Număr mai mare sau egal cu 10",
+   "Cazul II – Număr cuprins între 0 și 1"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c7/modul-1/06.mdx",
+  "transcript": "transcripts/c7/modul-1/06.md",
+  "ruta": "/docs/c7/modul-1/06",
+  "identitate": "MAT-07-C05-0-0",
+  "titlu": "C5 - Mulțimea nr. reale (1)",
+  "titluri": [
+   "Incluziune",
+   "Cea mai mică mulțime",
+   "Proprietatea lui radical din 2"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c7/modul-1/07.mdx",
+  "transcript": "transcripts/c7/modul-1/07.md",
+  "ruta": "/docs/c7/modul-1/07",
+  "identitate": "MAT-07-C05-0-0",
+  "titlu": "C5 - Mulțimea nr. reale (2)",
+  "titluri": [
+   "Mai multe scrieri pentru același număr",
+   "Incluziunea a două mulțimi oarecare",
+   "Mulțimea vidă",
+   "Paritate"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c7/modul-1/08.mdx",
+  "transcript": "transcripts/c7/modul-1/08.md",
+  "ruta": "/docs/c7/modul-1/08",
+  "identitate": "MAT-07-C06-0-0",
+  "titlu": "C6 – Modulul, compararea și ordonarea numerelor reale",
+  "titluri": [
+   "Definiția modulului unui număr real",
+   "Proprietățile modulului",
+   "Compararea numerelor reale",
+   "Ordonarea numerelor reale"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c7/modul-1/09.mdx",
+  "transcript": "transcripts/c7/modul-1/09.md",
+  "ruta": "/docs/c7/modul-1/09",
+  "identitate": "MAT-07-C07-0-0",
+  "titlu": "C7 – Raționalizarea numitorului de forma a√b",
+  "titluri": [
+   "Introducere",
+   "Metoda de raționalizare pentru numitor de forma √b",
+   "Exemple",
+   "Metoda de raționalizare pentru numitor de forma a√b",
+   "Exemple"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c7/modul-1/10.mdx",
+  "transcript": "transcripts/c7/modul-1/10.md",
+  "ruta": "/docs/c7/modul-1/10",
+  "identitate": "MAT-07-C08-1-0",
+  "titlu": "C8.1 – Media aritmetică",
+  "titluri": [
+   "Introducere",
+   "Media aritmetică a `n` numere reale",
+   "Exemple",
+   "Media aritmetică ponderată",
+   "Exemple"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c7/modul-1/11.mdx",
+  "transcript": "transcripts/c7/modul-1/11.md",
+  "ruta": "/docs/c7/modul-1/11",
+  "identitate": "MAT-07-C08-2-0",
+  "titlu": "C8.2 – Media geometrică",
+  "titluri": [
+   "Introducere",
+   "Formula mediei geometrice",
+   "Exemple",
+   "Proprietăți ale mediei geometrice",
+   "Exemplu de aplicare"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c7/modul-1/12.mdx",
+  "transcript": "transcripts/c7/modul-1/12.md",
+  "ruta": "/docs/c7/modul-1/12",
+  "identitate": "MAT-07-G01-0-0",
+  "titlu": "G1 - Punct, dreaptă și plan",
+  "titluri": [
+   "Punctul și dreapta",
+   "Puncte coliniare",
+   "Drepte concurente",
+   "Planul",
+   "Drepte coplanare și necoplanare"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c7/modul-1/13.mdx",
+  "transcript": "transcripts/c7/modul-1/13.md",
+  "ruta": "/docs/c7/modul-1/13",
+  "identitate": "MAT-07-G02-0-0",
+  "titlu": "G2 - Unghiul. Clasificare și măsurarea unghiurilor",
+  "titluri": [
+   "Definiție",
+   "Notații",
+   "Construcția imaginii unui punct prin rotație",
+   "Interiorul unui unghi",
+   "Clasificarea unghiurilor",
+   "Unghiuri congruente"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c7/modul-1/14.mdx",
+  "transcript": "transcripts/c7/modul-1/14.md",
+  "ruta": "/docs/c7/modul-1/14",
+  "identitate": "MAT-07-C09-0-0",
+  "titlu": "C9 - Ecuația x² = a",
+  "titluri": [
+   "Cazuri",
+   "Transformări echivalente",
+   "Exemple"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c7/modul-1/15.mdx",
+  "transcript": "transcripts/c7/modul-1/15.md",
+  "ruta": "/docs/c7/modul-1/15",
+  "identitate": "MAT-07-G03-0-0",
+  "titlu": "G3 - Patrulaterul convex",
+  "titluri": [
+   "Introducere",
+   "Patrulater convex și patrulater concav",
+   "Elemente ale patrulaterului",
+   "Proprietăți",
+   "Teoremă",
+   "Aplicații",
+   "Aplicația 1",
+   "Aplicația 2"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c7/modul-1/17.mdx",
+  "transcript": "transcripts/c7/modul-1/17.md",
+  "ruta": "/docs/c7/modul-1/17",
+  "identitate": "MAT-07-C10-0-0",
+  "titlu": "C10 - Aproximări ale numerelor iraționale",
+  "titluri": [
+   "Aproximarea prin lipsă",
+   "Aproximarea prin adaos",
+   "Rotunjirea unui număr real",
+   "Aproximarea numerelor reale prin fracții zecimale",
+   "Exemple",
+   "Tabelul 1",
+   "Tabelul 2"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c7/modul-2/01.mdx",
+  "transcript": "transcripts/c7/modul-2/01.md",
+  "ruta": "/docs/c7/modul-2/01",
+  "identitate": "MAT-07-G04-0-0",
+  "titlu": "G4 - Paralelogramul",
+  "titluri": [
+   "Proprietăți",
+   "Algoritmul pentru a demonstra că un patrulater convex este paralelogram",
+   "Aplicații"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c7/modul-2/02.mdx",
+  "transcript": "transcripts/c7/modul-2/02.md",
+  "ruta": "/docs/c7/modul-2/02",
+  "identitate": "MAT-07-C11-0-0",
+  "titlu": "C11 - Relația de egalitate",
+  "titluri": [
+   "Proprietăți ale relației de egalitate",
+   "Scriere matematică",
+   "Exemple",
+   "Obținerea de noi egalități din egalități date",
+   "Exemple",
+   "Exemplul 1",
+   "Exemplul 2",
+   "Exemplul 3",
+   "Exemplul 4"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c7/modul-2/03.mdx",
+  "transcript": "transcripts/c7/modul-2/03.md",
+  "ruta": "/docs/c7/modul-2/03",
+  "identitate": "MAT-07-C12-0-0",
+  "titlu": "C12 - Ecuația ax+b=0",
+  "titluri": [
+   "Definiții și noțiuni introductive",
+   "Ecuații echivalente",
+   "Etapele de rezolvare",
+   "Observație",
+   "Exemplul 1",
+   "Exemplul 2"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c7/modul-2/04.mdx",
+  "transcript": "transcripts/c7/modul-2/04.md",
+  "ruta": "/docs/c7/modul-2/04",
+  "identitate": "MAT-07-G05-0-0",
+  "titlu": "G5 - Linia mijlocie în triunghi",
+  "titluri": [
+   "Definiție",
+   "Proprietate",
+   "Aplicații",
+   "Exemplul 1",
+   "Rezolvare:",
+   "Exemplul 2",
+   "Rezolvare:"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c7/modul-2/05.mdx",
+  "transcript": "transcripts/c7/modul-2/05.md",
+  "ruta": "/docs/c7/modul-2/05",
+  "identitate": "MAT-07-C13-1-0",
+  "titlu": "C13.1 - Sisteme de ecuații",
+  "titluri": [
+   "Forma generală",
+   "Noțiune",
+   "Cazurile posibile",
+   "Metode de rezolvare",
+   "1. Metoda substituției",
+   "Exemple",
+   "Exemplul 1",
+   "Exemplul 2",
+   "2. Metoda reducerii",
+   "Exemple",
+   "Exemplul 1",
+   "Exemplul 2",
+   "Concluzii"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c7/modul-2/06.mdx",
+  "transcript": "transcripts/c7/modul-2/06.md",
+  "ruta": "/docs/c7/modul-2/06",
+  "identitate": "MAT-07-C13-2-0",
+  "titlu": "C13.2 - Probleme care se rezolvă cu ajutorul sistemelor de ecuații",
+  "titluri": [
+   "Etapele rezolvării unei probleme prin ecuații",
+   "Probleme rezolvate",
+   "Problema 1",
+   "Rezolvare",
+   "Problema 2",
+   "Rezolvare",
+   "Problema 3",
+   "Rezolvare",
+   "Observație"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c7/modul-2/07.mdx",
+  "transcript": "transcripts/c7/modul-2/07.md",
+  "ruta": "/docs/c7/modul-2/07",
+  "identitate": "MAT-07-G06-0-0",
+  "titlu": "G6 - Centrul de greutate al unui triunghi",
+  "titluri": [
+   "Medianele unui triunghi",
+   "Exemple de Aplicații",
+   "Problema 1",
+   "Rezolvare",
+   "Problema 2",
+   "Rezolvare"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c7/modul-2/08.mdx",
+  "transcript": "transcripts/c7/modul-2/08.md",
+  "ruta": "/docs/c7/modul-2/08",
+  "identitate": "MAT-07-C14-0-0",
+  "titlu": "C14 - Operații cu numere reale (recapitulare)",
+  "titluri": [
+   "Proprietăți de bază",
+   "Introducerea și scoaterea factorilor de sub radical",
+   "Introducerea factorilor sub radical",
+   "Scoaterea factorilor de sub radical",
+   "Ordinea efectuării operațiilor",
+   "Paranteze",
+   "Operații cu modulul unui număr real",
+   "Proprietăți importante ale modulului",
+   "Modulul unui produs",
+   "Modulul unui cât",
+   "Ridicarea la putere a modulului",
+   "Proprietatea triunghiului",
+   "Proprietatea triunghiului invers"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c7/modul-2/09.mdx",
+  "transcript": "transcripts/c7/modul-2/09.md",
+  "ruta": "/docs/c7/modul-2/09",
+  "identitate": "MAT-07-C15-0-0",
+  "titlu": "C15 - Operații cu mulțimi (recapitulare)",
+  "titluri": [
+   "Relații între mulțimi",
+   "Submulțimi",
+   "Mulțimea vidă și submulțimile improprii",
+   "Mulțimea părților",
+   "Operații cu mulțimi",
+   "Intersecția mulțimilor",
+   "Reuniunea mulțimilor",
+   "Diferența a două mulțimi",
+   "Aplicație"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c7/modul-2/10.mdx",
+  "transcript": "transcripts/c7/modul-2/10.md",
+  "ruta": "/docs/c7/modul-2/10",
+  "identitate": "MAT-07-C16-0-0",
+  "titlu": "C16 - Apartenența la o mulțime",
+  "titluri": [
+   "Noțiuni de bază",
+   "Exemple de apartenență la mulțimi",
+   "Criterii de apartenență la mulțimi"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c7/modul-3/01.mdx",
+  "transcript": "transcripts/c7/modul-3/01.md",
+  "ruta": "/docs/c7/modul-3/01",
+  "identitate": "MAT-07-C17-1-0",
+  "titlu": "C17.1 - Sistem de axe ortogonale în plan",
+  "titluri": [
+   "Definiții și Exemple",
+   "Cum asociem unei perechi de numere $(a, b)$ un punct din plan folosind un sistem de axe ortogonale?"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c7/modul-3/02.mdx",
+  "transcript": "transcripts/c7/modul-3/02.md",
+  "ruta": "/docs/c7/modul-3/02",
+  "identitate": "MAT-07-C17-2-0",
+  "titlu": "C17.2 - Distanţa dintre două puncte din plan",
+  "titluri": [
+   "Introducere",
+   "Formulă",
+   "Exersează",
+   "PROBLEMĂ REZOLVATĂ"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c7/modul-3/03.mdx",
+  "transcript": "transcripts/c7/modul-3/03.md",
+  "ruta": "/docs/c7/modul-3/03",
+  "identitate": "MAT-07-C17-3-0",
+  "titlu": "C17.3 - Reprezentarea şi interpretarea unor dependenţe funcţionale prin tabele, diagrame şi grafice",
+  "titluri": [
+   "Important"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c7/modul-3/04.mdx",
+  "transcript": "transcripts/c7/modul-3/04.md",
+  "ruta": "/docs/c7/modul-3/04",
+  "identitate": "MAT-07-C17-4-0",
+  "titlu": "C17.4 - Poligonul frecvenţelor",
+  "titluri": [
+   "Exersează"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c7/modul-3/06.mdx",
+  "transcript": "transcripts/c7/modul-3/06.md",
+  "ruta": "/docs/c7/modul-3/06",
+  "identitate": "MAT-07-G07-1-0",
+  "titlu": "G7.1 - Unghi înscris în cerc, coarde şi arce în cerc",
+  "titluri": [
+   "Unghi înscris în cerc"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c7/modul-3/07.mdx",
+  "transcript": "transcripts/c7/modul-3/07.md",
+  "ruta": "/docs/c7/modul-3/07",
+  "identitate": "MAT-07-G07-2-0",
+  "titlu": "G7.2 - Tangente dintr-un punct exterior la un cerc",
+  "titluri": [
+   "Pentru a-ți aduce aminte, răspunde următoarele întrebări:",
+   "Cum construim tangenta la cerc într-un punct de pe cerc?",
+   "Răspunsuri",
+   "Cum construim tangenta la cerc dintr-un punct exterior cercului?",
+   "Teorema ciocului de cioară"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c7/modul-3/08.mdx",
+  "transcript": "transcripts/c7/modul-3/08.md",
+  "ruta": "/docs/c7/modul-3/08",
+  "identitate": "MAT-07-G07-3-0",
+  "titlu": "G7.3 - Poligoane regulate înscrise în cerc",
+  "titluri": [
+   "Observă și descoperă!",
+   "Important",
+   "Cum construiesc un pentagon regulat?",
+   "Justificare:",
+   "Exemplu:"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c7/modul-3/09.mdx",
+  "transcript": "transcripts/c7/modul-3/09.md",
+  "ruta": "/docs/c7/modul-3/09",
+  "identitate": "MAT-07-G07-4-0",
+  "titlu": "G7.4 - Lungimea cercului și aria discului",
+  "titluri": [
+   "<span style={{color: 'white', backgroundColor: '#6a1b9a', padding: '5px 10px'}}>Observă și descoperă!</span>",
+   "Lungimea cercului",
+   "Aria discului"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c7/modul-4/02.mdx",
+  "transcript": "transcripts/c7/modul-4/02.md",
+  "ruta": "/docs/c7/modul-4/03",
+  "identitate": "MAT-07-C18-2-0",
+  "titlu": "C18.2 - Funcții trigonometrice (proprietăți)",
+  "titluri": [
+   "Funcția sinus",
+   "Proprietățile funcției sinus:",
+   "Funcția cosinus",
+   "Proprietățile funcției cosinus:",
+   "Funcția tangentă",
+   "Proprietățile funcției tangentă:",
+   "Funcția cotangentă",
+   "Proprietățile funcției cotangentă:"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c7/modul-4/03.mdx",
+  "transcript": "transcripts/c7/modul-4/03.md",
+  "ruta": "/docs/c7/modul-4/02",
+  "identitate": "MAT-07-C18-1-0",
+  "titlu": "C18.1 - Funcții trigonometrice (demonstrații)",
+  "titluri": [
+   "Demonstrații",
+   "Demonstrația identității fundamentale",
+   "Demonstrația sinusului și cosinusului de 30 de grade",
+   "Demonstrația sinusului și cosinusului de 45 de grade",
+   "Demonstrația sinusului și cosinusului de 60 de grade"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c8/modul-1/01.mdx",
+  "transcript": "transcripts/c8/modul-1/01.md",
+  "ruta": "/docs/c8/modul-1/01",
+  "identitate": "MAT-08-C01-0-0",
+  "titlu": "C1 - Notații și simboluri matematice",
+  "titluri": [
+   "Cu numere",
+   "Cu puncte",
+   "Despre funcții",
+   "Pentru relații, mulțimi și raționamente"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c8/modul-1/02.md",
+  "transcript": "transcripts/c8/modul-1/02.md",
+  "ruta": "/docs/c8/modul-1/02",
+  "identitate": "MAT-08-C02-0-0",
+  "titlu": "C2 - Mulțimea nr. reale R",
+  "titluri": [
+   "Manipularea numerelor reale",
+   "Mulțimea $\\mathbb{R}$ și dreapta numerică",
+   "Intervalele din $\\mathbb{R}$",
+   "Intervale mărginite:",
+   "Intervale nemărginite:",
+   "Valoarea absolută a unui număr real",
+   "Distanța dintre două numere reale $a$ și $b$",
+   "Intervalul $[a-r ; a+r]$",
+   "Condiția $|x-a| \\leq r$",
+   "Alte mulțimi de numere",
+   "Mulțimea $\\mathbb{N}$ a numerelor naturale și $\\mathbb{Z}$ a numerelor întregi",
+   "Mulțimea $\\mathbb{Q}$ a numerelor raționale",
+   "Numere iraționale $\\mathbb{R} \\setminus \\mathbb{Q}$"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c8/modul-1/03.mdx",
+  "transcript": "transcripts/c8/modul-1/03.md",
+  "ruta": "/docs/c8/modul-1/03",
+  "identitate": "MAT-08-C03-1-0",
+  "titlu": "C3.1 – Egalitatea expresiilor literale. Distributivitate simplă",
+  "titluri": [
+   "Expresii literale egale",
+   "Metode",
+   "Testarea egalității a două expresii literale",
+   "Utilizarea proprietății de distributivitate simplă"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c8/modul-1/04.mdx",
+  "transcript": "transcripts/c8/modul-1/04.md",
+  "ruta": "/docs/c8/modul-1/04",
+  "identitate": "MAT-08-C03-2-0",
+  "titlu": "C3.2 – Dezvoltarea și simplificarea expresiilor literale",
+  "titluri": [
+   "Sumă sau produs",
+   "Metode",
+   "Simplificarea produselor",
+   "Simplificarea sumelor",
+   "Dezvoltarea (folosind distributivitatea simplă) și simplificarea"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c8/modul-1/05.mdx",
+  "transcript": "transcripts/c8/modul-1/05.md",
+  "ruta": "/docs/c8/modul-1/05",
+  "identitate": "MAT-08-C03-3-0",
+  "titlu": "C3.3 - Dublă distributivitate și identitate remarcabilă",
+  "titluri": [
+   "Dezvoltare folosind dubla distributivitate",
+   "Dezvoltare folosind identitatea remarcabilă",
+   "Observație"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c8/modul-1/06.mdx",
+  "transcript": "transcripts/c8/modul-1/06.md",
+  "ruta": "/docs/c8/modul-1/06",
+  "identitate": "MAT-08-C04-0-0",
+  "titlu": "C4 - Intervale si comparatii in multimea nr. reale",
+  "titluri": [],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c8/modul-1/07.mdx",
+  "transcript": "transcripts/c8/modul-1/07.md",
+  "ruta": "/docs/c8/modul-1/07",
+  "identitate": "MAT-08-C05-0-0",
+  "titlu": "C5 - Inecuatii de forma ax + b",
+  "titluri": [
+   "Definite",
+   "Proprietăți ale relației de inegalitate",
+   "Exemple"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c8/modul-1/08.mdx",
+  "transcript": "transcripts/c8/modul-1/08.md",
+  "ruta": "/docs/c8/modul-1/08",
+  "identitate": "MAT-08-C06-0-0",
+  "titlu": "C6 – Raționalizarea numitorului folosind conjugata",
+  "titluri": [
+   "Introducere",
+   "Conjugatul unui număr",
+   "Metoda de raționalizare pentru numitor de forma a + b√c",
+   "Exemple",
+   "Metoda de raționalizare pentru numitor de forma a - b√c",
+   "Exemple",
+   "Proprietăți și observații",
+   "Exemplu de aplicare",
+   "Metoda de raționalizare pentru numitor de forma √a ± √b",
+   "Exemple"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c8/modul-1/09.mdx",
+  "transcript": "transcripts/c8/modul-1/09.md",
+  "ruta": "/docs/c8/modul-1/09",
+  "identitate": "MAT-08-C07-0-0",
+  "titlu": "C7 - Fracții: amplificarea și simplificarea",
+  "titluri": [
+   "Simplificarea unei fracții",
+   "Fracția ireductibilă",
+   "Metode",
+   "Simplificarea unei fracții",
+   "Forma ireductibilă",
+   "Metoda 1 - Simplificare pas cu pas",
+   "Metoda 2 - Descompunerea în produs de factori primi",
+   "Amplificarea unei fracții",
+   "Metode",
+   "Proprietați"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c8/modul-1/10.md",
+  "transcript": "transcripts/c8/modul-1/10.md",
+  "ruta": "/docs/c8/modul-1/10",
+  "identitate": "MAT-08-C08-1-0",
+  "titlu": "C8.1 - Calcul literar: expresii algebrice",
+  "titluri": [
+   "Expresii algebrice",
+   "Reducerea unei sume algebrice",
+   "Adunarea a două sume algebrice",
+   "Scăderea a două sume algebrice",
+   "Înmulțirea a două sume algebrice",
+   "REGULI DE SEMN"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c8/modul-1/11.mdx",
+  "transcript": "transcripts/c8/modul-1/11.md",
+  "ruta": "/docs/c8/modul-1/11",
+  "identitate": "MAT-08-C08-2-0",
+  "titlu": "C8.2 - Calcul literar: descompuneri în factori",
+  "titluri": [
+   "Dezvoltare și factorizare",
+   "Factorizarea unei expresii algebrice",
+   "Caz particular: diferența de pătrate"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c8/modul-1/12.mdx",
+  "transcript": "transcripts/c8/modul-1/12.md",
+  "ruta": "/docs/c8/modul-1/12",
+  "identitate": "MAT-08-G01-0-0",
+  "titlu": "G1 - Punct, dreaptă și plan",
+  "titluri": [
+   "Notații geometrice",
+   "Punctul și dreapta",
+   "Puncte coliniare",
+   "Drepte concurente",
+   "Planul",
+   "Drepte coplanare și necoplanare"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c8/modul-1/13.mdx",
+  "transcript": "transcripts/c8/modul-1/13.md",
+  "ruta": "/docs/c8/modul-1/13",
+  "identitate": "MAT-08-G02-0-0",
+  "titlu": "G2 - Relații între puncte, drepte și plane",
+  "titluri": [
+   "Punctul, dreapta, planul",
+   "Punctul",
+   "Dreapta",
+   "Pozițiile relative ale unui punct față de o dreaptă",
+   "Puncte coliniare și necoliniare",
+   "Planul",
+   "Determinarea dreptei",
+   "Axioma dreptei",
+   "Axioma paralelor (axioma lui Euclid)",
+   "Determinarea planului",
+   "Pozițiile relative a două drepte în spațiu",
+   "Pozițiile relative ale unei drepte față de un plan",
+   "Pozițiile relative a două plane"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c8/modul-1/14.mdx",
+  "transcript": "transcripts/c8/modul-1/14.md",
+  "ruta": "/docs/c8/modul-1/14",
+  "identitate": "MAT-08-C09-0-0",
+  "titlu": "C9 - Existența, amplificarea și simplificarea fracțiilor algebrice",
+  "titluri": [
+   "Introducere",
+   "Observație",
+   "a) $ E(x) = \\dfrac{7x + 1}{3x - 6}$",
+   "b) $E(x) = \\dfrac{5 - x^2}{x^2 + 6x}$",
+   "a) $$F(x) = \\dfrac{x^3}{4x - 8}$$",
+   "b) $F(x) = \\dfrac{x^2}{x^2 - 9}$",
+   "Operația de amplificare",
+   "Operația de simplificare",
+   "Observație"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c8/modul-1/15.mdx",
+  "transcript": "transcripts/c8/modul-1/15.md",
+  "ruta": "/docs/c8/modul-1/15",
+  "identitate": "MAT-08-G03-0-0",
+  "titlu": "G3 - Piramida",
+  "titluri": [],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c8/modul-2/01.mdx",
+  "transcript": "transcripts/c8/modul-2/01.md",
+  "ruta": "/docs/c8/modul-2/01",
+  "identitate": "MAT-08-C10-1-0",
+  "titlu": "C10.1 - Adunarea și scăderea fracțiilor algebrice",
+  "titluri": [
+   "Exemple",
+   "Metoda de Rezolvare",
+   "Exemple"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c8/modul-2/02.mdx",
+  "transcript": "transcripts/c8/modul-2/02.md",
+  "ruta": "/docs/c8/modul-2/02",
+  "identitate": "MAT-08-C10-2-0",
+  "titlu": "C10.2 - Înmulțirea, împărțirea și ridicarea la putere a fracțiilor algebrice",
+  "titluri": [
+   "Înmulțirea fracțiilor algebrice",
+   "Exemplul 1",
+   "Exemplul 2",
+   "Exemplul 3",
+   "Împărțirea fracțiilor algebrice",
+   "Exemplul 1",
+   "Exemplul 2",
+   "Exemplul 3",
+   "Ridicarea la putere a fracțiilor algebrice",
+   "Exemplul 1",
+   "Exemplul 2",
+   "Exemplul 3"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c8/modul-2/03.mdx",
+  "transcript": "transcripts/c8/modul-2/03.md",
+  "ruta": "/docs/c8/modul-2/03",
+  "identitate": "MAT-08-C10-3-0",
+  "titlu": "C10.3 - Ordinea efectuării operațiilor a fracțiilor algebrice",
+  "titluri": [
+   "Ordinea efectuării operațiilor cu fracții algebrice",
+   "Exemplu",
+   "Exemplu",
+   "Exemplu",
+   "Exemplu"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c8/modul-2/04.mdx",
+  "transcript": "transcripts/c8/modul-2/04.md",
+  "ruta": "/docs/c8/modul-2/04",
+  "identitate": "MAT-08-C11-0-0",
+  "titlu": "C11 - Ecuația de gradul al doilea",
+  "titluri": [
+   "Forma generală",
+   "Discriminantul ecuației",
+   "Cazuri posibile",
+   "Exemple",
+   "Exemplul 1",
+   "Exemplul 2",
+   "Exemplul 3",
+   "5. Observație",
+   "Exemplul 4"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c8/modul-2/05.mdx",
+  "transcript": "transcripts/c8/modul-2/05.md",
+  "ruta": "/docs/c8/modul-2/05",
+  "identitate": "MAT-08-G04-1-0",
+  "titlu": "G4.1 - Prisma dreaptă",
+  "titluri": [],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c8/modul-2/06.mdx",
+  "transcript": "transcripts/c8/modul-2/06.md",
+  "ruta": "/docs/c8/modul-2/06",
+  "identitate": "MAT-08-G04-2-0",
+  "titlu": "G4.2 - Prisma regulată (arii și volum)",
+  "titluri": [
+   "Definiții și tipuri de prisme regulate",
+   "Arii specifice prismelor regulate",
+   "Aria bazei",
+   "Aria laterală",
+   "Aria totală",
+   "Volumul prismei regulate",
+   "Exemple rezolvate",
+   "Exemplul 1",
+   "Rezolvare",
+   "Exemplul 2",
+   "Rezolvare"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c8/modul-2/07.mdx",
+  "transcript": "transcripts/c8/modul-2/07.md",
+  "ruta": "/docs/c8/modul-2/07",
+  "identitate": "MAT-08-G05-1-0",
+  "titlu": "G5.1 - Cilindrul circular drept",
+  "titluri": [
+   "Desen și elemente",
+   "Desfășurarea unui cilindru circular drept",
+   "Secțiuni în cilindrul circular drept",
+   "Secțiuni paralele cu baza",
+   "Secțiunea axială"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c8/modul-2/08.mdx",
+  "transcript": "transcripts/c8/modul-2/08.md",
+  "ruta": "/docs/c8/modul-2/08",
+  "identitate": "MAT-08-G05-2-0",
+  "titlu": "G5.2 - Cilindrul circular drept (arii și volum)",
+  "titluri": [
+   "Elemente ale cilindrului",
+   "Formule",
+   "Aria bazei",
+   "Aria laterală",
+   "Aria totală",
+   "Volumul",
+   "Exemple",
+   "Exemplul 1",
+   "Rezolvare",
+   "Exemplul 2",
+   "Rezolvare"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c8/modul-2/09.mdx",
+  "transcript": "transcripts/c8/modul-2/09.md",
+  "ruta": "/docs/c8/modul-2/09",
+  "identitate": "MAT-08-C13-0-0",
+  "titlu": "C13 - Mărimi și unități de măsură",
+  "titluri": [],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c8/modul-2/10.mdx",
+  "transcript": "transcripts/c8/modul-2/10.md",
+  "ruta": "/docs/c8/modul-2/10",
+  "identitate": "MAT-08-C01-0-0",
+  "titlu": "C1* | EXTRA - Triunghiuri asemenea (recapitulare)",
+  "titluri": [
+   "Definiție",
+   "Notații",
+   "Demonstrație"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c8/modul-2/11.mdx",
+  "transcript": "transcripts/c8/modul-2/11.md",
+  "ruta": "/docs/c8/modul-2/11",
+  "identitate": "MAT-08-C02-0-0",
+  "titlu": "C2* | EXTRA - Triunghiul dreptunghic. Teorema lui Pitagora",
+  "titluri": [
+   "Proprietăți",
+   "Teorema lui Pitagora",
+   "Recunoașterea unui triunghi dreptunghic",
+   "Exemplu curs"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c8/modul-3/02.mdx",
+  "transcript": "transcripts/c8/modul-3/02.md",
+  "ruta": "/docs/c8/modul-3/02",
+  "identitate": "MAT-08-C14-1-0",
+  "titlu": "C14.1 - Descompuneri în factori utilizând reguli de calcul în ℝ (factor comun)",
+  "titluri": [
+   "Metoda de rezolvare",
+   "Redactare",
+   "Model de rezolvare",
+   "Exersează!"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c8/modul-3/03.mdx",
+  "transcript": "transcripts/c8/modul-3/03.md",
+  "ruta": "/docs/c8/modul-3/03",
+  "identitate": "MAT-08-C14-2-0",
+  "titlu": "C14.2 - Descompuneri în factori utilizând reguli de calcul în ℝ (formule de calcul prescurtat)",
+  "titluri": [
+   "Definiție",
+   "Exemplul 1",
+   "Analiza procesului:",
+   "Exemplul 2",
+   "Analiza procesului:",
+   "Exemplul 3",
+   "Analiza procesului:"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c8/modul-3/04.mdx",
+  "transcript": "transcripts/c8/modul-3/04.md",
+  "ruta": "/docs/c8/modul-3/04",
+  "identitate": "MAT-08-C14-3-0",
+  "titlu": "C14.3 - Descompuneri în factori utilizând reguli de calcul în ℝ (grupare de termeni)",
+  "titluri": [
+   "Observație",
+   "Exemplul 1: Grupare prin factor comun parțial",
+   "Exemplul 2: Grupare folosind formule de calcul prescurtat"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c8/modul-3/06.mdx",
+  "transcript": "transcripts/c8/modul-3/06.md",
+  "ruta": "/docs/c8/modul-3/06",
+  "identitate": "MAT-08-G06-1-0",
+  "titlu": "G6.1 - Paralelism: drepte paralele; unghiul a două drepte",
+  "titluri": [
+   "Drepte în spațiu",
+   "Proprietate",
+   "Observă și descoperă!",
+   "Exercițiu",
+   "Proprietăți ale dreptelor concurente"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c8/modul-3/07.mdx",
+  "transcript": "transcripts/c8/modul-3/07.md",
+  "ruta": "/docs/c8/modul-3/07",
+  "identitate": "MAT-08-G06-2-0",
+  "titlu": "G6.2 - Dreapta paralelă cu planul",
+  "titluri": [
+   "Observă și descoperă!",
+   "Demonstrație"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c8/modul-3/08.mdx",
+  "transcript": "transcripts/c8/modul-3/08.md",
+  "ruta": "/docs/c8/modul-3/08",
+  "identitate": "MAT-08-G07-0-0",
+  "titlu": "G7 - Conul circular drept",
+  "titluri": [
+   "Definiție",
+   "Elementele unui con circular drept:",
+   "Desfășurarea unui con circular drept:",
+   "Formule esențiale"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c8/modul-3/09.mdx",
+  "transcript": "transcripts/c8/modul-3/09.md",
+  "ruta": "/docs/c8/modul-3/09",
+  "identitate": "MAT-08-G08-1-0",
+  "titlu": "G8.1 - Trunchi de piramidă regulată",
+  "titluri": [
+   "Observație",
+   "Important"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c8/modul-3/10.mdx",
+  "transcript": "transcripts/c8/modul-3/10.md",
+  "ruta": "/docs/c8/modul-3/10",
+  "identitate": "MAT-08-G08-2-0",
+  "titlu": "G8.2 - Trunchi de con circular drept",
+  "titluri": [
+   "Notații"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c8/modul-4/00.mdx",
+  "transcript": "transcripts/c8/modul-4/00.md",
+  "ruta": "/docs/c8/modul-4/00",
+  "identitate": "MAT-08-C15-0-0",
+  "titlu": "C15 - Funcția de gradul I și graficul acesteia",
+  "titluri": [],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c8/modul-4/02.mdx",
+  "transcript": "transcripts/c8/modul-4/02.md",
+  "ruta": "/docs/c8/modul-4/03",
+  "identitate": "MAT-08-C16-2-0",
+  "titlu": "C16.2 - Funcții trigonometrice (proprietăți)",
+  "titluri": [
+   "Funcția sinus",
+   "Proprietățile funcției sinus:",
+   "Funcția cosinus",
+   "Proprietățile funcției cosinus:",
+   "Funcția tangentă",
+   "Proprietățile funcției tangentă:",
+   "Funcția cotangentă",
+   "Proprietățile funcției cotangentă:"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c8/modul-4/03.mdx",
+  "transcript": "transcripts/c8/modul-4/03.md",
+  "ruta": "/docs/c8/modul-4/02",
+  "identitate": "MAT-08-C16-1-0",
+  "titlu": "C16.1 - Funcții trigonometrice (demonstrații)",
+  "titluri": [
+   "Demonstrații",
+   "Demonstrația identității fundamentale",
+   "Demonstrația sinusului și cosinusului de 30 de grade",
+   "Demonstrația sinusului și cosinusului de 45 de grade",
+   "Demonstrația sinusului și cosinusului de 60 de grade"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c8/modul-4/04.mdx",
+  "transcript": "transcripts/c8/modul-4/04.md",
+  "ruta": "/docs/c8/modul-4/04",
+  "identitate": "MAT-08-C17-0-0",
+  "titlu": "C17 - Elemente de statistică: indicatorii tendinței centrale (frecvență, medie, mediană, mod și amplitudine a unui set de date)",
+  "titluri": [
+   "Exemplu:",
+   "Frecvența",
+   "Exemplu:",
+   "Modul",
+   "Exemplu:",
+   "Amplitudinea",
+   "Exemplu:",
+   "Media",
+   "Exemplu:",
+   "Mediana",
+   "Exemplu:",
+   "Exemplu:"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/edupasi/c5/modul-1/01.md",
+  "transcript": "transcripts/edupasi/c5/modul-1/01.md",
+  "ruta": "/docs/edupasi/c5/modul-1/01",
+  "identitate": "MAT-05-C01-0-1",
+  "titlu": "C1 - Scrierea sub forma zecimala",
+  "titluri": [
+   "Definiție",
+   "Reprezentarea pozițională",
+   "Citirea numerelor zecimale",
+   "Scrierea numerelor zecimale",
+   "Conversii",
+   "Cifră vs Număr",
+   "Operații cu puteri zecimale",
+   "Aproximări"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/edupasi/c5/modul-1/02.md",
+  "transcript": "transcripts/edupasi/c5/modul-1/02.md",
+  "ruta": "/docs/edupasi/c5/modul-1/02",
+  "identitate": "MAT-05-C02-0-1",
+  "titlu": "C2 - Adunarea și scăderea nr. zecimale",
+  "titluri": [
+   "Generalități",
+   "Metoda",
+   "Adunarea și scăderea numerelor zecimale prin poziționare",
+   "Exemple practice",
+   "Reținutul",
+   "Operații"
+  ],
+  "stare": "lipsa"
+ },
+ {
+  "sursa": "docs/c6/modul-1/01.md",
+  "transcript": "transcripts/c6/modul-1/01.md",
+  "ruta": "/docs/c6/modul-1/01",
+  "identitate": "MAT-06-C01-0-0",
+  "titlu": "C1 - Multiplii si divizori",
+  "titluri": [
+   "Vocabular",
+   "Criterii de divizibilitate",
+   "Exemple"
+  ],
+  "stare": "aprobat"
+ },
+ {
+  "sursa": "docs/c6/modul-1/02.md",
+  "transcript": "transcripts/c6/modul-1/02.md",
+  "ruta": "/docs/c6/modul-1/02",
+  "identitate": "MAT-06-C02-0-0",
+  "titlu": "C2 - Numere prime. Descompunerea in factori primi",
+  "titluri": [
+   "Numere prime",
+   "Metode",
+   "1. Demonstrația că un număr nu este prim",
+   "2. Descompunerea unui număr în produs de factori primi"
+  ],
+  "stare": "aprobat"
+ },
+ {
+  "sursa": "docs/c6/modul-1/04.md",
+  "transcript": "transcripts/c6/modul-1/04.md",
+  "ruta": "/docs/c6/modul-1/04",
+  "identitate": "MAT-06-C04-0-0",
+  "titlu": "C4 - Multimea nr. intregi Z",
+  "titluri": [
+   "Numere întregi",
+   "Metode",
+   "Reperarea pe o dreaptă gradată",
+   "Reperarea în plan"
+  ],
+  "stare": "aprobat"
+ },
+ {
+  "sursa": "docs/c6/modul-1/05.mdx",
+  "transcript": "transcripts/c6/modul-1/05.md",
+  "ruta": "/docs/c6/modul-1/05",
+  "identitate": "MAT-06-C05-1-0",
+  "titlu": "C5.1 – Diagrame în bastoane și histograme",
+  "titluri": [
+   "Citirea unei diagrame în bastoane sau a unei histograme",
+   "Exemplu de citire",
+   "Construirea unei diagrame în bastoane sau a unei histograme"
+  ],
+  "stare": "aprobat"
+ },
+ {
+  "sursa": "docs/c6/modul-1/07.mdx",
+  "transcript": "transcripts/c6/modul-1/07.md",
+  "ruta": "/docs/c6/modul-1/07",
+  "identitate": "MAT-06-C05-3-0",
+  "titlu": "C5.3 - Procente. Calcul procentual",
+  "titluri": [
+   "Definiție",
+   "Proprietăți",
+   "Metode de calcul",
+   "Aplicarea unui procent",
+   "Calcularea unui procent"
+  ],
+  "stare": "aprobat"
+ },
+ {
+  "sursa": "docs/c6/modul-1/09.mdx",
+  "transcript": "transcripts/c6/modul-1/09.md",
+  "ruta": "/docs/c6/modul-1/09",
+  "identitate": "MAT-06-C05-5-0",
+  "titlu": "C5.5 - Rapoarte",
+  "titluri": [
+   "Definiții",
+   "Reprezentări grafice ale fracțiilor",
+   "Reprezentări pe axă ale fracțiilor",
+   "Definiții rapoarte",
+   "Reprezentare grafică",
+   "Exemplu practic",
+   "Metodă: Partajarea unei cantități după un raport dat"
+  ],
+  "stare": "aprobat"
+ },
+ {
+  "sursa": "docs/c6/modul-1/10.mdx",
+  "transcript": "transcripts/c6/modul-1/10.md",
+  "ruta": "/docs/c6/modul-1/10",
+  "identitate": "MAT-06-C05-6-0",
+  "titlu": "C5.6 - Scara numerică",
+  "titluri": [
+   "Definiții",
+   "Metode",
+   "1. Calcularea unei lungimi folosind o scară",
+   "2. Calcularea unei scări"
+  ],
+  "stare": "aprobat"
+ },
+ {
+  "sursa": "docs/c6/modul-1/12.mdx",
+  "transcript": "transcripts/c6/modul-1/12.md",
+  "ruta": "/docs/c6/modul-1/12",
+  "identitate": "MAT-06-C06-1-0",
+  "titlu": "C6.1 - Mărimi direct proporționale",
+  "titluri": [
+   "Definiție",
+   "Proprietăți",
+   "Mulțimi de numere",
+   "Probleme rezolvate"
+  ],
+  "stare": "aprobat"
+ },
+ {
+  "sursa": "docs/c6/modul-1/14.mdx",
+  "transcript": "transcripts/c6/modul-1/14.md",
+  "ruta": "/docs/c6/modul-1/14",
+  "identitate": "MAT-06-C06-3-0",
+  "titlu": "C6.3 - Regula de trei simplă",
+  "titluri": [
+   "Reprezentarea grafică a dependenței d.p.",
+   "Regula de trei simplă pentru direct proporționalitate",
+   "Exemple",
+   "Reprezentarea grafică a dependenței i.p.",
+   "Regula de trei simplă pentru invers proporționalitate"
+  ],
+  "stare": "aprobat"
+ }
+]

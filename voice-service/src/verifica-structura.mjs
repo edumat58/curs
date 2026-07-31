@@ -260,6 +260,17 @@ export function verifica(caleTranscript) {
   const latex = faraFormule.match(/\\[a-zA-Z]{2,}/g);
   if (latex) probleme.push(`LaTeX în afara formulelor: ${[...new Set(latex)].slice(0, 5).join(' ')}`);
   if (/<[A-Za-z][A-Za-z0-9\s]{4,}>/.test(text)) probleme.push('marcaj lung <...>');
+  /**
+   * Marcajul de literă e pentru TEXT, nu pentru formulă.
+   *
+   * În `$...$` KaTeX nu-l înțelege și îl scrie literal: elevul vede „<a>=<b>"
+   * în loc de simboluri. La rostire sună bine, deci greșeala trece neobservată
+   * până se uită cineva la ecran. Formulele se iau ca PERECHI de dolari —
+   * o expresie lacomă prinde textul DINTRE două formule și dă alarme false.
+   */
+  for (const f of String(text).matchAll(/\$([^$\n]+)\$/g)) {
+    if (/<[a-zA-Z]>/.test(f[1])) probleme.push(`marcaj de literă în formulă: $${f[1].slice(0, 40)}$`);
+  }
   if (/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/.test(text)) probleme.push('caractere de control');
   if (/\b(be|capa|igrec|ics|zet)\b/i.test(faraFormule)) probleme.push('nume fonetice de litere în textul scris');
   /**
