@@ -267,47 +267,54 @@ export function createGeminiTts(env = process.env) {
       if (!clean) throw new Error('Text gol pentru sinteză.');
 
       /**
-       * Sintetizăm pe propoziții și concatenăm — două motive: (1) fiecare cerere
-       * rămâne sub limita de tokeni a modelului, (2) știm durata EXACTĂ a fiecărei
-       * propoziții din lungimea PCM, deci alinierea pornește de la granițe de
-       * propoziție deja corecte, nu doar din acustică.
+       * Sinteză ȘI ALINIERE pe fiecare bucată, nu pe lecția întreagă.
+       *
+       * Alinierea globală părea firească — un singur audio, un singur text — dar
+       * are un defect fatal cu un motor generativ: dacă modelul repetă un pasaj
+       * într-o bucată, alinierea încearcă să întindă TOT textul peste TOT
+       * audio-ul, iar decalajul se propagă până la sfârșitul lecției. Măsurat:
+       * clic pe o secțiune de la minutul doi ateriza cu zeci de secunde greșeală.
+       *
+       * Aliniind bucată cu bucată, fiecare își primește timpii din audio-ul EI,
+       * iar offset-ul e suma duratelor bucăților dinainte — mărimi exacte, nu
+       * estimate. O bucată stricată rămâne o bucată stricată; restul lecției
+       * rămâne sincronizat.
        */
-      /**
-       * O SINGURĂ cerere dacă textul încape — free tier-ul Gemini limitează
-       * numărul de CERERI, nu caracterele, iar vocea împarte bugetul cu modelul
-       * de text. Deci fiecare cerere economisită contează. Cădem pe bucăți doar
-       * dacă textul întreg e prea lung pentru o cerere.
-       */
-      let pcm;
-      if (clean.length <= 1400) {
-        pcm = await sintetizeazaBucata(clean);
-        if (onProgress) onProgress({ index: 1, total: 1 });
-      } else {
-        const bucati = bucatiText(clean);
-        const parti = [];
-        for (let i = 0; i < bucati.length; i += 1) {
-          parti.push(await sintetizeazaBucata(bucati[i]));
-          if (onProgress) onProgress({ index: i + 1, total: bucati.length });
+      const bucati = clean.length <= 1400 ? [clean] : bucatiText(clean);
+      const parti = [];
+      const words = [];
+      let offsetMs = 0;
+
+      for (let i = 0; i < bucati.length; i += 1) {
+        const pcm = await sintetizeazaBucata(bucati[i]);
+        parti.push(pcm);
+
+        const dir = await fs.mkdtemp(path.join(os.tmpdir(), 'voice-align-'));
+        const wavPath = path.join(dir, 'b.wav');
+        try {
+          await fs.writeFile(wavPath, pcmToWav(pcm));
+          const res = await Echogarden.align(wavPath, bucati[i], { language: 'ro', engine: 'dtw' });
+          for (const c of cuvinteDinTimeline(res, bucati[i])) {
+            words.push({ ...c, t: c.t + offsetMs });
+          }
+        } finally {
+          await fs.rm(dir, { recursive: true, force: true });
         }
-        pcm = Buffer.concat(parti);
+
+        offsetMs += Math.round((pcm.length / 24000 / 2) * 1000);
+        if (onProgress) onProgress({ index: i + 1, total: bucati.length });
       }
+
+      const pcm = Buffer.concat(parti);
       const sampleRate = 24000;
-      const wav = pcmToWav(pcm, sampleRate);
-      const durationSec = pcm.length / sampleRate / 2;
-
-      // aliniere forțată → timpi pe cuvinte
-      const dir = await fs.mkdtemp(path.join(os.tmpdir(), 'voice-align-'));
-      const wavPath = path.join(dir, 'a.wav');
-      let words = [];
-      try {
-        await fs.writeFile(wavPath, wav);
-        const res = await Echogarden.align(wavPath, clean, { language: 'ro', engine: 'dtw' });
-        words = cuvinteDinTimeline(res, clean);
-      } finally {
-        await fs.rm(dir, { recursive: true, force: true });
-      }
-
-      return { wav, durationSec, sampleRate, voice, words, chars: clean.length };
+      return {
+        wav: pcmToWav(pcm, sampleRate),
+        durationSec: pcm.length / sampleRate / 2,
+        sampleRate,
+        voice,
+        words,
+        chars: clean.length,
+      };
     },
   };
 }
