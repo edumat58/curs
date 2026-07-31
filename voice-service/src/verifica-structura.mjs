@@ -60,6 +60,13 @@ const CUVINTE_NUMAR = {
 
 export function numereDin(text) {
   const curat = String(text)
+    /**
+     * Spațierile LaTeX („\\[20pt]", „\\[8pt]") sunt așezare în pagină, nu
+     * conținut — aceeași speță ca atributele de stil: numerele lor sunt
+     * puncte tipografice, nu exemple. Lăsate în text, fiecare secțiune cu un
+     * bloc KaTeX aerisit părea să „ceară" transcriptului numerele 20, 10, 8.
+     */
+    .replace(/\\+\[\s*-?[\d.]+\s*(?:pt|em|ex|mu|cm|mm|in|bp)\s*\]/g, ' ')
     .replace(/\\,/g, '')
     .replace(/(\d)[\s.](?=\d{3}\b)/g, '$1')
     .replace(/(\d)\{,\}(\d)/g, '$1,$2')
@@ -90,7 +97,18 @@ export function inSectiuni(text, titluri) {
   const sectiuni = [];
   let cursorBrut = 0;
   for (let i = 0; i < titluri.length; i += 1) {
-    const re = new RegExp(titluri[i].replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\s+/g, '\\s+'), 'i');
+    /**
+     * Dolarul se potrivește și dublat: în sursă, o formulă din titlu poate fi
+     * scrisă `$$...$$` (pe rând separat), iar în transcript `$...$` — aceeași
+     * formulă, altă scriere. Fără toleranța asta, titlul nu era găsit în textul
+     * brut, secțiunea începea unde se terminase cea dinainte și înghițea corpul
+     * ei; verificatorul raporta apoi că exemplul „lipsește" din secțiunea greșită.
+     */
+    const tipar = titluri[i]
+      .replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+      .replace(/\s+/g, '\\s+')
+      .replace(/\\\$/g, '\\$+');
+    const re = new RegExp(tipar, 'i');
     const m = re.exec(text.slice(cursorBrut));
     const start = m ? cursorBrut + m.index : cursorBrut;
     if (i > 0) sectiuni[i - 1].pana = start;
@@ -131,6 +149,12 @@ export function verifica(caleTranscript) {
      * nu au ce căuta printre numerele cerute transcriptului.
      */
     .replace(/\s+style=\{\{[^}]*\}\}/g, '')
+    /**
+     * Comentariile JSX („{/* Figura 14a *\/}") sunt note pentru dezvoltator,
+     * nu conținut: numărul figurii nu se rostește niciodată — transcriptul
+     * nici nu are voie să pomenească figura ca obiect.
+     */
+    .replace(/\{\/\*[\s\S]*?\*\/\}/g, ' ')
     .replace(/<\/?(?:div|span|p|section|h[1-6]|br|hr)\b[^>]*\/?>/gi, ' ')
     /**
      * Îngroșarea Markdown e tot decor: titlurile ca „## Metoda 1 — Calculul
@@ -167,7 +191,20 @@ export function verifica(caleTranscript) {
        * unei drepte numerice sau gradațiile unei axe se VĂD pe ecran, nu se
        * recită. Ce e didactic din figură a ajuns deja în faptele ei.
        */
-      const aleSursei = numereDin(sectSursa[i].corp.replace(/\[FIGURĂ:[\s\S]*?\n\]/g, ' '));
+      /**
+       * Numerele care nu sunt conținut: legenda unei figuri („Fig. 1"), numărul
+       * ei de ordine. Nu se rostesc — vorbim despre ce ARATĂ desenul, nu despre
+       * al câtelea e — dar, numărate, făceau secțiunea să pară că a pierdut
+       * exemple pe care nu le-a avut niciodată.
+       */
+      const fara = sectSursa[i].corp
+        .replace(/\[FIGURĂ:[\s\S]*?\n\]/g, ' ')
+        .replace(/\bfig(?:ura)?\.?\s*\d+/gi, ' ')
+        // Numerotarea nu e conținut: „Exemplul 3", „Problema 2", „Pasul 1".
+        // Ele spun al câtelea e ceva, nu ce anume — iar cerute, făceau
+        // secțiunea să pară că a pierdut un exemplu pe care îl are întreg.
+        .replace(/\b(exemplul|exemplu|problema|pasul|etapa|cazul|definiția|observația|proprietatea|metoda)\s*\d+/gi, ' ');
+      const aleSursei = numereDin(fara);
       if (!aleSursei.length) continue;
       const aleTrans = new Set(numereDin(sectTrans[i].corp));
       const lipsesc = [...new Set(aleSursei)].filter((n) => !aleTrans.has(n));
@@ -210,7 +247,13 @@ export function verifica(caleTranscript) {
   if (/<[A-Za-z][A-Za-z0-9\s]{4,}>/.test(text)) probleme.push('marcaj lung <...>');
   if (/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/.test(text)) probleme.push('caractere de control');
   if (/\b(be|capa|igrec|ics|zet)\b/i.test(faraFormule)) probleme.push('nume fonetice de litere în textul scris');
-  if (/\bfigur[ăa]|imagine[a]?\b|desenul de mai/i.test(faraFormule)) avertismente.push('pomenește figura ca obiect');
+  /**
+   * „Imaginea" e și termen matematic, nu doar poză: imaginea lui <x> printr-o
+   * funcție, imaginea unui punct printr-o simetrie. Cerem context de desen —
+   * altfel lecția de funcții era semnalată la fiecare frază despre imagini.
+   */
+  const desen = /\bfigur[ăa]\b|\bdesenul\b|\bimaginea de (?:mai sus|alături)\b|\bîn imagine\b|\bimaginea al[ăa]turat[ăa]\b/i;
+  if (desen.test(faraFormule)) avertismente.push('pomenește figura ca obiect');
 
   // 5. Conversia la rostire nu lasă nimic în urmă.
   const rostit = toSpeakable(text);

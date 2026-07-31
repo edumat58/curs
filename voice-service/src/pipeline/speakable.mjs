@@ -536,6 +536,24 @@ export function toSpeakable(text, optiuni = {}) {
   out = out.replace(/[„”“‟«»‹›]/g, ' ').replace(/[’‘]/g, "'");
   out = out.replace(/…/g, '...');
 
+  /**
+   * Semnul de la exponentul unei mulțimi de numere nu e o putere: el restrânge
+   * mulțimea. `ℝ⁺` sunt reale POZITIVE, `ℝ⁻` cele NEGATIVE, `ℕ*` cele NENULE —
+   * așa le definesc manualele (mathema.ro, ematematica.ro, Wikipedia RO).
+   *
+   * Se poate citi și „R plus", „N steluță", dar numele întreg spune ce
+   * înseamnă, iar elevul care ascultă n-are figura în față ca să deducă. Numele
+   * mulțimii e deja desfăcut aici de `COMENZI`, deci prindem forma în cuvinte.
+   */
+  out = out
+    .replace(/(mulțimea numerelor \p{L}+)\s*\^\s*\+/gu, '$1 pozitive')
+    .replace(/(mulțimea numerelor \p{L}+)\s*\^\s*[-−]/gu, '$1 negative')
+    .replace(/(mulțimea numerelor \p{L}+)\s*\^\s*[*∗]/gu, '$1 nenule')
+    // Steluța rămasă pe altceva decât o mulțime de numere: „N*" citit la tablă.
+    // Regula stă ÎNAINTEA curățeniei de Markdown, care ar înghiți asteriscul și
+    // ar lăsa circumflexul orfan, nerostit.
+    .replace(/\s*\^\s*[*∗]/g, ' steluță');
+
   // Marcajele Markdown rămase. `>` se tratează mai jos: e și marcaj de citat,
   // și „mai mare decât".
   out = out.replace(/```[\s\S]*?```/g, ' ').replace(/[*_#`]+/g, ' ');
@@ -674,8 +692,18 @@ export function toSpeakable(text, optiuni = {}) {
      * Intervalele: `[1 ; 5]`, `[a, b]`. Paranteza dreaptă include capătul, cea
      * rotundă îl exclude — de aici „închis" și „deschis" (matera.ro, mathema.ro).
      */
-    .replace(/([[(])\s*(-?[\w,]+)\s*[;,]\s*(-?[\w,]+)\s*([\])])/g,
-      (_, st, a, b, dr) => ` intervalul ${st === '[' ? 'închis' : 'deschis'} la stânga și ${dr === ']' ? 'închis' : 'deschis'} la dreapta, de la ${a} la ${b} `)
+    /**
+     * Capetele pot fi și expresii, nu doar numere: `[0 ; +\infty)`. Cu tiparul
+     * vechi, care cerea un singur cuvânt, intervalele cu infinit rămâneau
+     * necitite — și tocmai ele apar la domeniile de definiție.
+     */
+    .replace(/([[(])\s*([^;,\[\]()]{1,26}?)\s*[;,]\s*([^;\[\]()]{1,26}?)\s*([\])])/g,
+      (_, st, a, b, dr) => {
+        // Semnul capătului se rostește aici: „−∞" e un cuvânt întreg, pe care
+        // regula generală de minus nu-l atinge (ea cere cifră sau literă).
+        const capat = (x) => String(x).replace(/^\+\s*/, '').replace(/^[-−]\s*/, 'minus ').trim();
+        return ` intervalul ${st === '[' ? 'închis' : 'deschis'} la stânga și ${dr === ']' ? 'închis' : 'deschis'} la dreapta, de la ${capat(a)} la ${capat(b)} `;
+      })
     // Ce rămâne — parantezele drepte de grupare — se aud ca pauză, ca și cele rotunde.
     .replace(/\s*\[\s*/g, ', ')
     .replace(/\s*\]\s*/g, ', ');
