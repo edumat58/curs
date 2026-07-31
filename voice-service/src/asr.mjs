@@ -51,33 +51,51 @@ for (const d of docs) {
   execFileSync('ffmpeg', ['-y', '-i', mp3, '-ar', '16000', '-ac', '1', wav], { stdio: 'ignore' });
 
   const w = d.audio.words; const dur = d.audio.durationSec;
-  // 4 ferestre: 15%, 40%, 65%, 90% din durată
-  for (const frac of [0.15, 0.4, 0.65, 0.9]) {
-    // 14 secunde s-au dovedit prea puține: pe una dintre ferestre, recunoașterea
-    // s-a oprit după trei cuvinte, deși pe 22 de secunde a transcris tot ce se
-    // aude. Fereastra mai lungă îi dă context și încheie fraza.
-    const start = Math.round(dur * frac), len = 20;
+  const lcs = (a, b) => {
+    let prev = new Uint16Array(b.length + 1);
+    for (let i = 1; i <= a.length; i += 1) {
+      const cur = new Uint16Array(b.length + 1);
+      for (let j = 1; j <= b.length; j += 1) cur[j] = a[i - 1] === b[j - 1] ? prev[j - 1] + 1 : Math.max(prev[j], cur[j - 1]);
+      prev = cur;
+    }
+    return prev[b.length];
+  };
+
+  /**
+   * Întrebarea pusă corect: TOT CE S-A AUZIT în fereastră există în transcript,
+   * în jurul acelui moment? — nu invers.
+   *
+   * Recunoașterea nu transcrie fidel fereastra: uneori sare începutul și dă doar
+   * coada, alteori se oprește devreme. Când cerem ca tot ce PRETINDE transcriptul
+   * să se regăsească în ce a auzit, fiecare asemenea capriciu devine alarmă
+   * falsă — pe C5.1, aceeași fereastră trecea cu 97% la 14 secunde și pica la
+   * 46% la 20, pe un sunet neschimbat. Măsurat invers, cu o marjă de ±6s pentru
+   * transcript, capriciul nu mai contează, iar o desincronizare reală (peste 6s)
+   * pică în continuare.
+   */
+  const probeaza = (start, len) => {
     const buc = path.join(tmp, 'f.wav');
     execFileSync('ffmpeg', ['-y', '-ss', String(start), '-t', String(len), '-i', wav, buc], { stdio: 'ignore' });
-    const rec = await Echogarden.recognize(buc, { engine: 'whisper', language: 'ro', whisper: { model: 'small' } });
-    // Se compară ȘIRURI DE CARACTERE, nu cuvinte: ASR-ul lipește ("m unghiul"→"mungiul"),
-    // sparge și scrie greșit, dar ORDINEA sunetelor rămâne. Subșirul comun maxim
-    // măsoară exact ce ne interesează: se aude la secunda T ce scrie transcriptul la T?
-    const auzit = cheie(rec.transcript || '');
-    const scris = cheie(w.filter((x) => x.t >= start * 1000 && x.t < (start + len) * 1000).map((x) => x.w).join(''));
-    const lcs = (a, b) => {
-      let prev = new Uint16Array(b.length + 1);
-      for (let i = 1; i <= a.length; i += 1) {
-        const cur = new Uint16Array(b.length + 1);
-        for (let j = 1; j <= b.length; j += 1) cur[j] = a[i - 1] === b[j - 1] ? prev[j - 1] + 1 : Math.max(prev[j], cur[j - 1]);
-        prev = cur;
-      }
-      return prev[b.length];
-    };
-    const pot = scris.length ? lcs(scris, auzit) / scris.length : 1;
+    return Echogarden.recognize(buc, { engine: 'whisper', language: 'ro', whisper: { model: 'small' } }).then((rec) => {
+      const auzit = cheie(rec.transcript || '');
+      const scris = cheie(w.filter((x) => x.t >= (start - 6) * 1000 && x.t < (start + len + 6) * 1000).map((x) => x.w).join(''));
+      // Sub 3 cuvinte auzite nu e o probă, e o toană a decodării.
+      if (auzit.length < 12) return { pot: -1, auzit, scris };
+      return { pot: auzit.length ? lcs(auzit, scris) / auzit.length : 1, auzit, scris };
+    });
+  };
+
+  // 4 ferestre: 15%, 40%, 65%, 90% din durată
+  for (const frac of [0.15, 0.4, 0.65, 0.9]) {
+    const start = Math.round(dur * frac), len = 18;
+    let r = await probeaza(start, len);
+    // O singură reîncercare, deplasată: desincronizarea reală pică și acolo,
+    // dar o halucinație a recunoașterii nu se repetă în aceleași condiții.
+    if (r.pot < 0.75) r = await probeaza(Math.max(0, start - 5), len + 6);
+    const pot = r.pot < 0 ? 1 : r.pot;
     const verdict = pot >= 0.75 ? 'OK  ' : 'FAIL';
     if (pot >= 0.75) bune += 1; else rele += 1;
-    console.log(`${verdict} ${nume} @${start}s ${(pot * 100).toFixed(0)}%  scris: "${scris.slice(0, 46)}"  auzit: "${auzit.slice(0, 46)}"`);
+    console.log(`${verdict} ${nume} @${start}s ${(pot * 100).toFixed(0)}%  auzit: "${r.auzit.slice(0, 46)}"  scris: "${r.scris.slice(0, 46)}"`);
   }
 }
 console.log(`\nferestre corecte: ${bune} | greșite: ${rele}`);

@@ -715,7 +715,16 @@ export function toSpeakable(text, optiuni = {}) {
      * deci nu pot fi luate drept scădere. Cifrele lipite rămân la regula de sus.
      */
     .replace(/(\d)\s*[-−–]\s*(?=\d)/g, '$1, minus ')
-    .replace(new RegExp(`(${OPERAND})\\s+[-−–]\\s+(?=${URMEAZA})`, 'gu'), '$1, minus ')
+    /**
+     * Ce stă după minus trebuie să poată FI un termen.
+     *
+     * Regula accepta orice, așa că fiecare titlu de lecție se auzea ca o
+     * scădere: „C9 minus Relații și operații între mulțimi". Cratima dintre
+     * codul lecției și numele ei desparte două lucruri, nu scade unul din
+     * celălalt. Un termen e o cifră, o variabilă (literă singură), un nume
+     * geometric (majuscule lipite) sau o paranteză — niciodată un cuvânt.
+     */
+    .replace(new RegExp(`(${OPERAND})\\s+[-−–]\\s+(?=\\d|[(√]|\\p{L}(?!\\p{L})|[A-Z]{2,4}(?![a-z])|modulul|radical)`, 'gu'), '$1, minus ')
     /**
      * Scăderea lipită de o literă: `1-a`, `100-x`.
      *
