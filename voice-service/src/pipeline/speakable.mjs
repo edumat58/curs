@@ -78,8 +78,19 @@ function litereSpatiate(grup) {
 }
 
 const COMENZI = [
-  // Fracțiile devin forma „3/4", pe care regula de mai jos o rostește „3 supra 4".
-  { nume: ['frac', 'dfrac', 'tfrac'], argumente: 2, iesire: (a, b) => `${a}/${b}` },
+  /**
+   * Fracția se rostește AICI, nu prin forma intermediară „3/4".
+   *
+   * Bara era lăsată pe seama unei reguli de la sfârșit, care cerea cifre de o
+   * parte și de alta. Din 105 fracții reale ale lecțiilor, cele cu litere
+   * treceau neatinse: `\dfrac{a}{b}` se auzea „a b" — adică un PRODUS în loc de
+   * un raport, fără ca ceva să pară în neregulă. Iar `\dfrac{a+b}{n}` pierdea
+   * și gruparea: „a plus b supra n" nu spune ce e deasupra barei.
+   *
+   * Se citește „supra", exact ca la tablă, și când numărătorul e o expresie:
+   * `\dfrac{a+b}{b}` se aude „a plus b supra b".
+   */
+  { nume: ['frac', 'dfrac', 'tfrac'], argumente: 2, iesire: (a, b) => ` ${a} supra ${b} ` },
   { nume: ['sqrt'], argumente: 1, iesire: (a) => `√${a}` },
   // Radicalul cu ordin, adus aici de pre-pasul care rescrie `\sqrt[3]{54}`.
   { nume: ['radord'], argumente: 2, iesire: (ord, x) => ` radical de ordinul ${ord} din ${x} ` },
@@ -367,6 +378,24 @@ const SIMBOLURI = [
   [/[≥⩾]/g, ' mai mare sau egal cu '],
   [/[∥‖]/g, ' paralel cu '],
   [/⊥/g, ' perpendicular pe '],
+  /**
+   * `m(∡AOB)` nu e „m" aplicat unui unghi: e MĂSURA unghiului AOB.
+   *
+   * Convertorul lua notația pe bucăți — „m", paranteza, apoi simbolul — și
+   * ieșea „m unghiul A O B", cu paranteza rămasă în text pe deasupra. La tablă
+   * nimeni nu citește așa: se spune „măsura unghiului A O B". Notația apare și
+   * fără paranteze (`m∡AOB`, de 16 ori în lecții), deci o prindem în ambele
+   * forme, ÎNAINTE ca simbolul să devină cuvânt.
+   */
+  [/\bm\s*\(\s*[∠∡∢]\s*([^()]*?)\s*\)/g, ' măsura unghiului $1 '],
+  [/\bm\s*[∠∡∢]\s*/g, ' măsura unghiului '],
+  /**
+   * Aceeași notație peste ce a desfăcut deja `COMENZI`: `m(\overset{\frown}{AB})`
+   * a devenit între timp „m( arcul A B )". Genitivul se face din „‑ul" → „‑ului",
+   * regulat pentru toate formele care apar aici (arcul, segmentul, triunghiul).
+   */
+  [/\bm\s*\(\s*(arcul|segmentul|triunghiul|semidreapta|dreapta)\s+([^()]*?)\s*\)/gi,
+    (_, nume, rest) => ` măsura ${nume.replace(/ul$/i, 'ului').replace(/a$/i, 'ei')} ${rest} `],
   [/[∠∡∢]/g, ' unghiul '],
   [/[∆Δ△](?=[A-Z])/g, ' triunghiul '],
   [/∈/g, ' aparține lui '],
@@ -401,6 +430,10 @@ const EXPONENTI = {
 function spusaPutere(exponent) {
   if (exponent === '2') return ' la pătrat ';
   if (exponent === '3') return ' la cub ';
+  // Exponentul negativ: „10⁻ⁿ" se aude „10 la puterea minus n". Fără asta,
+  // semnul rămâne mut și puterea negativă se confundă cu cea pozitivă.
+  const negativ = /^[-−–]\s*(.+)$/.exec(String(exponent));
+  if (negativ) return ` la puterea minus ${negativ[1]} `;
   return ` la puterea ${exponent} `;
 }
 
@@ -541,7 +574,25 @@ export function toSpeakable(text, optiuni = {}) {
    * dădea „la puterea este". Un exponent e ori numeric, ori o singură literă
    * (n, x, k) eventual cu cifră — nu un cuvânt.
    */
-  out = out.replace(/\^\s*(-?(?:\d+|[a-zA-Z]\d?))(?![\p{L}])/gu, (_all, exp) => spusaPutere(exp));
+  /**
+   * Exponentul NUMERIC se rostește oricând, chiar lipit de ce urmează: „10^9 m"
+   * ajunge aici „10^9m" (spațiul fin din LaTeX s-a dus), iar cu vechea condiție
+   * — nicio literă după — puterea rămânea nerostită tocmai la unitățile de
+   * măsură. Exponentul-LITERĂ păstrează condiția: altfel „2^ este" ar da
+   * „la puterea este".
+   */
+  out = out.replace(/\^\s*(-?\d+)/g, (_all, exp) => spusaPutere(exp));
+  out = out.replace(/\^\s*(-?[a-zA-Z]\d?)(?![\p{L}])/gu, (_all, exp) => spusaPutere(exp));
+
+  /**
+   * Grupul ridicat la putere se spune ÎNTREG, cât e încă între paranteze.
+   *
+   * `(-3)²` și `-3²` nu sunt același lucru — 9 față de −9 — iar la ureche s-ar
+   * confunda. „Totul la pătrat" e formula de la tablă care spune că puterea
+   * prinde toată paranteza. Regula stă aici, imediat după ce exponentul a
+   * devenit cuvânt și înainte ca parantezele să se piardă.
+   */
+  out = out.replace(/\(\s*([^()]{1,60}?)\s*\)\s*(la pătrat|la cub|la puterea [^\s,.]+)/g, '$1, totul $2 ');
 
   // Comparațiile: espeak taie „<" și „>" fără să scoată vreun sunet.
   out = out
@@ -564,16 +615,155 @@ export function toSpeakable(text, optiuni = {}) {
    * „A+" sau enumerări). Scăderea între cifre lipite („7-3") o prindem aici;
    * minusul dintr-un semn („rezultă -5") rămâne pentru `spokenMinus`.
    */
+  /**
+   * Un nume geometric e și el operand: `AB = 5`, `AB + CD`, `AOB = 45°`.
+   *
+   * Regulile cereau cifră sau paranteză, iar litera singură era prinsă abia mai
+   * jos — deci „AB = 5" se auzea „A B 5", cu egalul înghițit. Cel mai urât fel
+   * de greșeală: propoziția sună întreagă, dar relația dintre mărimi a dispărut.
+   * Numele geometrice sunt majuscule lipite (1-4 litere) și ajung aici încă
+   * nedesfăcute — literele se separă mai târziu — așa că le prindem ca atare.
+   */
+  /**
+   * Operanzii pot fi și litere: `a + b`, `AB = 5`, `x = y`.
+   *
+   * Regulile cereau cifre sau paranteze, ca să nu atingă „A+" ori enumerările.
+   * Prețul a fost mare: din formulele reale ale lecțiilor, 355 aveau un „+" și
+   * 334 un „=" nerostit, fiindcă un capăt era literă — „a înmulțit cu 100 + b"
+   * se auzea fără „plus", iar „AB = 5" fără „egal cu". Propoziția sună întreagă
+   * și relația dintre mărimi dispare: greșeala pe care nimeni n-o aude.
+   *
+   * Plusul și egalul nu au omonime în textul unei lecții de matematică, deci se
+   * pot prinde între orice operanzi. MINUSUL nu: „s-a", „într-o", „clasa a VI-a"
+   * sunt cratime, nu scăderi — el rămâne pe seama regulilor de mai jos, care cer
+   * cifre sau spații de o parte și de alta.
+   */
+  const OPERAND = '[\\p{L}\\d)%²³]';
+  const URMEAZA = '[\\p{L}\\d(√]';
+
+  /**
+   * Simplificarea scrisă ca exponent: `\dfrac{8}{10}^{(2}`.
+   *
+   * E o notație de manual românesc, nu LaTeX obișnuit: numărul mic cu paranteză
+   * arată cu cât se împarte fracția. Că despre împărțire e vorba o spune chiar
+   * materialul, care continuă `= \dfrac{8:2}{10:2}`. Netratată, ieșea „8 supra
+   * 10 la puterea, 2" — o putere care nu există.
+   */
+  out = out.replace(/\^\s*\{?\(\s*(\d+)\s*\}?/g, ' simplificat prin $1 ');
+
+  /**
+   * Modulul și bara din descrierea unei mulțimi sunt același semn, „|", cu două
+   * sensuri. Perechea închide un număr — `|-12|` e modulul; bara singură,
+   * într-o acoladă, desparte variabila de condiție: `{x | x este par}`.
+   */
   out = out
-    .replace(/([\d)%²³])\s*\+\s*(?=[\d(√])/g, '$1, plus ')
-    .replace(/([\d)%²³])\s*=\s*(?=[\s\d(√+-]|minus|radical)/g, '$1 egal cu ')
+    .replace(/\|\s*\{?\s*([^|{}]{1,24}?)\s*\}?\s*\|/g, ' modulul lui $1 ')
+    .replace(/\s\|\s/g, ' astfel încât ');
+
+  /**
+   * Parantezele drepte ale geometriei: `[AB]` e segmentul, `[OE` semidreapta
+   * închisă, `(OE` semidreapta deschisă — convenția din manualele românești
+   * (mateingimnaziu.ro, „Punct. Dreaptă. Semidreaptă. Segment"). Fără ele,
+   * elevul auzea „paranteză A B paranteză", adică nimic.
+   */
+  out = out
+    .replace(/\[\s*([A-Z][A-Z'′]?)\s*([A-Z][A-Z'′]?)\s*\]/g, ' segmentul $1 $2 ')
+    .replace(/\[\s*([A-Z])\s*([A-Z])\s*\)/g, ' semidreapta $1 $2 ')
+    .replace(/\[\s*([A-Z])\s*([A-Z])(?![\]\w])/g, ' semidreapta $1 $2 ')
+    /**
+     * Intervalele: `[1 ; 5]`, `[a, b]`. Paranteza dreaptă include capătul, cea
+     * rotundă îl exclude — de aici „închis" și „deschis" (matera.ro, mathema.ro).
+     */
+    .replace(/([[(])\s*(-?[\w,]+)\s*[;,]\s*(-?[\w,]+)\s*([\])])/g,
+      (_, st, a, b, dr) => ` intervalul ${st === '[' ? 'închis' : 'deschis'} la stânga și ${dr === ']' ? 'închis' : 'deschis'} la dreapta, de la ${a} la ${b} `)
+    // Ce rămâne — parantezele drepte de grupare — se aud ca pauză, ca și cele rotunde.
+    .replace(/\s*\[\s*/g, ', ')
+    .replace(/\s*\]\s*/g, ', ');
+
+  /**
+   * Notațiile cu paranteze se rezolvă ÎNAINTEA operatorilor, cât semnele sunt
+   * încă semne. După ce „+" a devenit cuvântul „plus", un `(` de după el pare
+   * lipit de o literă și orice regulă de alăturare s-ar declanșa greșit.
+   */
+  out = out
+    /** `f(x)` e o funcție, nu un produs: „f de x", ca „sinus de x". */
+    .replace(/\b([fgh])\s*\(\s*([^()]{1,14}?)\s*\)/gu, '$1 de $2')
+    /** `7(x + 2)`, `2(L+l)`, `3x(x-2)`: înmulțirea prin alăturare trebuie auzită. */
+    .replace(/([\d\p{L}])\s*\((?=[^()]*[+\-−])/gu, '$1 înmulțit cu (');
+
+  out = out
+    .replace(new RegExp(`(${OPERAND})\\s*\\+\\s*(?=${URMEAZA})`, 'gu'), '$1, plus ')
+    .replace(new RegExp(`(${OPERAND})\\s*=\\s*(?=[\\s+-]|${URMEAZA}|minus|radical)`, 'gu'), '$1 egal cu ')
     /**
      * Egalul dintre LITERE („a = b") rămânea nerostit: regula de mai sus cere
      * operanzi numerici. Aici îl prindem când de o parte și de alta stă o
      * literă singură — cazul formulelor cu variabile.
      */
     .replace(/(^|\s)([\p{L}])\s*=\s*(?=[\p{L}\d(√])/gu, '$1$2 egal cu ')
-    .replace(/(\d)\s*[-−–]\s*(?=\d)/g, '$1, minus ');
+    /**
+     * Egalul care ÎNCEPE o formulă: lecțiile continuă un calcul pe rândul
+     * următor cu `$= 0$` sau `$=\left(1-\dots\right)$`. Nu are operand la
+     * stânga, deci nicio regulă de mai sus nu-l prindea și rândul începea cu un
+     * semn mut.
+     */
+    .replace(/(^|[\s,])=\s*/gu, '$1egal cu ')
+    /**
+     * Scăderea cu operanzi-litere: `6 - x`, `a - b`.
+     *
+     * Cerem SPAȚIU de ambele părți, și pe asta se sprijină totul: cratimele
+     * românești n-au spații — „s-a", „într-o", „clasa a VI-a", „non-negativ" —
+     * deci nu pot fi luate drept scădere. Cifrele lipite rămân la regula de sus.
+     */
+    .replace(/(\d)\s*[-−–]\s*(?=\d)/g, '$1, minus ')
+    .replace(new RegExp(`(${OPERAND})\\s+[-−–]\\s+(?=${URMEAZA})`, 'gu'), '$1, minus ')
+    /**
+     * Scăderea lipită de o literă: `1-a`, `100-x`.
+     *
+     * Aici cratima chiar seamănă cu o scădere, cu o singură excepție care
+     * contează: ordinalele românești se scriu la fel — „a 6-a", „al 2-lea".
+     * Pe acelea le lăsăm în pace după terminație, nu după formă.
+     */
+    /**
+     * Ce deosebește scăderea `1-a` de ordinalul „a 6-a" nu e ce urmează după
+     * cratimă — de amândouă dățile o literă — ci ARTICOLUL dinaintea cifrei:
+     * ordinalele românești se scriu „a 6-a", „al 2-lea", niciodată fără el.
+     */
+    .replace(/(\d)[-−–]\s*(?=[\p{L}])/gu, (tot, cifra, poz, sir) => (
+      /\b(?:a|al)\s\d*$/.test(sir.slice(0, poz + 1)) ? tot : `${cifra}, minus `
+    ));
+
+  /**
+   * Parantezele: pauză, nu cuvânt.
+   *
+   * Rostite („paranteză minus trei paranteză"), ar apărea de peste 300 de ori
+   * într-o lecție de numere întregi și ar acoperi matematica cu recuzită.
+   * Lăsate ca semn, nu se aud deloc. Devin virgulă: pauza scurtă ține locul
+   * grupării. Vin DUPĂ operatori, fiindcă paranteza e ea însăși un operand
+   * („) + (") — desființată mai devreme, plusul dintre grupuri rămânea mut.
+   */
+  out = out
+    .replace(/\(\s*\+\s*([^()]{1,24}?)\s*\)/g, ' $1 ')
+    .replace(/\(\s*[-−]\s*([^()]{1,24}?)\s*\)/g, ', minus $1, ')
+    .replace(/\s*\(\s*/g, ', ')
+    .replace(/\s*\)\s*/g, ', ')
+    // Virgula lipită de „înmulțit cu" e o pauză în plus, fix acolo unde fraza
+    // trebuie să curgă: „2 înmulțit cu, L plus l" → „2 înmulțit cu L plus l".
+    .replace(/(înmulțit cu|de|supra),\s*/g, '$1 ');
+
+  /**
+   * Semnul rămas lipit de un număr, după ce operațiile și-au luat partea.
+   *
+   * Plusul unui număr pozitiv nu se rostește — „+3" este pur și simplu „3".
+   * Minusul, dimpotrivă, ESTE numărul: fără el „−12" s-ar auzi „12".
+   *
+   * Înaintea unei LITERE, minusul se rostește doar dacă litera e o variabilă —
+   * una singură, neurmată de altă literă. Altfel linia de dialog dintr-o
+   * problemă („— Bună!") s-ar auzi „minus Bună".
+   */
+  out = out
+    .replace(/(^|[\s,:;=])\+\s*(?=[\d\p{L}(,])/gu, '$1')
+    .replace(/(^|[\s,:;=(„"])[-−–]\s?(?=\d)/g, '$1minus ')
+    .replace(/(^|[\s,:;=(])[-−–]\s?(?=[\p{L}](?![\p{L}]))/gu, '$1minus ');
 
   // Împărțirea scrisă cu două puncte cere spații de o parte și de alta: așa se
   // scrie la clasă („12 : 4"), și tot așa se deosebește de o oră („12:30") sau

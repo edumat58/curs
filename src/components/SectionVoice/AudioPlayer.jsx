@@ -335,24 +335,30 @@ function Subtitrare({ words, currentMs, contentRoot, onSeek, formule }) {
         return bucati.map((b) => {
           if (b.tip === 'cuvant') {
             if (b.tok.formula) {
+              /**
+               * Formula e text, nu buton.
+               *
+               * A fost o vreme un jeton colorat, pe care se putea apăsa ca să
+               * sari la ea. Nu are ce căuta: transcriptul se citește, nu se
+               * navighează formulă cu formulă, iar culoarea trăgea ochiul spre
+               * ceva ce nu e mai important decât restul frazei. Primește exact
+               * stilul cuvintelor din jur, inclusiv urma de „citit până aici".
+               */
               const html = randeazaFormula(b.tok.formula);
-              const activa = b.i === idx;
+              const clasaF = b.i === idx ? styles.cuvantActiv : (b.i < idx ? styles.cuvantCitit : styles.cuvant);
               return (
                 // eslint-disable-next-line react/no-array-index-key
-                <button
+                <span
                   key={b.i}
-                  type="button"
-                  ref={activa ? activ : null}
-                  data-activ={activa ? '' : undefined}
-                  className={activa ? styles.formulaActiva : styles.formula}
-                  onClick={() => { if (onSeek && Number.isFinite(b.tok.t)) onSeek(b.tok.t); }}
-                  title="Sari la această formulă"
+                  ref={b.i === idx ? activ : null}
+                  data-activ={b.i === idx ? '' : undefined}
+                  className={clasaF}
                 >
                   {html
                     // eslint-disable-next-line react/no-danger
                     ? <span dangerouslySetInnerHTML={{ __html: html }} />
-                    : <code>{b.tok.formula}</code>}
-                </button>
+                    : b.tok.formula}
+                </span>
               );
             }
             const clasa = b.i === idx ? styles.cuvantActiv : (b.i < idx ? styles.cuvantCitit : styles.cuvant);
