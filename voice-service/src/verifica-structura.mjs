@@ -23,7 +23,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { curataSursa } from './pipeline/prompts.mjs';
-import { toSpeakable } from './pipeline/speakable.mjs';
+import { toSpeakable, LITERE_NEMARCABILE } from './pipeline/speakable.mjs';
 
 const RADACINA = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 
@@ -199,6 +199,21 @@ export function verifica(caleTranscript) {
        */
       const fara = sectSursa[i].corp
         .replace(/\[FIGURĂ:[\s\S]*?\n\]/g, ' ')
+        /**
+         * Tabloul de calcul pe coloană (`\begin{array}…\end{array}`) e AȘEZARE
+         * ÎN PAGINĂ, nu conținut rostit: cifrele lui sunt deja în rezultatul
+         * scris alături. Recitat, se aude „r 4, 4 8 înmulțit cu 2,3" — cu
+         * specificatorul de coloană citit ca literă. Cerut, obliga transcriptul
+         * exact la greșeala asta.
+         */
+        .replace(/\\begin\{array\}[\s\S]*?\\end\{array\}/g, ' ')
+        /**
+         * Grila de numere e tot desen: ciurul lui Eratostene e un tabel 10×10
+         * cu numerele tăiate sau îngroșate. Se VEDE dintr-o privire ce a rămas;
+         * rostit, înseamnă șaptezeci și ceva de cifre citite una câte una. Ce
+         * trebuie spus e lista de dedesubt, care chiar e text în lecție.
+         */
+        .replace(/^\|(?:[^|\n]*\d[^|\n]*\|){4,}\s*$/gm, ' ')
         .replace(/\bfig(?:ura)?\.?\s*\d+/gi, ' ')
         // Numerotarea nu e conținut: „Exemplul 3", „Problema 2", „Pasul 1".
         // Ele spun al câtelea e ceva, nu ce anume — iar cerute, făceau
@@ -259,6 +274,22 @@ export function verifica(caleTranscript) {
   const rostit = toSpeakable(text);
   const reziduu = rostit.match(/\\[a-zA-Z]{2,}|\$|\^|(?<!\d)[{}](?!\d)/g);
   if (reziduu) probleme.push(`rămân semne nerostite: ${[...new Set(reziduu)].slice(0, 6).join(' ')}`);
+  /**
+   * Marcajul de literă care nu are cum să fie rostit.
+   *
+   * `marcheazaLitere` cunoaște numele a 16 consoane și lasă vocalele așa cum
+   * sunt; pentru restul — c, d, l, p, t, ale căror nume sunt cuvinte curente —
+   * întoarce marcajul NEATINS. Un transcript cu `<C>` trecea deci de tot ce e
+   * mai sus și ajungea la sinteză cu parantezele în text: „litere mari de
+   * tipar:, A, be, <C>". Prins pe transcripts/c8/modul-1/12.md, unde
+   * verificatorul spunea „curate".
+   */
+  const litereNemarcate = rostit.match(/<[A-Za-z]>/g);
+  if (litereNemarcate) {
+    probleme.push(`marcaj de literă nerostit: ${[...new Set(litereNemarcate)].slice(0, 6).join(' ')}`
+      + ` — literele ${LITERE_NEMARCABILE.join(', ')} nu se pot marca (numele lor e cuvânt curent);`
+      + ' scrie-le ca literă simplă');
+  }
 
   return { probleme, avertismente };
 }

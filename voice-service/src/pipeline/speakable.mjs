@@ -924,6 +924,17 @@ const NUME_LITERE = {
  */
 const VOCALE_MARCATE = 'aeiou';
 
+/**
+ * Literele pe care marcajul `<x>` NU le poate rosti: nu sunt vocale (al căror
+ * nume E litera) și nu au nume în `NUME_LITERE`, fiindcă numele lor ar fi un
+ * cuvânt curent. `marcheazaLitere` le lasă atunci NEATINSE — cu paranteze
+ * unghiulare cu tot —, iar sinteza citește semnele. Lista se exportă ca să nu
+ * fie scrisă a doua oară în verificator: ce litere se pot marca se hotărăște
+ * într-un singur loc, aici.
+ */
+export const LITERE_NEMARCABILE = 'abcdefghijklmnopqrstuvwxyz'.split('')
+  .filter((l) => !VOCALE_MARCATE.includes(l) && !NUME_LITERE[l]);
+
 /** Marcajul literelor-simbol: `<k>`, `<a>`, `<B>` — o singură literă. */
 /**
  * Marcajul literelor-simbol: `<k>`, `<a>`, `<B>`.

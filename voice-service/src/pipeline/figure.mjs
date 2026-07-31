@@ -160,9 +160,26 @@ function elementeGenerate(markup) {
   return cuExpresii + generatoare;
 }
 
+/**
+ * Cât de scurtă poate fi o linie și să mai însemne ceva.
+ *
+ * Sub pragul ăsta nu mai e segment, ci SEMN: reperul de pe o axă, vârful unei
+ * săgeți, liniuța care marchează laturi egale. Măsurat pe o dreaptă numerică
+ * reală (pânză 500×150): reperele au 10 unități, adică 1,9% din diagonală, în
+ * timp ce segmentele adevărate dintr-o figură de geometrie trec de 20%.
+ *
+ * Netratate, semnele astea deveneau geometrie: eticheta „O" de deasupra axei și
+ * „0" de dedesubt sunt două nume ale ACELUIAȘI punct, iar reperul dintre ele
+ * ieșea „segmentul de la O la 0"; două repere de aceeași înălțime ieșeau
+ * „segmentele au aceeași lungime", iar reperul perpendicular pe axă ieșea
+ * „unghi drept cu vârful în O" — într-o lecție despre fracții.
+ */
+const LUNGIME_MINIMA = 0.05;
+
 /** Segmentele: din `<line>` și din laturile poligoanelor. */
-function readSegments(markup, labels, tolerance) {
+function readSegments(markup, labels, tolerance, size) {
   const segments = [];
+  const minim = (size || 400) * LUNGIME_MINIMA;
 
   for (const attrs of readTags(markup, 'line')) {
     const x1 = numberAttr(attrs, 'x1');
@@ -170,6 +187,7 @@ function readSegments(markup, labels, tolerance) {
     const x2 = numberAttr(attrs, 'x2');
     const y2 = numberAttr(attrs, 'y2');
     if ([x1, y1, x2, y2].some((v) => v === null)) continue;
+    if (Math.hypot(x2 - x1, y2 - y1) < minim) continue;
     segments.push({
       x1, y1, x2, y2,
       a: pointName(labels, x1, y1, tolerance),
@@ -243,7 +261,10 @@ function rightAngles(segments, labels, tolerance) {
 
 /** Segmentele de aceeași lungime — informația didactică din spatele desenului. */
 function equalGroups(segments) {
-  const named = segments.filter((s) => s.a && s.b && s.length > 0);
+  // Aceeași condiție ca la inventar: un segment are două capete DIFERITE.
+  // Fără ea, o linie ale cărei capete cad amândouă lângă eticheta „R" ieșea
+  // „segmentele RR și RR au aceeași lungime" — un fapt despre nimic.
+  const named = segments.filter((s) => s.a && s.b && s.a !== s.b && s.length > 0);
   const groups = [];
   for (const segment of named) {
     const group = groups.find(
@@ -269,7 +290,7 @@ export function describeFigure(markup) {
   const size = canvasSize(source);
   const tolerance = size * APROPIERE_ETICHETA;
   const labels = readLabels(source);
-  const segments = readSegments(source, labels, tolerance);
+  const segments = readSegments(source, labels, tolerance, size);
   const polygons = readPolygons(source, labels, tolerance);
 
   /**
