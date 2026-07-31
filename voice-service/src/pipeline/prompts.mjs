@@ -10,7 +10,7 @@
  * definițiile, formulele și figurile, narațiunea se sprijină pe fapte extrase,
  * nu pe asociații.
  */
-import { describeFigure } from './figure.mjs';
+import { describeFigure, inlocuiesteComponente } from './figure.mjs';
 
 /**
  * v2: analiza inventariază explicit exemplele din material, bugetul de vorbire
@@ -34,6 +34,14 @@ import { describeFigure } from './figure.mjs';
  * („0{,}1", „37\,540{,}85"), iar sinteza o rostea literal — numărul se auzea
  * rupt în cifre. Interdicția e acum explicită în prompt, deci explicațiile
  * generate cu v5 chiar sunt altele și trebuie refăcute.
+ *
+ * Citirea figurilor s-a schimbat de atunci (descrierea autorului, componentele
+ * care desenează, axele care nu mai devin segmente), iar materialul chiar
+ * diferă la 48 de lecții. Versiunea a rămas totuși 7, deliberat: ea invalidează
+ * TOT, iar dintre lecțiile care aveau explicație salvată doar una era afectată.
+ * Un plus de versiune ar fi șters patru înregistrări bune ca să repare una —
+ * aceea a fost regenerată direct. Versiunea se incrementează când se schimbă
+ * ceva pentru toată lumea, nu ca formalitate.
  */
 export const PROMPT_VERSION = 7;
 
@@ -68,9 +76,17 @@ function renderVisual(visual, index) {
   const lines = [`visuals[${index}] (desen geometric):`];
   if (visual.label) lines.push(`  titlu: ${visual.label}`);
   if (visual.description) lines.push(`  descriere: ${visual.description}`);
+  for (const d of figure.descrieri) lines.push(`  descrierea autorului: ${d}`);
   if (figure.meaningful) {
-    lines.push('  ce se vede în desen:');
-    figure.facts.forEach((fact) => lines.push(`    - ${fact}`));
+    // Ca la lecția întreagă: doar ce ÎNVAȚĂ desenul, nu lista liniilor din el.
+    if (figure.didactice.length) {
+      lines.push('  ce arată desenul:');
+      figure.didactice.forEach((fact) => lines.push(`    - ${fact}`));
+    }
+    if (figure.necitite) {
+      lines.push('  (figura mai are părți desenate din cod, pe care nu le poți vedea — '
+        + 'vorbește DOAR despre ce scrie mai sus și nu spune că descrii toată figura)');
+    }
   } else {
     lines.push('  desen fără conținut didactic (decorativ) — se ignoră complet.');
   }
@@ -227,23 +243,55 @@ export function imparteLectia(source, maxChars) {
  * prompturile, repararea și garda de fidelitate — o singură realitate.
  */
 export function curataSursa(mdx) {
-  return String(mdx || '')
-    .replace(/^---[\s\S]*?---\s*/, '')
-    .replace(/^\s*import\s.+$/gm, '')
-    .replace(/<svg[\s\S]*?<\/svg>/gi, (svg) => descrieFigura(svg))
-    .replace(/\n{3,}/g, '\n\n');
+  return inlocuiesteFiguri(
+    String(mdx || '')
+      .replace(/^---[\s\S]*?---\s*/, '')
+      .replace(/^\s*import\s.+$/gm, '')
+  ).replace(/\n{3,}/g, '\n\n');
 }
 
-function descrieFigura(svg) {
-  const fig = describeFigure(svg);
-  if (fig.meaningful && fig.facts.length) {
-    return `\n[FIGURĂ — ce se vede în desen:\n${fig.facts.map((f) => `  - ${f}`).join('\n')}\n]\n`;
+/**
+ * Figura, așa cum o citește modelul.
+ *
+ * Ordinea contează: descrierea scrisă de autor (`<title>`, `aria-label`) vine
+ * prima, fiindcă spune ce vrea figura să arate; geometria dedusă vine după, ca
+ * detaliu. Iar dacă figura are părți desenate din cod, pe care nu le putem
+ * citi, o spunem aici — altfel modelul primește un fragment și îl explică drept
+ * întreg desen.
+ */
+function scrieFigura(fig) {
+  const invata = (fig.descrieri || []).length + (fig.didactice || []).length;
+  // Fără nimic de învățat din ea, figura e decor: un bloc gol ar fi tot o figură
+  // în ochii modelului, adică o invitație să spună ceva despre ea.
+  if (!fig.meaningful || !invata) return '[figură decorativă — se ignoră]';
+  const linii = ['[FIGURĂ:'];
+  for (const d of fig.descrieri) linii.push(`  descrierea autorului: ${d}`);
+  if (fig.didactice && fig.didactice.length) {
+    linii.push('  ce arată desenul (asta se spune elevului):');
+    fig.didactice.forEach((f) => linii.push(`    - ${f}`));
   }
-  return '[figură decorativă — se ignoră]';
+  /**
+   * Inventarul de segmente NU se trimite deloc.
+   *
+   * A fost trimis ca „context, nu-l enumera" și modelul l-a enumerat oricum —
+   * ba a și inventat, dintr-o listă de trei segmente scoțând un al patrulea,
+   * „segmentul de la M la M", care nu exista nicăieri. Nu are cum să recite
+   * ceva ce nu primește, iar pierderea e zero: elevul VEDE desenul pe ecran,
+   * are nevoie de ce înseamnă el, nu de lista liniilor din care e făcut.
+   */
+  if (fig.necitite) {
+    linii.push('  (figura mai are părți desenate din cod, pe care nu le poți vedea — '
+      + 'vorbește DOAR despre ce scrie mai sus și nu spune că descrii toată figura)');
+  }
+  linii.push(']');
+  return `\n${linii.join('\n')}\n`;
 }
 
 export function inlocuiesteFiguri(mdx) {
-  return String(mdx).replace(/<svg[\s\S]*?<\/svg>/gi, (svg) => descrieFigura(svg));
+  return inlocuiesteComponente(
+    String(mdx).replace(/<svg[\s\S]*?<\/svg>/gi, (svg) => scrieFigura(describeFigure(svg))),
+    (fig) => scrieFigura(fig)
+  );
 }
 
 export function renderSource(section, maxChars = 12000) {
@@ -264,8 +312,10 @@ export function renderSource(section, maxChars = 12000) {
       'rescrii în altă formă („zece la puterea minus unu"). FORMULELE cu notație matematică',
       '(cele dintre $...$ sau din blocurile de formule) le COPIEZI între dolari, cu LaTeX-ul lor',
       'exact — elevul le vede randate, iar vocea le citește singură. Ordinea titlurilor este ordinea lecției.',
-      'Blocurile [FIGURĂ — ...] sunt desene din lecție, citite pentru tine: spui direct ce',
-      'arată desenul (punctele, laturile, unghiurile), fără să pomenești că există o figură.',
+      'Blocurile [FIGURĂ: ...] sunt desene din lecție, citite pentru tine: conțin DOAR ce',
+      'arată desenul — o egalitate, un unghi drept, o valoare. Le spui ca fapt, în fraza ta,',
+      'fără să pomenești că există o figură. Nu descrii desenul și nu enumeri linii: elevul',
+      'îl vede pe ecran, de la tine are nevoie de înțelesul lui.',
       '',
       '```mdx',
       inlocuiesteFiguri(section.sourceCode).slice(0, maxChars),
@@ -557,7 +607,7 @@ Fidelitate — regula cea mai importantă:
 
 Acoperire — a doua regulă ca importanță:
 - ABSOLUT FIECARE secțiune din material (fiecare titlu ## ȘI fiecare subtitlu ###) își are pasul ei cu titlul între [[...]], în ordinea din lecție. NICIO secțiune nu se sare, oricât de scurtă — dacă lecția are opt titluri și subtitluri, explicația are opt marcaje [[...]]. Înainte să închei, verifici că ai atins toate titlurile din material.
-- În fiecare secțiune parcurgi TOT ce apare: fiecare definiție, fiecare formulă, fiecare exemplu (cu valorile exacte), fiecare informație din figuri. Niciun punct nu se sare.
+- În fiecare secțiune parcurgi TOT ce apare: fiecare definiție, fiecare formulă, fiecare exemplu (cu valorile exacte), fiecare informație DIDACTICĂ din figuri. Niciun punct nu se sare. Inventarul de segmente dintr-un desen nu e informație didactică: nu se enumeră.
 - Respecți ordinea logică indicată.
 - Termini ce ai început. Ultima idee se spune la fel de complet ca prima, iar textul se încheie cu o frază terminată — niciodată la mijlocul unui gând.
 

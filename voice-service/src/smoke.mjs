@@ -65,6 +65,23 @@ const wordsL = cleanForSpeech('Fie <a> și <b> și <k>.').split(/\s+/).filter(Bo
 const refacut = repuneLitere(wordsL, per).map((w) => w.w).join(' ');
 T('nume fonetice refăcute în litere', !/\b(be|capa)\b/i.test(refacut), refacut);
 
+console.log('═══ C2. VERSIUNEA PROMPTULUI: aceeași de ambele părți ═══');
+/**
+ * Site-ul și serviciul își țin fiecare copia lui de `PROMPT_VERSION`, fiindcă
+ * unul rulează în browser și celălalt în Node. Dacă se despart, elevul cere un
+ * hash pe care serviciul nu l-a scris niciodată: lecția pare pur și simplu
+ * fără voce, fără nicio eroare nicăieri. Verificarea rulează din repo, unde
+ * ambele fișiere există.
+ */
+try {
+  const { PROMPT_VERSION: alService } = await import('./src/pipeline/prompts.mjs');
+  const alSite = /PROMPT_VERSION\s*=\s*(\d+)/.exec(fs.readFileSync('../src/lib/voice/cod.mjs', 'utf8'));
+  T('versiunea promptului e aceeași în site și în serviciu',
+    alSite && Number(alSite[1]) === alService, `site: ${alSite && alSite[1]} | serviciu: ${alService}`);
+} catch (e) {
+  console.log('   (site indisponibil de aici — sărit)');
+}
+
 console.log('═══ D. FORMULE: mapare pe TOATE lecțiile cu audio ═══');
 const client = await new MongoClient(env.MONGODB_URI || env.MONGODB_URI_EDUCONNECT).connect();
 const col = client.db(env.VOICE_DB_NAME || 'edupasi').collection('voice_explanations');
