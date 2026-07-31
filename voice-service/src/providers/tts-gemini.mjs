@@ -31,23 +31,19 @@ function pcmToWav(pcm, sampleRate = 24000) {
 }
 
 /**
- * Textul, grupat în bucăți de cel mult ~3500 de caractere, tăiate la propoziție.
+ * Textul, grupat în bucăți de cel mult ~1400 de caractere, tăiate la propoziție.
  *
- * NU sintetizăm per propoziție: o lecție are ~25 și ar însemna 25 de cereri
- * secvențiale (~40 s doar pe trei, plus riscul de 429 pe free tier). NU
- * sintetizăm nici tot deodată: textul lung poate depăși limita unei cereri.
- * Mărimea e MĂSURATĂ, nu presupusă: pe text real din lecție am sintetizat bucăți
- * de 1200, 2000, 3000, 4000 și 5000 de caractere, iar fiecare a ieșit COMPLETĂ —
- * aliniind audio-ul cu textul, ultimul cuvânt rostit coincide cu ultimul din text
- * la toate, cu acoperire 100%. Am ales 3500, sub pragul de ~4000 peste care
- * modelul începe să refuze intrarea.
+ * Mărimea NU e o preferință, e o măsurătoare corectată. Testasem 1200-5000 de
+ * caractere și toate păreau bune: audio-ul se termina pe ultimul cuvânt al
+ * textului, deci am ales 3500 pentru economie de cereri. Verificarea aceea era
+ * însă oarbă la ce se întâmplă ÎN interior — a confirmat doar capetele.
  *
- * Bucata mare aduce două câștiguri deodată: mai puține cereri (cota gratuită se
- * numără în CERERI, nu în caractere — o lecție de 6800 de caractere trece de la
- * șase cereri la două) și mai puține îmbinări între bucăți, deci mai puține locuri
- * unde intonația poate porni altfel.
+ * Recunoașterea vocală pe audio-ul real a arătat adevărul: pentru un text de 564
+ * de cuvinte, sinteza rostise 1070 — 90% în plus, cu pasaje REPETATE. Gemini TTS
+ * e un model generativ, nu un motor de citit, iar pe intrări lungi se pierde și
+ * reia. Bucata mai mică reduce mult riscul, iar garda de mai jos prinde ce scapă.
  */
-function bucatiText(text, maxChars = 3500) {
+function bucatiText(text, maxChars = 1400) {
   /**
    * Numerotarea unui titlu („2." sau „3.1.") NU e sfârșit de frază — aceeași
    * regulă ca pe calea Azure. Fără ea, o bucată se putea termina cu „2."
@@ -168,6 +164,37 @@ export function createGeminiTts(env = process.env) {
     ultimaCerere = Date.now();
   }
 
+  /**
+   * Ritmul MĂSURAT al vocii Callirrhoe, pentru garda de mai jos.
+   *
+   * Verificat prin recunoaștere pe audio real: 264 de cuvinte în 100 de secunde,
+   * adică ~158 pe minut. Folosim 150 ca reper, cu prag larg — garda trebuie să
+   * prindă improvizația grosolană, nu variația firească de vorbire.
+   */
+  const CUVINTE_PE_MINUT = 150;
+
+  /**
+   * Sinteza a rostit MAI MULT decât textul?
+   *
+   * Gemini TTS e un model generativ, nu un motor de citit: pe intrări lungi
+   * REPETĂ pasaje. Măsurat pe o lecție reală — text de 564 de cuvinte, audio cu
+   * 1070 rostite (90% în plus), cu secvențe de opt cuvinte detectate de două ori.
+   * Consecința nu e doar audio mai lung: alinierea forțată încearcă să mapeze
+   * cuvintele textului peste un audio care conține altceva, „întinde" timpii și
+   * transcriptul se desincronizează progresiv — exact ce a raportat utilizatorul
+   * („totul e sincronizat până aici").
+   *
+   * Deci verificăm fiecare bucată: dacă durata depășește cu mult ce ar dura
+   * textul ei la ritm normal, sinteza a improvizat și se reîncearcă.
+   */
+  function aImprovizat(text, pcmLungime) {
+    const cuvinte = String(text).split(/\s+/).filter((x) => /[\p{L}\d]/u.test(x)).length;
+    if (!cuvinte) return false;
+    const durata = pcmLungime / 24000 / 2;
+    const asteptat = (cuvinte / CUVINTE_PE_MINUT) * 60;
+    return durata > asteptat * 1.45;
+  }
+
   async function sintetizeazaBucata(text) {
     await asteaptaRandul();
     const body = {
@@ -183,8 +210,14 @@ export function createGeminiTts(env = process.env) {
       if (r.ok) {
         const d = await r.json();
         const part = d.candidates?.[0]?.content?.parts?.find((p) => p.inlineData);
-        if (part) return Buffer.from(part.inlineData.data, 'base64');
-        throw new Error('Gemini TTS: răspuns fără audio.');
+        if (!part) throw new Error('Gemini TTS: răspuns fără audio.');
+        const pcm = Buffer.from(part.inlineData.data, 'base64');
+        if (aImprovizat(text, pcm.length) && incercare < 3) {
+          const sec = (pcm.length / 24000 / 2).toFixed(0);
+          console.warn(`[voice] sinteza a ieșit ${sec}s pentru un text de ~${Math.round(String(text).split(/\s+/).length / 150 * 60)}s — modelul a repetat; reîncerc`);
+          continue;
+        }
+        return pcm;
       }
       if (r.status === 429 || r.status === 503) {
         /**
@@ -246,7 +279,7 @@ export function createGeminiTts(env = process.env) {
        * dacă textul întreg e prea lung pentru o cerere.
        */
       let pcm;
-      if (clean.length <= 3500) {
+      if (clean.length <= 1400) {
         pcm = await sintetizeazaBucata(clean);
         if (onProgress) onProgress({ index: 1, total: 1 });
       } else {
