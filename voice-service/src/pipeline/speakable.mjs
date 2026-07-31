@@ -824,14 +824,48 @@ export function calculeazaFormule(text, words, rosteste) {
   const lungimi = formule.map((f) => rostibile(rosteste(`$${f}$`)).length);
 
   const curat = (w) => String(w).toLowerCase().replace(/[^a-z]/g, '');
+  const cheie = (w) => String(w).toLowerCase().replace(/[^\p{L}\d]/gu, '');
+
+  /**
+   * Numărarea DĂ ESTIMAREA; potrivirea o CONFIRMĂ.
+   *
+   * Numărarea singură acumulează erori — măsurat pe lecția reală, 12 din 19
+   * intervale ieșeau decalate cu exact o poziție, iar un interval greșit
+   * deplasează tot ce urmează: sincronizarea ținea până la prima formulă și se
+   * rupea de acolo încolo. Cauza e că sinteza nu raportează chiar același șir de
+   * jetoane pe care îl producem noi la numărare (lipiri de punctuație, jetoane
+   * fără litere).
+   *
+   * Deci: pornim de la poziția estimată, dar acceptăm intervalul DOAR dacă
+   * secvența de cuvinte de acolo se potrivește cu rostirea formulei. Căutăm în
+   * jur (±8) și, dacă nu găsim, formula pur și simplu nu se mapează — rămâne
+   * text rostit normal, iar restul transcriptului rămâne sincronizat. Nicio
+   * formulă randată nu are voie să coste sincronizarea.
+   */
+  const asteptate = formule.map((f) => rostibile(rosteste(`$${f}$`)).map(cheie));
+  const potrivesteLa = (i, sec) => {
+    if (i < 0 || i + sec.length > words.length) return false;
+    for (let k2 = 0; k2 < sec.length; k2 += 1) if (cheie(words[i + k2].w) !== sec[k2]) return false;
+    return true;
+  };
+  const cauta = (sec, estimat) => {
+    if (!sec.length) return -1;
+    for (let d = 0; d <= 8; d += 1) {
+      if (potrivesteLa(estimat + d, sec)) return estimat + d;
+      if (d && potrivesteLa(estimat - d, sec)) return estimat - d;
+    }
+    return -1;
+  };
+
   const out = [];
   let index = 0;
   let k = 0;
   for (const w of cuvintePH) {
     if (curat(w) === MARTOR) {
-      const n = lungimi[k] || 0;
-      if (n > 0) out.push({ s: index, e: index + n - 1, tex: formule[k] });
-      index += n;
+      const sec = asteptate[k] || [];
+      const gasit = cauta(sec, index);
+      if (gasit >= 0) out.push({ s: gasit, e: gasit + sec.length - 1, tex: formule[k] });
+      index += sec.length;
       k += 1;
       continue;
     }
@@ -839,8 +873,14 @@ export function calculeazaFormule(text, words, rosteste) {
   }
 
   if (k !== formule.length) return [];
-  if (Math.abs(index - words.length) > 2) return [];
-  return out.filter((f) => f.e < words.length);
+  // intervalele confirmate nu au voie să se suprapună
+  const sortate = out.sort((a, b) => a.s - b.s);
+  const finale = [];
+  for (const f of sortate) {
+    const ultim = finale[finale.length - 1];
+    if (!ultim || f.s > ultim.e) finale.push(f);
+  }
+  return finale.filter((f) => f.e < words.length);
 }
 
 export function repuneLitere(words, perechi) {
