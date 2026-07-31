@@ -125,7 +125,7 @@ function verificaTextPentruAudio(text, titluriLectie) {
   const faraFormule = t.replace(/\$[^$\n]+\$/g, ' ');
   const latexRamas = faraFormule.match(/\\[a-zA-Z]{2,}/g);
   if (latexRamas) probleme.push(`notație LaTeX rămasă (${[...new Set(latexRamas)].slice(0, 4).join(', ')})`);
-  const grupuri = t.match(/<[A-Za-z]{5,}>/g);
+  const grupuri = t.match(/<[A-Za-z][A-Za-z0-9\s]{4,}>/g);
   if (grupuri) probleme.push(`marcaje nepermise (${[...new Set(grupuri)].slice(0, 3).join(', ')})`);
   if (/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/.test(t)) probleme.push('caractere de control invizibile');
   /**

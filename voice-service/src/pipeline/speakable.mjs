@@ -627,6 +627,7 @@ export function toSpeakable(text, optiuni = {}) {
     .replace(/\s+/g, ' ')
     .trim();
 
+  out = desfaMarcajeLungi(out);
   out = desfaNumeGeometrice(out);
   out = desfaGrupuriDeLitere(out);
   return optiuni.litere === false ? out : marcheazaLitere(out);
@@ -945,6 +946,41 @@ function desfaNumeGeometrice(text) {
   // grupurile orfane (2-4 majuscule) care nu sunt numerale romane
   out = out.replace(/\b([A-Z]{2,4})\b/g, (tot, grup) => (/^[IVX]+$/.test(grup) ? tot : spatiat(grup)));
   return out;
+}
+
+/**
+ * Marcajele LUNGI puse greșit în paranteze unghiulare: `<measuredangle M O N>`.
+ *
+ * Modelul generalizează marcajul de literă `<k>` la orice: întâi la grupuri de
+ * majuscule („<MON>"), acum la NUMELE COMENZILOR LaTeX scrise fără backslash.
+ * Plasa veche desfăcea doar 2-4 litere lipite, deci „<measuredangle M O N>"
+ * trecea neatinsă, parantezele cădeau la curățenie și vocea rostea literal
+ * „measuredangle" — exact ce a auzit elevul.
+ *
+ * Aici recunoaștem numele comenzii și îl traducem ca pe o notație adevărată,
+ * cu literele rostite separat: „unghiul M O N".
+ */
+const COMENZI_FARA_BACKSLASH = {
+  measuredangle: 'unghiul', sphericalangle: 'unghiul', angle: 'unghiul',
+  triangle: 'triunghiul', overline: 'segmentul', overrightarrow: 'semidreapta',
+  vec: 'semidreapta', widehat: 'unghiul', frown: 'arcul',
+};
+
+function desfaMarcajeLungi(text) {
+  return String(text).replace(/<([A-Za-z][A-Za-z0-9\s]{1,40})>/g, (tot, corp) => {
+    const c = String(corp).trim();
+    const m = /^([A-Za-z]+)\s*(.*)$/.exec(c);
+    if (m) {
+      const nume = COMENZI_FARA_BACKSLASH[m[1].toLowerCase()];
+      if (nume) {
+        const litere = m[2].replace(/\s+/g, '').split('').filter(Boolean).join(' ');
+        return litere ? ` ${nume} ${litere} ` : ` ${nume} `;
+      }
+    }
+    // grup de majuscule (cu sau fără spații) → litere rostite separat
+    if (/^[A-Z][A-Z\s]*$/.test(c)) return ` ${c.replace(/\s+/g, '').split('').join(' ')} `;
+    return ` ${c} `;
+  });
 }
 
 function desfaGrupuriDeLitere(text) {
