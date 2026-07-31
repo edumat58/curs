@@ -10,6 +10,7 @@ import { toSpeakable, calculeazaFormule, litereMarcate, repuneLitere } from './p
 import { cleanForSpeech, titluriAcoperite } from './pipeline/explain.mjs';
 import { curataSursa, imparteLectia, bugetSursaCaractere, speechBudget, buildNarrationPrompt } from './pipeline/prompts.mjs';
 import { describeFigure, describeComponent } from './pipeline/figure.mjs';
+import { planificaPeticul, cuvinteleDupaPetic, hotareleTaieturii } from './pipeline/patch.mjs';
 
 const env = process.env;
 let ok = 0; const rele = [];
@@ -145,6 +146,29 @@ for (const [nume, cod, trebuie] of COMP) {
   const d = describeComponent(nume, cod);
   const tot = [...d.facts, ...d.didactice].join(' ');
   T(`componentă citită: ${nume}`, d.meaningful && trebuie.test(tot), JSON.stringify(tot).slice(0, 90));
+}
+
+// ─────────── 3c. PETICUL: reparația punctuală nu poate strica nimic ───────────
+console.log('═══ PETIC ═══');
+{
+  const V = 'Primul pas. Numărul 435 este primm și frumos. Al doilea pas.'.split(' ');
+  const N = 'Primul pas. Numărul 435 este prim și frumos. Al doilea pas.'.split(' ');
+  const plan = planificaPeticul(V, N, N);
+  T('petic: o literă → doar propoziția ei', plan.fel === 'petic' && plan.vDe === 2 && plan.vPana === 7, JSON.stringify(plan));
+  T('petic: texte identice → nimic', planificaPeticul(N, N, N).fel === 'nimic');
+  const mare = ('Cu totul alt text, complet rescris de la zero. '.repeat(20)).trim().split(' ');
+  T('petic: rescriere → refuz cinstit', planificaPeticul(V, mare, mare).fel === 'prea-mare');
+  const N2 = 'Primul pas. Numărul 435 este prim, frumos și util. Al doilea pas.'.split(' ');
+  const p2 = planificaPeticul(V, N2, N2);
+  T('petic: lungimi diferite → capete corecte', p2.fel === 'petic' && (V.length - 1 - p2.vPana) === (N2.length - 1 - p2.nPana), JSON.stringify(p2));
+  const words = V.map((w, i) => ({ w, t: i * 500, d: 400 }));
+  const { start, stop } = hotareleTaieturii(words, plan.vDe, plan.vPana, V.length * 0.5);
+  T('petic: tăietura cade în pauze', start > (words[1].t + words[1].d) / 1000 && start < words[2].t / 1000 + 0.001, `${start}s`);
+  const petic = N.slice(plan.nDe, plan.nPana + 1).map((w, i) => ({ w, t: i * 480, d: 380 }));
+  const noi = cuvinteleDupaPetic({ words, vDe: plan.vDe, vPana: plan.vPana, peticWords: petic, afisatePetic: N.slice(plan.nDe, plan.nPana + 1), start, stop, durataPeticSec: petic.length * 0.48 });
+  T('petic: cuvintele rămân monotone', Array.isArray(noi) && noi.every((x, i) => !i || x.t >= noi[i - 1].t));
+  const gresit = cuvinteleDupaPetic({ words, vDe: plan.vDe, vPana: plan.vPana, peticWords: petic.slice(1), afisatePetic: N.slice(plan.nDe, plan.nPana + 1), start, stop, durataPeticSec: 1 });
+  T('petic: nealiniat → refuză fără să scrie', gresit === null);
 }
 
 // ─────────── 4. BAZA: fiecare lecție cu audio, verificată ───────────

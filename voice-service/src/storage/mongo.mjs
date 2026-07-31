@@ -172,6 +172,35 @@ export async function createStore(env = process.env) {
       return res.deletedCount;
     },
 
+    /**
+     * Schimbă textul FĂRĂ să arunce audio-ul — calea peticului.
+     *
+     * `updateText` obișnuit șterge audio-ul, pentru că un text nou înseamnă de
+     * regulă o sinteză nouă. Peticul e excepția: audio-ul tocmai a fost cârpit
+     * să corespundă textului, deci se păstrează, doar formulele se recalculează.
+     */
+    async updateTextPastrandAudio(sectionHash, text, formule) {
+      const res = await col.updateOne(
+        { sectionHash, status: { $in: ['draft', 'ready'] } },
+        { $set: { explanationText: text, 'audio.formule': formule || null, updatedAt: new Date() } }
+      );
+      return res.matchedCount > 0;
+    },
+
+    /** Audio-ul întreg, ca Buffer — pentru îmbinarea peticului. */
+    async readAudio(fileId) {
+      const id = typeof fileId === 'string' ? new ObjectId(fileId) : fileId;
+      const parti = [];
+      for await (const chunk of bucket.openDownloadStream(id)) parti.push(chunk);
+      return Buffer.concat(parti);
+    },
+
+    /** Șterge un fișier audio orfan (după ce peticul l-a înlocuit). */
+    async deleteAudioFile(fileId) {
+      const id = typeof fileId === 'string' ? new ObjectId(fileId) : fileId;
+      await bucket.delete(id).catch(() => {});
+    },
+
     /** Flux de audio pentru redare (suportă și cereri parțiale). */
     openAudioStream(fileId, { start, end } = {}) {
       const id = typeof fileId === 'string' ? new ObjectId(fileId) : fileId;

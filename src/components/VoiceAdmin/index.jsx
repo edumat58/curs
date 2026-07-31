@@ -254,10 +254,13 @@ export default function VoiceAdmin({ token, apiBase }) {
   // Callirrhoe (Google), aleasă de administrator; Azure rămâne o opțiune.
   const [provider, setProvider] = useState('gemini');
   const [filtruClasa, setFiltruClasa] = useState('toate');
+  // identitate lecție -> transcript propus din depozit (text + stare).
+  const [propuneri, setPropuneri] = useState({});
   const [cauta, setCauta] = useState('');
 
   const indexUrl = useBaseUrl('/lessons-index.json');
   const sourcesUrl = useBaseUrl('/lesson-sources.json');
+  const transcriptsUrl = useBaseUrl('/transcripts-index.json');
 
   const authFetch = useCallback(
     (path, init = {}) => fetch(`${apiBase}${path}`, {
@@ -270,12 +273,14 @@ export default function VoiceAdmin({ token, apiBase }) {
   // Lista de lecții + sursele (de pe site) și starea vocii (de la serviciu).
   const incarca = useCallback(async () => {
     try {
-      const [idx, src, st, us, llm] = await Promise.all([
+      const [idx, src, st, us, llm, prop] = await Promise.all([
         fetch(indexUrl).then((r) => r.json()).catch(() => ({ lessons: [] })),
         fetch(sourcesUrl).then((r) => r.json()).catch(() => ({})),
         authFetch('/admin/voice/lessons').then((r) => (r.ok ? r.json() : { lessons: {} })).catch(() => ({ lessons: {} })),
         authFetch('/admin/voice/usage').then((r) => (r.ok ? r.json() : null)).catch(() => null),
         authFetch('/admin/voice/llm-usage').then((r) => (r.ok ? r.json() : null)).catch(() => null),
+        // Transcripturile PROPUSE, din depozitul revizuibil (transcripts/ în repo).
+        fetch(transcriptsUrl).then((r) => (r.ok ? r.json() : {})).catch(() => ({})),
       ]);
       // Doar lecțiile reale (titlu care începe cu C sau G); restul n-au voce.
       const doarLectii = (idx.lessons || []).filter((l) => /^\s*[CG]\s*\d/.test(l.title || ''));
@@ -284,10 +289,11 @@ export default function VoiceAdmin({ token, apiBase }) {
       setStatus(st.lessons || {});
       setUsage(us);
       setLlmUsage(llm);
+      setPropuneri(prop || {});
     } catch (err) {
       setMesaj(`Nu am putut încărca: ${err.message}`);
     }
-  }, [indexUrl, sourcesUrl, authFetch]);
+  }, [indexUrl, sourcesUrl, transcriptsUrl, authFetch]);
 
   useEffect(() => { incarca(); }, [incarca]);
 
@@ -410,6 +416,55 @@ export default function VoiceAdmin({ token, apiBase }) {
     finally { setBusy(''); }
   }
 
+  /**
+   * PETICUL: salvează textul și repară audio-ul punctual, fără regenerare.
+   *
+   * Pentru o greșeală mică (o literă, un cuvânt), serviciul sintetizează DOAR
+   * propozițiile schimbate și le îmbină în locul celor vechi, în pauze. Restul
+   * lecției — voce, timpi, cotă — rămâne neatins. La schimbări mari refuză și
+   * spune să regenerezi.
+   */
+  async function peticesteAudio() {
+    const doc = status[selected];
+    if (!doc) return;
+    setBusy('petic'); setMesaj('Repar audio-ul punctual…');
+    try {
+      const r = await authFetch(`/admin/voice/patch/${doc.sectionHash}`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text }),
+      });
+      const d = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error(d.error || `${r.status}`);
+      if (d.petic === 'doar-text') {
+        setMesaj('Rostirea nu s-a schimbat — doar textul și formulele au fost actualizate; audio-ul e neatins.');
+      } else {
+        setMesaj(`Petic aplicat: ${d.petic.cuvinteInlocuite} cuvinte înlocuite cu ${d.petic.cuvinteNoi}, `
+          + `${d.petic.secundeInlocuite}s → ${d.petic.secundeNoi}s, între ${d.petic.intre[0]}s și ${d.petic.intre[1]}s. `
+          + 'Ascultă zona ca să confirmi.');
+      }
+      await incarca();
+    } catch (err) { setMesaj(`Peticul a eșuat (lecția e neatinsă): ${err.message}`); }
+    finally { setBusy(''); }
+  }
+
+  /** Adoptă transcriptul propus din depozit: intră în editor și se salvează ciornă. */
+  async function adoptaPropunerea(propunere) {
+    const doc = status[selected];
+    setText(propunere.text);
+    if (!doc) { setMesaj('Text propus încărcat în editor. Generează-l întâi ca lecție.'); return; }
+    setBusy('adopta'); setMesaj('Adopt transcriptul propus…');
+    try {
+      const r = await authFetch(`/admin/voice/text/${doc.sectionHash}`, {
+        method: 'PUT', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text: propunere.text }),
+      });
+      if (!r.ok) throw new Error((await r.json().catch(() => ({}))).error || `${r.status}`);
+      setMesaj('Transcript adoptat ca ciornă. Citește-l, apoi generează audio.');
+      await incarca();
+    } catch (err) { setMesaj(`Adoptarea a eșuat: ${err.message}`); }
+    finally { setBusy(''); }
+  }
+
   async function genereazaAudio() {
     const doc = status[selected];
     if (!doc) return;
@@ -523,6 +578,29 @@ export default function VoiceAdmin({ token, apiBase }) {
                 </div>
               </div>
 
+              {(() => {
+                const identitate = identitateLectie({ course: selectat.course, title: selectat.title });
+                const propunere = identitate && propuneri[identitate];
+                if (!propunere || propunere.text === text) return null;
+                return (
+                  /* Transcript PROPUS în depozitul revizuibil (transcripts/ în
+                     git). Nimic nu se aplică automat: administratorul îl vede,
+                     îl compară și îl adoptă cu un clic — sau îl ignoră. */
+                  <div className={styles.propunere}>
+                    <span>
+                      Există un transcript {propunere.stare === 'aprobat' ? 'aprobat' : 'propus'} în depozit
+                      {' '}({propunere.fisier}) diferit de textul curent.
+                    </span>
+                    <button type="button" className={styles.btn} disabled={Boolean(busy)} onClick={() => setText(propunere.text)}>
+                      Vezi în editor
+                    </button>
+                    <button type="button" className={styles.btnPrimary} disabled={Boolean(busy)} onClick={() => adoptaPropunerea(propunere)}>
+                      {busy === 'adopta' ? 'Adopt…' : 'Adoptă ca ciornă'}
+                    </button>
+                  </div>
+                );
+              })()}
+
               <div className={styles.actions}>
                 <button
                   type="button"
@@ -538,6 +616,20 @@ export default function VoiceAdmin({ token, apiBase }) {
                     <button type="button" className={styles.btn} disabled={Boolean(busy) || !text.trim()} onClick={salveazaText}>
                       {busy === 'save' ? 'Se salvează…' : 'Salvează textul'}
                     </button>
+                    {staree(selectat.url) === 'ready' ? (
+                      /* Reparația punctuală: pentru greșeli mici, sintetizează
+                         doar propozițiile schimbate și le îmbină în audio-ul
+                         existent. „Salvează textul" ar arunca audio-ul întreg. */
+                      <button
+                        type="button"
+                        className={styles.btn}
+                        disabled={Boolean(busy) || !text.trim()}
+                        onClick={peticesteAudio}
+                        title="Sintetizează doar propozițiile schimbate și le îmbină în audio-ul existent"
+                      >
+                        {busy === 'petic' ? 'Repar…' : 'Repară audio punctual'}
+                      </button>
+                    ) : null}
                     {/* Selector de VOCE, ales manual per lecție. Fără comutări
                         automate: se sintetizează exact vocea de aici. */}
                     <div className={styles.voceSelect} role="group" aria-label="Vocea lecției">

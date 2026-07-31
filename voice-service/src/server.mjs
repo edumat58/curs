@@ -59,6 +59,7 @@ import { litereMarcate, repuneLitere, calculeazaFormule } from './pipeline/speak
 import { speechBudget } from './pipeline/prompts.mjs';
 import { createStore } from './storage/mongo.mjs';
 import { encodeOpus } from './providers/encode.mjs';
+import { planificaPeticul, hotareleTaieturii, imbinaAudio, cuvinteleDupaPetic } from './pipeline/patch.mjs';
 import { azureUsageLive } from './providers/azure-usage.mjs';
 
 const PORT = Number(process.env.PORT || 8099);
@@ -386,6 +387,95 @@ export async function createServer(env = process.env) {
     const ok = await store.updateText(req.params.hash, text);
     if (!ok) return res.status(404).json({ error: 'Inexistent sau nu poate fi editat.' });
     return res.json({ sectionHash: req.params.hash, status: 'draft', text });
+  });
+
+  /**
+   * PETICUL: schimbă textul și repară audio-ul PUNCTUAL, fără regenerare.
+   *
+   * Pentru o literă greșită, regenerarea întregii lecții e risipă: minute de
+   * sinteză, cotă arsă și o voce complet nouă pe care administratorul trebuie
+   * să o reasculte cap-coadă. Aici se sintetizează DOAR propozițiile schimbate
+   * și se îmbină în locul celor vechi, la mijlocul pauzelor. Dacă schimbarea nu
+   * atinge rostirea (o formulă rescrisă, o virgulă), audio-ul nu se atinge
+   * deloc. Dacă schimbarea e prea mare, răspunsul spune cinstit: regenerează.
+   */
+  app.post('/admin/voice/patch/:hash', cereAdmin, async (req, res) => {
+    const text = String(req.body && req.body.text || '').trim();
+    if (text.length < 10) return res.status(400).json({ error: 'Text prea scurt.' });
+    const doc = await store.findByHash(req.params.hash);
+    if (!doc) return res.status(404).json({ error: 'Inexistent.' });
+    if (!doc.audio || !Array.isArray(doc.audio.words) || !doc.audio.words.length) {
+      return res.status(409).json({ error: 'Lecția nu are audio cu timpi — editează normal și generează.' });
+    }
+
+    // Formele noi: rostită (ce se sintetizează) și afișată (ce vede elevul).
+    const rostite = cleanForSpeech(text).split(/\s+/).filter(Boolean);
+    const afisate = repuneLitere(rostite.map((w) => ({ w })), litereMarcate(text)).map((x) => x.w);
+    const vechiAfisate = doc.audio.words.map((w) => w.w);
+
+    const plan = planificaPeticul(vechiAfisate, afisate, afisate);
+    if (plan.fel === 'prea-mare') {
+      return res.status(409).json({
+        error: `Schimbarea acoperă ${plan.caractere} de caractere — prea mult pentru un petic. Regenerează lecția.`,
+      });
+    }
+
+    if (plan.fel === 'nimic') {
+      // Rostirea e identică: doar textul și harta formulelor se schimbă.
+      const formule = calculeazaFormule(text, doc.audio.words, (x) => cleanForSpeech(x));
+      await store.updateTextPastrandAudio(doc.sectionHash, text, formule);
+      return res.json({ status: 'ready', petic: 'doar-text', formule: formule.length });
+    }
+
+    try {
+      const { vDe, vPana, nDe, nPana } = plan;
+      const engine = ttsFor(doc.audio.provider || doc.voiceProvider || ttsImplicit);
+      const textPetic = rostite.slice(nDe, nPana + 1).join(' ');
+      const sinteza = await engine.synthesize(textPetic);
+      recordUsage(engine.name, sinteza.chars, { sectionHash: doc.sectionHash, heading: doc.heading, route: doc.route });
+
+      const { start, stop } = hotareleTaieturii(doc.audio.words, vDe, vPana, doc.audio.durationSec);
+      const cuvinteNoi = cuvinteleDupaPetic({
+        words: doc.audio.words, vDe, vPana,
+        peticWords: sinteza.words,
+        // Jetoanele NOASTRE: alinierea rupe cratimele și ar da alt număr de
+        // cuvinte; potrivirea pe litere le recompune pe ale noastre.
+        rostitePetic: rostite.slice(nDe, nPana + 1),
+        afisatePetic: afisate.slice(nDe, nPana + 1),
+        start, stop, durataPeticSec: sinteza.durationSec,
+      });
+      if (!cuvinteNoi) {
+        return res.status(409).json({ error: 'Peticul nu s-a aliniat cuvânt cu cuvânt — nimic nu a fost modificat. Regenerează lecția.' });
+      }
+
+      const original = await store.readAudio(doc.audio.fileId);
+      const imbinat = imbinaAudio(original, sinteza.wav, start, stop);
+      const durata = doc.audio.durationSec - (stop - start) + sinteza.durationSec;
+      const formule = calculeazaFormule(text, cuvinteNoi, (x) => cleanForSpeech(x));
+
+      const vechiFileId = doc.audio.fileId;
+      await store.attachAudio(doc.sectionHash, {
+        codec: 'mp3', contentType: 'audio/mpeg', buffer: imbinat,
+        durationSec: durata, sampleRate: doc.audio.sampleRate, voice: doc.audio.voice,
+        provider: doc.audio.provider, defaultRate: doc.audio.defaultRate,
+        words: cuvinteNoi, sentences: null, formule,
+      });
+      await store.updateTextPastrandAudio(doc.sectionHash, text, formule);
+      await store.deleteAudioFile(vechiFileId);
+
+      return res.json({
+        status: 'ready',
+        petic: {
+          cuvinteInlocuite: vPana - vDe + 1,
+          cuvinteNoi: nPana - nDe + 1,
+          secundeInlocuite: Number((stop - start).toFixed(1)),
+          secundeNoi: Number(sinteza.durationSec.toFixed(1)),
+          intre: [Number(start.toFixed(1)), Number(stop.toFixed(1))],
+        },
+      });
+    } catch (err) {
+      return res.status(502).json({ error: 'Peticul a eșuat, lecția a rămas neatinsă: ' + String(err.message) });
+    }
   });
 
   /**
