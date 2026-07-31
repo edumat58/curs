@@ -20,7 +20,22 @@ const db = c.db(process.env.VOICE_DB_NAME || 'edupasi');
 const col = db.collection('voice_explanations');
 const bucket = new (await import('mongodb')).GridFSBucket(db, { bucketName: 'voice_audio' });
 
-const cheie = (x) => String(x).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^\p{L}\d]/gu, '');
+/**
+ * Recunoașterea scrie unitățile PRESCURTAT — „km", „cm", „kg" — acolo unde
+ * vocea le rostește întregi. Comparate literă cu literă, ferestrele acelea
+ * păreau desincronizate deși se auzea exact ce trebuie: două alarme false din
+ * trei, la prima rulare pe toate lecțiile. Le desfacem înainte de comparație.
+ */
+const PRESCURTARI = [
+  [/\bkm\b/g, 'kilometri'], [/\bcm\b/g, 'centimetri'], [/\bmm\b/g, 'milimetri'],
+  [/\bkg\b/g, 'kilograme'], [/\bml\b/g, 'mililitri'], [/\bmin\b/g, 'minute'],
+  [/\bsec\b/g, 'secunde'], [/\bh\b/g, 'ore'],
+];
+const cheie = (x) => {
+  let t = String(x).toLowerCase();
+  for (const [re, intreg] of PRESCURTARI) t = t.replace(re, intreg);
+  return t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^\p{L}\d]/gu, '');
+};
 const tmp = path.join(os.tmpdir(), 'asr' + process.pid);
 fs.mkdirSync(tmp, { recursive: true });
 
@@ -38,7 +53,10 @@ for (const d of docs) {
   const w = d.audio.words; const dur = d.audio.durationSec;
   // 4 ferestre: 15%, 40%, 65%, 90% din durată
   for (const frac of [0.15, 0.4, 0.65, 0.9]) {
-    const start = Math.round(dur * frac), len = 14;
+    // 14 secunde s-au dovedit prea puține: pe una dintre ferestre, recunoașterea
+    // s-a oprit după trei cuvinte, deși pe 22 de secunde a transcris tot ce se
+    // aude. Fereastra mai lungă îi dă context și încheie fraza.
+    const start = Math.round(dur * frac), len = 20;
     const buc = path.join(tmp, 'f.wav');
     execFileSync('ffmpeg', ['-y', '-ss', String(start), '-t', String(len), '-i', wav, buc], { stdio: 'ignore' });
     const rec = await Echogarden.recognize(buc, { engine: 'whisper', language: 'ro', whisper: { model: 'small' } });
@@ -57,7 +75,7 @@ for (const d of docs) {
       return prev[b.length];
     };
     const pot = scris.length ? lcs(scris, auzit) / scris.length : 1;
-    const verdict = pot >= 0.75 ? 'OK ' : 'RĂU';
+    const verdict = pot >= 0.75 ? 'OK  ' : 'FAIL';
     if (pot >= 0.75) bune += 1; else rele += 1;
     console.log(`${verdict} ${nume} @${start}s ${(pot * 100).toFixed(0)}%  scris: "${scris.slice(0, 46)}"  auzit: "${auzit.slice(0, 46)}"`);
   }
