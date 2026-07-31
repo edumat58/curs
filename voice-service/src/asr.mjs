@@ -1,0 +1,68 @@
+/**
+ * PROBA DE ADEVĂR a sincronizării: nu verifică ce credem noi despre aliniere,
+ * ci ce se AUDE efectiv. Taie 4 ferestre din audio-ul fiecărei lecții, le trece
+ * prin recunoaștere vocală și compară cu ce pretinde transcriptul la acel moment.
+ *
+ * Metricile indirecte (ritm, monotonie) pot trece cu alinierea stricată; asta nu.
+ *
+ *   node --env-file=.env src/asr.mjs            # toate lecțiile cu audio
+ *   node --env-file=.env src/asr.mjs 'G1 -'     # doar unele
+ *
+ * Cere ffmpeg în PATH. Prima rulare descarcă modelul Whisper (~500 MB).
+ */
+import fs from 'node:fs'; import os from 'node:os'; import path from 'node:path';
+import { execFileSync } from 'node:child_process';
+import { MongoClient } from 'mongodb';
+import * as Echogarden from 'echogarden';
+
+const c = await new MongoClient(process.env.MONGODB_URI || process.env.MONGODB_URI_EDUCONNECT).connect();
+const db = c.db(process.env.VOICE_DB_NAME || 'edupasi');
+const col = db.collection('voice_explanations');
+const bucket = new (await import('mongodb')).GridFSBucket(db, { bucketName: 'voice_audio' });
+
+const cheie = (x) => String(x).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^\p{L}\d]/gu, '');
+const tmp = path.join(os.tmpdir(), 'asr' + process.pid);
+fs.mkdirSync(tmp, { recursive: true });
+
+const tinte = process.argv.slice(2);
+const docs = await col.find({ 'audio.words': { $exists: true, $ne: null } }).toArray();
+let rele = 0, bune = 0;
+
+for (const d of docs) {
+  const nume = (d.heading || '').slice(0, 28);
+  if (tinte.length && !tinte.some((t) => nume.includes(t))) continue;
+  const mp3 = path.join(tmp, 'a.mp3'), wav = path.join(tmp, 'a.wav');
+  await new Promise((res, rej) => bucket.openDownloadStream(d.audio.fileId).pipe(fs.createWriteStream(mp3)).on('finish', res).on('error', rej));
+  execFileSync('ffmpeg', ['-y', '-i', mp3, '-ar', '16000', '-ac', '1', wav], { stdio: 'ignore' });
+
+  const w = d.audio.words; const dur = d.audio.durationSec;
+  // 4 ferestre: 15%, 40%, 65%, 90% din durată
+  for (const frac of [0.15, 0.4, 0.65, 0.9]) {
+    const start = Math.round(dur * frac), len = 14;
+    const buc = path.join(tmp, 'f.wav');
+    execFileSync('ffmpeg', ['-y', '-ss', String(start), '-t', String(len), '-i', wav, buc], { stdio: 'ignore' });
+    const rec = await Echogarden.recognize(buc, { engine: 'whisper', language: 'ro', whisper: { model: 'small' } });
+    // Se compară ȘIRURI DE CARACTERE, nu cuvinte: ASR-ul lipește ("m unghiul"→"mungiul"),
+    // sparge și scrie greșit, dar ORDINEA sunetelor rămâne. Subșirul comun maxim
+    // măsoară exact ce ne interesează: se aude la secunda T ce scrie transcriptul la T?
+    const auzit = cheie(rec.transcript || '');
+    const scris = cheie(w.filter((x) => x.t >= start * 1000 && x.t < (start + len) * 1000).map((x) => x.w).join(''));
+    const lcs = (a, b) => {
+      let prev = new Uint16Array(b.length + 1);
+      for (let i = 1; i <= a.length; i += 1) {
+        const cur = new Uint16Array(b.length + 1);
+        for (let j = 1; j <= b.length; j += 1) cur[j] = a[i - 1] === b[j - 1] ? prev[j - 1] + 1 : Math.max(prev[j], cur[j - 1]);
+        prev = cur;
+      }
+      return prev[b.length];
+    };
+    const pot = scris.length ? lcs(scris, auzit) / scris.length : 1;
+    const verdict = pot >= 0.75 ? 'OK ' : 'RĂU';
+    if (pot >= 0.75) bune += 1; else rele += 1;
+    console.log(`${verdict} ${nume} @${start}s ${(pot * 100).toFixed(0)}%  scris: "${scris.slice(0, 46)}"  auzit: "${auzit.slice(0, 46)}"`);
+  }
+}
+console.log(`\nferestre corecte: ${bune} | greșite: ${rele}`);
+fs.rmSync(tmp, { recursive: true, force: true });
+await c.close();
+process.exit(rele ? 1 : 0);
