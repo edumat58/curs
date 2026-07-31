@@ -13,7 +13,7 @@
 import express from 'express';
 import cors from 'cors';
 import { pathToFileURL } from 'node:url';
-import { createLlm } from './providers/llm.mjs';
+import { createLlm, createLlmRegistry } from './providers/llm.mjs';
 import { createPiperTts } from './providers/tts.mjs';
 import { createAzureTts } from './providers/tts-azure.mjs';
 import { createGeminiTts } from './providers/tts-gemini.mjs';
@@ -203,6 +203,13 @@ export async function createServer(env = process.env) {
   // UN SINGUR model, pentru tot. Fără al doilea model de „analiză" și fără lanț
   // de rezerve: aceeași calitate la fiecare lecție, previzibilă.
   const llm = createLlm(env);
+  /**
+   * Modelele de text disponibile, ca să poată fi alese la fiecare generare —
+   * exact cum se alege deja vocea. `llm` rămâne cel implicit, ca nimic din ce
+   * merge azi să nu se schimbe; `llmFor` dă altul doar dacă e cerut anume.
+   */
+  const { furnizori: llmDisponibili, implicit: llmImplicit } = createLlmRegistry(env);
+  const llmFor = (nume) => (nume && llmDisponibili[nume]) || llm;
   const { providers: ttsProviders, implicit: ttsImplicit } = createProviders(env);
   const tts = ttsProviders[ttsImplicit];
   /** Providerul cerut (per lecție), cu revenire la cel implicit dacă lipsește. */
@@ -224,7 +231,7 @@ export async function createServer(env = process.env) {
 
   app.get('/health', async (_req, res) => {
     try {
-      res.json({ ok: true, ...(await store.stats()), llm: llm.model, voice: tts.voice });
+      res.json({ ok: true, ...(await store.stats()), llm: llm.model, llmDisponibili: Object.keys(llmDisponibili), llmImplicit, voice: tts.voice });
     } catch (err) {
       res.status(500).json({ ok: false, error: String(err.message) });
     }
@@ -341,7 +348,7 @@ export async function createServer(env = process.env) {
 
     const work = (async () => {
       try {
-        const result = await explainSection(section, llm, {});
+        const result = await explainSection(section, llmFor(req.body.llmProvider), {});
         // Tokenii de limbaj consumați intră în evidența bugetului zilnic.
         if (result.meta && result.meta.tokeniTotal) {
           store.recordLlmUsage(result.meta.tokeniTotal, {
@@ -616,7 +623,7 @@ export async function createServer(env = process.env) {
 
         try {
           const mark = (stage) => store.progress(sectionHash, stage).catch(() => {});
-          const result = await explainSection(section, llm, { onStage: mark });
+          const result = await explainSection(section, llmFor(req.body.llmProvider), { onStage: mark });
           await mark('sinteza');
           const engine = ttsFor(req.body.provider || ttsImplicit);
           const audio = await engine.synthesize(result.transcript);

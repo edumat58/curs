@@ -52,6 +52,20 @@ const DEFAULTS = {
   // expune același dialect OpenAI la /v1. Portul și modelul se dau din mediu.
   local: { baseUrl: 'http://127.0.0.1:8090/v1', model: 'local' },
   ollama: { baseUrl: 'http://127.0.0.1:11434/v1', model: 'qwen2.5:7b' },
+  /**
+   * GPT-OSS-20B, tot local, pe alt port — modelul cu RAȚIONAMENT.
+   *
+   * E un MoE cu 21B totali dar doar 3,6B activi, deci încape în 12 GB și merge
+   * pe procesor: măsurat pe i5-11400, o lecție întreagă în 16 minute, la 4,3
+   * tokeni pe secundă. Nemotron 3, cerut inițial, nu poate rula aici: crapă în
+   * llama.cpp exact pe CPU-only (ggml-org/llama.cpp#18099, închis „not
+   * planned") din cauza stratului Mamba-2, iar varianta Super cere 68 GB.
+   *
+   * Stă ALĂTURI de furnizorii din cloud, nu în locul lor: e alegerea gratuită,
+   * fără cotă zilnică, pentru când bugetul Gemini s-a terminat sau pur și
+   * simplu nu vrei să trimiți lecția afară.
+   */
+  gptoss: { baseUrl: 'http://127.0.0.1:8091/v1', model: 'gpt-oss-20b', raționament: 'medium' },
   // Google Gemini prin endpointul lui OpENAI-compatibil. Nivelul gratuit are o
   // limită ZILNICĂ mult peste Groq (mii de cereri/zi), deci nu mai blochează
   // regenerarea lecțiilor. `gemini-2.5-flash`: rapid, bun la proză românească.
@@ -252,6 +266,40 @@ export function createLlm(env = process.env) {
     timeoutMs: Number(env.VOICE_LLM_TIMEOUT_MS || 60000),
     maxRetries: Number(env.VOICE_LLM_MAX_RETRIES || 3),
   });
+}
+
+/**
+ * TOȚI furnizorii disponibili, nu doar cel implicit.
+ *
+ * Panoul de admin lasă omul să aleagă modelul la fiecare generare, exact cum
+ * alege deja vocea. Un furnizor din cloud apare doar dacă are cheie; unul local
+ * apare oricum — dacă serverul lui nu răspunde, cererea eșuează limpede, cu
+ * mesajul lui, nu tăcut. Implicitul rămâne ce spune `VOICE_LLM_PROVIDER`.
+ */
+export function createLlmRegistry(env = process.env) {
+  const CHEI = { groq: 'GROQ_API_KEY', gemini: 'GEMINI_API_KEY' };
+  const furnizori = {};
+  for (const nume of Object.keys(DEFAULTS)) {
+    const cereCheie = CHEI[nume];
+    if (cereCheie && !(env[cereCheie] || env.VOICE_LLM_API_KEY)) continue;
+    try {
+      furnizori[nume] = createOpenAiCompatible({
+        name: nume,
+        baseUrl: DEFAULTS[nume].baseUrl,
+        apiKey: cereCheie ? (env[cereCheie] || env.VOICE_LLM_API_KEY) : env.VOICE_LLM_API_KEY,
+        model: DEFAULTS[nume].model,
+        // Un model local pe procesor scrie o lecție în ~16 minute; timeout-ul
+        // din cloud (un minut) l-ar tăia de fiecare dată.
+        timeoutMs: Number(env.VOICE_LLM_TIMEOUT_MS || (DEFAULTS[nume].baseUrl.includes('127.0.0.1') ? 45 * 60 * 1000 : 60000)),
+        maxRetries: Number(env.VOICE_LLM_MAX_RETRIES || 3),
+      });
+    } catch (err) {
+      console.warn(`[voice] LLM ${nume} indisponibil: ${err.message}`);
+    }
+  }
+  const cerut = (env.VOICE_LLM_PROVIDER || 'gemini').toLowerCase();
+  const implicit = furnizori[cerut] ? cerut : Object.keys(furnizori)[0];
+  return { furnizori, implicit };
 }
 
 export { LlmError };

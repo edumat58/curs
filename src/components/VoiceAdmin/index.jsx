@@ -253,6 +253,15 @@ export default function VoiceAdmin({ token, apiBase }) {
   // Vocea aleasă pentru ACEASTĂ lecție, MANUAL — fără comutări automate. Implicit
   // Callirrhoe (Google), aleasă de administrator; Azure rămâne o opțiune.
   const [provider, setProvider] = useState('gemini');
+  /**
+   * Modelul care SCRIE textul, ales manual — separat de vocea care îl rostește.
+   *
+   * Implicit rămâne Gemini, ca nimic din ce merge azi să nu se schimbe.
+   * Alternativa e modelul LOCAL cu raționament (GPT-OSS-20B, pe serverul de
+   * acasă): fără cotă zilnică și fără să trimită lecția afară, dar scrie o
+   * lecție în ~16 minute, nu în 30 de secunde.
+   */
+  const [modelText, setModelText] = useState('gemini');
   const [filtruClasa, setFiltruClasa] = useState('toate');
   // identitate lecție -> transcript propus din depozit (text + stare).
   const [propuneri, setPropuneri] = useState({});
@@ -360,6 +369,7 @@ export default function VoiceAdmin({ token, apiBase }) {
           // Codul și identitatea merg la serviciu: fișierul audio se numește
           // după cod, iar identitatea rămâne evidența stabilă a lecției.
           cod, identitate, numeAudio: numeFisierAudio(identitate),
+          llmProvider: modelText,
           section: {
             mode: 'lectie', sourceCode: sursa, heading: lectie.title,
             lessonTitle: lectie.title, contentText: textDinSursa(sursa),
@@ -630,6 +640,31 @@ export default function VoiceAdmin({ token, apiBase }) {
                         {busy === 'petic' ? 'Repar…' : 'Repară audio punctual'}
                       </button>
                     ) : null}
+                    {/* Selector de MODEL pentru TEXT. Cel local nu are cotă și
+                        nu trimite lecția afară, dar scrie în ~16 minute, nu în
+                        30 de secunde — de aceea scrie asta pe buton. */}
+                    <div className={styles.voceSelect} role="group" aria-label="Modelul care scrie textul">
+                      <button
+                        type="button"
+                        className={modelText === 'gemini' ? styles.voceOn : styles.voce}
+                        aria-pressed={modelText === 'gemini'}
+                        disabled={Boolean(busy)}
+                        onClick={() => setModelText('gemini')}
+                        title="Rapid, dar cu buget zilnic"
+                      >
+                        Text: Gemini
+                      </button>
+                      <button
+                        type="button"
+                        className={modelText === 'gptoss' ? styles.voceOn : styles.voce}
+                        aria-pressed={modelText === 'gptoss'}
+                        disabled={Boolean(busy)}
+                        onClick={() => setModelText('gptoss')}
+                        title="Local, fără cotă, cu raționament — aproximativ 16 minute pe lecție"
+                      >
+                        Text: local (~16 min)
+                      </button>
+                    </div>
                     {/* Selector de VOCE, ales manual per lecție. Fără comutări
                         automate: se sintetizează exact vocea de aici. */}
                     <div className={styles.voceSelect} role="group" aria-label="Vocea lecției">
