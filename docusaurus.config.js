@@ -160,6 +160,16 @@ const config = {
   scripts: [
     '/status.js',
   ],
+  headTags: [
+    {
+      // Modul proiecție se citește ÎNAINTE de prima pictare. Altfel bara de sus
+      // apare o clipă la fiecare încărcare, apoi dispare când pornește JS-ul.
+      tagName: 'script',
+      attributes: {},
+      innerHTML:
+        "try{if(localStorage.getItem('hideUI')==='true'){document.documentElement.setAttribute('data-ui-ascuns','')}}catch(e){}",
+    },
+  ],
   themeConfig: ({
     image: 'img/logo.png',
     colorMode: {

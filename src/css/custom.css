@@ -1069,6 +1069,88 @@ html.docs-doc-page[class*='docs-doc-id'] .main-wrapper {
   display: block;
 }
 
+/* ============================================================
+   MOD PROIECȚIE — butonul-ochi scoate tot cromul de navigare:
+   bara de sus (ambele rânduri), firul Ariadnei, sidebarul, cuprinsul
+   din dreapta, subsolul. Lecția urcă în vârful paginii.
+
+   Înălțimea barei o dă o singură variabilă, folosită și de padding-ul
+   conținutului, și de offset-urile sticky: o punem pe zero și urcă tot,
+   dintr-o mișcare, fără să vânăm fiecare regulă în parte.
+
+   Butonul din navbar dispare odată cu bara pe care stă, așa că modul are
+   butonul lui, plutitor — vezi `creeazaButonulPlutitor` din uiFixes.js.
+   ============================================================ */
+html[data-ui-ascuns] {
+  --ifm-navbar-height: 0rem;
+}
+
+html[data-ui-ascuns] .navbar,
+html[data-ui-ascuns] .theme-doc-breadcrumbs,
+html[data-ui-ascuns] .theme-doc-sidebar-container,
+html[data-ui-ascuns] .theme-doc-toc-desktop,
+html[data-ui-ascuns] .theme-doc-toc-mobile,
+html[data-ui-ascuns] .footer {
+  display: none !important;
+}
+
+html[data-ui-ascuns] .main-wrapper {
+  padding-top: 0 !important;
+}
+
+/* Cu sidebarul scos rămâne gaura lui: `main` are `max-width: calc(100% - 300px)`,
+   adică ține locul barei care nu mai e, și lecția stă strâmb în stânga. */
+html[data-ui-ascuns] [class*='docMainContainer_'] {
+  max-width: 100% !important;
+}
+
+html[data-ui-ascuns] [class*='docItemCol_'] {
+  max-width: 100% !important;
+  flex: 0 0 100% !important;
+}
+
+html[data-ui-ascuns] [class*='docItemContainer_'] {
+  margin: 0 auto;
+  max-width: 55rem;
+}
+
+/* Butonul de ieșire: în colțul din dreapta sus, unde era și cel din bară.
+   Fundal plin, ca să rămână lizibil peste titlul lecției. */
+.ui-eye-float {
+  position: fixed;
+  top: 0.65rem;
+  right: 0.65rem;
+  z-index: 400;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  color: #fff;
+  background: var(--km-orange);
+  border: 1px solid var(--km-orange);
+  border-radius: 10px;
+  box-shadow: 0 1px 6px rgba(28, 26, 22, 0.18);
+  cursor: pointer;
+}
+
+.ui-eye-float:hover {
+  background: var(--km-orange-deep);
+  border-color: var(--km-orange-deep);
+}
+
+html[data-ui-ascuns] .ui-eye-float {
+  display: inline-flex;
+}
+
+/* La tipar nu are ce căuta nici butonul, nici modul. */
+@media print {
+  .ui-eye-float {
+    display: none !important;
+  }
+}
+
 /* formulele KaTeX randate în cuprins stau cuminți în rândul de text */
 .table-of-contents .katex {
   font-size: 1.05em;
