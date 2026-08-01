@@ -1,13 +1,34 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+/**
+ * Automatisme — exerciții scurte, regenerate la fiecare încercare.
+ *
+ * Un automatism nu e un exercițiu oarecare: e o procedură pe care elevul
+ * trebuie s-o poată face fără să se gândească la ea, ca să-i rămână memoria de
+ * lucru liberă pentru raționamentul propriu-zis. De aceea întrebările sunt
+ * scurte, se schimbă la fiecare apăsare, iar corectura vine imediat.
+ *
+ * Două reguli îi dau forma, și amândouă se văd în cod:
+ *
+ * 1. **Elevul nu scrie matematică.** Nu are tastatură pentru radicali, fracții
+ *    sau exponenți, iar dacă i-am cere așa ceva am măsura priceperea de a scrie
+ *    LaTeX, nu de a calcula. Așa că fiecare răspuns e ori un număr, ori o
+ *    alegere dintr-o listă. O fracție se cere pe două casete, numărător și
+ *    numitor, nu ca „3/4".
+ *
+ * 2. **Cerința spune exact ce se completează.** Fiecare casetă are eticheta ei;
+ *    nimic nu se ghicește din context și nu se strecoară indicii în paranteze.
+ *
+ * Contractul unei întrebări e descris în `generators.js`.
+ */
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import katex from 'katex';
 import { REGISTRY } from './generators';
 import styles from './styles.module.css';
 
-/* Randează LaTeX cu KaTeX (CSS-ul KaTeX e încărcat global în site). */
+/** Matematică randată cu KaTeX; CSS-ul lui e încărcat global de site. */
 function Tex({ math, block }) {
   const html = katex.renderToString(String(math), {
     throwOnError: false,
-    displayMode: !!block,
+    displayMode: Boolean(block),
   });
   return (
     <span
@@ -20,7 +41,8 @@ function Tex({ math, block }) {
 function escapeHtml(s) {
   return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
-// Text cu matematică inline între $...$ — totul randat cu KaTeX.
+
+/** Text cu matematică între `$...$`. */
 function renderRich(text) {
   return String(text)
     .split(/\$([^$]+)\$/g)
@@ -28,77 +50,74 @@ function renderRich(text) {
     .join('');
 }
 
-function normNum(s) {
-  return String(s).trim().replace(/\s+/g, '').replace(',', '.');
-}
-
-// Verifică un răspuns (acceptă zecimale cu virgulă și fracții echivalente).
-function checkBlank(input, blank) {
-  const raw = (input ?? '').trim();
-  if (!raw) return false;
-  if (blank.kind === 'text') {
-    return raw.toLowerCase() === String(blank.answer).toLowerCase();
-  }
-  let val;
-  if (raw.includes('/')) {
-    const parts = raw.split('/');
-    val = parseFloat(normNum(parts[0])) / parseFloat(normNum(parts[1]));
-  } else {
-    val = parseFloat(normNum(raw));
-  }
-  if (!isFinite(val)) return false;
-  const target = Number(blank.answer);
-  const tol = blank.tol ?? (blank.kind === 'int' ? 1e-9 : 1e-6);
-  return Math.abs(val - target) <= tol;
-}
-
 /**
- * <Automatism id="pythagoras" title="A5 · Teorema lui Pitagora" />
- * sau  <Automatism generator={fn} />
+ * Verifică un răspuns.
+ *
+ * Zecimalele se acceptă cu virgulă sau cu punct — în manualele românești se
+ * scrie cu virgulă, dar tastatura numerică de pe telefon dă punct, și n-are
+ * niciun rost ca elevul să greșească din pricina asta.
  */
+function verifica(raspuns, camp) {
+  const brut = String(raspuns ?? '').trim();
+  if (!brut) return false;
+
+  if (camp.kind === 'choice') return brut === String(camp.answer);
+  if (camp.kind === 'text') {
+    const curata = (s) => String(s).trim().toLowerCase().replace(/\s+/g, ' ');
+    return curata(brut) === curata(camp.answer);
+  }
+
+  const valoare = Number(brut.replace(/\s+/g, '').replace(',', '.'));
+  if (!Number.isFinite(valoare)) return false;
+  const tinta = Number(camp.answer);
+  const toleranta = camp.tol ?? (camp.kind === 'int' ? 1e-9 : 1e-6);
+  return Math.abs(valoare - tinta) <= toleranta;
+}
+
 export default function Automatism({ id, generator, title, subtitle }) {
-  const gen = generator || REGISTRY[id]?.fn;
-  const [q, setQ] = useState(null);
-  const [inputs, setInputs] = useState([]);
-  const [status, setStatus] = useState('idle'); // idle | correct | wrong
-  const [score, setScore] = useState({ ok: 0, total: 0, streak: 0, best: 0 });
-  const firstInput = useRef(null);
+  const genereaza = generator || REGISTRY[id]?.fn;
+  const [intrebare, setIntrebare] = useState(null);
+  const [raspunsuri, setRaspunsuri] = useState([]);
+  const [stare, setStare] = useState('deschis'); // deschis | corect | gresit
+  const [scor, setScor] = useState({ bune: 0, total: 0, sir: 0 });
+  const primaCaseta = useRef(null);
 
-  const nextQuestion = useCallback(() => {
-    if (!gen) return;
-    const question = gen();
-    setQ(question);
-    setInputs(question.blanks.map(() => ''));
-    setStatus('idle');
-    requestAnimationFrame(() => firstInput.current?.focus());
-  }, [gen]);
+  const urmatoarea = useCallback(() => {
+    if (!genereaza) return;
+    const noua = genereaza();
+    setIntrebare(noua);
+    setRaspunsuri(noua.blanks.map(() => ''));
+    setStare('deschis');
+    requestAnimationFrame(() => primaCaseta.current?.focus());
+  }, [genereaza]);
 
-  // Prima întrebare doar pe client (Math.random ar strica hidratarea SSR).
-  useEffect(() => {
-    nextQuestion();
-  }, [nextQuestion]);
+  // Prima întrebare se face doar în browser: `Math.random` la randarea de pe
+  // server ar da alt rezultat decât la hidratare și React ar reclama.
+  useEffect(() => { urmatoarea(); }, [urmatoarea]);
 
-  const submit = (e) => {
+  const trimite = (e) => {
     e.preventDefault();
-    if (!q) return;
-    if (status === 'idle') {
-      const ok = q.blanks.every((b, i) => checkBlank(inputs[i], b));
-      setStatus(ok ? 'correct' : 'wrong');
-      setScore((s) => {
-        const streak = ok ? s.streak + 1 : 0;
-        return {
-          ok: s.ok + (ok ? 1 : 0),
-          total: s.total + 1,
-          streak,
-          best: Math.max(s.best, streak),
-        };
-      });
-    } else {
-      nextQuestion();
-    }
+    if (!intrebare) return;
+    if (stare !== 'deschis') { urmatoarea(); return; }
+    const corect = intrebare.blanks.every((camp, i) => verifica(raspunsuri[i], camp));
+    setStare(corect ? 'corect' : 'gresit');
+    setScor((s) => ({
+      bune: s.bune + (corect ? 1 : 0),
+      total: s.total + 1,
+      sir: corect ? s.sir + 1 : 0,
+    }));
   };
 
-  if (!gen) {
+  const scrie = (i, valoare) => {
+    setRaspunsuri((precedente) => {
+      const noi = precedente.slice();
+      noi[i] = valoare;
+      return noi;
+    });
+    if (stare === 'gresit') setStare('deschis');
+  };
+
+  if (!genereaza) {
     return (
       <div className={styles.card}>
         <p className={styles.error}>Automatism necunoscut: <code>{id}</code></p>
@@ -113,101 +132,103 @@ export default function Automatism({ id, generator, title, subtitle }) {
           {title && <h3 className={styles.title}>{title}</h3>}
           {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
         </div>
-        <div className={styles.scoreBox} aria-live="polite">
-          <span className={styles.streak} title="Răspunsuri corecte la rând">
-            🔥 {score.streak}
-          </span>
-          <span className={styles.tally}>
-            {score.ok}/{score.total}
-          </span>
-        </div>
+        <p className={styles.scoreBox} aria-live="polite">
+          {scor.total > 0 && (
+            <>
+              <span className={styles.tally}>{scor.bune} din {scor.total}</span>
+              {scor.sir > 1 && <span className={styles.streak}>{scor.sir} la rând</span>}
+            </>
+          )}
+        </p>
       </header>
 
-      {!q ? (
-        <p className={styles.loading}>Se pregătește o întrebare…</p>
+      {!intrebare ? (
+        <p className={styles.loading}>Se pregătește întrebarea.</p>
       ) : (
-        <form onSubmit={submit}>
+        <form onSubmit={trimite}>
           <div className={styles.prompt}>
-            {q.prompt.text && (
+            {intrebare.prompt.text && (
               <p
                 className={styles.promptText}
-                dangerouslySetInnerHTML={{ __html: renderRich(q.prompt.text) }}
+                dangerouslySetInnerHTML={{ __html: renderRich(intrebare.prompt.text) }}
               />
             )}
-            {q.prompt.latex && (
+            {intrebare.prompt.latex && (
               <div className={styles.promptMath}>
-                <Tex math={q.prompt.latex} block />
+                <Tex math={intrebare.prompt.latex} block />
               </div>
             )}
-            {q.prompt.svg && (
+            {intrebare.prompt.svg && (
               <div
                 className={styles.figure}
-                dangerouslySetInnerHTML={{ __html: q.prompt.svg }}
+                dangerouslySetInnerHTML={{ __html: intrebare.prompt.svg }}
               />
-            )}
-            {q.prompt.imageUrl && (
-              <img className={styles.figureImg} src={q.prompt.imageUrl} alt="" />
             )}
           </div>
 
           <div className={styles.blanks}>
-            {q.blanks.map((b, i) => (
-              <label className={styles.blank} key={i}>
-                <input
-                  ref={i === 0 ? firstInput : null}
-                  className={
-                    status === 'wrong'
-                      ? checkBlank(inputs[i], b)
-                        ? styles.inputOk
-                        : styles.inputBad
-                      : styles.input
-                  }
-                  type="text"
-                  inputMode={b.kind === 'text' ? 'text' : 'numeric'}
-                  autoComplete="off"
-                  placeholder={b.placeholder || '?'}
-                  value={inputs[i]}
-                  disabled={status === 'correct'}
-                  onChange={(e) => {
-                    const next = inputs.slice();
-                    next[i] = e.target.value;
-                    setInputs(next);
-                    if (status === 'wrong') setStatus('idle');
-                  }}
-                />
-              </label>
-            ))}
+            {intrebare.blanks.map((camp, i) => {
+              const gresitAici = stare === 'gresit' && !verifica(raspunsuri[i], camp);
+
+              // Clasificările se aleg dintr-o listă: nimic de tastat, deci nici
+              // ortografia și nici simbolurile nu stau în calea răspunsului.
+              if (camp.kind === 'choice') {
+                return (
+                  <fieldset className={styles.choiceGroup} key={i}>
+                    <legend className={styles.blankLabel}>{camp.label}</legend>
+                    <div className={gresitAici ? styles.choicesBad : styles.choices}>
+                      {camp.options.map((optiune) => (
+                        <button
+                          type="button"
+                          key={optiune}
+                          className={raspunsuri[i] === optiune ? styles.choiceOn : styles.choice}
+                          aria-pressed={raspunsuri[i] === optiune}
+                          disabled={stare === 'corect'}
+                          onClick={() => scrie(i, optiune)}
+                        >
+                          {optiune}
+                        </button>
+                      ))}
+                    </div>
+                  </fieldset>
+                );
+              }
+
+              return (
+                <label className={styles.blank} key={i}>
+                  <span className={styles.blankLabel}>{camp.label}</span>
+                  <input
+                    ref={i === 0 ? primaCaseta : null}
+                    className={gresitAici ? styles.inputBad : styles.input}
+                    type="text"
+                    inputMode={camp.kind === 'text' ? 'text' : 'decimal'}
+                    autoComplete="off"
+                    value={raspunsuri[i]}
+                    disabled={stare === 'corect'}
+                    onChange={(e) => scrie(i, e.target.value)}
+                  />
+                </label>
+              );
+            })}
           </div>
 
           <div className={styles.actions}>
-            {status === 'correct' ? (
-              <button type="submit" className={styles.primary}>
-                Următoarea →
-              </button>
-            ) : (
-              <button type="submit" className={styles.primary}>
-                Verifică
+            <button type="submit" className={styles.primary}>
+              {stare === 'deschis' ? 'Verifică' : 'Întrebarea următoare'}
+            </button>
+            {stare === 'deschis' && (
+              <button type="button" className={styles.ghost} onClick={urmatoarea}>
+                Schimbă întrebarea
               </button>
             )}
-            <button
-              type="button"
-              className={styles.ghost}
-              onClick={nextQuestion}
-            >
-              Altă întrebare
-            </button>
           </div>
 
-          {status === 'correct' && (
-            <p className={styles.feedbackOk}>✓ Corect! Bravo.</p>
-          )}
-          {status === 'wrong' && (
+          {stare === 'corect' && <p className={styles.feedbackOk}>Corect.</p>}
+          {stare === 'gresit' && (
             <div className={styles.feedbackBad}>
-              <span>Mai încearcă. Rezolvarea:</span>
-              {q.solutionLatex && (
-                <span className={styles.solution}>
-                  <Tex math={q.solutionLatex} />
-                </span>
+              <p className={styles.feedbackTitle}>Nu este răspunsul corect.</p>
+              {intrebare.solutionLatex && (
+                <p className={styles.solution}><Tex math={intrebare.solutionLatex} /></p>
               )}
             </div>
           )}

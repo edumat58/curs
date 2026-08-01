@@ -1,0 +1,364 @@
+/* Evaluarea tipărită: panoul de comandă și foaia propriu-zisă.
+
+   Foaia se randează în pagină, nu într-o fereastră nouă. Așa profesorul o vede
+   înainte s-o trimită la imprimantă, iar la tipărire ascundem restul paginii cu
+   `visibility: hidden`. Nu cu `display: none`: acela scoate elementele din
+   așezare, iar KaTeX are nevoie ca ele să existe ca să măsoare corect fracțiile
+   și radicalii — altfel formulele ies strâmbe exact pe hârtie. */
+
+.panou {
+  --ev-accent: #e8590c;
+  margin: 2rem 0;
+  padding: clamp(1rem, 3vw, 1.5rem);
+  background: var(--ifm-background-surface-color, #fff);
+  border: 2px dashed var(--ifm-color-emphasis-300, #d7e5e0);
+  border-radius: 16px;
+}
+
+.panouTitlu {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.panouNota {
+  margin: 0.3rem 0 1rem;
+  max-width: 60ch;
+  font-size: 0.9rem;
+  color: var(--ifm-color-emphasis-700, #444);
+}
+
+.grup {
+  margin: 0 0 0.9rem;
+  padding: 0;
+  border: 0;
+}
+
+.eticheta {
+  padding: 0;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--ifm-color-emphasis-800, #333);
+}
+
+.optiuni {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.4rem;
+}
+
+.optiune,
+.optiuneAleasa {
+  min-width: 3.2rem;
+  min-height: 44px;
+  padding: 0.45rem 0.9rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ifm-font-color-base, #161616);
+  background: var(--ifm-background-color, #fff);
+  border: 2.5px solid var(--ifm-color-emphasis-300, #d7e5e0);
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.optiune:hover {
+  border-color: var(--ev-accent);
+}
+
+.optiuneAleasa {
+  color: #fff;
+  background: var(--ev-accent);
+  border-color: var(--ev-accent);
+}
+
+.barem {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.actiuni {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.tipar,
+.previzualizare {
+  min-height: 48px;
+  padding: 0.6rem 1.4rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.tipar {
+  color: #fff;
+  background: var(--ev-accent);
+  border: 2.5px solid var(--ev-accent);
+}
+
+.previzualizare {
+  color: var(--ifm-font-color-base, #161616);
+  background: transparent;
+  border: 2.5px solid var(--ifm-color-emphasis-300, #d7e5e0);
+}
+
+.confirmare {
+  margin: 0.9rem 0 0;
+  font-size: 0.88rem;
+  color: var(--ifm-color-emphasis-700, #444);
+}
+
+/* ── foaia ─────────────────────────────────────────────────────────────── */
+
+.foaie {
+  margin: 1.5rem 0;
+}
+
+.coala {
+  max-width: 21cm;
+  margin: 0 auto;
+  padding: 1.6cm 1.4cm;
+  color: #111;
+  background: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0 6px 30px rgb(0 0 0 / 8%);
+  font-size: 11.5pt;
+  line-height: 1.45;
+}
+
+.titlu {
+  margin: 0;
+  font-size: 17pt;
+  text-align: center;
+}
+
+.subtitlu {
+  margin: 0.2rem 0 1.1rem;
+  font-size: 10.5pt;
+  text-align: center;
+  color: #444;
+}
+
+.identitate {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 0.9rem;
+  font-size: 11pt;
+}
+
+.linieScris,
+.linieScurta {
+  display: inline-block;
+  border-bottom: 1px solid #333;
+  vertical-align: baseline;
+}
+
+.linieScris { width: 11cm; }
+.linieScurta { width: 3.2cm; }
+
+.conditii {
+  margin: 0 0 1rem;
+  padding-left: 1.1rem;
+  font-size: 10.5pt;
+}
+
+.grila {
+  width: 100%;
+  margin-bottom: 1.4rem;
+  border-collapse: collapse;
+  font-size: 10.5pt;
+}
+
+.grilaTitlu {
+  padding-bottom: 0.35rem;
+  font-size: 9.5pt;
+  font-style: italic;
+  text-align: left;
+  color: #555;
+}
+
+.grila th,
+.grila td {
+  padding: 0.3rem 0.5rem;
+  border: 1px solid #999;
+  text-align: center;
+}
+
+.grila td:first-child,
+.grila th:first-child {
+  text-align: left;
+}
+
+.grila td:last-child {
+  min-width: 3cm;
+}
+
+.grilaTotal {
+  font-weight: 700;
+}
+
+.subiect {
+  margin-bottom: 1.2rem;
+}
+
+.subiectTitlu {
+  margin: 1.2rem 0 0.7rem;
+  padding: 0.28rem 0.7rem;
+  font-size: 12pt;
+  color: #fff;
+  background: #e65100;
+  border-radius: 4px;
+}
+
+.exercitiu {
+  margin-bottom: 0.9rem;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.exercitiuTitlu {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  margin: 0 0 0.35rem;
+  font-size: 11pt;
+}
+
+.puncte {
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.cerinta {
+  padding: 0.5rem 0.7rem;
+  background: #f6f6f6;
+  border-left: 3px solid #e65100;
+}
+
+.enunt {
+  margin: 0;
+}
+
+.enuntMath {
+  margin: 0.4rem 0 0;
+  text-align: center;
+}
+
+.enuntMath :global(.katex-display) {
+  margin: 0.2rem 0;
+}
+
+.figura {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.4rem;
+}
+
+.figura svg {
+  max-width: 6cm;
+  height: auto;
+}
+
+.cerute {
+  margin: 0.5rem 0 0;
+  padding-left: 1.1rem;
+  font-size: 10.5pt;
+}
+
+.linieRaspuns {
+  display: inline-block;
+  width: 4.5cm;
+  border-bottom: 1px solid #333;
+  vertical-align: baseline;
+}
+
+/* Loc de scris rezolvarea. Un test fără el se rezolvă pe ciornă, iar
+   profesorul corectează rezultate, nu raționamente. */
+.spatiu {
+  height: 2.2cm;
+  border-bottom: 1px dotted #bbb;
+}
+
+.baremFoaie {
+  page-break-before: always;
+  break-before: page;
+}
+
+.baremNota {
+  margin: 0 0 0.8rem;
+  font-size: 10pt;
+  font-style: italic;
+  color: #b3261e;
+}
+
+.baremLista {
+  margin: 0;
+  padding-left: 1.4rem;
+  font-size: 10.5pt;
+}
+
+.baremRaspuns {
+  font-weight: 600;
+}
+
+/* ── la tipărire ───────────────────────────────────────────────────────── */
+
+@media print {
+  /* Ascundem tot, apoi arătăm doar foaia. `visibility` păstrează așezarea, deci
+     KaTeX rămâne măsurat corect; `display: none` ar strica formulele. */
+  :global(body) * {
+    visibility: hidden;
+  }
+
+  .foaie,
+  .foaie * {
+    visibility: visible;
+  }
+
+  .foaie {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
+  }
+
+  .coala {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-shadow: none;
+  }
+
+  /* Panoul de comandă n-are ce căuta pe hârtie. */
+  .panou {
+    display: none;
+  }
+
+  .subiectTitlu {
+    /* Fundalurile colorate se pierd la tipărire dacă browserul „economisește"
+       cerneala; forțăm redarea, altfel titlul de subiect iese alb pe alb. */
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .cerinta {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+
+@page {
+  size: A4;
+  margin: 1.5cm;
+}
