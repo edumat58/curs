@@ -326,7 +326,11 @@
     break-after: page;
   }
 
-  .coloane, .legenda {
+  /* Regula se cere pe învelișul BLOC, nu pe `.coloane`, care e flex: WebKit
+     n-are reguli scrise pentru fragmentarea containerelor flex (bug 70795) și
+     ignoră tăcut `break-inside` pe ele. Și `avoid`, nu `avoid-page`: în
+     context paginat, Safari nu implementează `avoid-page`. */
+  .blocColoane, .legenda {
     page-break-inside: avoid;
     break-inside: avoid;
   }

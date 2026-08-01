@@ -164,6 +164,12 @@ export default function Evaluare({ capitol, clasa, automatisme }) {
        * Marcăm frații de pe drumul spre `body`, nu „tot": un selector care
        * ascunde totul ar ascunde și strămoșii foii, adică foaia însăși.
        */
+      // Marcajele rămase de la o tipărire anterioară (dacă `afterprint` n-a
+      // venit) se șterg acum: altfel s-ar aduna pe elemente care între timp
+      // nu mai sunt pe drumul spre foaie.
+      document.querySelectorAll('[data-ascuns-la-tipar]').forEach((el) => el.removeAttribute('data-ascuns-la-tipar'));
+      document.querySelectorAll('[data-lant-tipar]').forEach((el) => el.removeAttribute('data-lant-tipar'));
+
       const ascunse = [];
       const lant = [];
       for (let el = foaie; el && el !== document.body; el = el.parentElement) {
@@ -191,6 +197,22 @@ export default function Evaluare({ capitol, clasa, automatisme }) {
       const titluVechi = document.title;
       document.title = `Automatisme ${NUME_CLASA[clasa]} — ${capitol}`;
 
+      /*
+       * Curățarea NU merge pe temporizator.
+       *
+       * Pe iOS așezarea pentru tipar e leneșă și se repetă: UIKit cere întâi
+       * numărul de pagini, iar coala propriu-zisă abia la `drawInRect:`. În
+       * plus, WebKit invalidează starea de tipar când aplicația trece în
+       * fundal — adică exact când utilizatorul intră în foaia de partajare.
+       * Reașezarea se face cu DOM-ul DE ATUNCI, așa că orice răgaz ales prost
+       * scoate marcajele înainte să fie folosite, iar coala iese din pagina
+       * nemarcată. Nu există răgaz corect: depinde cât zăbovește omul în
+       * previzualizare.
+       *
+       * Așa că marcajele rămân până la `afterprint`, iar dacă acela nu vine,
+       * până la următoarea tipărire, care începe prin a șterge ce-a rămas.
+       * Pe ecran sunt inerte: regulile lor stau doar în `@media print`.
+       */
       const curata = () => {
         ascunse.forEach((el) => el.removeAttribute('data-ascuns-la-tipar'));
         lant.forEach((el) => el.removeAttribute('data-lant-tipar'));
@@ -200,14 +222,6 @@ export default function Evaluare({ capitol, clasa, automatisme }) {
       window.addEventListener('afterprint', curata);
 
       window.print();
-      /*
-       * Safari pe iOS nu emite mereu `afterprint`, deci ne trebuie și un
-       * răgaz. Era de 1,5 secunde — prea scurt: pe telefon, tipărirea trece
-       * prin foaia de partajare, iar dacă marcajele dispar înainte, coala se
-       * generează din pagina nemarcată. Marcajele nu se văd pe ecran (regulile
-       * lor stau doar în `@media print`), deci un răgaz lung nu costă nimic.
-       */
-      setTimeout(curata, 20000);
     }));
   }, [pregateste, capitol, clasa]);
 
@@ -307,6 +321,10 @@ function FoaieTest({ capitol, clasa, subiecte, cuBarem, cate }) {
         <p><strong>Testul începe de pe pagina următoare.</strong></p>
       </Admonition>
 
+      {/* Învelișul e bloc, nu flex: `break-inside: avoid` se cere pe EL, fiindcă
+          WebKit nu are reguli scrise pentru fragmentarea containerelor flex
+          (bug 70795), iar pe un flex regula e ignorată tăcut. */}
+      <div className={styles.blocColoane}>
       <div className={styles.coloane}>
         <div className={styles.coloanaGrila}>
           <h2 className={styles.subtitluAntet}>Grila de notare</h2>
@@ -339,6 +357,7 @@ function FoaieTest({ capitol, clasa, subiecte, cuBarem, cate }) {
             </p>
           ))}
         </div>
+      </div>
       </div>
 
       <blockquote className={styles.legenda}>
