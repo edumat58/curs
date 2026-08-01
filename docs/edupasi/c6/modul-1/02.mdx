@@ -1,0 +1,105 @@
+---
+sidebar_position: 2
+slug: /edupasi/c5/modul-1/02
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C2 - Numere prime. Descompunerea in factori primi
+
+---
+
+## Numere prime
+
+:::danger Definiție
+Un **<HighlightText color="red">număr prim</HighlightText>** are exact doi divizori: `1` și el însuși.
+:::
+
+Observăm numerele 6 și 7.
+
+<svg viewBox="0 0 400 180" width="100%" role="img">
+  <text x="15" y="42" fontSize="26" fill="#4ECDC4">6</text>
+  <rect x="55" y="10" width="330" height="50" fill="#4ECDC4" fillOpacity="0.25" stroke="#4ECDC4" strokeWidth="3" />
+  <line x1="165" y1="10" x2="165" y2="60" stroke="#4ECDC4" strokeWidth="3" />
+  <line x1="275" y1="10" x2="275" y2="60" stroke="#4ECDC4" strokeWidth="3" />
+  <text x="110" y="45" textAnchor="middle" fontSize="26" fill="#4ECDC4">2</text>
+  <text x="220" y="45" textAnchor="middle" fontSize="26" fill="#4ECDC4">2</text>
+  <text x="330" y="45" textAnchor="middle" fontSize="26" fill="#4ECDC4">2</text>
+  <text x="55" y="85" fontSize="20" fill="#4ECDC4">6 = 2 × 3, nu este prim</text>
+  <text x="15" y="145" fontSize="26" fill="#FF6B6B">7</text>
+  <rect x="55" y="113" width="330" height="50" fill="#FF6B6B" fillOpacity="0.25" stroke="#FF6B6B" strokeWidth="3" />
+  <text x="220" y="147" textAnchor="middle" fontSize="20" fill="#FF6B6B">7 este prim, nu se taie in parti egale</text>
+</svg>
+
+Numerele prime mai mici decât 50:
+
+<Katex>
+{String.raw`
+\color{#9370DB}{2,\ 3,\ 5,\ 7,\ 11,\ 13,\ 17,\ 19,\ 23,\ 29,\ 31,\ 37,\ 41,\ 43,\ 47}
+`}
+</Katex>
+
+:::warning Atenție
+Numărul `1` nu este prim. Are un singur divizor.
+:::
+
+---
+
+## Cum arătăm că un număr nu este prim
+
+Verificăm numărul 45.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: ultima cifră este } \color{#FF6B6B}{5} \Rightarrow 45 \text{ se împarte la } 5\\[6pt]
+& \text{Pasul 2: divizori găsiți: } \color{#4ECDC4}{1},\ \color{#4ECDC4}{5},\ \color{#4ECDC4}{45}\\[6pt]
+& \text{Pasul 3: sunt mai mulți de doi} \Rightarrow 45 \text{ nu este prim}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Descompunerea in factori primi
+
+Împărțim numărul la numere prime, pe rând. Ne oprim la 1.
+
+### Exemplu
+
+Descompunem numărul 60.
+
+<Katex>
+{String.raw`
+\left.\begin{array}{r|l}
+60 & \color{#FF6B6B}{2}\\
+30 & \color{#FF6B6B}{2}\\
+15 & \color{#4ECDC4}{3}\\
+5 & \color{#9370DB}{5}\\
+1 &
+\end{array}\right.
+`}
+</Katex>
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: } 60 : \color{#FF6B6B}{2} = 30\\[6pt]
+& \text{Pasul 2: } 30 : \color{#FF6B6B}{2} = 15\\[6pt]
+& \text{Pasul 3: } 15 : \color{#4ECDC4}{3} = 5\\[6pt]
+& \text{Pasul 4: } 5 : \color{#9370DB}{5} = 1
+\end{aligned}
+`}
+</Katex>
+
+Scriem factorii înmulțiți:
+
+<Katex>
+{String.raw`
+60 = \color{#FF6B6B}{2} \times \color{#FF6B6B}{2} \times \color{#4ECDC4}{3} \times \color{#9370DB}{5} = 2^2 \times 3 \times 5
+`}
+</Katex>
+
+---

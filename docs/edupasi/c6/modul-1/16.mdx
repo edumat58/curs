@@ -1,0 +1,108 @@
+---
+sidebar_position: 16
+slug: /edupasi/c5/modul-1/16
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C8.1 - Cel mai mare divizor comun
+
+---
+
+## Definiție
+
+:::danger Definiție
+**<HighlightText color="red">Cel mai mare divizor comun</HighlightText>** a două numere este cel mai mare număr care le împarte exact pe amândouă.
+:::
+
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="220" viewBox="0 0 400 220" role="img" aria-label="Divizorii lui 12 si divizorii lui 18, divizorii comuni colorati, cel mai mare este 6">
+  <text x="10" y="65" font-size="24" fill="#9370DB">12</text>
+  <rect x="60" y="35" width="50" height="44" fill="#4ECDC4" fill-opacity="0.25" stroke="#4ECDC4" stroke-width="3"/>
+  <rect x="116" y="35" width="50" height="44" fill="#4ECDC4" fill-opacity="0.25" stroke="#4ECDC4" stroke-width="3"/>
+  <rect x="172" y="35" width="50" height="44" fill="#4ECDC4" fill-opacity="0.25" stroke="#4ECDC4" stroke-width="3"/>
+  <rect x="228" y="35" width="50" height="44" fill="none" stroke="#9370DB" stroke-width="3"/>
+  <rect x="284" y="35" width="50" height="44" fill="#FF8C00" fill-opacity="0.35" stroke="#FF8C00" stroke-width="3"/>
+  <rect x="340" y="35" width="50" height="44" fill="none" stroke="#9370DB" stroke-width="3"/>
+  <text x="85" y="65" font-size="22" fill="#4ECDC4" text-anchor="middle">1</text>
+  <text x="141" y="65" font-size="22" fill="#4ECDC4" text-anchor="middle">2</text>
+  <text x="197" y="65" font-size="22" fill="#4ECDC4" text-anchor="middle">3</text>
+  <text x="253" y="65" font-size="22" fill="#9370DB" text-anchor="middle">4</text>
+  <text x="309" y="65" font-size="22" fill="#FF8C00" text-anchor="middle">6</text>
+  <text x="365" y="65" font-size="22" fill="#9370DB" text-anchor="middle">12</text>
+  <text x="10" y="145" font-size="24" fill="#9370DB">18</text>
+  <rect x="60" y="115" width="50" height="44" fill="#4ECDC4" fill-opacity="0.25" stroke="#4ECDC4" stroke-width="3"/>
+  <rect x="116" y="115" width="50" height="44" fill="#4ECDC4" fill-opacity="0.25" stroke="#4ECDC4" stroke-width="3"/>
+  <rect x="172" y="115" width="50" height="44" fill="#4ECDC4" fill-opacity="0.25" stroke="#4ECDC4" stroke-width="3"/>
+  <rect x="228" y="115" width="50" height="44" fill="#FF8C00" fill-opacity="0.35" stroke="#FF8C00" stroke-width="3"/>
+  <rect x="284" y="115" width="50" height="44" fill="none" stroke="#9370DB" stroke-width="3"/>
+  <rect x="340" y="115" width="50" height="44" fill="none" stroke="#9370DB" stroke-width="3"/>
+  <text x="85" y="145" font-size="22" fill="#4ECDC4" text-anchor="middle">1</text>
+  <text x="141" y="145" font-size="22" fill="#4ECDC4" text-anchor="middle">2</text>
+  <text x="197" y="145" font-size="22" fill="#4ECDC4" text-anchor="middle">3</text>
+  <text x="253" y="145" font-size="22" fill="#FF8C00" text-anchor="middle">6</text>
+  <text x="309" y="145" font-size="22" fill="#9370DB" text-anchor="middle">9</text>
+  <text x="365" y="145" font-size="22" fill="#9370DB" text-anchor="middle">18</text>
+  <text x="200" y="200" font-size="21" fill="#FF8C00" text-anchor="middle">cel mai mare divizor comun: 6</text>
+</svg>
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& D_{12} = \{1,\, 2,\, 3,\, 4,\, 6,\, 12\}\\[6pt]
+& D_{18} = \{1,\, 2,\, 3,\, 6,\, 9,\, 18\}\\[6pt]
+& (12,\, 18) = \color{#FF8C00}{6}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Algoritmul de determinare
+
+:::tip De reținut
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: descompunem în factori primi}\\[6pt]
+& \text{Pasul 2: alegem factorii } \color{#FF6B6B}{\text{comuni}}\\[6pt]
+& \text{Pasul 3: luăm exponentul cel mai } \color{#4ECDC4}{\text{mic}}
+\end{aligned}
+`}
+</Katex>
+:::
+
+**Exemplu.** Aflăm (24, 36).
+
+Pasul 1: Descompunem numerele.
+
+<Katex>
+{String.raw`
+24 = \color{#FF6B6B}{2}^3 \cdot \color{#4ECDC4}{3}, \qquad 36 = \color{#FF6B6B}{2}^2 \cdot \color{#4ECDC4}{3}^2
+`}
+</Katex>
+
+Pasul 2: Factorii comuni sunt 2 și 3.
+
+Pasul 3: Luăm exponentul cel mai mic.
+
+<Katex>
+{String.raw`
+(24,\, 36) = \color{#FF6B6B}{2}^2 \cdot \color{#4ECDC4}{3} = \color{#FF8C00}{12}
+`}
+</Katex>
+
+---
+
+## Observații
+
+Două numere cu cel mai mare divizor comun 1 se numesc prime între ele.
+
+<Katex>
+{String.raw`
+(4,\, 9) = \color{#FF8C00}{1}, \qquad (7,\, 8) = \color{#FF8C00}{1}
+`}
+</Katex>
+
+Reținem: două numere naturale consecutive sunt mereu prime între ele.

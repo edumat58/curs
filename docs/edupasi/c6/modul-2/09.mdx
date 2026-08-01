@@ -1,0 +1,172 @@
+---
+sidebar_position: 9
+slug: /edupasi/c5/modul-2/09
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C14 - Puterea cu exponent număr natural a unui număr întreg nenul
+
+---
+
+## Definiție
+
+:::danger Definiție
+**<HighlightText color="red">Puterea</HighlightText>** este o înmulțire de factori egali.
+
+Numărul de jos este **<HighlightText color="red">baza</HighlightText>**. Numărul de sus este **<HighlightText color="teal">exponentul</HighlightText>**.
+:::
+
+<svg viewBox="0 0 440 170" width="100%" style={{maxWidth: '460px'}} xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Minus doi la puterea a treia are trei factori">
+  <text x="14" y="62" fontSize="30" fill="#FF6B6B">(-2)</text>
+  <text x="76" y="44" fontSize="22" fill="#4ECDC4">3</text>
+  <text x="104" y="62" fontSize="28" fill="#333">=</text>
+  <rect x="140" y="30" width="84" height="44" rx="7" fill="none" stroke="#FF6B6B" strokeWidth="3" />
+  <text x="182" y="61" fontSize="24" fill="#FF6B6B" textAnchor="middle">(-2)</text>
+  <rect x="240" y="30" width="84" height="44" rx="7" fill="none" stroke="#FF6B6B" strokeWidth="3" />
+  <text x="282" y="61" fontSize="24" fill="#FF6B6B" textAnchor="middle">(-2)</text>
+  <rect x="340" y="30" width="84" height="44" rx="7" fill="none" stroke="#FF6B6B" strokeWidth="3" />
+  <text x="382" y="61" fontSize="24" fill="#FF6B6B" textAnchor="middle">(-2)</text>
+  <line x1="140" y1="92" x2="424" y2="92" stroke="#4ECDC4" strokeWidth="3" />
+  <line x1="140" y1="92" x2="140" y2="80" stroke="#4ECDC4" strokeWidth="3" />
+  <line x1="424" y1="92" x2="424" y2="80" stroke="#4ECDC4" strokeWidth="3" />
+  <text x="282" y="126" fontSize="24" fill="#4ECDC4" textAnchor="middle">3 factori</text>
+  <text x="282" y="158" fontSize="24" fill="#FF8C00" textAnchor="middle">rezultat: -8</text>
+</svg>
+
+<Katex>
+{String.raw`
+(-2)^3 = (-2)\cdot(-2)\cdot(-2) = \color{#FF8C00}{-8}
+`}
+</Katex>
+
+Reținem:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& a^1 = a\\[8pt]
+& a^0 = 1
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Semnul unei puteri
+
+:::tip De reținut
+Baza pozitivă dă rezultat pozitiv.
+
+Baza negativă cu exponent **par** dă rezultat pozitiv.
+
+Baza negativă cu exponent **impar** dă rezultat negativ.
+:::
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& (+3)^2 = \color{#4ECDC4}{+9}\\[8pt]
+& (-4)^2 = \color{#4ECDC4}{+16}\\[8pt]
+& (-2)^3 = \color{#FF6B6B}{-8}
+\end{aligned}
+`}
+</Katex>
+
+Parantezele contează:
+
+<Katex>
+{String.raw`
+(-5)^2 = \color{#4ECDC4}{+25} \qquad -5^2 = \color{#FF6B6B}{-25}
+`}
+</Katex>
+
+---
+
+## Reguli de calcul
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& a^n \cdot a^m = a^{\color{#9370DB}{n+m}}\\[8pt]
+& a^n : a^m = a^{\color{#9370DB}{n-m}}\\[8pt]
+& (a^n)^m = a^{\color{#9370DB}{n \cdot m}}
+\end{aligned}
+`}
+</Katex>
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& (-2)^2 \cdot (-2)^3 = (-2)^{\color{#9370DB}{5}} = -32\\[8pt]
+& (-2)^7 : (-2)^4 = (-2)^{\color{#9370DB}{3}} = -8\\[8pt]
+& \left[(-2)^2\right]^3 = (-2)^{\color{#9370DB}{6}} = 64
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Exemplu rezolvat
+
+Calculăm pas cu pas:
+
+<Katex>
+{String.raw`
+(-3)^2 + (-2)^3
+`}
+</Katex>
+
+Pasul 1: Calculăm prima putere.
+
+Pasul 2: Calculăm a doua putere.
+
+Pasul 3: Adunăm rezultatele.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& (-3)^2 = \color{#4ECDC4}{+9}\\[8pt]
+& (-2)^3 = \color{#FF6B6B}{-8}\\[8pt]
+& 9 + (-8) = \color{#FF8C00}{1}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Compararea puterilor
+
+Puterea negativă este mai mică decât puterea pozitivă.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& (-7)^5 = \color{#FF6B6B}{\text{negativ}}\\[8pt]
+& (-7)^4 = \color{#4ECDC4}{\text{pozitiv}}\\[8pt]
+& (-7)^5 < (-7)^4
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Fișă de lucru
+
+**1.** Calculați:
+
+<Katex>
+{String.raw`
+\text{a) } (+4)^2 \qquad \text{b) } (-1)^3 \qquad \text{c) } (-2)^4 \qquad \text{d) } (-3)^3
+`}
+</Katex>
+
+**2.** Scrieți ca o singură putere:
+
+<Katex>
+{String.raw`
+\text{a) } (-3)^2 \cdot (-3)^4 \qquad \text{b) } (-8)^5 : (-8)^3 \qquad \text{c) } \left[(-2)^3\right]^2
+`}
+</Katex>

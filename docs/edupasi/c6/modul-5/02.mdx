@@ -1,0 +1,121 @@
+---
+sidebar_position: 2
+slug: /edupasi/c5/modul-5/02
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# Suma măsurilor unghiurilor într-un triunghi
+
+---
+
+## 1) Suma măsurilor unghiurilor unui triunghi
+
+:::tip De reținut
+Orice triunghi are **<HighlightText color="red">trei unghiuri</HighlightText>**.
+
+Suma măsurilor lor este **<HighlightText color="teal">180 de grade</HighlightText>**.
+:::
+
+<svg viewBox="0 0 460 270" xmlns="http://www.w3.org/2000/svg" role="img">
+  <line x1="60" y1="200" x2="430" y2="200" stroke="currentColor" strokeWidth="3" />
+  <line x1="60" y1="200" x2="170" y2="60" stroke="currentColor" strokeWidth="3" />
+  <line x1="170" y1="60" x2="300" y2="200" stroke="currentColor" strokeWidth="3" />
+  <text x="170" y="45" fontSize="24" textAnchor="middle" fill="currentColor">A</text>
+  <text x="48" y="228" fontSize="24" textAnchor="middle" fill="currentColor">B</text>
+  <text x="298" y="228" fontSize="24" textAnchor="middle" fill="currentColor">C</text>
+  <text x="172" y="105" fontSize="26" textAnchor="middle" fill="#FF6B6B">a</text>
+  <text x="98" y="190" fontSize="26" textAnchor="middle" fill="#4ECDC4">b</text>
+  <text x="272" y="190" fontSize="26" textAnchor="middle" fill="#9370DB">c</text>
+  <text x="332" y="190" fontSize="26" textAnchor="middle" fill="#FF8C00">e</text>
+  <text x="365" y="245" fontSize="20" textAnchor="middle" fill="#FF8C00">exterior</text>
+</svg>
+
+<Katex>
+{String.raw`
+{\color{#FF6B6B}a}+{\color{#4ECDC4}b}+{\color{#9370DB}c}=180^\circ
+`}
+</Katex>
+
+Aflăm al treilea unghi.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& {\color{#FF6B6B}a}=50^\circ,\qquad {\color{#4ECDC4}b}=60^\circ\\[8pt]
+& \text{Pasul 1: adunăm cele două unghiuri}\\[6pt]
+& 50^\circ+60^\circ=110^\circ\\[6pt]
+& \text{Pasul 2: scădem din }180^\circ\\[6pt]
+& 180^\circ-110^\circ={\color{#9370DB}70^\circ}\\[6pt]
+& \text{Al treilea unghi are }70^\circ
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## 2) Unghi exterior triunghiului
+
+:::danger Definiție
+Prelungim o latură a triunghiului.
+
+Se formează **<HighlightText color="orange">unghiul exterior</HighlightText>**.
+
+În desen este unghiul **<HighlightText color="orange">e</HighlightText>**.
+:::
+
+<Katex>
+{String.raw`
+{\color{#9370DB}c}+{\color{#FF8C00}e}=180^\circ
+`}
+</Katex>
+
+---
+
+## 3) Teorema unghiului exterior
+
+Unghiul exterior este suma celor două unghiuri depărtate de el.
+
+<Katex>
+{String.raw`
+{\color{#FF8C00}e}={\color{#FF6B6B}a}+{\color{#4ECDC4}b}
+`}
+</Katex>
+
+Folosim același triunghi.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& {\color{#FF6B6B}a}=50^\circ,\qquad {\color{#4ECDC4}b}=60^\circ\\[8pt]
+& \text{Pasul 1: alegem unghiurile depărtate}\\[6pt]
+& \text{Pasul 2: le adunăm}\\[6pt]
+& {\color{#FF8C00}e}=50^\circ+60^\circ=110^\circ
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Exerciții
+
+**1.** Două unghiuri ale unui triunghi au 40 de grade și 75 de grade. Cât are al treilea unghi?
+
+**2.** Un triunghi are unghiurile de 30 de grade și 40 de grade. Cât are unghiul exterior din al treilea vârf?
+
+<details>
+<summary>Răspunsuri</summary>
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \textbf{1.}\quad 40^\circ+75^\circ=115^\circ\\[6pt]
+& \qquad 180^\circ-115^\circ={\color{#4ECDC4}65^\circ}\\[10pt]
+& \textbf{2.}\quad 30^\circ+40^\circ={\color{#FF8C00}70^\circ}
+\end{aligned}
+`}
+</Katex>
+
+</details>

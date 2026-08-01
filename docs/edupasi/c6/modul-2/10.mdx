@@ -1,0 +1,148 @@
+---
+sidebar_position: 10
+slug: /edupasi/c5/modul-2/10
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C15 - Reguli de calcul cu puteri
+
+---
+
+## Noțiuni de bază
+
+:::danger Definiție
+Puterea este o **<HighlightText color="red">înmulțire repetată</HighlightText>**. Baza se înmulțește de atâtea ori cât arată exponentul.
+:::
+
+<svg viewBox="0 0 520 210" width="100%" role="img" aria-label="Baza si exponentul">
+  <text x="60" y="70" fontSize="56" fill="#FF6B6B" fontWeight="bold">2</text>
+  <text x="98" y="42" fontSize="34" fill="#4ECDC4" fontWeight="bold">4</text>
+  <text x="150" y="40" fontSize="22" fill="#4ECDC4">exponent</text>
+  <line x1="145" y1="34" x2="118" y2="30" stroke="#4ECDC4" strokeWidth="3" />
+  <text x="150" y="80" fontSize="22" fill="#FF6B6B">bază</text>
+  <line x1="145" y1="74" x2="95" y2="66" stroke="#FF6B6B" strokeWidth="3" />
+  <rect x="40" y="110" width="60" height="60" rx="10" fill="none" stroke="#FF6B6B" strokeWidth="3" />
+  <text x="62" y="152" fontSize="30" fill="#FF6B6B">2</text>
+  <text x="110" y="152" fontSize="30" fill="#9370DB">·</text>
+  <rect x="130" y="110" width="60" height="60" rx="10" fill="none" stroke="#FF6B6B" strokeWidth="3" />
+  <text x="152" y="152" fontSize="30" fill="#FF6B6B">2</text>
+  <text x="200" y="152" fontSize="30" fill="#9370DB">·</text>
+  <rect x="220" y="110" width="60" height="60" rx="10" fill="none" stroke="#FF6B6B" strokeWidth="3" />
+  <text x="242" y="152" fontSize="30" fill="#FF6B6B">2</text>
+  <text x="290" y="152" fontSize="30" fill="#9370DB">·</text>
+  <rect x="310" y="110" width="60" height="60" rx="10" fill="none" stroke="#FF6B6B" strokeWidth="3" />
+  <text x="332" y="152" fontSize="30" fill="#FF6B6B">2</text>
+  <text x="390" y="152" fontSize="30" fill="#FF8C00">= 16</text>
+  <line x1="40" y1="185" x2="370" y2="185" stroke="#4ECDC4" strokeWidth="3" />
+  <text x="150" y="207" fontSize="22" fill="#4ECDC4">4 factori</text>
+</svg>
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#FF6B6B}{a}^{\color{#4ECDC4}{x}} = \underbrace{a \cdot a \cdot \ldots \cdot a}_{x\ \text{factori}} \\[10pt]
+& \color{#FF6B6B}{2}^{\color{#4ECDC4}{4}} = 2 \cdot 2 \cdot 2 \cdot 2 = 16
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Reguli fundamentale
+
+:::tip De reținut
+<Katex>
+{String.raw`
+\Large \color{#FF8C00}{a^{0} = 1}
+`}
+</Katex>
+:::
+
+### R1. Înmulțirea puterilor cu aceeași bază
+
+Baza rămâne la fel. Exponenții se adună.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#FF6B6B}{a^{x} \cdot a^{y} = a^{x+y}} \\[12pt]
+& \text{Exemplu: } 2^{3} \cdot 2^{4} \\[8pt]
+& \text{Pasul 1: adunăm exponenții} \rightarrow 3+4=7 \\[8pt]
+& \text{Pasul 2: scriem baza cu suma} \rightarrow 2^{7}
+\end{aligned}
+`}
+</Katex>
+
+### R2. Împărțirea puterilor cu aceeași bază
+
+Baza rămâne la fel. Exponenții se scad.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#4ECDC4}{a^{x} : a^{y} = a^{x-y}} \\[12pt]
+& \text{Exemplu: } 3^{5} : 3^{2} \\[8pt]
+& \text{Pasul 1: scădem exponenții} \rightarrow 5-2=3 \\[8pt]
+& \text{Pasul 2: scriem baza cu diferența} \rightarrow 3^{3}
+\end{aligned}
+`}
+</Katex>
+
+### R3. Puterea unei puteri
+
+Baza rămâne la fel. Exponenții se înmulțesc.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#9370DB}{(a^{x})^{y} = a^{x \cdot y}} \\[12pt]
+& \text{Exemplu: } (5^{2})^{3} = 5^{2 \cdot 3} = 5^{6}
+\end{aligned}
+`}
+</Katex>
+
+### R4. Puterea unui produs
+
+Fiecare factor se ridică la putere.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#FF8C00}{(a \cdot b)^{x} = a^{x} \cdot b^{x}} \\[12pt]
+& \text{Exemplu: } (2 \cdot 3)^{2} = 2^{2} \cdot 3^{2} = 4 \cdot 9 = 36
+\end{aligned}
+`}
+</Katex>
+
+### R5. Puterea negativă
+
+Scriem o fracție cu 1 sus. Exponentul devine pozitiv.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#FF6B6B}{a^{-x} = \frac{1}{a^{x}}} \\[12pt]
+& \text{Exemplu: } 2^{-3} \\[8pt]
+& \text{Pasul 1: trecem puterea la numitor} \rightarrow \frac{1}{2^{3}} \\[8pt]
+& \text{Pasul 2: calculăm numitorul} \rightarrow \frac{1}{8}
+\end{aligned}
+`}
+</Katex>
+
+### R6. Puterea unui raport
+
+Numărătorul și numitorul se ridică la putere.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#4ECDC4}{\left(\frac{a}{b}\right)^{x} = \frac{a^{x}}{b^{x}}} \\[12pt]
+& \text{Exemplu: } \left(\frac{2}{5}\right)^{2} = \frac{2^{2}}{5^{2}} = \frac{4}{25}
+\end{aligned}
+`}
+</Katex>
+
+---

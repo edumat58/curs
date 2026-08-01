@@ -1,0 +1,116 @@
+---
+sidebar_position: 2
+slug: /edupasi/c5/modul-3/02
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C17 - Inecuații în mulțimea numerelor întregi
+
+---
+
+## Definiții și proprietăți
+
+:::danger Definiție
+O **<HighlightText color="red">inecuație</HighlightText>** este o inegalitate cu un număr necunoscut.
+
+Necunoscuta se notează cu **<HighlightText color="teal">x</HighlightText>**.
+
+Numerele care verifică inegalitatea formează **<HighlightText color="orange">soluția</HighlightText>**.
+:::
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& 2{\color{#FF6B6B}x} - 4 > 0 && \text{inecuație}\\[6pt]
+& {\color{#FF6B6B}x} > 2 && \text{soluția}\\[6pt]
+& S = \{3,\, 4,\, 5,\, \ldots\} && \text{mulțimea soluțiilor}
+\end{aligned}
+`}
+</Katex>
+
+Regulile de lucru:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Adunăm sau scădem un număr} && \to {\color{#4ECDC4}\text{semnul rămâne}}\\[6pt]
+& \text{Împărțim la număr pozitiv} && \to {\color{#4ECDC4}\text{semnul rămâne}}\\[6pt]
+& \text{Împărțim la număr negativ} && \to {\color{#FF6B6B}\text{semnul se schimbă}}
+\end{aligned}
+`}
+</Katex>
+
+Etapele de rezolvare:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: separăm termenii}\\[6pt]
+& \text{Pasul 2: facem calculele}\\[6pt]
+& \text{Pasul 3: împărțim la numărul din fața lui } x\\[6pt]
+& \text{Pasul 4: scriem mulțimea soluțiilor}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Exemple rezolvate
+
+Rezolvăm prima inecuație. Alegem numerele din mulțimea M.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& 5x - 3 \ge 3x + 1, \quad M = \{-1,\, 0,\, 2,\, 3,\, 4\}\\[8pt]
+& \text{Pasul 1: } 5x - 3x \ge 1 {\color{#FF6B6B}+ 3}\\[6pt]
+& \text{Pasul 2: } 2x \ge 4 \quad | :2\\[6pt]
+& \text{Pasul 3: } x \ge {\color{#4ECDC4}2}\\[6pt]
+& \text{Pasul 4: } S = \{2,\, 3,\, 4\}
+\end{aligned}
+`}
+</Katex>
+
+Vedem soluția pe axă:
+
+<svg viewBox="0 0 440 130" xmlns="http://www.w3.org/2000/svg" role="img">
+  <line x1="20" y1="70" x2="420" y2="70" stroke="currentColor" strokeWidth="2" />
+  <circle cx="60" cy="70" r="10" fill="#BBBBBB" />
+  <circle cx="130" cy="70" r="10" fill="#BBBBBB" />
+  <circle cx="270" cy="70" r="10" fill="#4ECDC4" />
+  <circle cx="340" cy="70" r="10" fill="#4ECDC4" />
+  <circle cx="410" cy="70" r="10" fill="#4ECDC4" />
+  <text x="60" y="112" fontSize="24" textAnchor="middle" fill="currentColor">-1</text>
+  <text x="130" y="112" fontSize="24" textAnchor="middle" fill="currentColor">0</text>
+  <text x="270" y="112" fontSize="24" textAnchor="middle" fill="currentColor">2</text>
+  <text x="340" y="112" fontSize="24" textAnchor="middle" fill="currentColor">3</text>
+  <text x="410" y="112" fontSize="24" textAnchor="middle" fill="currentColor">4</text>
+  <text x="340" y="34" fontSize="24" textAnchor="middle" fill="#4ECDC4">x ≥ 2</text>
+</svg>
+
+Rezolvăm a doua inecuație. Aici împărțim la un număr negativ.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& 8 - 3x \ge 2, \quad x \in \mathbb{Z}\\[8pt]
+& \text{Pasul 1: } -3x \ge 2 {\color{#FF6B6B}- 8}\\[6pt]
+& \text{Pasul 2: } -3x \ge -6 \quad | :(-3)\\[6pt]
+& \text{Pasul 3: } x \le {\color{#4ECDC4}2}\\[6pt]
+& \text{Pasul 4: } S = \{\ldots,\, 0,\, 1,\, 2\}
+\end{aligned}
+`}
+</Katex>
+
+:::warning Atenție
+La împărțirea cu un număr **<HighlightText color="red">negativ</HighlightText>** schimbăm semnul inecuației.
+
+<Katex>
+{String.raw`
+-2x \le 6 \quad | :(-2) \quad \Rightarrow \quad x {\color{#FF6B6B}\ge} -3
+`}
+</Katex>
+:::

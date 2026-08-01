@@ -1,0 +1,78 @@
+---
+sidebar_position: 11
+slug: /edupasi/c5/modul-1/11
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C5.7 - Proporții
+
+---
+
+## Generalități
+
+:::danger Definiție
+Două mărimi sunt **<HighlightText color="red">proporționale</HighlightText>** dacă înmulțim mereu cu **<HighlightText color="orange">același număr</HighlightText>**. Acel număr se numește **<HighlightText color="teal">coeficient</HighlightText>**.
+:::
+
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="180" viewBox="0 0 440 180" role="img" aria-label="Un caiet costă 3 lei, două caiete costă 6 lei">
+  <text x="10" y="60" font-size="20" fill="#FF6B6B">1 caiet</text>
+  <rect x="120" y="32" width="92" height="44" rx="6" fill="#4ECDC4"/>
+  <text x="166" y="61" font-size="20" fill="#ffffff" text-anchor="middle">3 lei</text>
+  <text x="228" y="61" font-size="21" fill="#FF8C00">= 3 lei</text>
+  <text x="10" y="142" font-size="20" fill="#FF6B6B">2 caiete</text>
+  <rect x="120" y="114" width="92" height="44" rx="6" fill="#4ECDC4"/>
+  <text x="166" y="143" font-size="20" fill="#ffffff" text-anchor="middle">3 lei</text>
+  <rect x="216" y="114" width="92" height="44" rx="6" fill="#4ECDC4"/>
+  <text x="262" y="143" font-size="20" fill="#ffffff" text-anchor="middle">3 lei</text>
+  <text x="318" y="143" font-size="21" fill="#FF8C00">= 6 lei</text>
+</svg>
+
+| Caiete | 1 | 2 | 4 |
+|--------|---|---|----|
+| Lei | 3 | 6 | 12 |
+
+<Katex>
+{String.raw`
+3 \div 1 = \color{#FF8C00}{3} \qquad 6 \div 2 = \color{#FF8C00}{3} \qquad 12 \div 4 = \color{#FF8C00}{3}
+`}
+</Katex>
+
+---
+
+## Metode
+
+Pasul 1: împărțim numărul de jos la numărul de sus.
+
+Pasul 2: facem la fel la fiecare coloană.
+
+Pasul 3: comparăm rezultatele.
+
+| G1 | 2 | 5 |
+|----|---|----|
+| G2 | 6 | 20 |
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& 6 \div 2 = \color{#FF6B6B}{3}\\[6pt]
+& 20 \div 5 = \color{#9370DB}{4}
+\end{aligned}
+`}
+</Katex>
+
+Rezultatele sunt diferite. Mărimile nu sunt proporționale.
+
+:::tip De reținut
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#FF8C00}{k} = b \div a\\[6pt]
+& b = a \times \color{#FF8C00}{k}\\[6pt]
+& a = b \div \color{#FF8C00}{k}
+\end{aligned}
+`}
+</Katex>
+:::

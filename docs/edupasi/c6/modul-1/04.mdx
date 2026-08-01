@@ -1,0 +1,108 @@
+---
+sidebar_position: 4
+slug: /edupasi/c5/modul-1/04
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C4 - Multimea nr. intregi Z
+
+---
+
+## Numere întregi
+
+:::danger Definiție
+**<HighlightText color="red">Numerele întregi</HighlightText>** sunt numerele pozitive, numerele negative și zero. Mulțimea lor se notează cu Z.
+:::
+
+<svg viewBox="0 0 400 110" width="100%" style={{maxWidth: '420px'}} xmlns="http://www.w3.org/2000/svg">
+  <line x1="15" y1="50" x2="390" y2="50" stroke="#333" strokeWidth="3" />
+  <line x1="35" y1="40" x2="35" y2="60" stroke="#333" strokeWidth="3" />
+  <line x1="90" y1="40" x2="90" y2="60" stroke="#333" strokeWidth="3" />
+  <line x1="145" y1="40" x2="145" y2="60" stroke="#333" strokeWidth="3" />
+  <line x1="200" y1="36" x2="200" y2="64" stroke="#9370DB" strokeWidth="4" />
+  <line x1="255" y1="40" x2="255" y2="60" stroke="#333" strokeWidth="3" />
+  <line x1="310" y1="40" x2="310" y2="60" stroke="#333" strokeWidth="3" />
+  <line x1="365" y1="40" x2="365" y2="60" stroke="#333" strokeWidth="3" />
+  <text x="35" y="90" fontSize="26" fill="#FF6B6B" textAnchor="middle">-3</text>
+  <text x="90" y="90" fontSize="26" fill="#FF6B6B" textAnchor="middle">-2</text>
+  <text x="145" y="90" fontSize="26" fill="#FF6B6B" textAnchor="middle">-1</text>
+  <text x="200" y="90" fontSize="26" fill="#9370DB" textAnchor="middle">0</text>
+  <text x="255" y="90" fontSize="26" fill="#4ECDC4" textAnchor="middle">1</text>
+  <text x="310" y="90" fontSize="26" fill="#4ECDC4" textAnchor="middle">2</text>
+  <text x="365" y="90" fontSize="26" fill="#4ECDC4" textAnchor="middle">3</text>
+  <text x="35" y="25" fontSize="20" fill="#FF6B6B">negative</text>
+  <text x="290" y="25" fontSize="20" fill="#4ECDC4">pozitive</text>
+</svg>
+
+<Katex>
+{String.raw`
+\mathbb{Z} = \{\dots,\ \color{#FF6B6B}{-3},\ \color{#FF6B6B}{-2},\ \color{#FF6B6B}{-1},\ \color{#9370DB}{0},\ \color{#4ECDC4}{1},\ \color{#4ECDC4}{2},\ \color{#4ECDC4}{3},\ \dots\}
+`}
+</Katex>
+
+---
+
+## Reperarea pe o dreaptă gradată
+
+:::tip De reținut
+Numărul care arată locul unui punct se numește **<HighlightText color="teal">abscisă</HighlightText>**.
+:::
+
+**Exemplu:** Punctul A stă pe 3. Punctul B stă pe -2.
+
+Lucrăm pas cu pas:
+
+Pasul 1: Citim numărul de sub punct.
+
+Pasul 2: Scriem numărul în paranteză, după literă.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& A(\color{#4ECDC4}{3})\\[8pt]
+& B(\color{#FF6B6B}{-2})
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Reperarea în plan
+
+Un punct din plan are două numere. Ele se numesc coordonate.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Primul număr} = \color{#FF6B6B}{\text{abscisa}} \quad \text{(orizontal)}\\[8pt]
+& \text{Al doilea număr} = \color{#4ECDC4}{\text{ordonata}} \quad \text{(vertical)}
+\end{aligned}
+`}
+</Katex>
+
+<svg viewBox="0 0 320 240" width="100%" style={{maxWidth: '340px'}} xmlns="http://www.w3.org/2000/svg">
+  <line x1="20" y1="100" x2="300" y2="100" stroke="#333" strokeWidth="3" />
+  <line x1="60" y1="20" x2="60" y2="225" stroke="#333" strokeWidth="3" />
+  <line x1="180" y1="100" x2="180" y2="180" stroke="#FF6B6B" strokeWidth="3" strokeDasharray="7 6" />
+  <line x1="60" y1="180" x2="180" y2="180" stroke="#4ECDC4" strokeWidth="3" strokeDasharray="7 6" />
+  <circle cx="180" cy="180" r="8" fill="#9370DB" />
+  <text x="196" y="188" fontSize="24" fill="#9370DB" fontWeight="bold">A</text>
+  <text x="180" y="88" fontSize="24" fill="#FF6B6B" textAnchor="middle">3</text>
+  <text x="46" y="188" fontSize="24" fill="#4ECDC4" textAnchor="end">-2</text>
+  <text x="48" y="122" fontSize="20" fill="#333" textAnchor="end">0</text>
+</svg>
+
+**Exemplu:** Citim coordonatele punctului A.
+
+Pasul 1: Mergem 3 unități la dreapta.
+
+Pasul 2: Mergem 2 unități în jos.
+
+<Katex>
+{String.raw`
+A(\color{#FF6B6B}{3}\ ;\ \color{#4ECDC4}{-2})
+`}
+</Katex>

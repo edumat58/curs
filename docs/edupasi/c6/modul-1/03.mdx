@@ -1,0 +1,90 @@
+---
+sidebar_position: 3
+slug: /edupasi/c5/modul-1/03
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C3 - Mulțimi. Mulțimea numerelor naturale N
+
+---
+
+## Ce este o mulțime?
+
+:::danger Definiție 1
+O **<HighlightText color="red">mulțime</HighlightText>** este un grup de obiecte. Obiectele se numesc **<HighlightText color="teal">elemente</HighlightText>**.
+:::
+
+<svg viewBox="0 0 340 190" width="100%" style={{maxWidth: '380px'}} xmlns="http://www.w3.org/2000/svg">
+  <ellipse cx="125" cy="105" rx="110" ry="68" fill="none" stroke="#4ECDC4" strokeWidth="4" />
+  <text x="22" y="38" fontSize="32" fill="#4ECDC4" fontWeight="bold">A</text>
+  <text x="72" y="120" fontSize="38" fill="#FF6B6B" textAnchor="middle">2</text>
+  <text x="125" y="120" fontSize="38" fill="#FF6B6B" textAnchor="middle">5</text>
+  <text x="178" y="120" fontSize="38" fill="#FF6B6B" textAnchor="middle">7</text>
+  <text x="300" y="120" fontSize="38" fill="#FF8C00" textAnchor="middle">3</text>
+</svg>
+
+<Katex>
+{String.raw`
+A = \{\color{#FF6B6B}{2},\ \color{#FF6B6B}{5},\ \color{#FF6B6B}{7}\}
+`}
+</Katex>
+
+Reținem: elementele se scriu între acolade.
+
+---
+
+## Reprezentarea mulțimilor
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#4ECDC4}{\in} \ \text{ înseamnă „aparține"}\\[8pt]
+& \color{#FF8C00}{\notin} \ \text{ înseamnă „nu aparține"}
+\end{aligned}
+`}
+</Katex>
+
+**Exemplu:** Scriem locul numărului 5.
+
+Pasul 1: Citim elementele mulțimii A.
+
+Pasul 2: Căutăm numărul 5 printre ele.
+
+Pasul 3: Îl găsim. Deci 5 aparține.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& 5 \color{#4ECDC4}{\in} A\\[8pt]
+& 3 \color{#FF8C00}{\notin} A
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Mulțimea numerelor naturale
+
+:::danger Definiție 2
+**<HighlightText color="teal">Numerele naturale</HighlightText>** sunt numerele cu care numărăm. Mulțimea lor se notează cu N.
+:::
+
+<Katex>
+{String.raw`
+\mathbb{N} = \{\color{#9370DB}{0},\ 1,\ 2,\ 3,\ 4,\ 5,\ \dots\}
+`}
+</Katex>
+
+Observăm că N începe de la 0. Numerele nu se termină.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& 7 \color{#4ECDC4}{\in} \mathbb{N}\\[8pt]
+& 0 \color{#4ECDC4}{\in} \mathbb{N}
+\end{aligned}
+`}
+</Katex>

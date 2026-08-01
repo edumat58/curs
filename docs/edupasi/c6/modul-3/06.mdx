@@ -1,0 +1,108 @@
+---
+sidebar_position: 6
+slug: /edupasi/c5/modul-3/06
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C19.2 - Inmulțirea și împărțirea numerelor raționale
+
+---
+
+## Înmulțirea numerelor raționale
+
+:::danger Definiție
+La **<HighlightText color="red">înmulțire</HighlightText>** înmulțim numărător cu numărător. Apoi înmulțim numitor cu numitor.
+:::
+
+<Katex>
+{String.raw`
+\frac{\color{#FF6B6B}{a}}{\color{#4ECDC4}{b}} \cdot \frac{\color{#FF6B6B}{c}}{\color{#4ECDC4}{d}} = \frac{\color{#FF6B6B}{a \cdot c}}{\color{#4ECDC4}{b \cdot d}}
+`}
+</Katex>
+
+**Exemplul 1**
+
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="300" viewBox="0 0 480 300" role="img" aria-label="Dreptunghi împărțit în 15 părți egale, 8 părți colorate">
+  <rect x="60" y="50" width="240" height="120" fill="#9370DB" fill-opacity="0.45"/>
+  <g stroke="#333333" stroke-width="3" fill="none">
+    <rect x="60" y="50" width="300" height="180"/>
+    <line x1="120" y1="50" x2="120" y2="230"/>
+    <line x1="180" y1="50" x2="180" y2="230"/>
+    <line x1="240" y1="50" x2="240" y2="230"/>
+    <line x1="300" y1="50" x2="300" y2="230"/>
+    <line x1="60" y1="110" x2="360" y2="110"/>
+    <line x1="60" y1="170" x2="360" y2="170"/>
+  </g>
+  <text x="180" y="34" font-size="24" fill="#4ECDC4" text-anchor="middle">4 din 5 coloane</text>
+  <text x="34" y="140" font-size="24" fill="#FF6B6B" text-anchor="middle" transform="rotate(-90 34 140)">2 din 3 linii</text>
+  <text x="210" y="272" font-size="24" fill="#9370DB" text-anchor="middle">colorat: 8 din 15</text>
+</svg>
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: } \frac{2}{3} \cdot \frac{4}{5}\\[6pt]
+& \text{Pasul 2: numărători } 2 \cdot 4 = \color{#FF6B6B}{8}\\[6pt]
+& \text{Pasul 3: numitori } 3 \cdot 5 = \color{#4ECDC4}{15}\\[6pt]
+& \text{Pasul 4: } \frac{2}{3} \cdot \frac{4}{5} = \frac{\color{#FF6B6B}{8}}{\color{#4ECDC4}{15}}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Regula semnelor
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& (+) \cdot (+) = \color{#FF6B6B}{+} \qquad (-) \cdot (-) = \color{#FF6B6B}{+}\\[8pt]
+& (+) \cdot (-) = \color{#9370DB}{-} \qquad (-) \cdot (+) = \color{#9370DB}{-}
+\end{aligned}
+`}
+</Katex>
+
+**Exemplul 2**
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: } (-0{,}5) \cdot 6\\[6pt]
+& \text{Pasul 2: înmulțim numerele } 0{,}5 \cdot 6 = 3\\[6pt]
+& \text{Pasul 3: semnele sunt diferite, deci minus}\\[6pt]
+& \text{Pasul 4: } (-0{,}5) \cdot 6 = \color{#9370DB}{-3}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Împărțirea numerelor raționale
+
+:::tip De reținut
+La **<HighlightText color="teal">împărțire</HighlightText>** întoarcem împărțitorul. Apoi înmulțim.
+:::
+
+<Katex>
+{String.raw`
+\frac{a}{b} : \frac{c}{d} = \frac{a}{b} \cdot \frac{\color{#FF8C00}{d}}{\color{#FF8C00}{c}}
+`}
+</Katex>
+
+**Exemplul 3**
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: } \frac{3}{4} : \frac{2}{5}\\[6pt]
+& \text{Pasul 2: întoarcem } \frac{2}{5} \rightarrow \color{#FF8C00}{\frac{5}{2}}\\[6pt]
+& \text{Pasul 3: } \frac{3}{4} \cdot \frac{5}{2} = \frac{3 \cdot 5}{4 \cdot 2}\\[6pt]
+& \text{Pasul 4: } \frac{3}{4} : \frac{2}{5} = \color{#FF8C00}{\frac{15}{8}}
+\end{aligned}
+`}
+</Katex>
+
+Reținem: împărțitorul nu poate fi zero.

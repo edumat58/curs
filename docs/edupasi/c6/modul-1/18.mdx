@@ -1,0 +1,109 @@
+---
+sidebar_position: 18
+slug: /edupasi/c5/modul-1/18
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C9 - Relații și operații între mulțimi
+
+---
+
+## Relații între mulțimi
+
+:::danger Definiție
+Două mulțimi sunt **<HighlightText color="red">egale</HighlightText>** dacă au aceleași elemente.
+
+Mulțimea A este **<HighlightText color="teal">submulțime</HighlightText>** a mulțimii B.
+
+Condiția: toate elementele lui A sunt și în B.
+:::
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#FF6B6B}{A} = \{2,\ 5,\ 7\} \qquad \color{#4ECDC4}{B} = \{7,\ 2,\ 5\} \\[8pt]
+& \text{Aceleași elemente, deci } \color{#FF6B6B}{A} = \color{#4ECDC4}{B} \\[14pt]
+& \color{#9370DB}{C} = \{2,\ 5\} \\[8pt]
+& \text{2 și 5 sunt în } \color{#FF6B6B}{A} \text{, deci } \color{#9370DB}{C} \subset \color{#FF6B6B}{A}
+\end{aligned}
+`}
+</Katex>
+
+Toate submulțimile unei mulțimi formează **mulțimea părților**.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& D = \{1,\ 2\} \\[8pt]
+& P(D) = \{\ \varnothing,\ \{1\},\ \{2\},\ D\ \}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Operații cu mulțimi
+
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="290" viewBox="0 0 480 290" role="img" aria-label="Diagrama cu doua multimi care se suprapun">
+  <circle cx="180" cy="140" r="110" fill="#FF6B6B" fill-opacity="0.18" stroke="#FF6B6B" stroke-width="5"/>
+  <circle cx="300" cy="140" r="110" fill="#4ECDC4" fill-opacity="0.18" stroke="#4ECDC4" stroke-width="5"/>
+  <text x="66" y="52" font-size="34" fill="#FF6B6B">A</text>
+  <text x="392" y="52" font-size="34" fill="#4ECDC4">B</text>
+  <text x="118" y="132" font-size="30" fill="#333333">1</text>
+  <text x="118" y="182" font-size="30" fill="#333333">2</text>
+  <text x="228" y="132" font-size="30" fill="#9370DB">3</text>
+  <text x="228" y="182" font-size="30" fill="#9370DB">4</text>
+  <text x="340" y="157" font-size="30" fill="#333333">6</text>
+  <text x="240" y="282" font-size="24" fill="#9370DB" text-anchor="middle">3 și 4 sunt în amândouă</text>
+</svg>
+
+:::tip De reținut
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#FF6B6B}{A \cap B} \;\text{ — elementele comune}\\[10pt]
+& \color{#4ECDC4}{A \cup B} \;\text{ — toate elementele}\\[10pt]
+& \color{#9370DB}{A - B} \;\text{ — elementele lui } A \text{ fără cele din } B
+\end{aligned}
+`}
+</Katex>
+:::
+
+Citim desenul și calculăm pas cu pas:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& A = \{1,\ 2,\ 3,\ 4\} \qquad B = \{3,\ 4,\ 6\} \\[12pt]
+& \text{Pasul 1: luăm elementele comune}\\[6pt]
+& \color{#FF6B6B}{A \cap B = \{3,\ 4\}} \\[12pt]
+& \text{Pasul 2: luăm toate elementele}\\[6pt]
+& \color{#4ECDC4}{A \cup B = \{1,\ 2,\ 3,\ 4,\ 6\}} \\[12pt]
+& \text{Pasul 3: din } A \text{ tăiem pe 3 și 4}\\[6pt]
+& \color{#9370DB}{A - B = \{1,\ 2\}}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Aplicație
+
+Calculăm pas cu pas:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& M = \{0,\ 1,\ 2\} \qquad N = \{2,\ 3\} \\[12pt]
+& \text{Pasul 1: } \color{#FF6B6B}{M \cap N = \{2\}} \\[8pt]
+& \text{Pasul 2: } \color{#4ECDC4}{M \cup N = \{0,\ 1,\ 2,\ 3\}} \\[8pt]
+& \text{Pasul 3: } \color{#9370DB}{M - N = \{0,\ 1\}} \\[8pt]
+& \text{Pasul 4: } \color{#FF8C00}{N - M = \{3\}}
+\end{aligned}
+`}
+</Katex>
+
+Reținem: M - N nu este același lucru cu N - M.

@@ -1,0 +1,82 @@
+---
+sidebar_position: 10
+slug: /edupasi/c5/modul-1/10
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C5.6 - Scara numerică
+
+---
+
+## Definiții
+
+:::danger Definiție
+**<HighlightText color="red">Scara</HighlightText>** compară distanța de pe hartă cu distanța reală.
+
+<Katex>
+{String.raw`
+\text{scara} = \frac{\color{#FF6B6B}{\text{distanța pe hartă}}}{\color{#4ECDC4}{\text{distanța reală}}}
+`}
+</Katex>
+:::
+
+Scriem cele două distanțe în aceeași unitate.
+
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="200" viewBox="0 0 600 200" role="img" aria-label="Model cu bare pentru scara 1 la 100">
+  <text x="300" y="34" font-size="28" text-anchor="middle" fill="#111">Scara 1 : 100</text>
+  <rect x="40" y="62" width="52" height="46" fill="#FF6B6B" stroke="#111" stroke-width="2"/>
+  <text x="106" y="93" font-size="24" fill="#111">1 cm pe hartă</text>
+  <rect x="40" y="132" width="520" height="46" fill="#4ECDC4" stroke="#111" stroke-width="2"/>
+  <text x="300" y="163" font-size="24" text-anchor="middle" fill="#111">100 cm în realitate</text>
+</svg>
+
+---
+
+## Metode
+
+### Aflăm distanța reală
+
+Harta are scara 1 la 100. Pe hartă măsurăm 6 cm.
+
+Calculăm pas cu pas:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: } \color{#FF6B6B}{1\text{ cm}} \text{ pe hartă} \rightarrow \color{#4ECDC4}{100\text{ cm}} \text{ real} \\[8pt]
+& \text{Pasul 2: înmulțim } 6 \times 100 = \color{#4ECDC4}{600\text{ cm}} \\[8pt]
+& \text{Pasul 3: } 600\text{ cm} = \color{#9370DB}{6\text{ m}}
+\end{aligned}
+`}
+</Katex>
+
+### Aflăm scara
+
+Pe hartă măsurăm 5 cm. În realitate sunt 250 cm.
+
+Calculăm pas cu pas:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: împărțim } 250 \div 5 = \color{#FF8C00}{50} \\[8pt]
+& \text{Pasul 2: scara} = \frac{5}{250} = \color{#FF8C00}{\frac{1}{50}}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+:::tip De reținut
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{De pe hartă spre realitate: } \color{#FF6B6B}{\text{înmulțim}} \\[8pt]
+& \text{Din realitate spre hartă: } \color{#4ECDC4}{\text{împărțim}}
+\end{aligned}
+`}
+</Katex>
+:::

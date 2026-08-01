@@ -1,0 +1,153 @@
+---
+sidebar_position: 8
+slug: /edupasi/c5/modul-2/08
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C13 - Mărimi și unități de măsură
+
+---
+
+## Mărimi și unități
+
+:::danger Definiție
+O **<HighlightText color="red">mărime</HighlightText>** este ceva ce putem măsura. Fiecare mărime are o **<HighlightText color="teal">unitate</HighlightText>**.
+:::
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Lungimea se măsoară în } \color{#FF6B6B}{\text{metri (m)}}\\[6pt]
+& \text{Masa se măsoară în } \color{#4ECDC4}{\text{kilograme (kg)}}\\[6pt]
+& \text{Timpul se măsoară în } \color{#9370DB}{\text{secunde (s)}}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Mărimi produs
+
+Aici înmulțim două mărimi.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Energia: } \color{#FF6B6B}{E = P \cdot t} \quad \text{(Wh)}\\[6pt]
+& \text{Volumul: } \color{#4ECDC4}{V = B \cdot h} \quad \text{(m}^3\text{)}
+\end{aligned}
+`}
+</Katex>
+
+**Exemplul 1**
+
+Un bec de 60 W stă aprins 2 ore.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: } P = 60 \text{ W}, \quad t = 2 \text{ h}\\[6pt]
+& \text{Pasul 2: } E = 60 \cdot 2\\[6pt]
+& \text{Pasul 3: } E = \color{#FF6B6B}{120 \text{ Wh}}
+\end{aligned}
+`}
+</Katex>
+
+**Exemplul 2**
+
+O cutie are baza de 6 m² și înălțimea de 2 m.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: } B = 6 \text{ m}^2, \quad h = 2 \text{ m}\\[6pt]
+& \text{Pasul 2: } V = 6 \cdot 2\\[6pt]
+& \text{Pasul 3: } V = \color{#4ECDC4}{12 \text{ m}^3}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Mărimi fracționale
+
+Aici împărțim două mărimi.
+
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="190" viewBox="0 0 560 190" role="img" aria-label="Model cu bare: 60 de metri împărțiți în 3 părți egale">
+  <text x="280" y="28" font-size="22" fill="#FF8C00" text-anchor="middle">60 m parcurși în 3 s</text>
+  <g stroke="#333333" stroke-width="3">
+    <rect x="40" y="45" width="160" height="70" fill="#FF6B6B" fill-opacity="0.35"/>
+    <rect x="200" y="45" width="160" height="70" fill="#4ECDC4" fill-opacity="0.35"/>
+    <rect x="360" y="45" width="160" height="70" fill="#9370DB" fill-opacity="0.35"/>
+  </g>
+  <g font-size="22" fill="#333333" text-anchor="middle">
+    <text x="120" y="88">20 m</text>
+    <text x="280" y="88">20 m</text>
+    <text x="440" y="88">20 m</text>
+  </g>
+  <g font-size="20" fill="#333333" text-anchor="middle">
+    <text x="120" y="145">1 s</text>
+    <text x="280" y="145">1 s</text>
+    <text x="440" y="145">1 s</text>
+  </g>
+  <text x="280" y="178" font-size="21" fill="#FF6B6B" text-anchor="middle">într-o secundă: 20 m</text>
+</svg>
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Viteza: } v = \frac{d}{t}\\[6pt]
+& \text{Pasul 1: } d = 60 \text{ m}, \quad t = 3 \text{ s}\\[6pt]
+& \text{Pasul 2: } v = \frac{60}{3}\\[6pt]
+& \text{Pasul 3: } v = \color{#FF6B6B}{20 \text{ m/s}}
+\end{aligned}
+`}
+</Katex>
+
+**Debitul**
+
+Debitul arată câți litri curg într-un minut.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& Q = \frac{V}{t} \quad \text{(40 l curg în 5 min)}\\[6pt]
+& Q = \frac{40}{5} = \color{#4ECDC4}{8 \text{ l/min}}
+\end{aligned}
+`}
+</Katex>
+
+**Densitatea**
+
+Densitatea arată câte kilograme are un metru cub.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \rho = \frac{m}{V} \quad \text{(24 kg în 3 m}^3\text{)}\\[6pt]
+& \rho = \frac{24}{3} = \color{#9370DB}{8 \text{ kg/m}^3}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Densitatea populației
+
+Arată câți locuitori stau pe un kilometru pătrat.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Un sat are 90 de locuitori pe 3 km}^2\\[6pt]
+& \text{Densitatea} = \frac{90}{3} = \color{#FF8C00}{30 \text{ loc/km}^2}
+\end{aligned}
+`}
+</Katex>
+
+:::tip De reținut
+La **<HighlightText color="red">produs</HighlightText>** înmulțim. La **<HighlightText color="teal">fracție</HighlightText>** împărțim. Scriem mereu unitatea.
+:::

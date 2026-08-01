@@ -1,0 +1,122 @@
+---
+sidebar_position: 7
+slug: /edupasi/c5/modul-3/07
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C19.3 - Ridicarea la putere a numerelor raționale
+
+---
+
+## Puterea cu exponent număr întreg a unui număr rațional
+
+:::danger Definiție
+**<HighlightText color="red">Puterea</HighlightText>** este o înmulțire repetată. Numărul mare este **<HighlightText color="red">baza</HighlightText>**. Numărul mic de sus este **<HighlightText color="teal">exponentul</HighlightText>**. Exponentul arată de câte ori se repetă baza.
+:::
+
+<Katex>
+{String.raw`
+{\color{#FF6B6B}{a}}^{\color{#4ECDC4}{n}} = \underbrace{\color{#FF6B6B}{a} \cdot \color{#FF6B6B}{a} \cdot \ldots \cdot \color{#FF6B6B}{a}}_{\color{#4ECDC4}{n} \text{ factori}}
+`}
+</Katex>
+
+**Exemplul 1**
+
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="300" viewBox="0 0 420 300" role="img" aria-label="Patrat impartit in 9 parti egale, 4 parti colorate">
+  <rect x="90" y="50" width="160" height="160" fill="#4ECDC4" fill-opacity="0.45"/>
+  <g stroke="#333333" stroke-width="3" fill="none">
+    <rect x="90" y="50" width="240" height="240"/>
+    <line x1="170" y1="50" x2="170" y2="290"/>
+    <line x1="250" y1="50" x2="250" y2="290"/>
+    <line x1="90" y1="130" x2="330" y2="130"/>
+    <line x1="90" y1="210" x2="330" y2="210"/>
+  </g>
+  <text x="170" y="34" font-size="24" fill="#4ECDC4" text-anchor="middle">2 din 3 coloane</text>
+  <text x="64" y="170" font-size="24" fill="#FF6B6B" text-anchor="middle" transform="rotate(-90 64 170)">2 din 3 linii</text>
+  <text x="378" y="176" font-size="24" fill="#9370DB" text-anchor="middle">4 din 9</text>
+</svg>
+
+Calculăm pas cu pas:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: } \left(\frac{2}{3}\right)^2 = \frac{2}{3} \cdot \frac{2}{3}\\[6pt]
+& \text{Pasul 2: numărătorul } 2^2 = \color{#FF6B6B}{4}\\[6pt]
+& \text{Pasul 3: numitorul } 3^2 = \color{#4ECDC4}{9}\\[6pt]
+& \text{Pasul 4: } \left(\frac{2}{3}\right)^2 = \frac{\color{#FF6B6B}{4}}{\color{#4ECDC4}{9}}
+\end{aligned}
+`}
+</Katex>
+
+Reținem: ridicăm la putere numărătorul și numitorul.
+
+Exponentul negativ arată o împărțire.
+
+**Exemplul 2**
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& a^{-n} = \frac{1}{a^n}\\[8pt]
+& \text{Pasul 1: } 5^{-2} = \frac{1}{5^2}\\[6pt]
+& \text{Pasul 2: } 5^2 = 25\\[6pt]
+& \text{Pasul 3: } 5^{-2} = \color{#FF8C00}{\frac{1}{25}}
+\end{aligned}
+`}
+</Katex>
+
+:::tip De reținut
+Baza negativă cu exponent par dă rezultat **<HighlightText color="teal">pozitiv</HighlightText>**. Baza negativă cu exponent impar dă rezultat **<HighlightText color="red">negativ</HighlightText>**.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \left(-\frac{1}{2}\right)^2 = \color{#4ECDC4}{+\frac{1}{4}}\\[8pt]
+& \left(-\frac{1}{2}\right)^3 = \color{#FF6B6B}{-\frac{1}{8}}
+\end{aligned}
+`}
+</Katex>
+:::
+
+---
+
+## Reguli de calcul cu puteri
+
+**1) Aceeași bază, înmulțire: adunăm exponenții.**
+
+<Katex>
+{String.raw`
+\left(\frac{2}{3}\right)^4 \cdot \left(\frac{2}{3}\right)^2 = \left(\frac{2}{3}\right)^{\color{#FF6B6B}{4+2}} = \left(\frac{2}{3}\right)^{\color{#FF6B6B}{6}}
+`}
+</Katex>
+
+**2) Aceeași bază, împărțire: scădem exponenții.**
+
+<Katex>
+{String.raw`
+\left(\frac{5}{6}\right)^7 : \left(\frac{5}{6}\right)^3 = \left(\frac{5}{6}\right)^{\color{#4ECDC4}{7-3}} = \left(\frac{5}{6}\right)^{\color{#4ECDC4}{4}}
+`}
+</Katex>
+
+**3) Puterea unei puteri: înmulțim exponenții.**
+
+<Katex>
+{String.raw`
+\left[\left(\frac{3}{2}\right)^2\right]^3 = \left(\frac{3}{2}\right)^{\color{#9370DB}{2 \cdot 3}} = \left(\frac{3}{2}\right)^{\color{#9370DB}{6}}
+`}
+</Katex>
+
+**4) Puterea unui produs: ridicăm fiecare factor.**
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \left(\frac{1}{2} \cdot \frac{2}{5}\right)^2 = \left(\frac{1}{2}\right)^2 \cdot \left(\frac{2}{5}\right)^2\\[8pt]
+& = \frac{1}{4} \cdot \frac{4}{25} = \color{#FF8C00}{\frac{1}{25}}
+\end{aligned}
+`}
+</Katex>

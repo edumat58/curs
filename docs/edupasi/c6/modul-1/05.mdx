@@ -1,0 +1,84 @@
+---
+sidebar_position: 5
+slug: /edupasi/c5/modul-1/05
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C5.1 – Diagrame în bastoane și histograme
+
+---
+
+## Citirea unei diagrame în bastoane sau a unei histograme
+
+:::danger Definiție
+**<HighlightText color="red">Diagrama în bastoane</HighlightText>** arată datele cu bastoane. La **<HighlightText color="teal">histogramă</HighlightText>** bastoanele sunt lipite. Bastonul mai înalt arată un număr mai mare.
+:::
+
+<svg viewBox="0 0 600 360" width="100%" xmlns="http://www.w3.org/2000/svg">
+<g stroke="#dddddd" stroke-width="2">
+<line x1="60" y1="240" x2="560" y2="240"></line>
+<line x1="60" y1="180" x2="560" y2="180"></line>
+<line x1="60" y1="120" x2="560" y2="120"></line>
+<line x1="60" y1="60" x2="560" y2="60"></line>
+</g>
+<rect x="90" y="60" width="100" height="240" fill="#FF6B6B"></rect>
+<rect x="250" y="180" width="100" height="120" fill="#4ECDC4"></rect>
+<rect x="410" y="120" width="100" height="180" fill="#4ECDC4"></rect>
+<g stroke="#222222" stroke-width="3">
+<line x1="60" y1="40" x2="60" y2="300"></line>
+<line x1="60" y1="300" x2="560" y2="300"></line>
+</g>
+<g font-size="20" fill="#222222" text-anchor="end">
+<text x="50" y="307">0</text>
+<text x="50" y="247">20</text>
+<text x="50" y="187">40</text>
+<text x="50" y="127">60</text>
+<text x="50" y="67">80</text>
+</g>
+<g font-size="20" fill="#222222" text-anchor="middle">
+<text x="140" y="330">Fotbal</text>
+<text x="300" y="330">Handbal</text>
+<text x="460" y="330">Tenis</text>
+<text x="310" y="356">Sportul preferat</text>
+</g>
+</svg>
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Câți elevi preferă fotbalul?} \\[6pt]
+& \text{Pasul 1: căutăm bastonul } \color{#FF6B6B}{\text{Fotbal}} \\[6pt]
+& \text{Pasul 2: urcăm până la vârful lui} \\[6pt]
+& \text{Pasul 3: citim numărul din stânga} \\[6pt]
+& \text{Răspuns: } \color{#FF6B6B}{80} \text{ elevi}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Construirea unei diagrame în bastoane sau a unei histograme
+
+Ora de sosire a elevilor la școală:
+
+| Ora | 9 – 10 | 10 – 11 | 11 – 12 |
+|-----|--------|---------|---------|
+| Elevi | 10 | 35 | 20 |
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: trasăm cele două axe} \\[6pt]
+& \text{Pasul 2: scriem jos orele } 9,\ 10,\ 11,\ 12 \\[6pt]
+& \text{Pasul 3: scriem în stânga } \color{#4ECDC4}{0,\ 10,\ 20,\ 30,\ 40} \\[6pt]
+& \text{Pasul 4: desenăm bastoane de înălțime } \color{#9370DB}{10},\ \color{#9370DB}{35},\ \color{#9370DB}{20}
+\end{aligned}
+`}
+</Katex>
+
+:::tip De reținut
+Bastonul cel mai înalt arată grupa cea mai mare. Aici este ora **<HighlightText color="orange">10 – 11</HighlightText>**.
+:::

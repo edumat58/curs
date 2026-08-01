@@ -1,0 +1,97 @@
+---
+sidebar_position: 7
+slug: /edupasi/c5/modul-1/07
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C5.3 - Procente. Calcul procentual
+
+---
+
+## Definiție
+
+:::danger Definiție
+Un **<HighlightText color="red">procent</HighlightText>** arată câte părți luăm din 100.
+
+Scriem **<HighlightText color="teal">a %</HighlightText>** și citim „a la sută".
+:::
+
+<Katex>
+{String.raw`
+\color{#4ECDC4}{30\%} = \frac{30}{100} = 0{,}3
+`}
+</Katex>
+
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="160" viewBox="0 0 440 160" role="img" aria-label="Bară împărțită în zece părți egale, cu trei părți colorate">
+  <text x="220" y="26" text-anchor="middle" font-size="22" fill="#FF6B6B">întregul = 100 %</text>
+  <rect x="20" y="42" width="120" height="66" fill="#4ECDC4"/>
+  <rect x="20" y="42" width="400" height="66" fill="none" stroke="#FF6B6B" stroke-width="3"/>
+  <path d="M60 42V108 M100 42V108 M140 42V108 M180 42V108 M220 42V108 M260 42V108 M300 42V108 M340 42V108 M380 42V108" stroke="#FF6B6B" stroke-width="3"/>
+  <text x="80" y="142" text-anchor="middle" font-size="22" fill="#4ECDC4">30 %</text>
+</svg>
+
+---
+
+## Proprietăți
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{1. } \color{#FF6B6B}{a\%} \text{ din } b = \frac{a}{100} \times b\\[8pt]
+& \text{2. partea } \color{#4ECDC4}{p} \text{ din întregul } t = \frac{p}{t} \times 100\ \%
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Metode de calcul
+
+Într-o clasă sunt 20 de elevi.
+
+### Aplicăm un procent
+
+25 % dintre elevi merg la teatru. Câți elevi merg?
+
+**Pasul 1:** Scriem procentul ca fracție.
+
+**Pasul 2:** Înmulțim fracția cu numărul.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#FF6B6B}{25\%} = \frac{25}{100}\\[8pt]
+& \frac{25}{100} \times 20 = \frac{500}{100} = \color{#9370DB}{5}
+\end{aligned}
+`}
+</Katex>
+
+Răspuns: 5 elevi merg la teatru.
+
+### Aflăm procentul
+
+6 elevi poartă ochelari. Cât la sută poartă ochelari?
+
+**Pasul 1:** Partea este numărător. Întregul este numitor.
+
+**Pasul 2:** Aducem fracția la numitorul 100.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \frac{\color{#4ECDC4}{6}}{\color{#FF6B6B}{20}} = \frac{3}{10}\\[8pt]
+& \frac{3}{10} = \frac{30}{100} = \color{#9370DB}{30\%}
+\end{aligned}
+`}
+</Katex>
+
+Răspuns: 30 % dintre elevi poartă ochelari.
+
+:::tip De reținut
+La „din" înmulțim cu fracția.
+
+La „cât la sută" împărțim partea la întreg.
+:::

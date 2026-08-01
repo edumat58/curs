@@ -1,0 +1,115 @@
+---
+sidebar_position: 8
+slug: /edupasi/c5/modul-3/08
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# G4 - Drepte paralele
+
+---
+
+## Definiție și notație
+
+:::danger Definiție
+Două drepte din același plan care nu se întâlnesc se numesc **<HighlightText color="red">drepte paralele</HighlightText>**.
+:::
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Scriem: } \color{#FF6B6B}{a \parallel b} \\[6pt]
+& \text{Citim: a paralel cu b}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Axioma paralelelor
+
+:::tip De reținut
+Printr-un punct din afara unei drepte trece **<HighlightText color="teal">o singură</HighlightText>** paralelă la acea dreaptă.
+:::
+
+Reținem și proprietatea:
+
+<Katex>
+{String.raw`
+a \parallel b \text{ și } b \parallel c \Rightarrow \color{#9370DB}{a \parallel c}
+`}
+</Katex>
+
+---
+
+## Criterii de paralelism
+
+Dreptele **a** și **b** sunt tăiate de dreapta **s**.
+
+<div style={{display: 'flex', justifyContent: 'center', margin: '20px 0'}}>
+  <svg width="360" height="200" viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+    <line x1="20" y1="60" x2="340" y2="60" stroke="#333" strokeWidth="3" />
+    <text x="325" y="48" fontSize="20" fontWeight="bold" fill="#333">a</text>
+
+    <line x1="20" y1="140" x2="340" y2="140" stroke="#333" strokeWidth="3" />
+    <text x="325" y="168" fontSize="20" fontWeight="bold" fill="#333">b</text>
+
+    <line x1="110" y1="180" x2="250" y2="20" stroke="#9370DB" strokeWidth="3" />
+    <text x="255" y="26" fontSize="20" fontWeight="bold" fill="#9370DB">s</text>
+
+    <text x="170" y="86" fontSize="20" fontWeight="bold" fill="#4ECDC4">1</text>
+    <text x="176" y="130" fontSize="20" fontWeight="bold" fill="#4ECDC4">2</text>
+
+    <text x="192" y="52" fontSize="20" fontWeight="bold" fill="#FF8C00">3</text>
+    <text x="122" y="132" fontSize="20" fontWeight="bold" fill="#FF8C00">4</text>
+  </svg>
+</div>
+
+Unghiurile **1** și **2** sunt <HighlightText color="teal">alterne interne</HighlightText>.
+
+Unghiurile **3** și **4** sunt <HighlightText color="orange">corespondente</HighlightText>.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& a \parallel b \Rightarrow \color{#4ECDC4}{\sphericalangle 1 \equiv \sphericalangle 2} \\[6pt]
+& a \parallel b \Rightarrow \color{#FF8C00}{\sphericalangle 3 \equiv \sphericalangle 4}
+\end{aligned}
+`}
+</Katex>
+
+Regula merge și invers. Unghiuri egale înseamnă drepte paralele.
+
+---
+
+## Exemple rezolvate
+
+**Exemplul 1.** Dreptele **a** și **b** sunt paralele. Unghiul 1 are 70 de grade. Aflăm unghiul 2.
+
+Calculăm pas cu pas:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: } \sphericalangle 1 \text{ și } \sphericalangle 2 \text{ sunt alterne interne} \\[6pt]
+& \text{Pasul 2: } a \parallel b \Rightarrow \sphericalangle 1 \equiv \sphericalangle 2 \\[6pt]
+& \text{Pasul 3: } m(\sphericalangle 2) = \color{#4ECDC4}{70^\circ}
+\end{aligned}
+`}
+</Katex>
+
+**Exemplul 2.** Unghiul 3 are 45 de grade. Unghiul 4 are tot 45 de grade. Aflăm dacă dreptele sunt paralele.
+
+Calculăm pas cu pas:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: } \sphericalangle 3 \text{ și } \sphericalangle 4 \text{ sunt corespondente} \\[6pt]
+& \text{Pasul 2: } m(\sphericalangle 3) = m(\sphericalangle 4) = 45^\circ \\[6pt]
+& \text{Pasul 3: } \color{#FF8C00}{a \parallel b}
+\end{aligned}
+`}
+</Katex>

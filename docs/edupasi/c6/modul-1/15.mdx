@@ -1,0 +1,124 @@
+---
+sidebar_position: 15
+slug: /edupasi/c5/modul-1/15
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C7 - Probabilități
+
+---
+
+## Noțiunea probabilității
+
+:::danger Definiție
+**<HighlightText color="red">Probabilitatea</HighlightText>** arată șansa ca un lucru să se întâmple.
+
+Împărțim **<HighlightText color="teal">cazurile favorabile</HighlightText>** la **<HighlightText color="orange">cazurile posibile</HighlightText>**.
+:::
+
+<Katex>
+{String.raw`
+P = \frac{\color{#4ECDC4}{\text{cazuri favorabile}}}{\color{#FF8C00}{\text{cazuri posibile}}}
+`}
+</Katex>
+
+Aruncăm un zar. Zarul are 6 fețe.
+
+<Katex>
+{String.raw`
+P(\text{fața } 4) = \frac{\color{#4ECDC4}{1}}{\color{#FF8C00}{6}}
+`}
+</Katex>
+
+---
+
+## Proprietăți
+
+:::tip De reținut
+Probabilitatea este un număr între 0 și 1.
+
+Suma tuturor probabilităților este 1.
+:::
+
+---
+
+## Situația echiprobabilă
+
+Toate fețele zarului au aceeași șansă. Spunem că experiența este echiprobabilă.
+
+---
+
+## Probabilitatea unui eveniment
+
+Un eveniment este o grupă de cazuri favorabile.
+
+**Exemplu.** Aruncăm zarul. Evenimentul E: cade un multiplu al lui 3.
+
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="130" viewBox="0 0 420 130" role="img" aria-label="Cele șase fețe ale zarului; fețele 3 și 6 sunt favorabile">
+  <rect x="10" y="20" width="60" height="60" fill="none" stroke="#FF6B6B" stroke-width="3"/>
+  <rect x="76" y="20" width="60" height="60" fill="none" stroke="#FF6B6B" stroke-width="3"/>
+  <rect x="142" y="20" width="60" height="60" fill="#4ECDC4" fill-opacity="0.35" stroke="#4ECDC4" stroke-width="3"/>
+  <rect x="208" y="20" width="60" height="60" fill="none" stroke="#FF6B6B" stroke-width="3"/>
+  <rect x="274" y="20" width="60" height="60" fill="none" stroke="#FF6B6B" stroke-width="3"/>
+  <rect x="340" y="20" width="60" height="60" fill="#4ECDC4" fill-opacity="0.35" stroke="#4ECDC4" stroke-width="3"/>
+  <text x="40" y="60" font-size="26" fill="#FF6B6B" text-anchor="middle">1</text>
+  <text x="106" y="60" font-size="26" fill="#FF6B6B" text-anchor="middle">2</text>
+  <text x="172" y="60" font-size="26" fill="#4ECDC4" text-anchor="middle">3</text>
+  <text x="238" y="60" font-size="26" fill="#FF6B6B" text-anchor="middle">4</text>
+  <text x="304" y="60" font-size="26" fill="#FF6B6B" text-anchor="middle">5</text>
+  <text x="370" y="60" font-size="26" fill="#4ECDC4" text-anchor="middle">6</text>
+  <text x="210" y="114" font-size="24" fill="#9370DB" text-anchor="middle">2 fețe favorabile din 6</text>
+</svg>
+
+Pasul 1: Numărăm cazurile favorabile. Sunt 2.
+
+Pasul 2: Numărăm cazurile posibile. Sunt 6.
+
+Pasul 3: Scriem raportul. Simplificăm.
+
+<Katex>
+{String.raw`
+P(E) = \frac{\color{#4ECDC4}{2}}{\color{#FF8C00}{6}} = \color{#9370DB}{\frac{1}{3}}
+`}
+</Katex>
+
+Evenimentul F este contrar lui E. Scădem din 1.
+
+<Katex>
+{String.raw`
+P(F) = 1 - \frac{1}{3} = \color{#9370DB}{\frac{2}{3}}
+`}
+</Katex>
+
+---
+
+## Denumărare
+
+Avem două urne cu bile. Prima urnă are bilele 1 și 2. A doua urnă are bilele 1, 2 și 3.
+
+Scoatem o bilă din fiecare urnă. Adunăm cele două numere. Scriem toate sumele în tabel.
+
+<Katex>
+{String.raw`
+\begin{array}{c|ccc}
++ & \color{#FF8C00}{1} & \color{#FF8C00}{2} & \color{#FF8C00}{3}\\ \hline
+\color{#FF6B6B}{1} & \color{#4ECDC4}{2} & \color{#4ECDC4}{3} & 4\\
+\color{#FF6B6B}{2} & \color{#4ECDC4}{3} & 4 & \color{#4ECDC4}{5}
+\end{array}
+`}
+</Katex>
+
+Sunt 6 sume. Evenimentul A: suma este număr prim.
+
+Pasul 1: Numerele prime sunt colorate. Sunt 4.
+
+Pasul 2: Scriem raportul. Simplificăm.
+
+<Katex>
+{String.raw`
+P(A) = \frac{\color{#4ECDC4}{4}}{\color{#FF8C00}{6}} = \color{#9370DB}{\frac{2}{3}}
+`}
+</Katex>

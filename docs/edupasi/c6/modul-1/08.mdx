@@ -1,0 +1,87 @@
+---
+sidebar_position: 8
+slug: /edupasi/c5/modul-1/08
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C5.4 – Procente de mărire și micșorare
+
+---
+
+## Calcul cu procente de mărire și micșorare
+
+:::danger Definiție
+Mărim sau micșorăm un număr printr-o **<HighlightText color="red">înmulțire</HighlightText>**.
+
+Înmulțim cu **<HighlightText color="teal">factorul</HighlightText>** k.
+:::
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#4ECDC4}{\text{Mărire cu } a\%:} \quad k = 1 + \frac{a}{100} \\[8pt]
+& \color{#FF8C00}{\text{Micșorare cu } a\%:} \quad k = 1 - \frac{a}{100} \\[8pt]
+& \text{final} = k \times \text{inițial}
+\end{aligned}
+`}
+</Katex>
+
+<svg viewBox="0 0 400 190" xmlns="http://www.w3.org/2000/svg">
+  <text x="10" y="30" fontSize="20" fill="#4ECDC4">40 lei</text>
+  <rect x="10" y="40" width="200" height="40" fill="#4ECDC4" />
+  <text x="10" y="125" fontSize="20" fill="#FF8C00">48 lei</text>
+  <rect x="10" y="135" width="200" height="40" fill="#4ECDC4" />
+  <rect x="210" y="135" width="40" height="40" fill="#FF8C00" />
+  <text x="258" y="163" fontSize="20" fill="#FF8C00">+20%</text>
+</svg>
+
+---
+
+## Metoda 1 — Cantitatea finală
+
+Un preț de 40 lei crește cu 20%.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: } k = 1 + \frac{20}{100} = \color{#4ECDC4}{1{,}2} \\[8pt]
+& \text{Pasul 2: } 40 \times 1{,}2 = \color{#FF6B6B}{48} \text{ lei}
+\end{aligned}
+`}
+</Katex>
+
+Un preț de 50 lei scade cu 10%.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: } k = 1 - \frac{10}{100} = \color{#FF8C00}{0{,}9} \\[8pt]
+& \text{Pasul 2: } 50 \times 0{,}9 = \color{#FF6B6B}{45} \text{ lei}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Metoda 2 — Procentul
+
+Un preț crește de la 25 lei la 30 lei.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: } \frac{30}{25} = \color{#4ECDC4}{1{,}2} \\[8pt]
+& \text{Pasul 2: } 1{,}2 = 1 + \color{#9370DB}{0{,}2} \\[8pt]
+& \text{Pasul 3: } \color{#9370DB}{0{,}2} = \frac{20}{100} = \color{#FF6B6B}{20\%}
+\end{aligned}
+`}
+</Katex>
+
+:::tip De reținut
+Împărțim numărul nou la numărul vechi.
+
+Factorul mai mare decât 1 arată o **<HighlightText color="teal">mărire</HighlightText>**.
+:::

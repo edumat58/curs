@@ -1,0 +1,112 @@
+---
+sidebar_position: 3
+slug: /edupasi/c5/modul-2/03
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C12.1 - Adunarea și scăderea numerelor întregi
+
+---
+
+## Adunarea numerelor întregi
+
+:::danger Definiție
+Semne **<HighlightText color="teal">la fel</HighlightText>**: adunăm numerele. Păstrăm semnul.
+
+Semne **<HighlightText color="red">diferite</HighlightText>**: scădem numerele. Punem semnul numărului mai mare.
+:::
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& (\color{#4ECDC4}{+4}) + (\color{#4ECDC4}{+3}) = \color{#4ECDC4}{+7}\\[8pt]
+& (\color{#FF6B6B}{-6}) + (\color{#FF6B6B}{-2}) = \color{#FF6B6B}{-8}
+\end{aligned}
+`}
+</Katex>
+
+**Exemplu:** Calculăm 5 + (-3).
+
+<svg viewBox="0 0 390 140" width="100%" style={{maxWidth: '420px'}} xmlns="http://www.w3.org/2000/svg">
+  <text x="42" y="47" fontSize="24" fill="#4ECDC4" textAnchor="end">+5</text>
+  <text x="42" y="107" fontSize="24" fill="#FF6B6B" textAnchor="end">-3</text>
+  <rect x="55" y="20" width="38" height="38" rx="5" fill="#4ECDC4" />
+  <rect x="100" y="20" width="38" height="38" rx="5" fill="#4ECDC4" />
+  <rect x="145" y="20" width="38" height="38" rx="5" fill="#4ECDC4" />
+  <rect x="190" y="20" width="38" height="38" rx="5" fill="#4ECDC4" />
+  <rect x="235" y="20" width="38" height="38" rx="5" fill="#4ECDC4" />
+  <rect x="55" y="80" width="38" height="38" rx="5" fill="#FF6B6B" />
+  <rect x="100" y="80" width="38" height="38" rx="5" fill="#FF6B6B" />
+  <rect x="145" y="80" width="38" height="38" rx="5" fill="#FF6B6B" />
+  <line x1="57" y1="22" x2="91" y2="116" stroke="#333" strokeWidth="3" />
+  <line x1="102" y1="22" x2="136" y2="116" stroke="#333" strokeWidth="3" />
+  <line x1="147" y1="22" x2="181" y2="116" stroke="#333" strokeWidth="3" />
+  <rect x="185" y="15" width="93" height="48" rx="7" fill="none" stroke="#FF8C00" strokeWidth="3" />
+  <text x="292" y="52" fontSize="28" fill="#FF8C00">= +2</text>
+</svg>
+
+Pasul 1: Tăiem perechile turcoaz-roșu.
+
+Pasul 2: Numărăm pătrățelele rămase.
+
+<Katex>
+{String.raw`
+5 + (\color{#FF6B6B}{-3}) = \color{#FF8C00}{+2}
+`}
+</Katex>
+
+---
+
+## Proprietățile adunării
+
+Ordinea numerelor nu contează.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& 7 + (-4) = (-4) + 7 = 3\\[8pt]
+& 9 + 0 = 9\\[8pt]
+& 6 + (\color{#FF6B6B}{-6}) = 0
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Scăderea numerelor întregi
+
+:::tip De reținut
+Scăderea devine adunare. Schimbăm semnul celui de-al doilea număr.
+:::
+
+**Exemplu:** Calculăm 8 - (-6).
+
+Pasul 1: Semnul lui -6 devine +6.
+
+Pasul 2: Adunăm cele două numere.
+
+<Katex>
+{String.raw`
+8 - (\color{#FF6B6B}{-6}) = 8 + \color{#4ECDC4}{6} = 14
+`}
+</Katex>
+
+---
+
+## Desfacerea parantezelor
+
+Semnul **plus** în față: semnele rămân la fel.
+
+Semnul **minus** în față: toate semnele se schimbă.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& 9 + (5 - 2) = 9 \color{#4ECDC4}{+} 5 \color{#4ECDC4}{-} 2 = 12\\[8pt]
+& 9 - (5 - 2) = 9 \color{#FF6B6B}{-} 5 \color{#FF6B6B}{+} 2 = 6
+\end{aligned}
+`}
+</Katex>

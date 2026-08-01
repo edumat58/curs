@@ -1,0 +1,96 @@
+---
+sidebar_position: 7
+slug: /edupasi/c5/modul-2/07
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# G3 - Unghiul. Clasificare și măsurarea unghiurilor
+
+---
+
+## Definiție
+
+:::danger Definiție
+Unghiul are două **<HighlightText color="red">laturi</HighlightText>** și un **<HighlightText color="teal">vârf</HighlightText>**.
+
+Laturile pornesc din vârf.
+:::
+
+<svg width="340" height="200" viewBox="0 0 340 200">
+  <path d="M 60 150 L 160 150 A 100 100 0 0 0 142 92 Z" fill="#4ECDC4" opacity="0.35" />
+  <line x1="60" y1="150" x2="300" y2="150" stroke="#FF6B6B" strokeWidth="4" />
+  <line x1="60" y1="150" x2="230" y2="30" stroke="#FF6B6B" strokeWidth="4" />
+  <circle cx="60" cy="150" r="6" fill="#9370DB" />
+  <text x="30" y="175" fontSize="20" fill="#9370DB">O</text>
+  <text x="305" y="158" fontSize="20" fill="#FF6B6B">B</text>
+  <text x="238" y="28" fontSize="20" fill="#FF6B6B">A</text>
+  <text x="98" y="142" fontSize="16" fill="#2A9D96">interior</text>
+</svg>
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Notăm: } \color{#FF6B6B}{\measuredangle AOB}\\[6pt]
+& \text{Vârful: } \color{#9370DB}{O}\\[6pt]
+& \text{Laturile: } \color{#FF6B6B}{[OA} \text{ și } \color{#FF6B6B}{[OB}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Clasificarea unghiurilor
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Unghi } \color{#FF6B6B}{\text{nul}} = 0^\circ\\[6pt]
+& \text{Unghi } \color{#4ECDC4}{\text{drept}} = 90^\circ\\[6pt]
+& \text{Unghi } \color{#9370DB}{\text{obtuz}}: \text{ mai mare decât } 90^\circ\\[6pt]
+& \text{Unghi } \color{#FF8C00}{\text{alungit}} = 180^\circ
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Măsurarea unghiurilor
+
+:::tip De reținut
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#FF6B6B}{\text{Congruente}}: \text{ au măsuri egale}\\[8pt]
+& \color{#4ECDC4}{\text{Complementare}}: \text{ suma } = 90^\circ\\[8pt]
+& \color{#9370DB}{\text{Suplementare}}: \text{ suma } = 180^\circ
+\end{aligned}
+`}
+</Katex>
+:::
+
+**Exemplul 1.** Un unghi are 30°. Aflăm complementul.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: suma este } \color{#4ECDC4}{90^\circ}\\[6pt]
+& \text{Pasul 2: scădem } 90 - 30 = \color{#FF6B6B}{60}\\[6pt]
+& \text{Complementul are } \color{#FF6B6B}{60^\circ}
+\end{aligned}
+`}
+</Katex>
+
+**Exemplul 2.** Un unghi are 50°. Aflăm suplementul.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: suma este } \color{#9370DB}{180^\circ}\\[6pt]
+& \text{Pasul 2: scădem } 180 - 50 = \color{#FF6B6B}{130}\\[6pt]
+& \text{Suplementul are } \color{#FF6B6B}{130^\circ}
+\end{aligned}
+`}
+</Katex>

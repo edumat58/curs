@@ -1,0 +1,98 @@
+---
+sidebar_position: 13
+slug: /edupasi/c5/modul-1/13
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C6.2 - Mărimi invers proporționale
+
+---
+
+## Definiție
+
+:::danger Definiție
+Două mărimi sunt **<HighlightText color="red">invers proporționale</HighlightText>** dacă una crește de câteva ori și cealaltă se micșorează de tot atâtea ori.
+:::
+
+<svg xmlns="http://www.w3.org/2000/svg" width="460" height="250" viewBox="0 0 460 250" role="img" aria-label="Model cu bare: 8 muncitori termina lucrarea in 6 zile, iar 16 muncitori o termina in 3 zile">
+  <text x="10" y="30" font-size="22" fill="#FF6B6B">8 muncitori</text>
+  <rect x="10" y="45" width="240" height="46" fill="#4ECDC4" fill-opacity="0.2" stroke="#4ECDC4" stroke-width="3"/>
+  <text x="130" y="77" font-size="22" fill="#4ECDC4" text-anchor="middle">6 zile</text>
+  <text x="10" y="135" font-size="22" fill="#FF6B6B">16 muncitori</text>
+  <rect x="10" y="150" width="120" height="46" fill="#4ECDC4" fill-opacity="0.2" stroke="#4ECDC4" stroke-width="3"/>
+  <text x="70" y="182" font-size="22" fill="#4ECDC4" text-anchor="middle">3 zile</text>
+  <text x="230" y="235" font-size="24" fill="#FF8C00" text-anchor="middle">muncitori × 2, zile : 2</text>
+</svg>
+
+---
+
+## Proprietăți
+
+:::tip De reținut
+Înmulțim valorile care se corespund. Rezultatul este mereu același.
+:::
+
+<Katex>
+{String.raw`
+\color{#FF6B6B}{8} \times \color{#4ECDC4}{6} = \color{#FF6B6B}{16} \times \color{#4ECDC4}{3} = \color{#FF8C00}{48}
+`}
+</Katex>
+
+<Katex>
+{String.raw`
+\color{#FF6B6B}{a_1} \times \color{#4ECDC4}{b_1} = \color{#FF6B6B}{a_2} \times \color{#4ECDC4}{b_2}
+`}
+</Katex>
+
+---
+
+## Probleme rezolvate
+
+**Problema 1.** 4 robinete umplu un bazin în 9 ore. În câte ore umplu bazinul 6 robinete?
+
+Pasul 1: Înmulțim valorile date.
+
+<Katex>
+{String.raw`
+\color{#FF6B6B}{4} \times \color{#4ECDC4}{9} = \color{#FF8C00}{36}
+`}
+</Katex>
+
+Pasul 2: Împărțim la 6.
+
+<Katex>
+{String.raw`
+x = \color{#FF8C00}{36} : \color{#FF6B6B}{6} = \color{#4ECDC4}{6 \text{ ore}}
+`}
+</Katex>
+
+---
+
+**Problema 2.** Numerele x și y sunt invers proporționale cu 2 și 3. Suma lor este 25.
+
+Pasul 1: Scriem numerele cu k.
+
+<Katex>
+{String.raw`
+x = \frac{k}{\color{#FF6B6B}{2}}, \qquad y = \frac{k}{\color{#4ECDC4}{3}}
+`}
+</Katex>
+
+Pasul 2: Aflăm k.
+
+<Katex>
+{String.raw`
+\frac{k}{2} + \frac{k}{3} = 25 \;\Rightarrow\; \frac{5k}{6} = 25 \;\Rightarrow\; \color{#FF8C00}{k = 30}
+`}
+</Katex>
+
+Pasul 3: Aflăm numerele.
+
+<Katex>
+{String.raw`
+x = 30 : 2 = \color{#FF6B6B}{15}, \qquad y = 30 : 3 = \color{#4ECDC4}{10}
+`}
+</Katex>

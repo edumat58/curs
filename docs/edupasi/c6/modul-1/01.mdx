@@ -1,0 +1,74 @@
+---
+sidebar_position: 1
+slug: /edupasi/c5/modul-1/01
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C1 - Multiplii si divizori
+
+---
+
+## Vocabular
+
+:::danger Definiție
+Împărțim pe `a` la `b`. Restul este `0`.
+
+Atunci `b` este <HighlightText color="red">divizor</HighlightText> al lui `a`.
+
+Atunci `a` este <HighlightText color="teal">multiplu</HighlightText> al lui `b`.
+:::
+
+Observăm numărul 12 împărțit în 4 părți egale.
+
+<svg viewBox="0 0 400 130" width="100%" role="img">
+  <text x="200" y="22" textAnchor="middle" fontSize="24" fill="#9370DB">12</text>
+  <line x1="20" y1="34" x2="380" y2="34" stroke="#9370DB" strokeWidth="3" />
+  <rect x="20" y="48" width="360" height="62" fill="#4ECDC4" fillOpacity="0.2" stroke="#4ECDC4" strokeWidth="3" />
+  <line x1="110" y1="48" x2="110" y2="110" stroke="#4ECDC4" strokeWidth="3" />
+  <line x1="200" y1="48" x2="200" y2="110" stroke="#4ECDC4" strokeWidth="3" />
+  <line x1="290" y1="48" x2="290" y2="110" stroke="#4ECDC4" strokeWidth="3" />
+  <text x="65" y="90" textAnchor="middle" fontSize="26" fill="#FF6B6B">3</text>
+  <text x="155" y="90" textAnchor="middle" fontSize="26" fill="#FF6B6B">3</text>
+  <text x="245" y="90" textAnchor="middle" fontSize="26" fill="#FF6B6B">3</text>
+  <text x="335" y="90" textAnchor="middle" fontSize="26" fill="#FF6B6B">3</text>
+</svg>
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& 12 = \color{#FF6B6B}{3} \times 4 \qquad \text{rest } 0\\[6pt]
+& \color{#FF6B6B}{3} \text{ este divizor al lui } 12\\[6pt]
+& 12 \text{ este multiplu de } \color{#FF6B6B}{3}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Criterii de divizibilitate
+
+:::tip De reținut
+Un număr se împarte exact:
+
+- **cu 2** dacă ultima cifră este 0, 2, 4, 6 sau 8;
+- **cu 5** dacă ultima cifră este 0 sau 5;
+- **cu 10** dacă ultima cifră este 0;
+- **cu 3** dacă suma cifrelor se împarte la 3;
+- **cu 9** dacă suma cifrelor se împarte la 9.
+:::
+
+Calculăm pas cu pas pentru numărul 45.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: ultima cifră este } \color{#FF6B6B}{5} \Rightarrow \text{se împarte la } 5\\[6pt]
+& \text{Pasul 2: } 4 + 5 = \color{#4ECDC4}{9} \Rightarrow \text{se împarte la } 3 \text{ și la } 9
+\end{aligned}
+`}
+</Katex>
+
+Reținem: 45 este multiplu de 5, de 3 și de 9.

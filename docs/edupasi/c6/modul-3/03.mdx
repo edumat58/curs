@@ -1,0 +1,113 @@
+---
+sidebar_position: 3
+slug: /edupasi/c5/modul-3/03
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C18.1 - Mulțimea numerelor raționale
+
+---
+
+## Definiție și notație
+
+:::danger Definiție
+Un **<HighlightText color="red">număr rațional</HighlightText>** este o fracție. **<HighlightText color="teal">Numărătorul</HighlightText>** și **<HighlightText color="teal">numitorul</HighlightText>** sunt numere întregi. Numitorul nu poate fi zero.
+:::
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \mathbb{Q} = \left\{ \frac{a}{b} \ \mid \ a, b \in \mathbb{Z}, \ b \neq 0 \right\} \\[8pt]
+& \text{Exemple: } \color{#FF6B6B}{\frac{3}{4}}, \quad \color{#4ECDC4}{\frac{-2}{5}}, \quad \color{#9370DB}{\frac{7}{1}}
+\end{aligned}
+`}
+</Katex>
+
+Semnul fracției:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Semne la fel} \rightarrow \color{#4ECDC4}{\text{pozitiv}}: \ \frac{-3}{-4} = \frac{3}{4} \\[8pt]
+& \text{Semne diferite} \rightarrow \color{#FF6B6B}{\text{negativ}}: \ \frac{3}{-4} = -\frac{3}{4}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Forme de scriere a numerelor raționale
+
+Același număr are două forme:
+
+<div style={{display: 'flex', justifyContent: 'center', margin: '24px 0'}}>
+<svg width="400" height="150" viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg">
+  <text x="200" y="26" textAnchor="middle" fontSize="18" fill="#FF8C00">1 întreg</text>
+  <rect x="20" y="42" width="270" height="56" fill="#4ECDC4" />
+  <rect x="20" y="42" width="360" height="56" fill="none" stroke="#333333" strokeWidth="2" />
+  <line x1="110" y1="42" x2="110" y2="98" stroke="#333333" strokeWidth="2" />
+  <line x1="200" y1="42" x2="200" y2="98" stroke="#333333" strokeWidth="2" />
+  <line x1="290" y1="42" x2="290" y2="98" stroke="#333333" strokeWidth="2" />
+  <text x="200" y="132" textAnchor="middle" fontSize="20" fill="#9370DB">3/4 = 0,75</text>
+</svg>
+</div>
+
+---
+
+## Transformarea fracțiilor ordinare în fracții zecimale
+
+:::tip De reținut
+Împărțim **<HighlightText color="red">numărătorul</HighlightText>** la **<HighlightText color="teal">numitorul</HighlightText>**.
+:::
+
+Calculăm pas cu pas:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: împărțim } 3 : 4 \\[8pt]
+& \text{Pasul 2: } 3 : 4 = 0{,}75 \\[8pt]
+& \text{Deci } \frac{3}{4} = \color{#4ECDC4}{0{,}75}
+\end{aligned}
+`}
+</Katex>
+
+Uneori cifrele se repetă. Scriem perioada în paranteză.
+
+<Katex>
+{String.raw`
+\frac{2}{3} = 0{,}666\ldots = \color{#FF8C00}{0{,}(6)}
+`}
+</Katex>
+
+---
+
+## Transformarea fracțiilor zecimale în fracții ordinare
+
+Observăm că numărul de zecimale ne dă numitorul.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: scriem } 0{,}7 \text{ fără virgulă} \rightarrow 7 \\[8pt]
+& \text{Pasul 2: o zecimală} \rightarrow \text{numitorul } 10 \\[8pt]
+& \text{Deci } 0{,}7 = \color{#4ECDC4}{\frac{7}{10}} \\[8pt]
+& \text{La fel: } 2{,}5 = \color{#4ECDC4}{\frac{25}{10}}
+\end{aligned}
+`}
+</Katex>
+
+Când numărul are perioadă, la numitor scriem cifre de 9.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: la numărător scriem perioada} \rightarrow 3 \\[8pt]
+& \text{Pasul 2: perioada are o cifră} \rightarrow \text{numitorul } 9 \\[8pt]
+& \text{Deci } 0{,}(3) = \color{#9370DB}{\frac{3}{9}}
+\end{aligned}
+`}
+</Katex>

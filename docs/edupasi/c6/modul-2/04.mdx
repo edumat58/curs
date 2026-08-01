@@ -1,0 +1,201 @@
+---
+sidebar_position: 4
+slug: /edupasi/c5/modul-2/04
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C12.2 - Înmulțirea și împărțirea numerelor întregi
+
+---
+
+## Înmulțirea numerelor întregi
+
+:::danger Definiție
+Înmulțim numerele **<HighlightText color="red">fără semn</HighlightText>**. Apoi punem semnul.
+:::
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#4ECDC4}{(+)\cdot(+) = (+)} \qquad \color{#4ECDC4}{(-)\cdot(-) = (+)}\\[8pt]
+& \color{#FF6B6B}{(+)\cdot(-) = (-)} \qquad \color{#FF6B6B}{(-)\cdot(+) = (-)}
+\end{aligned}
+`}
+</Katex>
+
+Semne **<HighlightText color="teal">la fel</HighlightText>** dau plus. Semne **<HighlightText color="orange">diferite</HighlightText>** dau minus.
+
+---
+
+**Exemplul 1.**
+
+<Katex>
+{String.raw`
+(-4)\cdot(-3)
+`}
+</Katex>
+
+Pasul 1: Înmulțim numerele fără semn.
+
+<Katex>
+{String.raw`
+4 \cdot 3 = 12
+`}
+</Katex>
+
+Pasul 2: Semnele sunt la fel. Punem plus.
+
+<Katex>
+{String.raw`
+(-4)\cdot(-3) = \color{#4ECDC4}{+12}
+`}
+</Katex>
+
+**Exemplul 2.**
+
+<Katex>
+{String.raw`
+(+5)\cdot(-6)
+`}
+</Katex>
+
+Pasul 1: Înmulțim numerele fără semn.
+
+<Katex>
+{String.raw`
+5 \cdot 6 = 30
+`}
+</Katex>
+
+Pasul 2: Semnele sunt diferite. Punem minus.
+
+<Katex>
+{String.raw`
+(+5)\cdot(-6) = \color{#FF6B6B}{-30}
+`}
+</Katex>
+
+---
+
+## Proprietățile înmulțirii
+
+Ordinea factorilor nu contează. Înmulțirea cu 1 nu schimbă numărul.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#4ECDC4}{a \cdot b = b \cdot a}\\[8pt]
+& \color{#FF8C00}{a \cdot 1 = a}
+\end{aligned}
+`}
+</Katex>
+
+**Exemplul 3.**
+
+<Katex>
+{String.raw`
+(-2)\cdot(-5)\cdot(-7)
+`}
+</Katex>
+
+Pasul 1: Înmulțim primii doi factori.
+
+<Katex>
+{String.raw`
+(-2)\cdot(-5) = \color{#4ECDC4}{+10}
+`}
+</Katex>
+
+Pasul 2: Înmulțim rezultatul cu al treilea factor.
+
+<Katex>
+{String.raw`
+(+10)\cdot(-7) = \color{#FF6B6B}{-70}
+`}
+</Katex>
+
+---
+
+## Multiplii unui număr întreg
+
+Un număr este **<HighlightText color="teal">multiplu</HighlightText>** al lui 3 dacă îl obținem înmulțind 3 cu un număr întreg.
+
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="165" viewBox="0 0 420 165" role="img" aria-label="Bara de 12 impartita in 4 parti egale de cate 3">
+  <text x="210" y="28" font-size="24" fill="#9370DB" text-anchor="middle">12</text>
+  <rect x="20" y="40" width="95" height="60" fill="#4ECDC4" fill-opacity="0.2" stroke="#4ECDC4" stroke-width="3"/>
+  <rect x="115" y="40" width="95" height="60" fill="#4ECDC4" fill-opacity="0.2" stroke="#4ECDC4" stroke-width="3"/>
+  <rect x="210" y="40" width="95" height="60" fill="#4ECDC4" fill-opacity="0.2" stroke="#4ECDC4" stroke-width="3"/>
+  <rect x="305" y="40" width="95" height="60" fill="#4ECDC4" fill-opacity="0.2" stroke="#4ECDC4" stroke-width="3"/>
+  <text x="67" y="80" font-size="24" fill="#4ECDC4" text-anchor="middle">3</text>
+  <text x="162" y="80" font-size="24" fill="#4ECDC4" text-anchor="middle">3</text>
+  <text x="257" y="80" font-size="24" fill="#4ECDC4" text-anchor="middle">3</text>
+  <text x="352" y="80" font-size="24" fill="#4ECDC4" text-anchor="middle">3</text>
+  <text x="210" y="140" font-size="24" fill="#FF8C00" text-anchor="middle">4 părți a câte 3 fac 12</text>
+</svg>
+
+<Katex>
+{String.raw`
+3 \cdot 4 = 12 \quad \Rightarrow \quad \color{#4ECDC4}{12 \text{ este multiplu al lui } 3}
+`}
+</Katex>
+
+<Katex>
+{String.raw`
+M_3 = \{0, \pm3, \pm6, \pm9, \pm12, \dots\}
+`}
+</Katex>
+
+---
+
+## Împărțirea numerelor întregi
+
+Împărțim numerele fără semn. Apoi punem semnul după aceeași regulă.
+
+<Katex>
+{String.raw`
+\underset{\text{deîmpărțit}}{(-20)} : \underset{\text{împărțitor}}{(+10)} = \underset{\text{cât}}{\color{#FF6B6B}{-2}}
+`}
+</Katex>
+
+**Exemplul 4.**
+
+<Katex>
+{String.raw`
+(-35) : (-7)
+`}
+</Katex>
+
+Pasul 1: Împărțim numerele fără semn.
+
+<Katex>
+{String.raw`
+35 : 7 = 5
+`}
+</Katex>
+
+Pasul 2: Semnele sunt la fel. Punem plus.
+
+<Katex>
+{String.raw`
+(-35) : (-7) = \color{#4ECDC4}{+5}
+`}
+</Katex>
+
+:::warning Atenție
+Nu împărțim niciodată la **<HighlightText color="red">0</HighlightText>**.
+:::
+
+---
+
+## Divizorii unui număr întreg
+
+Numărul 12 este multiplu al lui 3. Atunci 3 este **<HighlightText color="orange">divizor</HighlightText>** al lui 12.
+
+<Katex>
+{String.raw`
+D_6 = \{\pm1, \pm2, \pm3, \pm6\}
+`}
+</Katex>

@@ -1,0 +1,96 @@
+---
+sidebar_position: 6
+slug: /edupasi/c5/modul-2/06
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# G2 - Unghiuri opuse la vârf și unghiuri formate în jurul unui punct
+
+---
+
+## Unghiuri opuse la vârf
+
+:::danger Definiție
+Două drepte se taie într-un punct. Se formează patru unghiuri.
+
+Unghiurile **<HighlightText color="red">față în față</HighlightText>** se numesc **<HighlightText color="teal">opuse la vârf</HighlightText>**.
+:::
+
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="260" viewBox="0 0 420 260" role="img" aria-label="Doua drepte care se taie in punctul O">
+  <g stroke="#333" stroke-width="3" fill="none">
+    <line x1="50" y1="50" x2="370" y2="210"/>
+    <line x1="50" y1="210" x2="370" y2="50"/>
+  </g>
+  <path d="M 169.75 109.88 A 45 45 0 0 0 169.75 150.12" stroke="#FF6B6B" stroke-width="5" fill="none"/>
+  <path d="M 250.25 150.12 A 45 45 0 0 0 250.25 109.88" stroke="#FF6B6B" stroke-width="5" fill="none"/>
+  <path d="M 151.86 100.93 A 65 65 0 0 1 268.14 100.93" stroke="#4ECDC4" stroke-width="5" fill="none"/>
+  <path d="M 268.14 159.07 A 65 65 0 0 1 151.86 159.07" stroke="#4ECDC4" stroke-width="5" fill="none"/>
+  <circle cx="210" cy="130" r="5" fill="#333"/>
+  <g font-size="22" fill="#333" text-anchor="middle">
+    <text x="32" y="42">A</text>
+    <text x="388" y="42">D</text>
+    <text x="32" y="228">C</text>
+    <text x="388" y="228">B</text>
+    <text x="226" y="122">O</text>
+  </g>
+  <text x="120" y="138" font-size="22" fill="#FF6B6B" text-anchor="middle">50°</text>
+</svg>
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Unghiurile opuse la vârf au măsuri } \color{#FF8C00}{\text{egale.}}\\[8pt]
+& \color{#FF6B6B}{\measuredangle AOC} \equiv \color{#FF6B6B}{\measuredangle BOD}\\[6pt]
+& \color{#4ECDC4}{\measuredangle AOD} \equiv \color{#4ECDC4}{\measuredangle BOC}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Unghiuri formate în jurul unui punct
+
+:::tip De reținut
+Unghiurile din jurul unui punct **<HighlightText color="orange">acoperă tot planul</HighlightText>**.
+
+<Katex>
+{String.raw`
+\text{Suma măsurilor lor este } \color{#FF8C00}{360^\circ}.
+`}
+</Katex>
+:::
+
+---
+
+## Aplicații
+
+**Exemplul 1**
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Din figură: } m(\measuredangle AOC) = \color{#FF6B6B}{50^\circ}\\[8pt]
+& \text{Pasul 1: } \measuredangle BOD \text{ este opus lui } \measuredangle AOC.\\[6pt]
+& \text{Pasul 2: unghiurile opuse au măsuri egale.}\\[6pt]
+& \text{Pasul 3: } m(\measuredangle BOD) = \color{#FF6B6B}{50^\circ}
+\end{aligned}
+`}
+</Katex>
+
+**Exemplul 2**
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{În jurul punctului } O \text{ avem: } 90^\circ,\ 80^\circ,\ 100^\circ \text{ și } x.\\[8pt]
+& \text{Pasul 1: adunăm măsurile știute.}\\[6pt]
+& 90^\circ + 80^\circ + 100^\circ = 270^\circ\\[6pt]
+& \text{Pasul 2: scădem din } 360^\circ.\\[6pt]
+& 360^\circ - 270^\circ = 90^\circ\\[6pt]
+& \text{Pasul 3: } x = \color{#9370DB}{90^\circ}
+\end{aligned}
+`}
+</Katex>

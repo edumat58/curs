@@ -1,0 +1,112 @@
+---
+sidebar_position: 5
+slug: /edupasi/c5/modul-2/05
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# G1 - Unghiuri adiacente și bisectoarea unui unghi
+
+---
+
+## Unghiuri adiacente
+
+:::danger Definiție
+Două unghiuri **<HighlightText color="orange">adiacente</HighlightText>** au același vârf. Ele au și o latură comună.
+:::
+
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="300" viewBox="0 0 520 300" role="img" aria-label="Unghiul AOC cu semidreapta OB si bisectoarea OM">
+  <g stroke="#333" stroke-width="3" fill="none">
+    <line x1="80" y1="250" x2="470" y2="250"/>
+    <line x1="80" y1="250" x2="340" y2="31"/>
+    <line x1="80" y1="250" x2="80" y2="30"/>
+  </g>
+  <line x1="80" y1="250" x2="456" y2="113" stroke="#9370DB" stroke-width="3" stroke-dasharray="8,6"/>
+  <path d="M 245 250 A 165 165 0 0 0 80 85" stroke="#FF6B6B" stroke-width="3" fill="none"/>
+  <path d="M 190 250 A 110 110 0 0 0 164 179" stroke="#4ECDC4" stroke-width="3" fill="none"/>
+  <circle cx="80" cy="250" r="6" fill="#333"/>
+  <g font-size="24" fill="#333" text-anchor="middle">
+    <text x="58" y="278">O</text>
+    <text x="70" y="22">A</text>
+    <text x="352" y="24">B</text>
+    <text x="488" y="258">C</text>
+  </g>
+  <text x="472" y="106" font-size="24" fill="#9370DB" text-anchor="middle">M</text>
+  <text x="162" y="73" font-size="22" fill="#FF6B6B" text-anchor="middle">90°</text>
+  <text x="196" y="184" font-size="22" fill="#4ECDC4" text-anchor="middle">40°</text>
+</svg>
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#FF8C00}{\measuredangle AOB} \text{ și } \color{#4ECDC4}{\measuredangle BOC} \text{ sunt adiacente.}\\[6pt]
+& \text{Vârful comun: } O.\\[6pt]
+& \text{Latura comună: } [OB).
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Bisectoarea unui unghi
+
+:::danger Definiție
+**<HighlightText color="purple">Bisectoarea</HighlightText>** pleacă din vârful unghiului. Ea taie unghiul în două unghiuri egale.
+:::
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#9370DB}{[OM)} \text{ este bisectoarea lui } \color{#4ECDC4}{\measuredangle BOC}.\\[6pt]
+& m(\measuredangle BOM) = m(\measuredangle MOC) = m(\measuredangle BOC) : 2
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Construcția bisectoarei
+
+**Exemplu**
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Unghiul are } \color{#FF6B6B}{70^\circ}.\\[6pt]
+& \text{Pasul 1: împărțim măsura la } 2.\\[6pt]
+& \text{Pasul 2: } 70^\circ : 2 = \color{#9370DB}{35^\circ}.\\[6pt]
+& \text{Pasul 3: marcăm cu raportorul } \color{#9370DB}{35^\circ}.\\[6pt]
+& \text{Pasul 4: trasăm semidreapta din vârf.}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Aplicație
+
+Folosim figura de mai sus.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& m(\measuredangle AOC) = \color{#FF6B6B}{90^\circ}\\[6pt]
+& m(\measuredangle BOC) = \color{#4ECDC4}{40^\circ}\\[6pt]
+& \color{#9370DB}{[OM)} \text{ este bisectoarea lui } \measuredangle BOC.
+\end{aligned}
+`}
+</Katex>
+
+Calculăm pas cu pas:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: } m(\measuredangle AOB) = 90^\circ - 40^\circ = \color{#FF8C00}{50^\circ}\\[6pt]
+& \text{Pasul 2: } m(\measuredangle BOM) = 40^\circ : 2 = \color{#9370DB}{20^\circ}\\[6pt]
+& \text{Pasul 3: } m(\measuredangle AOM) = 50^\circ + 20^\circ = 70^\circ
+\end{aligned}
+`}
+</Katex>

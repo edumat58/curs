@@ -1,0 +1,126 @@
+---
+sidebar_position: 14
+slug: /edupasi/c5/modul-1/14
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C6.3 - Regula de trei simplă
+
+---
+
+## Mărimi direct proporționale
+
+:::danger Definiție 1
+Două mărimi sunt **<HighlightText color="red">direct proporționale</HighlightText>** dacă cresc de același număr de ori.
+:::
+
+Observăm modelul de mai jos.
+
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="230" viewBox="0 0 520 230" role="img" aria-label="Model cu bare: 2 kilograme costa 14 lei, 7 kilograme costa 49 lei">
+  <text x="10" y="60" font-size="22" fill="#FF6B6B">2 kg</text>
+  <rect x="100" y="28" width="45" height="44" fill="#FF6B6B" fill-opacity="0.2" stroke="#FF6B6B" stroke-width="3"/>
+  <rect x="145" y="28" width="45" height="44" fill="#FF6B6B" fill-opacity="0.2" stroke="#FF6B6B" stroke-width="3"/>
+  <text x="122" y="60" font-size="20" fill="#FF6B6B" text-anchor="middle">7</text>
+  <text x="167" y="60" font-size="20" fill="#FF6B6B" text-anchor="middle">7</text>
+  <text x="430" y="60" font-size="22" fill="#FF6B6B">14 lei</text>
+  <text x="10" y="160" font-size="22" fill="#4ECDC4">7 kg</text>
+  <rect x="100" y="128" width="45" height="44" fill="#4ECDC4" fill-opacity="0.2" stroke="#4ECDC4" stroke-width="3"/>
+  <rect x="145" y="128" width="45" height="44" fill="#4ECDC4" fill-opacity="0.2" stroke="#4ECDC4" stroke-width="3"/>
+  <rect x="190" y="128" width="45" height="44" fill="#4ECDC4" fill-opacity="0.2" stroke="#4ECDC4" stroke-width="3"/>
+  <rect x="235" y="128" width="45" height="44" fill="#4ECDC4" fill-opacity="0.2" stroke="#4ECDC4" stroke-width="3"/>
+  <rect x="280" y="128" width="45" height="44" fill="#4ECDC4" fill-opacity="0.2" stroke="#4ECDC4" stroke-width="3"/>
+  <rect x="325" y="128" width="45" height="44" fill="#4ECDC4" fill-opacity="0.2" stroke="#4ECDC4" stroke-width="3"/>
+  <rect x="370" y="128" width="45" height="44" fill="#4ECDC4" fill-opacity="0.2" stroke="#4ECDC4" stroke-width="3"/>
+  <text x="122" y="160" font-size="20" fill="#4ECDC4" text-anchor="middle">7</text>
+  <text x="167" y="160" font-size="20" fill="#4ECDC4" text-anchor="middle">7</text>
+  <text x="212" y="160" font-size="20" fill="#4ECDC4" text-anchor="middle">7</text>
+  <text x="257" y="160" font-size="20" fill="#4ECDC4" text-anchor="middle">7</text>
+  <text x="302" y="160" font-size="20" fill="#4ECDC4" text-anchor="middle">7</text>
+  <text x="347" y="160" font-size="20" fill="#4ECDC4" text-anchor="middle">7</text>
+  <text x="392" y="160" font-size="20" fill="#4ECDC4" text-anchor="middle">7</text>
+  <text x="430" y="160" font-size="22" fill="#4ECDC4">x lei</text>
+  <text x="100" y="212" font-size="22" fill="#9370DB">1 kg costă 7 lei</text>
+</svg>
+
+---
+
+## Regula de trei simplă. Direct proporționalitate
+
+**Problema 1.** 2 kg de portocale costă 14 lei. Cât costă 7 kg?
+
+Pasul 1: Așezăm datele pe două rânduri.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#FF6B6B}{2} \text{ kg} \;\longrightarrow\; \color{#4ECDC4}{14} \text{ lei}\\[6pt]
+& \color{#FF6B6B}{7} \text{ kg} \;\longrightarrow\; \color{#FF8C00}{x} \text{ lei}
+\end{aligned}
+`}
+</Katex>
+
+Pasul 2: Scriem rapoartele egale.
+
+<Katex>
+{String.raw`
+\frac{\color{#FF6B6B}{2}}{\color{#FF6B6B}{7}} = \frac{\color{#4ECDC4}{14}}{\color{#FF8C00}{x}}
+`}
+</Katex>
+
+Pasul 3: Înmulțim în cruce și aflăm x.
+
+<Katex>
+{String.raw`
+x = \frac{7 \times 14}{2} = \frac{98}{2} = \color{#FF8C00}{49 \text{ lei}}
+`}
+</Katex>
+
+**Răspuns:** 7 kg de portocale costă 49 de lei.
+
+---
+
+## Mărimi invers proporționale
+
+:::danger Definiție 2
+Două mărimi sunt **<HighlightText color="teal">invers proporționale</HighlightText>** dacă una crește și cealaltă scade. Scăderea are loc de același număr de ori.
+:::
+
+Reținem: mai mulți muncitori termină lucrarea în mai puține zile.
+
+---
+
+## Regula de trei simplă. Invers proporționalitate
+
+**Problema 2.** 3 robinete umplu un bazin în 12 ore. În câte ore umplu bazinul 4 robinete?
+
+Pasul 1: Așezăm datele pe două rânduri.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#FF6B6B}{3} \text{ robinete} \;\longrightarrow\; \color{#4ECDC4}{12} \text{ ore}\\[6pt]
+& \color{#FF6B6B}{4} \text{ robinete} \;\longrightarrow\; \color{#FF8C00}{x} \text{ ore}
+\end{aligned}
+`}
+</Katex>
+
+Pasul 2: Înmulțim numerele de pe fiecare rând. Produsele sunt egale.
+
+<Katex>
+{String.raw`
+\color{#FF6B6B}{3} \times \color{#4ECDC4}{12} = \color{#FF6B6B}{4} \times \color{#FF8C00}{x}
+`}
+</Katex>
+
+Pasul 3: Aflăm x.
+
+<Katex>
+{String.raw`
+x = \frac{36}{4} = \color{#FF8C00}{9 \text{ ore}}
+`}
+</Katex>
+
+**Răspuns:** 4 robinete umplu bazinul în 9 ore.

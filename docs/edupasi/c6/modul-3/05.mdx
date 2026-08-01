@@ -1,0 +1,142 @@
+---
+sidebar_position: 5
+slug: /edupasi/c5/modul-3/05
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C19.1 - Adunarea și scăderea numerelor raționale
+
+---
+
+## Adunarea numerelor raționale
+
+:::danger Definiție
+Numerele pe care le adunăm se numesc **<HighlightText color="red">termeni</HighlightText>**.
+
+Rezultatul adunării se numește **<HighlightText color="teal">sumă</HighlightText>**.
+:::
+
+<Katex>
+{String.raw`
+\underbrace{\color{#FF6B6B}{a}}_{\text{termen}} + \underbrace{\color{#FF6B6B}{b}}_{\text{termen}} = \underbrace{\color{#4ECDC4}{a+b}}_{\text{sumă}}
+`}
+</Katex>
+
+Observăm că orice număr rațional are un **opus**.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#FF6B6B}{3} + (\color{#4ECDC4}{-3}) = 0\\[6pt]
+& \color{#FF6B6B}{\frac{2}{5}} + \left(\color{#4ECDC4}{-\frac{2}{5}}\right) = 0
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Scăderea numerelor raționale
+
+:::tip De reținut
+Scăderea se transformă în adunare cu **<HighlightText color="orange">opusul</HighlightText>**.
+
+<Katex>
+{String.raw`
+a - b = a + (\color{#FF8C00}{-b})
+`}
+</Katex>
+:::
+
+<Katex>
+{String.raw`
+5 - 7 = 5 + (\color{#FF8C00}{-7}) = -2
+`}
+</Katex>
+
+Semnul minus din fața parantezei schimbă semnele din paranteză.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#4ECDC4}{+}(3 - 8) = 3 - 8 = -5\\[6pt]
+& \color{#FF6B6B}{-}(3 - 8) = -3 + 8 = 5
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Adunarea și scăderea fracțiilor ordinare
+
+<svg viewBox="0 0 420 150" width="100%" xmlns="http://www.w3.org/2000/svg">
+<rect x="100" y="14" width="100" height="44" fill="#FF6B6B"></rect>
+<rect x="100" y="86" width="100" height="44" fill="#4ECDC4"></rect>
+<g stroke="#222222" stroke-width="2" fill="none">
+<rect x="100" y="14" width="300" height="44"></rect>
+<rect x="100" y="86" width="300" height="44"></rect>
+<line x1="200" y1="14" x2="200" y2="58"></line>
+<line x1="300" y1="14" x2="300" y2="58"></line>
+<line x1="150" y1="86" x2="150" y2="130"></line>
+<line x1="200" y1="86" x2="200" y2="130"></line>
+<line x1="250" y1="86" x2="250" y2="130"></line>
+<line x1="300" y1="86" x2="300" y2="130"></line>
+<line x1="350" y1="86" x2="350" y2="130"></line>
+</g>
+<g font-size="22" text-anchor="end">
+<text x="88" y="44" fill="#FF6B6B">1/3</text>
+<text x="88" y="116" fill="#4ECDC4">2/6</text>
+</g>
+</svg>
+
+Calculăm pas cu pas:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Exemplu: } -\frac{5}{6} + \frac{1}{3}\\[8pt]
+& \text{Pasul 1: același numitor} \quad \frac{1}{3} = \frac{2}{6}\\[8pt]
+& \text{Pasul 2: adunăm numărătorii} \quad -\frac{5}{6} + \frac{2}{6} = \frac{-5+2}{6}\\[8pt]
+& \text{Pasul 3: simplificăm} \quad \frac{-3}{6} = -\frac{1}{2}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Adunarea și scăderea fracțiilor zecimale
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#FF6B6B}{\text{Semne la fel}} \text{: adunăm, păstrăm semnul.}\\[8pt]
+& \color{#4ECDC4}{\text{Semne diferite}} \text{: scădem, luăm semnul numărului mai mare.}
+\end{aligned}
+`}
+</Katex>
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: } (-3{,}5) + (-2{,}4) = -(3{,}5 + 2{,}4) = \color{#FF6B6B}{-5{,}9}\\[8pt]
+& \text{Pasul 2: } (-7{,}4) - (-2{,}1) = -7{,}4 + 2{,}1 = \color{#4ECDC4}{-5{,}3}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Fracții ordinare și fracții zecimale
+
+Transformăm toate numerele în fracții zecimale.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: } \frac{3}{5} = \frac{6}{10} = \color{#FF8C00}{0{,}6}\\[8pt]
+& \text{Pasul 2: } \color{#FF8C00}{0{,}6} + (-0{,}2) = 0{,}6 - 0{,}2 = \color{#4ECDC4}{0{,}4}
+\end{aligned}
+`}
+</Katex>

@@ -1,0 +1,120 @@
+---
+sidebar_position: 1
+slug: /edupasi/c5/modul-3/01
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C16 - Ecuații în mulțimea numerelor întregi
+
+---
+
+## Definiție
+
+:::danger Definiție
+O **<HighlightText color="red">ecuație</HighlightText>** este o egalitate cu un număr necunoscut.
+
+Necunoscuta se notează cu **<HighlightText color="teal">x</HighlightText>**.
+
+Numărul care verifică egalitatea este **<HighlightText color="orange">soluția</HighlightText>**.
+:::
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& {\color{#FF6B6B}x} + 3 = 8 && \text{ecuație}\\[6pt]
+& {\color{#FF6B6B}x} = 5 && \text{soluția}\\[6pt]
+& S = \{5\} && \text{mulțimea soluțiilor}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Rezolvarea ecuațiilor
+
+Numărul trece de cealaltă parte cu semn schimbat.
+
+<svg viewBox="0 0 440 170" xmlns="http://www.w3.org/2000/svg" role="img">
+  <rect x="20" y="80" width="170" height="62" rx="8" fill="none" stroke="#4ECDC4" strokeWidth="3" />
+  <text x="105" y="122" fontSize="26" textAnchor="middle" fill="currentColor">x + 10</text>
+  <text x="220" y="122" fontSize="28" textAnchor="middle" fill="currentColor">=</text>
+  <rect x="250" y="80" width="170" height="62" rx="8" fill="none" stroke="#9370DB" strokeWidth="3" />
+  <text x="335" y="122" fontSize="26" textAnchor="middle" fill="currentColor">7</text>
+  <path d="M 130 72 C 170 38, 290 38, 330 72" fill="none" stroke="#FF6B6B" strokeWidth="3" />
+  <polygon points="330,80 320,60 340,60" fill="#FF6B6B" />
+  <text x="230" y="30" fontSize="24" textAnchor="middle" fill="#FF6B6B">- 10</text>
+</svg>
+
+---
+
+## Exemple rezolvate
+
+Rezolvăm `x + 10 = 7`.
+
+Pasul 1: Trecem pe 10 în dreapta.
+
+Pasul 2: Schimbăm semnul.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& x = 7 {\color{#FF6B6B}- 10}\\[6pt]
+& x = {\color{#4ECDC4}-3}\\[6pt]
+& S = \{-3\}
+\end{aligned}
+`}
+</Katex>
+
+Rezolvăm `3x + 13 = -2`.
+
+Pasul 1: Trecem pe 13 în dreapta.
+
+Pasul 2: Împărțim la 3.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& 3x = -2 {\color{#FF6B6B}- 13}\\[6pt]
+& 3x = -15 \quad | :3\\[6pt]
+& x = {\color{#4ECDC4}-5}\\[6pt]
+& S = \{-5\}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Aplicații în geometrie
+
+Un dreptunghi are lungimea 8 cm și lățimea x cm. Aria lui este 40 cm².
+
+Pasul 1: Scriem formula ariei.
+
+Pasul 2: Împărțim la 8.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& A = L \cdot l\\[6pt]
+& 40 = {\color{#9370DB}8} \cdot x \quad | :8\\[6pt]
+& x = {\color{#4ECDC4}5}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## De reținut
+
+:::tip De reținut
+Punem soluția în locul lui x și verificăm.
+
+<Katex>
+{String.raw`
+{\color{#4ECDC4}-3} + 10 = 7 \quad \text{adevărat}
+`}
+</Katex>
+:::

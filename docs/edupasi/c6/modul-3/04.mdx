@@ -1,0 +1,157 @@
+---
+sidebar_position: 4
+slug: /edupasi/c5/modul-3/04
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C18.2 - Opusul, modulul și compararea numerelor raționale
+
+---
+
+## Reprezentarea pe axa numerelor
+
+Fiecare număr rațional are un punct pe axă. La dreapta lui 0 stau numerele pozitive. La stânga stau cele negative.
+
+<svg xmlns="http://www.w3.org/2000/svg" width="470" height="165" viewBox="0 0 470 165" role="img" aria-label="Axa numerelor cu punctele minus 1 virgula 5 si 1 virgula 5">
+  <line x1="20" y1="75" x2="450" y2="75" stroke="#666" stroke-width="3"/>
+  <path d="M450,75 L436,68 L436,82 z" fill="#666"/>
+  <line x1="50" y1="65" x2="50" y2="85" stroke="#666" stroke-width="3"/>
+  <line x1="140" y1="65" x2="140" y2="85" stroke="#666" stroke-width="3"/>
+  <line x1="230" y1="60" x2="230" y2="90" stroke="#9370DB" stroke-width="4"/>
+  <line x1="320" y1="65" x2="320" y2="85" stroke="#666" stroke-width="3"/>
+  <line x1="410" y1="65" x2="410" y2="85" stroke="#666" stroke-width="3"/>
+  <text x="50" y="115" font-size="22" fill="#333" text-anchor="middle">-2</text>
+  <text x="140" y="115" font-size="22" fill="#333" text-anchor="middle">-1</text>
+  <text x="230" y="115" font-size="22" fill="#9370DB" text-anchor="middle">0</text>
+  <text x="320" y="115" font-size="22" fill="#333" text-anchor="middle">1</text>
+  <text x="410" y="115" font-size="22" fill="#333" text-anchor="middle">2</text>
+  <circle cx="95" cy="75" r="8" fill="#FF6B6B"/>
+  <circle cx="365" cy="75" r="8" fill="#4ECDC4"/>
+  <text x="95" y="45" font-size="22" fill="#FF6B6B" text-anchor="middle">-1,5</text>
+  <text x="365" y="45" font-size="22" fill="#4ECDC4" text-anchor="middle">1,5</text>
+  <text x="120" y="152" font-size="20" fill="#FF6B6B" text-anchor="middle">negative</text>
+  <text x="350" y="152" font-size="20" fill="#4ECDC4" text-anchor="middle">pozitive</text>
+</svg>
+
+---
+
+## Opusul unui număr rațional
+
+:::danger Definiție
+Două numere sunt **<HighlightText color="red">opuse</HighlightText>** dacă au același număr și semne diferite.
+:::
+
+<Katex>
+{String.raw`
+\text{Opusul lui } \color{#4ECDC4}{x} \text{ este } \color{#FF6B6B}{-x}
+`}
+</Katex>
+
+**Exemplul 1.**
+
+<Katex>
+{String.raw`
+\text{Aflăm opusul lui } +\dfrac{3}{4}
+`}
+</Katex>
+
+Pasul 1: Păstrăm numărul.
+
+<Katex>
+{String.raw`
+\dfrac{3}{4}
+`}
+</Katex>
+
+Pasul 2: Schimbăm semnul.
+
+<Katex>
+{String.raw`
++\dfrac{3}{4} \quad \Rightarrow \quad \color{#FF6B6B}{-\dfrac{3}{4}}
+`}
+</Katex>
+
+**Exemplul 2.**
+
+<Katex>
+{String.raw`
+\text{Opusul lui } \color{#FF6B6B}{-2{,}5} \text{ este } \color{#4ECDC4}{+2{,}5}
+`}
+</Katex>
+
+---
+
+## Modulul unui număr rațional
+
+:::tip De reținut
+Modulul este distanța de la 0 până la număr. Scriem numărul fără semn.
+:::
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \left|\color{#4ECDC4}{+\dfrac{2}{9}}\right| = \dfrac{2}{9}\\[8pt]
+& \left|\color{#FF6B6B}{-\dfrac{2}{9}}\right| = \dfrac{2}{9}
+\end{aligned}
+`}
+</Katex>
+
+**Exemplul 3.**
+
+<Katex>
+{String.raw`
+|-4{,}5| = \color{#FF8C00}{4{,}5} \qquad |+1{,}3| = \color{#FF8C00}{1{,}3}
+`}
+</Katex>
+
+Observăm că modulul nu este niciodată negativ.
+
+---
+
+## Compararea numerelor raționale
+
+Pe axă numerele cresc de la stânga la dreapta. Numărul din dreapta este mai mare.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{1. Orice număr pozitiv este mai mare decât orice număr negativ}\\[8pt]
+& \text{2. Dintre două numere negative, mai mare este cel cu modulul mai mic}
+\end{aligned}
+`}
+</Katex>
+
+**Exemplul 4.**
+
+<Katex>
+{String.raw`
+\text{Comparăm } -0{,}7 \text{ cu } -0{,}2
+`}
+</Katex>
+
+Pasul 1: Calculăm modulele.
+
+<Katex>
+{String.raw`
+|-0{,}7| = 0{,}7 \qquad |-0{,}2| = 0{,}2
+`}
+</Katex>
+
+Pasul 2: Modulul mai mic dă numărul mai mare.
+
+<Katex>
+{String.raw`
+\color{#4ECDC4}{-0{,}2} > \color{#FF6B6B}{-0{,}7}
+`}
+</Katex>
+
+**Exemplul 5.**
+
+<Katex>
+{String.raw`
+\color{#4ECDC4}{\dfrac{1}{2}} > \color{#FF6B6B}{-\dfrac{9}{2}}
+`}
+</Katex>
