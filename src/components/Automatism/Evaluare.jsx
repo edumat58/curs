@@ -22,6 +22,7 @@
  */
 import React, { useCallback, useMemo, useState } from 'react';
 import katex from 'katex';
+import Admonition from '@theme/Admonition';
 
 import { REGISTRY } from './generators';
 import styles from './evaluare.module.css';
@@ -35,6 +36,15 @@ const TOTALURI = { 1: [80], 2: [45, 35], 3: [35, 30, 15] };
 const NUME_CLASA = { 5: 'a V-a', 6: 'a VI-a', 7: 'a VII-a', 8: 'a VIII-a' };
 const NUMERAL = ['I', 'al II-lea', 'al III-lea'];
 const LITERE = 'abcdefghij';
+
+/* Banda subiectului, copiată din `teste/template.mdx`: aceleași valori, ca
+   testul generat să nu se deosebească de cele scrise de mână. */
+const BANDA = {
+  backgroundColor: '#e65100',
+  color: 'white',
+  padding: '4px 8px',
+  borderRadius: '4px',
+};
 
 /** Timpul de lucru crește cu testul, în trepte de manual. */
 const MINUTE = { 5: 20, 10: 30, 15: 40, 20: 45, 25: 50, 30: 50 };
@@ -213,7 +223,8 @@ function FoaieTest({ capitol, clasa, subiecte, cuBarem, cate }) {
 
   return (
     <article className={styles.coala}>
-      {/* ── antetul, ca în șablon ── */}
+      {/* ── antetul: o singură unitate, ca legenda să nu treacă pe pagina a doua ── */}
+      <header className={styles.antet}>
       <h1 className={styles.titlu}>Test Clasa {NUME_CLASA[clasa]} — {capitol}</h1>
 
       <p className={styles.identitate}>
@@ -230,13 +241,10 @@ function FoaieTest({ capitol, clasa, subiecte, cuBarem, cate }) {
         <li>Se acordă <strong>{OFICIU} puncte</strong> din oficiu</li>
       </ul>
 
-      <hr className={styles.linie} />
-
-      <aside className={styles.avertisment}>
-        <p className={styles.avertismentTitlu}>Nu completați!</p>
+      <Admonition type="warning" title="Nu completați!">
         <p>Rubrica aceasta se completează <strong>doar de profesorul evaluator</strong>!</p>
         <p><strong>Testul începe de pe pagina următoare.</strong></p>
-      </aside>
+      </Admonition>
 
       <div className={styles.coloane}>
         <div className={styles.coloanaGrila}>
@@ -257,19 +265,17 @@ function FoaieTest({ capitol, clasa, subiecte, cuBarem, cate }) {
 
         <div className={styles.coloanaCalificative}>
           <h2 className={styles.subtitluAntet}>Calificativ capitole incluse</h2>
-          <hr className={styles.linie} />
           {toateExercitiile.map((e) => (
-            <div className={styles.calificativ} key={e.cheie}>
-              <p className={styles.calificativNume}><em>{e.titlu}</em></p>
-              <p className={styles.calificativCasete}>
-                {['N', 'S', 'B', 'E'].map((litera, i) => (
-                  <span key={litera}>
+            <p className={styles.calificativ} key={e.cheie}>
+              <em className={styles.calificativNume}>{e.titlu}</em>
+              <span className={styles.calificativCasete}>
+                {['N', 'S', 'B', 'E'].map((litera) => (
+                  <span key={litera} className={styles.bifa}>
                     <input type="checkbox" readOnly value={litera} /> {litera}
-                    {i < 3 ? ' | ' : ''}
                   </span>
                 ))}
-              </p>
-            </div>
+              </span>
+            </p>
           ))}
         </div>
       </div>
@@ -278,16 +284,15 @@ function FoaieTest({ capitol, clasa, subiecte, cuBarem, cate }) {
         <p>Legendă:</p>
         <p><strong>N - Nesatisfăcător | S - Satisfăcător | B - Bine | E - Excelent</strong></p>
       </blockquote>
-
-      <hr className={styles.linie} />
+      </header>
 
       {/* ── subiectele — de pe pagina următoare, cum promite caseta ── */}
       {subiecte.map((subiect, s) => {
         let numarExercitiu = 0;
         return (
           <section key={s} className={s === 0 ? styles.subiectPrim : styles.subiect}>
-            <h2 className={styles.banda}>
-              Subiectul {NUMERAL[s]} - {subiect.total} puncte
+            <h2 className={styles.titluSubiect}>
+              <span style={BANDA}>Subiectul {NUMERAL[s]} - {subiect.total} puncte</span>
             </h2>
             {subiect.exercitii.map((ex) => {
               numarExercitiu += 1;
@@ -303,11 +308,11 @@ function FoaieTest({ capitol, clasa, subiecte, cuBarem, cate }) {
         );
       })}
 
-      <h2 className={styles.banda}>SFÂRȘIT TEST</h2>
+      <h2 className={styles.titluSubiect}><span style={BANDA}>SFÂRȘIT TEST</span></h2>
 
       {cuBarem && (
         <section className={styles.baremFoaie}>
-          <h2 className={styles.banda}>Barem de corectare</h2>
+          <h2 className={styles.titluSubiect}><span style={BANDA}>Barem de corectare</span></h2>
           <p className={styles.baremNota}>
             Pagina aceasta este pentru profesor. Nu se distribuie elevilor.
           </p>
@@ -359,7 +364,7 @@ function Exercitiu({ numar, exercitiu }) {
         Exercițiul {numar} <strong>{formulaPunctaj(puncte)}</strong>
       </h3>
 
-      <div className={styles.cerinta}>
+      <Admonition type="note">
         {doarCalcule && <p className={styles.enunt}>Să se calculeze:</p>}
         <ol className={styles.subpuncte} type="a">
           {items.map((q, i) => (
@@ -385,7 +390,7 @@ function Exercitiu({ numar, exercitiu }) {
             </li>
           ))}
         </ol>
-      </div>
+      </Admonition>
 
       <div className={styles.spatiu} aria-hidden="true" />
     </div>

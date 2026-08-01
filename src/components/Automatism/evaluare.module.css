@@ -120,191 +120,113 @@
   color: var(--ifm-color-emphasis-700, #444);
 }
 
-/* ── foaia ─────────────────────────────────────────────────────────────── */
+/* ── foaia ─────────────────────────────────────────────────────────────
+
+   Nu mai desenăm o „coală" cu stiluri proprii. Testul e o bucată de pagină
+   Docusaurus, cu componentele temei: `<Admonition>` pentru casete, tabel
+   obișnuit pentru grilă, `<blockquote>` pentru legendă, `<h2>` cu banda
+   portocalie scrisă inline — exact ca în `teste/template.mdx`. Așa arată la
+   tipar identic cu ce se vede pe ecran, fiindcă e același lucru.
+
+   Aici rămân doar cele trei lucruri pe care tema nu le are: liniile de
+   completat, spațiul de rezolvare și așezarea în pagina A4. */
 
 .foaie {
-  margin: 1.5rem 0;
-}
-
-.coala {
-  max-width: 21cm;
-  margin: 0 auto;
-  padding: 1.6cm 1.4cm;
-  color: #111;
-  background: #fff;
-  border: 1px solid #ddd;
-  font-size: 11.5pt;
-  line-height: 1.5;
+  margin: 2rem 0;
 }
 
 .titlu {
   margin: 0 0 0.8rem;
-  font-size: 17pt;
 }
 
 /* Nume/Prenume pe linii de completat, ca în șablon. */
 .identitate {
-  margin: 0 0 0.9rem;
-  font-size: 11.5pt;
-  line-height: 1.9;
+  line-height: 2.1;
 }
 
 .linieScris {
   display: inline-block;
   width: 6.5cm;
-  border-bottom: 1.5px solid #333;
+  border-bottom: 1.5px solid currentColor;
   vertical-align: baseline;
 }
 
-.conditii {
-  margin: 0 0 0.8rem;
-  padding-left: 1.3rem;
-  font-size: 11pt;
-}
-
-.linie {
-  margin: 0.9rem 0;
-  border: 0;
-  border-top: 1px solid #bbb;
-}
-
-/* Caseta „Nu completați!" — echivalentul tipărit al admonition-ului warning. */
-.avertisment {
-  margin: 0 0 1rem;
-  padding: 0.6rem 0.9rem;
-  background: #fff8e6;
-  border-left: 5px solid #e6a700;
-}
-
-.avertisment p {
-  margin: 0.25rem 0;
-}
-
-.avertismentTitlu {
-  font-weight: 800;
-  text-transform: none;
-}
-
-/* Grila și calificativele, alături — ca div-urile flex din șablon. */
+/* Grila și calificativele stau alături cât e loc; pe hârtie îngustă sau pe
+   telefon trec una sub alta, ca să nu se strivească. */
 .coloane {
   display: flex;
-  gap: 20px;
+  flex-wrap: wrap;
+  gap: 1.5rem;
 }
 
-.coloanaGrila {
-  width: 50%;
-}
-
-.coloanaCalificative {
-  width: 47%;
-}
+.coloanaGrila { flex: 1 1 18rem; }
+.coloanaCalificative { flex: 1 1 18rem; }
 
 .subtitluAntet {
   margin: 0 0 0.5rem;
-  font-size: 13pt;
+  font-size: 1.1rem;
 }
 
 .grila {
   width: 100%;
-  border-collapse: collapse;
-  font-size: 10.5pt;
-}
-
-.grila th,
-.grila td {
-  padding: 0.3rem 0.5rem;
-  border: 1px solid #999;
-  text-align: center;
-}
-
-.grila td:first-child,
-.grila th:first-child {
-  text-align: left;
-}
-
-.calificativ {
-  margin-bottom: 0.55rem;
-  font-size: 10.5pt;
-}
-
-.calificativNume {
-  margin: 0 0 0.15rem;
-}
-
-.calificativCasete {
   margin: 0;
 }
 
-.calificativCasete input {
+/* Numele capitolului la stânga, casetele la dreapta, pe același rând: la un
+   capitol cu opt automatisme, varianta pe două rânduri împingea legenda pe
+   pagina a doua. */
+.calificativ {
+  display: flex;
+  gap: 0.6rem;
+  align-items: baseline;
+  justify-content: space-between;
+  margin: 0 0 0.3rem;
+  font-size: 0.9rem;
+}
+
+.calificativNume {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.calificativCasete {
+  display: inline-flex;
+  gap: 0.5rem;
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.bifa input {
   vertical-align: middle;
+  margin-right: 0.15rem;
 }
 
-.legenda {
-  margin: 1rem 0 0;
-  padding: 0.2rem 0 0.2rem 0.9rem;
-  border-left: 4px solid #ccc;
-  font-size: 10.5pt;
-  color: #333;
-}
+.legenda { margin: 1rem 0 0; }
 
-.legenda p {
-  margin: 0.2rem 0;
-}
-
-/* ── subiectele ────────────────────────────────────────────────────────── */
-
-/* Banda portocalie a subiectului — exact stilul din șablon:
-   background #e65100, text alb, padding 4px 8px, colțuri 4px, în linie. */
-.banda {
-  display: inline-block;
-  margin: 1.4rem 0 0.8rem;
-  padding: 4px 8px;
-  font-size: 13pt;
-  color: #fff;
-  background: #e65100;
-  border-radius: 4px;
-}
-
-.subiect,
-.subiectPrim {
-  display: block;
+.titluSubiect {
+  margin: 1.6rem 0 0.8rem;
 }
 
 .exercitiu {
-  margin-bottom: 1rem;
   page-break-inside: avoid;
   break-inside: avoid;
 }
 
 .exercitiuTitlu {
-  margin: 0.9rem 0 0.4rem;
-  font-size: 12pt;
+  margin: 1rem 0 0.4rem;
+  font-size: 1.05rem;
   font-weight: 600;
 }
 
-/* Cerința — echivalentul tipărit al admonition-ului :::note din teste. */
-.cerinta {
-  padding: 0.55rem 0.8rem;
-  background: #f6f7f8;
-  border-left: 5px solid #d4d5d8;
-}
-
-.enunt {
-  margin: 0 0 0.3rem;
-}
+.enunt { margin: 0 0 0.35rem; }
 
 .subpuncte {
   margin: 0;
-  padding-left: 1.5rem;
+  padding-left: 1.4rem;
 }
 
-.subpunct {
-  margin: 0.35rem 0;
-}
-
-.formula {
-  margin-left: 0.35rem;
-}
+.subpunct { margin: 0.4rem 0; }
+.formula { margin-left: 0.35rem; }
 
 .figura svg {
   display: block;
@@ -313,17 +235,11 @@
   margin: 0.3rem 0;
 }
 
-.seCere {
-  font-size: 10.5pt;
-}
+.seCere { font-size: 0.92rem; }
 
 /* Loc de scris rezolvarea. Un test fără el se rezolvă pe ciornă, iar
    profesorul corectează rezultate, nu raționamente. */
-.spatiu {
-  height: 2.4cm;
-}
-
-/* ── baremul, pe pagină separată ───────────────────────────────────────── */
+.spatiu { height: 2.4cm; }
 
 .baremFoaie {
   page-break-before: always;
@@ -332,37 +248,19 @@
 
 .baremNota {
   margin: 0.5rem 0 0.8rem;
-  font-size: 10pt;
   font-style: italic;
-  color: #b3261e;
 }
 
-.baremSubiect {
-  margin: 0.6rem 0 0.2rem;
-  font-weight: 700;
-}
-
-.baremLista {
-  margin: 0;
-  padding-left: 1.4rem;
-  font-size: 10.5pt;
-}
-
-.baremRaspuns {
-  font-size: 10pt;
-}
+.baremSubiect { margin: 0.6rem 0 0.2rem; font-weight: 700; }
+.baremLista { margin: 0; padding-left: 1.4rem; }
+.baremRaspuns { font-size: 0.92rem; }
 
 /* ── la tipărire ───────────────────────────────────────────────────────── */
 
 @media print {
-  :global(body) * {
-    visibility: hidden;
-  }
+  :global(body) * { visibility: hidden; }
 
-  .foaie,
-  .foaie * {
-    visibility: visible;
-  }
+  .foaie, .foaie * { visibility: visible; }
 
   .foaie {
     position: absolute;
@@ -370,18 +268,13 @@
     left: 0;
     width: 100%;
     margin: 0;
+    /* Corpul textului scade puțin la tipar: pe ecran e citit de la 60 cm, pe
+       hârtie de la 30, iar antetul trebuie să încapă pe prima pagină. */
+    font-size: 10.5pt;
+    line-height: 1.45;
   }
 
-  .coala {
-    max-width: none;
-    margin: 0;
-    padding: 0;
-    border: 0;
-  }
-
-  .panou {
-    display: none;
-  }
+  .panou { display: none; }
 
   /* „Testul începe de pe pagina următoare" — caseta promite, tiparul ține. */
   .subiectPrim {
@@ -389,11 +282,28 @@
     break-before: page;
   }
 
+  /* Antetul e o singură unitate: nume, condiții, grilă, calificative și
+     legendă rămân împreună pe prima pagină, nu se rup între ele. */
+  .antet {
+    page-break-after: always;
+    break-after: page;
+  }
+
+  .antet, .coloane, .legenda {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .titlu { font-size: 15pt; }
+  .subtitluAntet { font-size: 11.5pt; }
+  .calificativ { font-size: 9pt; margin-bottom: 0.25rem; }
+  .grila { font-size: 9.5pt; }
+  .spatiu { height: 2cm; }
+
   /* Fundalurile colorate se pierd dacă browserul „economisește" cerneala:
-     banda ar ieși alb pe alb, caseta de avertisment ar dispărea. */
-  .banda,
-  .avertisment,
-  .cerinta {
+     banda ar ieși alb pe alb, casetele ar dispărea. */
+  .foaie :global(.admonition),
+  .titluSubiect span {
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
@@ -401,5 +311,5 @@
 
 @page {
   size: A4;
-  margin: 1.5cm;
+  margin: 1.4cm;
 }
