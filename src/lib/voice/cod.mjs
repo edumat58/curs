@@ -38,18 +38,36 @@ const GRAD = { c5: '05', c6: '06', c7: '07', c8: '08' };
  * @returns {{litera, numar, subdiviziune}|null} null dacă titlul nu e de lecție.
  */
 export function parseTitlu(titlu) {
-  const m = /^\s*([CG])\s*(\d+)(?:\.(\d+))?/.exec(String(titlu || ''));
+  const t = String(titlu || '');
+  const m = /^\s*([CG])\s*(\d+)(?:\.(\d+))?/.exec(t);
   if (!m) return null;
-  return {
-    litera: m[1].toUpperCase(),
-    numar: Number(m[2]),
-    subdiviziune: m[3] ? Number(m[3]) : 0,
-  };
+
+  // Subdiviziunea se scrie în două feluri, ambele folosite în curs: „C6.1 – …"
+  // și „C5 - … (1)". A doua formă nu era citită deloc, așa că „C5 … (1)" și
+  // „C5 … (2)" primeau aceeași identitate — două lecții diferite sub o singură
+  // cheie. În indexul de transcripturi una o suprascria tăcut pe cealaltă, iar
+  // la audio ar fi ajuns să împartă același fișier.
+  const parte = /\((\d+)\)\s*$/.exec(t.trim());
+  const subdiviziune = m[3] ? Number(m[3]) : (parte ? Number(parte[1]) : 0);
+
+  // Lecțiile de recapitulare poartă în titlu un asterisc ori mențiunea EXTRA
+  // („C1* | EXTRA – Triunghiuri asemenea"). Numărul lor se repetă peste cel al
+  // lecției obișnuite din același capitol, deci fără marcaj se ciocnesc cu ea.
+  const extra = /^\s*[CG]\s*\d+(?:\.\d+)?\s*\*/.test(t) || /\bEXTRA\b/.test(t);
+
+  return { litera: m[1].toUpperCase(), numar: Number(m[2]), subdiviziune, extra };
 }
 
-/** Grupul titlului: literă + număr pe două cifre. „C1" → „C01", „G15" → „G15". */
+/**
+ * Grupul titlului: literă + număr pe două cifre. „C1" → „C01", „G15" → „G15".
+ *
+ * Lecțiile EXTRA primesc un „X" la coadă („C01X"), ca să nu cadă peste lecția
+ * obișnuită cu același număr. Restul rămân neatinse, deci identitățile deja
+ * emise — și fișierele audio numite după ele — nu se schimbă.
+ */
 function grupTitlu(parsat) {
-  return `${parsat.litera}${String(parsat.numar).padStart(2, '0')}`;
+  const baza = `${parsat.litera}${String(parsat.numar).padStart(2, '0')}`;
+  return parsat.extra ? `${baza}X` : baza;
 }
 
 /**

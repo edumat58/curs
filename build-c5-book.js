@@ -69,8 +69,12 @@ for (const mod of MODULES) {
       title: fm._h1,
     });
   }
-  // course sequence = descending sidebar_position, then filename ascending
-  items.sort((a, b) => (b.pos - a.pos) || a.base.localeCompare(b.base));
+  // Ordinea din carte = ordinea din site: sidebar_position crescător, apoi
+  // numele fișierului. Sorta descrescător cât timp lecțiile aveau pozițiile
+  // invers (C1 pe 16, C9 pe 1) — dar asta era așa doar în „modul-1"; pentru
+  // celelalte module, deja crescătoare, cartea ieșea de-a-ndoaselea. Acum toate
+  // modulele sunt crescătoare, deci sortarea e una singură, în același sens.
+  items.sort((a, b) => (a.pos - b.pos) || a.base.localeCompare(b.base));
   for (const it of items) lessons.push(it);
 }
 

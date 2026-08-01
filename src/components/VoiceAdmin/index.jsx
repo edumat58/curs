@@ -237,10 +237,32 @@ function textDinSursa(mdx) {
     .slice(0, MAX_CONTENT);
 }
 
+/**
+ * Ruta unei lecții, adusă la o singură formă.
+ *
+ * Indexul de lecții scrie rutele cu prefixul sitului („/curs/docs/…"), fiindcă
+ * așa arată adresa din browser. Serviciul de voce are însă și rute fără el
+ * („/docs/…"): au intrat așa din scriptul care a scris transcripturile în serie,
+ * care lucra cu căile din depozit, nu cu adresele publice.
+ *
+ * Aceeași lecție ajunge astfel sub două chei diferite. Panoul caută după adresa
+ * din browser, nu găsește nimic, și arată „Negenerată" o lecție care are demult
+ * și text, și voce — fără niciun mesaj de eroare, fiindcă din punctul lui de
+ * vedere pur și simplu nu există.
+ *
+ * Tăiem prefixul, ca ambele forme să cadă pe aceeași cheie.
+ */
+function cheieRuta(ruta, baza) {
+  const s = String(ruta || '').replace(/\/+$/, '');
+  const b = String(baza || '/').replace(/\/+$/, '');
+  if (b && s.startsWith(`${b}/`)) return s.slice(b.length);
+  return s;
+}
+
 export default function VoiceAdmin({ token, apiBase }) {
   const [lessons, setLessons] = useState([]); // {url, title, course, collection}
   const [sources, setSources] = useState({}); // url -> mdx brut
-  const [status, setStatus] = useState({}); // route -> doc voce
+  const [status, setStatus] = useState({}); // rută normalizată -> doc voce
   const [usage, setUsage] = useState(null);
   const [llmUsage, setLlmUsage] = useState(null);
   const [selected, setSelected] = useState(null); // url selectat
@@ -270,6 +292,8 @@ export default function VoiceAdmin({ token, apiBase }) {
   const indexUrl = useBaseUrl('/lessons-index.json');
   const sourcesUrl = useBaseUrl('/lesson-sources.json');
   const transcriptsUrl = useBaseUrl('/transcripts-index.json');
+  const baza = useBaseUrl('/');
+  const dupaRuta = useCallback((url) => status[cheieRuta(url, baza)], [status, baza]);
 
   const authFetch = useCallback(
     (path, init = {}) => fetch(`${apiBase}${path}`, {
@@ -295,14 +319,16 @@ export default function VoiceAdmin({ token, apiBase }) {
       const doarLectii = (idx.lessons || []).filter((l) => /^\s*[CG]\s*\d/.test(l.title || ''));
       setLessons(doarLectii);
       setSources(src || {});
-      setStatus(st.lessons || {});
+      setStatus(Object.fromEntries(
+        Object.entries(st.lessons || {}).map(([ruta, doc]) => [cheieRuta(ruta, baza), doc])
+      ));
       setUsage(us);
       setLlmUsage(llm);
       setPropuneri(prop || {});
     } catch (err) {
       setMesaj(`Nu am putut încărca: ${err.message}`);
     }
-  }, [indexUrl, sourcesUrl, transcriptsUrl, authFetch]);
+  }, [indexUrl, sourcesUrl, transcriptsUrl, authFetch, baza]);
 
   useEffect(() => { incarca(); }, [incarca]);
 
@@ -315,7 +341,7 @@ export default function VoiceAdmin({ token, apiBase }) {
     });
   }, [lessons, filtruClasa, cauta]);
 
-  const staree = (url) => (status[url] ? status[url].status : 'none');
+  const staree = (url) => (dupaRuta(url) ? dupaRuta(url).status : 'none');
 
   const selectat = lessons.find((l) => l.url === selected) || null;
 
@@ -323,15 +349,15 @@ export default function VoiceAdmin({ token, apiBase }) {
   // La selectarea unei lecții, selectorul pornește de la vocea ei deja generată
   // (dacă are una); altfel de la Callirrhoe. Nu se schimbă singur mai departe.
   useEffect(() => {
-    const doc = status[selected];
+    const doc = dupaRuta(selected);
     const p = doc?.audio?.provider || doc?.voiceProvider;
     setProvider(p === 'azure' ? 'azure' : 'gemini');
-  }, [selected, status]);
+  }, [selected, dupaRuta]);
 
   useEffect(() => {
     let viu = true;
     if (!selected) { setText(''); setWords(null); return undefined; }
-    const doc = status[selected];
+    const doc = dupaRuta(selected);
     if (!doc) { setText(''); setWords(null); return undefined; }
     (async () => {
       const r = await authFetch(`/admin/voice/text/${doc.sectionHash}`).catch(() => null);
@@ -348,7 +374,7 @@ export default function VoiceAdmin({ token, apiBase }) {
       }
     })();
     return () => { viu = false; };
-  }, [selected, status, authFetch, sources]);
+  }, [selected, dupaRuta, authFetch, sources]);
 
   async function genereazaText(url) {
     const lectie = lessons.find((l) => l.url === url);
@@ -411,7 +437,7 @@ export default function VoiceAdmin({ token, apiBase }) {
   }
 
   async function salveazaText() {
-    const doc = status[selected];
+    const doc = dupaRuta(selected);
     if (!doc) return;
     setBusy('save'); setMesaj('Salvez textul editat…');
     try {
@@ -435,7 +461,7 @@ export default function VoiceAdmin({ token, apiBase }) {
    * spune să regenerezi.
    */
   async function peticesteAudio() {
-    const doc = status[selected];
+    const doc = dupaRuta(selected);
     if (!doc) return;
     setBusy('petic'); setMesaj('Repar audio-ul punctual…');
     try {
@@ -459,7 +485,7 @@ export default function VoiceAdmin({ token, apiBase }) {
 
   /** Adoptă transcriptul propus din depozit: intră în editor și se salvează ciornă. */
   async function adoptaPropunerea(propunere) {
-    const doc = status[selected];
+    const doc = dupaRuta(selected);
     setText(propunere.text);
     if (!doc) { setMesaj('Text propus încărcat în editor. Generează-l întâi ca lecție.'); return; }
     setBusy('adopta'); setMesaj('Adopt transcriptul propus…');
@@ -476,7 +502,7 @@ export default function VoiceAdmin({ token, apiBase }) {
   }
 
   async function genereazaAudio() {
-    const doc = status[selected];
+    const doc = dupaRuta(selected);
     if (!doc) return;
     const numeVoce = provider === 'azure' ? 'Azure · Alina' : 'Google · Callirrhoe';
     setBusy('audio'); setMesaj(`Sintetizez audio (${numeVoce})…`);
@@ -498,7 +524,7 @@ export default function VoiceAdmin({ token, apiBase }) {
   }
 
   async function sterge(url) {
-    const doc = status[url];
+    const doc = dupaRuta(url);
     if (!doc) return;
     if (!window.confirm('Ștergi vocea acestei lecții (text + audio)?')) return;
     setBusy(`del:${url}`);
@@ -621,7 +647,7 @@ export default function VoiceAdmin({ token, apiBase }) {
                   {busy === `text:${selectat.url}` ? 'Se generează…'
                     : staree(selectat.url) === 'none' ? 'Generează textul' : 'Regenerează textul'}
                 </button>
-                {status[selectat.url] ? (
+                {dupaRuta(selectat.url) ? (
                   <>
                     <button type="button" className={styles.btn} disabled={Boolean(busy) || !text.trim()} onClick={salveazaText}>
                       {busy === 'save' ? 'Se salvează…' : 'Salvează textul'}
@@ -698,10 +724,10 @@ export default function VoiceAdmin({ token, apiBase }) {
                 ) : null}
               </div>
 
-              {staree(selectat.url) === 'ready' && status[selectat.url]?.audio ? (
+              {staree(selectat.url) === 'ready' && dupaRuta(selectat.url)?.audio ? (
                 <div className={styles.audioInfo}>
-                  Audio: {Math.round(status[selectat.url].audio.durationSec)}s
-                  {status[selectat.url].models?.azureChars ? ` · ${status[selectat.url].models.azureChars} caractere Azure` : ''}
+                  Audio: {Math.round(dupaRuta(selectat.url).audio.durationSec)}s
+                  {dupaRuta(selectat.url).models?.azureChars ? ` · ${dupaRuta(selectat.url).models.azureChars} caractere Azure` : ''}
                 </div>
               ) : null}
 
@@ -709,7 +735,7 @@ export default function VoiceAdmin({ token, apiBase }) {
                 text={text}
                 onChange={setText}
                 titluri={titluriDinSursa(sources[selectat.url])}
-                placeholder={status[selectat.url] ? 'Textul explicației — corectează-l aici.' : 'Generează textul mai întâi.'}
+                placeholder={dupaRuta(selectat.url) ? 'Textul explicației — corectează-l aici.' : 'Generează textul mai întâi.'}
               />
               <div className={styles.count}>{text.trim() ? `${text.trim().split(/\s+/).length} cuvinte` : ''}</div>
             </>

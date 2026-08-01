@@ -93,3 +93,27 @@ Conținut care nu trebuie copiat în modul.
   );
   assert.doesNotMatch(generatedModule, /Conținut care nu trebuie copiat/);
 });
+
+test('preambulul se închide și când linia are spații la coadă', () => {
+  // Șapte lecții din curs sunt scrise cu „--- " la închiderea preambulului.
+  // Fără toleranță la spațiu, potrivirea sărea la următorul „---" din pagină —
+  // linia orizontală de sub titlu — și înghițea chiar titlul H1. Lecția intra
+  // apoi în index numită după fișier („11") și dispărea din panoul de admin.
+  const brut = [
+    '---',
+    'sidebar_position: 6',
+    'slug: /c7/modul-1/11',
+    '--- ',
+    '# C8.2 – Media geometrică',
+    '',
+    '---',
+    '',
+    '## Introducere',
+  ].join('\n');
+
+  assert.equal(firstMarkdownH1(brut), 'C8.2 – Media geometrică');
+  assert.deepEqual(parseFrontmatter(brut), {
+    'sidebar_position': '6', slug: '/c7/modul-1/11',
+  });
+  assert.equal(resolveLessonTitle(brut, parseFrontmatter(brut), '11'), 'C8.2 – Media geometrică');
+});

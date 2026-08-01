@@ -37,32 +37,24 @@ function processDirectory(dirPath) {
       if (targetPos !== null) {
         let content = fs.readFileSync(fullPath, 'utf8');
 
-        // Check if file has frontmatter with sidebar_position
-        if (content.startsWith('---')) {
-          const frontmatterEnd = content.indexOf('---', 3);
-          if (frontmatterEnd !== -1) {
-            let frontmatter = content.substring(0, frontmatterEnd + 3);
-            let rest = content.substring(frontmatterEnd + 3);
-
-            if (/sidebar_position:\s*["']?(-?\d+)["']?/.test(frontmatter)) {
-              const updatedFrontmatter = frontmatter.replace(
+        if (content.trimStart().startsWith('---')) {
+          const newContent = content.replace(/^---\r?\n([\s\S]*?)\r?\n---/, (match, frontmatter) => {
+            let updatedFrontmatter;
+            if (/sidebar_position:/.test(frontmatter)) {
+              updatedFrontmatter = frontmatter.replace(
                 /sidebar_position:\s*["']?(-?\d+)["']?/,
                 `sidebar_position: ${targetPos}`
               );
-              if (updatedFrontmatter !== frontmatter) {
-                fs.writeFileSync(fullPath, updatedFrontmatter + rest, 'utf8');
-                console.log(`Updated ${path.relative(projectRoot, fullPath)} -> sidebar_position: ${targetPos}`);
-                totalUpdated++;
-              }
             } else {
-              // Add sidebar_position to frontmatter
-              const lines = frontmatter.split('\n');
-              lines.splice(1, 0, `sidebar_position: ${targetPos}`);
-              const updatedFrontmatter = lines.join('\n');
-              fs.writeFileSync(fullPath, updatedFrontmatter + rest, 'utf8');
-              console.log(`Added to ${path.relative(projectRoot, fullPath)} -> sidebar_position: ${targetPos}`);
-              totalUpdated++;
+              updatedFrontmatter = `sidebar_position: ${targetPos}\n${frontmatter}`;
             }
+            return `---\n${updatedFrontmatter.trim()}\n---`;
+          });
+
+          if (newContent !== content) {
+            fs.writeFileSync(fullPath, newContent, 'utf8');
+            console.log(`Updated ${path.relative(projectRoot, fullPath)} -> sidebar_position: ${targetPos}`);
+            totalUpdated++;
           }
         }
       }

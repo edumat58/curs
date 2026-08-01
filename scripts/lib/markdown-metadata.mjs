@@ -2,8 +2,20 @@
 // Nu încercăm să implementăm întregul YAML/Markdown aici: citim doar
 // frontmatter-ul plat folosit deja de lecții și primul titlu Markdown H1.
 
+/**
+ * Preambulul lecției: `---`, conținut, `---`.
+ *
+ * Linia de închidere acceptă spații la coadă. Șapte lecții le au („--- "), iar
+ * fără toleranța asta închiderea nu se potrivea acolo, așa că regexul căuta mai
+ * departe și se oprea la următorul `---` din pagină — linia orizontală de sub
+ * titlu. Preambulul înghițea astfel chiar titlul H1, iar lecția intra în index
+ * numită după fișier: „11", „15". Cu numele acela nu mai trecea de filtrul
+ * lecțiilor reale, deci dispărea cu totul din panoul de administrare.
+ */
+const PREAMBUL = /^---[ \t]*\r?\n([\s\S]*?)\r?\n---[ \t]*(?:\r?\n|$)/;
+
 export function parseFrontmatter(raw) {
-  const match = String(raw).replace(/^\uFEFF/, '').match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/);
+  const match = String(raw).replace(/^\uFEFF/, '').match(PREAMBUL);
   if (!match) return {};
 
   const frontmatter = {};
@@ -26,7 +38,7 @@ export function parseFrontmatter(raw) {
 function bodyWithoutFrontmatter(raw) {
   return String(raw)
     .replace(/^\uFEFF/, '')
-    .replace(/^---\r?\n[\s\S]*?\r?\n---(?:\r?\n|$)/, '');
+    .replace(PREAMBUL, '');
 }
 
 function plainHeadingText(value) {
