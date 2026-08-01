@@ -149,8 +149,50 @@ export default function Evaluare({ capitol, clasa, automatisme }) {
     pregateste();
     // Foaia trebuie să existe în pagină când se deschide dialogul; altfel s-ar
     // tipări o coală goală.
-    requestAnimationFrame(() => requestAnimationFrame(() => window.print()));
-  }, [pregateste]);
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      const foaie = document.querySelector('[data-evaluare-tiparita]');
+      if (!foaie) { window.print(); return; }
+
+      /*
+       * Ascundem restul paginii cu `display: none`, nu cu `visibility`.
+       *
+       * `visibility: hidden` păstrează spațiul: cele opt casete de automatisme
+       * rămâneau în pagină, invizibile dar late cât o coală, iar testul ieșea
+       * pe patru file cu mari zone albe și cu antetul rupt între pagini.
+       * `display: none` le scoate din așezare, deci hârtia conține doar testul.
+       *
+       * Marcăm frații de pe drumul spre `body`, nu „tot": un selector care
+       * ascunde totul ar ascunde și strămoșii foii, adică foaia însăși.
+       */
+      const ascunse = [];
+      for (let el = foaie; el && el !== document.body; el = el.parentElement) {
+        for (const frate of el.parentElement.children) {
+          if (frate !== el) {
+            frate.setAttribute('data-ascuns-la-tipar', '');
+            ascunse.push(frate);
+          }
+        }
+      }
+
+      // Numele documentului ajunge în PDF-ul salvat. Fără asta, fișierul se
+      // cheamă după pagina din care s-a tipărit („AV.1 — Numere naturale"),
+      // ceea ce nu spune că e un test.
+      const titluVechi = document.title;
+      document.title = `Test ${NUME_CLASA[clasa]} — ${capitol}`;
+
+      const curata = () => {
+        ascunse.forEach((el) => el.removeAttribute('data-ascuns-la-tipar'));
+        document.title = titluVechi;
+        window.removeEventListener('afterprint', curata);
+      };
+      window.addEventListener('afterprint', curata);
+
+      window.print();
+      // Safari pe iOS nu emite mereu `afterprint`; curățăm și după un răgaz,
+      // altfel pagina rămâne goală după ce se închide dialogul.
+      setTimeout(curata, 1500);
+    }));
+  }, [pregateste, capitol, clasa]);
 
   if (chei.length === 0) return null;
 

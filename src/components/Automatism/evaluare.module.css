@@ -7,9 +7,11 @@
    casete de completat pe ecran.
 
    Foaia se randează în pagină, nu într-o fereastră nouă: profesorul o vede
-   înainte s-o trimită la imprimantă. La tipărire, restul paginii se ascunde cu
-   `visibility: hidden` — nu cu `display: none`, care ar scoate elementele din
-   așezare și ar strica măsurătorile KaTeX exact pe hârtie. */
+   înainte s-o trimită la imprimantă. La tipărire, restul paginii se scoate din
+   așezare cu `display: none`, aplicat din JavaScript pe frații de pe drumul
+   spre `body`. Prima variantă folosea `visibility: hidden`, care ascunde dar
+   păstrează spațiul: casetele de automatisme rămâneau late cât o coală și
+   testul ieșea pe patru file, cu antetul rupt între pagini. */
 
 .panou {
   --ev-accent: #e8590c;
@@ -258,15 +260,15 @@
 /* ── la tipărire ───────────────────────────────────────────────────────── */
 
 @media print {
-  :global(body) * { visibility: hidden; }
-
-  .foaie, .foaie * { visibility: visible; }
+  /* Restul paginii se scoate din așezare, nu doar din văz: `visibility` lăsa
+     casetele de automatisme să ocupe hârtia, iar testul ieșea pe patru file cu
+     zone albe. Marcarea se face din JavaScript, pe frații de pe drumul spre
+     `body` — vezi `tipareste` în Evaluare.jsx. */
+  :global([data-ascuns-la-tipar]) { display: none !important; }
 
   .foaie {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
+    /* În flux, nu absolut: un element scos din flux nu se paginează corect,
+       iar antetul se rupea între pagini. */
     margin: 0;
     /* Corpul textului scade puțin la tipar: pe ecran e citit de la 60 cm, pe
        hârtie de la 30, iar antetul trebuie să încapă pe prima pagină. */
@@ -283,13 +285,14 @@
   }
 
   /* Antetul e o singură unitate: nume, condiții, grilă, calificative și
-     legendă rămân împreună pe prima pagină, nu se rup între ele. */
+     legendă rămân împreună pe prima pagină. Ruperea o cere `.subiectPrim`,
+     nu antetul: dacă amândouă ar cere-o, ar ieși o filă goală între ele. */
   .antet {
-    page-break-after: always;
-    break-after: page;
+    page-break-inside: avoid;
+    break-inside: avoid;
   }
 
-  .antet, .coloane, .legenda {
+  .coloane, .legenda {
     page-break-inside: avoid;
     break-inside: avoid;
   }
