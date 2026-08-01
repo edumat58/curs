@@ -200,10 +200,19 @@ export default function EduPasiPage() {
                   <strong>Documentația EduPAȘI</strong>
                 </a>
               </p>
+              {/* Programa adaptată stă lângă lecții, nu doar în bara laterală:
+                  e primul lucru de care are nevoie un profesor care primește
+                  un elev cu adaptare curriculară — ce anume se cere de la el. */}
               <div className={styles.heroActions}>
                 <a className={styles.primaryAction} href="#lectii">
                   Vezi lecțiile
                 </a>
+                <Link
+                  className={styles.secondaryAction}
+                  to={useBaseUrl('/docs/edupasi/programa-adaptata')}
+                >
+                  Programa adaptată
+                </Link>
               </div>
             </div>
 
