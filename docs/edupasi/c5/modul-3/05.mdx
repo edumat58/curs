@@ -1,0 +1,166 @@
+---
+sidebar_position: 5
+slug: /edupasi/c5/modul-3/05
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C19.5 - Introducerea și scoaterea întregilor dintr-o fracție
+
+---
+
+## Introducere
+
+Observăm fracția 5/3. Numărătorul 5 este mai mare decât numitorul 3. Fracția este **<HighlightText color="red">supraunitară</HighlightText>**.
+
+Împărțim numărătorul la numitor. Deîmpărțitul este 5. Împărțitorul este 3.
+
+<Katex>
+{String.raw`
+5 \div 3 = \color{#4ECDC4}{1}, \text{ rest } \color{#FF6B6B}{2}
+`}
+</Katex>
+
+Câtul este 1. Restul este 2.
+
+:::note
+Completează tabelul, la fel ca pe primul rând.
+:::
+
+| Fracția | Câtul împărțirii | Restul împărțirii |
+|:---:|:---:|:---:|
+| 5/3 | 1 | 2 |
+| 8/5 | | |
+| 11/3 | | |
+| 7/4 | | |
+| 5/2 | | |
+
+---
+
+## Definiție
+
+:::danger Definiție
+**<HighlightText color="red">Scoaterea întregilor</HighlightText>** dintr-o fracție supraunitară:
+- **<HighlightText color="teal">câtul</HighlightText>** împărțirii numărătorului la numitor este **numărul de întregi**;
+- **<HighlightText color="red">restul</HighlightText>** este **noul numărător**;
+- **numitorul** rămâne același.
+:::
+
+Calculăm pas cu pas pentru fracția 5/3:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{1. Împărțim: } 5 \div 3 = \color{#4ECDC4}{1}, \text{ rest } \color{#FF6B6B}{2}\\[6pt]
+& \text{2. Câtul } \color{#4ECDC4}{1} \text{ este numărul de întregi}\\[6pt]
+& \text{3. Restul } \color{#FF6B6B}{2} \text{ este noul numărător}\\[6pt]
+& \text{4. Scriem: } \frac{5}{3} = \color{#4ECDC4}{1}\frac{\color{#FF6B6B}{2}}{3}
+\end{aligned}
+`}
+</Katex>
+
+Citim: „un întreg și două treimi".
+
+<div style={{display: 'flex', justifyContent: 'center', margin: '20px 0'}}>
+<svg width="470" height="170" viewBox="0 0 470 170" xmlns="http://www.w3.org/2000/svg">
+  <g transform="translate(50, 55)">
+    <text x="15" y="20" fontFamily="serif" fontSize="30" fontWeight="bold" textAnchor="middle">5</text>
+    <line x1="0" y1="30" x2="30" y2="30" stroke="#333" strokeWidth="2" />
+    <text x="15" y="60" fontFamily="serif" fontSize="30" fontWeight="bold" textAnchor="middle">3</text>
+  </g>
+  <text x="100" y="95" fontFamily="sans-serif" fontSize="30" fontWeight="bold">=</text>
+  <g transform="translate(135, 55)">
+    <text x="0" y="50" fontFamily="serif" fontSize="44" fontWeight="bold" fill="#4ECDC4">1</text>
+    <g transform="translate(34, 0)">
+      <text x="15" y="22" fontFamily="serif" fontSize="28" fontWeight="bold" textAnchor="middle" fill="#FF6B6B">2</text>
+      <line x1="0" y1="30" x2="30" y2="30" stroke="#333" strokeWidth="2" />
+      <text x="15" y="58" fontFamily="serif" fontSize="28" fontWeight="bold" textAnchor="middle">3</text>
+    </g>
+  </g>
+  <path d="M 190 68 L 225 30" stroke="#FF6B6B" strokeWidth="1.5" fill="none" />
+  <rect x="225" y="12" width="225" height="36" rx="6" fill="white" stroke="#FF6B6B" strokeWidth="2" />
+  <text x="237" y="36" fontFamily="sans-serif" fontSize="17" fill="#333">restul: noul numărător</text>
+  <path d="M 145 112 L 145 134 L 168 134" stroke="#4ECDC4" strokeWidth="1.5" fill="none" />
+  <rect x="168" y="116" width="240" height="36" rx="6" fill="white" stroke="#4ECDC4" strokeWidth="2" />
+  <text x="180" y="140" fontFamily="sans-serif" fontSize="17" fill="#333">câtul: numărul de întregi</text>
+</svg>
+</div>
+
+Încă un exemplu:
+
+<Katex>
+{String.raw`
+17 \div 5 = \color{#4ECDC4}{3}, \text{ rest } \color{#FF6B6B}{2}, \text{ deci } \frac{17}{5} = \color{#4ECDC4}{3}\frac{\color{#FF6B6B}{2}}{5}
+`}
+</Katex>
+
+Operația inversă se numește **<HighlightText color="teal">introducerea întregilor în fracție</HighlightText>**.
+
+:::tip De reținut
+<Katex>
+{String.raw`
+\color{#4ECDC4}{a}\frac{b}{c} = \frac{\color{#4ECDC4}{a} \times c + b}{c}, \quad c \neq 0
+`}
+</Katex>
+:::
+
+Introducem întregii înapoi în fracție. Calculăm pas cu pas:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{1. Înmulțim întregii cu numitorul: } \color{#4ECDC4}{1} \times 3 = 3\\[6pt]
+& \text{2. Adunăm numărătorul: } 3 + 2 = 5\\[6pt]
+& \text{3. Scriem suma deasupra numitorului: } \color{#4ECDC4}{1}\frac{2}{3} = \frac{5}{3}
+\end{aligned}
+`}
+</Katex>
+
+Am obținut fracția de la care am plecat. Cele două operații se verifică una pe cealaltă.
+
+Încă un exemplu:
+
+<Katex>
+{String.raw`
+3\frac{1}{4} = \frac{3 \times 4 + 1}{4} = \frac{13}{4}
+`}
+</Katex>
+
+:::warning Atenție
+- Scoatem întregii numai din fracțiile **<HighlightText color="red">supraunitare</HighlightText>**.
+- La introducerea întregilor, întâi **<HighlightText color="orange">înmulțim</HighlightText>** întregii cu numitorul. Abia apoi adunăm numărătorul.
+
+<Katex>
+{String.raw`
+1\frac{2}{3} = \frac{1 \times 3 + 2}{3} = \frac{5}{3}, \text{ nu } \frac{1 + 2}{3}
+`}
+</Katex>
+:::
+
+---
+
+## <span style={{backgroundColor: '#FF8C00', color: 'white', padding: '4px 8px', borderRadius: '4px'}}>Exersează!</span>
+
+:::note Exercițiul 1
+Scoate întregii din fiecare fracție.
+:::
+
+<Katex>
+{String.raw`
+\text{a) } \frac{9}{4} \qquad \text{b) } \frac{15}{6} \qquad \text{c) } \frac{17}{3}
+`}
+</Katex>
+
+:::note Exercițiul 2
+Introdu întregii în fiecare fracție.
+:::
+
+<Katex>
+{String.raw`
+\text{a) } 2\frac{1}{4} \qquad \text{b) } 4\frac{3}{7} \qquad \text{c) } 1\frac{1}{9}
+`}
+</Katex>
+
+---

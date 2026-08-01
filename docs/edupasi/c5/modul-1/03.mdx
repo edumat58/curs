@@ -1,0 +1,74 @@
+---
+sidebar_position: 3
+slug: /edupasi/c5/modul-1/03
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C3 - Înmulțirea nr. zecimale
+
+---
+
+## Vocabular
+
+:::danger Definiție
+Numerele pe care le înmulțim se numesc **<HighlightText color="red">factori</HighlightText>**.
+Rezultatul înmulțirii se numește **<HighlightText color="teal">produs</HighlightText>**.
+:::
+
+<Katex>{String.raw`\underbrace{\color{#FF6B6B}{6{,}8}}_{\text{factor}} \times \underbrace{\color{#FF6B6B}{3{,}4}}_{\text{factor}} = \underbrace{\color{#4ECDC4}{23{,}12}}_{\text{produs}}`}</Katex>
+
+---
+
+## Metode
+
+### 1. Înmulțirea a două numere zecimale
+
+Calculăm pas cu pas: <Katex>{String.raw`4{,}48 \times 2{,}3`}</Katex>
+
+1. Înmulțim numerele fără virgule: <Katex>{String.raw`448 \times 23 = 10\,304`}</Katex>
+2. Numărăm cifrele de după virgulă: 4,**48** are 2 cifre, iar 2,**3** are 1 cifră. În total: 2 + 1 = **3 cifre**.
+3. Punem virgula în produs, separând **3 cifre** de la dreapta: **10,304**.
+
+<Katex>{String.raw`\Large\begin{array}{r}4\ {,}\ \color{#FF8C00}{4}\ 8 \\ \times \quad 2{,}\color{#FF8C00}3 \\ \hline 1\ 3\ 4\ 4\  \\ 8\ 9\ 6\ \  .\ \\ \hline 1\ 0{,}\color{#FF8C00}3\ 0\ 4\ \end{array}`}</Katex>
+
+:::tip De reținut
+Produsul are atâtea cifre după virgulă câte au **cei doi factori împreună**.
+:::
+
+### 2. Înmulțirea cu 10, 100 sau 1 000
+
+:::tip De reținut
+Mutăm virgula spre **<HighlightText color="red">DREAPTA</HighlightText>**:
+- cu 10 → 1 rang
+- cu 100 → 2 ranguri
+- cu 1 000 → 3 ranguri
+:::
+
+**Exemple:**
+
+<Katex>{String.raw`\begin{aligned}& 4{,}85 \times 10 = 48{,}5\\[6pt]& 3{,}9 \times 100 = 390\\[6pt]& 12{,}379 \times 1\,000 = 12\,379\end{aligned}`}</Katex>
+
+:::warning Atenție
+Dacă nu mai avem cifre, adăugăm zerouri.
+La <Katex>{String.raw`3{,}9 \times 100 = 390`}</Katex> mutăm virgula cu 2 ranguri, dar avem o singură cifră după virgulă. Adăugăm un zero.
+:::
+
+### 3. Înmulțirea cu 0,1; 0,01 sau 0,001
+
+:::tip De reținut
+Mutăm virgula spre **<HighlightText color="teal">STÂNGA</HighlightText>**:
+- cu 0,1 → 1 rang
+- cu 0,01 → 2 ranguri
+- cu 0,001 → 3 ranguri
+:::
+
+**Exemple:**
+
+<Katex>{String.raw`\begin{aligned}& 9\,756{,}4 \times 0{,}01 = 97{,}564\\[6pt]& 4{,}51 \times 0{,}001 = 0{,}00451\end{aligned}`}</Katex>
+
+Observăm: a împărți la 10, 100 sau 1 000 înseamnă a înmulți cu 0,1; 0,01 sau 0,001.
+
+<Katex>{String.raw`\begin{aligned}& 1\,235 : 100 = 1\,235 \times 0{,}01 = 12{,}35\\[6pt]& 583 : 1\,000 = 583 \times 0{,}001 = 0{,}583\end{aligned}`}</Katex>

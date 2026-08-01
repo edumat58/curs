@@ -1,0 +1,123 @@
+---
+sidebar_position: 16
+slug: /edupasi/c5/modul-1/16
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C14 - Media aritmetică
+
+---
+
+## Media aritmetică a două numere naturale
+
+:::danger Definiție 1
+**<HighlightText color="red">Media aritmetică</HighlightText>** a două numere naturale se calculează așa: **<HighlightText color="red">adunăm</HighlightText>** cele două numere, apoi **<HighlightText color="teal">împărțim suma la 2</HighlightText>**.
+:::
+
+<Katex>
+{String.raw`
+ma = \frac{\color{#FF6B6B}{a + b}}{\color{#4ECDC4}{2}}
+`}
+</Katex>
+
+**Exemplu:** calculăm media aritmetică a numerelor 7 și 11.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{1. Adunăm termenii: } 7 + 11 = \color{#FF6B6B}{18}\\[6pt]
+& \text{2. Împărțim suma la 2: } 18 : 2 = \color{#4ECDC4}{9}\\[6pt]
+& \text{3. Media aritmetică este } \color{#4ECDC4}{9}.
+\end{aligned}
+`}
+</Katex>
+
+**Exemplu din viața de zi cu zi:**
+
+Un kilogram de prune costă 2 lei. Un kilogram de struguri costă 4 lei. Cât costă, în medie, un kilogram de fructe?
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{1. Adunăm prețurile: } 2 + 4 = \color{#FF6B6B}{6} \text{ lei}\\[6pt]
+& \text{2. Împărțim la 2: } 6 : 2 = \color{#4ECDC4}{3} \text{ lei}\\[6pt]
+& \text{3. În medie, un kilogram de fructe costă } \color{#4ECDC4}{3} \text{ lei.}
+\end{aligned}
+`}
+</Katex>
+
+:::warning Atenție
+Media aritmetică **<HighlightText color="red">nu este totdeauna număr natural</HighlightText>**.
+
+<Katex>
+{String.raw`
+ma = \frac{5 + 8}{2} = \frac{13}{2} = \color{#FF8C00}{6{,}5}
+`}
+</Katex>
+:::
+
+---
+
+## Media aritmetică a trei numere naturale
+
+:::danger Definiție 2
+Pentru trei numere naturale: **<HighlightText color="red">adunăm</HighlightText>** cele trei numere, apoi **<HighlightText color="teal">împărțim suma la 3</HighlightText>**.
+:::
+
+<Katex>
+{String.raw`
+ma = \frac{\color{#FF6B6B}{a + b + c}}{\color{#4ECDC4}{3}}
+`}
+</Katex>
+
+**Exemplu:** calculăm media aritmetică a numerelor 6, 15 și 24.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{1. Adunăm termenii: } 6 + 15 + 24 = \color{#FF6B6B}{45}\\[6pt]
+& \text{2. Împărțim suma la 3: } 45 : 3 = \color{#4ECDC4}{15}\\[6pt]
+& \text{3. Media aritmetică este } \color{#4ECDC4}{15}.
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Media aritmetică a n numere naturale
+
+:::danger Definiție 3
+Pentru mai multe numere naturale, regula este aceeași: **<HighlightText color="red">adunăm toate numerele</HighlightText>**, apoi **<HighlightText color="teal">împărțim suma la câte numere avem</HighlightText>**, adică la *n*.
+:::
+
+<Katex>
+{String.raw`
+ma = \frac{\color{#FF6B6B}{a_1 + a_2 + \ldots + a_n}}{\color{#4ECDC4}{n}}
+`}
+</Katex>
+
+**Exemplu:** Maria are la istorie notele 9, 10, 7, 10, 9. Calculăm media ei.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{1. Numărăm notele: sunt } \color{#9370DB}{5} \text{ note}\\[6pt]
+& \text{2. Adunăm notele: } 9 + 10 + 7 + 10 + 9 = \color{#FF6B6B}{45}\\[6pt]
+& \text{3. Împărțim suma la 5: } 45 : 5 = \color{#4ECDC4}{9}\\[6pt]
+& \text{4. Media Mariei este } \color{#4ECDC4}{9}.
+\end{aligned}
+`}
+</Katex>
+
+:::tip De reținut
+Media aritmetică este cuprinsă **<HighlightText color="teal">între cel mai mic și cel mai mare</HighlightText>** dintre numere. Așa verificăm rezultatul.
+
+<Katex>
+{String.raw`
+\text{Notele Mariei: } \color{#FF6B6B}{7} \le \color{#4ECDC4}{9} \le \color{#FF6B6B}{10} \quad \checkmark
+`}
+</Katex>
+:::

@@ -1,0 +1,148 @@
+---
+sidebar_position: 6
+slug: /edupasi/c5/modul-2/06
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# G2 - Semiplan, semidreaptă și segment
+
+---
+
+## Semiplanul
+
+:::danger Definiție 1
+O dreaptă dintr-un plan împarte planul în două regiuni.
+Fiecare regiune se numește **<HighlightText color="red">semiplan</HighlightText>**.
+Dreapta care separă planul se numește **<HighlightText color="teal">frontiera</HighlightText>** semiplanului.
+:::
+
+Observăm figura:
+
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="320" viewBox="0 0 700 320">
+  <polygon points="180,180 220,80 620,80 580,180" fill="#d7f4f1" stroke="#4ECDC4" stroke-width="2"/>
+  <polygon points="140,280 180,180 580,180 540,280" fill="#ffe0e0" stroke="#FF6B6B" stroke-width="2"/>
+  <line x1="150" y1="180" x2="610" y2="180" stroke="#000000" stroke-width="3"/>
+  <text x="118" y="190" font-size="30" font-family="Noto Sans JP">d</text>
+  <circle cx="400" cy="125" r="6" fill="#000000"/>
+  <text x="415" y="120" font-size="30" font-family="Noto Sans JP">A</text>
+  <circle cx="370" cy="235" r="6" fill="#000000"/>
+  <text x="385" y="230" font-size="30" font-family="Noto Sans JP">B</text>
+  <text x="200" y="265" font-size="30" font-family="Noto Sans JP">β</text>
+</svg>
+
+Ce vedem în figură:
+
+1. Planul se numește **β**.
+2. Dreapta **d** este în planul **β**.
+3. Punctul **A** este deasupra dreptei **d**.
+4. Punctul **B** este sub dreapta **d**.
+
+Notăm semiplanele astfel:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Semiplanul care conține punctul } A \text{: } \color{#4ECDC4}{(d, A)}\\[6pt]
+& \text{Semiplanul care conține punctul } B \text{: } \color{#FF6B6B}{(d, B)}
+\end{aligned}
+`}
+</Katex>
+
+:::tip De reținut
+O dreaptă dintr-un plan determină **două <HighlightText color="orange">semiplane opuse</HighlightText>**.
+În figură, semiplanele **(d, A)** și **(d, B)** sunt semiplane opuse.
+:::
+
+---
+
+## Semidreapta
+
+:::danger Definiție 2
+Alegem un punct **O** pe o dreaptă **d**.
+Toate punctele dreptei aflate de aceeași parte a punctului **O** formează o **<HighlightText color="red">semidreaptă</HighlightText>**.
+Punctul **O** se numește **<HighlightText color="teal">originea</HighlightText>** semidreptei.
+:::
+
+Observăm figura:
+
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="140" viewBox="0 0 700 140">
+  <line x1="60" y1="85" x2="300" y2="85" stroke="#000000" stroke-width="2" stroke-dasharray="8,8"/>
+  <line x1="300" y1="85" x2="640" y2="85" stroke="#FF6B6B" stroke-width="4"/>
+  <circle cx="300" cy="85" r="6" fill="#000000"/>
+  <text x="288" y="55" font-size="30" font-family="Noto Sans JP">O</text>
+  <circle cx="480" cy="85" r="6" fill="#000000"/>
+  <text x="470" y="55" font-size="30" font-family="Noto Sans JP">E</text>
+  <text x="62" y="55" font-size="30" font-family="Noto Sans JP">d</text>
+</svg>
+
+Linia roșie este semidreapta cu originea în **O**, care trece prin punctul **E**.
+Dreapta **d** se numește **dreapta suport** a semidreptei.
+
+### Tipuri de semidrepte
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Semidreapta } \color{#FF6B6B}{\text{deschisă }} (OE) \text{: NU conține punctul } O\\[6pt]
+& \text{Semidreapta } \color{#4ECDC4}{\text{închisă }} [OE) \text{: conține punctul } O
+\end{aligned}
+`}
+</Katex>
+
+:::warning Atenție
+Paranteza rotundă „(" arată că punctul **NU** face parte din semidreaptă.
+Paranteza pătrată „[" arată că punctul face parte din semidreaptă.
+:::
+
+:::tip De reținut
+Un punct de pe o dreaptă determină **două <HighlightText color="orange">semidrepte opuse</HighlightText>**.
+:::
+
+**Exemplu:**
+Punctele **D**, **O**, **C** sunt pe aceeași dreaptă, în această ordine.
+
+<Katex>
+{String.raw`
+\text{Semidreptele } \color{#FF6B6B}{(OD)} \text{ și } \color{#4ECDC4}{(OC)} \text{ sunt semidrepte opuse.}
+`}
+</Katex>
+
+---
+
+## Segmentul de dreaptă
+
+:::danger Definiție 3
+Alegem două puncte **A** și **B** pe o dreaptă **d**.
+Toate punctele aflate între **A** și **B** formează un **<HighlightText color="red">segment de dreaptă</HighlightText>**.
+:::
+
+Reținem denumirile:
+
+1. Punctele **A** și **B** se numesc **extremitățile** segmentului.
+2. Dreapta **d** se numește **dreapta suport** a segmentului.
+
+### Tipuri de segmente
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Segment } \color{#FF6B6B}{\text{deschis }} (AB) \text{: NU conține extremitățile}\\[6pt]
+& \text{Segment } \color{#4ECDC4}{\text{închis }} [AB] \text{: conține extremitățile}
+\end{aligned}
+`}
+</Katex>
+
+:::tip De reținut
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#FF6B6B}{(d, A)} \to \text{ semiplan cu frontiera } d\\[6pt]
+& \color{#4ECDC4}{[OE)} \to \text{ semidreaptă închisă cu originea } O\\[6pt]
+& \color{#9370DB}{[AB]} \to \text{ segment închis cu extremitățile } A \text{ și } B
+\end{aligned}
+`}
+</Katex>
+:::

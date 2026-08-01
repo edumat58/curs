@@ -1,0 +1,124 @@
+---
+sidebar_position: 1
+slug: /edupasi/c5/modul-4/01
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C23.1 - Înumlțirea fracțiilor ordinare
+
+---
+
+## Înmulțirea a două fracții ordinare
+
+:::danger Definiție 1
+Două fracții se înmulțesc astfel: **<HighlightText color="red">numărător</HighlightText>** cu **<HighlightText color="red">numărător</HighlightText>** și **<HighlightText color="teal">numitor</HighlightText>** cu **<HighlightText color="teal">numitor</HighlightText>**.
+:::
+
+<Katex>
+{String.raw`
+\frac{\color{#FF6B6B}{a}}{\color{#4ECDC4}{b}} \cdot \frac{\color{#FF6B6B}{c}}{\color{#4ECDC4}{d}} = \frac{\color{#FF6B6B}{a \cdot c}}{\color{#4ECDC4}{b \cdot d}}
+`}
+</Katex>
+
+Calculăm pas cu pas:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{1. Înmulțim numărătorii: } \color{#FF6B6B}{5 \cdot 3 = 15}\\[6pt]
+& \text{2. Înmulțim numitorii: } \color{#4ECDC4}{6 \cdot 8 = 48}\\[6pt]
+& \text{3. Scriem rezultatul: } \frac{5}{6} \cdot \frac{3}{8} = \frac{\color{#FF6B6B}{15}}{\color{#4ECDC4}{48}}\\[6pt]
+& \text{4. Simplificăm prin } \color{#9370DB}{3}\text{: } \frac{15}{48} = \frac{5}{16}
+\end{aligned}
+`}
+</Katex>
+
+:::tip De reținut
+Putem simplifica și **înainte** de înmulțire. Simplificăm totdeauna un **<HighlightText color="red">numărător</HighlightText>** cu un **<HighlightText color="teal">numitor</HighlightText>**.
+:::
+
+**Exemplu — simplificăm înainte de înmulțire:**
+
+Observăm: 3 și 6 se simplifică prin **<HighlightText color="purple">3</HighlightText>**. În locul lui 3 rămâne 1. În locul lui 6 rămâne 2.
+
+<Katex>
+{String.raw`
+\frac{5}{6} \cdot \frac{3}{8} = \frac{5}{\color{#9370DB}{2}} \cdot \frac{\color{#9370DB}{1}}{8} = \frac{5 \cdot 1}{2 \cdot 8} = \frac{5}{16}
+`}
+</Katex>
+
+---
+
+## Înmulțirea între un număr natural și o fracție
+
+:::danger Definiție 2
+Un **<HighlightText color="red">număr natural</HighlightText>** se scrie ca fracție cu **<HighlightText color="teal">numitorul 1</HighlightText>**.
+:::
+
+Calculăm pas cu pas:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{1. Scriem numărul ca fracție: } \color{#FF6B6B}{3} = \frac{\color{#FF6B6B}{3}}{\color{#4ECDC4}{1}}\\[6pt]
+& \text{2. Înmulțim numărătorii: } \color{#FF6B6B}{3 \cdot 5 = 15}\\[6pt]
+& \text{3. Înmulțim numitorii: } \color{#4ECDC4}{1 \cdot 7 = 7}\\[6pt]
+& \text{4. Scriem rezultatul: } 3 \cdot \frac{5}{7} = \frac{15}{7}
+\end{aligned}
+`}
+</Katex>
+
+:::warning Atenție
+Numărul natural se înmulțește numai cu **<HighlightText color="red">numărătorul</HighlightText>**. **<HighlightText color="teal">Numitorul</HighlightText>** rămâne neschimbat.
+
+<Katex>
+{String.raw`
+\color{#FF8C00}{4} \cdot \frac{2}{9} = \frac{\color{#FF8C00}{4} \cdot 2}{9} = \frac{8}{9}
+`}
+</Katex>
+:::
+
+---
+
+## Proprietățile înmulțirii
+
+:::tip De reținut
+Proprietățile înmulțirii de la numerele naturale rămân adevărate și la fracții.
+:::
+
+**1. Comutativitatea** — ordinea factorilor nu schimbă rezultatul.
+
+<Katex>
+{String.raw`
+\frac{1}{2} \cdot \frac{3}{5} = \frac{3}{5} \cdot \frac{1}{2} = \frac{3}{10}
+`}
+</Katex>
+
+**2. Asociativitatea** — factorii se pot grupa în moduri diferite.
+
+<Katex>
+{String.raw`
+\left( \frac{1}{2} \cdot \frac{2}{3} \right) \cdot \frac{3}{4} = \frac{1}{2} \cdot \left( \frac{2}{3} \cdot \frac{3}{4} \right) = \frac{1}{4}
+`}
+</Katex>
+
+**3. Elementul neutru** — numărul **<HighlightText color="orange">1</HighlightText>** nu schimbă rezultatul.
+
+<Katex>
+{String.raw`
+\frac{4}{9} \cdot \color{#FF8C00}{1} = \color{#FF8C00}{1} \cdot \frac{4}{9} = \frac{4}{9}
+`}
+</Katex>
+
+**4. Distributivitatea** — înmulțim fiecare termen din paranteză, apoi adunăm.
+
+<Katex>
+{String.raw`
+\frac{1}{2} \cdot \left( \frac{1}{3} + \frac{1}{3} \right) = \frac{1}{2} \cdot \frac{1}{3} + \frac{1}{2} \cdot \frac{1}{3} = \frac{2}{6} = \frac{1}{3}
+`}
+</Katex>
+
+Distributivitatea funcționează la fel și față de scădere.

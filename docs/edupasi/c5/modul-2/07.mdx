@@ -1,0 +1,152 @@
+---
+sidebar_position: 7
+slug: /edupasi/c5/modul-2/07
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C15.5 - Metoda falsei ipoteze
+
+---
+
+## Definiție
+
+:::danger Definiție
+La **<HighlightText color="red">metoda falsei ipoteze</HighlightText>** presupunem că **toate** obiectele din problemă sunt de **același fel**. Calculăm totalul. Totalul nu se potrivește cu datele problemei. Din **<HighlightText color="teal">diferență</HighlightText>** aflăm câte obiecte sunt de fiecare fel.
+:::
+
+:::tip De reținut
+Lucrăm mereu în aceiași pași:
+
+1. **<HighlightText color="red">Presupunem</HighlightText>** că toate obiectele sunt de același fel.
+2. **Calculăm** totalul din presupunere.
+3. **<HighlightText color="teal">Scădem</HighlightText>** totalul real din totalul presupus.
+4. **<HighlightText color="purple">Împărțim</HighlightText>** diferența la diferența dintre cele două feluri.
+5. Câtul este numărul obiectelor de **<HighlightText color="orange">celălalt fel</HighlightText>**.
+:::
+
+---
+
+## Exemple
+
+:::note Exemplul 1
+Într-un bloc sunt **24 apartamente**, unele cu **2 camere**, altele cu **3 camere**, în total **54 camere**.
+Câte apartamente sunt de fiecare fel?
+:::
+
+> Rezolvare
+
+**Pasul 1.** Presupunem că **toate** cele 24 de apartamente au **3 camere**.
+
+**Pasul 2.** Calculăm câte camere ar fi:
+
+<Katex>
+{String.raw`
+\color{#FF6B6B}{24 \cdot 3 = 72} \text{ camere}
+`}
+</Katex>
+
+**Pasul 3.** În realitate sunt **54 camere**. Presupunerea este falsă. Scădem:
+
+<Katex>
+{String.raw`
+\color{#4ECDC4}{72 - 54 = 18}
+`}
+</Katex>
+
+**Pasul 4.** Diferența dintre cele două feluri este de o cameră. Împărțim:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& 3 - 2 = 1\\[6pt]
+& \color{#9370DB}{18 : 1 = 18}
+\end{aligned}
+`}
+</Katex>
+
+**Pasul 5.** Am presupus 3 camere, deci câtul arată apartamentele cu **2 camere**: sunt **18**.
+Cele cu 3 camere:
+
+<Katex>
+{String.raw`
+24 - 18 = \color{#FF8C00}{6}
+`}
+</Katex>
+
+Facem proba:
+
+<Katex>
+{String.raw`
+18 \cdot 2 + 6 \cdot 3 = 36 + 18 = 54
+`}
+</Katex>
+
+**Răspuns:** 18 apartamente cu 2 camere și 6 apartamente cu 3 camere.
+
+:::warning Atenție
+Câtul de la Pasul 4 dă numărul obiectelor de **<HighlightText color="orange">celălalt fel</HighlightText>**, nu al celor presupuse. Verificăm mereu prin probă.
+:::
+
+---
+
+:::note Exemplul 2
+Un fermier are găini și iepuri. În total sunt **100 capete** și **240 picioare**.
+Câte găini și câți iepuri are fermierul?
+:::
+
+> Rezolvare
+
+Presupunem că **toate** cele 100 de animale sunt **iepuri**:
+
+<Katex>
+{String.raw`
+100 \cdot 4 = 400 \text{ picioare}
+`}
+</Katex>
+
+În realitate sunt **240 picioare**. Scădem, apoi împărțim la diferența de picioare:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& 400 - 240 = 160\\[6pt]
+& 4 - 2 = 2\\[6pt]
+& 160 : 2 = 80
+\end{aligned}
+`}
+</Katex>
+
+Am presupus iepuri, deci câtul arată **găinile**: sunt **80**. Iepurii:
+
+<Katex>
+{String.raw`
+100 - 80 = 20
+`}
+</Katex>
+
+Facem proba:
+
+<Katex>
+{String.raw`
+80 \cdot 2 + 20 \cdot 4 = 160 + 80 = 240
+`}
+</Katex>
+
+**Răspuns:** 80 găini și 20 iepuri.
+
+---
+
+## Probleme propuse
+
+Rezolvăm urmând pașii din exemple.
+
+1. În **9 bidoane**, unele de **3 litri**, altele de **5 litri**, încap **31 litri apă**.
+   Câte bidoane de fiecare fel sunt?
+
+2. Se toarnă **49 litri apă** în **17 sticle**, unele de **2 litri**, altele de **5 litri**.
+   Câte sticle de fiecare fel sunt?
+
+---

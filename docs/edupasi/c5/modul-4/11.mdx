@@ -1,0 +1,160 @@
+---
+sidebar_position: 11
+slug: /edupasi/c5/modul-4/11
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# G4 - Mijlocul unui segment și simetricul unui punct
+
+---
+
+## Mijlocul unui segment
+
+:::danger Definiție
+**<HighlightText color="red">Mijlocul</HighlightText>** segmentului [AB] este punctul M aflat pe segment, **la fel de departe** de A și de B.
+:::
+
+<div style={{ display: "flex", justifyContent: "center", margin: "1.5rem 0" }}>
+<svg width="480" height="110" viewBox="0 0 480 110" xmlns="http://www.w3.org/2000/svg">
+  <line x1="50" y1="65" x2="430" y2="65" stroke="black" strokeWidth="3"/>
+  <circle cx="50" cy="65" r="6" fill="black"/>
+  <circle cx="240" cy="65" r="6" fill="#FF6B6B"/>
+  <circle cx="430" cy="65" r="6" fill="black"/>
+  <text x="38" y="42" fontSize="30" fontFamily="serif" fontWeight="bold">A</text>
+  <text x="228" y="42" fontSize="30" fontFamily="serif" fontWeight="bold" fill="#FF6B6B">M</text>
+  <text x="418" y="42" fontSize="30" fontFamily="serif" fontWeight="bold">B</text>
+  <line x1="140" y1="55" x2="150" y2="75" stroke="#4ECDC4" strokeWidth="3"/>
+  <line x1="330" y1="55" x2="340" y2="75" stroke="#4ECDC4" strokeWidth="3"/>
+</svg>
+</div>
+
+Liniuțele turcoaz arată că cele două jumătăți sunt **egale**.
+
+:::tip De reținut
+<Katex>
+{String.raw`
+\begin{aligned}
+& AM = MB = \frac{AB}{2}\\[6pt]
+& AB = 2 \cdot AM
+\end{aligned}
+`}
+</Katex>
+:::
+
+:::warning Atenție
+Un segment are **un singur** mijloc. Mijlocul se află mereu **între** capetele segmentului.
+:::
+
+**Exemplu 1.** M este mijlocul segmentului [AB]. Știm că AB = 18 cm. Calculăm AM.
+
+1. Mijlocul împarte segmentul în două părți egale.
+2. Împărțim lungimea la 2:
+
+<Katex>
+{String.raw`
+AM = \frac{AB}{2} = \frac{18}{2} = 9 \text{ cm}
+`}
+</Katex>
+
+**Exemplu 2.** M este mijlocul segmentului [AB]. Știm că AM = 7 cm. Calculăm AB.
+
+1. Segmentul întreg este dublul unei jumătăți.
+2. Înmulțim cu 2:
+
+<Katex>
+{String.raw`
+AB = 2 \cdot AM = 2 \cdot 7 = 14 \text{ cm}
+`}
+</Katex>
+
+---
+
+## Simetricul unui punct față de un punct
+
+:::danger Definiție
+**<HighlightText color="teal">Simetricul</HighlightText>** punctului A față de punctul O este punctul A'. Punctul O este **mijlocul** segmentului [AA'].
+:::
+
+Punctul O se numește **<HighlightText color="orange">centru de simetrie</HighlightText>**.
+
+<div style={{ display: "flex", justifyContent: "center", margin: "1.5rem 0" }}>
+<svg width="520" height="110" viewBox="0 0 520 110" xmlns="http://www.w3.org/2000/svg">
+  <line x1="60" y1="65" x2="460" y2="65" stroke="black" strokeWidth="3"/>
+  <circle cx="60" cy="65" r="6" fill="black"/>
+  <circle cx="260" cy="65" r="6" fill="#FF6B6B"/>
+  <circle cx="460" cy="65" r="6" fill="#9370DB"/>
+  <text x="48" y="42" fontSize="30" fontFamily="serif" fontWeight="bold">A</text>
+  <text x="248" y="42" fontSize="30" fontFamily="serif" fontWeight="bold" fill="#FF6B6B">O</text>
+  <text x="444" y="42" fontSize="30" fontFamily="serif" fontWeight="bold" fill="#9370DB">A'</text>
+  <line x1="150" y1="55" x2="160" y2="75" stroke="#4ECDC4" strokeWidth="3"/>
+  <line x1="350" y1="55" x2="360" y2="75" stroke="#4ECDC4" strokeWidth="3"/>
+</svg>
+</div>
+
+Din definiție rezultă:
+
+<Katex>
+{String.raw`
+OA = OA'
+`}
+</Katex>
+
+Punctele A, O, A' sunt pe **aceeași dreaptă**. Punctul O este **între** A și A'.
+
+:::tip De reținut
+Dacă A' este simetricul lui A față de O, atunci și A este simetricul lui A' față de O. Simetricul punctului O față de el însuși este chiar O.
+:::
+
+Construim simetricul lui A față de O astfel:
+
+1. Trasăm dreapta prin A și O. Prelungim dincolo de O.
+2. Măsurăm distanța OA.
+3. Punem aceeași distanță de cealaltă parte a lui O. Punctul obținut este A'.
+
+**Exemplu 3.** O este mijlocul segmentului [AA']. Știm că OA = 5 cm. Calculăm AA'.
+
+1. Cele două jumătăți sunt egale: OA = OA' = 5 cm.
+2. Adunăm jumătățile:
+
+<Katex>
+{String.raw`
+AA' = 5 + 5 = 10 \text{ cm}
+`}
+</Katex>
+
+---
+
+## Calcule cu mijloc și simetric
+
+:::tip De reținut
+<Katex>
+{String.raw`
+AM = MB = \frac{AB}{2} \qquad\quad AB = 2 \cdot AM
+`}
+</Katex>
+:::
+
+**Exemplu 4.** C este simetricul lui A față de B. Știm că AB = 6 cm. Calculăm AC.
+
+1. B este mijlocul segmentului [AC].
+2. Cele două jumătăți sunt egale: BC = AB = 6 cm.
+3. Adunăm jumătățile:
+
+<Katex>
+{String.raw`
+AC = AB + BC = 6 + 6 = 12 \text{ cm}
+`}
+</Katex>
+
+**Exemplu 5.** M este mijlocul segmentului [AO]. Știm că AO = 7 cm. Calculăm MO. Împărțim lungimea la 2:
+
+<Katex>
+{String.raw`
+MO = \frac{AO}{2} = \frac{7}{2} = 3{,}5 \text{ cm}
+`}
+</Katex>
+
+---

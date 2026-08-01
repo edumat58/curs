@@ -1,0 +1,184 @@
+---
+sidebar_position: 3
+slug: /edupasi/c5/modul-4/03
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C24 - Ridicarea la putere a fracțiilor ordinare
+
+---
+
+## Ridicarea la putere a unei fracții
+
+:::danger Definiție
+Pentru a ridica o fracție la putere, ridicăm la putere **<HighlightText color="red">numărătorul</HighlightText>** și **<HighlightText color="teal">numitorul</HighlightText>**.
+:::
+
+<Katex>
+{String.raw`
+\left( \dfrac{\color{#FF6B6B}{a}}{\color{#4ECDC4}{b}} \right)^{\color{#9370DB}{n}} = \dfrac{\color{#FF6B6B}{a}^{\color{#9370DB}{n}}}{\color{#4ECDC4}{b}^{\color{#9370DB}{n}}}
+`}
+</Katex>
+
+Calculăm pas cu pas:
+
+1. Ridicăm numărătorul la putere: <Katex>{String.raw`2^2 = 4`}</Katex>
+2. Ridicăm numitorul la putere: <Katex>{String.raw`5^2 = 25`}</Katex>
+3. Scriem rezultatul.
+
+<Katex>
+{String.raw`
+\left( \dfrac{\color{#FF6B6B}{2}}{\color{#4ECDC4}{5}} \right)^2 = \dfrac{\color{#FF6B6B}{2}^2}{\color{#4ECDC4}{5}^2} = \dfrac{\color{#FF6B6B}{4}}{\color{#4ECDC4}{25}}
+`}
+</Katex>
+
+---
+
+## Reguli de calcul
+
+### 1. Înmulțirea puterilor cu aceeași bază
+
+Păstrăm baza. **<HighlightText color="red">Adunăm</HighlightText>** exponenții.
+
+<Katex>
+{String.raw`
+\left( \dfrac{a}{b} \right)^{m} \cdot \left( \dfrac{a}{b} \right)^{n} = \left( \dfrac{a}{b} \right)^{\color{#FF6B6B}{m+n}}
+`}
+</Katex>
+
+**Exemplu:**
+
+<Katex>
+{String.raw`
+\left( \dfrac{5}{2} \right)^3 \cdot \left( \dfrac{5}{2} \right)^4 = \left( \dfrac{5}{2} \right)^{\color{#FF6B6B}{3+4}} = \left( \dfrac{5}{2} \right)^7
+`}
+</Katex>
+
+---
+
+### 2. Împărțirea puterilor cu aceeași bază
+
+Păstrăm baza. **<HighlightText color="teal">Scădem</HighlightText>** exponenții. Primul exponent este mai mare sau egal cu al doilea.
+
+<Katex>
+{String.raw`
+\left( \dfrac{a}{b} \right)^{m} : \left( \dfrac{a}{b} \right)^{n} = \left( \dfrac{a}{b} \right)^{\color{#4ECDC4}{m-n}}
+`}
+</Katex>
+
+**Exemplu:**
+
+<Katex>
+{String.raw`
+\left( \dfrac{4}{5} \right)^7 : \left( \dfrac{4}{5} \right)^4 = \left( \dfrac{4}{5} \right)^{\color{#4ECDC4}{7-4}} = \left( \dfrac{4}{5} \right)^3
+`}
+</Katex>
+
+---
+
+### 3. Puterea unei puteri
+
+Păstrăm baza. **<HighlightText color="orange">Înmulțim</HighlightText>** exponenții.
+
+<Katex>
+{String.raw`
+\left[ \left( \dfrac{a}{b} \right)^{m} \right]^{n} = \left( \dfrac{a}{b} \right)^{\color{#FF8C00}{m \cdot n}}
+`}
+</Katex>
+
+**Exemplu:**
+
+<Katex>
+{String.raw`
+\left[ \left( \dfrac{2}{5} \right)^2 \right]^5 = \left( \dfrac{2}{5} \right)^{\color{#FF8C00}{2 \cdot 5}} = \left( \dfrac{2}{5} \right)^{10}
+`}
+</Katex>
+
+:::warning Atenție
+Orice fracție nenulă ridicată la **<HighlightText color="red">puterea 0</HighlightText>** este egală cu **1**.
+
+<Katex>
+{String.raw`
+\left( \dfrac{11}{101} \right)^{\color{#FF6B6B}{0}} = 1
+`}
+</Katex>
+:::
+
+---
+
+### 4. Puterea unui produs
+
+Ridicăm **fiecare factor** la aceeași putere.
+
+<Katex>
+{String.raw`
+\left( \dfrac{a}{b} \cdot \dfrac{c}{d} \right)^{n} = \left( \dfrac{a}{b} \right)^{n} \cdot \left( \dfrac{c}{d} \right)^{n}
+`}
+</Katex>
+
+**Exemplu:**
+
+<Katex>
+{String.raw`
+\left( \dfrac{2}{3} \cdot \dfrac{5}{7} \right)^3 = \left( \dfrac{2}{3} \right)^3 \cdot \left( \dfrac{5}{7} \right)^3
+`}
+</Katex>
+
+Regula se aplică și invers: produsul a două puteri cu același exponent este puterea produsului.
+
+<Katex>
+{String.raw`
+\left( \dfrac{a}{b} \right)^{n} \cdot \left( \dfrac{c}{d} \right)^{n} = \left( \dfrac{a}{b} \cdot \dfrac{c}{d} \right)^{n}
+`}
+</Katex>
+
+---
+
+### 5. Puterea unui cât
+
+Ridicăm **fiecare fracție** din cât la aceeași putere.
+
+<Katex>
+{String.raw`
+\left( \dfrac{a}{b} : \dfrac{c}{d} \right)^{n} = \left( \dfrac{a}{b} \right)^{n} : \left( \dfrac{c}{d} \right)^{n}
+`}
+</Katex>
+
+**Exemplu:**
+
+<Katex>
+{String.raw`
+\left( \dfrac{4}{9} : \dfrac{2}{7} \right)^5 = \left( \dfrac{4}{9} \right)^5 : \left( \dfrac{2}{7} \right)^5
+`}
+</Katex>
+
+Regula se aplică și invers: câtul a două puteri cu același exponent este puterea câtului.
+
+<Katex>
+{String.raw`
+\left( \dfrac{a}{b} \right)^{n} : \left( \dfrac{c}{d} \right)^{n} = \left( \dfrac{a}{b} : \dfrac{c}{d} \right)^{n}
+`}
+</Katex>
+
+**Exemplu:**
+
+<Katex>
+{String.raw`
+\left( \dfrac{3}{13} \right)^6 : \left( \dfrac{5}{13} \right)^6 = \left( \dfrac{3}{13} : \dfrac{5}{13} \right)^6 = \left( \dfrac{3}{5} \right)^6
+`}
+</Katex>
+
+:::tip De reținut
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Înmulțire cu aceeași bază: } \color{#FF6B6B}{\text{ADUNĂM exponenții}}\\[8pt]
+& \text{Împărțire cu aceeași bază: } \color{#4ECDC4}{\text{SCĂDEM exponenții}}\\[8pt]
+& \text{Putere ridicată la putere: } \color{#FF8C00}{\text{ÎNMULȚIM exponenții}}
+\end{aligned}
+`}
+</Katex>
+:::

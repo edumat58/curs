@@ -1,0 +1,154 @@
+---
+sidebar_position: 4
+slug: /edupasi/c5/modul-1/04
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C4 - Împărțirea Euclidiană. Împărțirea nr. zecimale
+
+---
+
+## Împărțirea euclidiană
+
+:::danger Definiție 1
+**<HighlightText color="red">Împărțirea euclidiană</HighlightText>** este împărțirea cu **<HighlightText color="orange">rest</HighlightText>** a două numere naturale.
+
+La această împărțire obținem un **<HighlightText color="purple">cât</HighlightText>** și un **<HighlightText color="orange">rest</HighlightText>**.
+:::
+
+Numerele dintr-o împărțire au nume precise:
+
+<Katex>
+{String.raw`
+\underbrace{17}_{\color{#FF6B6B}{\text{deîmpărțit}}} = \underbrace{5}_{\color{#4ECDC4}{\text{împărțitor}}} \times \underbrace{3}_{\color{#9370DB}{\text{cât}}} + \underbrace{2}_{\color{#FF8C00}{\text{rest}}}
+`}
+</Katex>
+
+**Exemplu:** calculăm pas cu pas împărțirea **17 : 5**.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{1. Căutăm de câte ori intră 5 în 17: } 5 \times \color{#9370DB}{3} = 15\\[6pt]
+& \text{2. Calculăm restul: } 17 - 15 = \color{#FF8C00}{2}\\[6pt]
+& \text{3. Verificăm restul: } \color{#FF8C00}{2} < \color{#4ECDC4}{5}\\[6pt]
+& \text{4. Scriem: } 17 = 5 \times \color{#9370DB}{3} + \color{#FF8C00}{2}
+\end{aligned}
+`}
+</Katex>
+
+:::warning Atenție
+**<HighlightText color="orange">Restul</HighlightText>** este întotdeauna mai mic decât **<HighlightText color="teal">împărțitorul</HighlightText>**.
+
+<Katex>
+{String.raw`
+\color{#FF8C00}{\text{rest}} < \color{#4ECDC4}{\text{împărțitor}}
+`}
+</Katex>
+
+Împărțitorul nu poate fi niciodată **0**.
+:::
+
+---
+
+## Proba împărțirii
+
+:::tip De reținut
+<Katex>
+{String.raw`
+\color{#FF6B6B}{\text{deîmpărțit}} = \color{#4ECDC4}{\text{împărțitor}} \times \color{#9370DB}{\text{cât}} + \color{#FF8C00}{\text{rest}}
+`}
+</Katex>
+:::
+
+**Exemplu:** facem proba pentru împărțirea **17 : 5**.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{1. Înmulțim: } \color{#4ECDC4}{5} \times \color{#9370DB}{3} = 15\\[6pt]
+& \text{2. Adunăm restul: } 15 + \color{#FF8C00}{2} = 17\\[6pt]
+& \text{3. Am obținut deîmpărțitul. Împărțirea este corectă.}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Împărțirea unui număr zecimal la un număr natural
+
+:::tip De reținut
+Împărțim la fel ca la numerele naturale.
+
+Când coborâm **<HighlightText color="teal">prima zecimală</HighlightText>**, punem **<HighlightText color="red">virgula</HighlightText>** la cât.
+:::
+
+**Exemplu:** calculăm pas cu pas **7,5 : 3**.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{1. Împărțim partea întreagă: } 7 \div 3 = 2 \text{, rest } 1\\[6pt]
+& \text{2. Coborâm zecimala 5 și punem } \color{#FF6B6B}{\text{virgula}} \text{ la cât}\\[6pt]
+& \text{3. Împărțim mai departe: } 15 \div 3 = 5\\[6pt]
+& \text{4. Câtul este: } 7{,}5 \div 3 = \color{#9370DB}{2{,}5}
+\end{aligned}
+`}
+</Katex>
+
+Facem proba:
+
+<Katex>
+{String.raw`
+3 \times 2{,}5 = 7{,}5
+`}
+</Katex>
+
+**Exemplu:** uneori adăugăm un zero. Calculăm **6 : 4**.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{1. Împărțim: } 6 \div 4 = 1 \text{, rest } 2\\[6pt]
+& \text{2. Punem virgula la cât și adăugăm un } \color{#4ECDC4}{0} \text{: restul 2 devine } 20\\[6pt]
+& \text{3. Împărțim: } 20 \div 4 = 5\\[6pt]
+& \text{4. Câtul este: } 6 \div 4 = \color{#9370DB}{1{,}5}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Împărțirea a două numere zecimale
+
+:::tip De reținut
+Mutăm **<HighlightText color="red">virgula spre dreapta</HighlightText>**, la **<HighlightText color="teal">amândouă numerele</HighlightText>**, cu același număr de poziții.
+
+Ne oprim când împărțitorul devine număr natural.
+:::
+
+**Exemplu:** calculăm pas cu pas **7,2 : 0,3**.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{1. Împărțitorul } 0{,}3 \text{ are o singură zecimală}\\[6pt]
+& \text{2. Mutăm virgula cu o poziție la amândouă: } 7{,}2 \to \color{#FF6B6B}{72} \text{ și } 0{,}3 \to \color{#4ECDC4}{3}\\[6pt]
+& \text{3. Împărțim: } 72 \div 3 = 24\\[6pt]
+& \text{4. Deci: } 7{,}2 \div 0{,}3 = \color{#9370DB}{24}
+\end{aligned}
+`}
+</Katex>
+
+:::warning Atenție
+Mutăm virgula **la fel** la amândouă numerele.
+
+<Katex>
+{String.raw`
+1{,}44 \div 1{,}2 = 14{,}4 \div 12 = 1{,}2
+`}
+</Katex>
+:::

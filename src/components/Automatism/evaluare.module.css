@@ -1,10 +1,15 @@
-/* Evaluarea tipărită: panoul de comandă și foaia propriu-zisă.
+/* Testul tipărit: panoul de comandă și foaia propriu-zisă.
 
-   Foaia se randează în pagină, nu într-o fereastră nouă. Așa profesorul o vede
-   înainte s-o trimită la imprimantă, iar la tipărire ascundem restul paginii cu
-   `visibility: hidden`. Nu cu `display: none`: acela scoate elementele din
-   așezare, iar KaTeX are nevoie ca ele să existe ca să măsoare corect fracțiile
-   și radicalii — altfel formulele ies strâmbe exact pe hârtie. */
+   Foaia urmează `teste/template.mdx` — de acolo vin banda portocalie #e65100 a
+   subiectelor, caseta de avertisment pentru evaluator, grila cu subiectele
+   I/II/III și calificativele N|S|B|E. Aspectul e al unui document, nu al unei
+   pagini de aplicație: fără colțuri rotunjite, fără umbre pe elemente, fără
+   casete de completat pe ecran.
+
+   Foaia se randează în pagină, nu într-o fereastră nouă: profesorul o vede
+   înainte s-o trimită la imprimantă. La tipărire, restul paginii se ascunde cu
+   `visibility: hidden` — nu cu `display: none`, care ar scoate elementele din
+   așezare și ar strica măsurătorile KaTeX exact pe hârtie. */
 
 .panou {
   --ev-accent: #e8590c;
@@ -128,61 +133,81 @@
   color: #111;
   background: #fff;
   border: 1px solid #ddd;
-  box-shadow: 0 6px 30px rgb(0 0 0 / 8%);
   font-size: 11.5pt;
-  line-height: 1.45;
+  line-height: 1.5;
 }
 
 .titlu {
-  margin: 0;
+  margin: 0 0 0.8rem;
   font-size: 17pt;
-  text-align: center;
 }
 
-.subtitlu {
-  margin: 0.2rem 0 1.1rem;
-  font-size: 10.5pt;
-  text-align: center;
-  color: #444;
-}
-
+/* Nume/Prenume pe linii de completat, ca în șablon. */
 .identitate {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  margin-bottom: 0.9rem;
-  font-size: 11pt;
+  margin: 0 0 0.9rem;
+  font-size: 11.5pt;
+  line-height: 1.9;
 }
 
-.linieScris,
-.linieScurta {
+.linieScris {
   display: inline-block;
-  border-bottom: 1px solid #333;
+  width: 6.5cm;
+  border-bottom: 1.5px solid #333;
   vertical-align: baseline;
 }
 
-.linieScris { width: 11cm; }
-.linieScurta { width: 3.2cm; }
-
 .conditii {
+  margin: 0 0 0.8rem;
+  padding-left: 1.3rem;
+  font-size: 11pt;
+}
+
+.linie {
+  margin: 0.9rem 0;
+  border: 0;
+  border-top: 1px solid #bbb;
+}
+
+/* Caseta „Nu completați!" — echivalentul tipărit al admonition-ului warning. */
+.avertisment {
   margin: 0 0 1rem;
-  padding-left: 1.1rem;
-  font-size: 10.5pt;
+  padding: 0.6rem 0.9rem;
+  background: #fff8e6;
+  border-left: 5px solid #e6a700;
+}
+
+.avertisment p {
+  margin: 0.25rem 0;
+}
+
+.avertismentTitlu {
+  font-weight: 800;
+  text-transform: none;
+}
+
+/* Grila și calificativele, alături — ca div-urile flex din șablon. */
+.coloane {
+  display: flex;
+  gap: 20px;
+}
+
+.coloanaGrila {
+  width: 50%;
+}
+
+.coloanaCalificative {
+  width: 47%;
+}
+
+.subtitluAntet {
+  margin: 0 0 0.5rem;
+  font-size: 13pt;
 }
 
 .grila {
   width: 100%;
-  margin-bottom: 1.4rem;
   border-collapse: collapse;
   font-size: 10.5pt;
-}
-
-.grilaTitlu {
-  padding-bottom: 0.35rem;
-  font-size: 9.5pt;
-  font-style: italic;
-  text-align: left;
-  color: #555;
 }
 
 .grila th,
@@ -197,96 +222,108 @@
   text-align: left;
 }
 
-.grila td:last-child {
-  min-width: 3cm;
+.calificativ {
+  margin-bottom: 0.55rem;
+  font-size: 10.5pt;
 }
 
-.grilaTotal {
-  font-weight: 700;
+.calificativNume {
+  margin: 0 0 0.15rem;
 }
 
-.subiect {
-  margin-bottom: 1.2rem;
+.calificativCasete {
+  margin: 0;
 }
 
-.subiectTitlu {
-  margin: 1.2rem 0 0.7rem;
-  padding: 0.28rem 0.7rem;
-  font-size: 12pt;
+.calificativCasete input {
+  vertical-align: middle;
+}
+
+.legenda {
+  margin: 1rem 0 0;
+  padding: 0.2rem 0 0.2rem 0.9rem;
+  border-left: 4px solid #ccc;
+  font-size: 10.5pt;
+  color: #333;
+}
+
+.legenda p {
+  margin: 0.2rem 0;
+}
+
+/* ── subiectele ────────────────────────────────────────────────────────── */
+
+/* Banda portocalie a subiectului — exact stilul din șablon:
+   background #e65100, text alb, padding 4px 8px, colțuri 4px, în linie. */
+.banda {
+  display: inline-block;
+  margin: 1.4rem 0 0.8rem;
+  padding: 4px 8px;
+  font-size: 13pt;
   color: #fff;
   background: #e65100;
   border-radius: 4px;
 }
 
+.subiect,
+.subiectPrim {
+  display: block;
+}
+
 .exercitiu {
-  margin-bottom: 0.9rem;
+  margin-bottom: 1rem;
   page-break-inside: avoid;
   break-inside: avoid;
 }
 
 .exercitiuTitlu {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 1rem;
-  margin: 0 0 0.35rem;
-  font-size: 11pt;
+  margin: 0.9rem 0 0.4rem;
+  font-size: 12pt;
+  font-weight: 600;
 }
 
-.puncte {
-  font-weight: 700;
-  white-space: nowrap;
-}
-
+/* Cerința — echivalentul tipărit al admonition-ului :::note din teste. */
 .cerinta {
-  padding: 0.5rem 0.7rem;
-  background: #f6f6f6;
-  border-left: 3px solid #e65100;
+  padding: 0.55rem 0.8rem;
+  background: #f6f7f8;
+  border-left: 5px solid #d4d5d8;
 }
 
 .enunt {
+  margin: 0 0 0.3rem;
+}
+
+.subpuncte {
   margin: 0;
+  padding-left: 1.5rem;
 }
 
-.enuntMath {
-  margin: 0.4rem 0 0;
-  text-align: center;
+.subpunct {
+  margin: 0.35rem 0;
 }
 
-.enuntMath :global(.katex-display) {
-  margin: 0.2rem 0;
-}
-
-.figura {
-  display: flex;
-  justify-content: center;
-  margin-top: 0.4rem;
+.formula {
+  margin-left: 0.35rem;
 }
 
 .figura svg {
+  display: block;
   max-width: 6cm;
   height: auto;
+  margin: 0.3rem 0;
 }
 
-.cerute {
-  margin: 0.5rem 0 0;
-  padding-left: 1.1rem;
+.seCere {
   font-size: 10.5pt;
-}
-
-.linieRaspuns {
-  display: inline-block;
-  width: 4.5cm;
-  border-bottom: 1px solid #333;
-  vertical-align: baseline;
 }
 
 /* Loc de scris rezolvarea. Un test fără el se rezolvă pe ciornă, iar
    profesorul corectează rezultate, nu raționamente. */
 .spatiu {
-  height: 2.2cm;
-  border-bottom: 1px dotted #bbb;
+  height: 2.4cm;
 }
+
+/* ── baremul, pe pagină separată ───────────────────────────────────────── */
 
 .baremFoaie {
   page-break-before: always;
@@ -294,10 +331,15 @@
 }
 
 .baremNota {
-  margin: 0 0 0.8rem;
+  margin: 0.5rem 0 0.8rem;
   font-size: 10pt;
   font-style: italic;
   color: #b3261e;
+}
+
+.baremSubiect {
+  margin: 0.6rem 0 0.2rem;
+  font-weight: 700;
 }
 
 .baremLista {
@@ -307,14 +349,12 @@
 }
 
 .baremRaspuns {
-  font-weight: 600;
+  font-size: 10pt;
 }
 
 /* ── la tipărire ───────────────────────────────────────────────────────── */
 
 @media print {
-  /* Ascundem tot, apoi arătăm doar foaia. `visibility` păstrează așezarea, deci
-     KaTeX rămâne măsurat corect; `display: none` ar strica formulele. */
   :global(body) * {
     visibility: hidden;
   }
@@ -337,21 +377,22 @@
     margin: 0;
     padding: 0;
     border: 0;
-    box-shadow: none;
   }
 
-  /* Panoul de comandă n-are ce căuta pe hârtie. */
   .panou {
     display: none;
   }
 
-  .subiectTitlu {
-    /* Fundalurile colorate se pierd la tipărire dacă browserul „economisește"
-       cerneala; forțăm redarea, altfel titlul de subiect iese alb pe alb. */
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
+  /* „Testul începe de pe pagina următoare" — caseta promite, tiparul ține. */
+  .subiectPrim {
+    page-break-before: always;
+    break-before: page;
   }
 
+  /* Fundalurile colorate se pierd dacă browserul „economisește" cerneala:
+     banda ar ieși alb pe alb, caseta de avertisment ar dispărea. */
+  .banda,
+  .avertisment,
   .cerinta {
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;

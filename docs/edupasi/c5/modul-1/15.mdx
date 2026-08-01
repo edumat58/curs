@@ -1,0 +1,169 @@
+---
+sidebar_position: 15
+slug: /edupasi/c5/modul-1/15
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C13 - Ordinea efectuării operațiilor
+
+---
+
+## Ordin de calcul
+
+:::danger Definiție
+Operațiile au trei ordine:
+
+- **<HighlightText color="red">ordinul I</HighlightText>**: adunarea și scăderea
+- **<HighlightText color="teal">ordinul II</HighlightText>**: înmulțirea și împărțirea
+- **<HighlightText color="orange">ordinul III</HighlightText>**: ridicarea la putere
+:::
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#FF6B6B}{\text{ordinul I: }} 8 + 5 = 13 \qquad 9 - 4 = 5\\[6pt]
+& \color{#4ECDC4}{\text{ordinul II: }} 6 \cdot 3 = 18 \qquad 12 : 4 = 3\\[6pt]
+& \color{#FF8C00}{\text{ordinul III: }} 2^3 = 8
+\end{aligned}
+`}
+</Katex>
+
+În exerciții apar și **paranteze**. Sunt de trei feluri:
+
+- **<HighlightText color="red">paranteze rotunde</HighlightText>** ( )
+- **<HighlightText color="teal">paranteze drepte</HighlightText>** [ ]
+- **<HighlightText color="orange">acolade</HighlightText>** \{ \}
+
+---
+
+## Reguli de calcul
+
+:::tip De reținut
+1. Operații de **<HighlightText color="red">același ordin</HighlightText>**: calculăm de la stânga la dreapta.
+2. Operații de **<HighlightText color="teal">ordine diferite</HighlightText>**: calculăm întâi puterile, apoi înmulțirile și împărțirile, apoi adunările și scăderile.
+3. Exercițiu cu **<HighlightText color="orange">paranteze</HighlightText>**: calculăm întâi în parantezele rotunde, apoi în cele drepte, apoi în acolade.
+:::
+
+Observăm fiecare regulă pe un exemplu.
+
+**Regula 1.** Același ordin. Calculăm de la stânga la dreapta:
+
+<Katex>
+{String.raw`
+20 - 5 + 3 = 15 + 3 = 18
+`}
+</Katex>
+
+**Regula 2.** Ordine diferite. Calculăm întâi înmulțirea, apoi adunarea:
+
+<Katex>
+{String.raw`
+4 + 2 \cdot 3 = 4 + 6 = 10
+`}
+</Katex>
+
+**Regula 3.** Cu paranteze. Calculăm întâi paranteza, apoi înmulțirea:
+
+<Katex>
+{String.raw`
+2 \cdot (3 + 4) = 2 \cdot 7 = 14
+`}
+</Katex>
+
+:::warning Atenție
+Nu calculăm mereu de la stânga la dreapta. Verificăm întâi ordinul operațiilor.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#4ECDC4}{\text{corect: }} 4 + 2 \cdot 3 = 4 + 6 = 10\\[6pt]
+& \color{#FF6B6B}{\text{greșit: }} 4 + 2 \cdot 3 = 6 \cdot 3 = 18
+\end{aligned}
+`}
+</Katex>
+:::
+
+---
+
+## Exemple
+
+**Exemplul 1.** Efectuăm:
+
+<Katex>
+{String.raw`
+81 : 3^2 + 57
+`}
+</Katex>
+
+Calculăm pas cu pas:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#FF8C00}{\text{Pasul 1 — puterea: }} 3^2 = 9\\[6pt]
+& \color{#4ECDC4}{\text{Pasul 2 — împărțirea: }} 81 : 9 = 9\\[6pt]
+& \color{#FF6B6B}{\text{Pasul 3 — adunarea: }} 9 + 57 = 66
+\end{aligned}
+`}
+</Katex>
+
+<Katex>
+{String.raw`
+81 : 3^2 + 57 = 81 : 9 + 57 = 9 + 57 = 66
+`}
+</Katex>
+
+**Exemplul 2.** Efectuăm:
+
+<Katex>
+{String.raw`
+(7^2 + 35) \cdot 10
+`}
+</Katex>
+
+Calculăm întâi în paranteză:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#FF8C00}{\text{Pasul 1 — puterea din paranteză: }} 7^2 = 49\\[6pt]
+& \color{#FF6B6B}{\text{Pasul 2 — adunarea din paranteză: }} 49 + 35 = 84\\[6pt]
+& \color{#4ECDC4}{\text{Pasul 3 — înmulțirea: }} 84 \cdot 10 = 840
+\end{aligned}
+`}
+</Katex>
+
+<Katex>
+{String.raw`
+(7^2 + 35) \cdot 10 = 84 \cdot 10 = 840
+`}
+</Katex>
+
+**Exemplul 3.** Efectuăm:
+
+<Katex>
+{String.raw`
+2 \cdot [10 - (3 + 4)]
+`}
+</Katex>
+
+Calculăm întâi paranteza rotundă, apoi paranteza dreaptă:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#FF6B6B}{\text{Pasul 1 — paranteza rotundă: }} 3 + 4 = 7\\[6pt]
+& \color{#4ECDC4}{\text{Pasul 2 — paranteza dreaptă: }} 10 - 7 = 3\\[6pt]
+& \color{#9370DB}{\text{Pasul 3 — înmulțirea: }} 2 \cdot 3 = 6
+\end{aligned}
+`}
+</Katex>
+
+<Katex>
+{String.raw`
+2 \cdot [10 - (3 + 4)] = 2 \cdot [10 - 7] = 2 \cdot 3 = 6
+`}
+</Katex>

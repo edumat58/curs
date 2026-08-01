@@ -1,0 +1,121 @@
+---
+sidebar_position: 9
+slug: /edupasi/c5/modul-3/09
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C21.2 - Aducerea fracțiilor la un numitor comun
+
+---
+
+## Definiție
+
+:::danger Definiție
+Ca să **comparăm**, să **adunăm** sau să **scădem** două fracții, le aducem la același **<HighlightText color="red">numitor</HighlightText>**. Acesta se numește **<HighlightText color="teal">numitor comun</HighlightText>**. Alegem numitorul comun, **preferabil cel mai mic**, apoi **<HighlightText color="orange">amplificăm</HighlightText>** fiecare fracție.
+:::
+
+:::tip De reținut
+Oricare două fracții pot fi înlocuite cu fracții echivalente care au același numitor.
+:::
+
+**Pașii:**
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{1. Alegem } \color{#4ECDC4}{\text{numitorul comun}}\\[6pt]
+& \text{2. } \color{#FF6B6B}{\text{Amplificăm}} \text{ fiecare fracție}\\[6pt]
+& \text{3. Comparăm } \color{#9370DB}{\text{numărătorii}}
+\end{aligned}
+`}
+</Katex>
+
+**Exemplu:** aducem fracțiile la numitorul comun 6.
+
+<Katex>
+{String.raw`{}^{3)}\dfrac{1}{2} = \dfrac{3}{6} \qquad {}^{2)}\dfrac{1}{3} = \dfrac{2}{6}`}
+</Katex>
+
+---
+
+## Compararea fracțiilor
+
+### Problemă rezolvată
+
+**O pizza este tăiată în 6 felii identice. O felie este mâncată.**
+
+<div style={{textAlign: 'center', margin: '20px 0'}}>
+  <svg width="140" height="140" viewBox="-55 -55 110 110" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <path id="felie" d="M 0 0 L 50 0 A 50 50 0 0 1 25 43.3 Z" stroke="#e65100" strokeWidth="2" />
+    </defs>
+    <g transform="rotate(-90)">
+      <use href="#felie" fill="#ffcc80" />
+      <use href="#felie" transform="rotate(60)" fill="#ffcc80" />
+      <use href="#felie" transform="rotate(120)" fill="#ffcc80" />
+      <use href="#felie" transform="rotate(180)" fill="#ffcc80" />
+      <use href="#felie" transform="rotate(240)" fill="#ffcc80" />
+      <use href="#felie" transform="rotate(300)" fill="#FF6B6B" />
+    </g>
+  </svg>
+</div>
+
+<Katex>
+{String.raw`\text{felia mâncată} = \color{#FF6B6B}{\dfrac{1}{6}}`}
+</Katex>
+
+**Care fracție este cea mai mare?**
+
+<Katex>
+{String.raw`\dfrac{1}{6} \qquad \dfrac{2}{5} \qquad \dfrac{3}{4}`}
+</Katex>
+
+**Pasul 1: comparăm primele două fracții.** Numitorul comun pentru 6 și 5 este 30.
+
+<Katex>
+{String.raw`{}^{5)}\dfrac{1}{6} = \dfrac{5}{30} \qquad {}^{6)}\dfrac{2}{5} = \dfrac{12}{30} \qquad \Rightarrow \quad \color{#FF6B6B}{\dfrac{1}{6} < \dfrac{2}{5}}`}
+</Katex>
+
+**Pasul 2: comparăm fracția mai mare cu a treia.** Numitorul comun pentru 5 și 4 este 20.
+
+<Katex>
+{String.raw`{}^{4)}\dfrac{2}{5} = \dfrac{8}{20} \qquad {}^{5)}\dfrac{3}{4} = \dfrac{15}{20} \qquad \Rightarrow \quad \color{#4ECDC4}{\dfrac{2}{5} < \dfrac{3}{4}}`}
+</Katex>
+
+**Pasul 3: scriem ordinea crescătoare.**
+
+<Katex>
+{String.raw`\color{#9370DB}{\dfrac{1}{6} < \dfrac{2}{5} < \dfrac{3}{4}}`}
+</Katex>
+
+:::warning Atenție
+Comparăm **<HighlightText color="red">numărătorii</HighlightText>** numai după ce fracțiile au **<HighlightText color="teal">același numitor</HighlightText>**.
+:::
+
+---
+
+## <span style={{backgroundColor: '#FF8C00', color: 'white', padding: '4px 8px', borderRadius: '4px'}}>Exersează!</span>
+
+:::note
+Ordonează crescător fracțiile. Folosește pașii 1, 2, 3 din problema rezolvată.
+:::
+
+**a)**
+<Katex>
+{String.raw`\dfrac{1}{2} \qquad \dfrac{1}{3} \qquad \dfrac{1}{5}`}
+</Katex>
+
+**b)**
+<Katex>
+{String.raw`\dfrac{1}{3} \qquad \dfrac{1}{4} \qquad \dfrac{1}{5}`}
+</Katex>
+
+**c)**
+<Katex>
+{String.raw`\dfrac{1}{10} \qquad \dfrac{1}{15} \qquad \dfrac{3}{20}`}
+</Katex>
+
+---

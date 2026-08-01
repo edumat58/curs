@@ -1,24 +1,26 @@
 /**
- * Evaluare tipărită, făcută din automatismele unui capitol.
+ * Test tipărit, făcut din automatismele unui capitol.
  *
  * Automatismele se lucrează pe ecran, cu corectură imediată — bun pentru
- * antrenament, inutil pentru o notă. Profesorul are nevoie de foaie: cu nume,
- * cu punctaj, cu loc de scris rezolvarea. Componenta asta ia aceleași
- * generatoare, trage la sorți câte întrebări s-au cerut și le așază în forma
- * lucrării de la clasă.
+ * antrenament, inutil pentru o notă. Profesorul are nevoie de foaie. Componenta
+ * ia aceleași generatoare, trage la sorți câte întrebări s-au cerut și le așază
+ * în forma testelor din catalogul profesorului.
  *
- * Formatul îl copiază pe cel al testelor scrise deja de profesor (vezi
- * `docs/c5/modul-5/testm4-5.mdx`): antet cu nume, condițiile de lucru, grila de
- * notare pentru evaluator, subiecte marcate, exerciții cu punctaj. Nu inventăm
- * un format nou — un test care arată altfel decât celelalte se corectează mai
- * greu și arată a temă generată de calculator.
+ * Forma NU e inventată aici: e șablonul din `teste/template.mdx`, urmat bucată
+ * cu bucată — antetul cu Nume/Prenume pe linii de completat, cele patru
+ * condiții de lucru, caseta „Nu completați!" pentru evaluator, grila de notare
+ * cu subiectele I/II/III (35+30+15 = 80, plus 20 din oficiu), calificativele pe
+ * capitole cu N|S|B|E, legenda, subiectele cu bandă portocalie #e65100,
+ * exercițiile cu subpuncte a), b), c) și formula de punctaj în titlu, banda
+ * „SFÂRȘIT TEST" la coadă. Un test care arată altfel decât celelalte ale
+ * profesorului se corectează mai greu și miroase a generat.
  *
- * Tipărirea folosește dialogul browserului, nu o bibliotecă de PDF. Din el se
- * salvează PDF pe orice sistem, se alege imprimanta și se vede exact ce iese pe
- * hârtie — iar noi nu ducem în pagină un megabyte de cod ca să redesenăm ce
- * știe deja să facă browserul.
+ * Tipărirea folosește dialogul browserului: de acolo se salvează PDF pe orice
+ * sistem și se vede exact ce iese pe hârtie. Caseta pentru evaluator promite că
+ * „testul începe de pe pagina următoare" — la tipărire, promisiunea se ține
+ * printr-o rupere de pagină înainte de Subiectul I.
  */
-import React, { useCallback, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import katex from 'katex';
 
 import { REGISTRY } from './generators';
@@ -26,12 +28,16 @@ import styles from './evaluare.module.css';
 
 const CANTITATI = [5, 10, 15, 20, 25, 30];
 
-/** Punctajul din oficiu, ca la lucrările din clasă. */
+/** Punctajul din oficiu și împărțirea pe subiecte, ca în șablonul testelor. */
 const OFICIU = 20;
-const DE_LUCRU = 100 - OFICIU;
+const TOTALURI = { 1: [80], 2: [45, 35], 3: [35, 30, 15] };
 
 const NUME_CLASA = { 5: 'a V-a', 6: 'a VI-a', 7: 'a VII-a', 8: 'a VIII-a' };
 const NUMERAL = ['I', 'al II-lea', 'al III-lea'];
+const LITERE = 'abcdefghij';
+
+/** Timpul de lucru crește cu testul, în trepte de manual. */
+const MINUTE = { 5: 20, 10: 30, 15: 40, 20: 45, 25: 50, 30: 50 };
 
 function escapeHtml(s) {
   return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -47,62 +53,92 @@ function bogat(text) {
     .join('');
 }
 
-/**
- * Împarte punctele pe întrebări, în așa fel încât suma să dea exact 80.
- *
- * Împărțirea simplă lasă rest: 80 la 30 de întrebări dă 2,66. Rotunjirea la
- * fiecare întrebare ar duce la un total care nu mai e 80, iar grila de notare
- * n-ar mai închide. Dăm deci partea întreagă tuturor și împărțim restul, câte
- * un punct, primelor întrebări.
- */
-function impartePuncte(cate) {
-  const baza = Math.floor(DE_LUCRU / cate);
-  const rest = DE_LUCRU - baza * cate;
+/** `total` puncte pe `cate` întrebări, cu suma exactă — restul, câte unu, primelor. */
+function impartePuncte(total, cate) {
+  const baza = Math.floor(total / cate);
+  const rest = total - baza * cate;
   return Array.from({ length: cate }, (_, i) => baza + (i < rest ? 1 : 0));
 }
 
-/** Întrebările se așază în trei subiecte, ca în lucrările de la clasă. */
-function inSubiecte(intrebari) {
-  const cate = intrebari.length;
-  const grupe = cate <= 6 ? 2 : 3;
-  const marime = Math.ceil(cate / grupe);
-  const out = [];
-  for (let i = 0; i < cate; i += marime) out.push(intrebari.slice(i, i + marime));
-  return out;
+/**
+ * Construiește foaia: întrebările, grupate pe exerciții și subiecte.
+ *
+ * Un exercițiu = un automatism, cu întrebările lui ca subpuncte a), b), c) —
+ * așa arată și testele scrise de mână („Să se calculeze: a) … b) …"), nu ca
+ * treizeci de exerciții separate de câte un rând.
+ */
+function construiesteFoaie(cate, chei) {
+  // Câte întrebări primește fiecare automatism: se împart pe rând, ca niciunul
+  // să nu domine testul.
+  const ordinea = [...chei].sort(() => Math.random() - 0.5);
+  const cateDe = new Map(ordinea.map((k) => [k, 0]));
+  for (let i = 0; i < cate; i += 1) {
+    const k = ordinea[i % ordinea.length];
+    cateDe.set(k, cateDe.get(k) + 1);
+  }
+
+  const exercitii = ordinea
+    .filter((k) => cateDe.get(k) > 0)
+    .map((k) => ({
+      cheie: k,
+      titlu: REGISTRY[k].title,
+      items: Array.from({ length: cateDe.get(k) }, () => REGISTRY[k].fn()),
+    }));
+
+  // Subiectele I/II/III taie ÎNTRE exerciții, cu numărul de întrebări cât mai
+  // aproape de proporția punctajelor (35/30/15).
+  const nSubiecte = Math.min(exercitii.length, 3);
+  const totaluri = TOTALURI[nSubiecte];
+  const subiecte = Array.from({ length: nSubiecte }, () => []);
+  let indice = 0;
+  let acoperit = 0;
+  const totalIntrebari = exercitii.reduce((s, e) => s + e.items.length, 0);
+  for (const ex of exercitii) {
+    const tintaCumulata = totaluri.slice(0, indice + 1).reduce((s, x) => s + x, 0) / 80;
+    if (indice < nSubiecte - 1 && acoperit / totalIntrebari >= tintaCumulata) indice += 1;
+    subiecte[indice].push(ex);
+    acoperit += ex.items.length;
+  }
+  // Un subiect nu rămâne gol: dacă tăierea a lăsat unul fără exerciții, se ia
+  // ultimul exercițiu al subiectului precedent.
+  for (let s = 1; s < nSubiecte; s += 1) {
+    if (subiecte[s].length === 0 && subiecte[s - 1].length > 1) {
+      subiecte[s].push(subiecte[s - 1].pop());
+    }
+  }
+
+  // Punctele: fiecare subiect își împarte totalul pe întrebările lui.
+  const cuPuncte = subiecte.map((exs, s) => {
+    const items = exs.reduce((sum, e) => sum + e.items.length, 0);
+    const puncte = impartePuncte(totaluri[s], items);
+    let i = 0;
+    return {
+      total: totaluri[s],
+      exercitii: exs.map((e) => ({
+        ...e,
+        puncte: e.items.map(() => puncte[i++]),
+      })),
+    };
+  });
+
+  return cuPuncte;
 }
 
 export default function Evaluare({ capitol, clasa, automatisme }) {
   const [cate, setCate] = useState(10);
   const [cuBarem, setCuBarem] = useState(false);
   const [foaie, setFoaie] = useState(null);
-  const zonaDeTiparit = useRef(null);
 
-  const chei = useMemo(
-    () => automatisme.filter((k) => REGISTRY[k]),
-    [automatisme]
-  );
+  const chei = useMemo(() => automatisme.filter((k) => REGISTRY[k]), [automatisme]);
 
   const pregateste = useCallback(() => {
-    // Trecem prin toate automatismele capitolului înainte să repetăm unul:
-    // altfel, la 30 de întrebări dintr-un capitol cu patru automatisme, sorții
-    // ar putea da de cinci ori la rând aceeași procedură.
-    const intrebari = [];
-    let rezerva = [];
-    while (intrebari.length < cate) {
-      if (rezerva.length === 0) {
-        rezerva = [...chei].sort(() => Math.random() - 0.5);
-      }
-      const cheie = rezerva.pop();
-      intrebari.push({ cheie, titlu: REGISTRY[cheie].title, q: REGISTRY[cheie].fn() });
-    }
-    const puncte = impartePuncte(cate);
-    setFoaie({ intrebari: intrebari.map((x, i) => ({ ...x, puncte: puncte[i] })), cuBarem });
+    setFoaie({ subiecte: construiesteFoaie(cate, chei), cuBarem, cate });
   }, [cate, cuBarem, chei]);
 
   const tipareste = useCallback(() => {
     pregateste();
-    // Așteptăm o pictare, ca foaia să existe în pagină când se deschide
-    // dialogul; altfel s-ar tipări o coală goală.
+    // Foaia trebuie să existe în pagină când se deschide dialogul; altfel s-ar
+    // tipări o coală goală.
     requestAnimationFrame(() => requestAnimationFrame(() => window.print()));
   }, [pregateste]);
 
@@ -110,12 +146,12 @@ export default function Evaluare({ capitol, clasa, automatisme }) {
 
   return (
     <>
-      <section className={styles.panou} aria-label={`Evaluare tipărită — ${capitol}`}>
+      <section className={styles.panou} aria-label={`Test tipărit — ${capitol}`}>
         <div className={styles.panouText}>
-          <h3 className={styles.panouTitlu}>Evaluare tipărită</h3>
+          <h3 className={styles.panouTitlu}>Test tipărit</h3>
           <p className={styles.panouNota}>
-            Trage la sorți întrebări din acest capitol și le așază în forma unei
-            lucrări de clasă, gata de tipărit sau de salvat ca PDF.
+            Trage la sorți întrebări din acest capitol și le așază în forma
+            testelor de clasă, gata de tipărit sau de salvat ca PDF.
           </p>
         </div>
 
@@ -142,7 +178,7 @@ export default function Evaluare({ capitol, clasa, automatisme }) {
             checked={cuBarem}
             onChange={(e) => setCuBarem(e.target.checked)}
           />
-          <span>Adaugă baremul la sfârșit</span>
+          <span>Adaugă baremul la sfârșit, pe pagină separată</span>
         </label>
 
         <div className={styles.actiuni}>
@@ -156,137 +192,229 @@ export default function Evaluare({ capitol, clasa, automatisme }) {
 
         {foaie && (
           <p className={styles.confirmare}>
-            Lucrarea e pregătită, mai jos. Apasă din nou <strong>Tipărește</strong> ca
-            s-o trimiți la imprimantă sau s-o salvezi ca PDF.
+            Testul e pregătit, mai jos. Apasă din nou <strong>Tipărește</strong> ca
+            să-l trimiți la imprimantă sau să-l salvezi ca PDF.
           </p>
         )}
       </section>
 
       {foaie && (
-        <div className={styles.foaie} ref={zonaDeTiparit} data-evaluare-tiparita>
-          <FoaieEvaluare capitol={capitol} clasa={clasa} {...foaie} />
+        <div className={styles.foaie} data-evaluare-tiparita>
+          <FoaieTest capitol={capitol} clasa={clasa} {...foaie} />
         </div>
       )}
     </>
   );
 }
 
-/** Foaia propriu-zisă — ce ajunge pe hârtie. */
-function FoaieEvaluare({ capitol, clasa, intrebari, cuBarem }) {
-  const subiecte = inSubiecte(intrebari);
-  let numar = 0;
+/** Foaia propriu-zisă — urmează `teste/template.mdx`, bucată cu bucată. */
+function FoaieTest({ capitol, clasa, subiecte, cuBarem, cate }) {
+  const toateExercitiile = subiecte.flatMap((s) => s.exercitii);
 
   return (
     <article className={styles.coala}>
-      <header className={styles.antet}>
-        <h1 className={styles.titlu}>Evaluare — {capitol}</h1>
-        <p className={styles.subtitlu}>Matematică · Clasa {NUME_CLASA[clasa]}</p>
+      {/* ── antetul, ca în șablon ── */}
+      <h1 className={styles.titlu}>Test Clasa {NUME_CLASA[clasa]} — {capitol}</h1>
 
-        <div className={styles.identitate}>
-          <span>Nume și prenume: <span className={styles.linieScris} /></span>
-          <span>Data: <span className={styles.linieScurta} /></span>
+      <p className={styles.identitate}>
+        <strong>Nume:</strong><br />
+        <span className={styles.linieScris} /><br />
+        <strong>Prenume:</strong><br />
+        <span className={styles.linieScris} />
+      </p>
+
+      <ul className={styles.conditii}>
+        <li>Toate subiectele sunt obligatorii</li>
+        <li>Timpul efectiv de lucru este de <strong>{MINUTE[cate] || 50} de minute</strong></li>
+        <li>Utilizarea instrumentelor de geometrie este <strong>permisă și recomandată</strong></li>
+        <li>Se acordă <strong>{OFICIU} puncte</strong> din oficiu</li>
+      </ul>
+
+      <hr className={styles.linie} />
+
+      <aside className={styles.avertisment}>
+        <p className={styles.avertismentTitlu}>Nu completați!</p>
+        <p>Rubrica aceasta se completează <strong>doar de profesorul evaluator</strong>!</p>
+        <p><strong>Testul începe de pe pagina următoare.</strong></p>
+      </aside>
+
+      <div className={styles.coloane}>
+        <div className={styles.coloanaGrila}>
+          <h2 className={styles.subtitluAntet}>Grila de notare</h2>
+          <table className={styles.grila}>
+            <thead>
+              <tr><th>Subiect</th><th>Punctaj total</th><th>Punctaj obținut</th></tr>
+            </thead>
+            <tbody>
+              {subiecte.map((s, i) => (
+                <tr key={i}><td>{['I', 'II', 'III'][i]}</td><td>{s.total}</td><td /></tr>
+              ))}
+              <tr><td>Total</td><td>{subiecte.reduce((x, s) => x + s.total, 0)}</td><td /></tr>
+              <tr><td>Oficiu</td><td>{OFICIU}</td><td>{OFICIU}</td></tr>
+            </tbody>
+          </table>
         </div>
 
-        <ul className={styles.conditii}>
-          <li>Toate subiectele sunt obligatorii.</li>
-          <li>Se acordă <strong>{OFICIU} de puncte</strong> din oficiu.</li>
-          <li>Se scrie rezolvarea, nu doar rezultatul.</li>
-        </ul>
+        <div className={styles.coloanaCalificative}>
+          <h2 className={styles.subtitluAntet}>Calificativ capitole incluse</h2>
+          <hr className={styles.linie} />
+          {toateExercitiile.map((e) => (
+            <div className={styles.calificativ} key={e.cheie}>
+              <p className={styles.calificativNume}><em>{e.titlu}</em></p>
+              <p className={styles.calificativCasete}>
+                {['N', 'S', 'B', 'E'].map((litera, i) => (
+                  <span key={litera}>
+                    <input type="checkbox" readOnly value={litera} /> {litera}
+                    {i < 3 ? ' | ' : ''}
+                  </span>
+                ))}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
 
-        <table className={styles.grila}>
-          <caption className={styles.grilaTitlu}>
-            Grila de notare — se completează de profesorul evaluator
-          </caption>
-          <thead>
-            <tr><th>Subiect</th><th>Punctaj total</th><th>Punctaj obținut</th></tr>
-          </thead>
-          <tbody>
-            {subiecte.map((grup, i) => (
-              <tr key={i}>
-                <td>{NUMERAL[i]}</td>
-                <td>{grup.reduce((s, x) => s + x.puncte, 0)}</td>
-                <td />
-              </tr>
-            ))}
-            <tr><td>Oficiu</td><td>{OFICIU}</td><td>{OFICIU}</td></tr>
-            <tr className={styles.grilaTotal}><td>Total</td><td>100</td><td /></tr>
-          </tbody>
-        </table>
-      </header>
+      <blockquote className={styles.legenda}>
+        <p>Legendă:</p>
+        <p><strong>N - Nesatisfăcător | S - Satisfăcător | B - Bine | E - Excelent</strong></p>
+      </blockquote>
 
-      {subiecte.map((grup, i) => (
-        <section key={i} className={styles.subiect}>
-          <h2 className={styles.subiectTitlu}>
-            Subiectul {NUMERAL[i]} — {grup.reduce((s, x) => s + x.puncte, 0)} puncte
-          </h2>
-          {grup.map((item) => {
-            numar += 1;
-            return <Exercitiu key={numar} numar={numar} {...item} />;
-          })}
-        </section>
-      ))}
+      <hr className={styles.linie} />
+
+      {/* ── subiectele — de pe pagina următoare, cum promite caseta ── */}
+      {subiecte.map((subiect, s) => {
+        let numarExercitiu = 0;
+        return (
+          <section key={s} className={s === 0 ? styles.subiectPrim : styles.subiect}>
+            <h2 className={styles.banda}>
+              Subiectul {NUMERAL[s]} - {subiect.total} puncte
+            </h2>
+            {subiect.exercitii.map((ex) => {
+              numarExercitiu += 1;
+              return (
+                <Exercitiu
+                  key={ex.cheie}
+                  numar={numarExercitiu}
+                  exercitiu={ex}
+                />
+              );
+            })}
+          </section>
+        );
+      })}
+
+      <h2 className={styles.banda}>SFÂRȘIT TEST</h2>
 
       {cuBarem && (
         <section className={styles.baremFoaie}>
-          <h2 className={styles.subiectTitlu}>Barem de corectare</h2>
+          <h2 className={styles.banda}>Barem de corectare</h2>
           <p className={styles.baremNota}>
-            Această pagină este pentru profesor. Nu se distribuie elevilor.
+            Pagina aceasta este pentru profesor. Nu se distribuie elevilor.
           </p>
-          <ol className={styles.baremLista}>
-            {intrebari.map((item, i) => (
-              <li key={i}>
-                <span className={styles.baremRaspuns}>
-                  {item.q.blanks.map((b) => `${b.label}: ${b.answer}`).join(' · ')}
-                </span>
-              </li>
-            ))}
-          </ol>
+          {subiecte.map((subiect, s) => (
+            <div key={s}>
+              <p className={styles.baremSubiect}>Subiectul {NUMERAL[s]}</p>
+              <ol className={styles.baremLista}>
+                {subiect.exercitii.map((ex) => (
+                  <li key={ex.cheie}>
+                    {ex.items.map((q, i) => (
+                      <span key={i} className={styles.baremRaspuns}>
+                        {LITERE[i]}) {q.blanks.map((b) => `${b.label}: ${b.answer}`).join('; ')}
+                        {i < ex.items.length - 1 ? ' · ' : ''}
+                      </span>
+                    ))}
+                  </li>
+                ))}
+              </ol>
+            </div>
+          ))}
         </section>
       )}
     </article>
   );
 }
 
-/** Un exercițiu: cerința, enunțul și spațiul de rezolvare. */
-function Exercitiu({ numar, titlu, puncte, q }) {
+/**
+ * Titlul exercițiului poartă formula de punctaj, ca în testele scrise de mână:
+ * „(3x5p = 15p)" când subpunctele valorează la fel, „(16p)" când nu.
+ */
+function formulaPunctaj(puncte) {
+  const total = puncte.reduce((s, p) => s + p, 0);
+  const uniform = puncte.every((p) => p === puncte[0]);
+  if (uniform && puncte.length > 1) return `(${puncte.length}x${puncte[0]}p = ${total}p)`;
+  return `(${total}p)`;
+}
+
+/** Un exercițiu: cerința în casetă, subpunctele a), b), c) și loc de rezolvare. */
+function Exercitiu({ numar, exercitiu }) {
+  const { items, puncte } = exercitiu;
+
+  // Cerința comună: dacă toate subpunctele sunt calcule pure (doar formulă),
+  // enunțul devine „Să se calculeze:", ca în testele profesorului.
+  const doarCalcule = items.every((q) => q.prompt.latex && !q.prompt.text && !q.prompt.svg);
+
   return (
     <div className={styles.exercitiu}>
       <h3 className={styles.exercitiuTitlu}>
-        <span>Exercițiul {numar}</span>
-        <span className={styles.puncte}>{puncte}p</span>
+        Exercițiul {numar} <strong>{formulaPunctaj(puncte)}</strong>
       </h3>
 
       <div className={styles.cerinta}>
-        {q.prompt.text && (
-          <p
-            className={styles.enunt}
-            dangerouslySetInnerHTML={{ __html: bogat(q.prompt.text) }}
-          />
-        )}
-        {q.prompt.latex && (
-          <p
-            className={styles.enuntMath}
-            dangerouslySetInnerHTML={{
-              __html: katex.renderToString(q.prompt.latex, { throwOnError: false, displayMode: true }),
-            }}
-          />
-        )}
-        {q.prompt.svg && (
-          <div className={styles.figura} dangerouslySetInnerHTML={{ __html: q.prompt.svg }} />
-        )}
-
-        {/* Ce anume se cere — aceleași etichete ca pe ecran, ca elevul care s-a
-            antrenat online să recunoască sarcina. */}
-        <ul className={styles.cerute}>
-          {q.blanks.map((b, i) => (
-            <li key={i}>
-              {b.label}: <span className={styles.linieRaspuns} />
+        {doarCalcule && <p className={styles.enunt}>Să se calculeze:</p>}
+        <ol className={styles.subpuncte} type="a">
+          {items.map((q, i) => (
+            <li key={i} className={styles.subpunct}>
+              {q.prompt.text && (
+                <span dangerouslySetInnerHTML={{ __html: bogat(q.prompt.text) }} />
+              )}
+              {q.prompt.latex && (
+                <span
+                  className={styles.formula}
+                  dangerouslySetInnerHTML={{
+                    __html: katex.renderToString(q.prompt.latex, { throwOnError: false }),
+                  }}
+                />
+              )}
+              {q.prompt.svg && (
+                <span
+                  className={styles.figura}
+                  dangerouslySetInnerHTML={{ __html: q.prompt.svg }}
+                />
+              )}
+              <CerintaSuplimentara blanks={q.blanks} />
             </li>
           ))}
-        </ul>
+        </ol>
       </div>
 
       <div className={styles.spatiu} aria-hidden="true" />
     </div>
+  );
+}
+
+/**
+ * Ce se cere, când nu reiese din enunț: la alegeri se încercuiește, la
+ * răspunsuri multiple se numesc. „Rezultatul" singur nu se mai spune — la un
+ * calcul scris pe foaie, ce se cere e evident.
+ */
+function CerintaSuplimentara({ blanks }) {
+  const alegeri = blanks.filter((b) => b.kind === 'choice');
+  const numite = blanks.filter((b) => b.kind !== 'choice' && b.label !== 'Rezultatul');
+
+  if (alegeri.length === 0 && numite.length <= 1) return null;
+
+  return (
+    <span className={styles.seCere}>
+      {alegeri.map((b, i) => (
+        <span key={`c${i}`}>
+          {' '}Încercuiește răspunsul corect: <strong>{b.options.join(' / ')}</strong>.
+        </span>
+      ))}
+      {numite.length > 1 && (
+        <span>
+          {' '}Se cer: {numite.map((b) => b.label.toLowerCase()).join(' și ')}.
+        </span>
+      )}
+    </span>
   );
 }

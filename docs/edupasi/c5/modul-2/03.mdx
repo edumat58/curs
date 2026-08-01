@@ -1,0 +1,309 @@
+---
+sidebar_position: 3
+slug: /edupasi/c5/modul-2/03
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C15.3 - Metoda figurativă
+
+---
+
+## Definiție
+
+:::danger Definiție
+**<HighlightText color="red">Metoda figurativă</HighlightText>** este metoda prin care desenăm numerele din problemă prin **<HighlightText color="teal">segmente</HighlightText>**.
+
+Segmentele egale se numesc **<HighlightText color="teal">părți egale</HighlightText>**.
+
+Folosim metoda figurativă când cunoaștem:
+
+- **suma și diferența** numerelor;
+- **suma și câtul** numerelor;
+- **diferența și câtul** numerelor.
+:::
+
+:::tip De reținut
+Pașii metodei figurative:
+
+1. Desenăm numerele prin segmente.
+2. Numărăm părțile egale.
+3. Aflăm cât valorează o parte.
+4. Aflăm fiecare număr.
+:::
+
+---
+
+## Exemple
+
+---
+
+> Exemplul 1 — Cunoaștem **suma și diferența**
+
+:::note Problema:
+Oana are 87 de baloane: roșii și verzi.
+Baloanele roșii sunt cu 17 mai multe decât cele verzi.
+Câte baloane de fiecare fel are Oana?
+:::
+
+#### Rezolvare:
+
+Suma este 87. Diferența este 17.
+
+**Pasul 1.** Desenăm baloanele verzi printr-un segment.
+Baloanele roșii au același segment și încă o bucată de 17.
+
+<svg viewBox="0 0 400 130" width="100%" height="130" style={{maxWidth: '400px', border: '1px solid #ccc', borderRadius: '8px'}}>
+  <text x="10" y="42" fontSize="16" fontFamily="sans-serif">Verzi</text>
+  <rect x="80" y="27" width="180" height="24" fill="none" stroke="#4ECDC4" strokeWidth="3" />
+  <text x="170" y="20" textAnchor="middle" fontSize="14" fontFamily="sans-serif">1 parte</text>
+
+  <text x="10" y="102" fontSize="16" fontFamily="sans-serif">Roșii</text>
+  <rect x="80" y="87" width="180" height="24" fill="none" stroke="#FF6B6B" strokeWidth="3" />
+  <rect x="260" y="87" width="70" height="24" fill="none" stroke="#FF6B6B" strokeWidth="3" strokeDasharray="5 4" />
+  <text x="170" y="80" textAnchor="middle" fontSize="14" fontFamily="sans-serif">1 parte</text>
+  <text x="295" y="80" textAnchor="middle" fontSize="14" fontFamily="sans-serif">+17</text>
+</svg>
+
+**Pasul 2.** Scoatem bucata de 17 din sumă:
+
+<Katex>
+{String.raw`
+87 - 17 = 70
+`}
+</Katex>
+
+**Pasul 3.** Au rămas 2 părți egale. Aflăm o parte:
+
+<Katex>
+{String.raw`
+70 : 2 = 35
+`}
+</Katex>
+
+**Pasul 4.** Aflăm fiecare număr:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{baloane verzi} = \color{#4ECDC4}{35}\\[6pt]
+& \text{baloane roșii} = 35 + 17 = \color{#FF6B6B}{52}
+\end{aligned}
+`}
+</Katex>
+
+Verificăm: <Katex>{String.raw`35 + 52 = 87`}</Katex>
+
+**R:** 35 baloane verzi, 52 baloane roșii.
+
+:::warning Atenție
+Întâi **<HighlightText color="red">scădem bucata în plus</HighlightText>** din sumă.
+Abia apoi **<HighlightText color="teal">împărțim</HighlightText>** la numărul de părți egale.
+:::
+
+---
+
+> Exemplul 2 — Cunoaștem **suma și câtul**
+
+:::note Problema:
+Suma a trei numere este 96.
+Primul număr este de 2 ori mai mare decât al doilea.
+Al treilea număr este de 5 ori mai mare decât al doilea.
+Aflați numerele.
+:::
+
+#### Rezolvare:
+
+**Pasul 1.** Desenăm numerele:
+
+- al doilea număr = 1 parte;
+- primul număr = 2 părți;
+- al treilea număr = 5 părți.
+
+<svg viewBox="0 0 400 200" width="100%" height="200" style={{maxWidth: '400px', border: '1px solid #ccc', borderRadius: '8px'}}>
+  <text x="10" y="42" fontSize="16" fontFamily="sans-serif">Al doilea</text>
+  <rect x="110" y="27" width="44" height="24" fill="none" stroke="#4ECDC4" strokeWidth="3" />
+  <text x="132" y="20" textAnchor="middle" fontSize="14" fontFamily="sans-serif">1 parte</text>
+
+  <text x="10" y="107" fontSize="16" fontFamily="sans-serif">Primul</text>
+  <rect x="110" y="92" width="44" height="24" fill="none" stroke="#FF6B6B" strokeWidth="3" />
+  <rect x="154" y="92" width="44" height="24" fill="none" stroke="#FF6B6B" strokeWidth="3" />
+  <text x="154" y="85" textAnchor="middle" fontSize="14" fontFamily="sans-serif">2 părți</text>
+
+  <text x="10" y="172" fontSize="16" fontFamily="sans-serif">Al treilea</text>
+  <rect x="110" y="157" width="44" height="24" fill="none" stroke="#FF8C00" strokeWidth="3" />
+  <rect x="154" y="157" width="44" height="24" fill="none" stroke="#FF8C00" strokeWidth="3" />
+  <rect x="198" y="157" width="44" height="24" fill="none" stroke="#FF8C00" strokeWidth="3" />
+  <rect x="242" y="157" width="44" height="24" fill="none" stroke="#FF8C00" strokeWidth="3" />
+  <rect x="286" y="157" width="44" height="24" fill="none" stroke="#FF8C00" strokeWidth="3" />
+  <text x="220" y="150" textAnchor="middle" fontSize="14" fontFamily="sans-serif">5 părți</text>
+</svg>
+
+**Pasul 2.** Numărăm părțile egale:
+
+<Katex>
+{String.raw`
+1 + 2 + 5 = 8 \ \text{părți}
+`}
+</Katex>
+
+**Pasul 3.** Aflăm o parte:
+
+<Katex>
+{String.raw`
+96 : 8 = 12
+`}
+</Katex>
+
+**Pasul 4.** Aflăm fiecare număr:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{primul} = 2 \times 12 = \color{#FF6B6B}{24}\\[6pt]
+& \text{al doilea} = \color{#4ECDC4}{12}\\[6pt]
+& \text{al treilea} = 5 \times 12 = \color{#FF8C00}{60}
+\end{aligned}
+`}
+</Katex>
+
+Verificăm: <Katex>{String.raw`24 + 12 + 60 = 96`}</Katex>
+
+**R:** Numerele sunt 24, 12 și 60.
+
+---
+
+> Exemplul 3 — Cunoaștem **diferența și câtul**
+
+:::note Problema:
+Tatăl este de 3 ori mai în vârstă decât fiul.
+Tatăl este cu 28 de ani mai în vârstă decât fiul.
+Ce vârstă are fiecare?
+:::
+
+#### Rezolvare:
+
+**Pasul 1.** Desenăm vârstele:
+
+<Katex>
+{String.raw`
+\text{fiul} = \color{#4ECDC4}{1 \ \text{parte}}, \quad \text{tatăl} = \color{#9370DB}{3 \ \text{părți}}
+`}
+</Katex>
+
+**Pasul 2.** Diferența este de 2 părți. Cele 2 părți valorează 28:
+
+<Katex>
+{String.raw`
+3 - 1 = 2 \ \text{părți} \to 28
+`}
+</Katex>
+
+**Pasul 3.** Aflăm o parte:
+
+<Katex>
+{String.raw`
+28 : 2 = 14
+`}
+</Katex>
+
+**Pasul 4.** Aflăm fiecare vârstă:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{fiul} = \color{#4ECDC4}{14} \ \text{ani}\\[6pt]
+& \text{tatăl} = 3 \times 14 = \color{#9370DB}{42} \ \text{ani}
+\end{aligned}
+`}
+</Katex>
+
+Verificăm: <Katex>{String.raw`42 - 14 = 28`}</Katex>
+
+**R:** Fiul are 14 ani, tatăl are 42 de ani.
+
+---
+
+> Exemplul 4 — Folosim **împărțirea cu rest**
+
+:::note Problema:
+Suma a trei numere este 92.
+Împărțim al doilea număr la primul: obținem câtul 2 și restul 5.
+Al treilea număr este de 2 ori mai mare decât al doilea.
+Aflați numerele.
+:::
+
+#### Rezolvare:
+
+**Pasul 1.** Scriem numerele cu ajutorul primului.
+
+Din teorema împărțirii cu rest: deîmpărțitul = împărțitorul <Katex>{String.raw`\times`}</Katex> câtul + restul.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{al doilea} = 2 \times \text{primul} + 5\\[6pt]
+& \text{al treilea} = 2 \times \text{al doilea} = 4 \times \text{primul} + 10
+\end{aligned}
+`}
+</Katex>
+
+Desenăm numerele:
+
+<svg viewBox="0 0 400 200" width="100%" height="200" style={{maxWidth: '400px', border: '1px solid #ccc', borderRadius: '8px'}}>
+  <text x="10" y="42" fontSize="16" fontFamily="sans-serif">Primul</text>
+  <rect x="110" y="27" width="44" height="24" fill="none" stroke="#4ECDC4" strokeWidth="3" />
+  <text x="132" y="20" textAnchor="middle" fontSize="14" fontFamily="sans-serif">1 parte</text>
+
+  <text x="10" y="107" fontSize="16" fontFamily="sans-serif">Al doilea</text>
+  <rect x="110" y="92" width="44" height="24" fill="none" stroke="#FF6B6B" strokeWidth="3" />
+  <rect x="154" y="92" width="44" height="24" fill="none" stroke="#FF6B6B" strokeWidth="3" />
+  <rect x="198" y="92" width="40" height="24" fill="none" stroke="#FF6B6B" strokeWidth="3" strokeDasharray="5 4" />
+  <text x="154" y="85" textAnchor="middle" fontSize="14" fontFamily="sans-serif">2 părți</text>
+  <text x="218" y="85" textAnchor="middle" fontSize="14" fontFamily="sans-serif">+5</text>
+
+  <text x="10" y="172" fontSize="16" fontFamily="sans-serif">Al treilea</text>
+  <rect x="110" y="157" width="44" height="24" fill="none" stroke="#FF8C00" strokeWidth="3" />
+  <rect x="154" y="157" width="44" height="24" fill="none" stroke="#FF8C00" strokeWidth="3" />
+  <rect x="198" y="157" width="44" height="24" fill="none" stroke="#FF8C00" strokeWidth="3" />
+  <rect x="242" y="157" width="44" height="24" fill="none" stroke="#FF8C00" strokeWidth="3" />
+  <rect x="286" y="157" width="40" height="24" fill="none" stroke="#FF8C00" strokeWidth="3" strokeDasharray="5 4" />
+  <text x="198" y="150" textAnchor="middle" fontSize="14" fontFamily="sans-serif">4 părți</text>
+  <text x="306" y="150" textAnchor="middle" fontSize="14" fontFamily="sans-serif">+10</text>
+</svg>
+
+**Pasul 2.** Scoatem bucățile în plus din sumă:
+
+<Katex>
+{String.raw`
+92 - (5 + 10) = 92 - 15 = 77
+`}
+</Katex>
+
+**Pasul 3.** Numărăm părțile egale și aflăm o parte:
+
+<Katex>
+{String.raw`
+1 + 2 + 4 = 7 \ \text{părți}, \quad 77 : 7 = 11
+`}
+</Katex>
+
+**Pasul 4.** Aflăm fiecare număr:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{primul} = \color{#4ECDC4}{11}\\[6pt]
+& \text{al doilea} = 2 \times 11 + 5 = \color{#FF6B6B}{27}\\[6pt]
+& \text{al treilea} = 4 \times 11 + 10 = \color{#FF8C00}{54}
+\end{aligned}
+`}
+</Katex>
+
+Verificăm: <Katex>{String.raw`11 + 27 + 54 = 92`}</Katex>
+
+**R:** Numerele sunt 11, 27 și 54.
+
+---

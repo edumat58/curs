@@ -1,0 +1,109 @@
+---
+sidebar_position: 4
+slug: /edupasi/c5/modul-2/04
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C15.4 - Metoda mersului invers
+
+---
+
+## Definiție
+
+:::danger Definiție
+**<HighlightText color="red">Metoda mersului invers</HighlightText>** se folosește când un număr necunoscut trece prin mai multe operații și cunoaștem doar **<HighlightText color="teal">rezultatul final</HighlightText>**.
+
+Pornim de la rezultat și facem **<HighlightText color="orange">operațiile inverse</HighlightText>**, în **ordine inversă**, până ajungem la numărul de la început.
+:::
+
+:::tip De reținut
+Fiecare operație are o operație inversă:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#FF6B6B}{\text{adunarea } (+)} \; \longleftrightarrow \; \color{#4ECDC4}{\text{scăderea } (-)}\\[8pt]
+& \color{#9370DB}{\text{înmulțirea } (\times)} \; \longleftrightarrow \; \color{#FF8C00}{\text{împărțirea } (:)}
+\end{aligned}
+`}
+</Katex>
+:::
+
+**Exemplu:**
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& n + 3 = 10 \Rightarrow n = 10 \color{#4ECDC4}{\; - \;} 3 = 7\\[6pt]
+& n \times 4 = 20 \Rightarrow n = 20 \color{#FF8C00}{\; : \;} 4 = 5
+\end{aligned}
+`}
+</Katex>
+
+:::warning Atenție
+Pornim mereu de la **rezultatul final**. **<HighlightText color="red">Ultima operație</HighlightText>** din enunț este **<HighlightText color="teal">prima</HighlightText>** pe care o desfacem.
+:::
+
+---
+
+## Exemple
+
+> Exemplul 1
+
+:::note Problema:
+Antonia s-a gândit la un număr. L-a înmulțit cu 7. A adunat 11. A împărțit rezultatul la 5 și a obținut 19. La ce număr s-a gândit Antonia?
+:::
+
+Scriem pașii din enunț, în ordine. Numărul necunoscut este <Katex>{String.raw`n`}</Katex>.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: } n \times 7 = P\\[6pt]
+& \text{Pasul 2: } P + 11 = S\\[6pt]
+& \text{Pasul 3: } S : 5 = 19
+\end{aligned}
+`}
+</Katex>
+
+Mergem invers, de la ultimul pas spre primul. Calculăm pas cu pas:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{1. } S : 5 = 19 \Rightarrow S = 19 \color{#9370DB}{\; \times \;} 5 = 95\\[8pt]
+& \text{2. } P + 11 = 95 \Rightarrow P = 95 \color{#4ECDC4}{\; - \;} 11 = 84\\[8pt]
+& \text{3. } n \times 7 = 84 \Rightarrow n = 84 \color{#FF8C00}{\; : \;} 7 = 12
+\end{aligned}
+`}
+</Katex>
+
+**Verificare:** <Katex>{String.raw`12 \times 7 = 84; \quad 84 + 11 = 95; \quad 95 : 5 = 19`}</Katex>
+
+**R:** Numărul gândit este **12**.
+
+---
+
+> Exemplul 2
+
+:::note Problema:
+Numărul de angajați ai unei firme se dublează o dată la 5 ani. Firma are o vechime de 25 de ani. În prezent are 3 520 de angajați. Câți angajați erau la început?
+:::
+
+Dublarea înseamnă înmulțire cu 2. Operația inversă este împărțirea la 2.
+
+Mergem înapoi în timp, din 5 în 5 ani, și împărțim la 2 la fiecare pas:
+
+| Moment în timp | Număr angajați |
+|----------------|----------------|
+| În prezent | 3 520 |
+| Acum 5 ani | 3 520 : 2 = 1 760 |
+| Acum 10 ani | 1 760 : 2 = 880 |
+| Acum 15 ani | 880 : 2 = 440 |
+| Acum 20 ani | 440 : 2 = 220 |
+| Acum 25 ani (la început) | 220 : 2 = 110 |
+
+**R:** La început firma avea **110 angajați**.

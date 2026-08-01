@@ -1,0 +1,281 @@
+---
+sidebar_position: 10
+slug: /edupasi/c5/modul-1/10
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C8 - Proprietăți ale înmulțirii
+
+---
+
+:::danger Definiție
+Proprietățile înmulțirii:
+
+- **<HighlightText color="red">Comutativitatea</HighlightText>**: schimbăm ordinea factorilor, produsul rămâne la fel.
+- **<HighlightText color="teal">Asociativitatea</HighlightText>**: grupăm factorii oricum, produsul rămâne la fel.
+- **<HighlightText color="orange">Elementul neutru</HighlightText>**: înmulțirea cu 1 nu schimbă numărul.
+- **Înmulțirea cu 0**: orice număr înmulțit cu 0 dă 0.
+:::
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#FF6B6B}{a \cdot b = b \cdot a} \quad \to \quad 3 \cdot 5 = 5 \cdot 3 = 15\\[6pt]
+& \color{#4ECDC4}{(a \cdot b) \cdot c = a \cdot (b \cdot c)} \quad \to \quad (2 \cdot 3) \cdot 5 = 2 \cdot (3 \cdot 5) = 30\\[6pt]
+& \color{#FF8C00}{a \cdot 1 = a} \quad \to \quad 7 \cdot 1 = 7\\[6pt]
+& \color{#9370DB}{a \cdot 0 = 0} \quad \to \quad 7 \cdot 0 = 0
+\end{aligned}
+`}
+</Katex>
+
+---
+
+:::note Enunț
+Albert pregătește sosul pentru cina școlii.
+
+O rețetă folosește o cantitate de carne tocată:
+
+<Katex>
+{String.raw`\frac{2}{9} \text{ kg}`}
+</Katex>
+
+Albert prepară rețeta de **18 ori**. Câtă carne trebuie să cumpere?
+:::
+
+## Reprezentarea grafică
+
+Desenăm o bară pentru 1 kg. Bara are 9 părți egale. Colorăm 2 părți.
+
+<svg xmlns="http://www.w3.org/2000/svg" width="380" height="320" viewBox="0 0 380 320" role="img" aria-label="O bară de 1 kg împărțită în 9 părți egale; 2 părți sunt colorate">
+  <g transform="translate(40,20)">
+    <rect x="0" y="0" width="70" height="270" rx="4" ry="4" fill="none" stroke="#111" stroke-width="2"/>
+    <rect x="0" y="0" width="70" height="30" fill="#4ECDC4"/>
+    <rect x="0" y="30" width="70" height="30" fill="#4ECDC4"/>
+    <path d="M0 30 H70 M0 60 H70 M0 90 H70 M0 120 H70 M0 150 H70 M0 180 H70 M0 210 H70 M0 240 H70" stroke="#111" stroke-width="1.5"/>
+    <text x="95" y="42" font-size="22" fill="#4ECDC4">2 părți colorate</text>
+    <text x="95" y="72" font-size="22" fill="#111">din 9 părți egale</text>
+    <text x="95" y="150" font-size="22" fill="#111">Bara întreagă = 1 kg</text>
+  </g>
+</svg>
+
+Calculăm pas cu pas:
+
+1. O rețetă înseamnă 2 din 9 părți.
+2. Scriem înmulțirea: 18 rețete de câte 2 părți.
+3. Grupăm cu asociativitatea: înmulțim întâi 18 cu 2.
+4. Împărțim 36 la 9.
+
+<Katex>
+{String.raw`
+18 \cdot \frac{2}{9} = \color{#4ECDC4}{(18 \cdot 2)} \cdot \frac{1}{9} = \frac{36}{9} = 4
+`}
+</Katex>
+
+Albert cumpără **4 kg** de carne.
+
+---
+
+:::note Enunț
+Daniel construiește un pătrat din paie. O latură are **3,4 cm**.
+
+Determinăm perimetrul pătratului.
+:::
+
+:::tip De reținut
+Perimetrul pătratului = latura luată de 4 ori.
+
+<Katex>
+{String.raw`P = 3{,}4 + 3{,}4 + 3{,}4 + 3{,}4 = 4 \cdot 3{,}4`}
+</Katex>
+:::
+
+Estimăm întâi: 3,4 este aproape de 3, deci perimetrul este în jur de 12 cm.
+
+## Reprezentarea pe dreapta numerică
+
+Descompunem latura: 3,4 = 3 + 0,4.
+
+1. Facem 4 sărituri de câte 3. Ajungem la 12.
+2. Facem 4 sărituri de câte 0,4. Ele înseamnă 1,6.
+3. Ajungem la 13,6.
+
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="190" viewBox="0 0 640 190" role="img" aria-label="Dreaptă numerică: 4 sărituri de 3 până la 12, apoi 1,6 până la 13,6">
+  <g transform="translate(30,120)">
+    <line x1="0" y1="0" x2="580" y2="0" stroke="#111" stroke-width="3"/>
+    <path d="M580,-6 L580,6 L595,0 Z" fill="#111"/>
+    <line x1="0" y1="-8" x2="0" y2="8" stroke="#111" stroke-width="2"/>
+    <text x="-5" y="30" font-size="18" fill="#111">0</text>
+    <line x1="120" y1="-8" x2="120" y2="8" stroke="#111" stroke-width="2"/>
+    <text x="114" y="30" font-size="18" fill="#111">3</text>
+    <line x1="240" y1="-8" x2="240" y2="8" stroke="#111" stroke-width="2"/>
+    <text x="234" y="30" font-size="18" fill="#111">6</text>
+    <line x1="360" y1="-8" x2="360" y2="8" stroke="#111" stroke-width="2"/>
+    <text x="354" y="30" font-size="18" fill="#111">9</text>
+    <line x1="480" y1="-8" x2="480" y2="8" stroke="#111" stroke-width="2"/>
+    <text x="468" y="30" font-size="18" fill="#111">12</text>
+    <line x1="544" y1="-8" x2="544" y2="8" stroke="#9370DB" stroke-width="2"/>
+    <text x="522" y="30" font-size="18" fill="#9370DB">13,6</text>
+    <rect x="514" y="10" width="60" height="26" rx="4" ry="4" fill="none" stroke="#9370DB" stroke-width="2"/>
+    <path d="M0,0 Q60,-55 120,0" stroke="#4ECDC4" stroke-width="3" fill="none"/>
+    <text x="54" y="-38" font-size="18" fill="#4ECDC4">3</text>
+    <path d="M120,0 Q180,-55 240,0" stroke="#4ECDC4" stroke-width="3" fill="none"/>
+    <text x="174" y="-38" font-size="18" fill="#4ECDC4">3</text>
+    <path d="M240,0 Q300,-55 360,0" stroke="#4ECDC4" stroke-width="3" fill="none"/>
+    <text x="294" y="-38" font-size="18" fill="#4ECDC4">3</text>
+    <path d="M360,0 Q420,-55 480,0" stroke="#4ECDC4" stroke-width="3" fill="none"/>
+    <text x="414" y="-38" font-size="18" fill="#4ECDC4">3</text>
+    <path d="M480,0 Q512,-40 544,0" stroke="#9370DB" stroke-width="3" fill="none"/>
+    <text x="496" y="-42" font-size="18" fill="#9370DB">1,6</text>
+  </g>
+</svg>
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#4ECDC4}{3 + 3 + 3 + 3 = 12}\\[6pt]
+& \color{#9370DB}{0{,}4 + 0{,}4 + 0{,}4 + 0{,}4 = 1{,}6}\\[6pt]
+& 12 + 1{,}6 = 13{,}6
+\end{aligned}
+`}
+</Katex>
+
+Perimetrul pătratului este **13,6 cm**.
+
+---
+
+## Reprezentarea în bază 10
+
+Folosim materialele în bază 10: un **<HighlightText color="red">pătrat</HighlightText>** înseamnă 1, un **<HighlightText color="teal">bețișor</HighlightText>** înseamnă 0,1.
+
+1. O latură de 3,4 înseamnă 3 pătrate și 4 bețișoare.
+2. Pentru 4 laturi luăm 12 pătrate și 16 bețișoare.
+3. Regrupăm: 10 bețișoare formează 1 pătrat. Rămân 6 bețișoare.
+4. Obținem 13 pătrate și 6 bețișoare.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#FF6B6B}{4 \cdot 3 = 12 \text{ pătrate}} \qquad \color{#4ECDC4}{4 \cdot 4 = 16 \text{ bețișoare}}\\[6pt]
+& \color{#4ECDC4}{16 \text{ bețișoare}} = \color{#FF6B6B}{1 \text{ pătrat}} + \color{#4ECDC4}{6 \text{ bețișoare}}\\[6pt]
+& \color{#FF6B6B}{13} \text{ întregi și } \color{#4ECDC4}{6} \text{ zecimi} = \color{#FF6B6B}{13}\color{#4ECDC4}{{,}6}
+\end{aligned}
+`}
+</Katex>
+
+### Calcul folosind fracții zecimale
+
+Scriem 3,4 ca întreg plus fracție zecimală: 3 și 4 zecimi.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+3{,}4 \cdot 4 &= \left(3 + \frac{4}{10}\right) \cdot 4\\[6pt]
+&= \color{#4ECDC4}{3 \cdot 4} + \color{#9370DB}{\frac{4}{10} \cdot 4}\\[6pt]
+&= \color{#4ECDC4}{12} + \color{#9370DB}{\frac{16}{10}}\\[6pt]
+&= 12 + 1 + \frac{6}{10} = 13{,}6
+\end{aligned}
+`}
+</Katex>
+
+### Calcul folosind descompunerea zecimală
+
+<Katex>
+{String.raw`
+\begin{aligned}
+3{,}4 \cdot 4 &= (3 + 0{,}4) \cdot 4\\[6pt]
+&= \color{#4ECDC4}{3 \cdot 4} + \color{#9370DB}{0{,}4 \cdot 4}\\[6pt]
+&= \color{#4ECDC4}{12} + \color{#9370DB}{1{,}6}\\[6pt]
+&= 13{,}6
+\end{aligned}
+`}
+</Katex>
+
+Perimetrul pătratului lui Daniel este **13,6 cm**.
+
+---
+
+:::note Enunț
+De **ziua Verde**, cei **278 de elevi** ai școlii merg fiecare câte **0,9 km**.
+
+Câți kilometri parcurg elevii în total?
+:::
+
+:::warning Atenție
+0,9 este mai mic decât 1. Produsul va fi **mai mic** decât 278.
+:::
+
+## METODA 1 - Înmulțiri folosind regula descompunerii
+
+Descompunem 278 și înmulțim fiecare parte cu 0,9.
+
+1. Descompunem: 278 = 200 + 70 + 8.
+2. Înmulțim fiecare parte cu 0,9.
+3. Adunăm produsele parțiale.
+
+| 200 | 70 | 8   | × 1   |
+|-----|----|-----|-------|
+| 180 | 63 | 7,2 | × 0,9 |
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#FF6B6B}{200 \cdot 0{,}9 = 180}\\[6pt]
+& \color{#4ECDC4}{70 \cdot 0{,}9 = 63}\\[6pt]
+& \color{#FF8C00}{8 \cdot 0{,}9 = 7{,}2}\\[6pt]
+& 180 + 63 + 7{,}2 = 250{,}2
+\end{aligned}
+`}
+</Katex>
+
+Elevii parcurg **250,2 km** în total.
+
+---
+
+## METODA 2 - Calculul mental și algoritm
+
+Folosim numărul reper 1, pentru că 0,9 + 0,1 = 1.
+
+1. Înmulțim cu 1: 278 · 1 = 278.
+2. Am pus 0,1 km în plus pentru fiecare elev. Calculăm surplusul: 278 · 0,1 = 27,8.
+3. Scădem surplusul: 278 − 27,8 = 250,2.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& 278 \cdot 1 = 278\\[6pt]
+& 278 \cdot 0{,}1 = 27{,}8\\[6pt]
+& 278 - 27{,}8 = 250{,}2
+\end{aligned}
+`}
+</Katex>
+
+Elevii parcurg **250,2 km** în total.
+
+---
+
+## METODA 3 — Descompunerea în factori și asociativitatea
+
+Descompunem 0,9 în factori și grupăm altfel.
+
+1. Scriem 0,9 = 9 · 0,1.
+2. Înmulțim întâi: 278 · 9 = 2 502.
+3. Înmulțim cu 0,1: mutăm virgula cu un rang spre stânga.
+
+<Katex>
+{String.raw`
+278 \cdot 0{,}9 = 278 \cdot \color{#4ECDC4}{(9 \cdot 0{,}1)} = \color{#4ECDC4}{(278 \cdot 9)} \cdot 0{,}1 = 2\,502 \cdot 0{,}1 = 250{,}2
+`}
+</Katex>
+
+:::tip De reținut
+Înmulțirea cu 0,1 mută virgula cu un rang spre **<HighlightText color="teal">stânga</HighlightText>**.
+
+<Katex>
+{String.raw`2\,502 \cdot 0{,}1 = 250{,}2`}
+</Katex>
+:::
+
+Elevii parcurg **250,2 km** în total.

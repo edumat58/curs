@@ -1,0 +1,161 @@
+---
+sidebar_position: 1
+slug: /edupasi/c5/modul-2/01
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C15.1 - Metoda reducerii la unitate
+
+---
+
+## Definiție
+
+:::danger Definiție
+Prin **<HighlightText color="red">metoda reducerii la unitate</HighlightText>** aflăm mai întâi valoarea pentru **<HighlightText color="teal">o singură unitate</HighlightText>**: 1 kg, 1 minut, 1 robinet.
+:::
+
+Lucrăm mereu în doi pași:
+
+1. Aflăm valoarea pentru **o unitate**.
+2. Cu ea, aflăm valoarea cerută în problemă.
+
+---
+
+## Tipuri de probleme
+
+:::tip De reținut
+- **Tipul I:** mărimile merg **<HighlightText color="teal">în același sens</HighlightText>**. Când una crește, crește și cealaltă. Cumpărăm mai multe mere, plătim mai mulți lei.
+- **Tipul II:** mărimile merg **<HighlightText color="orange">în sens opus</HighlightText>**. Când una crește, cealaltă scade. Lucrează mai multe robinete, timpul scade.
+:::
+
+Înainte de calcul, stabilim tipul problemei.
+
+---
+
+## Exemple
+
+### Tipul I — mărimile cresc sau scad împreună
+
+**Problemă.** 6 kg de mere costă 18 lei. Cât costă 2 kg de mere de aceeași calitate?
+
+Observăm: cumpărăm mai puține mere, deci plătim mai puțini lei. Este Tipul I.
+
+**Pasul 1.** Aflăm cât costă 1 kg de mere. Împărțim:
+
+<Katex>
+{String.raw`
+18 \text{ lei} : 6 = \color{#FF6B6B}{3 \text{ lei}}
+`}
+</Katex>
+
+**Pasul 2.** Aflăm cât costă 2 kg de mere. Înmulțim:
+
+<Katex>
+{String.raw`
+2 \times 3 = \color{#4ECDC4}{6 \text{ lei}}
+`}
+</Katex>
+
+Așezăm rezultatele în tabel:
+
+| Cantitate | Preț |
+|-----------|------|
+| 6 kg mere | 18 lei |
+| 1 kg mere | 3 lei |
+| 2 kg mere | 6 lei |
+
+**R:** 6 lei
+
+**Problemă.** Inima unui om bate de 210 ori în 3 minute. De câte ori bate într-o oră?
+
+O oră are 60 de minute.
+
+**Pasul 1.** Aflăm câte bătăi sunt într-un minut. Împărțim:
+
+<Katex>
+{String.raw`
+210 : 3 = \color{#FF6B6B}{70 \text{ de bătăi}}
+`}
+</Katex>
+
+**Pasul 2.** Aflăm câte bătăi sunt în 60 de minute. Înmulțim:
+
+<Katex>
+{String.raw`
+70 \times 60 = \color{#9370DB}{4\,200 \text{ de bătăi}}
+`}
+</Katex>
+
+| Timp | Bătăi |
+|------|-------|
+| 3 minute | 210 |
+| 1 minut | 70 |
+| 60 de minute | 4 200 |
+
+**R:** 4 200 de bătăi
+
+---
+
+### Tipul II — o mărime crește, cealaltă scade
+
+**Problemă.** 5 robinete cu același debit umplu un bazin în 12 ore. În cât timp umplu bazinul 4 robinete?
+
+Observăm: mai puține robinete înseamnă mai mult timp. Este Tipul II.
+
+:::warning Atenție
+La Tipul II, **<HighlightText color="red">un singur robinet</HighlightText>** are nevoie de **<HighlightText color="orange">mai mult timp</HighlightText>**. De aceea la Pasul 1 **<HighlightText color="teal">înmulțim</HighlightText>**, nu împărțim.
+:::
+
+**Pasul 1.** Aflăm în cât timp umple bazinul 1 robinet. Înmulțim:
+
+<Katex>
+{String.raw`
+12 \times 5 = \color{#FF6B6B}{60 \text{ de ore}}
+`}
+</Katex>
+
+**Pasul 2.** Aflăm timpul pentru 4 robinete. Împărțim:
+
+<Katex>
+{String.raw`
+60 : 4 = \color{#4ECDC4}{15 \text{ ore}}
+`}
+</Katex>
+
+| Robinete | Timp |
+|----------|------|
+| 5 robinete | 12 ore |
+| 1 robinet | 60 de ore |
+| 4 robinete | 15 ore |
+
+**R:** 15 ore
+
+**Problemă.** 30 de tractoare ară un teren în 6 ore. În cât timp ară același teren 18 tractoare?
+
+**Pasul 1.** Aflăm timpul pentru 1 tractor. Înmulțim:
+
+<Katex>
+{String.raw`
+30 \times 6 = \color{#FF6B6B}{180 \text{ de ore}}
+`}
+</Katex>
+
+**Pasul 2.** Aflăm timpul pentru 18 tractoare. Împărțim:
+
+<Katex>
+{String.raw`
+180 : 18 = \color{#4ECDC4}{10 \text{ ore}}
+`}
+</Katex>
+
+**R:** 10 ore
+
+:::tip De reținut
+Reținem ordinea operațiilor:
+
+- **Tipul I:** Pasul 1 — **<HighlightText color="red">împărțim</HighlightText>**, Pasul 2 — **<HighlightText color="teal">înmulțim</HighlightText>**.
+- **Tipul II:** Pasul 1 — **<HighlightText color="teal">înmulțim</HighlightText>**, Pasul 2 — **<HighlightText color="red">împărțim</HighlightText>**.
+:::

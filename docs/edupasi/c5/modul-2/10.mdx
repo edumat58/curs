@@ -1,0 +1,131 @@
+---
+sidebar_position: 10
+slug: /edupasi/c5/modul-2/10
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C18 - Număr prim, număr compus
+
+---
+
+## Numere prime
+
+:::danger Definiție
+Un **<HighlightText color="red">număr prim</HighlightText>** este un număr natural mai mare decât 1, care are **exact doi divizori**: pe **<HighlightText color="teal">1</HighlightText>** și pe **<HighlightText color="teal">el însuși</HighlightText>**.
+:::
+
+Verificăm divizorii:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& D_7 = \{\color{#4ECDC4}{1},\ \color{#4ECDC4}{7}\} \to \text{doi divizori} \to 7 \text{ este } \color{#FF6B6B}{\text{prim}}\\[6pt]
+& D_6 = \{1,\ 2,\ 3,\ 6\} \to \text{patru divizori} \to 6 \text{ nu este prim}
+\end{aligned}
+`}
+</Katex>
+
+:::tip De reținut
+- Singurul număr prim **par** este **<HighlightText color="red">2</HighlightText>**.
+- Numerele **0** și **1** nu sunt nici prime, nici compuse.
+:::
+
+---
+
+### Ciurul lui Eratostene
+
+Cu acest algoritm găsim toate numerele prime până la un număr dat. Lucrăm cu numerele până la 30.
+
+**Pașii algoritmului:**
+1. Scriem numerele de la 2 până la 30.
+2. Păstrăm pe **2**. Tăiem toți multiplii lui 2: 4, 6, 8, 10, ...
+3. Păstrăm pe **3**. Tăiem toți multiplii lui 3 rămași: 9, 15, 21, 27.
+4. Păstrăm pe **5**. Tăiem multiplii lui 5 rămași: 25.
+5. Numerele netăiate sunt numerele prime.
+
+|<s>1</s>|**2**|**3**|<s>4</s>|**5**|<s>6</s>|**7**|<s>8</s>|<s>9</s>|<s>10</s>|
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+|**11**|<s>12</s>|**13**|<s>14</s>|<s>15</s>|<s>16</s>|**17**|<s>18</s>|**19**|<s>20</s>|
+|<s>21</s>|<s>22</s>|**23**|<s>24</s>|<s>25</s>|<s>26</s>|<s>27</s>|<s>28</s>|**29**|<s>30</s>|
+
+Observăm că numerele prime până la 30 sunt: 2, 3, 5, 7, 11, 13, 17, 19, 23, 29.
+
+:::tip De reținut
+Numerele prime mai mici decât 100 sunt:
+
+2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97.
+:::
+
+---
+
+### Descompunerea în factori primi
+
+Orice număr natural mai mare decât 1 se poate scrie ca **<HighlightText color="orange">produs de factori primi</HighlightText>**.
+
+**Pașii algoritmului:**
+1. Împărțim numărul la 2, cât timp restul este 0.
+2. Când restul nu mai este 0, trecem la următorul număr prim: 3.
+3. Continuăm cu 5, 7, 11, ... până când câtul este 1.
+4. Scriem numărul ca produs al împărțitorilor folosiți.
+
+**Exemplu: descompunem numărul 60.** Calculăm pas cu pas:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& 60 : \color{#FF6B6B}{2} = 30\\[6pt]
+& 30 : \color{#FF6B6B}{2} = 15\\[6pt]
+& 15 : \color{#4ECDC4}{3} = 5\\[6pt]
+& 5 : \color{#9370DB}{5} = 1
+\end{aligned}
+`}
+</Katex>
+
+Am ajuns la câtul 1, deci ne oprim. Scriem produsul:
+
+<Katex>
+{String.raw`
+60 = \color{#FF6B6B}{2} \times \color{#FF6B6B}{2} \times \color{#4ECDC4}{3} \times \color{#9370DB}{5} = \color{#FF6B6B}{2^2} \times \color{#4ECDC4}{3} \times \color{#9370DB}{5}
+`}
+</Katex>
+
+:::warning Atenție
+Dacă numărul este prim, descompunerea lui este chiar el. Exemplu: <Katex>{String.raw`13 = 13`}</Katex>.
+:::
+
+**Cum verificăm că un număr este prim?** Îl împărțim, pe rând, la numerele prime 2, 3, 5, 7, ... Ne oprim când câtul devine mai mic decât împărțitorul.
+
+**Exemplu: verificăm numărul 29.**
+1. 29 este impar, deci nu se împarte exact la 2.
+2. <Katex>{String.raw`29 : 3 = 9`}</Katex> rest <Katex>{String.raw`2`}</Katex>, deci nu se împarte exact la 3.
+3. 29 nu se termină în 0 sau 5, deci nu se împarte exact la 5.
+4. <Katex>{String.raw`29 : 7 = 4`}</Katex> rest <Katex>{String.raw`1`}</Katex>. Câtul 4 este mai mic decât împărțitorul 7, deci ne oprim.
+
+Niciun număr prim nu îl divide pe 29, deci 29 este număr prim.
+
+---
+
+## Numere compuse
+
+:::danger Definiție
+Un **<HighlightText color="red">număr compus</HighlightText>** este un număr natural care are **cel puțin trei divizori**.
+:::
+
+Verificăm divizorii:
+
+<Katex>
+{String.raw`
+D_{10} = \{1,\ \color{#FF8C00}{2},\ \color{#FF8C00}{5},\ 10\} \to \text{patru divizori} \to 10 \text{ este compus}
+`}
+</Katex>
+
+:::tip De reținut
+Pentru a arăta că un număr este **compus**, este suficient să găsim **un divizor** diferit de 1 și de numărul însuși.
+:::
+
+**Exemple:**
+1. 111 este compus: suma cifrelor este <Katex>{String.raw`1 + 1 + 1 = 3`}</Katex>, deci 111 se împarte exact la 3.
+2. 707 este compus: <Katex>{String.raw`707 = 7 \times 101`}</Katex>, deci 707 se împarte exact la 7.

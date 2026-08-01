@@ -1,0 +1,141 @@
+---
+sidebar_position: 2
+slug: /edupasi/c5/modul-3/02
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C19.2 - Procente şi fracții echivalente
+
+---
+
+## Calcul procentual
+
+:::danger Definiție
+Un **<HighlightText color="red">procent</HighlightText>** este o fracție cu **<HighlightText color="teal">numitorul 100</HighlightText>**. Scriem **a %** și citim „a la sută".
+:::
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& a\,\% = \frac{a}{100}\\[8pt]
+& \text{Exemplu: } \color{#FF6B6B}{30\,\%} = \frac{30}{100} = 0{,}30
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Proprietăți
+
+:::tip De reținut
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{1. } \color{#FF6B6B}{a\,\%} \text{ din } b = \frac{a}{100} \times b\\[8pt]
+& \text{2. Procentul părții } p \text{ din întregul } t = \frac{p}{t} \times 100
+\end{aligned}
+`}
+</Katex>
+:::
+
+Calculăm un exemplu pentru fiecare proprietate:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{1. } 10\,\% \text{ din } 200 = \frac{10}{100} \times 200 = \color{#4ECDC4}{20}\\[8pt]
+& \text{2. } 25 \text{ din } 50 = \frac{25}{50} \times 100 = \color{#4ECDC4}{50\,\%}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Metode de calcul
+
+### Aplicarea unui procent
+
+Într-o școală sunt 350 de elevi. 20 % dintre ei merg pe jos la școală. Calculăm pas cu pas câți elevi merg pe jos:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{1. Scriem procentul ca fracție: } 20\,\% = \color{#FF6B6B}{\frac{20}{100}}\\[6pt]
+& \text{2. Înmulțim fracția cu întregul: } \frac{20}{100} \times 350 = \frac{7\,000}{100}\\[6pt]
+& \text{3. Împărțim la numitor: } 7\,000 \div 100 = \color{#4ECDC4}{70}
+\end{aligned}
+`}
+</Katex>
+
+**Răspuns:** 70 de elevi merg pe jos la școală.
+
+### Calcularea unui procent
+
+Un tort cântărește 350 g. Zahărul din el cântărește 105 g. Calculăm pas cu pas procentul de zahăr:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{1. Împărțim partea la întreg: } 105 \div 350 = \color{#FF8C00}{0{,}3}\\[6pt]
+& \text{2. Scriem câtul cu numitorul 100: } 0{,}3 = \frac{30}{100}\\[6pt]
+& \text{3. Citim procentul: } \frac{30}{100} = \color{#4ECDC4}{30\,\%}
+\end{aligned}
+`}
+</Katex>
+
+**Răspuns:** 30 % din masa tortului este zahăr.
+
+:::warning Atenție
+Împărțim întotdeauna **<HighlightText color="red">partea</HighlightText>** la **<HighlightText color="teal">întreg</HighlightText>**, nu invers. Partea este numărătorul. Întregul este numitorul.
+:::
+
+---
+
+## Fracții echivalente
+
+:::danger Definiție
+Fracțiile care reprezintă **<HighlightText color="red">aceeași parte din întreg</HighlightText>** se numesc **<HighlightText color="teal">fracții echivalente</HighlightText>**.
+:::
+
+<Katex>
+{String.raw`
+\text{Exemplu: } \frac{1}{2} = \frac{2}{4} = \frac{50}{100} = 50\,\%
+`}
+</Katex>
+
+Observăm că fiecare fracție reprezintă o jumătate din întreg.
+
+:::tip De reținut
+Două fracții sunt echivalente atunci când produsele în cruce sunt egale. Numitorii nu sunt niciodată 0.
+
+<Katex>
+{String.raw`
+\frac{a}{b} = \frac{c}{d} \iff \color{#FF6B6B}{a \times d} = \color{#4ECDC4}{b \times c}
+`}
+</Katex>
+:::
+
+Verificăm pas cu pas dacă fracțiile 2/5 și 4/10 sunt echivalente:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{1. Înmulțim în cruce: } \color{#FF6B6B}{2 \times 10 = 20} \text{ și } \color{#4ECDC4}{5 \times 4 = 20}\\[6pt]
+& \text{2. Produsele sunt egale, deci } \frac{2}{5} = \frac{4}{10}
+\end{aligned}
+`}
+</Katex>
+
+Obținem fracții echivalente prin amplificare sau prin simplificare:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Amplificăm cu } 3: \frac{1}{2} = \frac{1 \times 3}{2 \times 3} = \color{#9370DB}{\frac{3}{6}}\\[8pt]
+& \text{Simplificăm cu } 10: \frac{30}{100} = \frac{30 \div 10}{100 \div 10} = \color{#9370DB}{\frac{3}{10}}
+\end{aligned}
+`}
+</Katex>

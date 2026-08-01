@@ -1,0 +1,149 @@
+---
+sidebar_position: 6
+slug: /edupasi/c5/modul-3/06
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C20.1 - Cel mai mare divizor comun a două numere naturale
+
+---
+
+## Definiție
+
+:::danger Definiție
+**<HighlightText color="red">Cel mai mare divizor comun</HighlightText>** a două numere naturale este **<HighlightText color="teal">cel mai mare număr natural care le divide pe amândouă</HighlightText>**.
+
+Se notează pe scurt **c.m.m.d.c.**
+:::
+
+<Katex>
+{String.raw`
+\text{Pentru numerele } \color{#FF6B6B}{a} \text{ și } \color{#4ECDC4}{b} \text{ scriem: } (a, b)
+`}
+</Katex>
+
+**Exemplu:** determinăm cel mai mare divizor comun al numerelor **12** și **18**.
+
+**Pasul 1.** Scriem divizorii fiecărui număr:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& D_{12} = \{1, 2, 3, 4, 6, 12\}\\[6pt]
+& D_{18} = \{1, 2, 3, 6, 9, 18\}
+\end{aligned}
+`}
+</Katex>
+
+**Pasul 2.** Alegem divizorii care apar în ambele liste. Aceștia sunt **divizorii comuni**:
+
+<Katex>
+{String.raw`
+\color{#FF8C00}{1,\ 2,\ 3,\ 6}
+`}
+</Katex>
+
+**Pasul 3.** Cel mai mare dintre divizorii comuni este **6**. Deci:
+
+<Katex>
+{String.raw`
+(12, 18) = \color{#FF6B6B}{6}
+`}
+</Katex>
+
+Observăm că **6** este divizibil cu toți ceilalți divizori comuni: 1, 2 și 3.
+
+---
+
+## Algoritmul de determinare
+
+:::tip De reținut
+Determinăm c.m.m.d.c. în doi pași:
+
+1. **Descompunem** numerele în produs de puteri de numere prime.
+2. **Înmulțim factorii comuni**, luați o singură dată, cu **exponentul cel mai mic**.
+:::
+
+Reluăm numerele **12** și **18**.
+
+**Pasul 1.** Descompunem:
+
+<Katex>
+{String.raw`
+12 = \color{#FF6B6B}{2^2} \cdot \color{#4ECDC4}{3} \qquad 18 = \color{#FF6B6B}{2} \cdot \color{#4ECDC4}{3^2}
+`}
+</Katex>
+
+**Pasul 2.** Factorii comuni sunt **2** și **3**. La fiecare luăm exponentul cel mai mic:
+
+<Katex>
+{String.raw`
+(12, 18) = \color{#FF6B6B}{2} \cdot \color{#4ECDC4}{3} = 6
+`}
+</Katex>
+
+Un factor care apare **doar la unul** dintre numere nu se ia în produs.
+
+---
+
+## <span style={{backgroundColor: '#ff9800', color: 'white', padding: '4px 8px', borderRadius: '4px'}}>Observă și descoperă!</span>
+
+:::note Exercițiul 1
+Copiază tabelul pe caiet și completează-l după modelul din primul rând.
+:::
+
+| <Katex>{String.raw`a`}</Katex> | <Katex>{String.raw`b`}</Katex> | Divizorii lui <Katex>{String.raw`a`}</Katex> | Divizorii lui <Katex>{String.raw`b`}</Katex> | Divizorii comuni | <Katex>{String.raw`(a, b)`}</Katex> |
+| :---: | :---: | :--- | :--- | :--- | :---: |
+| 12 | 18 | 1, 2, 3, 4, 6, 12 | 1, 2, 3, 6, 9, 18 | 1, 2, 3, 6 | 6 |
+| 16 | 24 | | | | |
+| 14 | 27 | | | | |
+
+:::warning Atenție
+* Oricare două numere naturale nenule au cel puțin un divizor comun: numărul **1**.
+* Dacă **singurul divizor comun este 1**, numerele se numesc **<HighlightText color="red">numere prime între ele</HighlightText>**.
+
+<Katex>
+{String.raw`
+(4, 9) = 1 \ \Rightarrow \ 4 \text{ și } 9 \text{ sunt prime între ele}
+`}
+</Katex>
+:::
+
+## <span style={{backgroundColor: '#e65100', color: 'white', padding: '4px 8px', borderRadius: '4px'}}>Exersează!</span>
+
+**2.** Determină cel mai mare divizor comun al numerelor:
+a) 4 și 6; &nbsp; b) 15 și 9; &nbsp; c) 8 și 20; &nbsp; d) 18 și 27.
+
+**3.** Stabilește dacă numerele următoare sunt prime între ele:
+a) 4 și 9; &nbsp; b) 14 și 15; &nbsp; c) 15 și 28.
+
+**4.** Copiază figura pe caiet și completează casetele. Înmulțim și numărătorul, și numitorul cu 2 — spunem că **amplificăm** fracția.
+
+<svg width="260" height="130" viewBox="0 0 260 130" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrowA" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#e65100" />
+    </marker>
+  </defs>
+  <g transform="translate(10, 25)">
+    <text x="12" y="30" fontSize="28" fontFamily="serif" fill="currentColor">3</text>
+    <line x1="5" y1="42" x2="35" y2="42" stroke="currentColor" strokeWidth="1.5" />
+    <text x="12" y="72" fontSize="28" fontFamily="serif" fill="currentColor">5</text>
+    <line x1="50" y1="22" x2="110" y2="22" stroke="#e65100" strokeWidth="2" markerEnd="url(#arrowA)" />
+    <text x="65" y="14" fontSize="18" fill="#e65100">· 2</text>
+    <line x1="50" y1="62" x2="110" y2="62" stroke="#e65100" strokeWidth="2" markerEnd="url(#arrowA)" />
+    <text x="65" y="84" fontSize="18" fill="#e65100">· 2</text>
+    <rect x="125" y="5" width="34" height="34" fill="#ffe0b2" stroke="#e65100" strokeWidth="1.5" />
+    <line x1="118" y1="42" x2="168" y2="42" stroke="currentColor" strokeWidth="1.5" />
+    <rect x="125" y="46" width="34" height="34" fill="#ffe0b2" stroke="#e65100" strokeWidth="1.5" />
+  </g>
+</svg>
+
+Fracția obținută este **echivalentă** cu fracția de la care am plecat.
+
+**5.** Dacă adunăm **3** și la numărător, și la numitor, mai obținem o fracție echivalentă? Verifică pe fracția de la exercițiul 4.
+
+---

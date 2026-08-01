@@ -1,0 +1,120 @@
+---
+sidebar_position: 8
+slug: /edupasi/c5/modul-1/08
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C7.1 – Ilustrarea fracţiilor echiunitare, subunitare și supraunitare
+
+---
+
+## Introducere
+
+:::danger Definiție
+O **<HighlightText color="purple">fracție</HighlightText>** arată o parte dintr-un întreg.
+
+- **<HighlightText color="teal">Numitorul</HighlightText>** este numărul de jos. El arată în câte **părți egale** împărțim întregul.
+- **<HighlightText color="red">Numărătorul</HighlightText>** este numărul de sus. El arată câte părți **luăm**.
+:::
+
+:::tip De reținut
+Comparăm **<HighlightText color="red">numărătorul</HighlightText>** cu **<HighlightText color="teal">numitorul</HighlightText>**:
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#FF6B6B}{1} < \color{#4ECDC4}{2} \to \frac{1}{2} \text{ este } \color{#4ECDC4}{\text{subunitară}} \to \frac{1}{2} < 1\\[8pt]
+& \color{#FF6B6B}{2} = \color{#4ECDC4}{2} \to \frac{2}{2} \text{ este } \color{#9370DB}{\text{echiunitară}} \to \frac{2}{2} = 1\\[8pt]
+& \color{#FF6B6B}{3} > \color{#4ECDC4}{2} \to \frac{3}{2} \text{ este } \color{#FF6B6B}{\text{supraunitară}} \to \frac{3}{2} > 1
+\end{aligned}
+`}
+</Katex>
+:::
+
+---
+
+## Reprezentări grafice variate
+
+### Reprezentarea circulară
+
+1. Desenăm un cerc. Cercul este întregul.
+2. Împărțim cercul în părți egale, câte arată **numitorul**.
+3. Colorăm atâtea părți câte arată **numărătorul**.
+
+<div style={{textAlign:'center'}}>
+<svg width="440" height="160" viewBox="0 0 440 160">
+  <circle cx="80" cy="70" r="55" fill="none" stroke="black" strokeWidth="3"/><path d="M 80 15 A 55 55 0 0 1 80 125 L 80 70 Z" fill="#4ECDC4"/>
+  <text x="25" y="152" fontSize="16" fill="#4ECDC4">1/2 – subunitară</text>
+  <circle cx="240" cy="70" r="55" fill="#FF6B6B" stroke="black" strokeWidth="3"/><circle cx="360" cy="70" r="55" fill="none" stroke="black" strokeWidth="3"/><path d="M 360 15 A 55 55 0 0 1 360 125 L 360 70 Z" fill="#FF6B6B"/>
+  <text x="235" y="152" fontSize="16" fill="#FF6B6B">3/2 – supraunitară</text>
+</svg>
+</div>
+
+:::warning Atenție
+La fracția **<HighlightText color="red">supraunitară</HighlightText>** un singur întreg nu ajunge. Desenăm încă un întreg și colorăm mai departe.
+:::
+
+### Reprezentarea dreptunghiulară
+
+1. Desenăm un dreptunghi. Dreptunghiul este întregul.
+2. Numitorul este 3, deci împărțim dreptunghiul în 3 părți egale.
+3. Numărătorul este 2, deci colorăm 2 părți.
+
+<Katex>
+{String.raw`
+\frac{\color{#FF6B6B}{2}}{\color{#4ECDC4}{3}} \qquad \color{#FF6B6B}{2} < \color{#4ECDC4}{3} \to \text{fracție } \color{#4ECDC4}{\text{subunitară}}
+`}
+</Katex>
+
+### Reprezentarea pe axa numerelor
+
+1. Desenăm axa numerelor. Marcăm 0, 1 și 2.
+2. Împărțim fiecare unitate în părți egale, câte arată **numitorul**.
+3. Numărăm de la 0 atâția pași câte arată **numărătorul**. Acolo este fracția.
+
+<div style={{textAlign:'center'}}>
+<svg width="400" height="70" viewBox="0 0 400 70">
+  <line x1="20" y1="35" x2="380" y2="35" stroke="black" strokeWidth="2"/>
+  <line x1="20" y1="28" x2="20" y2="42" stroke="black" strokeWidth="2"/><text x="14" y="62" fontSize="16">0</text>
+  <line x1="180" y1="28" x2="180" y2="42" stroke="black" strokeWidth="2"/><text x="174" y="62" fontSize="16">1</text>
+  <line x1="340" y1="28" x2="340" y2="42" stroke="black" strokeWidth="2"/><text x="334" y="62" fontSize="16">2</text>
+  <circle cx="140" cy="35" r="5" fill="#4ECDC4"/><text x="124" y="18" fontSize="16" fill="#4ECDC4">3/4</text>
+  <circle cx="300" cy="35" r="5" fill="#FF6B6B"/><text x="284" y="18" fontSize="16" fill="#FF6B6B">7/4</text>
+</svg>
+</div>
+
+<Katex>
+{String.raw`
+\frac{3}{4} < 1 \to \color{#4ECDC4}{\text{subunitară}} \qquad \frac{7}{4} > 1 \to \color{#FF6B6B}{\text{supraunitară}}
+`}
+</Katex>
+
+---
+
+## Exemple detaliate
+
+### Exemplul 1 – Fracție subunitară
+
+1. Numitorul este 5, deci împărțim întregul în 5 părți egale.
+2. Numărătorul este 2, deci colorăm 2 părți.
+3. Comparăm: 2 este mai mic decât 5, deci fracția este subunitară.
+
+<Katex>
+{String.raw`
+\frac{\color{#FF6B6B}{2}}{\color{#4ECDC4}{5}} \qquad \color{#FF6B6B}{2} < \color{#4ECDC4}{5} \to \frac{2}{5} < 1 \to \color{#4ECDC4}{\text{subunitară}}
+`}
+</Katex>
+
+### Exemplul 2 – Fracție supraunitară
+
+1. Numitorul este 3, deci un întreg are 3 părți egale.
+2. Numărătorul este 4, deci un întreg nu ajunge: colorăm un întreg și încă o parte din al doilea întreg.
+3. Comparăm: 4 este mai mare decât 3, deci fracția este supraunitară.
+
+<Katex>
+{String.raw`
+\frac{\color{#FF6B6B}{4}}{\color{#4ECDC4}{3}} = \frac{3}{3} + \frac{1}{3} = 1 + \frac{1}{3} \qquad \color{#FF6B6B}{4} > \color{#4ECDC4}{3} \to \color{#FF6B6B}{\text{supraunitară}}
+`}
+</Katex>

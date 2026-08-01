@@ -1,0 +1,276 @@
+---
+sidebar_position: 8
+slug: /edupasi/c5/modul-2/08
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C16 - Divizori și multiplii
+
+---
+
+## Definiție
+
+:::danger Definiție
+Un număr natural **<HighlightText color="red">a</HighlightText>** este **<HighlightText color="red">divizibil</HighlightText>** cu un număr natural **<HighlightText color="teal">b</HighlightText>** dacă îl putem scrie ca produs:
+
+<Katex>
+{String.raw`
+\color{#FF6B6B}{a} = \color{#4ECDC4}{b} \cdot c
+`}
+</Katex>
+:::
+
+**Exemplu:**
+
+<Katex>
+{String.raw`
+\color{#FF6B6B}{15} = \color{#4ECDC4}{3} \cdot \color{#4ECDC4}{5}
+`}
+</Katex>
+
+Observăm că:
+
+- **15** este **<HighlightText color="red">multiplu</HighlightText>** al numerelor 3 și 5.
+- **3** și **5** sunt **<HighlightText color="teal">divizori</HighlightText>** ai lui 15.
+
+### Notații
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#FF6B6B}{15 \mid 3} \quad \text{citim: „15 este divizibil cu 3"}\\[6pt]
+& \color{#4ECDC4}{3 \mid 15} \quad \text{citim: „3 divide numărul 15"}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Exemple
+
+Verificăm prin înmulțire:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& 15 \mid 3 \quad \text{deoarece} \quad 15 = 3 \cdot 5\\[6pt]
+& 27 \mid 9 \quad \text{deoarece} \quad 27 = 9 \cdot 3\\[6pt]
+& 35 \mid 7 \quad \text{deoarece} \quad 35 = 7 \cdot 5
+\end{aligned}
+`}
+</Katex>
+
+Verificăm și prin împărțire, pas cu pas:
+
+1. Împărțim: deîmpărțitul este 15, împărțitorul este 3.
+2. Obținem câtul 5 și restul 0.
+3. Restul este 0, deci 15 este divizibil cu 3.
+
+:::tip De reținut
+**<HighlightText color="red">Restul 0</HighlightText>** la împărțire înseamnă **<HighlightText color="teal">divizibil</HighlightText>**.
+:::
+
+---
+
+## Observații importante
+
+**Observația 1.** Orice număr natural se divide cu **1**.
+
+<Katex>
+{String.raw`
+12 \mid 1 \quad \text{deoarece} \quad 12 = 1 \cdot 12
+`}
+</Katex>
+
+**Observația 2.** Orice număr natural se divide cu **el însuși**.
+
+<Katex>
+{String.raw`
+12 \mid 12 \quad \text{deoarece} \quad 12 = 12 \cdot 1
+`}
+</Katex>
+
+**Observația 3.** Divizorii **1** și **numărul însuși** se numesc **<HighlightText color="red">divizori improprii</HighlightText>**. Toți ceilalți divizori se numesc **<HighlightText color="teal">divizori proprii</HighlightText>**.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Divizorii lui } 12: \; 1,\; 2,\; 3,\; 4,\; 6,\; 12\\[6pt]
+& \text{Improprii: } \color{#FF6B6B}{1 \text{ și } 12}\\[6pt]
+& \text{Proprii: } \color{#4ECDC4}{2,\; 3,\; 4,\; 6}
+\end{aligned}
+`}
+</Katex>
+
+**Observația 4.** Numărul **0** se divide cu orice număr natural.
+
+<Katex>
+{String.raw`
+0 \mid 7 \quad \text{deoarece} \quad 0 = 7 \cdot 0
+`}
+</Katex>
+
+---
+
+# Aplicații
+
+## Divizori ai unui număr
+
+**1.** Scriem toți divizorii numărului 18.
+
+Căutăm perechile de factori, pas cu pas:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& 18 = \color{#FF6B6B}{1} \cdot \color{#4ECDC4}{18}\\[6pt]
+& 18 = \color{#FF6B6B}{2} \cdot \color{#4ECDC4}{9}\\[6pt]
+& 18 = \color{#FF6B6B}{3} \cdot \color{#4ECDC4}{6}
+\end{aligned}
+`}
+</Katex>
+
+Scriem divizorii în ordine crescătoare:
+
+<Katex>
+{String.raw`
+1,\; 2,\; 3,\; 6,\; 9,\; 18
+`}
+</Katex>
+
+**2.** Scriem toți divizorii numărului 50.
+
+<Katex>
+{String.raw`
+50 = 1 \cdot 50 = 2 \cdot 25 = 5 \cdot 10
+`}
+</Katex>
+
+Divizorii sunt: 1, 2, 5, 10, 25, 50.
+
+---
+
+## Multiplul unui număr
+
+Multiplii unui număr se obțin prin înmulțire cu 0, 1, 2, 3, …
+
+**3.** Scriem primii 5 multipli ai lui 7.
+
+Calculăm pas cu pas:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& 7 \cdot 0 = 0\\[6pt]
+& 7 \cdot 1 = 7\\[6pt]
+& 7 \cdot 2 = 14\\[6pt]
+& 7 \cdot 3 = 21\\[6pt]
+& 7 \cdot 4 = 28
+\end{aligned}
+`}
+</Katex>
+
+Multiplii sunt: 0, 7, 14, 21, 28.
+
+**4.** Scriem toți multiplii lui 3 cuprinși între 20 și 40.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& 3 \cdot 7 = 21 \qquad 3 \cdot 8 = 24 \qquad 3 \cdot 9 = 27\\[6pt]
+& 3 \cdot 10 = 30 \qquad 3 \cdot 11 = 33\\[6pt]
+& 3 \cdot 12 = 36 \qquad 3 \cdot 13 = 39
+\end{aligned}
+`}
+</Katex>
+
+Multiplii sunt: 21, 24, 27, 30, 33, 36, 39.
+
+:::warning Atenție
+Un număr are **<HighlightText color="red">divizori</HighlightText>** în număr **finit**, dar **<HighlightText color="teal">multipli</HighlightText>** în număr **infinit**.
+:::
+
+---
+
+## Verificarea multiplicității
+
+**5.** Stabilim dacă numerele 225 și 781 sunt multipli ai lui 9.
+
+Pentru 225:
+
+1. Împărțim: deîmpărțitul este 225, împărțitorul este 9.
+2. Obținem câtul 25 și restul 0.
+3. Restul este 0, deci 225 este multiplu al lui 9.
+
+<Katex>
+{String.raw`
+225 = 9 \cdot 25
+`}
+</Katex>
+
+Pentru 781:
+
+1. Împărțim: deîmpărțitul este 781, împărțitorul este 9.
+2. Obținem câtul 86 și restul 7.
+3. Restul nu este 0, deci 781 nu este multiplu al lui 9.
+
+---
+
+# Alte aplicații
+
+**6.** Scriem toți divizorii proprii ai lui 24.
+
+<Katex>
+{String.raw`
+24 = 1 \cdot 24 = 2 \cdot 12 = 3 \cdot 8 = 4 \cdot 6
+`}
+</Katex>
+
+1. Toți divizorii: 1, 2, 3, 4, 6, 8, 12, 24.
+2. Tăiem divizorii improprii: 1 și 24.
+3. Divizorii proprii sunt: 2, 3, 4, 6, 8, 12.
+
+**7.** Scriem trei numere naturale care au exact 2 divizori.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& 7: \text{ divizorii sunt } 1 \text{ și } 7\\[6pt]
+& 11: \text{ divizorii sunt } 1 \text{ și } 11\\[6pt]
+& 13: \text{ divizorii sunt } 1 \text{ și } 13
+\end{aligned}
+`}
+</Katex>
+
+Reținem: aceste numere se numesc **numere prime**.
+
+**8.** Scriem trei numere naturale care au exact 3 divizori.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& 4: \text{ divizorii sunt } 1,\; 2,\; 4\\[6pt]
+& 9: \text{ divizorii sunt } 1,\; 3,\; 9\\[6pt]
+& 25: \text{ divizorii sunt } 1,\; 5,\; 25
+\end{aligned}
+`}
+</Katex>
+
+Reținem: aceste numere sunt pătratele numerelor prime.
+
+**9.** Scriem trei numere naturale care au exact 4 divizori.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& 6: \text{ divizorii sunt } 1,\; 2,\; 3,\; 6\\[6pt]
+& 10: \text{ divizorii sunt } 1,\; 2,\; 5,\; 10\\[6pt]
+& 15: \text{ divizorii sunt } 1,\; 3,\; 5,\; 15
+\end{aligned}
+`}
+</Katex>
+
+---

@@ -1,0 +1,149 @@
+---
+sidebar_position: 1
+slug: /edupasi/c5/modul-3/01
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C19.1 - Fracții subunitare, echiunitare şi supraunitare
+
+---
+
+## Fracții ordinare. Noțiuni introductive
+
+:::danger Definiție 1
+**<HighlightText color="red">Întregul</HighlightText>** sau **<HighlightText color="red">unitatea</HighlightText>** este obiectul pe care îl împărțim în părți de mărimi egale.
+
+O parte dintr-un întreg împărțit în părți de mărimi egale se numește **<HighlightText color="teal">unitate fracționară</HighlightText>**.
+:::
+
+:::danger Definiție 2
+Una sau mai multe unități fracționare formează o **<HighlightText color="red">fracție</HighlightText>**.
+:::
+
+Observăm cum arată o fracție:
+
+<div style={{display: 'flex', justifyContent: 'center', margin: '20px 0'}}>
+<svg width="430" height="120" viewBox="0 0 430 120" xmlns="http://www.w3.org/2000/svg">
+  <g transform="translate(50, 20)">
+    <text x="20" y="25" fontFamily="sans-serif" fontSize="40" fontWeight="bold" fill="#FF6B6B" textAnchor="middle">a</text>
+    <line x1="-5" y1="40" x2="45" y2="40" stroke="#9370DB" strokeWidth="3" />
+    <text x="20" y="80" fontFamily="sans-serif" fontSize="40" fontWeight="bold" fill="#4ECDC4" textAnchor="middle">b</text>
+    <text x="80" y="30" fontSize="20" fontWeight="bold" fill="#FF6B6B">numărător</text>
+    <text x="80" y="48" fontSize="20" fontWeight="bold" fill="#9370DB">linie de fracție</text>
+    <text x="80" y="85" fontSize="20" fontWeight="bold" fill="#4ECDC4">numitor</text>
+  </g>
+</svg>
+</div>
+
+Reținem:
+1. **Numărătorul** arată câte părți egale am luat din întreg.
+2. **Numitorul** arată în câte părți egale a fost împărțit întregul.
+
+Exemplu. Împărțim un dreptunghi în 3 părți egale. Colorăm 2 părți.
+
+<div style={{display: 'flex', justifyContent: 'center', margin: '20px 0'}}>
+<svg width="360" height="95" viewBox="0 0 360 95" xmlns="http://www.w3.org/2000/svg">
+  <rect x="15" y="10" width="110" height="50" fill="#FF6B6B" opacity="0.5" stroke="black" strokeWidth="2" />
+  <rect x="125" y="10" width="110" height="50" fill="#FF6B6B" opacity="0.5" stroke="black" strokeWidth="2" />
+  <rect x="235" y="10" width="110" height="50" fill="none" stroke="black" strokeWidth="2" />
+  <text x="180" y="85" textAnchor="middle" fontSize="16" fill="black">2 părți luate din 3 părți egale</text>
+</svg>
+</div>
+
+<Katex>
+{String.raw`
+\text{Scriem fracția: } \frac{\color{#FF6B6B}{2}}{\color{#4ECDC4}{3}}
+`}
+</Katex>
+
+:::warning Atenție
+Numitorul nu poate fi niciodată 0. Nu putem împărți un întreg în 0 părți.
+
+Numărătorul poate fi 0. Atunci nu luăm nicio parte, deci fracția este egală cu 0.
+
+<Katex>
+{String.raw`
+\frac{0}{5} = 0 \qquad \frac{5}{0} \text{ nu există}
+`}
+</Katex>
+:::
+
+Fracția cu numitorul 100 se numește **<HighlightText color="orange">procent</HighlightText>**. Scriem semnul %.
+
+<Katex>
+{String.raw`
+\frac{p}{100} = p\,\% \qquad \frac{25}{100} = 25\,\%
+`}
+</Katex>
+
+Citim: „25 la sută".
+
+---
+
+## Clasificarea fracțiilor
+
+Comparăm numărătorul cu numitorul.
+
+:::tip De reținut
+| Denumire | Cum o recunosc? | Ce reprezintă? |
+| :--- | :---: | :--- |
+| Fracție **subunitară** | numărător < numitor | mai puțin decât un întreg |
+| Fracție **echiunitară** | numărător = numitor | exact un întreg |
+| Fracție **supraunitară** | numărător > numitor | mai mult decât un întreg |
+:::
+
+Calculăm pas cu pas pe trei exemple:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \frac{\color{#FF6B6B}{2}}{\color{#4ECDC4}{3}}: \quad 2 < 3 \ \Rightarrow \ \text{fracție subunitară}\\[8pt]
+& \frac{\color{#FF6B6B}{4}}{\color{#4ECDC4}{4}}: \quad 4 = 4 \ \Rightarrow \ \text{fracție echiunitară}\\[8pt]
+& \frac{\color{#FF6B6B}{7}}{\color{#4ECDC4}{5}}: \quad 7 > 5 \ \Rightarrow \ \text{fracție supraunitară}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Observă și descoperă
+
+Ana, Mihai, Radu și Ioana au de parcurs același drum de acasă până la școală.
+
+1. Ana a parcurs **o jumătate** din drum.
+2. Mihai a parcurs **două pătrimi**.
+3. Radu a parcurs **trei șesimi**.
+4. Ioana a parcurs **patru optimi**.
+
+Care dintre cei patru copii a parcurs distanța cea mai mare? Rezolvăm pas cu pas.
+
+Pasul 1. Scriem fracțiile:
+
+<Katex>
+{String.raw`
+\text{Ana: } \frac{1}{2} \qquad \text{Mihai: } \frac{2}{4} \qquad \text{Radu: } \frac{3}{6} \qquad \text{Ioana: } \frac{4}{8}
+`}
+</Katex>
+
+Pasul 2. Reprezentăm drumul Anei. Împărțim drumul în 2 părți egale și colorăm 1 parte:
+
+<div style={{display: 'flex', justifyContent: 'center', margin: '20px 0'}}>
+<svg width="360" height="70" viewBox="0 0 360 70" xmlns="http://www.w3.org/2000/svg">
+  <rect x="15" y="15" width="165" height="35" fill="#4ECDC4" opacity="0.5" stroke="black" strokeWidth="2" />
+  <rect x="180" y="15" width="165" height="35" fill="none" stroke="black" strokeWidth="2" />
+  <text x="97" y="38" textAnchor="middle" fontSize="16" fill="black">parcurs</text>
+</svg>
+</div>
+
+Pasul 3. Reprezentăm la fel și celelalte fracții. Observăm că fiecare copil a parcurs tot o jumătate din drum:
+
+<Katex>
+{String.raw`
+\frac{1}{2} = \frac{2}{4} = \frac{3}{6} = \frac{4}{8}
+`}
+</Katex>
+
+Toți cei patru copii au parcurs aceeași distanță.

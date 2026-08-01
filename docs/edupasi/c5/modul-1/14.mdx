@@ -1,0 +1,210 @@
+---
+sidebar_position: 14
+slug: /edupasi/c5/modul-1/14
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C12 - Scrierea în baza 10 și baza 2
+
+:::warning Atenție
+Acest subiect este **foarte important** și va avea o pondere mare la următoarea evaluare.
+:::
+
+---
+
+:::danger Definiție 1
+Sistemul de numerație folosit zilnic este **<HighlightText color="red">sistemul zecimal</HighlightText>**, adică sistemul cu **<HighlightText color="red">baza 10</HighlightText>**.
+
+Folosim zece cifre: **0, 1, 2, 3, 4, 5, 6, 7, 8, 9**.
+
+Zece unități de un ordin formează o unitate de ordinul imediat superior.
+:::
+
+<Katex>
+{String.raw`
+\text{Exemplu: } 135_{(10)} \text{ este un număr scris în baza } \color{#FF6B6B}{10}
+`}
+</Katex>
+
+---
+
+## Proprietăți
+
+Orice număr natural se scrie ca o sumă de produse.
+În fiecare produs, un factor este o putere a lui 10, iar celălalt factor este o cifră a numărului.
+
+Calculăm pas cu pas:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+135_{(10)} &= 1 \cdot 100 + 3 \cdot 10 + 5 \cdot 1\\[6pt]
+&= \color{#FF6B6B}{1} \cdot 10^2 + \color{#4ECDC4}{3} \cdot 10^1 + \color{#9370DB}{5} \cdot 10^0
+\end{aligned}
+`}
+</Katex>
+
+Încă un exemplu:
+
+<Katex>
+{String.raw`
+2\,017_{(10)} = 2 \cdot 10^3 + 0 \cdot 10^2 + 1 \cdot 10^1 + 7 \cdot 10^0
+`}
+</Katex>
+
+:::tip De reținut
+<Katex>
+{String.raw`
+\begin{aligned}
+\overline{ab}_{(10)} &= a \cdot 10 + b\\[6pt]
+\overline{abc}_{(10)} &= a \cdot 10^2 + b \cdot 10 + c
+\end{aligned}
+`}
+</Katex>
+
+unde **<HighlightText color="red">a, b, c sunt cifre</HighlightText>**, iar **<HighlightText color="teal">a nu este 0</HighlightText>**.
+
+Aceasta este **scrierea în baza 10**.
+:::
+
+---
+
+## Sistemul de numerație binar
+
+:::danger Definiție 2
+Sistemul de numerație cu **<HighlightText color="teal">baza 2</HighlightText>** se numește **<HighlightText color="teal">sistem binar</HighlightText>**.
+
+Folosim numai două cifre: **0** și **1**. Ele se numesc **cifre binare**.
+:::
+
+Observăm cum aflăm valoarea unui număr scris în baza 2:
+
+<Katex>
+{String.raw`
+101_{(2)} = 1 \cdot 2^2 + 0 \cdot 2^1 + 1 \cdot 2^0 = 4 + 0 + 1 = 5_{(10)}
+`}
+</Katex>
+
+:::tip De reținut
+<Katex>
+{String.raw`
+\begin{aligned}
+\overline{ab}_{(2)} &= a \cdot 2 + b\\[6pt]
+\overline{abc}_{(2)} &= a \cdot 2^2 + b \cdot 2 + c
+\end{aligned}
+`}
+</Katex>
+
+unde **<HighlightText color="red">a, b, c sunt cifre binare</HighlightText>**, iar **<HighlightText color="teal">a nu este 0</HighlightText>**.
+
+Aceasta este **scrierea în baza 2**.
+:::
+
+---
+
+## Trecerea între baze
+
+### 1) Trecerea de la baza 10 la baza 2
+
+Folosim împărțiri succesive la 2.
+
+1. Împărțim numărul la 2. Notăm câtul și restul.
+2. Împărțim noul cât la 2. Notăm din nou câtul și restul.
+3. Repetăm până când câtul este 0.
+4. Scriem resturile de jos în sus.
+
+Calculăm pas cu pas pentru numărul 13:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+13 : 2 &\rightarrow \text{cât } 6,\ \text{rest } \color{#FF8C00}{1}\\[6pt]
+6 : 2 &\rightarrow \text{cât } 3,\ \text{rest } \color{#9370DB}{0}\\[6pt]
+3 : 2 &\rightarrow \text{cât } 1,\ \text{rest } \color{#4ECDC4}{1}\\[6pt]
+1 : 2 &\rightarrow \text{cât } 0,\ \text{rest } \color{#FF6B6B}{1}
+\end{aligned}
+`}
+</Katex>
+
+Ne oprim: câtul este 0.
+Citim resturile de jos în sus:
+
+<Katex>
+{String.raw`
+13_{(10)} = \color{#FF6B6B}{1}\color{#4ECDC4}{1}\color{#9370DB}{0}\color{#FF8C00}{1}_{(2)}
+`}
+</Katex>
+
+:::warning Atenție
+Resturile se scriu în **<HighlightText color="orange">ordine inversă</HighlightText>**: ultimul rest devine prima cifră a numărului în baza 2.
+:::
+
+### 2) Trecerea de la baza 2 la baza 10
+
+1. Înmulțim fiecare cifră cu puterea lui 2 corespunzătoare rangului ei.
+2. Adunăm produsele obținute.
+
+Calculăm pentru numărul de mai sus:
+
+<Katex>
+{String.raw`
+1101_{(2)} = 1 \cdot 2^3 + 1 \cdot 2^2 + 0 \cdot 2^1 + 1 \cdot 2^0 = 8 + 4 + 0 + 1 = 13_{(10)}
+`}
+</Katex>
+
+---
+
+## Aplicații rezolvate
+
+**1.** Scriem numărul 4 507 ca sumă de produse cu puteri ale lui 10.
+
+<Katex>
+{String.raw`
+4\,507_{(10)} = \color{#FF6B6B}{4} \cdot 10^3 + \color{#4ECDC4}{5} \cdot 10^2 + \color{#9370DB}{0} \cdot 10^1 + \color{#FF8C00}{7} \cdot 10^0
+`}
+</Katex>
+
+**2.** Scriem numărul 36 în baza 2.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+36 : 2 &\rightarrow \text{cât } 18,\ \text{rest } 0\\[6pt]
+18 : 2 &\rightarrow \text{cât } 9,\ \text{rest } 0\\[6pt]
+9 : 2 &\rightarrow \text{cât } 4,\ \text{rest } 1\\[6pt]
+4 : 2 &\rightarrow \text{cât } 2,\ \text{rest } 0\\[6pt]
+2 : 2 &\rightarrow \text{cât } 1,\ \text{rest } 0\\[6pt]
+1 : 2 &\rightarrow \text{cât } 0,\ \text{rest } 1
+\end{aligned}
+`}
+</Katex>
+
+Ne oprim: câtul este 0. Citim resturile de jos în sus:
+
+<Katex>
+{String.raw`
+36_{(10)} = 100100_{(2)}
+`}
+</Katex>
+
+**3.** Comparăm două numere scrise în baza 2. Le trecem pe amândouă în baza 10:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+11001_{(2)} &= 1 \cdot 2^4 + 1 \cdot 2^3 + 0 \cdot 2^2 + 0 \cdot 2^1 + 1 \cdot 2^0 = 16 + 8 + 1 = 25_{(10)}\\[6pt]
+1011_{(2)} &= 1 \cdot 2^3 + 0 \cdot 2^2 + 1 \cdot 2^1 + 1 \cdot 2^0 = 8 + 2 + 1 = 11_{(10)}
+\end{aligned}
+`}
+</Katex>
+
+Cum 25 este mai mare decât 11, rezultă:
+
+<Katex>
+{String.raw`
+11001_{(2)} > 1011_{(2)}
+`}
+</Katex>

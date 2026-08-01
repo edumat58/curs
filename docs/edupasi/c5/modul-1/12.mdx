@@ -1,0 +1,116 @@
+---
+sidebar_position: 12
+slug: /edupasi/c5/modul-1/12
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C10 - Factor comun
+
+---
+
+## Definiție
+
+:::danger Definiție 1
+**<HighlightText color="red">Factorul comun</HighlightText>** este un număr sau o literă care apare în **<HighlightText color="teal">fiecare termen</HighlightText>** al unei expresii.
+:::
+
+Termenii unei expresii sunt separați prin semnele **+** sau **–**.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Expresia: } \color{#FF6B6B}{6x} + \color{#4ECDC4}{9}\\[6pt]
+& \text{Primul termen: } \color{#FF6B6B}{6x} = \color{#9370DB}{3} \cdot 2x\\[6pt]
+& \text{Al doilea termen: } \color{#4ECDC4}{9} = \color{#9370DB}{3} \cdot 3\\[6pt]
+& \text{Factorul comun: } \color{#9370DB}{3}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Distributivitatea simplă
+
+Un număr lipit de o paranteză se înmulțește cu **fiecare termen** din paranteză.
+
+:::tip De reținut
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#FF6B6B}{a}(b + c) = \color{#FF6B6B}{a} \cdot b + \color{#FF6B6B}{a} \cdot c\\[8pt]
+& \color{#FF6B6B}{a}(b - c) = \color{#FF6B6B}{a} \cdot b - \color{#FF6B6B}{a} \cdot c
+\end{aligned}
+`}
+</Katex>
+:::
+
+**Exemplu:**
+
+<Katex>
+{String.raw`
+\color{#FF6B6B}{7}(x + 2) = \color{#FF6B6B}{7} \cdot x + \color{#FF6B6B}{7} \cdot 2 = 7x + 14
+`}
+</Katex>
+
+Regula funcționează și cu litere:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& x(y + 3) = xy + 3x\\[6pt]
+& 2a(x + y) = 2ax + 2ay\\[6pt]
+& a \cdot a = a^2
+\end{aligned}
+`}
+</Katex>
+
+### Metoda
+
+Scoatem factorul comun în trei pași:
+
+1. Căutăm numărul sau litera care apare în **fiecare termen**.
+2. Scriem fiecare termen ca produs: factorul comun înmulțit cu restul.
+3. Scriem factorul comun în fața parantezei. În paranteză rămân resturile.
+
+**Exemplul 1** — factor comun un număr:
+
+<Katex>
+{String.raw`
+6x + 9 = \color{#FF6B6B}{3} \cdot 2x + \color{#FF6B6B}{3} \cdot 3 = \color{#FF6B6B}{3}(2x + 3)
+`}
+</Katex>
+
+În paranteză rămâne ce **nu** a fost scos ca factor comun.
+
+**Exemplul 2** — factor comun o literă:
+
+Observăm că <Katex>{String.raw`x^2 = x \cdot x`}</Katex>, deci litera <Katex>{String.raw`x`}</Katex> apare în ambii termeni.
+
+<Katex>
+{String.raw`
+5x^2 + 7x = \color{#4ECDC4}{x} \cdot 5x + \color{#4ECDC4}{x} \cdot 7 = \color{#4ECDC4}{x}(5x + 7)
+`}
+</Katex>
+
+**Exemplul 3** — factor comun o paranteză:
+
+Paranteza <Katex>{String.raw`(x - 2)`}</Katex> apare în ambii termeni.
+
+<Katex>
+{String.raw`
+4\color{#9370DB}{(x - 2)} + 3x\color{#9370DB}{(x - 2)} = \color{#9370DB}{(x - 2)}(4 + 3x)
+`}
+</Katex>
+
+:::warning Atenție
+Când factorul comun rămâne **<HighlightText color="orange">singur</HighlightText>**, scriem **1** în paranteză pentru acel termen.
+
+<Katex>
+{String.raw`
+3x + 3 = \color{#FF6B6B}{3} \cdot x + \color{#FF6B6B}{3} \cdot 1 = \color{#FF6B6B}{3}(x + 1)
+`}
+</Katex>
+:::

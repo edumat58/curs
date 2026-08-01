@@ -1,0 +1,110 @@
+---
+sidebar_position: 2
+slug: /edupasi/c5/modul-4/02
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C23.2 - Împarțirea fracțiilor ordinare
+
+---
+
+## Observă și descoperă!
+
+De câte ori se cuprinde <Katex>{String.raw`\dfrac{1}{3}`}</Katex> în <Katex>{String.raw`\dfrac{4}{6}`}</Katex>?
+
+Calculăm pas cu pas:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{1. Simplificăm: } \frac{4}{6} = \frac{2}{3}\\[6pt]
+& \text{2. Descompunem: } \color{#FF6B6B}{\frac{2}{3}} = \color{#4ECDC4}{\frac{1}{3}} + \color{#4ECDC4}{\frac{1}{3}}\\[6pt]
+& \text{3. Deci: } \frac{4}{6} : \frac{1}{3} = 2
+\end{aligned}
+`}
+</Katex>
+
+Observăm că <Katex>{String.raw`\dfrac{1}{3}`}</Katex> se cuprinde de **2 ori** în <Katex>{String.raw`\dfrac{4}{6}`}</Katex>.
+
+Proba împărțirii se face prin înmulțire: câtul înmulțit cu împărțitorul dă deîmpărțitul.
+
+<Katex>
+{String.raw`
+2 \cdot \frac{1}{3} = \frac{2}{3} = \frac{4}{6}
+`}
+</Katex>
+
+---
+
+## Regulă Importantă
+
+:::danger Definiție
+**<HighlightText color="red">Inversa</HighlightText>** unei fracții se obține schimbând **<HighlightText color="red">numărătorul</HighlightText>** cu **<HighlightText color="teal">numitorul</HighlightText>** între ele.
+
+<Katex>
+{String.raw`
+\text{Inversa fracției } \color{#FF6B6B}{\frac{c}{d}} \text{ este } \color{#4ECDC4}{\frac{d}{c}}
+`}
+</Katex>
+:::
+
+:::tip De reținut
+Pentru a împărți două fracții:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{1. Prima fracție } \color{#FF6B6B}{\text{rămâne la fel}}\\[6pt]
+& \text{2. Semnul „:" devine „} \cdot \text{"}\\[6pt]
+& \text{3. A doua fracție } \color{#4ECDC4}{\text{se inversează}}
+\end{aligned}
+`}
+</Katex>
+
+<Katex>
+{String.raw`
+\frac{a}{b} : \frac{c}{d} = \frac{a}{b} \cdot \frac{d}{c}
+`}
+</Katex>
+:::
+
+**Exemplu:**
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \frac{5}{4} : \frac{3}{2} = \frac{5}{4} \cdot \color{#4ECDC4}{\frac{2}{3}}\\[6pt]
+& = \frac{5 \cdot 2}{4 \cdot 3} = \frac{10}{12}\\[6pt]
+& = \frac{5}{6} \quad (\color{#FF8C00}{\text{simplificăm cu 2}})
+\end{aligned}
+`}
+</Katex>
+
+:::warning Atenție
+Se inversează **numai** **<HighlightText color="teal">a doua fracție</HighlightText>** (împărțitorul). **<HighlightText color="red">Prima fracție</HighlightText>** (deîmpărțitul) nu se schimbă.
+:::
+
+---
+
+## Problemă rezolvată
+
+**Cât este jumătate din 3 sferturi?**
+
+Jumătate din <Katex>{String.raw`\dfrac{3}{4}`}</Katex> înseamnă <Katex>{String.raw`\dfrac{3}{4} : 2`}</Katex>.
+
+Calculăm pas cu pas:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{1. Scriem: } 2 = \frac{2}{1}\\[6pt]
+& \text{2. Inversăm a doua fracție: } \frac{3}{4} : \frac{2}{1} = \frac{3}{4} \cdot \color{#4ECDC4}{\frac{1}{2}}\\[6pt]
+& \text{3. Înmulțim: } \frac{3 \cdot 1}{4 \cdot 2} = \color{#9370DB}{\frac{3}{8}}
+\end{aligned}
+`}
+</Katex>
+
+Reținem: un număr natural se scrie ca fracție cu numitorul 1.

@@ -1,0 +1,176 @@
+---
+sidebar_position: 0
+slug: /edupasi/c5/modul-4/00
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C22 - Adunarea și scăderea fracțiilor ordinare
+
+---
+
+## Adunarea și Scăderea Fracțiilor
+
+### Fracții cu același numitor
+
+:::danger Definiție
+Când două fracții au **<HighlightText color="teal">același numitor</HighlightText>**:
+- adunăm sau scădem **<HighlightText color="red">numărătorii</HighlightText>**;
+- **<HighlightText color="teal">numitorul</HighlightText>** rămâne neschimbat.
+:::
+
+<Katex>
+{String.raw`
+\frac{\color{#FF6B6B}{a}}{\color{#4ECDC4}{n}} + \frac{\color{#FF6B6B}{b}}{\color{#4ECDC4}{n}} = \frac{\color{#FF6B6B}{a+b}}{\color{#4ECDC4}{n}}
+`}
+</Katex>
+
+Calculăm pas cu pas:
+
+<Katex>
+{String.raw`
+\frac{5}{13} + \frac{2}{13}
+`}
+</Katex>
+
+1. Verificăm numitorii: amândoi sunt 13.
+2. Adunăm numărătorii: 5 + 2 = 7.
+3. Păstrăm numitorul: 13.
+
+<Katex>
+{String.raw`
+\frac{5}{13} + \frac{2}{13} = \frac{\color{#FF6B6B}{7}}{\color{#4ECDC4}{13}}
+`}
+</Katex>
+
+La scădere procedăm la fel, dar scădem numărătorii:
+
+<Katex>
+{String.raw`
+\frac{5}{13} - \frac{2}{13} = \frac{5-2}{13} = \frac{\color{#FF6B6B}{3}}{\color{#4ECDC4}{13}}
+`}
+</Katex>
+
+### Fracții cu numitori diferiți
+
+Dacă numitorii sunt diferiți, aducem fracțiile la **<HighlightText color="orange">numitor comun</HighlightText>** prin **amplificare**.
+
+1. Alegem numitorul comun.
+2. Amplificăm fiecare fracție.
+3. Adunăm sau scădem numărătorii.
+
+Calculăm pas cu pas:
+
+<Katex>
+{String.raw`
+\frac{5}{6} + \frac{3}{8}
+`}
+</Katex>
+
+1. Numitorul comun este 24.
+2. Amplificăm prima fracție cu 4 și a doua cu 3.
+3. Adunăm numărătorii: 20 + 9 = 29.
+
+<Katex>
+{String.raw`
+\frac{5}{6} + \frac{3}{8} = \frac{\color{#FF6B6B}{20}}{\color{#4ECDC4}{24}} + \frac{\color{#FF6B6B}{9}}{\color{#4ECDC4}{24}} = \frac{\color{#FF6B6B}{29}}{\color{#4ECDC4}{24}}
+`}
+</Katex>
+
+:::warning Atenție
+Dacă este posibil, **simplificăm** rezultatul.
+
+<Katex>
+{String.raw`
+\frac{3}{4} - \frac{1}{4} = \frac{2}{4} = \frac{\color{#FF6B6B}{1}}{\color{#4ECDC4}{2}}
+`}
+</Katex>
+:::
+
+---
+
+## Operații între un număr natural și o fracție
+
+Scriem numărul natural ca fracție cu **<HighlightText color="teal">numitorul 1</HighlightText>**, apoi aducem la numitor comun.
+
+Calculăm pas cu pas:
+
+<Katex>
+{String.raw`
+5 + \frac{3}{7}
+`}
+</Katex>
+
+1. Scriem numărul natural ca fracție:
+
+<Katex>
+{String.raw`
+5 = \frac{5}{1}
+`}
+</Katex>
+
+2. Amplificăm cu 7:
+
+<Katex>
+{String.raw`
+\frac{5}{1} = \frac{5 \cdot 7}{7} = \frac{35}{7}
+`}
+</Katex>
+
+3. Adunăm fracțiile cu același numitor:
+
+<Katex>
+{String.raw`
+\frac{35}{7} + \frac{3}{7} = \frac{\color{#FF6B6B}{38}}{\color{#4ECDC4}{7}}
+`}
+</Katex>
+
+La scădere procedăm la fel:
+
+<Katex>
+{String.raw`
+5 - \frac{3}{7} = \frac{35}{7} - \frac{3}{7} = \frac{\color{#FF6B6B}{32}}{\color{#4ECDC4}{7}}
+`}
+</Katex>
+
+:::tip De reținut
+<Katex>
+{String.raw`
+n + \frac{a}{b} = \frac{n \cdot b + a}{b} \qquad n - \frac{a}{b} = \frac{n \cdot b - a}{b}
+`}
+</Katex>
+:::
+
+---
+
+## Proprietățile adunării
+
+Adunarea fracțiilor ordinare este **<HighlightText color="red">comutativă</HighlightText>**: termenii pot fi adunați în orice ordine.
+
+<Katex>
+{String.raw`
+\frac{1}{5} + \frac{2}{5} = \frac{2}{5} + \frac{1}{5} = \frac{3}{5}
+`}
+</Katex>
+
+Adunarea fracțiilor ordinare este **<HighlightText color="teal">asociativă</HighlightText>**: termenii pot fi grupați în moduri diferite.
+
+<Katex>
+{String.raw`
+\left(\frac{1}{7} + \frac{2}{7}\right) + \frac{3}{7} = \frac{1}{7} + \left(\frac{2}{7} + \frac{3}{7}\right) = \frac{6}{7}
+`}
+</Katex>
+
+Numărul **<HighlightText color="orange">0 este element neutru</HighlightText>**: adunarea cu 0 nu schimbă fracția.
+
+<Katex>
+{String.raw`
+\frac{4}{9} + 0 = \frac{4}{9}
+`}
+</Katex>
+
+:::danger Atenție
+Aceste proprietăți **nu** sunt adevărate pentru scădere.
+:::

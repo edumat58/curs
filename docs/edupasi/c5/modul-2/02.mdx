@@ -1,0 +1,228 @@
+---
+sidebar_position: 2
+slug: /edupasi/c5/modul-2/02
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C15.2 - Metoda comparației
+
+---
+
+## Definiție
+
+:::danger Definiție
+Prin **<HighlightText color="red">metoda comparației</HighlightText>** comparăm două situații ale aceleiași probleme.
+
+Eliminăm o **<HighlightText color="teal">necunoscută</HighlightText>**. O aflăm pe cealaltă.
+
+Apoi înlocuim valoarea găsită într-una din situații. Așa aflăm și necunoscuta eliminată.
+:::
+
+---
+
+## Situații posibile
+
+Eliminăm o necunoscută în două moduri:
+
+1. Prin **<HighlightText color="red">scădere</HighlightText>**. Uneori, înainte de scădere, aducem datele la același **<HighlightText color="orange">termen de comparație</HighlightText>**.
+2. Prin **<HighlightText color="teal">înlocuire</HighlightText>**.
+
+---
+
+## Exemple
+
+> Exemplul 1
+
+:::note Problema
+6 pixuri și 5 creioane costă 28 lei.
+6 pixuri și 7 creioane costă 32 lei.
+Cât costă un creion? Cât costă un pix?
+:::
+
+#### Rezolvare
+
+**Pasul 1.** Așezăm datele una sub alta:
+
+| Pixuri | Creioane | Suma |
+|:------:|:--------:|:------:|
+| 6 | 5 | 28 lei |
+| 6 | 7 | 32 lei |
+
+**Pasul 2.** Observăm același **termen de comparație**: 6 pixuri apar pe ambele rânduri.
+
+**Pasul 3.** Scădem rândurile. Pixurile se elimină. Diferența de bani vine doar de la creioane:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& 7 - 5 = \color{#FF6B6B}{2} \text{ creioane}\\[6pt]
+& 32 - 28 = \color{#4ECDC4}{4} \text{ lei}
+\end{aligned}
+`}
+</Katex>
+
+**Pasul 4.** Aflăm prețul unui creion:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& 2 \text{ creioane} \rightarrow 4 \text{ lei}\\[6pt]
+& 1 \text{ creion} \rightarrow 4 : 2 = \color{#FF6B6B}{2} \text{ lei}
+\end{aligned}
+`}
+</Katex>
+
+**Pasul 5.** Înlocuim în primul rând. Cele 5 creioane costă 5 × 2 = 10 lei:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& 6 \text{ pixuri} \rightarrow 28 - 10 = 18 \text{ lei}\\[6pt]
+& 1 \text{ pix} \rightarrow 18 : 6 = \color{#4ECDC4}{3} \text{ lei}
+\end{aligned}
+`}
+</Katex>
+
+**R:** 1 creion costă **2 lei**, 1 pix costă **3 lei**.
+
+---
+
+:::warning Atenție
+Dacă rândurile nu au același **termen de comparație**, îl obținem prin **înmulțire**.
+Înmulțim unul dintre rânduri sau, la nevoie, ambele rânduri.
+:::
+
+---
+
+> Exemplul 2
+
+:::note Problema
+3 saci de ovăz și 5 saci de grâu cântăresc 595 kg.
+6 saci de ovăz și 3 saci de grâu cântăresc 630 kg.
+Cât cântărește un sac de ovăz? Cât cântărește un sac de grâu?
+:::
+
+#### Rezolvare
+
+**Pasul 1.** Așezăm datele una sub alta:
+
+| Ovăz | Grâu | Greutate |
+|:----:|:----:|:--------:|
+| 3 saci | 5 saci | 595 kg |
+| 6 saci | 3 saci | 630 kg |
+
+**Pasul 2.** Nu avem același termen de comparație. Înmulțim primul rând cu 2:
+
+| Ovăz | Grâu | Greutate |
+|:----:|:----:|:--------:|
+| 6 saci | 10 saci | 1 190 kg |
+| 6 saci | 3 saci | 630 kg |
+
+Acum avem termen de comparație: 6 saci de ovăz.
+
+**Pasul 3.** Scădem rândurile. Sacii de ovăz se elimină:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& 10 - 3 = \color{#FF6B6B}{7} \text{ saci de grâu}\\[6pt]
+& 1\,190 - 630 = \color{#4ECDC4}{560} \text{ kg}
+\end{aligned}
+`}
+</Katex>
+
+**Pasul 4.** Aflăm un sac de grâu:
+
+<Katex>
+{String.raw`
+1 \text{ sac de grâu} \rightarrow 560 : 7 = \color{#FF6B6B}{80} \text{ kg}
+`}
+</Katex>
+
+**Pasul 5.** Înlocuim în primul rând. Cei 5 saci de grâu cântăresc 5 × 80 = 400 kg:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& 3 \text{ saci de ovăz} \rightarrow 595 - 400 = 195 \text{ kg}\\[6pt]
+& 1 \text{ sac de ovăz} \rightarrow 195 : 3 = \color{#4ECDC4}{65} \text{ kg}
+\end{aligned}
+`}
+</Katex>
+
+**R:** 1 sac de ovăz cântărește **65 kg**, 1 sac de grâu cântărește **80 kg**.
+
+---
+
+> Exemplul 3
+
+:::note Problema
+Un croitor folosește pentru 7 rochii și 5 fuste 31 m de stofă.
+Pentru 2 rochii și 6 fuste folosește 18 m de stofă.
+Câți metri de stofă se folosesc pentru o rochie? Dar pentru o fustă?
+:::
+
+#### Rezolvare
+
+**Pasul 1.** Așezăm datele una sub alta:
+
+| Rochii | Fuste | Stofă |
+|:------:|:-----:|:-----:|
+| 7 | 5 | 31 m |
+| 2 | 6 | 18 m |
+
+**Pasul 2.** Nu avem același termen de comparație. Aici înmulțim ambele rânduri: primul rând cu 2, al doilea rând cu 7:
+
+| Rochii | Fuste | Stofă |
+|:------:|:-----:|:-----:|
+| 14 | 10 | 62 m |
+| 14 | 42 | 126 m |
+
+Acum avem termen de comparație: 14 rochii.
+
+**Pasul 3.** Scădem rândurile. Rochiile se elimină:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& 42 - 10 = \color{#FF6B6B}{32} \text{ fuste}\\[6pt]
+& 126 - 62 = \color{#4ECDC4}{64} \text{ m de stofă}
+\end{aligned}
+`}
+</Katex>
+
+**Pasul 4.** Aflăm stofa pentru o fustă:
+
+<Katex>
+{String.raw`
+1 \text{ fustă} \rightarrow 64 : 32 = \color{#FF6B6B}{2} \text{ m}
+`}
+</Katex>
+
+**Pasul 5.** Înlocuim în primul rând. Cele 5 fuste cer 5 × 2 = 10 m:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& 7 \text{ rochii} \rightarrow 31 - 10 = 21 \text{ m}\\[6pt]
+& 1 \text{ rochie} \rightarrow 21 : 7 = \color{#4ECDC4}{3} \text{ m}
+\end{aligned}
+`}
+</Katex>
+
+**R:** Pentru o rochie se folosesc **3 m de stofă**, pentru o fustă **2 m de stofă**.
+
+---
+
+:::tip De reținut
+Pașii metodei comparației:
+
+1. Așezăm datele una sub alta.
+2. Aducem rândurile la același **termen de comparație**. Dacă este nevoie, înmulțim.
+3. Scădem rândurile. Rămâne o singură necunoscută.
+4. Aflăm necunoscuta rămasă prin împărțire.
+5. Înlocuim valoarea găsită. Aflăm și a doua necunoscută.
+:::

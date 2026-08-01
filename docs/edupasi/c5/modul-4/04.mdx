@@ -1,0 +1,163 @@
+---
+sidebar_position: 4
+slug: /edupasi/c5/modul-4/04
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C25 - Scrierea numerelor zecimale neperiodice sub formă de fracții ordinare
+
+---
+
+## Observă și descoperă!
+
+Observăm ce se întâmplă când mărim un număr de 10, de 100, de 1 000 de ori.
+
+| Numărul | 3 | 13 |
+| :--- | :--- | :--- |
+| Mărit de 10 ori | 30 | 130 |
+| Mărit de 100 de ori | 300 | 1 300 |
+| Mărit de 1 000 de ori | 3 000 | 13 000 |
+
+Observăm și micșorarea de 10, de 100, de 1 000 de ori.
+
+| Numărul | 3 000 | 13 000 |
+| :--- | :--- | :--- |
+| Micșorat de 10 ori | 300 | 1 300 |
+| Micșorat de 100 de ori | 30 | 130 |
+| Micșorat de 1 000 de ori | 3 | 13 |
+
+:::tip De reținut
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Mărire de 10 ori: } \color{#FF6B6B}{\text{adăugăm un zero}}\\[6pt]
+& \text{Micșorare de 10 ori: } \color{#4ECDC4}{\text{tăiem un zero}}
+\end{aligned}
+`}
+</Katex>
+:::
+
+---
+
+## Formarea fracțiilor zecimale
+
+Micșorăm numărul 1 de 10 ori. Rezultatul nu mai este număr natural. Îl scriem cu **virgulă**.
+
+:::danger Definiție
+- **<HighlightText color="red">O zecime</HighlightText>** = 1 micșorat de 10 ori
+- **<HighlightText color="teal">O sutime</HighlightText>** = 1 micșorat de 100 de ori
+- **<HighlightText color="orange">O miime</HighlightText>** = 1 micșorat de 1 000 de ori
+:::
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& 1 : 10 = \color{#FF6B6B}{0{,}1} \quad (\text{o zecime})\\[6pt]
+& 1 : 100 = \color{#4ECDC4}{0{,}01} \quad (\text{o sutime})\\[6pt]
+& 1 : 1\,000 = \color{#9370DB}{0{,}001} \quad (\text{o miime})
+\end{aligned}
+`}
+</Katex>
+
+Reținem echivalențele:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Un întreg are } \color{#FF6B6B}{\text{10 zecimi}}: \quad 0{,}1 \cdot 10 = 1\\[6pt]
+& \text{Un întreg are } \color{#4ECDC4}{\text{100 de sutimi}}: \quad 0{,}01 \cdot 100 = 1
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Structura unei fracții zecimale
+
+:::danger Definiție
+O **fracție zecimală** are două părți:
+- **<HighlightText color="red">partea întreagă</HighlightText>** — cifrele din fața virgulei;
+- **<HighlightText color="teal">partea fracționară</HighlightText>** — cifrele de după virgulă.
+:::
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Exemplu: } \color{#FF6B6B}{23}\color{#4ECDC4}{{,}456}\\[6pt]
+& \text{Partea întreagă: } \color{#FF6B6B}{23}\\[6pt]
+& \text{Partea fracționară: } \color{#4ECDC4}{456}
+\end{aligned}
+`}
+</Katex>
+
+Citim numărul 23,456 în trei pași:
+1. Citim partea întreagă: „douăzeci și trei".
+2. Spunem „**<HighlightText color="teal">virgulă</HighlightText>**".
+3. Citim partea fracționară: „patru sute cincizeci și șase".
+
+:::warning Atenție
+Numerele naturale sunt fracții zecimale care au după virgulă numai cifre de 0.
+
+<Katex>
+{String.raw`
+\color{#FF6B6B}{5} = 5{,}0 = 5{,}00 = 5{,}000
+`}
+</Katex>
+:::
+
+---
+
+## Transformări
+
+### 1. Din fracție ordinară în fracție zecimală
+
+Calculăm pas cu pas:
+1. Scriem numărătorul.
+2. Numărăm zerourile de la numitor.
+3. Punem virgula astfel încât după ea să rămână tot atâtea cifre câte zerouri am numărat.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \frac{234}{10} = 23{,}4 \quad (\color{#FF6B6B}{\text{un zero} \to \text{o cifră după virgulă}})\\[8pt]
+& \frac{234}{100} = 2{,}34 \quad (\color{#4ECDC4}{\text{două zerouri} \to \text{două cifre}})\\[8pt]
+& \frac{1\,234}{1\,000} = 1{,}234 \quad (\color{#9370DB}{\text{trei zerouri} \to \text{trei cifre}})
+\end{aligned}
+`}
+</Katex>
+
+### 2. Din fracție zecimală în fracție ordinară
+
+Calculăm pas cu pas:
+1. La numărător scriem numărul fără virgulă.
+2. Numărăm cifrele de după virgulă.
+3. La numitor scriem 1 urmat de tot atâtea zerouri câte cifre am numărat.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& 3{,}7 = \frac{37}{10} \quad (\color{#FF6B6B}{\text{o cifră} \to \text{un zero}})\\[8pt]
+& 1{,}57 = \frac{157}{100} \quad (\color{#4ECDC4}{\text{două cifre} \to \text{două zerouri}})\\[8pt]
+& 2{,}013 = \frac{2\,013}{1\,000} \quad (\color{#9370DB}{\text{trei cifre} \to \text{trei zerouri}})
+\end{aligned}
+`}
+</Katex>
+
+Uneori fracția obținută se poate **simplifica**:
+
+<Katex>
+{String.raw`
+0{,}12 = \frac{12}{100} = \frac{12 : 4}{100 : 4} = \frac{3}{25}
+`}
+</Katex>
+
+:::tip De reținut
+<Katex>
+{String.raw`
+\color{#FF6B6B}{\text{cifre după virgulă}} = \color{#4ECDC4}{\text{zerouri la numitor}}
+`}
+</Katex>
+:::

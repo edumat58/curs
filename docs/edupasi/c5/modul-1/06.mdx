@@ -1,0 +1,96 @@
+---
+sidebar_position: 6
+slug: /edupasi/c5/modul-1/06
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C6.1 - Mulțimi. Mulțimea nr. naturale
+
+---
+
+## Mulțimi
+
+:::danger Definiție 1
+O **<HighlightText color="red">mulțime</HighlightText>** este o colecție de **<HighlightText color="teal">elemente</HighlightText>**.
+
+Mulțimea se notează cu **literă mare de tipar**. Elementele se scriu între **acolade**.
+:::
+
+**Exemplu:** scriem mulțimea literelor cuvântului „mama”.
+
+1. Literele cuvântului sunt: m, a, m, a.
+2. Păstrăm fiecare literă **o singură dată**: m și a.
+
+<Katex>
+{String.raw`
+\color{#FF6B6B}{B} = \{\color{#4ECDC4}{m;\,a}\}
+`}
+</Katex>
+
+:::warning Atenție
+Într-o mulțime, fiecare element se scrie **<HighlightText color="red">o singură dată</HighlightText>**.
+:::
+
+---
+
+## Mulțimea nr. naturale
+
+:::danger Definiție 2
+**<HighlightText color="teal">Numerele naturale</HighlightText>** sunt numerele cu care numărăm: 0, 1, 2, 3, 4, …
+
+Mulțimea lor se notează astfel:
+
+<Katex>
+{String.raw`
+\mathbb{N} = \{0;\,1;\,2;\,3;\,4;\,\ldots\}
+`}
+</Katex>
+:::
+
+:::tip De reținut
+Punctele de suspensie arată că numerele naturale **nu se termină**. Mulțimea **<HighlightText color="orange">N</HighlightText>** este **infinită**.
+:::
+
+### Definirea unei mulțimi matematice
+
+O mulțime se poate scrie și printr-o **condiție**:
+
+<Katex>
+{String.raw`
+D = \{\color{#FF6B6B}{x} \mid \color{#4ECDC4}{\text{condiția}}\}
+`}
+</Katex>
+
+**Citim:** mulțimea **D** conține toate elementele **x** care respectă condiția.
+
+**Exemplul 1:** aflăm elementele mulțimii:
+
+<Katex>
+{String.raw`
+D = \{x \mid 2 < x \le 6\}, \quad x \in \mathbb{N}
+`}
+</Katex>
+
+1. **x** este **strict mai mare** decât 2. Deci 2 **nu** intră în mulțime.
+2. **x** este **mai mic sau egal** cu 6. Deci 6 intră în mulțime.
+3. Numerele naturale potrivite sunt: 3, 4, 5, 6.
+
+<Katex>
+{String.raw`
+\Rightarrow D = \{3;\,4;\,5;\,6\}
+`}
+</Katex>
+
+**Exemplul 2:** aflăm mulțimea vocalelor. Vocalele sunt: a, e, i, o, u.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& F = \{x \mid x \text{ este vocală}\}\\[6pt]
+& \Rightarrow F = \{a;\,e;\,i;\,o;\,u\}
+\end{aligned}
+`}
+</Katex>

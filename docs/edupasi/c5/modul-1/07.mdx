@@ -1,0 +1,292 @@
+---
+sidebar_position: 7
+slug: /edupasi/c5/modul-1/07
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C6.2 - Scrierea si citirea nr. naturale
+
+---
+
+## Ne reamintim
+
+### Scrierea cu cifre arabe
+
+Orice număr natural se scrie cu cifrele 0, 1, 2, 3, 4, 5, 6, 7, 8, 9.
+
+Fiecare cifră ocupă un **<HighlightText color="red">ordin</HighlightText>**: unități, zeci, sute, mii și așa mai departe.
+
+Scriem cu cifre numărul „o mie șapte".
+
+1. „O mie" înseamnă cifra **1** la ordinul miilor.
+2. „Șapte" înseamnă cifra **7** la ordinul unităților.
+3. Ordinele care lipsesc (sutele și zecile) se completează cu **0**.
+
+| mii | sute | zeci | unități |
+|-----|------|------|---------|
+| **1** | 0 | 0 | **7** |
+
+<Katex>
+{String.raw`
+\text{o mie șapte} = \color{#FF6B6B}{1}\,00\color{#4ECDC4}{7}
+`}
+</Katex>
+
+:::warning Atenție
+Zeroul ține locul unui ordin gol. Fără el, numărul se schimbă: <Katex>{String.raw`1\,007 \neq 17`}</Katex>.
+:::
+
+Scriem cu cifre numărul „șapte milioane treizeci de mii paisprezece".
+
+1. „Șapte milioane" înseamnă cifra **7** la ordinul milioanelor.
+2. „Treizeci de mii" înseamnă cifra **3** la ordinul zecilor de mii.
+3. „Paisprezece" înseamnă cifra **1** la ordinul zecilor și cifra **4** la ordinul unităților.
+4. Ordinele care lipsesc se completează cu **0**.
+
+| milioane | sute de mii | zeci de mii | mii | sute | zeci | unități |
+|----------|-------------|-------------|-----|------|------|---------|
+| **7** | 0 | **3** | 0 | 0 | **1** | **4** |
+
+<Katex>
+{String.raw`
+\text{șapte milioane treizeci de mii paisprezece} = \color{#FF6B6B}{7}\,0\color{#4ECDC4}{3}0\,0\color{#9370DB}{1}\color{#FF8C00}{4}
+`}
+</Katex>
+
+---
+
+### Scrierea cu cifre romane
+
+| Simbol | Valoare |
+|--------|---------|
+| I | 1 |
+| V | 5 |
+| X | 10 |
+| L | 50 |
+| C | 100 |
+| D | 500 |
+| M | 1000 |
+
+:::tip De reținut
+- Simbolul mai mic scris **<HighlightText color="teal">după</HighlightText>** unul mai mare se **adună**: <Katex>{String.raw`XI = 10 + 1 = 11`}</Katex>
+- Simbolul mai mic scris **<HighlightText color="red">înainte</HighlightText>** de unul mai mare se **scade**: <Katex>{String.raw`IX = 10 - 1 = 9`}</Katex>
+:::
+
+Scriem numărul 24 cu cifre romane.
+
+1. Descompunem: <Katex>{String.raw`24 = 10 + 10 + 4`}</Katex>
+2. Scriem <Katex>{String.raw`10 + 10 = XX`}</Katex>
+3. Scriem <Katex>{String.raw`4 = 5 - 1 = IV`}</Katex>
+4. Așezăm totul: <Katex>{String.raw`24 = XXIV`}</Katex>
+
+Calculăm la fel:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& 12 = 10 + 2 = \color{#4ECDC4}{XII}\\[6pt]
+& 78 = 50 + 10 + 10 + 5 + 3 = \color{#9370DB}{LXXVIII}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Descompunerea unui nr. natural
+
+:::danger Definiție
+Un număr cu **<HighlightText color="red">cifre necunoscute</HighlightText>** se scrie cu o **<HighlightText color="teal">linie deasupra</HighlightText>**: <Katex>{String.raw`\overline{ab}`}</Katex>.
+
+Linia arată că <Katex>a</Katex> și <Katex>b</Katex> sunt **cifrele** numărului, nu o înmulțire.
+:::
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \overline{ab} \text{ are două cifre:}\\[6pt]
+& \color{#FF6B6B}{a} - \text{cifra zecilor}\\[6pt]
+& \color{#4ECDC4}{b} - \text{cifra unităților}
+\end{aligned}
+`}
+</Katex>
+
+:::tip De reținut
+Descompunem numărul ordin cu ordin:
+
+<Katex>
+{String.raw`
+\overline{abcd} = \color{#FF6B6B}{a \times 1\,000} + \color{#4ECDC4}{b \times 100} + \color{#9370DB}{c \times 10} + \color{#FF8C00}{d \times 1}
+`}
+</Katex>
+:::
+
+**Exemplu:**
+
+<Katex>
+{String.raw`
+2\,357 = \color{#FF6B6B}{2 \times 1\,000} + \color{#4ECDC4}{3 \times 100} + \color{#9370DB}{5 \times 10} + \color{#FF8C00}{7 \times 1}
+`}
+</Katex>
+
+---
+
+## Metode
+
+**1. Aflăm cifrele <Katex>a</Katex> și <Katex>b</Katex> dacă:** <Katex>{String.raw`459 = a \times 100 + b \times 10 + 9`}</Katex>
+
+1. Descompunem numărul 459:
+
+<Katex>
+{String.raw`
+459 = \color{#FF6B6B}{4 \times 100} + \color{#4ECDC4}{5 \times 10} + 9
+`}
+</Katex>
+
+2. Comparăm cele două scrieri, ordin cu ordin:
+
+| | sute | zeci | unități |
+|---|------|------|---------|
+| numărul | **4** | **5** | 9 |
+| forma dată | a | b | 9 |
+
+3. Citim din tabel:
+
+<Katex>
+{String.raw`
+\color{#FF6B6B}{a = 4} \qquad \color{#4ECDC4}{b = 5}
+`}
+</Katex>
+
+4. Verificăm:
+
+<Katex>
+{String.raw`
+4 \times 100 + 5 \times 10 + 9 = 400 + 50 + 9 = 459
+`}
+</Katex>
+
+---
+
+**2. Aflăm cifrele <Katex>a</Katex>, <Katex>b</Katex> și <Katex>c</Katex> dacă:** <Katex>{String.raw`1\,024 = a \times 1\,000 + b \times 100 + c \times 10 + 4`}</Katex>
+
+1. Descompunem numărul 1 024:
+
+<Katex>
+{String.raw`
+1\,024 = \color{#FF6B6B}{1 \times 1\,000} + \color{#4ECDC4}{0 \times 100} + \color{#9370DB}{2 \times 10} + 4
+`}
+</Katex>
+
+2. Comparăm cele două scrieri, ordin cu ordin:
+
+| | mii | sute | zeci | unități |
+|---|-----|------|------|---------|
+| numărul | **1** | **0** | **2** | 4 |
+| forma dată | a | b | c | 4 |
+
+3. Citim din tabel:
+
+<Katex>
+{String.raw`
+\color{#FF6B6B}{a = 1} \qquad \color{#4ECDC4}{b = 0} \qquad \color{#9370DB}{c = 2}
+`}
+</Katex>
+
+4. Verificăm:
+
+<Katex>
+{String.raw`
+1 \times 1\,000 + 0 \times 100 + 2 \times 10 + 4 = 1\,000 + 0 + 20 + 4 = 1\,024
+`}
+</Katex>
+
+---
+
+**3. Găsim toate numerele** <Katex>{String.raw`x = \overline{1ab}`}</Katex>**, cu** <Katex>{String.raw`a = 3 \times b`}</Katex>
+
+:::warning Atenție
+Orice **<HighlightText color="red">cifră</HighlightText>** este cuprinsă între **0 și 9**.
+
+<Katex>
+{String.raw`
+a \in \{0; 1; 2; \dots; 9\} \qquad b \in \{0; 1; 2; \dots; 9\}
+`}
+</Katex>
+:::
+
+1. Descompunem numărul:
+
+<Katex>
+{String.raw`
+x = 100 + a \times 10 + b
+`}
+</Katex>
+
+2. Înlocuim <Katex>{String.raw`a = 3 \times b`}</Katex>:
+
+<Katex>
+{String.raw`
+x = 100 + 30 \times b + b
+`}
+</Katex>
+
+3. Încercăm valorile lui <Katex>b</Katex>, pe rând:
+
+| <Katex>b</Katex> | <Katex>{String.raw`a = 3 \times b`}</Katex> | <Katex>x</Katex> | este soluție? |
+|---|---|---|---|
+| 0 | 0 | 100 | DA |
+| 1 | 3 | 131 | DA |
+| 2 | 6 | 162 | DA |
+| 3 | 9 | 193 | DA |
+| 4 | 12 | — | NU, 12 nu este cifră |
+
+4. La <Katex>{String.raw`b = 4`}</Katex> ne oprim, pentru că <Katex>{String.raw`a = 12 \notin \{0; 1; 2; \dots; 9\}`}</Katex>.
+
+**Răspuns:**
+
+<Katex>
+{String.raw`
+x \in \{\color{#FF6B6B}{100};\; \color{#4ECDC4}{131};\; \color{#9370DB}{162};\; \color{#FF8C00}{193}\}
+`}
+</Katex>
+
+---
+
+**4. Găsim toate numerele** <Katex>{String.raw`x = \overline{ab2a}`}</Katex>**, cu** <Katex>{String.raw`b = a + 4`}</Katex>
+
+:::danger Definiție
+**<HighlightText color="red">Prima cifră</HighlightText>** a unui număr nu poate fi 0.
+
+Aici prima cifră este <Katex>a</Katex>, deci:
+
+<Katex>
+{String.raw`
+a \neq 0 \Rightarrow a \in \{1; 2; 3; \dots; 9\}
+`}
+</Katex>
+:::
+
+1. Observăm că <Katex>{String.raw`b = a + 4`}</Katex> trebuie să fie cifră, adică cel mult 9.
+2. Încercăm valorile lui <Katex>a</Katex>, pe rând:
+
+| <Katex>a</Katex> | <Katex>{String.raw`b = a + 4`}</Katex> | <Katex>x</Katex> | este soluție? |
+|---|---|---|---|
+| 1 | 5 | 1521 | DA |
+| 2 | 6 | 2622 | DA |
+| 3 | 7 | 3723 | DA |
+| 4 | 8 | 4824 | DA |
+| 5 | 9 | 5925 | DA |
+| 6 | 10 | — | NU, 10 nu este cifră |
+
+3. La <Katex>{String.raw`a = 6`}</Katex> ne oprim, pentru că <Katex>{String.raw`b = 10 \notin \{0; 1; 2; \dots; 9\}`}</Katex>.
+
+**Răspuns:**
+
+<Katex>
+{String.raw`
+x \in \{1\,521;\; 2\,622;\; 3\,723;\; 4\,824;\; 5\,925\}
+`}
+</Katex>

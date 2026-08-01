@@ -1,0 +1,128 @@
+---
+sidebar_position: 8
+slug: /edupasi/c5/modul-3/08
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C21.1 - Cel mai mic multiplu comun a două numere naturale
+
+---
+
+## Definiție
+
+:::danger Definiție
+**<HighlightText color="red">Cel mai mic multiplu comun</HighlightText>** a două numere naturale este cel mai mic număr, **diferit de 0**, care este **<HighlightText color="teal">multiplu al ambelor numere</HighlightText>**.
+
+Îl notăm pe scurt **c.m.m.m.c.** Pentru numerele 10 și 15 scriem **[10, 15]**.
+:::
+
+Căutăm pas cu pas [10, 15].
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{1. Multiplii lui } \color{#FF6B6B}{10}: \; 0,\ 10,\ 20,\ \color{#FF8C00}{30},\ 40,\ 50,\ 60, \ldots\\[6pt]
+& \text{2. Multiplii lui } \color{#4ECDC4}{15}: \; 0,\ 15,\ \color{#FF8C00}{30},\ 45,\ 60, \ldots\\[6pt]
+& \text{3. Multiplii comuni: } 0,\ \color{#FF8C00}{30},\ 60, \ldots
+\end{aligned}
+`}
+</Katex>
+
+Observăm că cel mai mic multiplu comun, diferit de 0, este **<HighlightText color="orange">30</HighlightText>**.
+
+<Katex>
+{String.raw`
+[10, 15] = 30
+`}
+</Katex>
+
+---
+
+## Algoritmul de determinare
+
+:::tip De reținut
+Aflăm c.m.m.m.c. în trei pași:
+
+1. Descompunem fiecare număr în produs de puteri de numere prime.
+2. Alegem toți factorii primi care apar, **o singură dată**, fiecare cu **exponentul cel mai mare**.
+3. Înmulțim factorii aleși.
+:::
+
+**Exemplul 1:** calculăm [10, 15].
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: } 10 = 2 \cdot 5 \qquad 15 = 3 \cdot 5\\[6pt]
+& \text{Pasul 2: factorii sunt } \color{#FF6B6B}{2},\ \color{#4ECDC4}{3},\ \color{#9370DB}{5}\\[6pt]
+& \text{Pasul 3: } [10, 15] = 2 \cdot 3 \cdot 5 = 30
+\end{aligned}
+`}
+</Katex>
+
+**Exemplul 2:** calculăm [8, 12].
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: } 8 = 2^{3} \qquad 12 = 2^{2} \cdot 3\\[6pt]
+& \text{Pasul 2: luăm } \color{#FF6B6B}{2^{3}} \text{ (exponentul cel mai mare) și } \color{#4ECDC4}{3}\\[6pt]
+& \text{Pasul 3: } [8, 12] = 2^{3} \cdot 3 = 8 \cdot 3 = 24
+\end{aligned}
+`}
+</Katex>
+
+:::warning Atenție
+Dacă numărul mare este multiplu al numărului mic, atunci **c.m.m.m.c. este chiar numărul mare**.
+
+<Katex>
+{String.raw`
+[3, 9] = 9 \qquad [5, 10] = 10
+`}
+</Katex>
+:::
+
+---
+
+## Amintește-ți!
+
+Completăm tabelul. Primul rând este completat ca model.
+
+| a | b | Multiplii nenuli ai lui a | Multiplii nenuli ai lui b | Multiplii comuni | [a, b] |
+| :---: | :---: | :--- | :--- | :---: | :---: |
+| 6 | 4 | 6, 12, 18, 24 | 4, 8, 12, 16, 20, 24 | 12, 24 | 12 |
+| 2 | 3 | | | | |
+| 3 | 9 | | | | |
+| 5 | 10 | | | | |
+
+---
+
+## Exersează!
+
+Cu c.m.m.m.c. aducem fracțiile la un numitor comun. Urmărim modelul.
+
+**Model:** aducem la un numitor comun fracțiile <HighlightText color="red">1/2</HighlightText> și <HighlightText color="teal">2/3</HighlightText>.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: numitorul comun este } [2, 3] = 6\\[6pt]
+& \text{Pasul 2: amplificăm prima fracție cu } 3: \; \frac{1}{2} = \frac{3}{6}\\[6pt]
+& \text{Pasul 3: amplificăm a doua fracție cu } 2: \; \frac{2}{3} = \frac{4}{6}
+\end{aligned}
+`}
+</Katex>
+
+Aducem la un numitor comun fracțiile:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{a) } \frac{1}{3} \text{ și } \frac{4}{5} \qquad \text{b) } \frac{5}{8} \text{ și } \frac{1}{4}\\[8pt]
+& \text{c) } \frac{1}{6} \text{ și } \frac{2}{3} \qquad \text{d) } \frac{2}{3} \text{ și } \frac{5}{12}
+\end{aligned}
+`}
+</Katex>
