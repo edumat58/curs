@@ -178,7 +178,7 @@ export default function Evaluare({ capitol, clasa, automatisme }) {
       // cheamă după pagina din care s-a tipărit („AV.1 — Numere naturale"),
       // ceea ce nu spune că e un test.
       const titluVechi = document.title;
-      document.title = `Test ${NUME_CLASA[clasa]} — ${capitol}`;
+      document.title = `Automatisme ${NUME_CLASA[clasa]} — ${capitol}`;
 
       const curata = () => {
         ascunse.forEach((el) => el.removeAttribute('data-ascuns-la-tipar'));
@@ -267,7 +267,9 @@ function FoaieTest({ capitol, clasa, subiecte, cuBarem, cate }) {
     <article className={styles.coala}>
       {/* ── antetul: o singură unitate, ca legenda să nu treacă pe pagina a doua ── */}
       <header className={styles.antet}>
-      <h1 className={styles.titlu}>Test Clasa {NUME_CLASA[clasa]} — {capitol}</h1>
+      <h1 className={styles.titlu}>Automatisme: {capitol}</h1>
+
+      <p className={styles.subtitlu}>Matematică · Clasa {NUME_CLASA[clasa]}</p>
 
       <p className={styles.identitate}>
         <strong>Nume:</strong><br />
@@ -328,11 +330,12 @@ function FoaieTest({ capitol, clasa, subiecte, cuBarem, cate }) {
       </blockquote>
       </header>
 
-      {/* ── subiectele — de pe pagina următoare, cum promite caseta ── */}
+      {/* ── subiectele — de pe pagina următoare, cum promite caseta; ruperea
+             o cere antetul, prin `break-after`, nu subiectul ── */}
       {subiecte.map((subiect, s) => {
         let numarExercitiu = 0;
         return (
-          <section key={s} className={s === 0 ? styles.subiectPrim : styles.subiect}>
+          <section key={s}>
             <h2 className={styles.titluSubiect}>
               <span style={BANDA}>Subiectul {NUMERAL[s]} - {subiect.total} puncte</span>
             </h2>

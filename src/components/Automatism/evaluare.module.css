@@ -138,7 +138,12 @@
 }
 
 .titlu {
-  margin: 0 0 0.8rem;
+  margin: 0 0 0.2rem;
+}
+
+.subtitlu {
+  margin: 0 0 0.9rem;
+  color: var(--ifm-color-emphasis-700, #555);
 }
 
 /* Nume/Prenume pe linii de completat, ca în șablon. */
@@ -278,18 +283,14 @@
 
   .panou { display: none; }
 
-  /* „Testul începe de pe pagina următoare" — caseta promite, tiparul ține. */
-  .subiectPrim {
-    page-break-before: always;
-    break-before: page;
-  }
-
-  /* Antetul e o singură unitate: nume, condiții, grilă, calificative și
-     legendă rămân împreună pe prima pagină. Ruperea o cere `.subiectPrim`,
-     nu antetul: dacă amândouă ar cere-o, ar ieși o filă goală între ele. */
+  /* „Testul începe de pe pagina următoare" — caseta promite, tiparul ține.
+     Ruperea o cere ANTETUL, o singură dată: așa prima filă e antetul întreg,
+     iar Subiectul I pornește pe a doua. Dacă ar cere-o și subiectul, ar ieși
+     o filă goală între ele; dacă n-ar cere-o niciunul, antetul s-ar rupe
+     când grila și legenda nu mai încap în spațiul rămas. */
   .antet {
-    page-break-inside: avoid;
-    break-inside: avoid;
+    page-break-after: always;
+    break-after: page;
   }
 
   .coloane, .legenda {
@@ -298,6 +299,7 @@
   }
 
   .titlu { font-size: 15pt; }
+  .subtitlu { font-size: 10pt; }
   .subtitluAntet { font-size: 11.5pt; }
   .calificativ { font-size: 9pt; margin-bottom: 0.25rem; }
   .grila { font-size: 9.5pt; }
