@@ -1,0 +1,115 @@
+---
+sidebar_position: 9
+slug: /edupasi/c7/modul-2/09
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C15 - Operații cu mulțimi (recapitulare)
+
+---
+
+## Relații între mulțimi
+
+:::danger Definiție
+Două mulțimi sunt **<HighlightText color="red">egale</HighlightText>** dacă au aceleași elemente.
+
+Mulțimea A este **<HighlightText color="teal">submulțime</HighlightText>** a lui B dacă toate elementele lui A sunt și în B.
+:::
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& X = \{2, 4, 6\}, \quad Y = \{6, 2, 4\} \;\Rightarrow\; \color{#FF6B6B}{X = Y} \\[8pt]
+& C = \{1, 3\}, \quad D = \{1, 2, 3\} \;\Rightarrow\; \color{#4ECDC4}{C \subset D}
+\end{aligned}
+`}
+</Katex>
+
+Reținem: ordinea elementelor nu contează.
+
+---
+
+## Operații cu mulțimi
+
+Lucrăm cu mulțimile:
+
+<Katex>
+{String.raw`
+\color{#FF6B6B}{A = \{1, 2, 3, 4, 5\}}, \quad \color{#4ECDC4}{B = \{2, 4, 6\}}
+`}
+</Katex>
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 250" width="420" height="250">
+  <circle cx="165" cy="120" r="95" fill="#FF6B6B" fill-opacity="0.15" stroke="#FF6B6B" stroke-width="4"/>
+  <circle cx="255" cy="120" r="95" fill="#4ECDC4" fill-opacity="0.15" stroke="#4ECDC4" stroke-width="4"/>
+  <text x="80" y="130" font-size="30" fill="#FF6B6B">A</text>
+  <text x="326" y="130" font-size="30" fill="#4ECDC4">B</text>
+  <text x="122" y="88" font-size="26" fill="#333">1</text>
+  <text x="122" y="132" font-size="26" fill="#333">3</text>
+  <text x="130" y="176" font-size="26" fill="#333">5</text>
+  <text x="200" y="108" font-size="26" fill="#9370DB">2</text>
+  <text x="200" y="165" font-size="26" fill="#9370DB">4</text>
+  <text x="283" y="132" font-size="26" fill="#333">6</text>
+</svg>
+
+### Intersecția
+
+Intersecția are elementele comune.
+
+<Katex>
+{String.raw`
+A \cap B = \color{#9370DB}{\{2, 4\}}
+`}
+</Katex>
+
+### Reuniunea
+
+Reuniunea are toate elementele, scrise o singură dată.
+
+<Katex>
+{String.raw`
+A \cup B = \color{#9370DB}{\{1, 2, 3, 4, 5, 6\}}
+`}
+</Katex>
+
+### Diferența
+
+Diferența are elementele lui A care nu sunt în B.
+
+<Katex>
+{String.raw`
+A - B = \color{#9370DB}{\{1, 3, 5\}}
+`}
+</Katex>
+
+:::tip De reținut
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#FF6B6B}{\cap} \;\text{ elementele comune} \\[8pt]
+& \color{#4ECDC4}{\cup} \;\text{ toate elementele} \\[8pt]
+& \color{#FF8C00}{-} \;\text{ doar din prima mulțime}
+\end{aligned}
+`}
+</Katex>
+:::
+
+---
+
+## Aplicație
+
+Calculăm pas cu pas:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& M = \{3, 5, 7\}, \quad N = \{5, 7, 9\} \\[10pt]
+& \text{Pasul 1: } M \cap N = \color{#9370DB}{\{5, 7\}} \\[8pt]
+& \text{Pasul 2: } M \cup N = \color{#9370DB}{\{3, 5, 7, 9\}} \\[8pt]
+& \text{Pasul 3: } M - N = \color{#9370DB}{\{3\}}
+\end{aligned}
+`}
+</Katex>

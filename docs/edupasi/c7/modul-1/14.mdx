@@ -1,0 +1,100 @@
+---
+sidebar_position: 14
+slug: /edupasi/c7/modul-1/14
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C9 - Ecuația x² = a
+
+---
+
+## Cazuri
+
+:::danger Definiție
+La ecuația **<HighlightText color="red">x² = a</HighlightText>** căutăm numărul care la pătrat dă **<HighlightText color="teal">a</HighlightText>**.
+:::
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Dacă } \color{#4ECDC4}{a \gt 0} : \; x = \sqrt{a} \text{ sau } x = -\sqrt{a} \\[8pt]
+& \text{Dacă } \color{#9370DB}{a = 0} : \; x = 0 \\[8pt]
+& \text{Dacă } \color{#FF6B6B}{a \lt 0} : \; \text{nu are soluții}
+\end{aligned}
+`}
+</Katex>
+
+Soluțiile sunt două numere opuse:
+
+<svg viewBox="0 0 400 130" width="100%" role="img">
+  <line x1="20" y1="75" x2="380" y2="75" stroke="#888" strokeWidth="3" />
+  <line x1="200" y1="62" x2="200" y2="88" stroke="#888" strokeWidth="3" />
+  <circle cx="60" cy="75" r="11" fill="#FF6B6B" />
+  <circle cx="340" cy="75" r="11" fill="#4ECDC4" />
+  <text x="200" y="32" textAnchor="middle" fontSize="24" fill="#9370DB">x² = 25</text>
+  <text x="60" y="115" textAnchor="middle" fontSize="24" fill="#FF6B6B">-5</text>
+  <text x="200" y="115" textAnchor="middle" fontSize="24" fill="#888">0</text>
+  <text x="340" y="115" textAnchor="middle" fontSize="24" fill="#4ECDC4">5</text>
+</svg>
+
+---
+
+## Transformări echivalente
+
+Aducem ecuația la forma **x² = a**. Avem voie:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{1. Adunăm același număr la ambii membri.} \\[8pt]
+& \text{2. Scădem același număr din ambii membri.} \\[8pt]
+& \text{3. Împărțim ambii membri la același număr nenul.}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Exemple
+
+**Exemplul 1**
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: } x^2 = \color{#4ECDC4}{49} \\[8pt]
+& \text{Pasul 2: } x = \sqrt{49} \text{ sau } x = -\sqrt{49} \\[8pt]
+& \text{Pasul 3: } x = \color{#4ECDC4}{7} \text{ sau } x = \color{#FF6B6B}{-7} \\[8pt]
+& S = \{-7,\; 7\}
+\end{aligned}
+`}
+</Katex>
+
+**Exemplul 2**
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& 2x^2 - 3 = 15 \\[8pt]
+& \text{Pasul 1: adunăm } \color{#FF8C00}{3} : \; 2x^2 = 18 \\[8pt]
+& \text{Pasul 2: împărțim la } \color{#FF8C00}{2} : \; x^2 = 9 \\[8pt]
+& \text{Pasul 3: } x = \color{#4ECDC4}{3} \text{ sau } x = \color{#FF6B6B}{-3} \\[8pt]
+& S = \{-3,\; 3\}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+:::warning Atenție
+Un pătrat nu este niciodată negativ.
+
+<Katex>
+{String.raw`
+x^2 = \color{#FF6B6B}{-4} \; \Rightarrow \; S = \varnothing
+`}
+</Katex>
+:::

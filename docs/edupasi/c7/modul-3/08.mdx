@@ -1,0 +1,84 @@
+---
+sidebar_position: 8
+slug: /edupasi/c7/modul-3/08
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# G7.3 - Poligoane regulate înscrise în cerc
+
+---
+
+## Poligonul regulat
+
+:::danger Definiție
+Un **<HighlightText color="red">poligon regulat</HighlightText>** are toate laturile egale și toate unghiurile egale.
+:::
+
+Pentagonul regulat are 5 laturi. Hexagonul regulat are 6 laturi.
+
+---
+
+## Construim un pentagon regulat
+
+Pasul 1. Desenăm un cerc cu centrul O.
+
+Pasul 2. Împărțim cercul în 5 arce egale.
+
+<Katex>
+{String.raw`
+\frac{\color{#FF6B6B}{360^\circ}}{5} = \color{#4ECDC4}{72^\circ}
+`}
+</Katex>
+
+Pasul 3. Unim cele 5 puncte. Obținem pentagonul.
+
+<div style={{ display: 'flex', justifyContent: 'center', margin: '20px 0' }}>
+  <svg width="300" height="280" viewBox="0 0 300 280" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="150" cy="140" r="100" fill="none" stroke="#333" strokeWidth="2" />
+    <polygon points="150,40 55,109 91,221 209,221 245,109" fill="#4ECDC4" fillOpacity="0.2" stroke="#FF6B6B" strokeWidth="3" />
+    <line x1="150" y1="140" x2="150" y2="40" stroke="#9370DB" strokeWidth="2" />
+    <line x1="150" y1="140" x2="245" y2="109" stroke="#9370DB" strokeWidth="2" />
+    <text x="162" y="110" fontSize="18" fill="#9370DB">72°</text>
+    <circle cx="150" cy="140" r="4" fill="#333" />
+    <text x="137" y="160" fontSize="18" fontFamily="serif">O</text>
+    <text x="143" y="30" fontSize="18" fontFamily="serif">A</text>
+    <text x="32" y="105" fontSize="18" fontFamily="serif">B</text>
+    <text x="74" y="243" fontSize="18" fontFamily="serif">C</text>
+    <text x="214" y="243" fontSize="18" fontFamily="serif">D</text>
+    <text x="255" y="105" fontSize="18" fontFamily="serif">E</text>
+  </svg>
+</div>
+
+---
+
+## Măsura unui unghi
+
+:::tip De reținut
+<Katex>
+{String.raw`
+\text{un unghi} = \frac{(n - 2) \cdot 180^\circ}{n}
+`}
+</Katex>
+
+Litera <HighlightText color="orange">n</HighlightText> este numărul de laturi.
+:::
+
+**Exemplu.** Aflăm un unghi al pentagonului regulat.
+
+Pasul 1. Pentagonul are 5 laturi. Deci n este 5.
+
+Pasul 2. Calculăm pas cu pas:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \frac{(5 - 2) \cdot 180^\circ}{5} = \frac{3 \cdot 180^\circ}{5}\\[8pt]
+& = \frac{540^\circ}{5} = \color{#FF8C00}{108^\circ}
+\end{aligned}
+`}
+</Katex>
+
+Reținem: un unghi al pentagonului are 108 grade.

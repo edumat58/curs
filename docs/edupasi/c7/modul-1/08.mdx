@@ -1,0 +1,114 @@
+---
+sidebar_position: 8
+slug: /edupasi/c7/modul-1/08
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C6 – Modulul, compararea și ordonarea numerelor reale
+
+---
+
+## Modulul unui număr real
+
+:::danger Definiție
+**<HighlightText color="red">Modulul</HighlightText>** unui număr este distanța de la număr până la zero.
+:::
+
+<svg viewBox="0 0 360 130" width="100%" style={{maxWidth: '420px'}} xmlns="http://www.w3.org/2000/svg">
+  <line x1="20" y1="85" x2="340" y2="85" stroke="#9370DB" strokeWidth="3" />
+  <circle cx="60" cy="85" r="7" fill="#FF6B6B" />
+  <circle cx="180" cy="85" r="7" fill="#9370DB" />
+  <circle cx="300" cy="85" r="7" fill="#4ECDC4" />
+  <text x="60" y="118" fontSize="22" fill="#FF6B6B" textAnchor="middle">-3</text>
+  <text x="180" y="118" fontSize="22" fill="#9370DB" textAnchor="middle">0</text>
+  <text x="300" y="118" fontSize="22" fill="#4ECDC4" textAnchor="middle">3</text>
+  <line x1="60" y1="50" x2="180" y2="50" stroke="#FF6B6B" strokeWidth="4" />
+  <line x1="300" y1="50" x2="180" y2="50" stroke="#4ECDC4" strokeWidth="4" />
+  <text x="120" y="36" fontSize="24" fill="#FF6B6B" textAnchor="middle">3</text>
+  <text x="240" y="36" fontSize="24" fill="#4ECDC4" textAnchor="middle">3</text>
+</svg>
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& |\color{#4ECDC4}{3}| = 3\\[8pt]
+& |\color{#FF6B6B}{-3}| = 3
+\end{aligned}
+`}
+</Katex>
+
+Reținem: modulul nu este niciodată negativ.
+
+**Exemplu:** Calculăm modulul lui -7.
+
+Pasul 1: Numărul este negativ.
+
+Pasul 2: Îi schimbăm semnul.
+
+Pasul 3: Scriem rezultatul.
+
+<Katex>
+{String.raw`
+|-7| = -(-7) = \color{#FF8C00}{7}
+`}
+</Katex>
+
+---
+
+## Compararea numerelor reale
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Numărul din } \color{#4ECDC4}{\text{dreapta}} \text{ este mai mare}\\[8pt]
+& \text{Numărul din } \color{#FF6B6B}{\text{stânga}} \text{ este mai mic}
+\end{aligned}
+`}
+</Katex>
+
+**Exemplu:** Comparăm 5 cu -3.
+
+Pasul 1: Le căutăm pe axă.
+
+Pasul 2: 5 stă în dreapta lui -3.
+
+<Katex>
+{String.raw`
+\color{#4ECDC4}{5} > \color{#FF6B6B}{-3}
+`}
+</Katex>
+
+---
+
+## Ordonarea numerelor reale
+
+:::tip De reținut
+Ordinea **<HighlightText color="teal">crescătoare</HighlightText>** se citește de la stânga la dreapta.
+:::
+
+**Exemplu:** Ordonăm crescător numerele -2,5 ; 0 ; -1 ; 4.
+
+Pasul 1: Le punem pe axă.
+
+<svg viewBox="0 0 360 95" width="100%" style={{maxWidth: '420px'}} xmlns="http://www.w3.org/2000/svg">
+  <line x1="20" y1="45" x2="340" y2="45" stroke="#9370DB" strokeWidth="3" />
+  <circle cx="40" cy="45" r="7" fill="#FF6B6B" />
+  <circle cx="100" cy="45" r="7" fill="#FF6B6B" />
+  <circle cx="140" cy="45" r="7" fill="#9370DB" />
+  <circle cx="300" cy="45" r="7" fill="#4ECDC4" />
+  <text x="40" y="80" fontSize="20" fill="#FF6B6B" textAnchor="middle">-2,5</text>
+  <text x="100" y="80" fontSize="20" fill="#FF6B6B" textAnchor="middle">-1</text>
+  <text x="140" y="80" fontSize="20" fill="#9370DB" textAnchor="middle">0</text>
+  <text x="300" y="80" fontSize="20" fill="#4ECDC4" textAnchor="middle">4</text>
+</svg>
+
+Pasul 2: Le citim de la stânga la dreapta.
+
+<Katex>
+{String.raw`
+\color{#FF8C00}{-2{,}5} < -1 < 0 < 4
+`}
+</Katex>

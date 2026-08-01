@@ -1,0 +1,135 @@
+---
+sidebar_position: 8
+slug: /edupasi/c7/modul-2/08
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C14 - Operații cu numere reale (recapitulare)
+
+---
+
+## Proprietăți de bază
+
+:::danger Definiție
+**<HighlightText color="teal">Radicalii asemenea</HighlightText>** au același număr sub radical.
+:::
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 470 120" width="470" height="120">
+  <text x="60" y="24" font-size="22" fill="#FF6B6B">2√3</text>
+  <text x="252" y="24" font-size="22" fill="#FF8C00">3√3</text>
+  <rect x="10" y="38" width="58" height="50" fill="#FF6B6B"/>
+  <rect x="74" y="38" width="58" height="50" fill="#FF6B6B"/>
+  <text x="146" y="72" font-size="26" fill="#333">+</text>
+  <rect x="172" y="38" width="58" height="50" fill="#FF8C00"/>
+  <rect x="236" y="38" width="58" height="50" fill="#FF8C00"/>
+  <rect x="300" y="38" width="58" height="50" fill="#FF8C00"/>
+  <text x="372" y="72" font-size="26" fill="#333">=</text>
+  <text x="404" y="74" font-size="26" fill="#4ECDC4">5√3</text>
+  <text x="27" y="72" font-size="20" fill="#fff">√3</text>
+  <text x="91" y="72" font-size="20" fill="#fff">√3</text>
+  <text x="189" y="72" font-size="20" fill="#fff">√3</text>
+  <text x="253" y="72" font-size="20" fill="#fff">√3</text>
+  <text x="317" y="72" font-size="20" fill="#fff">√3</text>
+</svg>
+
+Adunăm numerele din față. Radicalul rămâne la fel.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#FF6B6B}{2}\sqrt{3} + \color{#FF8C00}{3}\sqrt{3} = \color{#4ECDC4}{5}\sqrt{3} \\[8pt]
+& \color{#FF6B6B}{7}\sqrt{5} - \color{#FF8C00}{4}\sqrt{5} = \color{#4ECDC4}{3}\sqrt{5} \\[8pt]
+& \sqrt{2} \cdot \sqrt{8} = \sqrt{16} = 4
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Introducerea și scoaterea factorilor de sub radical
+
+Scoatem factorul din radical:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: } \sqrt{12} = \sqrt{\color{#FF6B6B}{4} \cdot 3} \\[8pt]
+& \text{Pasul 2: } \sqrt{\color{#FF6B6B}{4}} = \color{#FF6B6B}{2} \\[8pt]
+& \text{Pasul 3: } \sqrt{12} = \color{#FF6B6B}{2}\sqrt{3}
+\end{aligned}
+`}
+</Katex>
+
+Introducem factorul sub radical:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: } \color{#9370DB}{2}\sqrt{5} \\[8pt]
+& \text{Pasul 2: } \color{#9370DB}{2}^2 = \color{#9370DB}{4} \\[8pt]
+& \text{Pasul 3: } \color{#9370DB}{2}\sqrt{5} = \sqrt{\color{#9370DB}{4} \cdot 5} = \sqrt{20}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Ordinea efectuării operațiilor
+
+:::tip De reținut
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{1. } \color{#FF6B6B}{\text{Parantezele}} \\[8pt]
+& \text{2. } \color{#FF8C00}{\text{Puterile și radicalii}} \\[8pt]
+& \text{3. } \color{#9370DB}{\text{Înmulțirea și împărțirea}} \\[8pt]
+& \text{4. } \color{#4ECDC4}{\text{Adunarea și scăderea}}
+\end{aligned}
+`}
+</Katex>
+:::
+
+Calculăm pas cu pas:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& E = (\sqrt{9} + 1) \cdot 2 - 5 \\[8pt]
+& \text{Pasul 1: } \color{#FF8C00}{\sqrt{9} = 3} \\[8pt]
+& \text{Pasul 2: } \color{#FF6B6B}{(3 + 1) = 4} \\[8pt]
+& \text{Pasul 3: } \color{#9370DB}{4 \cdot 2 = 8} \\[8pt]
+& \text{Pasul 4: } \color{#4ECDC4}{8 - 5 = 3}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Operații cu modulul unui număr real
+
+Modulul este distanța până la zero. El nu este niciodată negativ.
+
+<Katex>
+{String.raw`
+|a| =
+\begin{cases}
+a, & \text{dacă } a \ge 0 \\
+-a, & \text{dacă } a \lt 0
+\end{cases}
+`}
+</Katex>
+
+Observăm că semnul minus dispare:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#FF6B6B}{|7|} = 7 \\[8pt]
+& \color{#4ECDC4}{|-7|} = 7 \\[8pt]
+& \sqrt{(-4)^2} = |-4| = 4
+\end{aligned}
+`}
+</Katex>

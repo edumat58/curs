@@ -1,0 +1,83 @@
+---
+sidebar_position: 4
+slug: /edupasi/c7/modul-3/04
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C17.4 - Poligonul frecvenţelor
+
+---
+
+## Poligonul frecvențelor
+
+:::danger Definiție
+**<HighlightText color="red">Poligonul frecvențelor</HighlightText>** este linia care unește vârfurile barelor din diagramă.
+:::
+
+Notele a 15 elevi:
+
+| Nota | 5 | 6 | 7 | 8 |
+| :--- | :---: | :---: | :---: | :---: |
+| Număr de elevi | 2 | 4 | 6 | 3 |
+
+<svg width="100%" height="240" viewBox="0 0 330 240" xmlns="http://www.w3.org/2000/svg" fontFamily="Arial, sans-serif">
+  <line x1="45" y1="185" x2="315" y2="185" stroke="#666" strokeWidth="3"/>
+  <line x1="45" y1="185" x2="45" y2="25" stroke="#666" strokeWidth="3"/>
+
+  <rect x="55" y="145" width="40" height="40" fill="#4ECDC4" stroke="#333" strokeWidth="2"/>
+  <rect x="115" y="105" width="40" height="80" fill="#4ECDC4" stroke="#333" strokeWidth="2"/>
+  <rect x="175" y="65" width="40" height="120" fill="#4ECDC4" stroke="#333" strokeWidth="2"/>
+  <rect x="235" y="125" width="40" height="60" fill="#4ECDC4" stroke="#333" strokeWidth="2"/>
+
+  <polyline points="75,145 135,105 195,65 255,125" fill="none" stroke="#FF6B6B" strokeWidth="4"/>
+  <circle cx="75" cy="145" r="7" fill="#FF6B6B"/>
+  <circle cx="135" cy="105" r="7" fill="#FF6B6B"/>
+  <circle cx="195" cy="65" r="7" fill="#FF6B6B"/>
+  <circle cx="255" cy="125" r="7" fill="#FF6B6B"/>
+
+  <text x="36" y="192" textAnchor="end" fill="#333" fontSize="18">0</text>
+  <text x="36" y="152" textAnchor="end" fill="#333" fontSize="18">2</text>
+  <text x="36" y="112" textAnchor="end" fill="#333" fontSize="18">4</text>
+  <text x="36" y="72" textAnchor="end" fill="#333" fontSize="18">6</text>
+  <text x="52" y="22" fill="#333" fontSize="18" fontWeight="bold">Elevi</text>
+
+  <text x="75" y="210" textAnchor="middle" fill="#333" fontSize="18">5</text>
+  <text x="135" y="210" textAnchor="middle" fill="#333" fontSize="18">6</text>
+  <text x="195" y="210" textAnchor="middle" fill="#333" fontSize="18">7</text>
+  <text x="255" y="210" textAnchor="middle" fill="#333" fontSize="18">8</text>
+  <text x="290" y="210" fill="#333" fontSize="18" fontWeight="bold">Nota</text>
+</svg>
+
+Construim pas cu pas:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: desenăm barele.} \\[6pt]
+& \text{Pasul 2: punem un } \color{#FF6B6B}{\text{punct}} \text{ sus, la mijlocul fiecărei bare.} \\[6pt]
+& \text{Pasul 3: unim punctele cu o } \color{#FF6B6B}{\text{linie}}.
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Exersează
+
+Câți elevi au nota 6?
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Bara notei } \color{#4ECDC4}{6} \text{ urcă până la } \color{#FF8C00}{4}. \\[6pt]
+& \text{Răspuns: } \color{#FF8C00}{4} \text{ elevi.}
+\end{aligned}
+`}
+</Katex>
+
+:::tip De reținut
+Punctul cel mai de sus arată nota luată de cei mai mulți elevi.
+:::

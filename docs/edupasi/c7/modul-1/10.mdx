@@ -1,0 +1,89 @@
+---
+sidebar_position: 10
+slug: /edupasi/c7/modul-1/10
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C8.1 – Media aritmetică
+
+---
+
+## Media aritmetică
+
+:::danger Definiție 1
+**<HighlightText color="red">Media aritmetică</HighlightText>** este suma numerelor **împărțită** la **câte numere sunt**.
+:::
+
+<svg viewBox="0 0 480 210" width="100%" role="img" aria-label="Trei bare, 4, 6 si 8, egalizate la media 6">
+  <line x1="20" y1="170" x2="400" y2="170" stroke="currentColor" stroke-width="2" />
+  <rect x="50" y="110" width="60" height="60" fill="#4ECDC4" />
+  <rect x="160" y="80" width="60" height="90" fill="#4ECDC4" />
+  <rect x="270" y="50" width="60" height="120" fill="#4ECDC4" />
+  <line x1="20" y1="80" x2="350" y2="80" stroke="#FF6B6B" stroke-width="3" stroke-dasharray="8 6" />
+  <text x="360" y="87" font-size="20" fill="#FF6B6B">media 6</text>
+  <text x="80" y="196" font-size="20" text-anchor="middle" fill="currentColor">4</text>
+  <text x="190" y="196" font-size="20" text-anchor="middle" fill="currentColor">6</text>
+  <text x="300" y="196" font-size="20" text-anchor="middle" fill="currentColor">8</text>
+</svg>
+
+<Katex>
+{String.raw`
+M_a = \dfrac{\color{#4ECDC4}{\text{suma numerelor}}}{\color{#FF8C00}{\text{câte numere sunt}}}
+`}
+</Katex>
+
+**Exemplu:** media numerelor 4, 6 și 8.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1. Adunăm numerele: } 4 + 6 + 8 = \color{#4ECDC4}{18}\\[6pt]
+& \text{Pasul 2. Numărăm numerele: sunt } \color{#FF8C00}{3}\\[6pt]
+& \text{Pasul 3. Împărțim: } \dfrac{\color{#4ECDC4}{18}}{\color{#FF8C00}{3}} = \color{#FF6B6B}{6}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Media aritmetică ponderată
+
+:::danger Definiție 2
+**<HighlightText color="teal">Ponderea</HighlightText>** arată de câte ori se numără o notă.
+:::
+
+<svg viewBox="0 0 400 155" width="100%" role="img" aria-label="Nota 9 se numara de doua ori, nota 6 o data">
+  <rect x="20" y="25" width="100" height="70" rx="6" fill="#4ECDC4" />
+  <rect x="140" y="25" width="100" height="70" rx="6" fill="#4ECDC4" />
+  <rect x="260" y="25" width="100" height="70" rx="6" fill="#FF8C00" />
+  <text x="70" y="72" font-size="34" text-anchor="middle" fill="#1F2933">9</text>
+  <text x="190" y="72" font-size="34" text-anchor="middle" fill="#1F2933">9</text>
+  <text x="310" y="72" font-size="34" text-anchor="middle" fill="#1F2933">6</text>
+  <line x1="20" y1="110" x2="240" y2="110" stroke="currentColor" stroke-width="2" />
+  <line x1="20" y1="104" x2="20" y2="116" stroke="currentColor" stroke-width="2" />
+  <line x1="240" y1="104" x2="240" y2="116" stroke="currentColor" stroke-width="2" />
+  <text x="130" y="138" font-size="19" text-anchor="middle" fill="currentColor">pondere 2</text>
+  <text x="310" y="138" font-size="19" text-anchor="middle" fill="currentColor">pondere 1</text>
+</svg>
+
+<Katex>
+{String.raw`
+M_{ap} = \dfrac{\color{#4ECDC4}{\text{suma produselor}}}{\color{#FF8C00}{\text{suma ponderilor}}}
+`}
+</Katex>
+
+**Exemplu:** nota 9 are ponderea 2. Nota 6 are ponderea 1.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1. Înmulțim: } 9 \times 2 = 18 \text{ și } 6 \times 1 = 6\\[6pt]
+& \text{Pasul 2. Adunăm produsele: } 18 + 6 = \color{#4ECDC4}{24}\\[6pt]
+& \text{Pasul 3. Adunăm ponderile: } 2 + 1 = \color{#FF8C00}{3}\\[6pt]
+& \text{Pasul 4. Împărțim: } \dfrac{\color{#4ECDC4}{24}}{\color{#FF8C00}{3}} = \color{#FF6B6B}{8}
+\end{aligned}
+`}
+</Katex>

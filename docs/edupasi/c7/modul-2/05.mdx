@@ -1,0 +1,91 @@
+---
+sidebar_position: 5
+slug: /edupasi/c7/modul-2/05
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C13.1 - Sisteme de ecuații
+
+---
+
+## Forma generală
+
+:::danger Definiție
+Un **<HighlightText color="red">sistem</HighlightText>** are două ecuații. Necunoscutele sunt **<HighlightText color="teal">x</HighlightText>** și **<HighlightText color="purple">y</HighlightText>**.
+:::
+
+<Katex>
+{String.raw`
+\begin{cases}
+\color{#4ECDC4}{x} + \color{#9370DB}{y} = 7 \\[4pt]
+\color{#4ECDC4}{x} - \color{#9370DB}{y} = 1
+\end{cases}
+`}
+</Katex>
+
+A rezolva sistemul înseamnă a afla pe x și pe y. Ambele ecuații devin adevărate.
+
+<svg viewBox="0 0 360 160" width="100%" role="img" aria-label="Bara x si bara y: impreuna 7, diferenta 1">
+  <text x="24" y="56" font-size="24" fill="#4ECDC4">x</text>
+  <rect x="60" y="26" width="200" height="42" rx="4" fill="#4ECDC4" />
+  <text x="24" y="116" font-size="24" fill="#9370DB">y</text>
+  <rect x="60" y="86" width="150" height="42" rx="4" fill="#9370DB" />
+  <rect x="210" y="86" width="50" height="42" rx="4" fill="none" stroke="#FF6B6B" stroke-width="3" stroke-dasharray="6 4" />
+  <text x="235" y="115" font-size="22" text-anchor="middle" fill="#FF6B6B">1</text>
+  <path d="M 276 26 L 292 26 L 292 128 L 276 128" fill="none" stroke="#FF8C00" stroke-width="3" />
+  <text x="306" y="85" font-size="24" fill="#FF8C00">7</text>
+</svg>
+
+---
+
+## Metoda substituției
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: } \color{#4ECDC4}{x} = 7 - \color{#9370DB}{y} \\[6pt]
+& \text{Pasul 2: } (7 - \color{#9370DB}{y}) - \color{#9370DB}{y} = 1 \\[6pt]
+& \text{Pasul 3: } 7 - 2\color{#9370DB}{y} = 1 \Rightarrow 2\color{#9370DB}{y} = 6 \Rightarrow \color{#9370DB}{y} = 3 \\[6pt]
+& \text{Pasul 4: } \color{#4ECDC4}{x} = 7 - 3 = 4 \\[6pt]
+& \text{Soluția: } (\color{#4ECDC4}{4}\,;\, \color{#9370DB}{3})
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Metoda reducerii
+
+Luăm același sistem.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: adunăm ecuațiile} \\[6pt]
+& (\color{#4ECDC4}{x} + \color{#9370DB}{y}) + (\color{#4ECDC4}{x} - \color{#9370DB}{y}) = 7 + 1 \\[6pt]
+& \text{Pasul 2: } 2\color{#4ECDC4}{x} = 8 \Rightarrow \color{#4ECDC4}{x} = 4 \\[6pt]
+& \text{Pasul 3: } 4 + \color{#9370DB}{y} = 7 \Rightarrow \color{#9370DB}{y} = 3 \\[6pt]
+& \text{Soluția: } (\color{#4ECDC4}{4}\,;\, \color{#9370DB}{3})
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Concluzii
+
+:::tip De reținut
+Cele două metode dau același răspuns. Verificăm soluția în ambele ecuații.
+:::
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& 4 + 3 = 7 \quad \color{#FF8C00}{\checkmark} \\[6pt]
+& 4 - 3 = 1 \quad \color{#FF8C00}{\checkmark}
+\end{aligned}
+`}
+</Katex>

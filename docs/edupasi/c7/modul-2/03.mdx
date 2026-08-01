@@ -1,0 +1,106 @@
+---
+sidebar_position: 3
+slug: /edupasi/c7/modul-2/03
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C12 - Ecuația ax+b=0
+
+---
+
+## Definiții și noțiuni introductive
+
+:::danger Definiție
+O **<HighlightText color="red">ecuație</HighlightText>** este o egalitate cu o literă necunoscută.
+:::
+
+Necunoscuta este **<HighlightText color="teal">x</HighlightText>**. Numerele a și b sunt coeficienți.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#FF6B6B}{a} \cdot x + \color{#4ECDC4}{b} = 0 \\[6pt]
+& \color{#FF6B6B}{a} = \text{coeficientul lui } x \\[6pt]
+& \color{#4ECDC4}{b} = \text{termenul liber}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Etapele de rezolvare
+
+Termenul liber trece peste egal. Acolo își schimbă semnul.
+
+<svg viewBox="0 0 460 190" width="100%" role="img">
+  <path d="M 128 62 Q 240 8 350 62" fill="none" stroke="#9370DB" strokeWidth="3" />
+  <path d="M 350 66 L 340 48 L 358 50 Z" fill="#9370DB" />
+  <text x="240" y="28" textAnchor="middle" fontSize="20" fill="#9370DB">schimbă semnul</text>
+  <text x="60" y="118" textAnchor="middle" fontSize="32" fill="#FF6B6B">2x</text>
+  <rect x="95" y="84" width="70" height="48" rx="10" fill="none" stroke="#FF8C00" strokeWidth="3" />
+  <text x="130" y="118" textAnchor="middle" fontSize="30" fill="#FF8C00">+ 6</text>
+  <text x="205" y="118" textAnchor="middle" fontSize="32" fill="currentColor">=</text>
+  <text x="255" y="118" textAnchor="middle" fontSize="32" fill="currentColor">0</text>
+  <rect x="315" y="84" width="70" height="48" rx="10" fill="none" stroke="#4ECDC4" strokeWidth="3" />
+  <text x="350" y="118" textAnchor="middle" fontSize="30" fill="#4ECDC4">− 6</text>
+  <text x="230" y="172" textAnchor="middle" fontSize="22" fill="#4ECDC4">2x = − 6</text>
+</svg>
+
+Apoi împărțim la coeficientul lui x.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& a \cdot x + b = 0 \\[6pt]
+& a \cdot x = -b \\[6pt]
+& x = -\frac{b}{a} \\[6pt]
+& S = \left\{ -\frac{b}{a} \right\}
+\end{aligned}
+`}
+</Katex>
+
+:::tip De reținut
+Soluția se scrie în mulțimea **<HighlightText color="orange">S</HighlightText>**.
+:::
+
+---
+
+## Exemplul 1
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& 2x + 6 = 0 \\[8pt]
+& \text{Pasul 1: } \color{#FF8C00}{6} \text{ trece în dreapta} \\[6pt]
+& 2x = -6 \\[8pt]
+& \text{Pasul 2: împărțim la } \color{#FF6B6B}{2} \\[6pt]
+& x = -3 \\[8pt]
+& \text{Pasul 3: scriem soluția} \\[6pt]
+& S = \{-3\}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Exemplul 2
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& 5x - 3 = 2x + 6 \\[8pt]
+& \text{Pasul 1: } x \text{ în stânga, numerele în dreapta} \\[6pt]
+& 5x - 2x = 6 + 3 \\[8pt]
+& \text{Pasul 2: adunăm și scădem} \\[6pt]
+& 3x = 9 \\[8pt]
+& \text{Pasul 3: împărțim la } \color{#FF6B6B}{3} \\[6pt]
+& x = 3 \\[8pt]
+& S = \{3\}
+\end{aligned}
+`}
+</Katex>
+
+---

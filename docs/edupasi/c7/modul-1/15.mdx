@@ -1,0 +1,99 @@
+---
+sidebar_position: 15
+slug: /edupasi/c7/modul-1/15
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# G3 - Patrulaterul convex
+
+---
+
+## Patrulaterul
+
+:::danger Definiție
+Un **<HighlightText color="red">patrulater</HighlightText>** are patru vârfuri și patru laturi.
+:::
+
+<svg viewBox="0 0 340 215" width="100%" style={{maxWidth: '440px'}} xmlns="http://www.w3.org/2000/svg">
+  <polygon points="70,45 265,35 300,165 45,175" fill="none" stroke="#4ECDC4" strokeWidth="3" />
+  <line x1="70" y1="45" x2="300" y2="165" stroke="#FF8C00" strokeWidth="3" />
+  <line x1="265" y1="35" x2="45" y2="175" stroke="#FF8C00" strokeWidth="3" />
+  <circle cx="70" cy="45" r="6" fill="#9370DB" />
+  <circle cx="265" cy="35" r="6" fill="#9370DB" />
+  <circle cx="300" cy="165" r="6" fill="#9370DB" />
+  <circle cx="45" cy="175" r="6" fill="#9370DB" />
+  <text x="58" y="30" fontSize="22" fill="#9370DB" textAnchor="middle">A</text>
+  <text x="277" y="26" fontSize="22" fill="#9370DB" textAnchor="middle">B</text>
+  <text x="310" y="196" fontSize="22" fill="#9370DB" textAnchor="middle">C</text>
+  <text x="32" y="204" fontSize="22" fill="#9370DB" textAnchor="middle">D</text>
+</svg>
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Vârfuri: } \color{#9370DB}{A,\ B,\ C,\ D}\\[8pt]
+& \text{Laturi: } \color{#4ECDC4}{AB,\ BC,\ CD,\ DA}\\[8pt]
+& \text{Diagonale: } \color{#FF8C00}{AC,\ BD}
+\end{aligned}
+`}
+</Katex>
+
+Diagonala unește două vârfuri opuse.
+
+---
+
+## Patrulater convex și patrulater concav
+
+<svg viewBox="0 0 400 190" width="100%" style={{maxWidth: '480px'}} xmlns="http://www.w3.org/2000/svg">
+  <polygon points="35,45 145,35 165,140 45,150" fill="none" stroke="#4ECDC4" strokeWidth="3" />
+  <polygon points="235,150 305,40 375,150 305,105" fill="none" stroke="#FF6B6B" strokeWidth="3" />
+  <text x="100" y="180" fontSize="22" fill="#4ECDC4" textAnchor="middle">convex</text>
+  <text x="305" y="180" fontSize="22" fill="#FF6B6B" textAnchor="middle">concav</text>
+</svg>
+
+La patrulaterul **<HighlightText color="teal">convex</HighlightText>** niciun vârf nu intră spre interior.
+
+---
+
+## Suma unghiurilor
+
+:::tip De reținut
+Suma unghiurilor unui patrulater convex este mereu 360 de grade.
+:::
+
+<Katex>
+{String.raw`
+m\measuredangle A + m\measuredangle B + m\measuredangle C + m\measuredangle D = \color{#FF6B6B}{360^\circ}
+`}
+</Katex>
+
+---
+
+## Aplicație
+
+Aflăm măsura unghiului A.
+
+<Katex>
+{String.raw`
+m\measuredangle B = 85^\circ \quad m\measuredangle C = 110^\circ \quad m\measuredangle D = 44^\circ
+`}
+</Katex>
+
+Pasul 1: Adunăm cele trei unghiuri date.
+
+<Katex>
+{String.raw`
+85^\circ + 110^\circ + 44^\circ = \color{#4ECDC4}{239^\circ}
+`}
+</Katex>
+
+Pasul 2: Scădem suma din 360 de grade.
+
+<Katex>
+{String.raw`
+m\measuredangle A = 360^\circ - 239^\circ = \color{#FF8C00}{121^\circ}
+`}
+</Katex>

@@ -1,0 +1,102 @@
+---
+sidebar_position: 6
+slug: /edupasi/c7/modul-3/06
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# G7.1 - Unghi înscris în cerc, coarde şi arce în cerc
+
+---
+
+## Elementele cercului
+
+:::danger Definiție
+- **<HighlightText color="red">Coarda</HighlightText>** unește două puncte de pe cerc.
+- **<HighlightText color="orange">Arcul</HighlightText>** este bucata de cerc dintre acele puncte.
+:::
+
+---
+
+## Unghi la centru şi unghi înscris
+
+- **<HighlightText color="red">Unghiul la centru</HighlightText>** are vârful în centrul cercului.
+- **<HighlightText color="teal">Unghiul înscris</HighlightText>** are vârful pe cerc.
+
+<div style={{textAlign: 'center'}}>
+  <svg viewBox="0 0 300 300" width="300" height="300" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="150" cy="150" r="110" fill="none" stroke="#333" strokeWidth="2" />
+    <path d="M 79 234 A 110 110 0 0 0 221 234" fill="none" stroke="#FF8C00" strokeWidth="7" />
+    <line x1="150" y1="150" x2="79" y2="234" stroke="#FF6B6B" strokeWidth="2" />
+    <line x1="150" y1="150" x2="221" y2="234" stroke="#FF6B6B" strokeWidth="2" />
+    <line x1="150" y1="40" x2="79" y2="234" stroke="#4ECDC4" strokeWidth="2" />
+    <line x1="150" y1="40" x2="221" y2="234" stroke="#4ECDC4" strokeWidth="2" />
+    <path d="M 131 173 A 30 30 0 0 0 169 173" fill="none" stroke="#FF6B6B" strokeWidth="2" />
+    <text x="150" y="202" fontSize="20" textAnchor="middle" fill="#FF6B6B">80°</text>
+    <path d="M 136 78 A 40 40 0 0 0 164 78" fill="none" stroke="#4ECDC4" strokeWidth="2" />
+    <text x="150" y="112" fontSize="20" textAnchor="middle" fill="#4ECDC4">40°</text>
+    <circle cx="150" cy="150" r="4" fill="#333" />
+    <text x="150" y="140" fontSize="20" textAnchor="middle" fill="#333">O</text>
+    <circle cx="150" cy="40" r="4" fill="#333" />
+    <text x="150" y="26" fontSize="20" textAnchor="middle" fill="#333">A</text>
+    <circle cx="79" cy="234" r="4" fill="#333" />
+    <text x="58" y="254" fontSize="20" fill="#333">B</text>
+    <circle cx="221" cy="234" r="4" fill="#333" />
+    <text x="230" y="254" fontSize="20" fill="#333">C</text>
+  </svg>
+</div>
+
+:::tip De reținut
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#FF6B6B}{\text{unghi la centru}} = \color{#FF8C00}{\text{arcul}}\\[8pt]
+& \color{#4ECDC4}{\text{unghi înscris}} = \color{#FF8C00}{\text{arcul}} : 2
+\end{aligned}
+`}
+</Katex>
+:::
+
+---
+
+## Exemple
+
+**Exemplul 1.** Arcul BC are 80°. Aflăm unghiul înscris BAC.
+
+Calculăm pas cu pas:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: } \sphericalangle BAC = \overset{\frown}{BC} : 2\\[8pt]
+& \text{Pasul 2: } \sphericalangle BAC = 80^\circ : 2 = \color{#FF6B6B}{40^\circ}
+\end{aligned}
+`}
+</Katex>
+
+**Exemplul 2.** Unghiul înscris BAC are 30°. Aflăm arcul BC.
+
+Calculăm pas cu pas:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: } \overset{\frown}{BC} = \sphericalangle BAC \times 2\\[8pt]
+& \text{Pasul 2: } \overset{\frown}{BC} = 30^\circ \times 2 = \color{#9370DB}{60^\circ}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Coarde şi arce
+
+Reținem: arcele egale au coarde egale.
+
+<Katex>
+{String.raw`
+\overset{\frown}{AB} = \overset{\frown}{CD} \;\Rightarrow\; \color{#4ECDC4}{AB = CD}
+`}
+</Katex>

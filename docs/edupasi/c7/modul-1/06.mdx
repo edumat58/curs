@@ -1,0 +1,93 @@
+---
+sidebar_position: 6
+slug: /edupasi/c7/modul-1/06
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C5 - Mulțimea nr. reale (1)
+
+---
+
+## Incluziune
+
+<svg viewBox="0 0 420 240" width="100%" role="img">
+  <rect x="8" y="8" width="404" height="224" rx="14" fill="none" stroke="#9370DB" strokeWidth="4" />
+  <rect x="46" y="46" width="328" height="148" rx="12" fill="none" stroke="#4ECDC4" strokeWidth="4" />
+  <rect x="84" y="84" width="252" height="72" rx="10" fill="none" stroke="#FF8C00" strokeWidth="4" />
+  <rect x="122" y="104" width="176" height="32" rx="8" fill="none" stroke="#FF6B6B" strokeWidth="4" />
+  <text x="24" y="36" fontSize="26" fontWeight="700" fill="#9370DB">R</text>
+  <text x="62" y="74" fontSize="26" fontWeight="700" fill="#4ECDC4">Q</text>
+  <text x="100" y="112" fontSize="26" fontWeight="700" fill="#FF8C00">Z</text>
+  <text x="196" y="128" fontSize="26" fontWeight="700" fill="#FF6B6B">N</text>
+</svg>
+
+:::danger Definiție
+<Katex>
+{String.raw`
+\Large \mathbb{N}\subset\mathbb{Z}\subset\mathbb{Q}\subset\mathbb{R}
+`}
+</Katex>
+:::
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#FF6B6B}{\mathbb{N}} = \{0;1;2;3;\dots\} \\[6pt]
+& \color{#FF8C00}{\mathbb{Z}} = \{\dots;-2;-1;0;1;2;\dots\} \\[6pt]
+& \color{#4ECDC4}{\mathbb{Q}} = \text{numerele scrise } \frac{p}{q} \\[6pt]
+& \color{#9370DB}{\mathbb{R}} = \text{toate numerele}
+\end{aligned}
+`}
+</Katex>
+
+Reținem: orice număr zecimal este rațional.
+
+---
+
+## Cea mai mică mulțime
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& x \in A \;\text{: } x \text{ aparține lui } A \\[6pt]
+& x \notin A \;\text{: } x \text{ nu aparține lui } A
+\end{aligned}
+`}
+</Katex>
+
+Aflăm cea mai mică mulțime a fracției. Calculăm pas cu pas:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: împărțim } 12 : 5 = 2 \text{ rest } 2 \\[6pt]
+& \text{Pasul 2: nu este întreg, deci este fracție} \\[6pt]
+& \text{Pasul 3: } \frac{12}{5} \in \color{#4ECDC4}{\mathbb{Q}}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Proprietatea lui radical din 2
+
+<Katex>
+{String.raw`
+\sqrt{2} = 1{,}41421\dots
+`}
+</Katex>
+
+Zecimalele nu se termină. Nu se repetă. Deci nu este fracție.
+
+:::warning Atenție
+<Katex>
+{String.raw`
+\sqrt{2} \notin \color{#4ECDC4}{\mathbb{Q}} \qquad \sqrt{2} \in \color{#9370DB}{\mathbb{R}}
+`}
+</Katex>
+
+Numim <HighlightText color="purple">irațional</HighlightText> un astfel de număr.
+:::

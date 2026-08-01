@@ -1,0 +1,153 @@
+---
+sidebar_position: 2
+slug: /edupasi/c7/modul-4/02
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C18.2 - Funcții trigonometrice (proprietăți)
+
+---
+
+## Funcția sinus
+
+:::danger Definiție
+Funcția **<HighlightText color="red">sinus</HighlightText>** duce fiecare număr real x în valoarea sin x.
+:::
+
+<svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" style={{ backgroundColor: 'transparent', width: '100%', height: 'auto' }}>
+  <line x1="20" y1="100" x2="380" y2="100" stroke="currentColor" strokeWidth="2" />
+  <line x1="40" y1="15" x2="40" y2="185" stroke="currentColor" strokeWidth="2" />
+  <line x1="30" y1="30" x2="50" y2="30" stroke="#FF6B6B" strokeWidth="3" />
+  <text x="5" y="36" fontSize="18" fill="currentColor">1</text>
+  <line x1="30" y1="170" x2="50" y2="170" stroke="#FF6B6B" strokeWidth="3" />
+  <text x="0" y="176" fontSize="18" fill="currentColor">-1</text>
+  <text x="20" y="125" fontSize="18" fill="currentColor">0</text>
+  <text x="190" y="128" fontSize="18" fill="currentColor">π</text>
+  <text x="345" y="128" fontSize="18" fill="currentColor">2π</text>
+  <path d="M 40 100 C 80 10, 160 10, 200 100 C 240 190, 320 190, 360 100" fill="none" stroke="#4ECDC4" strokeWidth="4" />
+</svg>
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Perioada: } \color{#FF6B6B}{2\pi} \\[6pt]
+& \sin(x + 2\pi) = \sin x \\[6pt]
+& \text{Impară: } \color{#4ECDC4}{\sin(-x) = -\sin x} \\[6pt]
+& \text{Mărginită: } -1 \le \sin x \le 1
+\end{aligned}
+`}
+</Katex>
+
+Calculăm pas cu pas:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: } \frac{13\pi}{6} = 2\pi + \frac{\pi}{6} \\[6pt]
+& \text{Pasul 2: } \sin\frac{13\pi}{6} = \sin\frac{\pi}{6} \\[6pt]
+& \text{Pasul 3: } \sin\frac{\pi}{6} = \color{#FF8C00}{\frac{1}{2}}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Funcția cosinus
+
+Funcția cosinus se scrie cos x.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Perioada: } \color{#FF6B6B}{2\pi} \\[6pt]
+& \cos(x + 2\pi) = \cos x \\[6pt]
+& \text{Pară: } \color{#4ECDC4}{\cos(-x) = \cos x} \\[6pt]
+& \text{Mărginită: } -1 \le \cos x \le 1
+\end{aligned}
+`}
+</Katex>
+
+Calculăm pas cu pas:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: } \cos\left(-\frac{\pi}{3}\right) = \cos\frac{\pi}{3} \\[6pt]
+& \text{Pasul 2: } \cos\frac{\pi}{3} = \color{#FF8C00}{\frac{1}{2}}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Funcția tangentă
+
+Funcția tangentă se scrie tg x.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Perioada: } \color{#9370DB}{\pi} \\[6pt]
+& \tg(x + \pi) = \tg x \\[6pt]
+& \text{Impară: } \color{#4ECDC4}{\tg(-x) = -\tg x} \\[6pt]
+& \text{Nu este mărginită.}
+\end{aligned}
+`}
+</Katex>
+
+Calculăm pas cu pas:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: } \frac{5\pi}{4} = \pi + \frac{\pi}{4} \\[6pt]
+& \text{Pasul 2: } \tg\frac{5\pi}{4} = \tg\frac{\pi}{4} \\[6pt]
+& \text{Pasul 3: } \tg\frac{\pi}{4} = \color{#FF8C00}{1}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Funcția cotangentă
+
+Funcția cotangentă se scrie ctg x.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Perioada: } \color{#9370DB}{\pi} \\[6pt]
+& \ctg(x + \pi) = \ctg x \\[6pt]
+& \text{Impară: } \color{#4ECDC4}{\ctg(-x) = -\ctg x} \\[6pt]
+& \text{Nu este mărginită.}
+\end{aligned}
+`}
+</Katex>
+
+Calculăm pas cu pas:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: } \frac{5\pi}{4} = \pi + \frac{\pi}{4} \\[6pt]
+& \text{Pasul 2: } \ctg\frac{5\pi}{4} = \ctg\frac{\pi}{4} \\[6pt]
+& \text{Pasul 3: } \ctg\frac{\pi}{4} = \color{#FF8C00}{1}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+:::tip De reținut
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#FF6B6B}{\sin} \text{ și } \color{#FF6B6B}{\cos} \text{ se repetă din } 2\pi \\[8pt]
+& \color{#9370DB}{\tg} \text{ și } \color{#9370DB}{\ctg} \text{ se repetă din } \pi
+\end{aligned}
+`}
+</Katex>
+:::

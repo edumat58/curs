@@ -1,0 +1,117 @@
+---
+sidebar_position: 7
+slug: /edupasi/c7/modul-1/07
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C5 - Mulțimea nr. reale (2)
+
+---
+
+## Mai multe scrieri pentru același număr
+
+<svg viewBox="0 0 420 140" width="100%" role="img">
+  <rect x="20" y="30" width="380" height="60" rx="8" fill="none" stroke="#9370DB" strokeWidth="4" />
+  <rect x="20" y="30" width="190" height="60" rx="8" fill="#4ECDC4" stroke="#4ECDC4" strokeWidth="4" />
+  <line x1="210" y1="30" x2="210" y2="90" stroke="#9370DB" strokeWidth="4" />
+  <text x="210" y="20" fontSize="22" fontWeight="700" textAnchor="middle" fill="#9370DB">1 întreg</text>
+  <text x="115" y="72" fontSize="30" fontWeight="700" textAnchor="middle" fill="#ffffff">1/2</text>
+  <text x="115" y="122" fontSize="26" fontWeight="700" textAnchor="middle" fill="#4ECDC4">0,5</text>
+</svg>
+
+<Katex>
+{String.raw`
+\Large \color{#4ECDC4}{\frac{1}{2}} = \color{#4ECDC4}{0{,}5} = \color{#4ECDC4}{\frac{5}{10}}
+`}
+</Katex>
+
+Reținem: scrierea se schimbă, numărul rămâne.
+
+---
+
+## Mulțimi speciale
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \mathbb{N} = \{\color{#FF6B6B}{0};1;2;3;\dots\} \\[6pt]
+& \mathbb{N}^{*} = \{1;2;3;\dots\}
+\end{aligned}
+`}
+</Katex>
+
+Steluța scoate pe <HighlightText color="red">0</HighlightText> din mulțime.
+
+<Katex>
+{String.raw`
+\Large \varnothing
+`}
+</Katex>
+
+Mulțimea vidă nu are niciun element.
+
+---
+
+## Incluziunea a două mulțimi
+
+:::danger Definiție
+<Katex>
+{String.raw`
+\Large A \subset B
+`}
+</Katex>
+
+Toate elementele lui A sunt și în B.
+:::
+
+<svg viewBox="0 0 420 200" width="100%" role="img">
+  <rect x="10" y="10" width="400" height="180" rx="14" fill="none" stroke="#9370DB" strokeWidth="4" />
+  <rect x="40" y="55" width="200" height="100" rx="12" fill="none" stroke="#FF6B6B" strokeWidth="4" />
+  <text x="26" y="42" fontSize="28" fontWeight="700" fill="#9370DB">B</text>
+  <text x="56" y="86" fontSize="28" fontWeight="700" fill="#FF6B6B">A</text>
+  <text x="110" y="130" fontSize="32" fontWeight="700" textAnchor="middle" fill="#FF6B6B">1</text>
+  <text x="180" y="130" fontSize="32" fontWeight="700" textAnchor="middle" fill="#FF6B6B">2</text>
+  <text x="300" y="130" fontSize="32" fontWeight="700" textAnchor="middle" fill="#9370DB">3</text>
+  <text x="360" y="130" fontSize="32" fontWeight="700" textAnchor="middle" fill="#9370DB">4</text>
+</svg>
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#FF6B6B}{A} = \{1;2\} \qquad \color{#9370DB}{B} = \{1;2;3;4\} \\[6pt]
+& \text{Deci } \color{#FF6B6B}{A} \subset \color{#9370DB}{B}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Paritate
+
+:::tip De reținut
+Un număr <HighlightText color="teal">par</HighlightText> se împarte exact la 2. Restul este 0.
+:::
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#4ECDC4}{\text{Pare: }} 0;2;4;6;8 \\[6pt]
+& \color{#FF8C00}{\text{Impare: }} 1;3;5;7;9
+\end{aligned}
+`}
+</Katex>
+
+Verificăm dacă 14 este par. Calculăm pas cu pas:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: împărțim } 14 : 2 = 7 \text{ rest } 0 \\[6pt]
+& \text{Pasul 2: restul este } 0 \\[6pt]
+& \text{Pasul 3: deci } 14 \text{ este } \color{#4ECDC4}{\text{par}}
+\end{aligned}
+`}
+</Katex>

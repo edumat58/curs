@@ -1,0 +1,113 @@
+---
+sidebar_position: 5
+slug: /edupasi/c7/modul-1/05
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C4.2 – Puteri: prioritatea operațiilor și notația științifică
+
+---
+
+## Prioritatea operațiilor
+
+Calculăm în această ordine:
+
+<svg viewBox="0 0 420 200" width="100%" style={{maxWidth: '440px'}} xmlns="http://www.w3.org/2000/svg">
+  <rect x="10" y="10" width="400" height="50" rx="8" fill="#FF6B6B" />
+  <text x="30" y="43" fontSize="24" fill="#FFFFFF" fontWeight="bold">1. Puterile</text>
+  <rect x="10" y="72" width="400" height="50" rx="8" fill="#4ECDC4" />
+  <text x="30" y="105" fontSize="24" fill="#FFFFFF" fontWeight="bold">2. Înmulțirile și împărțirile</text>
+  <rect x="10" y="134" width="400" height="50" rx="8" fill="#FF8C00" />
+  <text x="30" y="167" fontSize="24" fill="#FFFFFF" fontWeight="bold">3. Adunările și scăderile</text>
+</svg>
+
+**Exemplu:**
+
+<Katex>
+{String.raw`
+2 + 3 \times 2^2
+`}
+</Katex>
+
+Calculăm pas cu pas:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1. Puterea: } \color{#FF6B6B}{2^2 = 4}\\[6pt]
+& \text{Pasul 2. Înmulțirea: } \color{#4ECDC4}{3 \times 4 = 12}\\[6pt]
+& \text{Pasul 3. Adunarea: } \color{#FF8C00}{2 + 12 = 14}
+\end{aligned}
+`}
+</Katex>
+
+Când avem **<HighlightText color="purple">paranteze</HighlightText>**, calculăm întâi în paranteză.
+
+<Katex>
+{String.raw`
+(9 - 2^3) \times 4 = (9 - 8) \times 4 = 1 \times 4 = \color{#9370DB}{4}
+`}
+</Katex>
+
+---
+
+## Notația științifică
+
+:::danger Definiție
+Un număr scris în **<HighlightText color="red">notație științifică</HighlightText>** are forma:
+
+<Katex>
+{String.raw`
+\color{#FF6B6B}{a} \times 10^{\color{#4ECDC4}{n}}, \qquad 1 \le \color{#FF6B6B}{a} < 10
+`}
+</Katex>
+:::
+
+Numărul din față are **o singură cifră** înainte de virgulă.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& 3{,}5 \times 10^4 \qquad \color{#4ECDC4}{\text{corect}}\\[6pt]
+& 0{,}7 \times 10^4 \qquad \color{#FF6B6B}{\text{greșit, fiindcă } 0{,}7 < 1}\\[6pt]
+& 25 \times 10^4 \qquad \color{#FF6B6B}{\text{greșit, fiindcă } 25 \ge 10}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Cum obținem o notație științifică
+
+### Numere mari
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Numărul: } 4\,500\\[6pt]
+& \text{Pasul 1. Virgula după prima cifră: } \color{#FF6B6B}{4{,}5}\\[6pt]
+& \text{Pasul 2. Numărăm pozițiile mutate: } \color{#4ECDC4}{3}\\[6pt]
+& \text{Pasul 3. Scriem: } 4\,500 = \color{#FF8C00}{4{,}5 \times 10^{3}}
+\end{aligned}
+`}
+</Katex>
+
+### Numere mici
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Numărul: } 0{,}006\\[6pt]
+& \text{Pasul 1. Virgula după prima cifră nenulă: } \color{#FF6B6B}{6}\\[6pt]
+& \text{Pasul 2. Numărăm pozițiile mutate: } \color{#4ECDC4}{3}\\[6pt]
+& \text{Pasul 3. Scriem: } 0{,}006 = \color{#FF8C00}{6 \times 10^{-3}}
+\end{aligned}
+`}
+</Katex>
+
+:::tip De reținut
+Numărul mare are exponentul **<HighlightText color="teal">pozitiv</HighlightText>**. Numărul mic are exponentul **<HighlightText color="orange">negativ</HighlightText>**.
+:::

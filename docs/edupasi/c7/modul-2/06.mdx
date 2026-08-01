@@ -1,0 +1,120 @@
+---
+sidebar_position: 6
+slug: /edupasi/c7/modul-2/06
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C13.2 - Probleme care se rezolvă cu ajutorul sistemelor de ecuații
+
+---
+
+## Etapele rezolvării unei probleme prin ecuații
+
+:::tip De reținut
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: notăm necunoscutele } \color{#FF6B6B}{x} \text{ și } \color{#4ECDC4}{y} \\[8pt]
+& \text{Pasul 2: scriem două ecuații} \\[8pt]
+& \text{Pasul 3: rezolvăm sistemul} \\[8pt]
+& \text{Pasul 4: scriem răspunsul}
+\end{aligned}
+`}
+</Katex>
+:::
+
+---
+
+## Probleme rezolvate
+
+### Problema 1
+
+Suma a două numere este 20. Diferența lor este 6.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 190" width="420" height="190">
+  <rect x="70" y="30" width="140" height="40" fill="#FF6B6B"/>
+  <rect x="210" y="30" width="120" height="40" fill="#FF8C00"/>
+  <rect x="70" y="100" width="140" height="40" fill="#4ECDC4"/>
+  <text x="40" y="60" font-size="24" fill="#FF6B6B">x</text>
+  <text x="40" y="130" font-size="24" fill="#4ECDC4">y</text>
+  <text x="260" y="60" font-size="24" fill="#fff">6</text>
+  <path d="M348 30 L364 30 L364 140 L348 140" fill="none" stroke="#9370DB" stroke-width="3"/>
+  <text x="372" y="93" font-size="24" fill="#9370DB">20</text>
+</svg>
+
+Notăm numărul mare cu x. Notăm numărul mic cu y.
+
+<Katex>
+{String.raw`
+\begin{cases}
+\color{#FF6B6B}{x} + \color{#4ECDC4}{y} = 20 \\
+\color{#FF6B6B}{x} - \color{#4ECDC4}{y} = 6
+\end{cases}
+`}
+</Katex>
+
+Calculăm pas cu pas:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: adunăm cele două ecuații} \\[8pt]
+& 2\color{#FF6B6B}{x} = 26 \\[8pt]
+& \text{Pasul 2: } \color{#FF6B6B}{x} = 26 : 2 = 13 \\[8pt]
+& \text{Pasul 3: înlocuim în prima ecuație} \\[8pt]
+& 13 + \color{#4ECDC4}{y} = 20 \Rightarrow \color{#4ECDC4}{y} = 7
+\end{aligned}
+`}
+</Katex>
+
+Numerele sunt **<HighlightText color="red">13</HighlightText>** și **<HighlightText color="teal">7</HighlightText>**.
+
+---
+
+### Problema 2
+
+Un elev are iepuri și porumbei. Are 8 capete și 22 de picioare.
+
+Un iepure are 4 picioare. Un porumbel are 2 picioare.
+
+<Katex>
+{String.raw`
+\begin{cases}
+\color{#FF6B6B}{x} + \color{#4ECDC4}{y} = 8 \\
+4\color{#FF6B6B}{x} + 2\color{#4ECDC4}{y} = 22
+\end{cases}
+`}
+</Katex>
+
+Calculăm pas cu pas:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: împărțim a doua ecuație la } 2 \\[8pt]
+& 2\color{#FF6B6B}{x} + \color{#4ECDC4}{y} = 11 \\[8pt]
+& \text{Pasul 2: scădem prima ecuație} \\[8pt]
+& \color{#FF6B6B}{x} = 11 - 8 = 3 \\[8pt]
+& \text{Pasul 3: înlocuim în prima ecuație} \\[8pt]
+& 3 + \color{#4ECDC4}{y} = 8 \Rightarrow \color{#4ECDC4}{y} = 5
+\end{aligned}
+`}
+</Katex>
+
+Elevul are 3 iepuri și 5 porumbei.
+
+:::warning Atenție
+Verificăm răspunsul în enunț.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& 3 + 5 = 8 \text{ capete} \\[8pt]
+& 4 \cdot 3 + 2 \cdot 5 = 22 \text{ picioare}
+\end{aligned}
+`}
+</Katex>
+:::

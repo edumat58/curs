@@ -1,0 +1,136 @@
+---
+sidebar_position: 2
+slug: /edupasi/c7/modul-1/02
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C2 – Reguli de calcul cu puteri
+
+---
+
+## Noțiuni de bază
+
+:::danger Definiție
+**<HighlightText color="red">Puterea</HighlightText>** este o înmulțire repetată. **<HighlightText color="red">Baza</HighlightText>** este numărul care se înmulțește. **<HighlightText color="teal">Exponentul</HighlightText>** arată de câte ori.
+:::
+
+Observăm desenul:
+
+<svg viewBox="0 0 340 210" width="100%" role="img">
+  <text x="150" y="62" textAnchor="middle" fontSize="48" fill="#FF6B6B">2</text>
+  <text x="170" y="36" fontSize="28" fill="#4ECDC4">4</text>
+  <line x1="128" y1="50" x2="80" y2="50" stroke="#FF6B6B" strokeWidth="2" />
+  <text x="74" y="56" textAnchor="end" fontSize="18" fill="#FF6B6B">bază</text>
+  <line x1="196" y1="30" x2="240" y2="30" stroke="#4ECDC4" strokeWidth="2" />
+  <text x="246" y="36" fontSize="18" fill="#4ECDC4">exponent</text>
+  <rect x="30" y="110" width="40" height="40" fill="#FF6B6B" fillOpacity="0.18" stroke="#FF6B6B" strokeWidth="2" />
+  <rect x="100" y="110" width="40" height="40" fill="#FF6B6B" fillOpacity="0.18" stroke="#FF6B6B" strokeWidth="2" />
+  <rect x="170" y="110" width="40" height="40" fill="#FF6B6B" fillOpacity="0.18" stroke="#FF6B6B" strokeWidth="2" />
+  <rect x="240" y="110" width="40" height="40" fill="#FF6B6B" fillOpacity="0.18" stroke="#FF6B6B" strokeWidth="2" />
+  <text x="50" y="139" textAnchor="middle" fontSize="22" fill="#FF6B6B">2</text>
+  <text x="120" y="139" textAnchor="middle" fontSize="22" fill="#FF6B6B">2</text>
+  <text x="190" y="139" textAnchor="middle" fontSize="22" fill="#FF6B6B">2</text>
+  <text x="260" y="139" textAnchor="middle" fontSize="22" fill="#FF6B6B">2</text>
+  <text x="85" y="139" textAnchor="middle" fontSize="20" fill="#9370DB">×</text>
+  <text x="155" y="139" textAnchor="middle" fontSize="20" fill="#9370DB">×</text>
+  <text x="225" y="139" textAnchor="middle" fontSize="20" fill="#9370DB">×</text>
+  <line x1="30" y1="170" x2="280" y2="170" stroke="#9370DB" strokeWidth="2" />
+  <line x1="30" y1="162" x2="30" y2="170" stroke="#9370DB" strokeWidth="2" />
+  <line x1="280" y1="162" x2="280" y2="170" stroke="#9370DB" strokeWidth="2" />
+  <text x="155" y="196" textAnchor="middle" fontSize="20" fill="#9370DB">de 4 ori</text>
+</svg>
+
+<Katex>
+{String.raw`
+\color{#FF6B6B}{2}^{\color{#4ECDC4}{4}} = 2 \times 2 \times 2 \times 2 = 16
+`}
+</Katex>
+
+---
+
+## Reguli fundamentale
+
+### R1. Înmulțirea puterilor
+
+<Katex>
+{String.raw`
+a^{\color{#4ECDC4}{m}} \times a^{\color{#4ECDC4}{n}} = a^{\color{#4ECDC4}{m+n}}
+`}
+</Katex>
+
+Calculăm pas cu pas:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: baza este } \color{#FF6B6B}{2}\\[6pt]
+& \text{Pasul 2: adunăm exponenții } \color{#4ECDC4}{3+4=7}\\[6pt]
+& \text{Pasul 3: } \color{#FF6B6B}{2}^{3} \times \color{#FF6B6B}{2}^{4} = \color{#FF6B6B}{2}^{\color{#4ECDC4}{7}}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+### R2. Împărțirea puterilor
+
+<Katex>
+{String.raw`
+a^{\color{#4ECDC4}{m}} : a^{\color{#4ECDC4}{n}} = a^{\color{#4ECDC4}{m-n}}
+`}
+</Katex>
+
+Calculăm pas cu pas:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: baza este } \color{#FF6B6B}{5}\\[6pt]
+& \text{Pasul 2: scădem exponenții } \color{#4ECDC4}{6-2=4}\\[6pt]
+& \text{Pasul 3: } \color{#FF6B6B}{5}^{6} : \color{#FF6B6B}{5}^{2} = \color{#FF6B6B}{5}^{\color{#4ECDC4}{4}}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+### R3. Puterea unei puteri
+
+<Katex>
+{String.raw`
+\bigl(a^{\color{#4ECDC4}{m}}\bigr)^{\color{#4ECDC4}{n}} = a^{\color{#4ECDC4}{m \times n}}
+`}
+</Katex>
+
+Calculăm pas cu pas:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: baza este } \color{#FF6B6B}{3}\\[6pt]
+& \text{Pasul 2: înmulțim exponenții } \color{#4ECDC4}{2 \times 4 = 8}\\[6pt]
+& \text{Pasul 3: } \bigl(\color{#FF6B6B}{3}^{2}\bigr)^{4} = \color{#FF6B6B}{3}^{\color{#4ECDC4}{8}}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+:::tip De reținut
+Baza trebuie să fie aceeași.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Înmulțim} \Rightarrow \color{#FF6B6B}{\text{adunăm}} \text{ exponenții}\\[6pt]
+& \text{Împărțim} \Rightarrow \color{#4ECDC4}{\text{scădem}} \text{ exponenții}\\[6pt]
+& \text{Putere la putere} \Rightarrow \color{#9370DB}{\text{înmulțim}} \text{ exponenții}
+\end{aligned}
+`}
+</Katex>
+:::
+
+---

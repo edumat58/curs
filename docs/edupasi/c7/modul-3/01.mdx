@@ -1,0 +1,91 @@
+---
+sidebar_position: 1
+slug: /edupasi/c7/modul-3/01
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C17.1 - Sistem de axe ortogonale în plan
+
+---
+
+## Produsul cartezian
+
+:::danger Definiție
+**<HighlightText color="red">Produsul cartezian</HighlightText>** este mulțimea tuturor perechilor de forma **<HighlightText color="teal">(a, b)</HighlightText>**.
+
+Primul element vine din prima mulțime. Al doilea element vine din a doua mulțime.
+:::
+
+Exemplu:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& A = \{1, 2\} \qquad B = \{a, b\} \\[6pt]
+& \color{#FF6B6B}{A \times B} = \{(1, a),\ (1, b),\ (2, a),\ (2, b)\}
+\end{aligned}
+`}
+</Katex>
+
+Reținem: perechea are o ordine fixă.
+
+---
+
+## Sistem de axe ortogonale
+
+Sunt două axe perpendiculare, cu aceeași origine.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#FF6B6B}{Ox} = \text{axa absciselor, orizontală} \\[6pt]
+& \color{#4ECDC4}{Oy} = \text{axa ordonatelor, verticală} \\[6pt]
+& \color{#9370DB}{O} = \text{originea}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Cum reprezentăm punctul M(a, b)
+
+<svg width="100%" height="280" viewBox="0 0 340 280" xmlns="http://www.w3.org/2000/svg" fontFamily="Arial, sans-serif">
+  <line x1="30" y1="220" x2="320" y2="220" stroke="#FF6B6B" strokeWidth="3"/>
+  <polygon points="320,214 332,220 320,226" fill="#FF6B6B"/>
+  <text x="316" y="250" fill="#FF6B6B" fontSize="20" fontWeight="bold">x</text>
+
+  <line x1="70" y1="260" x2="70" y2="30" stroke="#4ECDC4" strokeWidth="3"/>
+  <polygon points="64,30 70,18 76,30" fill="#4ECDC4"/>
+  <text x="34" y="36" fill="#4ECDC4" fontSize="20" fontWeight="bold">y</text>
+
+  <text x="44" y="248" fill="#9370DB" fontSize="20" fontWeight="bold">O</text>
+
+  <line x1="205" y1="214" x2="205" y2="226" stroke="#FF6B6B" strokeWidth="3"/>
+  <text x="198" y="250" fill="#FF6B6B" fontSize="20" fontWeight="bold">3</text>
+
+  <line x1="64" y1="130" x2="76" y2="130" stroke="#4ECDC4" strokeWidth="3"/>
+  <text x="40" y="138" fill="#4ECDC4" fontSize="20" fontWeight="bold">2</text>
+
+  <line x1="205" y1="220" x2="205" y2="130" stroke="#FF6B6B" strokeWidth="2" strokeDasharray="6,5"/>
+  <line x1="70" y1="130" x2="205" y2="130" stroke="#4ECDC4" strokeWidth="2" strokeDasharray="6,5"/>
+
+  <circle cx="205" cy="130" r="7" fill="#9370DB"/>
+  <text x="218" y="118" fill="#9370DB" fontSize="22" fontWeight="bold">M(3, 2)</text>
+</svg>
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: pe } \color{#FF6B6B}{Ox} \text{ mergem la } \color{#FF6B6B}{3} \\[6pt]
+& \text{Pasul 2: de acolo urcăm } \color{#4ECDC4}{2} \text{ unități} \\[6pt]
+& \text{Pasul 3: punem punctul } \color{#9370DB}{M(3, 2)}
+\end{aligned}
+`}
+</Katex>
+
+:::tip De reținut
+Primul număr se măsoară pe axa **<HighlightText color="red">Ox</HighlightText>**. Al doilea număr se măsoară pe axa **<HighlightText color="teal">Oy</HighlightText>**.
+:::

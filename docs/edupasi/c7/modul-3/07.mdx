@@ -1,0 +1,92 @@
+---
+sidebar_position: 7
+slug: /edupasi/c7/modul-3/07
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# G7.2 - Tangente dintr-un punct exterior la un cerc
+
+---
+
+## Tangenta la cerc
+
+:::danger Definiție
+**<HighlightText color="red">Tangenta</HighlightText>** este o dreaptă care atinge cercul într-un singur punct. Acel punct se numește **<HighlightText color="teal">punct de tangență</HighlightText>**.
+:::
+
+Raza dusă în punctul de tangență formează unghi drept cu tangenta.
+
+<Katex>
+{String.raw`
+\color{#4ECDC4}{OT} \perp \color{#FF6B6B}{AT} \quad \Rightarrow \quad \sphericalangle OTA = 90^\circ
+`}
+</Katex>
+
+---
+
+## Tangente dintr-un punct exterior
+
+Punctul <HighlightText color="orange">A</HighlightText> este în afara cercului. Din A ducem două tangente.
+
+<div style={{ display: 'flex', justifyContent: 'center', margin: '20px 0' }}>
+  <svg width="280" height="220" viewBox="0 0 280 220" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="155" cy="110" r="45" fill="none" stroke="#333" strokeWidth="2" />
+
+    <line x1="80" y1="110" x2="155" y2="110" stroke="#9370DB" strokeWidth="2" strokeDasharray="6,5" />
+    <line x1="155" y1="110" x2="128" y2="74" stroke="#4ECDC4" strokeWidth="3" />
+    <line x1="155" y1="110" x2="128" y2="146" stroke="#4ECDC4" strokeWidth="3" />
+
+    <line x1="80" y1="110" x2="128" y2="74" stroke="#FF6B6B" strokeWidth="3" />
+    <line x1="80" y1="110" x2="128" y2="146" stroke="#FF6B6B" strokeWidth="3" />
+
+    <path d="M 128 74 L 136 68 L 142 76 L 134 82 Z" fill="#FFE08A" stroke="#333" strokeWidth="1" />
+
+    <circle cx="80" cy="110" r="4" fill="#FF8C00" />
+    <circle cx="155" cy="110" r="4" fill="#333" />
+    <circle cx="128" cy="74" r="4" fill="#333" />
+    <circle cx="128" cy="146" r="4" fill="#333" />
+
+    <text x="58" y="116" fontSize="20" fontFamily="serif">A</text>
+    <text x="160" y="128" fontSize="20" fontFamily="serif">O</text>
+    <text x="118" y="58" fontSize="20" fontFamily="serif">T₁</text>
+    <text x="118" y="176" fontSize="20" fontFamily="serif">T₂</text>
+
+    <text x="92" y="102" fontSize="18" fill="#9370DB">5 cm</text>
+    <text x="163" y="88" fontSize="18" fill="#4ECDC4">3 cm</text>
+  </svg>
+</div>
+
+---
+
+## Teorema ciocului de cioară
+
+:::tip De reținut
+Cele două tangente duse din punctul A au lungimi egale.
+:::
+
+<Katex>
+{String.raw`
+\color{#FF6B6B}{AT_1 = AT_2}
+`}
+</Katex>
+
+**Exemplu.** Calculăm lungimea tangentei din desen.
+
+Pasul 1. Triunghiul AOT₁ are unghi drept în T₁.
+
+Pasul 2. Aplicăm teorema lui Pitagora.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& AT_1^2 = AO^2 - OT_1^2\\[6pt]
+& AT_1^2 = 5^2 - 3^2 = 25 - 9 = 16\\[6pt]
+& AT_1 = \color{#FF8C00}{4}\ \text{cm}
+\end{aligned}
+`}
+</Katex>
+
+Pasul 3. Cealaltă tangentă are tot 4 cm.

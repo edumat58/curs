@@ -1,0 +1,124 @@
+---
+sidebar_position: 7
+slug: /edupasi/c7/modul-2/07
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# G6 - Centrul de greutate al unui triunghi
+
+---
+
+## Medianele unui triunghi
+
+:::danger Definiție
+**<HighlightText color="red">Mediana</HighlightText>** unește un vârf cu mijlocul laturii opuse.
+:::
+
+Un triunghi are trei mediane. Ele se taie într-un punct. Punctul se notează cu **<HighlightText color="teal">G</HighlightText>**. Se numește **centru de greutate**.
+
+<svg viewBox="0 0 320 250" width="340" height="266" xmlns="http://www.w3.org/2000/svg">
+  <polygon points="30,200 290,200 110,30" fill="none" stroke="#333333" stroke-width="2"/>
+  <line x1="110" y1="30" x2="143" y2="143" stroke="#4ECDC4" stroke-width="5"/>
+  <line x1="143" y1="143" x2="160" y2="200" stroke="#FF8C00" stroke-width="5"/>
+  <line x1="121" y1="89" x2="133" y2="85" stroke="#333333" stroke-width="2"/>
+  <circle cx="143" cy="143" r="6" fill="#FF6B6B"/>
+  <circle cx="160" cy="200" r="5" fill="#333333"/>
+  <text x="100" y="22" font-size="20" fill="#333333">A</text>
+  <text x="12" y="216" font-size="20" fill="#333333">B</text>
+  <text x="294" y="216" font-size="20" fill="#333333">C</text>
+  <text x="154" y="222" font-size="20" fill="#333333">D</text>
+  <text x="154" y="136" font-size="20" fill="#FF6B6B">G</text>
+</svg>
+
+Mediana se împarte în trei părți egale.
+
+<svg viewBox="0 0 320 120" width="320" height="120" xmlns="http://www.w3.org/2000/svg">
+  <rect x="20" y="35" width="90" height="45" fill="#4ECDC4" stroke="#333333" stroke-width="2"/>
+  <rect x="110" y="35" width="90" height="45" fill="#4ECDC4" stroke="#333333" stroke-width="2"/>
+  <rect x="200" y="35" width="90" height="45" fill="#FF8C00" stroke="#333333" stroke-width="2"/>
+  <text x="110" y="24" font-size="16" fill="#333333" text-anchor="middle">AG = 2 părți</text>
+  <text x="245" y="24" font-size="16" fill="#333333" text-anchor="middle">GD = 1 parte</text>
+  <text x="155" y="106" font-size="16" fill="#333333" text-anchor="middle">AD = 3 părți</text>
+</svg>
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#4ECDC4}{AG} = \frac{2}{3} \cdot AD \\[8pt]
+& \color{#FF8C00}{GD} = \frac{1}{3} \cdot AD
+\end{aligned}
+`}
+</Katex>
+
+:::tip De reținut
+De la vârf la G sunt **două părți**. De la G la mijloc este **o parte**.
+:::
+
+---
+
+## Exemple de Aplicații
+
+### Problema 1
+
+În triunghiul ABC, AD este mediană. G este centrul de greutate.
+
+<Katex>
+{String.raw`
+AD = 9 \text{ cm}
+`}
+</Katex>
+
+Calculăm AG și GD.
+
+**Pasul 1:** Aflăm o parte. Împărțim la 3.
+
+<Katex>
+{String.raw`
+9 : 3 = 3 \text{ cm}
+`}
+</Katex>
+
+**Pasul 2:** AG are două părți.
+
+<Katex>
+{String.raw`
+\color{#4ECDC4}{AG} = 2 \cdot 3 = 6 \text{ cm}
+`}
+</Katex>
+
+**Pasul 3:** GD are o parte.
+
+<Katex>
+{String.raw`
+\color{#FF8C00}{GD} = 3 \text{ cm}
+`}
+</Katex>
+
+---
+
+### Problema 2
+
+În triunghiul ABC cunoaștem GD.
+
+<Katex>
+{String.raw`
+GD = 4 \text{ cm}
+`}
+</Katex>
+
+Calculăm AD.
+
+**Pasul 1:** GD este o parte. O parte are 4 cm.
+
+**Pasul 2:** AD are trei părți.
+
+<Katex>
+{String.raw`
+AD = 3 \cdot 4 = 12 \text{ cm}
+`}
+</Katex>
+
+---

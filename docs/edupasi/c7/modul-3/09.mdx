@@ -1,0 +1,93 @@
+---
+sidebar_position: 9
+slug: /edupasi/c7/modul-3/09
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# G7.4 - Lungimea cercului și aria discului
+
+---
+
+## Cerc și disc
+
+<div style={{ display: 'flex', justifyContent: 'center', margin: '20px 0' }}>
+  <svg width="320" height="180" viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="85" cy="95" r="55" fill="none" stroke="#FF6B6B" strokeWidth="5" />
+    <line x1="85" y1="95" x2="140" y2="95" stroke="#FF8C00" strokeWidth="3" />
+    <circle cx="85" cy="95" r="4" fill="#333" />
+    <text x="100" y="88" fontSize="18" fill="#FF8C00">R</text>
+    <text x="52" y="172" fontSize="20" fill="#FF6B6B">cerc</text>
+
+    <circle cx="235" cy="95" r="55" fill="#4ECDC4" stroke="#4ECDC4" strokeWidth="5" />
+    <text x="204" y="172" fontSize="20" fill="#4ECDC4">disc</text>
+  </svg>
+</div>
+
+Cercul este linia. Discul este suprafața dinăuntru.
+
+---
+
+## Lungimea cercului
+
+:::danger Definiție
+**<HighlightText color="red">Lungimea cercului</HighlightText>** se calculează cu raza. Numărul **<HighlightText color="teal">pi</HighlightText>** este aproximativ 3,14.
+:::
+
+<Katex>
+{String.raw`
+L = 2 \pi R
+`}
+</Katex>
+
+**Exemplu.** Cercul are raza de 5 cm.
+
+Pasul 1. Scriem formula.
+
+Pasul 2. Punem raza în formulă.
+
+Pasul 3. Înlocuim pi cu 3,14.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& L = 2 \pi R\\[6pt]
+& L = 2 \pi \cdot \color{#FF6B6B}{5} = 10\pi\\[6pt]
+& L \approx 10 \cdot 3{,}14 = \color{#FF8C00}{31{,}4}\ \text{cm}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Aria discului
+
+:::tip De reținut
+Aria discului se calculează tot cu raza. Raza se ridică la pătrat.
+:::
+
+<Katex>
+{String.raw`
+\mathcal{A} = \pi R^2
+`}
+</Katex>
+
+**Exemplu.** Discul are raza de 3 cm.
+
+Pasul 1. Scriem formula.
+
+Pasul 2. Ridicăm raza la pătrat.
+
+Pasul 3. Înlocuim pi cu 3,14.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \mathcal{A} = \pi R^2\\[6pt]
+& \mathcal{A} = \pi \cdot \color{#FF6B6B}{3}^2 = 9\pi\\[6pt]
+& \mathcal{A} \approx 9 \cdot 3{,}14 = \color{#9370DB}{28{,}26}\ \text{cm}^2
+\end{aligned}
+`}
+</Katex>

@@ -1,0 +1,100 @@
+---
+sidebar_position: 3
+slug: /edupasi/c7/modul-4/03
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C18.1 - Funcții trigonometrice (demonstrații)
+
+---
+
+## Cercul trigonometric
+
+:::danger Definiție
+În cercul trigonometric **<HighlightText color="purple">raza</HighlightText>** este 1.
+
+Raza este ipotenuza. Catetele sunt **<HighlightText color="red">sinusul</HighlightText>** și **<HighlightText color="teal">cosinusul</HighlightText>**.
+:::
+
+<svg viewBox="0 0 300 300" width="100%" role="img" aria-label="Cerc trigonometric cu triunghiul dreptunghic de 45 de grade">
+  <line x1="40" y1="240" x2="255" y2="240" stroke="currentColor" stroke-width="2" opacity="0.4" />
+  <line x1="60" y1="60" x2="60" y2="258" stroke="currentColor" stroke-width="2" opacity="0.4" />
+  <path d="M 220 240 A 160 160 0 0 0 60 80" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="6 6" opacity="0.3" />
+  <line x1="60" y1="240" x2="173" y2="127" stroke="#9370DB" stroke-width="4" />
+  <line x1="173" y1="127" x2="173" y2="240" stroke="#FF6B6B" stroke-width="4" />
+  <line x1="60" y1="240" x2="173" y2="240" stroke="#4ECDC4" stroke-width="4" />
+  <path d="M 161 240 L 161 228 L 173 228" fill="none" stroke="currentColor" stroke-width="2" />
+  <circle cx="173" cy="127" r="5" fill="#9370DB" />
+  <text x="70" y="152" font-size="18" fill="#9370DB">raza 1</text>
+  <text x="184" y="192" font-size="20" fill="#FF6B6B">sin</text>
+  <text x="92" y="266" font-size="20" fill="#4ECDC4">cos</text>
+  <text x="88" y="233" font-size="17" fill="currentColor">45°</text>
+  <text x="44" y="259" font-size="17" fill="currentColor">O</text>
+  <text x="182" y="121" font-size="17" fill="currentColor">A</text>
+  <text x="167" y="264" font-size="17" fill="currentColor">B</text>
+</svg>
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#FF6B6B}{\sin \alpha} = \text{cateta opusă}\\[8pt]
+& \color{#4ECDC4}{\cos \alpha} = \text{cateta alăturată}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Demonstrații
+
+### Identitatea fundamentală
+
+Aplicăm teorema lui Pitagora în triunghi.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{catetă}^2 + \text{catetă}^2 = \text{ipotenuză}^2\\[8pt]
+& \color{#FF6B6B}{\sin^2 \alpha} + \color{#4ECDC4}{\cos^2 \alpha} = 1^2\\[8pt]
+& \color{#FF6B6B}{\sin^2 \alpha} + \color{#4ECDC4}{\cos^2 \alpha} = 1
+\end{aligned}
+`}
+</Katex>
+
+### Sinusul și cosinusul de 45 de grade
+
+La 45 de grade catetele sunt egale. Notăm fiecare catetă cu x. Calculăm pas cu pas:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: } x^2 + x^2 = 1^2\\[8pt]
+& \text{Pasul 2: } 2x^2 = 1\\[8pt]
+& \text{Pasul 3: } x^2 = \frac{1}{2}\\[8pt]
+& \text{Pasul 4: } x = \frac{\sqrt{2}}{2}
+\end{aligned}
+`}
+</Katex>
+
+Observăm că cele două valori sunt egale.
+
+<Katex>
+{String.raw`
+\color{#FF6B6B}{\sin 45^\circ} = \color{#4ECDC4}{\cos 45^\circ} = \frac{\sqrt{2}}{2}
+`}
+</Katex>
+
+:::tip De reținut
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#FF6B6B}{\sin 30^\circ} = \frac{1}{2} \qquad \color{#4ECDC4}{\cos 30^\circ} = \frac{\sqrt{3}}{2}\\[8pt]
+& \color{#FF6B6B}{\sin 45^\circ} = \frac{\sqrt{2}}{2} \qquad \color{#4ECDC4}{\cos 45^\circ} = \frac{\sqrt{2}}{2}\\[8pt]
+& \color{#FF6B6B}{\sin 60^\circ} = \frac{\sqrt{3}}{2} \qquad \color{#4ECDC4}{\cos 60^\circ} = \frac{1}{2}
+\end{aligned}
+`}
+</Katex>
+:::

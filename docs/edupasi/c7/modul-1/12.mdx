@@ -1,0 +1,110 @@
+---
+sidebar_position: 12
+slug: /edupasi/c7/modul-1/12
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# G1 - Punct, dreaptă și plan
+
+---
+
+## Punctul și dreapta
+
+Punctul se notează cu <HighlightText color="red">literă mare</HighlightText>. Dreapta se notează cu <HighlightText color="teal">literă mică</HighlightText>.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Punct: } \color{#FF6B6B}{A,\ B,\ C} \\[8pt]
+& \text{Dreaptă: } \color{#4ECDC4}{a,\ b,\ c} \\[8pt]
+& \color{#FF6B6B}{A} \in \color{#4ECDC4}{a} \quad \text{(A este pe dreapta } a \text{)} \\[8pt]
+& \color{#FF6B6B}{B} \notin \color{#4ECDC4}{a} \quad \text{(B nu este pe dreapta } a \text{)}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Puncte coliniare
+
+:::danger Definiție
+Punctele care stau pe **aceeași dreaptă** se numesc **<HighlightText color="red">coliniare</HighlightText>**.
+:::
+
+<svg width="330" height="100" viewBox="0 0 330 100">
+  <line x1="15" y1="60" x2="300" y2="60" stroke="#4ECDC4" strokeWidth="4" />
+  <text x="312" y="52" fontSize="24" fontWeight="bold" fill="#4ECDC4">d</text>
+  <circle cx="75" cy="60" r="8" fill="#FF6B6B" />
+  <circle cx="160" cy="60" r="8" fill="#FF6B6B" />
+  <circle cx="245" cy="60" r="8" fill="#FF6B6B" />
+  <text x="75" y="35" fontSize="24" fontWeight="bold" fill="#FF6B6B" textAnchor="middle">A</text>
+  <text x="160" y="35" fontSize="24" fontWeight="bold" fill="#FF6B6B" textAnchor="middle">B</text>
+  <text x="245" y="35" fontSize="24" fontWeight="bold" fill="#FF6B6B" textAnchor="middle">C</text>
+</svg>
+
+<Katex>
+{String.raw`
+\color{#FF6B6B}{A},\ \color{#FF6B6B}{B},\ \color{#FF6B6B}{C} \in \color{#4ECDC4}{d}
+\ \Rightarrow\ \text{A, B, C sunt coliniare}
+`}
+</Katex>
+
+---
+
+## Drepte concurente
+
+Două drepte care se taie sunt **concurente**. Ele au un singur punct comun.
+
+<Katex>
+{String.raw`
+\color{#FF6B6B}{a} \cap \color{#4ECDC4}{b} = \{ \color{#FF8C00}{O} \}
+`}
+</Katex>
+
+---
+
+## Planul
+
+Planul se notează cu <HighlightText color="purple">literă grecească</HighlightText>. Un punct poate fi în plan sau în afara lui.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Plan: } \color{#9370DB}{\alpha,\ \beta,\ \gamma} \\[8pt]
+& \color{#FF6B6B}{A} \in \color{#9370DB}{\alpha} \quad \text{(A este în plan)} \\[8pt]
+& \color{#FF6B6B}{B} \notin \color{#9370DB}{\alpha} \quad \text{(B nu este în plan)}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Drepte coplanare și necoplanare
+
+Două drepte din același plan sunt **coplanare**. Două drepte din plane diferite sunt **necoplanare**.
+
+Două drepte coplanare care nu se taie sunt **paralele**.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#FF6B6B}{a} \parallel \color{#4ECDC4}{b} \\[8pt]
+& \color{#FF6B6B}{a} \cap \color{#4ECDC4}{b} = \emptyset
+\end{aligned}
+`}
+</Katex>
+
+:::tip De reținut
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Punct} \rightarrow \color{#FF6B6B}{\text{literă mare: } A} \\[8pt]
+& \text{Dreaptă} \rightarrow \color{#4ECDC4}{\text{literă mică: } a} \\[8pt]
+& \text{Plan} \rightarrow \color{#9370DB}{\text{literă grecească: } \alpha}
+\end{aligned}
+`}
+</Katex>
+:::

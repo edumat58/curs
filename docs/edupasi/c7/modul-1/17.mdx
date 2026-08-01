@@ -1,0 +1,128 @@
+---
+sidebar_position: 17
+slug: /edupasi/c7/modul-1/17
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C10 - Aproximări ale numerelor iraționale
+
+---
+
+## Aproximarea prin lipsă
+
+:::danger Definiție
+Aproximarea prin **<HighlightText color="red">lipsă</HighlightText>** este numărul întreg dinaintea numărului dat.
+:::
+
+<svg viewBox="0 0 360 120" width="100%" style={{maxWidth: '420px'}} xmlns="http://www.w3.org/2000/svg">
+  <line x1="20" y1="70" x2="340" y2="70" stroke="#9370DB" strokeWidth="3" />
+  <circle cx="60" cy="70" r="7" fill="#FF6B6B" />
+  <circle cx="159" cy="70" r="7" fill="#FF8C00" />
+  <circle cx="300" cy="70" r="7" fill="#4ECDC4" />
+  <text x="60" y="102" fontSize="22" fill="#FF6B6B" textAnchor="middle">1</text>
+  <text x="159" y="102" fontSize="20" fill="#FF8C00" textAnchor="middle">1,41</text>
+  <text x="300" y="102" fontSize="22" fill="#4ECDC4" textAnchor="middle">2</text>
+  <text x="60" y="38" fontSize="20" fill="#FF6B6B" textAnchor="middle">lipsă</text>
+  <text x="300" y="38" fontSize="20" fill="#4ECDC4" textAnchor="middle">adaos</text>
+</svg>
+
+**Exemplu:**
+
+<Katex>
+{String.raw`
+\sqrt{2} = 1{,}414\ldots
+`}
+</Katex>
+
+Pasul 1: Numărul stă între 1 și 2.
+
+Pasul 2: Luăm numărul din stânga.
+
+<Katex>
+{String.raw`
+\sqrt{2} \approx \color{#FF6B6B}{1}
+`}
+</Katex>
+
+---
+
+## Aproximarea prin adaos
+
+:::danger Definiție
+Aproximarea prin **<HighlightText color="teal">adaos</HighlightText>** este numărul întreg de după numărul dat.
+:::
+
+**Exemplu:**
+
+Pasul 1: Numărul stă între 1 și 2.
+
+Pasul 2: Luăm numărul din dreapta.
+
+<Katex>
+{String.raw`
+\sqrt{2} \approx \color{#4ECDC4}{2}
+`}
+</Katex>
+
+---
+
+## Rotunjirea unui număr real
+
+:::tip De reținut
+Ne uităm la prima cifră de după virgulă.
+
+Cifra este 5 sau mai mare: luăm **<HighlightText color="teal">adaosul</HighlightText>**.
+
+Cifra este mai mică decât 5: luăm **<HighlightText color="red">lipsa</HighlightText>**.
+:::
+
+**Exemplu:** Rotunjim la unități.
+
+<Katex>
+{String.raw`
+\sqrt{2} = 1{,}\color{#9370DB}{4}14\ldots
+`}
+</Katex>
+
+Pasul 1: Prima cifră după virgulă este 4.
+
+Pasul 2: 4 este mai mic decât 5.
+
+Pasul 3: Luăm aproximarea prin lipsă.
+
+<Katex>
+{String.raw`
+\sqrt{2} \approx \color{#FF8C00}{1}
+`}
+</Katex>
+
+---
+
+## Aproximări la zecimi
+
+Păstrăm o zecimală.
+
+**Exemplu:**
+
+<Katex>
+{String.raw`
+\sqrt{2} = 1{,}4\color{#9370DB}{1}4\ldots
+`}
+</Katex>
+
+Pasul 1: Numărul stă între 1,4 și 1,5.
+
+Pasul 2: Cifra tăiată este mai mică decât 5.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Prin lipsă: } \sqrt{2} \approx \color{#FF6B6B}{1{,}4}\\[8pt]
+& \text{Prin adaos: } \sqrt{2} \approx \color{#4ECDC4}{1{,}5}\\[8pt]
+& \text{Rotunjire: } \sqrt{2} \approx \color{#FF8C00}{1{,}4}
+\end{aligned}
+`}
+</Katex>

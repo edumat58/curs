@@ -1,0 +1,87 @@
+---
+sidebar_position: 4
+slug: /edupasi/c7/modul-2/04
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# G5 - Linia mijlocie în triunghi
+
+---
+
+## Definiție
+
+:::danger Definiție
+**<HighlightText color="teal">Linia mijlocie</HighlightText>** unește mijloacele a două laturi.
+:::
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 270" width="400" height="270">
+  <path d="M200 30 L40 220 L360 220 Z" fill="none" stroke="#333" stroke-width="3"/>
+  <line x1="120" y1="125" x2="280" y2="125" stroke="#4ECDC4" stroke-width="6"/>
+  <circle cx="120" cy="125" r="6" fill="#4ECDC4"/>
+  <circle cx="280" cy="125" r="6" fill="#4ECDC4"/>
+  <text x="188" y="22" font-size="24" fill="#333">A</text>
+  <text x="18" y="245" font-size="24" fill="#333">B</text>
+  <text x="368" y="245" font-size="24" fill="#333">C</text>
+  <text x="88" y="120" font-size="24" fill="#4ECDC4">M</text>
+  <text x="296" y="120" font-size="24" fill="#4ECDC4">N</text>
+</svg>
+
+---
+
+## Proprietate
+
+Observăm că linia mijlocie este paralelă cu latura mare.
+
+Ea are jumătate din lungimea acestei laturi.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#4ECDC4}{MN} \parallel \color{#FF6B6B}{BC} \\[8pt]
+& \color{#4ECDC4}{MN} = \frac{\color{#FF6B6B}{BC}}{2}
+\end{aligned}
+`}
+</Katex>
+
+:::tip De reținut
+Latura mare este dublul liniei mijlocii.
+
+<Katex>
+{String.raw`
+\color{#FF6B6B}{BC} = 2 \cdot \color{#4ECDC4}{MN}
+`}
+</Katex>
+:::
+
+---
+
+## Aplicații
+
+### Exemplul 1
+
+Se dă latura mare. Calculăm linia mijlocie.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: } \color{#FF6B6B}{BC} = 8 \text{ cm} \\[8pt]
+& \text{Pasul 2: } \color{#4ECDC4}{MN} = \frac{8}{2} = 4 \text{ cm}
+\end{aligned}
+`}
+</Katex>
+
+### Exemplul 2
+
+Se dă linia mijlocie. Calculăm latura mare.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: } \color{#4ECDC4}{MN} = 3 \text{ cm} \\[8pt]
+& \text{Pasul 2: } \color{#FF6B6B}{BC} = 2 \cdot 3 = 6 \text{ cm}
+\end{aligned}
+`}
+</Katex>

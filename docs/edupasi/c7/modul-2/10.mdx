@@ -1,0 +1,104 @@
+---
+sidebar_position: 10
+slug: /edupasi/c7/modul-2/10
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C16 - Apartenența la o mulțime
+
+---
+
+## Noțiuni de bază
+
+:::danger Definiție
+Un element **<HighlightText color="red">aparține</HighlightText>** unei mulțimi dacă se află în ea.
+
+Un element **<HighlightText color="teal">nu aparține</HighlightText>** mulțimii dacă nu se află în ea.
+:::
+
+<svg viewBox="0 0 420 210" width="100%" role="img">
+  <ellipse cx="150" cy="105" rx="130" ry="85" fill="none" stroke="#4ECDC4" strokeWidth="4" />
+  <text x="40" y="45" fontSize="30" fontWeight="bold" fill="#4ECDC4">A</text>
+  <text x="95" y="90" fontSize="30" fill="#4ECDC4">3</text>
+  <text x="150" y="130" fontSize="30" fill="#4ECDC4">5</text>
+  <text x="205" y="90" fontSize="30" fill="#4ECDC4">8</text>
+  <text x="350" y="115" fontSize="30" fill="#FF6B6B">7</text>
+</svg>
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& A = \{3,\ 5,\ 8\} \\[8pt]
+& \color{#4ECDC4}{5 \in A} \quad \text{5 este în mulțimea } A \\[8pt]
+& \color{#FF6B6B}{7 \notin A} \quad \text{7 nu este în mulțimea } A
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Criterii de apartenență la mulțimi
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#FF6B6B}{\mathbb{N}} = \{0,\ 1,\ 2,\ 3,\ 4,\ \dots\} \\[8pt]
+& \color{#4ECDC4}{\mathbb{Z}} = \{\dots,\ -2,\ -1,\ 0,\ 1,\ 2,\ \dots\} \\[8pt]
+& \color{#9370DB}{\mathbb{Q}} = \text{numerele scrise ca fracție}
+\end{aligned}
+`}
+</Katex>
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Număr întreg pozitiv sau } 0 \Rightarrow \color{#FF6B6B}{\mathbb{N}} \quad 7 \in \mathbb{N} \\[8pt]
+& \text{Număr întreg cu minus} \Rightarrow \color{#4ECDC4}{\mathbb{Z}} \quad -5 \in \mathbb{Z} \\[8pt]
+& \text{Fracție de numere întregi} \Rightarrow \color{#9370DB}{\mathbb{Q}} \quad \frac{3}{4} \in \mathbb{Q}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Exemple de apartenență la mulțimi
+
+**Exemplul 1:** Verificăm dacă 6 aparține mulțimii numerelor naturale.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: } 6 \text{ este număr întreg} \\[6pt]
+& \text{Pasul 2: } 6 \text{ este pozitiv} \\[6pt]
+& \text{Pasul 3: } \color{#FF6B6B}{6 \in \mathbb{N}}
+\end{aligned}
+`}
+</Katex>
+
+**Exemplul 2:** Verificăm dacă -4 aparține mulțimii numerelor naturale.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: } -4 \text{ este număr negativ} \\[6pt]
+& \text{Pasul 2: } \mathbb{N} \text{ nu are numere negative} \\[6pt]
+& \text{Pasul 3: } \color{#4ECDC4}{-4 \notin \mathbb{N}} \text{, dar } -4 \in \mathbb{Z}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+:::tip De reținut
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#4ECDC4}{\in} \ \text{ se citește „aparține"} \\[8pt]
+& \color{#FF6B6B}{\notin} \ \text{ se citește „nu aparține"}
+\end{aligned}
+`}
+</Katex>
+:::

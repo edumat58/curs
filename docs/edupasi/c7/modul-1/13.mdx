@@ -1,0 +1,110 @@
+---
+sidebar_position: 13
+slug: /edupasi/c7/modul-1/13
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# G2 - Unghiul. Clasificare și măsurarea unghiurilor
+
+---
+
+## Definiție
+
+:::danger Definiție
+**<HighlightText color="red">Unghiul</HighlightText>** este figura formată din două semidrepte cu aceeași origine.
+:::
+
+<svg viewBox="0 0 300 200" width="100%" style={{ maxWidth: '340px' }} xmlns="http://www.w3.org/2000/svg">
+  <path d="M 60 160 L 130 160 A 70 70 0 0 0 105 106 Z" fill="#4ECDC4" opacity="0.3" />
+  <line x1="60" y1="160" x2="265" y2="160" stroke="#FF6B6B" strokeWidth="3" />
+  <line x1="60" y1="160" x2="180" y2="18" stroke="#FF6B6B" strokeWidth="3" />
+  <circle cx="60" cy="160" r="6" fill="#FF8C00" />
+  <text x="30" y="180" fontSize="20" fill="#FF8C00">O</text>
+  <text x="272" y="168" fontSize="20" fill="#FF6B6B">B</text>
+  <text x="186" y="22" fontSize="20" fill="#FF6B6B">A</text>
+  <text x="116" y="142" fontSize="15" fill="#4ECDC4">interior</text>
+</svg>
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Vârful: } \color{#FF8C00}{O}\\[6pt]
+& \text{Laturile: } \color{#FF6B6B}{[OA)} \text{ și } \color{#FF6B6B}{[OB)}\\[6pt]
+& \text{Scriem: } \measuredangle AOB
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Interiorul unui unghi
+
+Interiorul este partea colorată dintre laturi.
+
+<Katex>
+{String.raw`
+\text{Scriem: int}(\color{#4ECDC4}{\measuredangle AOB})
+`}
+</Katex>
+
+---
+
+## Construcția imaginii unui punct prin rotație
+
+Rotim punctul P în jurul punctului O cu 60°.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: trasăm cercul cu centrul } \color{#FF8C00}{O} \text{ și raza } OP\\[6pt]
+& \text{Pasul 2: măsurăm } \color{#FF6B6B}{60^\circ} \text{ de la latura } OP\\[6pt]
+& \text{Pasul 3: marcăm punctul } \color{#9370DB}{P'} \text{ pe cerc}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Clasificarea unghiurilor
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Unghi } \color{#FF6B6B}{\text{nul}} && = 0^\circ\\[6pt]
+& \text{Unghi } \color{#4ECDC4}{\text{ascuțit}} && \text{ între } 0^\circ \text{ și } 90^\circ\\[6pt]
+& \text{Unghi } \color{#9370DB}{\text{drept}} && = 90^\circ\\[6pt]
+& \text{Unghi } \color{#FF8C00}{\text{obtuz}} && \text{ între } 90^\circ \text{ și } 180^\circ\\[6pt]
+& \text{Unghi } \color{#FF6B6B}{\text{alungit}} && = 180^\circ
+\end{aligned}
+`}
+</Katex>
+
+**Exemplu rezolvat**
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \measuredangle AOB = \color{#4ECDC4}{40^\circ}\\[6pt]
+& \text{Pasul 1: comparăm } 40^\circ \text{ cu } 90^\circ\\[6pt]
+& \text{Pasul 2: } 40^\circ \text{ este mai mic decât } 90^\circ\\[6pt]
+& \text{Pasul 3: unghiul este } \color{#4ECDC4}{\text{ascuțit}}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Unghiuri congruente
+
+:::tip De reținut
+Unghiurile cu măsuri egale se numesc **<HighlightText color="teal">congruente</HighlightText>**.
+:::
+
+<Katex>
+{String.raw`
+\measuredangle AOB = \measuredangle COD = \color{#4ECDC4}{50^\circ}
+`}
+</Katex>
