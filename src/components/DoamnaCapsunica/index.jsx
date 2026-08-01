@@ -158,10 +158,10 @@ export default function DoamnaCapsunica() {
           ref={triggerRef}
           className={styles.fab}
           onClick={() => setOpen(true)}
-          aria-label="Întreabă-o pe Doamna Căpșunică"
+          aria-label="Întreab-o pe Doamna Căpșunică"
         >
           <img className={styles.fabAvatar} src={AVATAR} alt="" />
-          <span className={styles.fabLabel}>Întreabă-o pe Doamna Căpșunică</span>
+          <span className={styles.fabLabel}>Întreab-o pe Doamna Căpșunică</span>
         </button>
       )}
 

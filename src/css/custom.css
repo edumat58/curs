@@ -1805,23 +1805,79 @@ svg[class*='breadcrumbHomeIcon'] path {
    oferim pentru că preferința și confortul contează, dar nu le prezentăm drept
    remediu și nu le punem primele.
 
-   Familiile se cer prin `local()`: nu se descarcă nimic. Dacă fontul e instalat
-   pe dispozitiv, se folosește; dacă nu, se cade pe stiva de sistem. Pagina
-   rămâne la fel de rapidă și offline, iar textul nu dispare niciodată în
-   așteptarea unei descărcări. */
+   Fonturile se LIVREAZĂ cu situl, nu se cer prin `local()`.
 
+   Varianta dinainte le cerea doar de pe dispozitiv. Suna econom — nu se
+   descarcă nimic — dar însemna că opțiunea „Pentru dislexie" nu făcea aproape
+   nimic: OpenDyslexic nu vine instalat nici pe Windows, nici pe macOS, nici pe
+   Android, așa că alegerea cădea tăcut pe Comic Sans sau pe Verdana. Elevul
+   apăsa butonul, litera nu se schimba, și n-avea de unde ști de ce.
+
+   Acum fișierele sunt în `static/fonts`. Costă 260 KB o singură dată, se pun în
+   cache, iar `font-display: swap` lasă textul citibil din prima clipă, cu
+   fontul de sistem, până sosește cel ales. */
+
+/* OpenDyslexic — Abbie Gonzalez, SIL Open Font License 1.1.
+   Are toate diacriticele românești (ă â î ș ț), verificat pe fișier: fără ele
+   lecțiile s-ar umple de pătrățele exact la copiii care au nevoie de font. */
 @font-face {
   font-family: 'EduPasiDislexie';
-  src: local('OpenDyslexic'), local('OpenDyslexic-Regular'), local('Open-Dyslexic'),
-       local('Lexie Readable'), local('Comic Sans MS');
+  src: url('/fonts/OpenDyslexic-Regular.woff2') format('woff2'),
+       local('OpenDyslexic'), local('OpenDyslexic-Regular');
+  font-weight: 400;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'EduPasiLizibil';
-  src: local('Atkinson Hyperlegible'), local('AtkinsonHyperlegible-Regular'),
-       local('Verdana'), local('Tahoma');
+  font-family: 'EduPasiDislexie';
+  src: url('/fonts/OpenDyslexic-Bold.woff2') format('woff2'),
+       local('OpenDyslexic-Bold');
+  font-weight: 700;
   font-display: swap;
+}
+
+/* Atkinson Hyperlegible — Braille Institute of America, licență liberă.
+   Vine în două bucăți, ca la Google Fonts: „latin" are â și î, „latin-ext" are
+   ă, ș și ț. Româna are nevoie de amândouă, iar browserul alege pe literă după
+   `unicode-range`, deci se descarcă doar ce chiar se folosește. */
+@font-face {
+  font-family: 'EduPasiLizibil';
+  src: url('/fonts/AtkinsonHyperlegible-Regular-latin.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+                 U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
+                 U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'EduPasiLizibil';
+  src: url('/fonts/AtkinsonHyperlegible-Regular-latin-ext.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+                 U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF,
+                 U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'EduPasiLizibil';
+  src: url('/fonts/AtkinsonHyperlegible-Bold-latin.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+                 U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
+                 U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'EduPasiLizibil';
+  src: url('/fonts/AtkinsonHyperlegible-Bold-latin-ext.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+                 U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF,
+                 U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 
 html[data-edupasi-font='lizibil'] { --edupasi-font-ales: 'EduPasiLizibil', Verdana, Tahoma, system-ui, sans-serif; }

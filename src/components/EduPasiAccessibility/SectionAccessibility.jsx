@@ -24,9 +24,11 @@ const DEFAULT_PREFERENCES = {
  * aceea fontul e o preferință oferită, nu o promisiune, iar ordinea din panou
  * spune elevului ce să încerce întâi.
  *
- * Familiile se cer prin `local()`: nu descărcăm nimic, deci pagina rămâne la fel
- * de rapidă și offline. Dacă fontul e instalat pe dispozitiv, se folosește;
- * dacă nu, se cade elegant pe stiva de sistem, fără text invizibil.
+ * Fișierele de font se livrează cu situl (`static/fonts`, vezi `custom.css`).
+ * Înainte se cereau doar prin `local()`, ceea ce însemna că alegerea „Pentru
+ * dislexie" nu schimba nimic pe dispozitivele unde OpenDyslexic nu e instalat —
+ * adică pe aproape toate. O opțiune care nu face nimic e mai rea decât una care
+ * lipsește: elevul crede că a încercat-o.
  */
 const TIPOGRAFIE = [
   {
@@ -61,7 +63,6 @@ const TIPOGRAFIE = [
   {
     cheie: 'font',
     titlu: 'Forma literelor',
-    nota: 'Alege ce ți se pare ție mai comod — nu există un font care ajută pe toată lumea.',
     optiuni: [
       ['implicit', 'Implicit'],
       ['lizibil', 'Litere clare'],
