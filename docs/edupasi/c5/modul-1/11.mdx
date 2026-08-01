@@ -11,138 +11,114 @@ import HighlightText from '@site/src/components/HighlightText';
 
 ---
 
-## Introducere
+## Ce este o putere
 
 :::danger Definiție
-O **<HighlightText color="red">putere</HighlightText>** este o înmulțire repetată a aceluiași număr.
-
-**<HighlightText color="teal">Baza</HighlightText>** este numărul care se înmulțește. **<HighlightText color="orange">Exponentul</HighlightText>** arată de câte ori se înmulțește baza.
-
-<Katex>{String.raw`\color{#4ECDC4}{a}^{\color{#FF8C00}{n}} = \underbrace{a \times a \times \dots \times a}_{\color{#FF8C00}{n}\ \text{factori}}`}</Katex>
+**<HighlightText color="red">Puterea</HighlightText>** este o înmulțire repetată. **<HighlightText color="teal">Exponentul</HighlightText>** arată câți factori scriem.
 :::
 
-**Exemplu:**
+<svg xmlns="http://www.w3.org/2000/svg" width="460" height="170" viewBox="0 0 460 170" role="img" aria-label="Puterea 2 la a treia scrisă ca produs de trei factori egali cu 2, rezultat 8">
+  <text x="10" y="75" font-size="38" fill="#FF6B6B">2<tspan font-size="24" dy="-16" fill="#4ECDC4">3</tspan></text>
+  <text x="72" y="75" font-size="32" fill="#9370DB">=</text>
+  <rect x="110" y="38" width="56" height="56" rx="8" fill="none" stroke="#FF6B6B" stroke-width="3"/>
+  <text x="138" y="78" font-size="32" fill="#FF6B6B" text-anchor="middle">2</text>
+  <text x="178" y="75" font-size="32" fill="#9370DB">×</text>
+  <rect x="208" y="38" width="56" height="56" rx="8" fill="none" stroke="#FF6B6B" stroke-width="3"/>
+  <text x="236" y="78" font-size="32" fill="#FF6B6B" text-anchor="middle">2</text>
+  <text x="276" y="75" font-size="32" fill="#9370DB">×</text>
+  <rect x="306" y="38" width="56" height="56" rx="8" fill="none" stroke="#FF6B6B" stroke-width="3"/>
+  <text x="334" y="78" font-size="32" fill="#FF6B6B" text-anchor="middle">2</text>
+  <text x="378" y="78" font-size="32" fill="#FF8C00">= 8</text>
+  <line x1="110" y1="110" x2="362" y2="110" stroke="#4ECDC4" stroke-width="3"/>
+  <text x="236" y="142" font-size="24" fill="#4ECDC4" text-anchor="middle">3 factori</text>
+</svg>
 
-<Katex>{String.raw`\color{#4ECDC4}{2}^{\color{#FF8C00}{5}} = 2 \times 2 \times 2 \times 2 \times 2 = 32`}</Katex>
+<Katex>
+{String.raw`
+\color{#FF6B6B}{2}^{\color{#4ECDC4}{3}} = 2 \times 2 \times 2 = 8
+`}
+</Katex>
 
-Se citește „2 la puterea 5".
+---
 
-<Katex>{String.raw`3^2 = 9 \quad \text{„3 la } \color{#4ECDC4}{\text{pătrat}}\text{"} \qquad 2^3 = 8 \quad \text{„2 la } \color{#9370DB}{\text{cub}}\text{"}`}</Katex>
+## Reguli de calcul
 
-:::warning Atenție
-Puterea nu este înmulțirea bazei cu exponentul.
+Aceeași bază, înmulțire. Adunăm exponenții.
 
-<Katex>{String.raw`2^3 = 2 \times 2 \times 2 = \color{#4ECDC4}{8} \qquad \text{dar} \qquad 2 \times 3 = \color{#FF6B6B}{6}`}</Katex>
+<Katex>
+{String.raw`
+2^3 \times 2^2 = 2^{\color{#FF6B6B}{3+2}} = 2^5
+`}
+</Katex>
+
+Aceeași bază, împărțire. Scădem exponenții.
+
+<Katex>
+{String.raw`
+\frac{5^6}{5^2} = 5^{\color{#4ECDC4}{6-2}} = 5^4
+`}
+</Katex>
+
+Putere la putere. Înmulțim exponenții.
+
+<Katex>
+{String.raw`
+\bigl(3^2\bigr)^4 = 3^{\color{#9370DB}{2 \times 4}} = 3^8
+`}
+</Katex>
+
+:::tip De reținut
+<Katex>
+{String.raw`
+\begin{aligned}
+& a^m \times a^n = a^{\color{#FF6B6B}{m+n}}\\[6pt]
+& \frac{a^m}{a^n} = a^{\color{#4ECDC4}{m-n}}\\[6pt]
+& \bigl(a^m\bigr)^n = a^{\color{#9370DB}{m \times n}}\\[6pt]
+& \text{Doar la } \color{#FF8C00}{\text{aceeași bază}}
+\end{aligned}
+`}
+</Katex>
 :::
 
 ---
 
-## 1. Puteri ale unui număr
+## Puterile lui 10
 
-### Produsul a două puteri cu aceeași bază
+Scriem cifra 1. Adăugăm atâtea zerouri cât arată exponentul.
 
-:::tip De reținut
-La înmulțirea puterilor cu aceeași bază, **<HighlightText color="red">adunăm exponenții</HighlightText>**.
+<Katex>
+{String.raw`
+\begin{aligned}
+& 10^{\color{#4ECDC4}{2}} = 1\underline{00}\\[6pt]
+& 10^{\color{#4ECDC4}{4}} = 1\underline{0\,000}
+\end{aligned}
+`}
+</Katex>
 
-<Katex>{String.raw`a^m \times a^n = a^{\color{#FF6B6B}{m+n}}`}</Katex>
-:::
+Înmulțim cu o putere a lui 10. Mutăm virgula spre dreapta.
 
-**Calculăm pas cu pas:**
-
-<Katex>{String.raw`\begin{aligned}
-& \text{1. Verificăm baza: } 2^3 \times 2^4 \text{ are baza } \color{#4ECDC4}{2} \text{ în ambele puteri}\\[6pt]
-& \text{2. Adunăm exponenții: } 3 + 4 = \color{#FF6B6B}{7}\\[6pt]
-& \text{3. Scriem rezultatul: } 2^3 \times 2^4 = 2^{\color{#FF6B6B}{7}}
-\end{aligned}`}</Katex>
-
-:::warning Atenție
-Regula se aplică numai dacă **<HighlightText color="red">bazele sunt egale</HighlightText>**.
-
-<Katex>{String.raw`5^2 \times 4^3 \quad \text{nu se poate scrie ca o singură putere.}`}</Katex>
-:::
-
-### Puterea cu exponent zero
-
-:::danger Definiție
-Orice număr ridicat la puterea 0 este egal cu 1.
-
-<Katex>{String.raw`a^0 = \color{#FF8C00}{1} \qquad 7^0 = 1 \qquad 100^0 = 1`}</Katex>
-:::
-
-### Puterea unei puteri
-
-:::tip De reținut
-La ridicarea unei puteri la altă putere, **<HighlightText color="teal">înmulțim exponenții</HighlightText>**.
-
-<Katex>{String.raw`\left(a^m\right)^n = a^{\color{#4ECDC4}{m \times n}} \qquad \left(2^3\right)^2 = 2^{3 \times 2} = 2^6`}</Katex>
-:::
-
-### Câtul a două puteri cu aceeași bază
-
-:::tip De reținut
-La împărțirea puterilor cu aceeași bază, **<HighlightText color="orange">scădem exponenții</HighlightText>**.
-
-<Katex>{String.raw`\frac{a^m}{a^n} = a^{\color{#FF8C00}{m-n}} \quad (a \neq 0) \qquad \frac{2^5}{2^2} = 2^{5-2} = 2^3 = 8`}</Katex>
-:::
-
-### Puterea unui produs și a unui cât
-
-:::tip De reținut
-Exponentul se dă **<HighlightText color="red">fiecărui factor</HighlightText>**.
-
-<Katex>{String.raw`(a \times b)^n = a^n \times b^n \qquad \left(\frac{a}{b}\right)^n = \frac{a^n}{b^n}`}</Katex>
-
-<Katex>{String.raw`(2 \times 3)^4 = 2^4 \times 3^4 \qquad \left(\frac{2}{5}\right)^3 = \frac{2^3}{5^3} = \frac{8}{125}`}</Katex>
-:::
+<Katex>
+{String.raw`
+3{,}5 \times 10^{\color{#4ECDC4}{2}} = 350
+`}
+</Katex>
 
 ---
 
-## 2. Puterile lui 10
+## Scrierea științifică
 
-:::danger Definiție
-<Katex>{String.raw`10^{\color{#FF6B6B}{n}} \text{ este numărul format din cifra 1 urmată de } \color{#FF6B6B}{n} \text{ zerouri.}`}</Katex>
-:::
+Scrierea științifică are o singură cifră înainte de virgulă. Apoi înmulțim cu o putere a lui 10.
 
-<Katex>{String.raw`10^1 = 10 \qquad 10^3 = 1\,000 \qquad 10^5 = 100\,000 \qquad 10^0 = 1`}</Katex>
+Scriem numărul 4 500.
 
-### Reguli de calcul
+Pasul 1: punem virgula după prima cifră. Avem 4,5.
 
-Regulile de la puteri se păstrează și pentru baza 10.
+Pasul 2: numărăm rangurile mutate. Sunt 3 ranguri.
 
-<Katex>{String.raw`10^3 \times 10^4 = 10^7 \qquad \frac{10^7}{10^3} = 10^4 \qquad \left(10^5\right)^2 = 10^{10}`}</Katex>
+Pasul 3: scriem puterea lui 10.
 
-### Deplasarea virgulei
-
-:::tip De reținut
-<Katex>{String.raw`\begin{aligned}& \text{Înmulțirea cu } 10^n\text{: virgula se mută } n \text{ ranguri spre } \color{#FF6B6B}{\text{DREAPTA}}\\[8pt]& \text{Împărțirea la } 10^n\text{: virgula se mută } n \text{ ranguri spre } \color{#4ECDC4}{\text{STÂNGA}}\end{aligned}`}</Katex>
-
-<Katex>{String.raw`25{,}1 \times 10^2 = 2\,510 \qquad 25{,}1 \div 10 = 2{,}51`}</Katex>
-:::
-
----
-
-## 3. Scrierea (notația) științifică
-
-:::danger Definiție
-Un număr este scris în **<HighlightText color="red">notație științifică</HighlightText>** dacă are forma de mai jos, cu **<HighlightText color="teal">o singură cifră nenulă</HighlightText>** înainte de virgulă.
-
-<Katex>{String.raw`\color{#4ECDC4}{a} \times 10^{\color{#FF8C00}{n}}`}</Katex>
-:::
-
-**Exemple:**
-
-<Katex>{String.raw`\begin{aligned}& 8{,}56 \times 10^7 \quad \color{#4ECDC4}{\text{corect}}\\[6pt]& 0{,}45 \times 10^2 \quad \color{#FF6B6B}{\text{greșit: înainte de virgulă este cifra 0}}\\[6pt]& 85{,}6 \times 10^6 \quad \color{#FF6B6B}{\text{greșit: două cifre înainte de virgulă}}\end{aligned}`}</Katex>
-
-### Compararea numerelor scrise științific
-
-<Katex>{String.raw`\begin{aligned}& \text{1. Comparăm } \color{#FF8C00}{\text{exponenții}} \text{. Exponentul mai mare dă numărul mai mare.}\\[6pt]& \text{2. Dacă exponenții sunt egali, comparăm } \color{#4ECDC4}{\text{coeficienții}} \text{.}\end{aligned}`}</Katex>
-
-**Exemple:**
-
-<Katex>{String.raw`\begin{aligned}& 6{,}04 \times 10^5 < 2{,}03 \times 10^7 \quad (5 < 7)\\[6pt]& 4{,}51 \times 10^7 < 6{,}7 \times 10^7 \quad (4{,}51 < 6{,}7)\end{aligned}`}</Katex>
-
----
-
-## Tabel – Reguli de calcul pentru puterile lui 10
-
-<Katex>{String.raw`\begin{aligned}& 10^m \times 10^n = 10^{\color{#FF6B6B}{m+n}} \qquad && 10^3 \times 10^4 = 10^7\\[8pt]& \frac{10^m}{10^n} = 10^{\color{#FF8C00}{m-n}} && \frac{10^7}{10^3} = 10^4\\[8pt]& \left(10^m\right)^n = 10^{\color{#4ECDC4}{m \times n}} && \left(10^5\right)^2 = 10^{10}\end{aligned}`}</Katex>
+<Katex>
+{String.raw`
+4\,500 = \color{#FF8C00}{4{,}5} \times 10^{\color{#9370DB}{3}}
+`}
+</Katex>

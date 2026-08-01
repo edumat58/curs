@@ -14,165 +14,102 @@ import HighlightText from '@site/src/components/HighlightText';
 ## Ce este distanța dintre două puncte?
 
 :::danger Definiție
-**<HighlightText color="red">Distanța</HighlightText>** dintre două puncte **A** și **B** este **<HighlightText color="teal">lungimea segmentului</HighlightText>** care le unește.
+**<HighlightText color="red">Distanța</HighlightText>** dintre punctele **A** și **B** este **<HighlightText color="teal">lungimea segmentului</HighlightText>** **AB**.
 :::
 
-Scriem distanța în două feluri:
+Scriem distanța astfel:
 
 <Katex>
 {String.raw`
-AB \quad \text{sau} \quad d(A, B)
+AB \quad \text{sau} \quad d(A,B)
 `}
 </Katex>
-
-<div style={{ display: "flex", justifyContent: "center", margin: "1.5rem 0" }}>
-<svg width="440" height="110" viewBox="0 0 440 110" xmlns="http://www.w3.org/2000/svg">
-  <line x1="60" y1="60" x2="380" y2="60" stroke="black" strokeWidth="4"/>
-  <circle cx="60" cy="60" r="7" fill="#FF6B6B"/>
-  <circle cx="380" cy="60" r="7" fill="#FF6B6B"/>
-  <text x="45" y="38" fontSize="30" fontFamily="serif" fontWeight="bold">A</text>
-  <text x="368" y="38" fontSize="30" fontFamily="serif" fontWeight="bold">B</text>
-  <text x="200" y="100" fontSize="26" fontFamily="serif" fill="#FF6B6B">AB</text>
-</svg>
-</div>
-
-:::tip De reținut
-- Distanța este un număr **<HighlightText color="red">pozitiv</HighlightText>** sau **0**.
-- Distanța de la un punct la el însuși este **0**.
-- Ordinea punctelor nu contează: **AB = BA**.
-:::
 
 ---
 
 ## Măsurarea distanței cu rigla
 
-Măsurăm distanța cu **rigla gradată**. Lucrăm pas cu pas:
+Așezăm rigla peste cele două puncte.
 
-1. Așezăm rigla pe cele două puncte.
-2. Citim gradația din dreptul punctului **A**.
-3. Citim gradația din dreptul punctului **B**.
-4. Scădem numărul mai mic din numărul mai mare.
+Pasul 1: Citim gradația de la **A**.
 
-**Exemplu:** punctul **A** este la gradația **2**. Punctul **B** este la gradația **7**.
+Pasul 2: Citim gradația de la **B**.
+
+Pasul 3: Scădem cele două numere.
+
+**Exemplu.** **A** este la gradația **2**. **B** este la gradația **7**.
 
 <Katex>
 {String.raw`
-AB = 7 - 2 = 5 \ \text{cm}
+AB = 7 - 2 = 5\ \text{cm}
 `}
 </Katex>
-
-:::tip De reținut
-Așezăm gradația **0** exact în punctul **A**. Atunci citim distanța direct în dreptul punctului **B**.
-:::
 
 ---
 
 ## Distanțe pe o dreaptă (puncte coliniare)
 
-Trei puncte sunt **<HighlightText color="teal">coliniare</HighlightText>** dacă se află pe aceeași dreaptă.
-
-Observăm punctul **C** aflat **între** **A** și **B**:
+Punctul **C** este între **A** și **B**.
 
 <div style={{ display: "flex", justifyContent: "center", margin: "1.5rem 0" }}>
-<svg width="480" height="110" viewBox="0 0 480 110" xmlns="http://www.w3.org/2000/svg">
-  <line x1="40" y1="60" x2="440" y2="60" stroke="black" strokeWidth="4"/>
-  <circle cx="40" cy="60" r="7" fill="black"/>
-  <circle cx="240" cy="60" r="7" fill="#FF6B6B"/>
-  <circle cx="440" cy="60" r="7" fill="black"/>
-  <text x="26" y="38" fontSize="30" fontFamily="serif" fontWeight="bold">A</text>
-  <text x="228" y="38" fontSize="30" fontFamily="serif" fontWeight="bold" fill="#FF6B6B">C</text>
-  <text x="426" y="38" fontSize="30" fontFamily="serif" fontWeight="bold">B</text>
-  <text x="120" y="100" fontSize="24" fontFamily="serif" fill="#4ECDC4">AC</text>
-  <text x="320" y="100" fontSize="24" fontFamily="serif" fill="#9370DB">CB</text>
+<svg width="460" height="170" viewBox="0 0 460 170" xmlns="http://www.w3.org/2000/svg">
+  <text x="22" y="34" fontSize="28" fontFamily="serif" fontWeight="bold">A</text>
+  <text x="212" y="34" fontSize="28" fontFamily="serif" fontWeight="bold" fill="#FF6B6B">C</text>
+  <text x="412" y="34" fontSize="28" fontFamily="serif" fontWeight="bold">B</text>
+  <rect x="30" y="50" width="190" height="46" fill="#4ECDC4" stroke="black" strokeWidth="2"/>
+  <rect x="220" y="50" width="210" height="46" fill="#9370DB" stroke="black" strokeWidth="2"/>
+  <text x="103" y="82" fontSize="26" fontFamily="serif" fill="white">AC</text>
+  <text x="298" y="82" fontSize="26" fontFamily="serif" fill="white">CB</text>
+  <line x1="30" y1="116" x2="430" y2="116" stroke="black" strokeWidth="3"/>
+  <line x1="30" y1="106" x2="30" y2="126" stroke="black" strokeWidth="3"/>
+  <line x1="430" y1="106" x2="430" y2="126" stroke="black" strokeWidth="3"/>
+  <text x="203" y="156" fontSize="28" fontFamily="serif">AB</text>
 </svg>
 </div>
 
-:::danger Definiție
-Dacă punctul **C** este **<HighlightText color="red">între</HighlightText>** **A** și **B**, atunci distanțele se **adună**:
-
+:::tip De reținut
 <Katex>
 {String.raw`
 \color{#4ECDC4}{AC} + \color{#9370DB}{CB} = AB
 `}
 </Katex>
+
+Regula merge doar când **C** este între **A** și **B**.
 :::
 
-Din regulă aflăm orice distanță lipsă, prin scădere:
+**Exemplu.** Calculăm **AB**.
 
 <Katex>
 {String.raw`
-\begin{aligned}
-& AC = AB - CB\\[6pt]
-& CB = AB - AC
-\end{aligned}
+AC = 4\ \text{cm} \qquad CB = 9\ \text{cm}
 `}
 </Katex>
 
-**Exemplu 1 (adunare):** punctele **A**, **C**, **B** sunt coliniare, în această ordine. Știm **AC = 4 cm** și **CB = 9 cm**. Calculăm **AB**.
-
-1. **C** este între **A** și **B**.
-2. Adunăm distanțele:
+Pasul 1: Adunăm cele două distanțe.
 
 <Katex>
 {String.raw`
-AB = AC + CB = 4 + 9 = 13 \ \text{cm}
+AB = 4 + 9 = 13\ \text{cm}
 `}
 </Katex>
-
-**Exemplu 2 (scădere):** știm **AB = 20 cm** și **AC = 12 cm**. Calculăm **CB**.
-
-1. Scriem regula: **AC + CB = AB**.
-2. Scădem:
-
-<Katex>
-{String.raw`
-CB = AB - AC = 20 - 12 = 8 \ \text{cm}
-`}
-</Katex>
-
-:::warning Atenție
-Regula **AC + CB = AB** este valabilă **doar** dacă **C** este între **A** și **B**.
-
-Dacă ordinea pe dreaptă este **A**, **B**, **C**, atunci **B** este între **A** și **C**, iar regula devine:
-
-<Katex>
-{String.raw`
-AB + BC = AC
-`}
-</Katex>
-:::
 
 ---
 
 ## Calcule cu distanțe
 
-**Exemplu rezolvat 1:** punctele **A**, **B**, **C** sunt coliniare, în această ordine. Știm **AB = 6 cm** și **BC = 10 cm**. Calculăm **AC**.
-
-1. **B** este între **A** și **C**.
-2. Adunăm distanțele:
+**Exemplu.** Calculăm **CB**.
 
 <Katex>
 {String.raw`
-AC = AB + BC = 6 + 10 = 16 \ \text{cm}
+AB = 20\ \text{cm} \qquad AC = 12\ \text{cm}
 `}
 </Katex>
 
-**Exemplu rezolvat 2:** punctul **M** este între **A** și **B**. Știm **AB = 17 cm** și **AM = 8 cm**. Calculăm **MB**.
-
-1. Scriem regula: **AM + MB = AB**.
-2. Scădem:
+Pasul 1: Scădem distanța cunoscută.
 
 <Katex>
 {String.raw`
-MB = AB - AM = 17 - 8 = 9 \ \text{cm}
-`}
-</Katex>
-
-3. Verificăm prin adunare:
-
-<Katex>
-{String.raw`
-AM + MB = 8 + 9 = 17 \ \text{cm}
+CB = 20 - 12 = 8\ \text{cm}
 `}
 </Katex>
 

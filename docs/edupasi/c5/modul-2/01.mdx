@@ -14,148 +14,97 @@ import HighlightText from '@site/src/components/HighlightText';
 ## Definiție
 
 :::danger Definiție
-Prin **<HighlightText color="red">metoda reducerii la unitate</HighlightText>** aflăm mai întâi valoarea pentru **<HighlightText color="teal">o singură unitate</HighlightText>**: 1 kg, 1 minut, 1 robinet.
+La **<HighlightText color="red">metoda reducerii la unitate</HighlightText>** aflăm întâi valoarea pentru **<HighlightText color="teal">o unitate</HighlightText>**. Unitatea este 1 kg, 1 oră, 1 robinet.
 :::
-
-Lucrăm mereu în doi pași:
-
-1. Aflăm valoarea pentru **o unitate**.
-2. Cu ea, aflăm valoarea cerută în problemă.
 
 ---
 
 ## Tipuri de probleme
 
-:::tip De reținut
-- **Tipul I:** mărimile merg **<HighlightText color="teal">în același sens</HighlightText>**. Când una crește, crește și cealaltă. Cumpărăm mai multe mere, plătim mai mulți lei.
-- **Tipul II:** mărimile merg **<HighlightText color="orange">în sens opus</HighlightText>**. Când una crește, cealaltă scade. Lucrează mai multe robinete, timpul scade.
-:::
-
-Înainte de calcul, stabilim tipul problemei.
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#FF6B6B}{\text{Tipul I: }} \text{mai puține kilograme} \rightarrow \text{mai puțini lei}\\[8pt]
+& \color{#4ECDC4}{\text{Tipul II: }} \text{mai puține robinete} \rightarrow \text{mai multe ore}
+\end{aligned}
+`}
+</Katex>
 
 ---
 
 ## Exemple
 
-### Tipul I — mărimile cresc sau scad împreună
+### Tipul I
 
-**Problemă.** 6 kg de mere costă 18 lei. Cât costă 2 kg de mere de aceeași calitate?
+6 kg de mere costă 18 lei. Cât costă 2 kg?
 
-Observăm: cumpărăm mai puține mere, deci plătim mai puțini lei. Este Tipul I.
+<div style={{display: 'flex', justifyContent: 'center', margin: '20px 0'}}>
+<svg width="400" height="140" viewBox="0 0 400 140" xmlns="http://www.w3.org/2000/svg">
+  <text x="200" y="26" textAnchor="middle" fontSize="18" fontWeight="bold" fill="#4ECDC4">6 kg = 18 lei</text>
+  <rect x="20" y="40" width="60" height="45" fill="#FF8C00" opacity="0.5" stroke="black" strokeWidth="2" />
+  <rect x="80" y="40" width="60" height="45" fill="#FF8C00" opacity="0.5" stroke="black" strokeWidth="2" />
+  <rect x="140" y="40" width="60" height="45" fill="none" stroke="black" strokeWidth="2" />
+  <rect x="200" y="40" width="60" height="45" fill="none" stroke="black" strokeWidth="2" />
+  <rect x="260" y="40" width="60" height="45" fill="none" stroke="black" strokeWidth="2" />
+  <rect x="320" y="40" width="60" height="45" fill="none" stroke="black" strokeWidth="2" />
+  <text x="50" y="70" textAnchor="middle" fontSize="15" fill="black">3 lei</text>
+  <text x="110" y="70" textAnchor="middle" fontSize="15" fill="black">3 lei</text>
+  <text x="170" y="70" textAnchor="middle" fontSize="15" fill="black">3 lei</text>
+  <text x="230" y="70" textAnchor="middle" fontSize="15" fill="black">3 lei</text>
+  <text x="290" y="70" textAnchor="middle" fontSize="15" fill="black">3 lei</text>
+  <text x="350" y="70" textAnchor="middle" fontSize="15" fill="black">3 lei</text>
+  <line x1="20" y1="98" x2="140" y2="98" stroke="#FF8C00" strokeWidth="4" />
+  <text x="80" y="122" textAnchor="middle" fontSize="18" fontWeight="bold" fill="#FF8C00">2 kg = 6 lei</text>
+</svg>
+</div>
 
-**Pasul 1.** Aflăm cât costă 1 kg de mere. Împărțim:
-
-<Katex>
-{String.raw`
-18 \text{ lei} : 6 = \color{#FF6B6B}{3 \text{ lei}}
-`}
-</Katex>
-
-**Pasul 2.** Aflăm cât costă 2 kg de mere. Înmulțim:
-
-<Katex>
-{String.raw`
-2 \times 3 = \color{#4ECDC4}{6 \text{ lei}}
-`}
-</Katex>
-
-Așezăm rezultatele în tabel:
-
-| Cantitate | Preț |
-|-----------|------|
-| 6 kg mere | 18 lei |
-| 1 kg mere | 3 lei |
-| 2 kg mere | 6 lei |
-
-**R:** 6 lei
-
-**Problemă.** Inima unui om bate de 210 ori în 3 minute. De câte ori bate într-o oră?
-
-O oră are 60 de minute.
-
-**Pasul 1.** Aflăm câte bătăi sunt într-un minut. Împărțim:
+Pasul 1. Aflăm prețul pentru 1 kg. Împărțim.
 
 <Katex>
 {String.raw`
-210 : 3 = \color{#FF6B6B}{70 \text{ de bătăi}}
+18 : 6 = \color{#FF6B6B}{3} \text{ lei}
 `}
 </Katex>
 
-**Pasul 2.** Aflăm câte bătăi sunt în 60 de minute. Înmulțim:
+Pasul 2. Aflăm prețul pentru 2 kg. Înmulțim.
 
 <Katex>
 {String.raw`
-70 \times 60 = \color{#9370DB}{4\,200 \text{ de bătăi}}
+2 \times 3 = \color{#4ECDC4}{6} \text{ lei}
 `}
 </Katex>
-
-| Timp | Bătăi |
-|------|-------|
-| 3 minute | 210 |
-| 1 minut | 70 |
-| 60 de minute | 4 200 |
-
-**R:** 4 200 de bătăi
 
 ---
 
-### Tipul II — o mărime crește, cealaltă scade
+### Tipul II
 
-**Problemă.** 5 robinete cu același debit umplu un bazin în 12 ore. În cât timp umplu bazinul 4 robinete?
+5 robinete umplu un bazin în 12 ore. În cât timp umplu bazinul 4 robinete?
 
-Observăm: mai puține robinete înseamnă mai mult timp. Este Tipul II.
-
-:::warning Atenție
-La Tipul II, **<HighlightText color="red">un singur robinet</HighlightText>** are nevoie de **<HighlightText color="orange">mai mult timp</HighlightText>**. De aceea la Pasul 1 **<HighlightText color="teal">înmulțim</HighlightText>**, nu împărțim.
-:::
-
-**Pasul 1.** Aflăm în cât timp umple bazinul 1 robinet. Înmulțim:
+Pasul 1. Aflăm timpul pentru 1 robinet. Înmulțim.
 
 <Katex>
 {String.raw`
-12 \times 5 = \color{#FF6B6B}{60 \text{ de ore}}
+12 \times 5 = \color{#FF6B6B}{60} \text{ ore}
 `}
 </Katex>
 
-**Pasul 2.** Aflăm timpul pentru 4 robinete. Împărțim:
+Pasul 2. Aflăm timpul pentru 4 robinete. Împărțim.
 
 <Katex>
 {String.raw`
-60 : 4 = \color{#4ECDC4}{15 \text{ ore}}
+60 : 4 = \color{#4ECDC4}{15} \text{ ore}
 `}
 </Katex>
 
-| Robinete | Timp |
-|----------|------|
-| 5 robinete | 12 ore |
-| 1 robinet | 60 de ore |
-| 4 robinete | 15 ore |
-
-**R:** 15 ore
-
-**Problemă.** 30 de tractoare ară un teren în 6 ore. În cât timp ară același teren 18 tractoare?
-
-**Pasul 1.** Aflăm timpul pentru 1 tractor. Înmulțim:
-
-<Katex>
-{String.raw`
-30 \times 6 = \color{#FF6B6B}{180 \text{ de ore}}
-`}
-</Katex>
-
-**Pasul 2.** Aflăm timpul pentru 18 tractoare. Împărțim:
-
-<Katex>
-{String.raw`
-180 : 18 = \color{#4ECDC4}{10 \text{ ore}}
-`}
-</Katex>
-
-**R:** 10 ore
+---
 
 :::tip De reținut
-Reținem ordinea operațiilor:
-
-- **Tipul I:** Pasul 1 — **<HighlightText color="red">împărțim</HighlightText>**, Pasul 2 — **<HighlightText color="teal">înmulțim</HighlightText>**.
-- **Tipul II:** Pasul 1 — **<HighlightText color="teal">înmulțim</HighlightText>**, Pasul 2 — **<HighlightText color="red">împărțim</HighlightText>**.
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#FF6B6B}{\text{Tipul I: }} \text{întâi împărțim, apoi înmulțim}\\[8pt]
+& \color{#4ECDC4}{\text{Tipul II: }} \text{întâi înmulțim, apoi împărțim}
+\end{aligned}
+`}
+</Katex>
 :::

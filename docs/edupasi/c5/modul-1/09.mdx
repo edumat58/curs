@@ -14,17 +14,12 @@ import HighlightText from '@site/src/components/HighlightText';
 ## Introducere
 
 :::danger Definiție
-Un **<HighlightText color="red">procent</HighlightText>** este o parte dintr-un întreg împărțit în **<HighlightText color="teal">100 de părți egale</HighlightText>**.
-
-Semnul procentului este **%** și se citește „la sută".
+Un **<HighlightText color="red">procent</HighlightText>** este o parte din **<HighlightText color="teal">100 de părți egale</HighlightText>**. Semnul **%** se citește „la sută".
 :::
 
 <Katex>
 {String.raw`
-\begin{aligned}
-& \color{#FF6B6B}{50\%} = \frac{50}{100} \quad \text{(50 de părți din 100)}\\[6pt]
-& \color{#4ECDC4}{25\%} = \frac{25}{100} \quad \text{(25 de părți din 100)}
-\end{aligned}
+\color{#FF6B6B}{x\%} = \frac{x}{100}
 `}
 </Katex>
 
@@ -32,130 +27,61 @@ Semnul procentului este **%** și se citește „la sută".
 
 ## Scrierea unui procent sub formă de fracție ordinară
 
-:::tip De reținut
-1. Ștergem semnul **%**.
-2. Scriem numărul la **<HighlightText color="red">numărător</HighlightText>**.
-3. Scriem 100 la **<HighlightText color="teal">numitor</HighlightText>**.
-4. Simplificăm fracția, dacă se poate.
-:::
+- Pasul 1: Ștergem semnul %.
+- Pasul 2: Scriem numărul la numărător.
+- Pasul 3: Scriem 100 la numitor.
+- Pasul 4: Simplificăm fracția.
 
-<Katex>
-{String.raw`
-x\% = \frac{x}{100}
-`}
-</Katex>
-
-Calculăm pas cu pas pentru **50 %**:
+Calculăm pas cu pas:
 
 <Katex>
 {String.raw`
 \begin{aligned}
-& \text{Pasul 1: } 50\% = \frac{50}{100}\\[6pt]
-& \text{Pasul 2: simplificăm prin } \color{#FF8C00}{50}\\[6pt]
-& \frac{50}{100} = \frac{50 \div 50}{100 \div 50} = \color{#FF6B6B}{\frac{1}{2}}
+& 50\% = \frac{50}{100} = \frac{50 \div 50}{100 \div 50} = \color{#FF6B6B}{\frac{1}{2}}\\[8pt]
+& 25\% = \frac{25}{100} = \frac{25 \div 25}{100 \div 25} = \color{#4ECDC4}{\frac{1}{4}}
 \end{aligned}
 `}
 </Katex>
-
-**Alte exemple:**
-
-<Katex>
-{String.raw`
-\begin{aligned}
-& 25\% = \frac{25}{100} = \frac{1}{4}\\[6pt]
-& 10\% = \frac{10}{100} = \frac{1}{10}\\[6pt]
-& 40\% = \frac{40}{100} = \frac{2}{5}
-\end{aligned}
-`}
-</Katex>
-
-:::warning Atenție
-La **<HighlightText color="orange">simplificare</HighlightText>** împărțim **și** numărătorul, **și** numitorul la același număr. Valoarea fracției nu se schimbă.
-:::
 
 ---
 
 ## Reprezentări grafice
 
-Observăm pe cerc cât înseamnă fiecare procent.
-
-<div style={{display:'flex',flexDirection:'row',gap:'2rem',alignItems:'center',justifyContent:'center',flexWrap:'wrap'}}>
-
 <div style={{textAlign:'center'}}>
-<svg width="140" height="140" viewBox="0 0 120 120">
-  <circle cx="60" cy="60" r="50" fill="none" stroke="black" strokeWidth="2"/>
-  <path d="M 60 10 A 50 50 0 0 1 60 110 L 60 60 Z" fill="#4ECDC4"/>
-</svg>
-<p><strong>50 % = 1/2</strong></p>
-<p>Jumătate din cerc</p>
-</div>
+<svg width="340" height="200" viewBox="0 0 340 200" role="img">
+  <text x="20" y="22" fontSize="18" fill="currentColor">1 întreg</text>
 
-<div style={{textAlign:'center'}}>
-<svg width="140" height="140" viewBox="0 0 120 120">
-  <circle cx="60" cy="60" r="50" fill="none" stroke="black" strokeWidth="2"/>
-  <path d="M 60 10 A 50 50 0 0 1 110 60 L 60 60 Z" fill="#FF8C00"/>
-</svg>
-<p><strong>25 % = 1/4</strong></p>
-<p>Un sfert din cerc</p>
-</div>
+  <rect x="20" y="32" width="280" height="46" fill="none" stroke="#888888" strokeWidth="3"/>
+  <rect x="20" y="32" width="140" height="46" fill="#4ECDC4"/>
+  <line x1="160" y1="32" x2="160" y2="78" stroke="#888888" strokeWidth="3"/>
+  <text x="20" y="100" fontSize="20" fill="currentColor">50 % = 1 din 2 părți</text>
 
+  <rect x="20" y="122" width="280" height="46" fill="none" stroke="#888888" strokeWidth="3"/>
+  <rect x="20" y="122" width="140" height="46" fill="#FF8C00"/>
+  <line x1="90" y1="122" x2="90" y2="168" stroke="#888888" strokeWidth="3"/>
+  <line x1="160" y1="122" x2="160" y2="168" stroke="#888888" strokeWidth="3"/>
+  <line x1="230" y1="122" x2="230" y2="168" stroke="#888888" strokeWidth="3"/>
+  <text x="20" y="190" fontSize="20" fill="currentColor">50 % = 2 din 4 părți</text>
+</svg>
 </div>
 
 ---
 
-## Verificarea echivalenței a două fracții prin diferite reprezentări
+## Verificarea echivalenței a două fracții
 
-:::danger Definiție
-Două fracții sunt **<HighlightText color="red">echivalente</HighlightText>** dacă arată **<HighlightText color="teal">aceeași parte</HighlightText>** din întreg.
+:::tip De reținut
+Două fracții sunt **<HighlightText color="orange">echivalente</HighlightText>** dacă arată aceeași parte din întreg.
 :::
 
-<Katex>
-{String.raw`
-\frac{1}{2} = \frac{2}{4} = 50\%
-`}
-</Katex>
-
-**Metoda 1 – desenul.** Colorăm partea din fiecare dreptunghi:
-
-<div style={{display:'flex',flexDirection:'row',gap:'2rem',alignItems:'center',justifyContent:'center',flexWrap:'wrap'}}>
-
-<div style={{textAlign:'center'}}>
-<svg width="140" height="90" viewBox="0 0 120 80">
-  <rect x="10" y="10" width="100" height="60" fill="none" stroke="black" strokeWidth="2"/>
-  <rect x="10" y="10" width="50" height="60" fill="#4ECDC4"/>
-  <line x1="60" y1="10" x2="60" y2="70" stroke="black" strokeWidth="2"/>
-</svg>
-<p><strong>1/2</strong></p>
-</div>
-
-<div style={{textAlign:'center'}}>
-<svg width="140" height="90" viewBox="0 0 120 80">
-  <rect x="10" y="10" width="100" height="60" fill="none" stroke="black" strokeWidth="2"/>
-  <rect x="10" y="10" width="25" height="60" fill="#FF8C00"/>
-  <rect x="35" y="10" width="25" height="60" fill="#FF8C00"/>
-  <line x1="35" y1="10" x2="35" y2="70" stroke="black" strokeWidth="1"/>
-  <line x1="60" y1="10" x2="60" y2="70" stroke="black" strokeWidth="2"/>
-</svg>
-<p><strong>2/4</strong></p>
-</div>
-
-</div>
-
-Partea colorată este la fel de mare în ambele desene. Fracțiile sunt echivalente.
-
-**Metoda 2 – înmulțirea încrucișată.** Calculăm pas cu pas:
+Înmulțim încrucișat. Calculăm pas cu pas:
 
 <Katex>
 {String.raw`
 \begin{aligned}
-& \text{Verificăm dacă } \frac{\color{#FF6B6B}{1}}{\color{#4ECDC4}{2}} = \frac{\color{#4ECDC4}{2}}{\color{#FF6B6B}{4}}\\[8pt]
-& \text{Pasul 1: } \color{#FF6B6B}{1} \times \color{#FF6B6B}{4} = 4\\[6pt]
-& \text{Pasul 2: } \color{#4ECDC4}{2} \times \color{#4ECDC4}{2} = 4\\[6pt]
-& \text{Pasul 3: } 4 = 4 \Rightarrow \frac{1}{2} = \frac{2}{4}
+& \text{Verificăm } \frac{1}{2} \text{ și } \frac{2}{4}\\[8pt]
+& \text{Pasul 1: } \color{#FF6B6B}{1 \times 4 = 4}\\[6pt]
+& \text{Pasul 2: } \color{#4ECDC4}{2 \times 2 = 4}\\[6pt]
+& \text{Pasul 3: } 4 = 4 \Rightarrow \frac{1}{2} = \frac{2}{4} = \color{#9370DB}{50\%}
 \end{aligned}
 `}
 </Katex>
-
-:::tip De reținut
-Dacă produsele în cruce sunt **egale**, fracțiile sunt **<HighlightText color="red">echivalente</HighlightText>**.
-:::

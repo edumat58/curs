@@ -13,47 +13,41 @@ import HighlightText from '@site/src/components/HighlightText';
 
 ## Măsurarea lungimii
 
-:::danger Definiție 1
-**<HighlightText color="red">Metrul</HighlightText>** este unitatea principală de măsură pentru **<HighlightText color="teal">lungime</HighlightText>**. Se notează cu **m**.
-:::
+Unitatea principală pentru lungime este **<HighlightText color="red">metrul</HighlightText>**. Îl notăm cu **m**.
 
-Unitățile de lungime, de la cea mai mare la cea mai mică:
-
-<Katex>
-{String.raw`
-km \to hm \to dam \to \color{#FF6B6B}{m} \to dm \to cm \to mm
-`}
-</Katex>
-
-Observăm că fiecare treaptă este de **10 ori** mai mare decât cea de sub ea.
-
-:::tip De reținut
-<Katex>
-{String.raw`
-\begin{aligned}
-& \text{De la mare la mic: } \color{#FF6B6B}{\text{înmulțim cu } 10} \text{ la fiecare treaptă}\\[8pt]
-& \text{De la mic la mare: } \color{#4ECDC4}{\text{împărțim la } 10} \text{ la fiecare treaptă}
-\end{aligned}
-`}
-</Katex>
-:::
-
-Reținem relațiile principale:
-
-<Katex>
-{String.raw`
-1\,km = 1\,000\,m \qquad 1\,m = 10\,dm = 100\,cm = 1\,000\,mm
-`}
-</Katex>
-
-**Exemplu.** Transformăm în metri. Fiecare rând este un pas.
+Pe scara de mai jos, fiecare treaptă este de 10 ori mai mare.
 
 <Katex>
 {String.raw`
 \begin{aligned}
-& \text{1. } 3{,}5\,dam = 3{,}5 \times 10 = \color{#FF6B6B}{35\,m} \quad (\text{o treaptă în jos: } \times 10)\\[6pt]
-& \text{2. } 1\,700\,cm = 1\,700 \div 100 = \color{#4ECDC4}{17\,m} \quad (\text{două trepte în sus: } \div 100)
+& km \to hm \to dam \to \color{#FF6B6B}{m} \to dm \to cm \to mm \\[10pt]
+& \text{Coborâm o treaptă: } \color{#FF6B6B}{\text{înmulțim cu } 10} \\[6pt]
+& \text{Urcăm o treaptă: } \color{#4ECDC4}{\text{împărțim la } 10}
 \end{aligned}
+`}
+</Katex>
+
+**Exemplul 1.** Transformăm 3,5 dam în metri.
+
+Pasul 1: De la dam la m coborâm o treaptă.
+
+Pasul 2: Înmulțim cu 10.
+
+<Katex>
+{String.raw`
+3{,}5\,dam = 3{,}5 \times 10 = \color{#FF6B6B}{35\,m}
+`}
+</Katex>
+
+**Exemplul 2.** Transformăm 40 cm în decimetri.
+
+Pasul 1: De la cm la dm urcăm o treaptă.
+
+Pasul 2: Împărțim la 10.
+
+<Katex>
+{String.raw`
+40\,cm = 40 \div 10 = \color{#4ECDC4}{4\,dm}
 `}
 </Katex>
 
@@ -61,136 +55,90 @@ Reținem relațiile principale:
 
 ## Perimetrul unui poligon
 
-:::danger Definiție 2
-**<HighlightText color="red">Perimetrul</HighlightText>** unui poligon este **<HighlightText color="teal">suma lungimilor laturilor</HighlightText>**. Se notează cu **P**.
+:::danger Definiție
+**<HighlightText color="red">Perimetrul</HighlightText>** este suma lungimilor laturilor. Îl notăm cu **P**.
 :::
-
-### Perimetrul pătratului
-
-Pătratul are toate cele 4 laturi egale.
-
-<div style={{ display: "flex", justifyContent: "center", margin: "1.5rem 0" }}>
-<svg width="220" height="220" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
-  <rect x="45" y="45" width="130" height="130" fill="none" stroke="#FF6B6B" strokeWidth="4"/>
-  <text x="104" y="34" fontSize="28" fontFamily="serif" fill="#FF6B6B">l</text>
-  <text x="104" y="208" fontSize="28" fontFamily="serif" fill="#FF6B6B">l</text>
-  <text x="20" y="120" fontSize="28" fontFamily="serif" fill="#FF6B6B">l</text>
-  <text x="186" y="120" fontSize="28" fontFamily="serif" fill="#FF6B6B">l</text>
-</svg>
-</div>
-
-<Katex>
-{String.raw`
-P_{\text{pătrat}} = \color{#FF6B6B}{4 \times l}
-\qquad \text{Exemplu: } l = 6\,cm \;\Rightarrow\; P = 4 \times 6 = 24\,cm
-`}
-</Katex>
-
-### Perimetrul dreptunghiului
-
-Dreptunghiul are lungimea **L** și lățimea **l**.
-
-<Katex>
-{String.raw`
-P_{\text{dreptunghi}} = \color{#4ECDC4}{2 \times (L + l)}
-`}
-</Katex>
-
-**Exemplu.** Un dreptunghi are **L** = 8 cm și **l** = 3 cm.
 
 <Katex>
 {String.raw`
 \begin{aligned}
-& \text{1. Adunăm: } L + l = 8 + 3 = 11\,cm\\[6pt]
-& \text{2. Înmulțim cu 2: } P = 2 \times 11 = \color{#4ECDC4}{22\,cm}
+& \color{#FF6B6B}{\text{Pătrat: }} P = 4 \times l \\[6pt]
+& \color{#4ECDC4}{\text{Dreptunghi: }} P = 2 \times (L + l) \\[6pt]
+& \color{#9370DB}{\text{Triunghi: }} P = a + b + c
 \end{aligned}
 `}
 </Katex>
 
-### Perimetrul triunghiului
+**Exemplu.** Un dreptunghi are lungimea de 8 cm și lățimea de 3 cm.
 
-Triunghiul are laturile **a**, **b**, **c**.
+Pasul 1: Adunăm lungimea cu lățimea.
 
-<Katex>
-{String.raw`
-P_{\text{triunghi}} = \color{#9370DB}{a + b + c}
-\qquad \text{Exemplu: } P = 5 + 6 + 7 = 18\,cm
-`}
-</Katex>
-
-:::warning Atenție
-Adunăm doar lungimi exprimate în **<HighlightText color="red">aceeași unitate</HighlightText>** de măsură. Mai întâi transformăm.
+Pasul 2: Înmulțim suma cu 2.
 
 <Katex>
 {String.raw`
-24\,cm + 100\,mm = 24\,cm + \color{#FF6B6B}{10\,cm} = 34\,cm
+\begin{aligned}
+& L + l = 8 + 3 = 11\,cm \\[6pt]
+& P = 2 \times 11 = \color{#4ECDC4}{22\,cm}
+\end{aligned}
 `}
 </Katex>
-:::
 
 ---
 
 ## Măsurarea ariei
 
-**Aria** arată cât de mare este o suprafață. Numărăm câte pătrate cu latura de 1 încap în ea.
-
-Pătratul de mai jos are latura de 3 cm. În el încap **9 pătrate** cu latura de 1 cm. Aria lui este 9 cm².
+Aria arată cât de mare este o suprafață. O măsurăm cu pătrate mici.
 
 <div style={{ display: "flex", justifyContent: "center", margin: "1.5rem 0" }}>
-<svg width="220" height="230" viewBox="0 0 220 230" xmlns="http://www.w3.org/2000/svg">
-  <rect x="35" y="35" width="150" height="150" fill="#4ECDC4" fillOpacity="0.25" stroke="black" strokeWidth="3"/>
-  <line x1="85" y1="35" x2="85" y2="185" stroke="black" strokeWidth="1"/>
-  <line x1="135" y1="35" x2="135" y2="185" stroke="black" strokeWidth="1"/>
-  <line x1="35" y1="85" x2="185" y2="85" stroke="black" strokeWidth="1"/>
-  <line x1="35" y1="135" x2="185" y2="135" stroke="black" strokeWidth="1"/>
-  <text x="90" y="218" fontSize="20" fontFamily="serif">3 cm</text>
+<svg width="340" height="275" viewBox="0 0 340 275" xmlns="http://www.w3.org/2000/svg">
+  <rect x="60" y="45" width="240" height="180" fill="#4ECDC4" fillOpacity="0.25" stroke="#333333" strokeWidth="3"/>
+  <line x1="120" y1="45" x2="120" y2="225" stroke="#333333" strokeWidth="1"/>
+  <line x1="180" y1="45" x2="180" y2="225" stroke="#333333" strokeWidth="1"/>
+  <line x1="240" y1="45" x2="240" y2="225" stroke="#333333" strokeWidth="1"/>
+  <line x1="60" y1="105" x2="300" y2="105" stroke="#333333" strokeWidth="1"/>
+  <line x1="60" y1="165" x2="300" y2="165" stroke="#333333" strokeWidth="1"/>
+  <text x="145" y="32" fontSize="26" fill="#FF6B6B">4 cm</text>
+  <text x="2" y="145" fontSize="26" fill="#9370DB">3 cm</text>
+  <text x="70" y="262" fontSize="26" fill="#333333">12 pătrate de 1 cm</text>
 </svg>
 </div>
 
-:::danger Definiție 3
-**<HighlightText color="red">Metrul pătrat</HighlightText>**, notat **m²**, este aria unui pătrat cu latura de **<HighlightText color="teal">1 metru</HighlightText>**. Este unitatea principală de măsură pentru arie.
-:::
-
-Unitățile de arie, de la cea mai mare la cea mai mică:
-
 <Katex>
 {String.raw`
-km^2 \to hm^2 \to dam^2 \to \color{#FF6B6B}{m^2} \to dm^2 \to cm^2 \to mm^2
+A = \color{#FF6B6B}{12\,cm^2}
 `}
 </Katex>
 
-:::tip De reținut
-La **arie**, o treaptă înseamnă **100**, nu 10.
+Unitatea principală pentru arie este **<HighlightText color="teal">metrul pătrat</HighlightText>**, notat **m²**.
 
 <Katex>
 {String.raw`
 \begin{aligned}
-& \text{De la mare la mic: } \color{#FF6B6B}{\text{înmulțim cu } 100} \text{ la fiecare treaptă}\\[8pt]
-& \text{De la mic la mare: } \color{#4ECDC4}{\text{împărțim la } 100} \text{ la fiecare treaptă}
-\end{aligned}
-`}
-</Katex>
-:::
-
-**Exemplu.** Transformăm. Fiecare rând este un pas.
-
-<Katex>
-{String.raw`
-\begin{aligned}
-& \text{1. } 7\,m^2 = 7 \times 100 = \color{#FF6B6B}{700\,dm^2} \quad (\text{o treaptă în jos: } \times 100)\\[6pt]
-& \text{2. } 12\,cm^2 = 12 \div 100 = \color{#4ECDC4}{0{,}12\,dm^2} \quad (\text{o treaptă în sus: } \div 100)
+& km^2 \to hm^2 \to dam^2 \to \color{#FF6B6B}{m^2} \to dm^2 \to cm^2 \to mm^2 \\[10pt]
+& \text{Coborâm o treaptă: } \color{#FF6B6B}{\text{înmulțim cu } 100} \\[6pt]
+& \text{Urcăm o treaptă: } \color{#4ECDC4}{\text{împărțim la } 100}
 \end{aligned}
 `}
 </Katex>
 
-Pentru terenuri folosim unități agricole:
+**Exemplu.** Transformăm 5 m² în dm².
+
+Pasul 1: De la m² la dm² coborâm o treaptă.
+
+Pasul 2: Înmulțim cu 100.
 
 <Katex>
 {String.raw`
-\begin{aligned}
-& 1\ \text{ar} = 100\,m^2 \qquad 1\ \text{hectar (ha)} = \color{#FF8C00}{10\,000\,m^2}\\[6pt]
-& \text{Exemplu: } 2\,ha = 2 \times 10\,000 = 20\,000\,m^2
-\end{aligned}
+5\,m^2 = 5 \times 100 = \color{#FF6B6B}{500\,dm^2}
+`}
+</Katex>
+
+Pentru terenuri folosim arul și hectarul.
+
+<Katex>
+{String.raw`
+1\ \text{ar} = \color{#FF8C00}{100\,m^2} \qquad 1\ \text{ha} = \color{#FF8C00}{10\,000\,m^2}
 `}
 </Katex>
 
@@ -198,45 +146,35 @@ Pentru terenuri folosim unități agricole:
 
 ## Aria pătratului și a dreptunghiului
 
-:::tip De reținut
 <Katex>
 {String.raw`
 \begin{aligned}
-& A_{\text{pătrat}} = \color{#FF6B6B}{l \times l = l^2}\\[8pt]
-& A_{\text{dreptunghi}} = \color{#4ECDC4}{L \times l}
+& \color{#FF6B6B}{\text{Pătrat: }} A = l \times l = l^2 \\[6pt]
+& \color{#4ECDC4}{\text{Dreptunghi: }} A = L \times l
 \end{aligned}
 `}
 </Katex>
-:::
 
-**Exemplu.** Un pătrat are latura de 5 cm.
+**Exemplul 1.** Un pătrat are latura de 6 cm.
+
+Pasul 1: Înmulțim latura cu ea însăși.
 
 <Katex>
 {String.raw`
-A = 5 \times 5 = \color{#FF6B6B}{25\,cm^2}
+A = 6 \times 6 = \color{#FF6B6B}{36\,cm^2}
 `}
 </Katex>
 
-**Exemplu.** O placă de gresie are **L** = 60 cm și **l** = 30 cm.
+**Exemplul 2.** Un dreptunghi are lungimea de 9 cm și lățimea de 4 cm.
+
+Pasul 1: Înmulțim lungimea cu lățimea.
 
 <Katex>
 {String.raw`
-A = 60 \times 30 = \color{#4ECDC4}{1\,800\,cm^2}
-`}
-</Katex>
-
-**Exemplu.** Calculăm aria unui pătrat cu perimetrul de 20 cm.
-
-<Katex>
-{String.raw`
-\begin{aligned}
-& \text{1. Aflăm latura: } l = P \div 4 = 20 \div 4 = 5\,cm\\[6pt]
-& \text{2. Calculăm aria: } A = l^2 = 5 \times 5 = \color{#FF6B6B}{25\,cm^2}
-\end{aligned}
+A = 9 \times 4 = \color{#4ECDC4}{36\,cm^2}
 `}
 </Katex>
 
 :::warning Atenție
-- **<HighlightText color="red">Perimetrul</HighlightText>** se măsoară în unități de **lungime**: cm, m, km.
-- **<HighlightText color="teal">Aria</HighlightText>** se măsoară în unități de **arie**: cm², m², km².
+Perimetrul se măsoară în **cm**. Aria se măsoară în **cm²**.
 :::

@@ -14,28 +14,31 @@ import HighlightText from '@site/src/components/HighlightText';
 ## Definiție
 
 :::danger Definiție
-**<HighlightText color="red">Cel mai mic multiplu comun</HighlightText>** a două numere naturale este cel mai mic număr, **diferit de 0**, care este **<HighlightText color="teal">multiplu al ambelor numere</HighlightText>**.
+**<HighlightText color="red">Cel mai mic multiplu comun</HighlightText>** a două numere naturale este cel mai mic multiplu comun al lor, diferit de 0.
 
-Îl notăm pe scurt **c.m.m.m.c.** Pentru numerele 10 și 15 scriem **[10, 15]**.
+Îl notăm **[a, b]**.
 :::
 
-Căutăm pas cu pas [10, 15].
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="190" viewBox="0 0 420 190" role="img" aria-label="Două bare de aceeași lungime: prima din trei bucăți de 4, a doua din două bucăți de 6, ambele lungi de 12">
+  <rect x="40" y="20" width="100" height="46" fill="#FF6B6B"/>
+  <rect x="140" y="20" width="100" height="46" fill="#FF6B6B"/>
+  <rect x="240" y="20" width="100" height="46" fill="#FF6B6B"/>
+  <text x="90" y="52" font-size="26" fill="#ffffff" text-anchor="middle">4</text>
+  <text x="190" y="52" font-size="26" fill="#ffffff" text-anchor="middle">4</text>
+  <text x="290" y="52" font-size="26" fill="#ffffff" text-anchor="middle">4</text>
+  <rect x="40" y="80" width="150" height="46" fill="#4ECDC4"/>
+  <rect x="190" y="80" width="150" height="46" fill="#4ECDC4"/>
+  <text x="115" y="112" font-size="26" fill="#ffffff" text-anchor="middle">6</text>
+  <text x="265" y="112" font-size="26" fill="#ffffff" text-anchor="middle">6</text>
+  <line x1="40" y1="145" x2="340" y2="145" stroke="#FF8C00" stroke-width="3"/>
+  <text x="190" y="178" font-size="28" fill="#FF8C00" text-anchor="middle">12</text>
+</svg>
+
+Observăm că 12 se umple și cu bucăți de 4, și cu bucăți de 6.
 
 <Katex>
 {String.raw`
-\begin{aligned}
-& \text{1. Multiplii lui } \color{#FF6B6B}{10}: \; 0,\ 10,\ 20,\ \color{#FF8C00}{30},\ 40,\ 50,\ 60, \ldots\\[6pt]
-& \text{2. Multiplii lui } \color{#4ECDC4}{15}: \; 0,\ 15,\ \color{#FF8C00}{30},\ 45,\ 60, \ldots\\[6pt]
-& \text{3. Multiplii comuni: } 0,\ \color{#FF8C00}{30},\ 60, \ldots
-\end{aligned}
-`}
-</Katex>
-
-Observăm că cel mai mic multiplu comun, diferit de 0, este **<HighlightText color="orange">30</HighlightText>**.
-
-<Katex>
-{String.raw`
-[10, 15] = 30
+[\color{#FF6B6B}{4}, \color{#4ECDC4}{6}] = \color{#FF8C00}{12}
 `}
 </Katex>
 
@@ -44,74 +47,49 @@ Observăm că cel mai mic multiplu comun, diferit de 0, este **<HighlightText co
 ## Algoritmul de determinare
 
 :::tip De reținut
-Aflăm c.m.m.m.c. în trei pași:
-
-1. Descompunem fiecare număr în produs de puteri de numere prime.
-2. Alegem toți factorii primi care apar, **o singură dată**, fiecare cu **exponentul cel mai mare**.
+1. Descompunem numerele în factori primi.
+2. Luăm toți factorii, o singură dată, cu exponentul cel mai mare.
 3. Înmulțim factorii aleși.
 :::
 
-**Exemplul 1:** calculăm [10, 15].
-
-<Katex>
-{String.raw`
-\begin{aligned}
-& \text{Pasul 1: } 10 = 2 \cdot 5 \qquad 15 = 3 \cdot 5\\[6pt]
-& \text{Pasul 2: factorii sunt } \color{#FF6B6B}{2},\ \color{#4ECDC4}{3},\ \color{#9370DB}{5}\\[6pt]
-& \text{Pasul 3: } [10, 15] = 2 \cdot 3 \cdot 5 = 30
-\end{aligned}
-`}
-</Katex>
-
-**Exemplul 2:** calculăm [8, 12].
+Calculăm pas cu pas:
 
 <Katex>
 {String.raw`
 \begin{aligned}
 & \text{Pasul 1: } 8 = 2^{3} \qquad 12 = 2^{2} \cdot 3\\[6pt]
-& \text{Pasul 2: luăm } \color{#FF6B6B}{2^{3}} \text{ (exponentul cel mai mare) și } \color{#4ECDC4}{3}\\[6pt]
-& \text{Pasul 3: } [8, 12] = 2^{3} \cdot 3 = 8 \cdot 3 = 24
+& \text{Pasul 2: luăm } \color{#FF6B6B}{2^{3}} \text{ și } \color{#4ECDC4}{3}\\[6pt]
+& \text{Pasul 3: } [8, 12] = 2^{3} \cdot 3 = 8 \cdot 3 = \color{#FF8C00}{24}
 \end{aligned}
 `}
 </Katex>
-
-:::warning Atenție
-Dacă numărul mare este multiplu al numărului mic, atunci **c.m.m.m.c. este chiar numărul mare**.
-
-<Katex>
-{String.raw`
-[3, 9] = 9 \qquad [5, 10] = 10
-`}
-</Katex>
-:::
 
 ---
 
 ## Amintește-ți!
 
-Completăm tabelul. Primul rând este completat ca model.
+Completăm tabelul. Primul rând este model.
 
-| a | b | Multiplii nenuli ai lui a | Multiplii nenuli ai lui b | Multiplii comuni | [a, b] |
-| :---: | :---: | :--- | :--- | :---: | :---: |
-| 6 | 4 | 6, 12, 18, 24 | 4, 8, 12, 16, 20, 24 | 12, 24 | 12 |
-| 2 | 3 | | | | |
-| 3 | 9 | | | | |
-| 5 | 10 | | | | |
+| a | b | Multiplii lui a | Multiplii lui b | [a, b] |
+| :---: | :---: | :--- | :--- | :---: |
+| 6 | 4 | 6, 12, 18, 24 | 4, 8, 12, 16 | 12 |
+| 2 | 3 | | | |
+| 3 | 9 | | | |
+| 5 | 10 | | | |
 
 ---
 
 ## Exersează!
 
-Cu c.m.m.m.c. aducem fracțiile la un numitor comun. Urmărim modelul.
-
-**Model:** aducem la un numitor comun fracțiile <HighlightText color="red">1/2</HighlightText> și <HighlightText color="teal">2/3</HighlightText>.
+Numitorul comun este c.m.m.m.c. al numitorilor.
 
 <Katex>
 {String.raw`
 \begin{aligned}
-& \text{Pasul 1: numitorul comun este } [2, 3] = 6\\[6pt]
-& \text{Pasul 2: amplificăm prima fracție cu } 3: \; \frac{1}{2} = \frac{3}{6}\\[6pt]
-& \text{Pasul 3: amplificăm a doua fracție cu } 2: \; \frac{2}{3} = \frac{4}{6}
+& \text{Model: } \frac{1}{2} \text{ și } \frac{2}{3}\\[6pt]
+& \text{Pasul 1: } [2, 3] = \color{#FF8C00}{6}\\[6pt]
+& \text{Pasul 2: } \frac{1}{2} = \frac{3}{6}\\[6pt]
+& \text{Pasul 3: } \frac{2}{3} = \frac{4}{6}
 \end{aligned}
 `}
 </Katex>
@@ -120,9 +98,6 @@ Aducem la un numitor comun fracțiile:
 
 <Katex>
 {String.raw`
-\begin{aligned}
-& \text{a) } \frac{1}{3} \text{ și } \frac{4}{5} \qquad \text{b) } \frac{5}{8} \text{ și } \frac{1}{4}\\[8pt]
-& \text{c) } \frac{1}{6} \text{ și } \frac{2}{3} \qquad \text{d) } \frac{2}{3} \text{ și } \frac{5}{12}
-\end{aligned}
+\text{a) } \frac{1}{3} \text{ și } \frac{4}{5} \qquad \text{b) } \frac{5}{8} \text{ și } \frac{1}{4}
 `}
 </Katex>

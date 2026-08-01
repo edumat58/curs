@@ -14,29 +14,27 @@ import HighlightText from '@site/src/components/HighlightText';
 ## Ce este un unghi?
 
 :::danger Definiție
-Un **<HighlightText color="red">unghi</HighlightText>** este figura geometrică formată din **<HighlightText color="teal">două semidrepte</HighlightText>** care au **<HighlightText color="teal">aceeași origine</HighlightText>**.
+Un **<HighlightText color="red">unghi</HighlightText>** este format din două semidrepte cu aceeași origine.
 :::
 
-- Cele două semidrepte sunt **<HighlightText color="teal">laturile</HighlightText>** unghiului.
-- Originea lor comună este **<HighlightText color="red">vârful</HighlightText>** unghiului.
-
 <div style={{ display: "flex", justifyContent: "center", margin: "1.5rem 0" }}>
-<svg width="360" height="220" viewBox="0 0 360 220" xmlns="http://www.w3.org/2000/svg">
-  <line x1="60" y1="180" x2="330" y2="180" stroke="black" strokeWidth="4" />
-  <line x1="60" y1="180" x2="290" y2="50" stroke="black" strokeWidth="4" />
-  <path d="M 140 180 A 80 80 0 0 0 130 141" fill="none" stroke="#FF6B6B" strokeWidth="4" />
-  <circle cx="60" cy="180" r="5" fill="black" />
-  <circle cx="330" cy="180" r="5" fill="black" />
-  <circle cx="290" cy="50" r="5" fill="black" />
-  <text x="32" y="207" fontSize="30" fontFamily="serif" fontWeight="bold">O</text>
-  <text x="335" y="207" fontSize="30" fontFamily="serif" fontWeight="bold">A</text>
-  <text x="298" y="45" fontSize="30" fontFamily="serif" fontWeight="bold">B</text>
+<svg width="380" height="230" viewBox="0 0 380 230" xmlns="http://www.w3.org/2000/svg">
+  <line x1="70" y1="180" x2="340" y2="180" stroke="black" strokeWidth="4" />
+  <line x1="70" y1="180" x2="300" y2="55" stroke="black" strokeWidth="4" />
+  <path d="M 150 180 A 80 80 0 0 0 140 141" fill="none" stroke="#FF6B6B" strokeWidth="4" />
+  <circle cx="70" cy="180" r="6" fill="black" />
+  <circle cx="340" cy="180" r="6" fill="black" />
+  <circle cx="300" cy="55" r="6" fill="black" />
+  <text x="40" y="210" fontSize="30" fontFamily="serif" fontWeight="bold">O</text>
+  <text x="345" y="210" fontSize="30" fontFamily="serif" fontWeight="bold">A</text>
+  <text x="310" y="48" fontSize="30" fontFamily="serif" fontWeight="bold">B</text>
+  <text x="52" y="228" fontSize="22" fontFamily="serif" fill="#FF6B6B">vârf</text>
+  <text x="200" y="210" fontSize="22" fontFamily="serif" fill="#4ECDC4">latură</text>
+  <text x="215" y="95" fontSize="22" fontFamily="serif" fill="#4ECDC4">latură</text>
 </svg>
 </div>
 
-Observăm figura. Vârful este punctul **O**. Laturile sunt **OA** și **OB**.
-
-Scriem unghiul astfel:
+Scriem unghiul din desen astfel:
 
 <Katex>
 {String.raw`
@@ -44,173 +42,62 @@ Scriem unghiul astfel:
 `}
 </Katex>
 
-:::warning Atenție
-Când scriem un unghi cu trei litere, litera din mijloc este întotdeauna **<HighlightText color="red">vârful</HighlightText>**.
-:::
+Litera din mijloc arată vârful.
 
 ---
 
 ## Măsura unghiurilor
 
-Măsurăm unghiurile în **<HighlightText color="orange">grade</HighlightText>**. Semnul pentru grade este <Katex>{String.raw`^\circ`}</Katex>.
+Măsurăm unghiurile în grade.
 
-:::tip De reținut
 <Katex>
 {String.raw`
 \begin{aligned}
-& \text{O rotație completă} = \color{#FF6B6B}{360^\circ}\\[6pt]
-& 1^\circ = \color{#4ECDC4}{60'} \quad (\text{60 de minute})\\[6pt]
-& 1' = \color{#9370DB}{60''} \quad (\text{60 de secunde})
+& \text{o rotație completă} = \color{#FF6B6B}{360^\circ}\\[6pt]
+& 1^\circ = \color{#4ECDC4}{60'}
 \end{aligned}
 `}
 </Katex>
-:::
 
 ---
 
 ## Tipuri de unghiuri după măsură
 
-Clasificăm unghiurile după măsura lor.
-
-<div style={{ display: "flex", justifyContent: "center", margin: "1.5rem 0" }}>
-<svg width="660" height="220" viewBox="0 0 660 220" xmlns="http://www.w3.org/2000/svg">
-  <line x1="30" y1="150" x2="180" y2="150" stroke="black" strokeWidth="4" />
-  <line x1="30" y1="150" x2="140" y2="60" stroke="black" strokeWidth="4" />
-  <path d="M 90 150 A 60 60 0 0 0 76 112" fill="none" stroke="#FF6B6B" strokeWidth="3" />
-  <circle cx="30" cy="150" r="5" fill="black" />
-  <text x="50" y="195" fontSize="22" fontFamily="serif">ascuțit</text>
-
-  <line x1="260" y1="150" x2="410" y2="150" stroke="black" strokeWidth="4" />
-  <line x1="260" y1="150" x2="260" y2="45" stroke="black" strokeWidth="4" />
-  <rect x="260" y="122" width="28" height="28" fill="none" stroke="#FF6B6B" strokeWidth="3" />
-  <circle cx="260" cy="150" r="5" fill="black" />
-  <text x="280" y="195" fontSize="22" fontFamily="serif">drept (90°)</text>
-
-  <line x1="500" y1="150" x2="650" y2="150" stroke="black" strokeWidth="4" />
-  <line x1="500" y1="150" x2="450" y2="55" stroke="black" strokeWidth="4" />
-  <path d="M 560 150 A 60 60 0 0 0 472 97" fill="none" stroke="#FF6B6B" strokeWidth="3" />
-  <circle cx="500" cy="150" r="5" fill="black" />
-  <text x="530" y="195" fontSize="22" fontFamily="serif">obtuz</text>
-</svg>
-</div>
-
-| Tipul unghiului | Măsura |
+| Unghiul | Măsura |
 |---|---|
-| Unghi nul | exact <Katex>{String.raw`0^\circ`}</Katex> |
-| Unghi ascuțit | mai mare decât <Katex>{String.raw`0^\circ`}</Katex>, mai mic decât <Katex>{String.raw`90^\circ`}</Katex> |
-| Unghi drept | exact <Katex>{String.raw`90^\circ`}</Katex> |
-| Unghi obtuz | mai mare decât <Katex>{String.raw`90^\circ`}</Katex>, mai mic decât <Katex>{String.raw`180^\circ`}</Katex> |
-| Unghi alungit | exact <Katex>{String.raw`180^\circ`}</Katex> |
-| Unghi complet | exact <Katex>{String.raw`360^\circ`}</Katex> |
-
-:::warning Atenție
-Unghiul **<HighlightText color="red">drept</HighlightText>** se marchează cu un mic pătrat în vârf, nu cu un arc.
-:::
+| ascuțit | sub <Katex>{String.raw`90^\circ`}</Katex> |
+| drept | exact <Katex>{String.raw`90^\circ`}</Katex> |
+| obtuz | peste <Katex>{String.raw`90^\circ`}</Katex>, sub <Katex>{String.raw`180^\circ`}</Katex> |
+| alungit | exact <Katex>{String.raw`180^\circ`}</Katex> |
+| complet | exact <Katex>{String.raw`360^\circ`}</Katex> |
 
 ---
 
 ## Perechi remarcabile de unghiuri
 
-### Unghiuri complementare
-
-:::danger Definiție
-Două unghiuri sunt **<HighlightText color="red">complementare</HighlightText>** dacă suma măsurilor lor este **<HighlightText color="teal">90°</HighlightText>**.
-:::
-
-Verificăm pe un exemplu:
-
-<Katex>
-{String.raw`
-30^\circ + 60^\circ = \color{#4ECDC4}{90^\circ}
-`}
-</Katex>
-
-Unghiurile de <Katex>{String.raw`30^\circ`}</Katex> și <Katex>{String.raw`60^\circ`}</Katex> sunt complementare.
-
-### Unghiuri suplementare
-
-:::danger Definiție
-Două unghiuri sunt **<HighlightText color="red">suplementare</HighlightText>** dacă suma măsurilor lor este **<HighlightText color="teal">180°</HighlightText>**.
-:::
-
-Verificăm pe un exemplu:
-
-<Katex>
-{String.raw`
-110^\circ + 70^\circ = \color{#4ECDC4}{180^\circ}
-`}
-</Katex>
-
-Unghiurile de <Katex>{String.raw`110^\circ`}</Katex> și <Katex>{String.raw`70^\circ`}</Katex> sunt suplementare.
-
-### Unghiuri opuse la vârf
-
-:::danger Definiție
-Două unghiuri sunt **<HighlightText color="red">opuse la vârf</HighlightText>** dacă laturile unuia sunt **<HighlightText color="teal">prelungirile</HighlightText>** laturilor celuilalt.
-:::
-
 :::tip De reținut
-Unghiurile opuse la vârf au **<HighlightText color="red">aceeași măsură</HighlightText>**.
+- Suma este <Katex>{String.raw`90^\circ`}</Katex>: unghiuri **<HighlightText color="teal">complementare</HighlightText>**.
+- Suma este <Katex>{String.raw`180^\circ`}</Katex>: unghiuri **<HighlightText color="orange">suplementare</HighlightText>**.
 :::
 
-Exemplu: două drepte se intersectează. Un unghi are <Katex>{String.raw`50^\circ`}</Katex>. Unghiul opus la vârf are tot <Katex>{String.raw`50^\circ`}</Katex>.
+<Katex>
+{String.raw`
+\begin{aligned}
+& 30^\circ + 60^\circ = \color{#4ECDC4}{90^\circ}\\[6pt]
+& 110^\circ + 70^\circ = \color{#FF8C00}{180^\circ}
+\end{aligned}
+`}
+</Katex>
+
+Unghiurile opuse la vârf au aceeași măsură.
 
 ---
 
 ## Calcule cu unghiuri
 
-### Adunarea măsurilor
-
-Calculăm pas cu pas:
-
-<Katex>
-{String.raw`
-35^\circ 40' + 28^\circ 30'
-`}
-</Katex>
-
-**Pasul 1.** Adunăm gradele cu gradele.
-
-<Katex>
-{String.raw`
-35^\circ + 28^\circ = 63^\circ
-`}
-</Katex>
-
-**Pasul 2.** Adunăm minutele cu minutele.
-
-<Katex>
-{String.raw`
-40' + 30' = 70'
-`}
-</Katex>
-
-**Pasul 3.** Transformăm minutele. Reținem: <Katex>{String.raw`60' = 1^\circ`}</Katex>.
-
-<Katex>
-{String.raw`
-70' = 60' + 10' = \color{#FF6B6B}{1^\circ 10'}
-`}
-</Katex>
-
-**Pasul 4.** Adunăm tot.
-
-<Katex>
-{String.raw`
-63^\circ + 1^\circ 10' = \color{#4ECDC4}{64^\circ 10'}
-`}
-</Katex>
-
-### Aflarea complementului și a suplementului
-
-:::tip De reținut
-- **<HighlightText color="teal">Complementul</HighlightText>**: scădem unghiul din <Katex>{String.raw`90^\circ`}</Katex>.
-- **<HighlightText color="orange">Suplementul</HighlightText>**: scădem unghiul din <Katex>{String.raw`180^\circ`}</Katex>.
-:::
-
 Aflăm complementul și suplementul unghiului de <Katex>{String.raw`35^\circ`}</Katex>.
 
-**Pasul 1.** Calculăm complementul.
+**Pasul 1.** Pentru complement scădem din <Katex>{String.raw`90^\circ`}</Katex>.
 
 <Katex>
 {String.raw`
@@ -218,7 +105,7 @@ Aflăm complementul și suplementul unghiului de <Katex>{String.raw`35^\circ`}</
 `}
 </Katex>
 
-**Pasul 2.** Calculăm suplementul.
+**Pasul 2.** Pentru suplement scădem din <Katex>{String.raw`180^\circ`}</Katex>.
 
 <Katex>
 {String.raw`

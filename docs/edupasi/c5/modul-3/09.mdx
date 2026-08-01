@@ -14,108 +14,91 @@ import HighlightText from '@site/src/components/HighlightText';
 ## Definiție
 
 :::danger Definiție
-Ca să **comparăm**, să **adunăm** sau să **scădem** două fracții, le aducem la același **<HighlightText color="red">numitor</HighlightText>**. Acesta se numește **<HighlightText color="teal">numitor comun</HighlightText>**. Alegem numitorul comun, **preferabil cel mai mic**, apoi **<HighlightText color="orange">amplificăm</HighlightText>** fiecare fracție.
+**<HighlightText color="teal">Numitorul comun</HighlightText>** este un număr care se împarte exact la ambii numitori.
 :::
 
-:::tip De reținut
-Oricare două fracții pot fi înlocuite cu fracții echivalente care au același numitor.
-:::
+<div style={{textAlign: 'center', margin: '20px 0'}}>
+  <svg width="360" height="170" viewBox="0 0 400 170" xmlns="http://www.w3.org/2000/svg">
+    <text x="10" y="48" fontSize="22" fontWeight="bold" fill="#4ECDC4">1/2</text>
+    <rect x="70" y="20" width="240" height="44" fill="#4ECDC4" />
+    <rect x="70" y="20" width="240" height="44" fill="none" stroke="#333" strokeWidth="2" />
+    <rect x="190" y="20" width="120" height="44" fill="#ffffff" stroke="#333" strokeWidth="2" />
+    <line x1="110" y1="20" x2="110" y2="64" stroke="#333" strokeWidth="1" />
+    <line x1="150" y1="20" x2="150" y2="64" stroke="#333" strokeWidth="1" />
+    <line x1="230" y1="20" x2="230" y2="64" stroke="#333" strokeWidth="1" />
+    <line x1="270" y1="20" x2="270" y2="64" stroke="#333" strokeWidth="1" />
+    <text x="320" y="48" fontSize="22" fontWeight="bold" fill="#4ECDC4">3/6</text>
 
-**Pașii:**
+    <text x="10" y="128" fontSize="22" fontWeight="bold" fill="#FF6B6B">1/3</text>
+    <rect x="70" y="100" width="240" height="44" fill="#FF6B6B" />
+    <rect x="70" y="100" width="240" height="44" fill="none" stroke="#333" strokeWidth="2" />
+    <rect x="150" y="100" width="160" height="44" fill="#ffffff" stroke="#333" strokeWidth="2" />
+    <line x1="110" y1="100" x2="110" y2="144" stroke="#333" strokeWidth="1" />
+    <line x1="190" y1="100" x2="190" y2="144" stroke="#333" strokeWidth="1" />
+    <line x1="230" y1="100" x2="230" y2="144" stroke="#333" strokeWidth="1" />
+    <line x1="270" y1="100" x2="270" y2="144" stroke="#333" strokeWidth="1" />
+    <text x="320" y="128" fontSize="22" fontWeight="bold" fill="#FF6B6B">2/6</text>
+  </svg>
+</div>
+
+Numitorul comun este 6. Amplificăm fiecare fracție.
 
 <Katex>
 {String.raw`
-\begin{aligned}
-& \text{1. Alegem } \color{#4ECDC4}{\text{numitorul comun}}\\[6pt]
-& \text{2. } \color{#FF6B6B}{\text{Amplificăm}} \text{ fiecare fracție}\\[6pt]
-& \text{3. Comparăm } \color{#9370DB}{\text{numărătorii}}
-\end{aligned}
+{}^{3)}\color{#4ECDC4}{\dfrac{1}{2}} = \dfrac{3}{6} \qquad {}^{2)}\color{#FF6B6B}{\dfrac{1}{3}} = \dfrac{2}{6}
 `}
-</Katex>
-
-**Exemplu:** aducem fracțiile la numitorul comun 6.
-
-<Katex>
-{String.raw`{}^{3)}\dfrac{1}{2} = \dfrac{3}{6} \qquad {}^{2)}\dfrac{1}{3} = \dfrac{2}{6}`}
 </Katex>
 
 ---
 
 ## Compararea fracțiilor
 
-### Problemă rezolvată
-
-**O pizza este tăiată în 6 felii identice. O felie este mâncată.**
-
-<div style={{textAlign: 'center', margin: '20px 0'}}>
-  <svg width="140" height="140" viewBox="-55 -55 110 110" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <path id="felie" d="M 0 0 L 50 0 A 50 50 0 0 1 25 43.3 Z" stroke="#e65100" strokeWidth="2" />
-    </defs>
-    <g transform="rotate(-90)">
-      <use href="#felie" fill="#ffcc80" />
-      <use href="#felie" transform="rotate(60)" fill="#ffcc80" />
-      <use href="#felie" transform="rotate(120)" fill="#ffcc80" />
-      <use href="#felie" transform="rotate(180)" fill="#ffcc80" />
-      <use href="#felie" transform="rotate(240)" fill="#ffcc80" />
-      <use href="#felie" transform="rotate(300)" fill="#FF6B6B" />
-    </g>
-  </svg>
-</div>
+Comparăm fracțiile:
 
 <Katex>
-{String.raw`\text{felia mâncată} = \color{#FF6B6B}{\dfrac{1}{6}}`}
+{String.raw`\dfrac{1}{4} \qquad \dfrac{2}{5}`}
 </Katex>
 
-**Care fracție este cea mai mare?**
+Calculăm pas cu pas:
+
+**Pasul 1.** Alegem numitorul comun. Înmulțim numitorii.
 
 <Katex>
-{String.raw`\dfrac{1}{6} \qquad \dfrac{2}{5} \qquad \dfrac{3}{4}`}
+{String.raw`4 \times 5 = \color{#9370DB}{20}`}
 </Katex>
 
-**Pasul 1: comparăm primele două fracții.** Numitorul comun pentru 6 și 5 este 30.
+**Pasul 2.** Amplificăm fiecare fracție.
 
 <Katex>
-{String.raw`{}^{5)}\dfrac{1}{6} = \dfrac{5}{30} \qquad {}^{6)}\dfrac{2}{5} = \dfrac{12}{30} \qquad \Rightarrow \quad \color{#FF6B6B}{\dfrac{1}{6} < \dfrac{2}{5}}`}
+{String.raw`{}^{5)}\dfrac{1}{4} = \dfrac{5}{20} \qquad {}^{4)}\dfrac{2}{5} = \dfrac{8}{20}`}
 </Katex>
 
-**Pasul 2: comparăm fracția mai mare cu a treia.** Numitorul comun pentru 5 și 4 este 20.
+**Pasul 3.** Comparăm numărătorii.
 
 <Katex>
-{String.raw`{}^{4)}\dfrac{2}{5} = \dfrac{8}{20} \qquad {}^{5)}\dfrac{3}{4} = \dfrac{15}{20} \qquad \Rightarrow \quad \color{#4ECDC4}{\dfrac{2}{5} < \dfrac{3}{4}}`}
+{String.raw`5 < 8 \quad \Rightarrow \quad \color{#FF8C00}{\dfrac{1}{4} < \dfrac{2}{5}}`}
 </Katex>
 
-**Pasul 3: scriem ordinea crescătoare.**
-
-<Katex>
-{String.raw`\color{#9370DB}{\dfrac{1}{6} < \dfrac{2}{5} < \dfrac{3}{4}}`}
-</Katex>
-
-:::warning Atenție
-Comparăm **<HighlightText color="red">numărătorii</HighlightText>** numai după ce fracțiile au **<HighlightText color="teal">același numitor</HighlightText>**.
+:::tip De reținut
+Comparăm **<HighlightText color="red">numărătorii</HighlightText>** doar după ce numitorii sunt egali.
 :::
 
 ---
 
-## <span style={{backgroundColor: '#FF8C00', color: 'white', padding: '4px 8px', borderRadius: '4px'}}>Exersează!</span>
+## Exersează!
 
-:::note
-Ordonează crescător fracțiile. Folosește pașii 1, 2, 3 din problema rezolvată.
-:::
+Adu fracțiile la numitor comun. Compară-le.
 
 **a)**
+
 <Katex>
-{String.raw`\dfrac{1}{2} \qquad \dfrac{1}{3} \qquad \dfrac{1}{5}`}
+{String.raw`\dfrac{1}{2} \qquad \dfrac{1}{3}`}
 </Katex>
 
 **b)**
-<Katex>
-{String.raw`\dfrac{1}{3} \qquad \dfrac{1}{4} \qquad \dfrac{1}{5}`}
-</Katex>
 
-**c)**
 <Katex>
-{String.raw`\dfrac{1}{10} \qquad \dfrac{1}{15} \qquad \dfrac{3}{20}`}
+{String.raw`\dfrac{1}{5} \qquad \dfrac{3}{4}`}
 </Katex>
 
 ---

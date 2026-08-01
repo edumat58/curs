@@ -13,116 +13,55 @@ import HighlightText from '@site/src/components/HighlightText';
 
 ## Proprietăți ale fracțiilor
 
-:::danger Definiție 1
-Dintre două fracții cu **<HighlightText color="teal">același numitor</HighlightText>**, mai mare este fracția care are **<HighlightText color="red">numărătorul mai mare</HighlightText>**.
+:::danger Definiție
+- Același **<HighlightText color="teal">numitor</HighlightText>**: mai mare este fracția cu numărătorul mai mare.
+- Același **<HighlightText color="red">numărător</HighlightText>**: mai mare este fracția cu numitorul mai mic.
 :::
 
-Cum comparăm:
-
-1. Verificăm numitorii. Trebuie să fie egali.
-2. Comparăm numărătorii.
-3. Fracția cu numărătorul mai mare este fracția mai mare.
-
-**Exemplu:** comparăm fracțiile de mai jos.
+**Exemplul 1.** Comparăm fracții cu același numitor.
 
 <Katex>
 {String.raw`
 \begin{aligned}
-& \text{1. Numitorii sunt egali: } \color{#4ECDC4}{7} = \color{#4ECDC4}{7}\\[6pt]
-& \text{2. Comparăm numărătorii: } \color{#FF6B6B}{5} > \color{#FF6B6B}{3}\\[6pt]
-& \text{3. Scriem: } \frac{\color{#FF6B6B}{5}}{\color{#4ECDC4}{7}} > \frac{\color{#FF6B6B}{3}}{\color{#4ECDC4}{7}}
+& \text{Pasul 1. Numitorii sunt egali: } \color{#4ECDC4}{7} = \color{#4ECDC4}{7}\\[6pt]
+& \text{Pasul 2. Comparăm numărătorii: } \color{#FF6B6B}{5} > \color{#FF6B6B}{3}\\[6pt]
+& \text{Pasul 3. Scriem: } \frac{\color{#FF6B6B}{5}}{\color{#4ECDC4}{7}} > \frac{\color{#FF6B6B}{3}}{\color{#4ECDC4}{7}}
 \end{aligned}
 `}
 </Katex>
 
-<div style={{display: 'flex', justifyContent: 'center', margin: '10px 0'}}>
-<svg width="360" height="95" viewBox="0 0 360 95" xmlns="http://www.w3.org/2000/svg">
-  <g transform="translate(70, 5)">
-    <rect x="0" y="0" width="280" height="30" fill="white" stroke="#333" strokeWidth="1.5" />
-    <rect x="0" y="0" width="200" height="30" fill="#4ECDC4" />
-    <line x1="40" y1="0" x2="40" y2="30" stroke="#333" strokeWidth="1.5" />
-    <line x1="80" y1="0" x2="80" y2="30" stroke="#333" strokeWidth="1.5" />
-    <line x1="120" y1="0" x2="120" y2="30" stroke="#333" strokeWidth="1.5" />
-    <line x1="160" y1="0" x2="160" y2="30" stroke="#333" strokeWidth="1.5" />
-    <line x1="200" y1="0" x2="200" y2="30" stroke="#333" strokeWidth="1.5" />
-    <line x1="240" y1="0" x2="240" y2="30" stroke="#333" strokeWidth="1.5" />
-    <text x="-35" y="21" fontSize="18" fontWeight="bold" fill="#FF6B6B">5/7</text>
+**Exemplul 2.** Comparăm fracții cu același numărător.
+
+<svg width="340" height="120" viewBox="0 0 340 120" xmlns="http://www.w3.org/2000/svg">
+  <g transform="translate(50, 10)">
+    <rect x="0" y="0" width="280" height="34" fill="white" stroke="#333" strokeWidth="2" />
+    <rect x="0" y="0" width="112" height="34" fill="#4ECDC4" />
+    <line x1="56" y1="0" x2="56" y2="34" stroke="#333" strokeWidth="2" />
+    <line x1="112" y1="0" x2="112" y2="34" stroke="#333" strokeWidth="2" />
+    <line x1="168" y1="0" x2="168" y2="34" stroke="#333" strokeWidth="2" />
+    <line x1="224" y1="0" x2="224" y2="34" stroke="#333" strokeWidth="2" />
+    <text x="-45" y="26" fontSize="20" fontWeight="bold" fill="#333">2/5</text>
   </g>
-  <g transform="translate(70, 55)">
-    <rect x="0" y="0" width="280" height="30" fill="white" stroke="#333" strokeWidth="1.5" />
-    <rect x="0" y="0" width="120" height="30" fill="#4ECDC4" />
-    <line x1="40" y1="0" x2="40" y2="30" stroke="#333" strokeWidth="1.5" />
-    <line x1="80" y1="0" x2="80" y2="30" stroke="#333" strokeWidth="1.5" />
-    <line x1="120" y1="0" x2="120" y2="30" stroke="#333" strokeWidth="1.5" />
-    <line x1="160" y1="0" x2="160" y2="30" stroke="#333" strokeWidth="1.5" />
-    <line x1="200" y1="0" x2="200" y2="30" stroke="#333" strokeWidth="1.5" />
-    <line x1="240" y1="0" x2="240" y2="30" stroke="#333" strokeWidth="1.5" />
-    <text x="-35" y="21" fontSize="18" fontWeight="bold" fill="#333">3/7</text>
+  <g transform="translate(50, 70)">
+    <rect x="0" y="0" width="280" height="34" fill="white" stroke="#333" strokeWidth="2" />
+    <rect x="0" y="0" width="80" height="34" fill="#FF8C00" />
+    <line x1="40" y1="0" x2="40" y2="34" stroke="#333" strokeWidth="2" />
+    <line x1="80" y1="0" x2="80" y2="34" stroke="#333" strokeWidth="2" />
+    <line x1="120" y1="0" x2="120" y2="34" stroke="#333" strokeWidth="2" />
+    <line x1="160" y1="0" x2="160" y2="34" stroke="#333" strokeWidth="2" />
+    <line x1="200" y1="0" x2="200" y2="34" stroke="#333" strokeWidth="2" />
+    <line x1="240" y1="0" x2="240" y2="34" stroke="#333" strokeWidth="2" />
+    <text x="-45" y="26" fontSize="20" fontWeight="bold" fill="#333">2/7</text>
   </g>
 </svg>
-</div>
-
-Observăm că ambele bare au 7 părți egale. Prima bară are 5 părți colorate. A doua are numai 3.
-
-:::danger Definiție 2
-Dintre două fracții cu **<HighlightText color="red">același numărător</HighlightText>**, mai mare este fracția care are **<HighlightText color="teal">numitorul mai mic</HighlightText>**.
-:::
-
-Numitorul mai mic înseamnă că întregul este împărțit în mai puține părți. Deci fiecare parte este **<HighlightText color="orange">mai mare</HighlightText>**.
-
-Cum comparăm:
-
-1. Verificăm numărătorii. Trebuie să fie egali.
-2. Comparăm numitorii.
-3. Fracția cu numitorul mai mic este fracția mai mare.
-
-**Exemplu:** comparăm fracțiile de mai jos.
 
 <Katex>
 {String.raw`
 \begin{aligned}
-& \text{1. Numărătorii sunt egali: } \color{#FF6B6B}{2} = \color{#FF6B6B}{2}\\[6pt]
-& \text{2. Comparăm numitorii: } \color{#4ECDC4}{5} < \color{#4ECDC4}{7}\\[6pt]
-& \text{3. Scriem: } \frac{\color{#FF6B6B}{2}}{\color{#4ECDC4}{5}} > \frac{\color{#FF6B6B}{2}}{\color{#4ECDC4}{7}}
+& \text{Pasul 1. Numărătorii sunt egali: } \color{#FF6B6B}{2} = \color{#FF6B6B}{2}\\[6pt]
+& \text{Pasul 2. Comparăm numitorii: } \color{#4ECDC4}{5} < \color{#4ECDC4}{7}\\[6pt]
+& \text{Pasul 3. Scriem: } \frac{\color{#FF6B6B}{2}}{\color{#4ECDC4}{5}} > \frac{\color{#FF6B6B}{2}}{\color{#4ECDC4}{7}}
 \end{aligned}
-`}
-</Katex>
-
-<div style={{display: 'flex', justifyContent: 'center', margin: '10px 0'}}>
-<svg width="360" height="95" viewBox="0 0 360 95" xmlns="http://www.w3.org/2000/svg">
-  <g transform="translate(70, 5)">
-    <rect x="0" y="0" width="280" height="30" fill="white" stroke="#333" strokeWidth="1.5" />
-    <rect x="0" y="0" width="112" height="30" fill="#4ECDC4" />
-    <line x1="56" y1="0" x2="56" y2="30" stroke="#333" strokeWidth="1.5" />
-    <line x1="112" y1="0" x2="112" y2="30" stroke="#333" strokeWidth="1.5" />
-    <line x1="168" y1="0" x2="168" y2="30" stroke="#333" strokeWidth="1.5" />
-    <line x1="224" y1="0" x2="224" y2="30" stroke="#333" strokeWidth="1.5" />
-    <text x="-35" y="21" fontSize="18" fontWeight="bold" fill="#FF6B6B">2/5</text>
-  </g>
-  <g transform="translate(70, 55)">
-    <rect x="0" y="0" width="280" height="30" fill="white" stroke="#333" strokeWidth="1.5" />
-    <rect x="0" y="0" width="80" height="30" fill="#4ECDC4" />
-    <line x1="40" y1="0" x2="40" y2="30" stroke="#333" strokeWidth="1.5" />
-    <line x1="80" y1="0" x2="80" y2="30" stroke="#333" strokeWidth="1.5" />
-    <line x1="120" y1="0" x2="120" y2="30" stroke="#333" strokeWidth="1.5" />
-    <line x1="160" y1="0" x2="160" y2="30" stroke="#333" strokeWidth="1.5" />
-    <line x1="200" y1="0" x2="200" y2="30" stroke="#333" strokeWidth="1.5" />
-    <line x1="240" y1="0" x2="240" y2="30" stroke="#333" strokeWidth="1.5" />
-    <text x="-35" y="21" fontSize="18" fontWeight="bold" fill="#333">2/7</text>
-  </g>
-</svg>
-</div>
-
-Observăm că părțile din prima bară sunt mai mari, pentru că întregul este împărțit în numai 5 părți.
-
-:::tip De reținut
-- Orice **<HighlightText color="red">fracție subunitară</HighlightText>** este cuprinsă între 0 și 1.
-- Fracțiile se reprezintă pe **<HighlightText color="teal">axa numerelor</HighlightText>**, la fel ca numerele naturale.
-:::
-
-<Katex>
-{String.raw`
-0 < \frac{\color{#FF6B6B}{5}}{\color{#4ECDC4}{9}} < 1
 `}
 </Katex>
 
@@ -130,57 +69,38 @@ Observăm că părțile din prima bară sunt mai mari, pentru că întregul este
 
 ## Observație
 
-:::warning Atenție
-Dintre două fracții reprezentate pe axa numerelor, mai mare este fracția din **<HighlightText color="orange">dreapta</HighlightText>**.
+:::tip De reținut
+Pe axa numerelor, mai mare este fracția din **<HighlightText color="orange">dreapta</HighlightText>**.
 :::
-
-**Exemplu:** pe axă, fracția de mai jos din stânga este mai mică.
 
 <Katex>
 {String.raw`
-\frac{1}{4} \text{ este în stânga lui } \frac{3}{4}, \text{ deci } \frac{1}{4} < \frac{3}{4}
+\frac{1}{4} < \frac{3}{4}
 `}
 </Katex>
 
 ---
 
-## <span style={{backgroundColor: '#FF8C00', color: 'white', padding: '4px 8px', borderRadius: '4px'}}>Exersează!</span>
+## Exersează!
 
-:::note Exercițiul 1
-Completează casetele cu unul din semnele &lt;, &gt;, =.
-:::
+**Exercițiul 1.** Scrie în casetă semnul potrivit.
 
 <Katex>
 {String.raw`
 \begin{aligned}
-& \text{a) } \frac{2}{7} \ \square \ \frac{3}{7} \qquad \text{b) } \frac{5}{11} \ \square \ \frac{4}{11}\\[8pt]
-& \text{c) } \frac{1}{4} \ \square \ \frac{1}{5} \qquad \text{d) } \frac{3}{3} \ \square \ \frac{7}{7}
+& \text{a) } \frac{2}{7} \ \square \ \frac{3}{7} \qquad \text{b) } \frac{5}{9} \ \square \ \frac{4}{9}\\[8pt]
+& \text{c) } \frac{1}{4} \ \square \ \frac{1}{5} \qquad \text{d) } \frac{3}{5} \ \square \ \frac{3}{8}
 \end{aligned}
 `}
 </Katex>
 
-:::note Exercițiul 2
-Scrie fracțiile în ordine crescătoare.
-:::
+**Exercițiul 2.** Scrie fracțiile în ordine crescătoare.
 
 <Katex>
 {String.raw`
 \begin{aligned}
-& \text{a) } \frac{3}{5}, \ \frac{2}{5}, \ \frac{4}{5}, \ \frac{7}{5}\\[8pt]
-& \text{b) } \frac{3}{2}, \ \frac{3}{7}, \ \frac{3}{5}, \ \frac{3}{10}
-\end{aligned}
-`}
-</Katex>
-
-:::note Exercițiul 3
-Determină numerele naturale nenule n pentru care inegalitățile sunt adevărate.
-:::
-
-<Katex>
-{String.raw`
-\begin{aligned}
-& \text{a) } \frac{n}{6} < \frac{4}{6}\\[8pt]
-& \text{b) } \frac{3}{14} < \frac{n}{14} < \frac{7}{14}
+& \text{a) } \frac{3}{5}, \ \frac{2}{5}, \ \frac{4}{5}\\[8pt]
+& \text{b) } \frac{3}{2}, \ \frac{3}{7}, \ \frac{3}{5}
 \end{aligned}
 `}
 </Katex>

@@ -11,11 +11,9 @@ import HighlightText from '@site/src/components/HighlightText';
 
 ---
 
-## Puterea unui număr natural
+## Puterea unui număr
 
-:::danger Definiție
-Într-o putere, numărul **<HighlightText color="red">a</HighlightText>** se numește **<HighlightText color="red">baza puterii</HighlightText>**, iar numărul **<HighlightText color="teal">n</HighlightText>** se numește **<HighlightText color="teal">exponentul</HighlightText>**.
-:::
+<HighlightText color="red">Baza</HighlightText> este numărul înmulțit. <HighlightText color="teal">Exponentul</HighlightText> arată de câte ori.
 
 <Katex>
 {String.raw`
@@ -23,40 +21,11 @@ import HighlightText from '@site/src/components/HighlightText';
 `}
 </Katex>
 
-Reținem două cazuri speciale:
+Reținem:
 
 <Katex>
 {String.raw`
-\begin{aligned}
-& a^0 = 1 \quad \text{Exemplu: } 5^0 = 1\\[6pt]
-& a^1 = a \quad \text{Exemplu: } 5^1 = 5
-\end{aligned}
-`}
-</Katex>
-
-:::warning Atenție
-Operația <Katex>{String.raw`0^0`}</Katex> **nu este definită**.
-:::
-
-:::tip De reținut
-Ridicarea la putere este operație de **<HighlightText color="red">ordinul al treilea</HighlightText>**.
-
-Ea se efectuează **înaintea** înmulțirii, împărțirii, adunării și scăderii.
-
-Dacă apar paranteze, efectuăm mai întâi operațiile din **parantezele rotunde**, apoi cele din **parantezele pătrate** și la final cele din **acolade**.
-:::
-
-Calculăm pas cu pas:
-
-<Katex>
-{String.raw`
-\begin{aligned}
-& 6^2 : 3 - 9^0 + 2^5 = \\[8pt]
-& \text{1. Calculăm puterile: } \color{#FF6B6B}{6^2 = 36}, \quad \color{#4ECDC4}{9^0 = 1}, \quad \color{#9370DB}{2^5 = 32}\\[6pt]
-& \text{2. Înlocuim: } 36 : 3 - 1 + 32\\[6pt]
-& \text{3. Împărțim: } 36 : 3 = 12\\[6pt]
-& \text{4. Calculăm în ordine: } 12 - 1 + 32 = 43
-\end{aligned}
+a^0 = 1 \qquad a^1 = a
 `}
 </Katex>
 
@@ -64,76 +33,73 @@ Calculăm pas cu pas:
 
 ## Compararea puterilor
 
-:::tip De reținut
-1. Puteri cu **<HighlightText color="red">aceeași bază</HighlightText>**: este mai mare puterea cu **exponentul mai mare**.
-2. Puteri cu **<HighlightText color="teal">același exponent</HighlightText>**: este mai mare puterea cu **baza mai mare**.
-:::
+Aceeași bază: mai mare este cea cu exponentul mai mare.
 
 <Katex>
 {String.raw`
-\begin{aligned}
-& \color{#FF6B6B}{5}^{10} < \color{#FF6B6B}{5}^{12}, \quad \text{deoarece } 10 < 12\\[6pt]
-& 7^{\color{#4ECDC4}{4}} > 5^{\color{#4ECDC4}{4}}, \quad \text{deoarece } 7 > 5
-\end{aligned}
+\color{#FF6B6B}{5}^{2} < \color{#FF6B6B}{5}^{3}
 `}
 </Katex>
 
-Dacă bazele și exponenții sunt diferiți, calculăm puterile și comparăm rezultatele:
+Același exponent: mai mare este cea cu baza mai mare.
 
 <Katex>
 {String.raw`
-2^5 = 32, \quad 3^3 = 27, \quad \text{deci } 2^5 > 3^3
+3^{\color{#4ECDC4}{4}} < 7^{\color{#4ECDC4}{4}}
 `}
 </Katex>
 
 ---
 
-## Pătrat perfect
+## Pătratul perfect
 
 :::danger Definiție
-Un număr natural **<HighlightText color="red">p</HighlightText>** se numește **<HighlightText color="red">pătrat perfect</HighlightText>** dacă se poate scrie ca **<HighlightText color="teal">puterea a doua</HighlightText>** a unui număr natural:
-
-<Katex>
-{String.raw`
-\color{#FF6B6B}{p} = \color{#4ECDC4}{a}^2
-`}
-</Katex>
+Un <HighlightText color="orange">pătrat perfect</HighlightText> este un număr scris ca <Katex>{String.raw`a^2`}</Katex>.
 :::
 
-Observăm pe exemple:
+<svg viewBox="0 0 300 240" width="100%" style={{maxWidth: '320px'}} xmlns="http://www.w3.org/2000/svg">
+  <rect x="70" y="40" width="168" height="168" fill="#4ECDC4" fillOpacity="0.18" stroke="#4ECDC4" strokeWidth="3" />
+  <line x1="98" y1="40" x2="98" y2="208" stroke="#4ECDC4" strokeWidth="1.5" />
+  <line x1="126" y1="40" x2="126" y2="208" stroke="#4ECDC4" strokeWidth="1.5" />
+  <line x1="154" y1="40" x2="154" y2="208" stroke="#4ECDC4" strokeWidth="1.5" />
+  <line x1="182" y1="40" x2="182" y2="208" stroke="#4ECDC4" strokeWidth="1.5" />
+  <line x1="210" y1="40" x2="210" y2="208" stroke="#4ECDC4" strokeWidth="1.5" />
+  <line x1="70" y1="68" x2="238" y2="68" stroke="#4ECDC4" strokeWidth="1.5" />
+  <line x1="70" y1="96" x2="238" y2="96" stroke="#4ECDC4" strokeWidth="1.5" />
+  <line x1="70" y1="124" x2="238" y2="124" stroke="#4ECDC4" strokeWidth="1.5" />
+  <line x1="70" y1="152" x2="238" y2="152" stroke="#4ECDC4" strokeWidth="1.5" />
+  <line x1="70" y1="180" x2="238" y2="180" stroke="#4ECDC4" strokeWidth="1.5" />
+  <text x="154" y="28" fontSize="22" fontWeight="bold" fill="#FF6B6B" textAnchor="middle">6</text>
+  <text x="48" y="132" fontSize="22" fontWeight="bold" fill="#FF6B6B" textAnchor="middle">6</text>
+  <text x="154" y="232" fontSize="22" fontWeight="bold" fill="#FF8C00" textAnchor="middle">36</text>
+</svg>
+
+Pasul 1: Numărăm pătrățelele de pe o latură. Sunt 6.
+
+Pasul 2: Înmulțim latura cu latura.
 
 <Katex>
 {String.raw`
-\begin{aligned}
-& 36 = 6 \cdot 6 = 6^2 \quad \Rightarrow \quad 36 \text{ este pătrat perfect}\\[6pt]
-& 100 = 10 \cdot 10 = 10^2 \quad \Rightarrow \quad 100 \text{ este pătrat perfect}
-\end{aligned}
+6 \cdot 6 = 36
 `}
 </Katex>
+
+Pasul 3: Scriem 36 ca putere.
+
+<Katex>
+{String.raw`
+36 = \color{#FF8C00}{6^2}
+`}
+</Katex>
+
+Deci 36 este pătrat perfect.
 
 :::tip De reținut
-Pătratele perfecte până la 100 sunt:
+Pătratele perfecte până la 100:
 
 <Katex>
 {String.raw`
-\color{#9370DB}{0,\ 1,\ 4,\ 9,\ 16,\ 25,\ 36,\ 49,\ 64,\ 81,\ 100}
+0,\ 1,\ 4,\ 9,\ 16,\ 25,\ 36,\ 49,\ 64,\ 81,\ 100
 `}
 </Katex>
 :::
-
-:::warning Atenție
-Ultima cifră a unui pătrat perfect poate fi doar **<HighlightText color="orange">0, 1, 4, 5, 6 sau 9</HighlightText>**.
-
-Un număr care se termină în **2, 3, 7 sau 8** nu este pătrat perfect.
-:::
-
-Verificăm pas cu pas dacă un număr este pătrat perfect:
-
-<Katex>
-{String.raw`
-\begin{aligned}
-& \text{1. } 49 = 7 \cdot 7 = 7^2 \quad \Rightarrow \quad 49 \text{ este pătrat perfect}\\[6pt]
-& \text{2. } 27 \text{ se termină în } \color{#FF6B6B}{7} \quad \Rightarrow \quad 27 \text{ nu este pătrat perfect}
-\end{aligned}
-`}
-</Katex>

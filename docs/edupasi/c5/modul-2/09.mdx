@@ -13,19 +13,24 @@ import HighlightText from '@site/src/components/HighlightText';
 
 ## 1. Criteriul de divizibilitate cu 2 și 5
 
-:::danger Definiție 1
-Un număr este divizibil cu **<HighlightText color="red">2</HighlightText>** dacă **<HighlightText color="red">ultima cifră</HighlightText>** este pară: 0, 2, 4, 6, 8.
+:::danger Definiție
+Un număr este divizibil cu **<HighlightText color="red">2</HighlightText>** dacă ultima cifră este 0, 2, 4, 6 sau 8.
 
-Un număr este divizibil cu **<HighlightText color="teal">5</HighlightText>** dacă **<HighlightText color="teal">ultima cifră</HighlightText>** este 0 sau 5.
+Un număr este divizibil cu **<HighlightText color="teal">5</HighlightText>** dacă ultima cifră este 0 sau 5.
 :::
 
-Observăm doar ultima cifră. Celelalte cifre nu contează.
+<svg viewBox="0 0 300 130" style={{width:'100%',maxWidth:'300px'}}>
+  <text x="82" y="74" textAnchor="middle" fontSize="54" fill="currentColor">3</text>
+  <rect x="118" y="22" width="64" height="68" rx="10" fill="none" stroke="#FF6B6B" strokeWidth="3" />
+  <text x="150" y="74" textAnchor="middle" fontSize="54" fill="#FF6B6B">4</text>
+  <text x="150" y="116" textAnchor="middle" fontSize="18" fill="#FF6B6B">ultima cifră</text>
+</svg>
 
 <Katex>
 {String.raw`
 \begin{aligned}
-& 123\color{#FF6B6B}{4} \to \text{ultima cifră este } \color{#FF6B6B}{4}\text{, cifră pară} \to \text{divizibil cu } 2\\[6pt]
-& 123\color{#4ECDC4}{5} \to \text{ultima cifră este } \color{#4ECDC4}{5} \to \text{divizibil cu } 5
+& 3\color{#FF6B6B}{4} \to \text{ultima cifră } \color{#FF6B6B}{4} \to \text{divizibil cu } 2\\[6pt]
+& 4\color{#4ECDC4}{5} \to \text{ultima cifră } \color{#4ECDC4}{5} \to \text{divizibil cu } 5
 \end{aligned}
 `}
 </Katex>
@@ -34,109 +39,55 @@ Observăm doar ultima cifră. Celelalte cifre nu contează.
 
 ## 2. Criteriul de divizibilitate cu 3
 
-:::danger Definiție 2
-Un număr este divizibil cu **<HighlightText color="orange">3</HighlightText>** dacă **<HighlightText color="orange">suma cifrelor</HighlightText>** sale este divizibilă cu 3.
-:::
+Un număr este divizibil cu **3** dacă suma cifrelor este divizibilă cu 3.
 
-**Exemplu:** verificăm dacă 123 este divizibil cu 3.
+**Exemplu:** numărul 24.
 
-**Pasul 1.** Adunăm toate cifrele numărului:
+**Pasul 1.** Adunăm cifrele.
 
 <Katex>
 {String.raw`
-1 + 2 + 3 = \color{#FF8C00}{6}
+2 + 4 = \color{#FF8C00}{6}
 `}
 </Katex>
 
-**Pasul 2.** Verificăm suma. 6 este divizibil cu 3, deoarece:
+**Pasul 2.** Împărțim suma la 3.
 
 <Katex>
 {String.raw`
-\color{#FF8C00}{6} = 3 \cdot 2
+\color{#FF8C00}{6} : 3 = 2 \text{ rest } 0
 `}
 </Katex>
 
-Deci **123 este divizibil cu 3**.
+Deci 24 este divizibil cu 3.
 
 ---
 
 ## 3. Criteriul de divizibilitate cu 9
 
-:::danger Definiție 3
-Un număr este divizibil cu **<HighlightText color="purple">9</HighlightText>** dacă **<HighlightText color="purple">suma cifrelor</HighlightText>** sale este divizibilă cu 9.
-:::
+Un număr este divizibil cu **9** dacă suma cifrelor este divizibilă cu 9.
 
-Lucrăm la fel ca la criteriul cu 3.
-
-**Exemplu:** verificăm dacă 1233 este divizibil cu 9.
-
-**Pasul 1.** Adunăm toate cifrele numărului:
+**Exemplu:** numărul 63.
 
 <Katex>
 {String.raw`
-1 + 2 + 3 + 3 = \color{#9370DB}{9}
+\begin{aligned}
+& \text{Pasul 1: } 6 + 3 = \color{#9370DB}{9}\\[6pt]
+& \text{Pasul 2: } \color{#9370DB}{9} : 9 = 1 \text{ rest } 0\\[6pt]
+& \text{Deci } 63 \text{ este divizibil cu } 9
+\end{aligned}
 `}
 </Katex>
-
-**Pasul 2.** Suma este 9, iar 9 este divizibil cu 9.
-
-Deci **1233 este divizibil cu 9**.
-
-:::warning Atenție
-La criteriile cu **<HighlightText color="orange">3</HighlightText>** și cu **<HighlightText color="purple">9</HighlightText>** nu ne uităm la ultima cifră. Adunăm **toate** cifrele numărului.
-:::
 
 ---
 
 ## 4. Criteriul de divizibilitate cu 10
 
-:::danger Definiție 4
-Un număr este divizibil cu **<HighlightText color="teal">10</HighlightText>** dacă **<HighlightText color="teal">ultima cifră</HighlightText>** este 0.
-:::
+Un număr este divizibil cu **10** dacă ultima cifră este 0.
 
 <Katex>
 {String.raw`
-123\color{#4ECDC4}{0} \to \text{ultima cifră este } \color{#4ECDC4}{0} \to \text{divizibil cu } 10
-`}
-</Katex>
-
----
-
-## 5. Criteriul de divizibilitate cu 4
-
-:::danger Definiție 5
-Un număr este divizibil cu **<HighlightText color="red">4</HighlightText>** dacă numărul format din **<HighlightText color="red">ultimele două cifre</HighlightText>** ale sale este divizibil cu 4.
-:::
-
-<Katex>
-{String.raw`
-12\color{#FF6B6B}{36} \to \text{ultimele două cifre formează } \color{#FF6B6B}{36} = 4 \cdot 9 \to \text{divizibil cu } 4
-`}
-</Katex>
-
----
-
-## 6. Criteriul de divizibilitate cu 6
-
-:::danger Definiție 6
-Un număr este divizibil cu **<HighlightText color="orange">6</HighlightText>** dacă este divizibil **și cu <HighlightText color="red">2</HighlightText>, și cu <HighlightText color="orange">3</HighlightText>**.
-:::
-
-**Exemplu:** 1236 este divizibil cu 2 (ultima cifră este 6, cifră pară) și cu 3 (suma cifrelor este 1 + 2 + 3 + 6 = 12, iar 12 este divizibil cu 3).
-
-Deci **1236 este divizibil cu 6**.
-
----
-
-## 7. Criteriul de divizibilitate cu 25
-
-:::danger Definiție 7
-Un număr este divizibil cu **<HighlightText color="teal">25</HighlightText>** dacă numărul format din **<HighlightText color="teal">ultimele două cifre</HighlightText>** ale sale este divizibil cu 25.
-:::
-
-<Katex>
-{String.raw`
-123\color{#4ECDC4}{75} \to \text{ultimele două cifre formează } \color{#4ECDC4}{75} = 25 \cdot 3 \to \text{divizibil cu } 25
+7\color{#4ECDC4}{0} \to \text{ultima cifră } \color{#4ECDC4}{0} \to \text{divizibil cu } 10
 `}
 </Katex>
 
@@ -144,10 +95,8 @@ Un număr este divizibil cu **<HighlightText color="teal">25</HighlightText>** d
 <Katex>
 {String.raw`
 \begin{aligned}
-& \text{Pentru } \color{#FF6B6B}{2}, \ \color{#4ECDC4}{5}, \ \color{#4ECDC4}{10}: \text{ observăm } \color{#FF6B6B}{\text{ultima cifră}}\\[8pt]
-& \text{Pentru } \color{#FF8C00}{3}, \ \color{#9370DB}{9}: \text{ adunăm } \color{#FF8C00}{\text{toate cifrele}}\\[8pt]
-& \text{Pentru } \color{#FF6B6B}{4}, \ \color{#4ECDC4}{25}: \text{ observăm } \color{#FF6B6B}{\text{ultimele două cifre}}\\[8pt]
-& \text{Pentru } \color{#FF8C00}{6}: \text{ verificăm divizibilitatea cu } \color{#FF6B6B}{2} \text{ și cu } \color{#FF8C00}{3}
+& \color{#FF6B6B}{2}, \ \color{#4ECDC4}{5}, \ \color{#4ECDC4}{10}: \text{ privim } \color{#FF6B6B}{\text{ultima cifră}}\\[8pt]
+& \color{#FF8C00}{3}, \ \color{#9370DB}{9}: \text{ adunăm } \color{#FF8C00}{\text{toate cifrele}}
 \end{aligned}
 `}
 </Katex>

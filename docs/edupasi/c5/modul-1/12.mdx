@@ -13,11 +13,11 @@ import HighlightText from '@site/src/components/HighlightText';
 
 ## Definiție
 
-:::danger Definiție 1
-**<HighlightText color="red">Factorul comun</HighlightText>** este un număr sau o literă care apare în **<HighlightText color="teal">fiecare termen</HighlightText>** al unei expresii.
+:::danger Definiție
+**<HighlightText color="red">Factorul comun</HighlightText>** este numărul sau litera care apare în **<HighlightText color="teal">fiecare termen</HighlightText>**.
 :::
 
-Termenii unei expresii sunt separați prin semnele **+** sau **–**.
+Termenii sunt despărțiți prin semnele **+** sau **–**.
 
 <Katex>
 {String.raw`
@@ -34,7 +34,7 @@ Termenii unei expresii sunt separați prin semnele **+** sau **–**.
 
 ## Distributivitatea simplă
 
-Un număr lipit de o paranteză se înmulțește cu **fiecare termen** din paranteză.
+Numărul din fața parantezei se înmulțește cu fiecare termen.
 
 :::tip De reținut
 <Katex>
@@ -47,7 +47,7 @@ Un număr lipit de o paranteză se înmulțește cu **fiecare termen** din paran
 </Katex>
 :::
 
-**Exemplu:**
+**Exemplu.** Dezvoltăm:
 
 <Katex>
 {String.raw`
@@ -55,62 +55,39 @@ Un număr lipit de o paranteză se înmulțește cu **fiecare termen** din paran
 `}
 </Katex>
 
-Regula funcționează și cu litere:
+---
+
+## Scoaterea factorului comun
+
+Factorizarea este drumul invers. Calculăm pas cu pas:
+
+**Pasul 1:** Căutăm factorul care apare în fiecare termen.
+
+**Pasul 2:** Scriem fiecare termen ca produs cu acest factor.
+
+**Pasul 3:** Scriem factorul în față. Restul rămâne în paranteză.
+
+**Exemplu.** Factorizăm:
 
 <Katex>
 {String.raw`
 \begin{aligned}
-& x(y + 3) = xy + 3x\\[6pt]
-& 2a(x + y) = 2ax + 2ay\\[6pt]
-& a \cdot a = a^2
+& 6x + 9\\[8pt]
+& \text{Pasul 1: factorul comun este } \color{#FF6B6B}{3}\\[6pt]
+& \text{Pasul 2: } 6x + 9 = \color{#FF6B6B}{3} \cdot 2x + \color{#FF6B6B}{3} \cdot 3\\[6pt]
+& \text{Pasul 3: } 6x + 9 = \color{#FF6B6B}{3}(2x + 3)
 \end{aligned}
 `}
 </Katex>
 
-### Metoda
-
-Scoatem factorul comun în trei pași:
-
-1. Căutăm numărul sau litera care apare în **fiecare termen**.
-2. Scriem fiecare termen ca produs: factorul comun înmulțit cu restul.
-3. Scriem factorul comun în fața parantezei. În paranteză rămân resturile.
-
-**Exemplul 1** — factor comun un număr:
-
-<Katex>
-{String.raw`
-6x + 9 = \color{#FF6B6B}{3} \cdot 2x + \color{#FF6B6B}{3} \cdot 3 = \color{#FF6B6B}{3}(2x + 3)
-`}
-</Katex>
-
-În paranteză rămâne ce **nu** a fost scos ca factor comun.
-
-**Exemplul 2** — factor comun o literă:
-
-Observăm că <Katex>{String.raw`x^2 = x \cdot x`}</Katex>, deci litera <Katex>{String.raw`x`}</Katex> apare în ambii termeni.
-
-<Katex>
-{String.raw`
-5x^2 + 7x = \color{#4ECDC4}{x} \cdot 5x + \color{#4ECDC4}{x} \cdot 7 = \color{#4ECDC4}{x}(5x + 7)
-`}
-</Katex>
-
-**Exemplul 3** — factor comun o paranteză:
-
-Paranteza <Katex>{String.raw`(x - 2)`}</Katex> apare în ambii termeni.
-
-<Katex>
-{String.raw`
-4\color{#9370DB}{(x - 2)} + 3x\color{#9370DB}{(x - 2)} = \color{#9370DB}{(x - 2)}(4 + 3x)
-`}
-</Katex>
+Reținem: în paranteză rămâne ce nu a fost scos.
 
 :::warning Atenție
-Când factorul comun rămâne **<HighlightText color="orange">singur</HighlightText>**, scriem **1** în paranteză pentru acel termen.
+Când factorul comun rămâne singur, scriem **<HighlightText color="orange">1</HighlightText>** în paranteză.
 
 <Katex>
 {String.raw`
-3x + 3 = \color{#FF6B6B}{3} \cdot x + \color{#FF6B6B}{3} \cdot 1 = \color{#FF6B6B}{3}(x + 1)
+3x + 3 = \color{#FF6B6B}{3} \cdot x + \color{#FF6B6B}{3} \cdot \color{#FF8C00}{1} = \color{#FF6B6B}{3}(x + \color{#FF8C00}{1})
 `}
 </Katex>
 :::

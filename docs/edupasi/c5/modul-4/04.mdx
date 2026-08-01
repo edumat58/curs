@@ -13,63 +13,30 @@ import HighlightText from '@site/src/components/HighlightText';
 
 ## Observă și descoperă!
 
-Observăm ce se întâmplă când mărim un număr de 10, de 100, de 1 000 de ori.
+Întregul este împărțit în 10 părți egale.
 
-| Numărul | 3 | 13 |
-| :--- | :--- | :--- |
-| Mărit de 10 ori | 30 | 130 |
-| Mărit de 100 de ori | 300 | 1 300 |
-| Mărit de 1 000 de ori | 3 000 | 13 000 |
+<svg viewBox="0 0 420 160" width="100%" role="img" aria-label="Un întreg împărțit în zece părți egale, o parte colorată">
+  <text x="210" y="28" textAnchor="middle" fontSize="22" fontWeight="bold" fill="currentColor">1 întreg</text>
+  <rect x="10" y="45" width="40" height="60" fill="#4ECDC4" />
+  <rect x="10" y="45" width="400" height="60" fill="none" stroke="currentColor" strokeWidth="3" />
+  <line x1="50" y1="45" x2="50" y2="105" stroke="currentColor" strokeWidth="2" />
+  <line x1="90" y1="45" x2="90" y2="105" stroke="currentColor" strokeWidth="2" />
+  <line x1="130" y1="45" x2="130" y2="105" stroke="currentColor" strokeWidth="2" />
+  <line x1="170" y1="45" x2="170" y2="105" stroke="currentColor" strokeWidth="2" />
+  <line x1="210" y1="45" x2="210" y2="105" stroke="currentColor" strokeWidth="2" />
+  <line x1="250" y1="45" x2="250" y2="105" stroke="currentColor" strokeWidth="2" />
+  <line x1="290" y1="45" x2="290" y2="105" stroke="currentColor" strokeWidth="2" />
+  <line x1="330" y1="45" x2="330" y2="105" stroke="currentColor" strokeWidth="2" />
+  <line x1="370" y1="45" x2="370" y2="105" stroke="currentColor" strokeWidth="2" />
+  <text x="30" y="135" textAnchor="middle" fontSize="22" fontWeight="bold" fill="#4ECDC4">0,1</text>
+  <text x="230" y="135" textAnchor="middle" fontSize="20" fill="currentColor">o parte din 10</text>
+</svg>
 
-Observăm și micșorarea de 10, de 100, de 1 000 de ori.
-
-| Numărul | 3 000 | 13 000 |
-| :--- | :--- | :--- |
-| Micșorat de 10 ori | 300 | 1 300 |
-| Micșorat de 100 de ori | 30 | 130 |
-| Micșorat de 1 000 de ori | 3 | 13 |
-
-:::tip De reținut
-<Katex>
-{String.raw`
-\begin{aligned}
-& \text{Mărire de 10 ori: } \color{#FF6B6B}{\text{adăugăm un zero}}\\[6pt]
-& \text{Micșorare de 10 ori: } \color{#4ECDC4}{\text{tăiem un zero}}
-\end{aligned}
-`}
-</Katex>
-:::
-
----
-
-## Formarea fracțiilor zecimale
-
-Micșorăm numărul 1 de 10 ori. Rezultatul nu mai este număr natural. Îl scriem cu **virgulă**.
-
-:::danger Definiție
-- **<HighlightText color="red">O zecime</HighlightText>** = 1 micșorat de 10 ori
-- **<HighlightText color="teal">O sutime</HighlightText>** = 1 micșorat de 100 de ori
-- **<HighlightText color="orange">O miime</HighlightText>** = 1 micșorat de 1 000 de ori
-:::
+O parte din 10 se numește **<HighlightText color="teal">o zecime</HighlightText>**.
 
 <Katex>
 {String.raw`
-\begin{aligned}
-& 1 : 10 = \color{#FF6B6B}{0{,}1} \quad (\text{o zecime})\\[6pt]
-& 1 : 100 = \color{#4ECDC4}{0{,}01} \quad (\text{o sutime})\\[6pt]
-& 1 : 1\,000 = \color{#9370DB}{0{,}001} \quad (\text{o miime})
-\end{aligned}
-`}
-</Katex>
-
-Reținem echivalențele:
-
-<Katex>
-{String.raw`
-\begin{aligned}
-& \text{Un întreg are } \color{#FF6B6B}{\text{10 zecimi}}: \quad 0{,}1 \cdot 10 = 1\\[6pt]
-& \text{Un întreg are } \color{#4ECDC4}{\text{100 de sutimi}}: \quad 0{,}01 \cdot 100 = 1
-\end{aligned}
+\color{#4ECDC4}{0{,}1} = \frac{1}{10}
 `}
 </Katex>
 
@@ -78,7 +45,7 @@ Reținem echivalențele:
 ## Structura unei fracții zecimale
 
 :::danger Definiție
-O **fracție zecimală** are două părți:
+Un **număr zecimal** are două părți:
 - **<HighlightText color="red">partea întreagă</HighlightText>** — cifrele din fața virgulei;
 - **<HighlightText color="teal">partea fracționară</HighlightText>** — cifrele de după virgulă.
 :::
@@ -86,71 +53,50 @@ O **fracție zecimală** are două părți:
 <Katex>
 {String.raw`
 \begin{aligned}
-& \text{Exemplu: } \color{#FF6B6B}{23}\color{#4ECDC4}{{,}456}\\[6pt]
-& \text{Partea întreagă: } \color{#FF6B6B}{23}\\[6pt]
-& \text{Partea fracționară: } \color{#4ECDC4}{456}
+& \color{#FF6B6B}{2}\color{#4ECDC4}{{,}34}\\[6pt]
+& \text{Partea întreagă: } \color{#FF6B6B}{2}\\[6pt]
+& \text{Partea fracționară: } \color{#4ECDC4}{34}
 \end{aligned}
 `}
 </Katex>
-
-Citim numărul 23,456 în trei pași:
-1. Citim partea întreagă: „douăzeci și trei".
-2. Spunem „**<HighlightText color="teal">virgulă</HighlightText>**".
-3. Citim partea fracționară: „patru sute cincizeci și șase".
-
-:::warning Atenție
-Numerele naturale sunt fracții zecimale care au după virgulă numai cifre de 0.
-
-<Katex>
-{String.raw`
-\color{#FF6B6B}{5} = 5{,}0 = 5{,}00 = 5{,}000
-`}
-</Katex>
-:::
 
 ---
 
 ## Transformări
 
-### 1. Din fracție ordinară în fracție zecimală
+Scriem un număr zecimal ca fracție ordinară.
 
-Calculăm pas cu pas:
-1. Scriem numărătorul.
-2. Numărăm zerourile de la numitor.
-3. Punem virgula astfel încât după ea să rămână tot atâtea cifre câte zerouri am numărat.
+Pasul 1: La numărător scriem numărul fără virgulă.
 
-<Katex>
-{String.raw`
-\begin{aligned}
-& \frac{234}{10} = 23{,}4 \quad (\color{#FF6B6B}{\text{un zero} \to \text{o cifră după virgulă}})\\[8pt]
-& \frac{234}{100} = 2{,}34 \quad (\color{#4ECDC4}{\text{două zerouri} \to \text{două cifre}})\\[8pt]
-& \frac{1\,234}{1\,000} = 1{,}234 \quad (\color{#9370DB}{\text{trei zerouri} \to \text{trei cifre}})
-\end{aligned}
-`}
-</Katex>
+Pasul 2: Numărăm cifrele de după virgulă.
 
-### 2. Din fracție zecimală în fracție ordinară
+Pasul 3: La numitor scriem 1 și tot atâtea zerouri.
 
-Calculăm pas cu pas:
-1. La numărător scriem numărul fără virgulă.
-2. Numărăm cifrele de după virgulă.
-3. La numitor scriem 1 urmat de tot atâtea zerouri câte cifre am numărat.
+**Exemplul 1**
 
 <Katex>
 {String.raw`
 \begin{aligned}
-& 3{,}7 = \frac{37}{10} \quad (\color{#FF6B6B}{\text{o cifră} \to \text{un zero}})\\[8pt]
-& 1{,}57 = \frac{157}{100} \quad (\color{#4ECDC4}{\text{două cifre} \to \text{două zerouri}})\\[8pt]
-& 2{,}013 = \frac{2\,013}{1\,000} \quad (\color{#9370DB}{\text{trei cifre} \to \text{trei zerouri}})
+& 3{,}7\\[6pt]
+& \text{Pasul 1: numărătorul este } \color{#FF6B6B}{37}\\[6pt]
+& \text{Pasul 2: o cifră după virgulă}\\[6pt]
+& \text{Pasul 3: numitorul este } \color{#4ECDC4}{10}\\[6pt]
+& 3{,}7 = \frac{\color{#FF6B6B}{37}}{\color{#4ECDC4}{10}}
 \end{aligned}
 `}
 </Katex>
 
-Uneori fracția obținută se poate **simplifica**:
+**Exemplul 2**
 
 <Katex>
 {String.raw`
-0{,}12 = \frac{12}{100} = \frac{12 : 4}{100 : 4} = \frac{3}{25}
+\begin{aligned}
+& 2{,}34\\[6pt]
+& \text{Pasul 1: numărătorul este } \color{#FF6B6B}{234}\\[6pt]
+& \text{Pasul 2: două cifre după virgulă}\\[6pt]
+& \text{Pasul 3: numitorul este } \color{#4ECDC4}{100}\\[6pt]
+& 2{,}34 = \frac{\color{#FF6B6B}{234}}{\color{#4ECDC4}{100}}
+\end{aligned}
 `}
 </Katex>
 

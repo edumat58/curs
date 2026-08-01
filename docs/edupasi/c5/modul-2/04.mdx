@@ -14,96 +14,84 @@ import HighlightText from '@site/src/components/HighlightText';
 ## Definiție
 
 :::danger Definiție
-**<HighlightText color="red">Metoda mersului invers</HighlightText>** se folosește când un număr necunoscut trece prin mai multe operații și cunoaștem doar **<HighlightText color="teal">rezultatul final</HighlightText>**.
-
-Pornim de la rezultat și facem **<HighlightText color="orange">operațiile inverse</HighlightText>**, în **ordine inversă**, până ajungem la numărul de la început.
+La **<HighlightText color="red">metoda mersului invers</HighlightText>** pornim de la rezultat. Mergem înapoi și facem operațiile inverse.
 :::
-
-:::tip De reținut
-Fiecare operație are o operație inversă:
 
 <Katex>
 {String.raw`
 \begin{aligned}
 & \color{#FF6B6B}{\text{adunarea } (+)} \; \longleftrightarrow \; \color{#4ECDC4}{\text{scăderea } (-)}\\[8pt]
-& \color{#9370DB}{\text{înmulțirea } (\times)} \; \longleftrightarrow \; \color{#FF8C00}{\text{împărțirea } (:)}
-\end{aligned}
-`}
-</Katex>
-:::
-
-**Exemplu:**
-
-<Katex>
-{String.raw`
-\begin{aligned}
-& n + 3 = 10 \Rightarrow n = 10 \color{#4ECDC4}{\; - \;} 3 = 7\\[6pt]
-& n \times 4 = 20 \Rightarrow n = 20 \color{#FF8C00}{\; : \;} 4 = 5
+& \color{#FF8C00}{\text{înmulțirea } (\times)} \; \longleftrightarrow \; \color{#9370DB}{\text{împărțirea } (:)}
 \end{aligned}
 `}
 </Katex>
 
-:::warning Atenție
-Pornim mereu de la **rezultatul final**. **<HighlightText color="red">Ultima operație</HighlightText>** din enunț este **<HighlightText color="teal">prima</HighlightText>** pe care o desfacem.
+:::tip De reținut
+Ultima operație din enunț se desface prima.
 :::
 
 ---
 
 ## Exemple
 
-> Exemplul 1
+**Problema 1:** Antonia s-a gândit la un număr. L-a înmulțit cu 3. A adunat 5. A obținut 17.
 
-:::note Problema:
-Antonia s-a gândit la un număr. L-a înmulțit cu 7. A adunat 11. A împărțit rezultatul la 5 și a obținut 19. La ce număr s-a gândit Antonia?
-:::
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="230" viewBox="0 0 560 230" role="img" aria-label="Numarul necunoscut este inmultit cu 3, apoi marit cu 5 si se obtine 17; sagetile de intoarcere arata impartirea la 3 si scaderea lui 5">
+  <rect x="15" y="80" width="120" height="70" rx="10" fill="none" stroke="#9370DB" stroke-width="3"/>
+  <text x="75" y="127" font-size="34" text-anchor="middle" fill="#9370DB">n</text>
+  <rect x="220" y="80" width="120" height="70" rx="10" fill="none" stroke="#9370DB" stroke-width="3"/>
+  <text x="280" y="127" font-size="34" text-anchor="middle" fill="#9370DB">?</text>
+  <rect x="425" y="80" width="120" height="70" rx="10" fill="none" stroke="#FF6B6B" stroke-width="3"/>
+  <text x="485" y="127" font-size="34" text-anchor="middle" fill="#FF6B6B">17</text>
+  <path d="M145 100 H205" stroke="#FF8C00" stroke-width="3" fill="none"/>
+  <path d="M205,94 L205,106 L218,100 Z" fill="#FF8C00"/>
+  <text x="175" y="70" font-size="24" text-anchor="middle" fill="#FF8C00">× 3</text>
+  <path d="M210 135 H155" stroke="#4ECDC4" stroke-width="3" fill="none"/>
+  <path d="M155,129 L155,141 L142,135 Z" fill="#4ECDC4"/>
+  <text x="175" y="180" font-size="24" text-anchor="middle" fill="#4ECDC4">: 3</text>
+  <path d="M350 100 H410" stroke="#FF8C00" stroke-width="3" fill="none"/>
+  <path d="M410,94 L410,106 L423,100 Z" fill="#FF8C00"/>
+  <text x="382" y="70" font-size="24" text-anchor="middle" fill="#FF8C00">+ 5</text>
+  <path d="M415 135 H360" stroke="#4ECDC4" stroke-width="3" fill="none"/>
+  <path d="M360,129 L360,141 L347,135 Z" fill="#4ECDC4"/>
+  <text x="382" y="180" font-size="24" text-anchor="middle" fill="#4ECDC4">− 5</text>
+</svg>
 
-Scriem pașii din enunț, în ordine. Numărul necunoscut este <Katex>{String.raw`n`}</Katex>.
+Calculăm pas cu pas:
 
 <Katex>
 {String.raw`
 \begin{aligned}
-& \text{Pasul 1: } n \times 7 = P\\[6pt]
-& \text{Pasul 2: } P + 11 = S\\[6pt]
-& \text{Pasul 3: } S : 5 = 19
+& \text{Pasul 1: } 17 \color{#4ECDC4}{\; - \;} 5 = 12\\[8pt]
+& \text{Pasul 2: } 12 \color{#4ECDC4}{\; : \;} 3 = 4
 \end{aligned}
 `}
 </Katex>
 
-Mergem invers, de la ultimul pas spre primul. Calculăm pas cu pas:
+Numărul gândit este **4**.
+
+Verificare:
 
 <Katex>
 {String.raw`
-\begin{aligned}
-& \text{1. } S : 5 = 19 \Rightarrow S = 19 \color{#9370DB}{\; \times \;} 5 = 95\\[8pt]
-& \text{2. } P + 11 = 95 \Rightarrow P = 95 \color{#4ECDC4}{\; - \;} 11 = 84\\[8pt]
-& \text{3. } n \times 7 = 84 \Rightarrow n = 84 \color{#FF8C00}{\; : \;} 7 = 12
-\end{aligned}
+4 \times 3 = 12 \quad \text{și} \quad 12 + 5 = 17
 `}
 </Katex>
-
-**Verificare:** <Katex>{String.raw`12 \times 7 = 84; \quad 84 + 11 = 95; \quad 95 : 5 = 19`}</Katex>
-
-**R:** Numărul gândit este **12**.
 
 ---
 
-> Exemplul 2
+**Problema 2:** O firmă își dublează numărul de angajați la 5 ani. Firma are 10 ani. Acum are 80 de angajați. Câți angajați erau la început?
 
-:::note Problema:
-Numărul de angajați ai unei firme se dublează o dată la 5 ani. Firma are o vechime de 25 de ani. În prezent are 3 520 de angajați. Câți angajați erau la început?
-:::
+Dublarea este înmulțire cu 2. Invers: împărțire la 2.
 
-Dublarea înseamnă înmulțire cu 2. Operația inversă este împărțirea la 2.
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Acum: } \color{#FF6B6B}{80}\\[8pt]
+& \text{Pasul 1 (acum 5 ani): } 80 \color{#4ECDC4}{\; : \;} 2 = 40\\[8pt]
+& \text{Pasul 2 (acum 10 ani): } 40 \color{#4ECDC4}{\; : \;} 2 = 20
+\end{aligned}
+`}
+</Katex>
 
-Mergem înapoi în timp, din 5 în 5 ani, și împărțim la 2 la fiecare pas:
-
-| Moment în timp | Număr angajați |
-|----------------|----------------|
-| În prezent | 3 520 |
-| Acum 5 ani | 3 520 : 2 = 1 760 |
-| Acum 10 ani | 1 760 : 2 = 880 |
-| Acum 15 ani | 880 : 2 = 440 |
-| Acum 20 ani | 440 : 2 = 220 |
-| Acum 25 ani (la început) | 220 : 2 = 110 |
-
-**R:** La început firma avea **110 angajați**.
+La început firma avea **20 de angajați**.

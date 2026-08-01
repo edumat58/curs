@@ -14,15 +14,27 @@ import HighlightText from '@site/src/components/HighlightText';
 ## Calcul procentual
 
 :::danger Definiție
-Un **<HighlightText color="red">procent</HighlightText>** este o fracție cu **<HighlightText color="teal">numitorul 100</HighlightText>**. Scriem **a %** și citim „a la sută".
+Un **<HighlightText color="red">procent</HighlightText>** este o fracție cu numitorul 100. Scriem **a %**. Citim „a la sută".
 :::
+
+<svg viewBox="0 0 400 110" width="100%" role="img">
+  <rect x="10" y="15" width="72" height="50" fill="#FF6B6B" />
+  <rect x="10" y="15" width="360" height="50" fill="none" stroke="#9370DB" strokeWidth="2" />
+  <line x1="46" y1="15" x2="46" y2="65" stroke="#9370DB" strokeWidth="1" />
+  <line x1="82" y1="15" x2="82" y2="65" stroke="#9370DB" strokeWidth="1" />
+  <line x1="118" y1="15" x2="118" y2="65" stroke="#9370DB" strokeWidth="1" />
+  <line x1="154" y1="15" x2="154" y2="65" stroke="#9370DB" strokeWidth="1" />
+  <line x1="190" y1="15" x2="190" y2="65" stroke="#9370DB" strokeWidth="1" />
+  <line x1="226" y1="15" x2="226" y2="65" stroke="#9370DB" strokeWidth="1" />
+  <line x1="262" y1="15" x2="262" y2="65" stroke="#9370DB" strokeWidth="1" />
+  <line x1="298" y1="15" x2="298" y2="65" stroke="#9370DB" strokeWidth="1" />
+  <line x1="334" y1="15" x2="334" y2="65" stroke="#9370DB" strokeWidth="1" />
+  <text x="190" y="95" fontSize="18" textAnchor="middle" fill="currentColor">2 din 10 = 20 din 100 = 20 %</text>
+</svg>
 
 <Katex>
 {String.raw`
-\begin{aligned}
-& a\,\% = \frac{a}{100}\\[8pt]
-& \text{Exemplu: } \color{#FF6B6B}{30\,\%} = \frac{30}{100} = 0{,}30
-\end{aligned}
+20\,\% = \frac{20}{100} = 0{,}20
 `}
 </Katex>
 
@@ -30,24 +42,11 @@ Un **<HighlightText color="red">procent</HighlightText>** este o fracție cu **<
 
 ## Proprietăți
 
-:::tip De reținut
 <Katex>
 {String.raw`
 \begin{aligned}
-& \text{1. } \color{#FF6B6B}{a\,\%} \text{ din } b = \frac{a}{100} \times b\\[8pt]
-& \text{2. Procentul părții } p \text{ din întregul } t = \frac{p}{t} \times 100
-\end{aligned}
-`}
-</Katex>
-:::
-
-Calculăm un exemplu pentru fiecare proprietate:
-
-<Katex>
-{String.raw`
-\begin{aligned}
-& \text{1. } 10\,\% \text{ din } 200 = \frac{10}{100} \times 200 = \color{#4ECDC4}{20}\\[8pt]
-& \text{2. } 25 \text{ din } 50 = \frac{25}{50} \times 100 = \color{#4ECDC4}{50\,\%}
+& \text{1. } a\,\% \text{ din } b = \color{#FF6B6B}{\frac{a}{100} \times b}\\[8pt]
+& \text{2. partea } p \text{ din întregul } t = \color{#4ECDC4}{\frac{p}{t} \times 100}\,\%
 \end{aligned}
 `}
 </Katex>
@@ -56,86 +55,59 @@ Calculăm un exemplu pentru fiecare proprietate:
 
 ## Metode de calcul
 
-### Aplicarea unui procent
-
-Într-o școală sunt 350 de elevi. 20 % dintre ei merg pe jos la școală. Calculăm pas cu pas câți elevi merg pe jos:
+Din 60 de elevi, 20 % merg pe jos.
 
 <Katex>
 {String.raw`
 \begin{aligned}
-& \text{1. Scriem procentul ca fracție: } 20\,\% = \color{#FF6B6B}{\frac{20}{100}}\\[6pt]
-& \text{2. Înmulțim fracția cu întregul: } \frac{20}{100} \times 350 = \frac{7\,000}{100}\\[6pt]
-& \text{3. Împărțim la numitor: } 7\,000 \div 100 = \color{#4ECDC4}{70}
+& \text{Pasul 1: } 20\,\% = \color{#FF6B6B}{\frac{20}{100}}\\[6pt]
+& \text{Pasul 2: } \frac{20}{100} \times 60 = \frac{1\,200}{100}\\[6pt]
+& \text{Pasul 3: } 1\,200 \div 100 = \color{#4ECDC4}{12 \text{ elevi}}
 \end{aligned}
 `}
 </Katex>
 
-**Răspuns:** 70 de elevi merg pe jos la școală.
-
-### Calcularea unui procent
-
-Un tort cântărește 350 g. Zahărul din el cântărește 105 g. Calculăm pas cu pas procentul de zahăr:
+Un tort de 50 g are 15 g zahăr.
 
 <Katex>
 {String.raw`
 \begin{aligned}
-& \text{1. Împărțim partea la întreg: } 105 \div 350 = \color{#FF8C00}{0{,}3}\\[6pt]
-& \text{2. Scriem câtul cu numitorul 100: } 0{,}3 = \frac{30}{100}\\[6pt]
-& \text{3. Citim procentul: } \frac{30}{100} = \color{#4ECDC4}{30\,\%}
+& \text{Pasul 1: } 15 \div 50 = \color{#FF8C00}{0{,}3}\\[6pt]
+& \text{Pasul 2: } 0{,}3 = \frac{30}{100}\\[6pt]
+& \text{Pasul 3: } \frac{30}{100} = \color{#4ECDC4}{30\,\% \text{ zahăr}}
 \end{aligned}
 `}
 </Katex>
-
-**Răspuns:** 30 % din masa tortului este zahăr.
-
-:::warning Atenție
-Împărțim întotdeauna **<HighlightText color="red">partea</HighlightText>** la **<HighlightText color="teal">întreg</HighlightText>**, nu invers. Partea este numărătorul. Întregul este numitorul.
-:::
 
 ---
 
 ## Fracții echivalente
 
-:::danger Definiție
-Fracțiile care reprezintă **<HighlightText color="red">aceeași parte din întreg</HighlightText>** se numesc **<HighlightText color="teal">fracții echivalente</HighlightText>**.
-:::
-
-<Katex>
-{String.raw`
-\text{Exemplu: } \frac{1}{2} = \frac{2}{4} = \frac{50}{100} = 50\,\%
-`}
-</Katex>
-
-Observăm că fiecare fracție reprezintă o jumătate din întreg.
-
 :::tip De reținut
-Două fracții sunt echivalente atunci când produsele în cruce sunt egale. Numitorii nu sunt niciodată 0.
-
-<Katex>
-{String.raw`
-\frac{a}{b} = \frac{c}{d} \iff \color{#FF6B6B}{a \times d} = \color{#4ECDC4}{b \times c}
-`}
-</Katex>
+Fracțiile care arată **<HighlightText color="teal">aceeași parte din întreg</HighlightText>** sunt echivalente.
 :::
 
-Verificăm pas cu pas dacă fracțiile 2/5 și 4/10 sunt echivalente:
+<svg viewBox="0 0 400 150" width="100%" role="img">
+  <text x="10" y="50" fontSize="20" fill="currentColor">1/2</text>
+  <rect x="70" y="20" width="150" height="45" fill="#4ECDC4" />
+  <rect x="70" y="20" width="300" height="45" fill="none" stroke="#9370DB" strokeWidth="2" />
+  <line x1="220" y1="20" x2="220" y2="65" stroke="#9370DB" strokeWidth="1" />
+  <text x="10" y="120" fontSize="20" fill="currentColor">3/6</text>
+  <rect x="70" y="90" width="150" height="45" fill="#4ECDC4" />
+  <rect x="70" y="90" width="300" height="45" fill="none" stroke="#9370DB" strokeWidth="2" />
+  <line x1="120" y1="90" x2="120" y2="135" stroke="#9370DB" strokeWidth="1" />
+  <line x1="170" y1="90" x2="170" y2="135" stroke="#9370DB" strokeWidth="1" />
+  <line x1="220" y1="90" x2="220" y2="135" stroke="#9370DB" strokeWidth="1" />
+  <line x1="270" y1="90" x2="270" y2="135" stroke="#9370DB" strokeWidth="1" />
+  <line x1="320" y1="90" x2="320" y2="135" stroke="#9370DB" strokeWidth="1" />
+</svg>
 
 <Katex>
 {String.raw`
 \begin{aligned}
-& \text{1. Înmulțim în cruce: } \color{#FF6B6B}{2 \times 10 = 20} \text{ și } \color{#4ECDC4}{5 \times 4 = 20}\\[6pt]
-& \text{2. Produsele sunt egale, deci } \frac{2}{5} = \frac{4}{10}
-\end{aligned}
-`}
-</Katex>
-
-Obținem fracții echivalente prin amplificare sau prin simplificare:
-
-<Katex>
-{String.raw`
-\begin{aligned}
-& \text{Amplificăm cu } 3: \frac{1}{2} = \frac{1 \times 3}{2 \times 3} = \color{#9370DB}{\frac{3}{6}}\\[8pt]
-& \text{Simplificăm cu } 10: \frac{30}{100} = \frac{30 \div 10}{100 \div 10} = \color{#9370DB}{\frac{3}{10}}
+& \frac{a}{b} = \frac{c}{d} \text{ dacă } \color{#FF6B6B}{a \times d} = \color{#4ECDC4}{b \times c}\\[8pt]
+& \text{Pasul 1: } \color{#FF6B6B}{1 \times 6 = 6} \text{ și } \color{#4ECDC4}{2 \times 3 = 6}\\[6pt]
+& \text{Pasul 2: } \frac{1}{2} = \frac{3}{6}
 \end{aligned}
 `}
 </Katex>

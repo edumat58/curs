@@ -13,177 +13,96 @@ import HighlightText from '@site/src/components/HighlightText';
 
 ## Definiție
 
-:::danger Definiție 1
-**<HighlightText color="red">A amplifica</HighlightText>** o fracție înseamnă să **<HighlightText color="red">înmulțim</HighlightText>** și **<HighlightText color="teal">numărătorul</HighlightText>**, și **<HighlightText color="teal">numitorul</HighlightText>** cu același număr natural, diferit de zero.
+:::danger Definiție
+**<HighlightText color="teal">A amplifica</HighlightText>** o fracție înseamnă să înmulțim numărătorul și numitorul cu același număr.
+
+**<HighlightText color="orange">A simplifica</HighlightText>** o fracție înseamnă să împărțim numărătorul și numitorul la același număr.
 :::
 
-Calculăm pas cu pas. Amplificăm fracția trei supra cinci cu 4:
+<svg width="100%" viewBox="0 0 400 180" xmlns="http://www.w3.org/2000/svg" role="img">
+  <text x="28" y="46" textAnchor="middle" fontSize="20">3</text>
+  <line x1="12" y1="53" x2="44" y2="53" stroke="#333" strokeWidth="2" />
+  <text x="28" y="74" textAnchor="middle" fontSize="20">5</text>
 
-1. Înmulțim numărătorul: 3 × 4 = 12.
-2. Înmulțim numitorul: 5 × 4 = 20.
-3. Scriem fracția obținută: doisprezece supra douăzeci.
+  <rect x="60" y="30" width="60" height="45" fill="#4ECDC4" stroke="#333" />
+  <rect x="120" y="30" width="60" height="45" fill="#4ECDC4" stroke="#333" />
+  <rect x="180" y="30" width="60" height="45" fill="#4ECDC4" stroke="#333" />
+  <rect x="240" y="30" width="60" height="45" fill="#f2f2f2" stroke="#333" />
+  <rect x="300" y="30" width="60" height="45" fill="#f2f2f2" stroke="#333" />
+
+  <text x="28" y="100" textAnchor="middle" fontSize="24">=</text>
+
+  <text x="28" y="126" textAnchor="middle" fontSize="20">6</text>
+  <line x1="12" y1="133" x2="44" y2="133" stroke="#333" strokeWidth="2" />
+  <text x="28" y="154" textAnchor="middle" fontSize="20">10</text>
+
+  <rect x="60" y="110" width="30" height="45" fill="#FF8C00" stroke="#333" />
+  <rect x="90" y="110" width="30" height="45" fill="#FF8C00" stroke="#333" />
+  <rect x="120" y="110" width="30" height="45" fill="#FF8C00" stroke="#333" />
+  <rect x="150" y="110" width="30" height="45" fill="#FF8C00" stroke="#333" />
+  <rect x="180" y="110" width="30" height="45" fill="#FF8C00" stroke="#333" />
+  <rect x="210" y="110" width="30" height="45" fill="#FF8C00" stroke="#333" />
+  <rect x="240" y="110" width="30" height="45" fill="#f2f2f2" stroke="#333" />
+  <rect x="270" y="110" width="30" height="45" fill="#f2f2f2" stroke="#333" />
+  <rect x="300" y="110" width="30" height="45" fill="#f2f2f2" stroke="#333" />
+  <rect x="330" y="110" width="30" height="45" fill="#f2f2f2" stroke="#333" />
+</svg>
+
+Observăm că partea colorată este aceeași.
+
+---
+
+## Amplificarea
+
+Amplificăm fracția cu 2. Calculăm pas cu pas:
+
+Pasul 1: Înmulțim numărătorul cu 2.
+
+Pasul 2: Înmulțim numitorul cu 2.
 
 <Katex>
 {String.raw`
-{}^{4)}\dfrac{\color{#FF6B6B}{3}}{\color{#4ECDC4}{5}} = \dfrac{4 \cdot 3}{4 \cdot 5} = \dfrac{\color{#FF6B6B}{12}}{\color{#4ECDC4}{20}}
+{}^{2)}\dfrac{3}{5} = \dfrac{3 \cdot 2}{5 \cdot 2} = \dfrac{\color{#FF8C00}{6}}{\color{#FF8C00}{10}}
 `}
 </Katex>
 
-Citim: „Fracția trei supra cinci se amplifică cu patru și se obține fracția doisprezece supra douăzeci".
+---
 
-:::danger Definiție 2
-**<HighlightText color="orange">A simplifica</HighlightText>** o fracție înseamnă să **<HighlightText color="orange">împărțim</HighlightText>** și **<HighlightText color="teal">numărătorul</HighlightText>**, și **<HighlightText color="teal">numitorul</HighlightText>** la același număr, diferit de zero.
-:::
+## Simplificarea
 
-Calculăm pas cu pas. Simplificăm fracția opt supra zece prin 2:
+Simplificăm fracția prin 2. Calculăm pas cu pas:
 
-1. Verificăm: 2 împarte exact și pe 8, și pe 10.
-2. Împărțim numărătorul: 8 : 2 = 4.
-3. Împărțim numitorul: 10 : 2 = 5.
+Pasul 1: Împărțim numărătorul la 2.
+
+Pasul 2: Împărțim numitorul la 2.
 
 <Katex>
 {String.raw`
-\dfrac{\color{#FF6B6B}{8}}{\color{#4ECDC4}{10}}^{(2} = \dfrac{8:2}{10:2} = \dfrac{\color{#FF6B6B}{4}}{\color{#4ECDC4}{5}}
+\dfrac{6}{10}^{(2} = \dfrac{6 : 2}{10 : 2} = \dfrac{\color{#4ECDC4}{3}}{\color{#4ECDC4}{5}}
 `}
 </Katex>
-
-Citim: „Fracția opt supra zece se simplifică prin doi și se obține fracția patru supra cinci".
-
-:::warning Atenție
-* Simplificăm numai printr-un **<HighlightText color="red">divizor comun</HighlightText>** al numărătorului și al numitorului, diferit de 1.
-* Înmulțim sau împărțim mereu **ambele numere**: și numărătorul, și numitorul.
-:::
 
 :::tip De reținut
-* Prin amplificare sau prin simplificare obținem o fracție **<HighlightText color="teal">echivalentă</HighlightText>** cu fracția dată. Cele două fracții reprezintă aceeași parte din întreg.
-* Fracția care nu mai poate fi simplificată se numește **<HighlightText color="red">fracție ireductibilă</HighlightText>**.
+Fracția care nu se mai poate simplifica se numește **<HighlightText color="red">fracție ireductibilă</HighlightText>**.
 :::
-
-Observăm cum ajungem la o fracție ireductibilă prin simplificări succesive:
-
-<Katex>
-{String.raw`
-\dfrac{12}{18}^{(2} = \dfrac{6}{9}^{(3} = \dfrac{\color{#FF6B6B}{2}}{\color{#FF6B6B}{3}}
-`}
-</Katex>
-
-Fracția doi supra trei nu se mai poate simplifica. Este ireductibilă.
 
 ---
 
 ## Exersează!
 
-<div style={{border: '1px solid #ccc', padding: '10px', borderRadius: '8px', backgroundColor: '#fff5e6', maxWidth: '340px', margin: '20px auto'}}>
-  <div style={{fontWeight: 'bold', marginBottom: '10px', color: '#e65100'}}>Unește prin săgeți fiecare fracție din coloana A cu fracția din coloana B obținută prin amplificare cu 2.</div>
-  <svg width="300" height="175" viewBox="0 0 300 175" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="45" cy="20" r="14" fill="#ffcc80" />
-    <text x="45" y="26" textAnchor="middle" fontWeight="bold" fontSize="16" fill="#e65100">A</text>
-
-    <g transform="translate(20, 45)">
-      <rect x="0" y="0" width="50" height="50" rx="5" fill="#ffe0b2" stroke="#e65100" />
-      <text x="25" y="21" textAnchor="middle" fontSize="18">3</text>
-      <line x1="12" y1="26" x2="38" y2="26" stroke="black" />
-      <text x="25" y="45" textAnchor="middle" fontSize="18">5</text>
-      <circle cx="57" cy="25" r="3" fill="#333" />
-    </g>
-
-    <g transform="translate(20, 110)">
-      <rect x="0" y="0" width="50" height="50" rx="5" fill="#ffe0b2" stroke="#e65100" />
-      <text x="25" y="21" textAnchor="middle" fontSize="18">4</text>
-      <line x1="12" y1="26" x2="38" y2="26" stroke="black" />
-      <text x="25" y="45" textAnchor="middle" fontSize="18">7</text>
-      <circle cx="57" cy="25" r="3" fill="#333" />
-    </g>
-
-    <circle cx="235" cy="20" r="14" fill="#ffcc80" />
-    <text x="235" y="26" textAnchor="middle" fontWeight="bold" fontSize="16" fill="#e65100">B</text>
-
-    <g transform="translate(210, 45)">
-      <circle cx="-7" cy="25" r="3" fill="#333" />
-      <rect x="0" y="0" width="50" height="50" rx="5" fill="#e0e0e0" stroke="#999" />
-      <text x="25" y="21" textAnchor="middle" fontSize="18">8</text>
-      <line x1="12" y1="26" x2="38" y2="26" stroke="black" />
-      <text x="25" y="45" textAnchor="middle" fontSize="18">14</text>
-    </g>
-
-    <g transform="translate(210, 110)">
-      <circle cx="-7" cy="25" r="3" fill="#333" />
-      <rect x="0" y="0" width="50" height="50" rx="5" fill="#e0e0e0" stroke="#999" />
-      <text x="25" y="21" textAnchor="middle" fontSize="18">6</text>
-      <line x1="12" y1="26" x2="38" y2="26" stroke="black" />
-      <text x="25" y="45" textAnchor="middle" fontSize="18">10</text>
-    </g>
-  </svg>
-</div>
-
-<div style={{border: '1px solid #ccc', padding: '10px', borderRadius: '8px', backgroundColor: '#fff5e6', maxWidth: '340px', margin: '20px auto'}}>
-  <div style={{fontWeight: 'bold', marginBottom: '10px', color: '#e65100'}}>Unește prin săgeți fiecare fracție din coloana A cu fracția din coloana B obținută prin simplificare.</div>
-  <svg width="300" height="175" viewBox="0 0 300 175" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="45" cy="20" r="14" fill="#ffcc80" />
-    <text x="45" y="26" textAnchor="middle" fontWeight="bold" fontSize="16" fill="#e65100">A</text>
-
-    <g transform="translate(20, 45)">
-      <rect x="0" y="0" width="50" height="50" rx="5" fill="#ffe0b2" stroke="#e65100" />
-      <text x="25" y="21" textAnchor="middle" fontSize="18">3</text>
-      <line x1="12" y1="26" x2="38" y2="26" stroke="black" />
-      <text x="25" y="45" textAnchor="middle" fontSize="18">9</text>
-      <circle cx="57" cy="25" r="3" fill="#333" />
-    </g>
-
-    <g transform="translate(20, 110)">
-      <rect x="0" y="0" width="50" height="50" rx="5" fill="#ffe0b2" stroke="#e65100" />
-      <text x="25" y="21" textAnchor="middle" fontSize="18">4</text>
-      <line x1="12" y1="26" x2="38" y2="26" stroke="black" />
-      <text x="25" y="45" textAnchor="middle" fontSize="18">10</text>
-      <circle cx="57" cy="25" r="3" fill="#333" />
-    </g>
-
-    <circle cx="235" cy="20" r="14" fill="#ffcc80" />
-    <text x="235" y="26" textAnchor="middle" fontWeight="bold" fontSize="16" fill="#e65100">B</text>
-
-    <g transform="translate(210, 45)">
-      <circle cx="-7" cy="25" r="3" fill="#333" />
-      <rect x="0" y="0" width="50" height="50" rx="5" fill="#e0e0e0" stroke="#999" />
-      <text x="25" y="21" textAnchor="middle" fontSize="18">2</text>
-      <line x1="12" y1="26" x2="38" y2="26" stroke="black" />
-      <text x="25" y="45" textAnchor="middle" fontSize="18">5</text>
-    </g>
-
-    <g transform="translate(210, 110)">
-      <circle cx="-7" cy="25" r="3" fill="#333" />
-      <rect x="0" y="0" width="50" height="50" rx="5" fill="#e0e0e0" stroke="#999" />
-      <text x="25" y="21" textAnchor="middle" fontSize="18">1</text>
-      <line x1="12" y1="26" x2="38" y2="26" stroke="black" />
-      <text x="25" y="45" textAnchor="middle" fontSize="18">3</text>
-    </g>
-  </svg>
-</div>
-
-:::note Exercițiul 1
-Simplifică fracțiile pentru a obține fracții ireductibile:
+Amplifică fiecare fracție cu 2:
 
 <Katex>
 {String.raw`
-\text{a) } \dfrac{15}{10} \qquad \text{b) } \dfrac{3}{21} \qquad \text{c) } \dfrac{4}{10} \qquad \text{d) } \dfrac{42}{30}
+\text{a) } \dfrac{1}{4} \qquad \text{b) } \dfrac{2}{3} \qquad \text{c) } \dfrac{5}{6}
 `}
 </Katex>
-:::
 
-:::note Exercițiul 2
-Amplifică fracțiile pentru a obține numitorul 100, apoi scrie-le ca procente:
+Simplifică fiecare fracție prin 2:
 
 <Katex>
 {String.raw`
-\text{a) } \dfrac{3}{10} \qquad \text{b) } \dfrac{1}{20} \qquad \text{c) } \dfrac{2}{5} \qquad \text{d) } \dfrac{3}{4}
-`}
-</Katex>
-:::
-
-Model de lucru: numitorul 5 devine 100 prin amplificare cu 20.
-
-<Katex>
-{String.raw`
-{}^{20)}\dfrac{3}{5} = \dfrac{60}{100} = 60\%
+\text{a) } \dfrac{4}{8} \qquad \text{b) } \dfrac{6}{8} \qquad \text{c) } \dfrac{2}{10}
 `}
 </Katex>
 

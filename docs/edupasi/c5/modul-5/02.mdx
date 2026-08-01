@@ -13,13 +13,11 @@ import HighlightText from '@site/src/components/HighlightText';
 
 ## Măsurarea volumului
 
-Volumul arată **cât spațiu ocupă un corp**.
-
 :::danger Definiție
-**<HighlightText color="red">Volumul</HighlightText>** unui corp este numărul care arată **de câte ori** încape un **<HighlightText color="teal">cub unitate</HighlightText>** în acel corp.
+**<HighlightText color="red">Volumul</HighlightText>** arată câte **<HighlightText color="teal">cuburi unitate</HighlightText>** încap într-un corp.
 :::
 
-Unitatea principală este **metrul cub**. Un metru cub este volumul unui cub cu muchia de un metru.
+Unitatea principală este metrul cub.
 
 <Katex>
 {String.raw`
@@ -27,45 +25,29 @@ Unitatea principală este **metrul cub**. Un metru cub este volumul unui cub cu 
 `}
 </Katex>
 
-<div style={{ display: "flex", justifyContent: "center", margin: "1.5rem 0" }}>
-<svg width="260" height="260" viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">
-  <rect x="50" y="95" width="120" height="120" fill="#4ECDC4" fillOpacity="0.25" stroke="black" strokeWidth="2.5"/>
-  <line x1="50" y1="95" x2="110" y2="45" stroke="black" strokeWidth="2.5"/>
-  <line x1="170" y1="95" x2="230" y2="45" stroke="black" strokeWidth="2.5"/>
-  <line x1="170" y1="215" x2="230" y2="165" stroke="black" strokeWidth="2.5"/>
-  <line x1="110" y1="45" x2="230" y2="45" stroke="black" strokeWidth="2.5"/>
-  <line x1="230" y1="45" x2="230" y2="165" stroke="black" strokeWidth="2.5"/>
-  <text x="90" y="245" fontSize="22" fontFamily="serif" fill="#FF6B6B">1 m</text>
-  <text x="8" y="160" fontSize="22" fontFamily="serif" fill="#FF6B6B">1 m</text>
-  <text x="172" y="76" fontSize="22" fontFamily="serif" fill="#FF6B6B">1 m</text>
-</svg>
-</div>
-
-### Schema transformărilor pentru volum
-
-:::tip De reținut
-La volum, o treaptă înseamnă **<HighlightText color="red">1000</HighlightText>**.
-
-- Spre o unitate **mai mică**: **înmulțim cu 1000**.
-- Spre o unitate **mai mare**: **împărțim la 1000**.
-:::
+Unitățile de volum, de la mare la mic:
 
 <Katex>
 {String.raw`
 \begin{aligned}
-& km^3 \xrightarrow{\;\times 1000\;} hm^3 \xrightarrow{\;\times 1000\;} dam^3 \xrightarrow{\;\times 1000\;} m^3\\[8pt]
-& m^3 \xrightarrow{\;\times 1000\;} dm^3 \xrightarrow{\;\times 1000\;} cm^3 \xrightarrow{\;\times 1000\;} mm^3
+& km^3 \xrightarrow{\;\cdot 1000\;} hm^3 \xrightarrow{\;\cdot 1000\;} dam^3 \xrightarrow{\;\cdot 1000\;} m^3\\[8pt]
+& m^3 \xrightarrow{\;\cdot 1000\;} dm^3 \xrightarrow{\;\cdot 1000\;} cm^3 \xrightarrow{\;\cdot 1000\;} mm^3
 \end{aligned}
 `}
 </Katex>
 
-:::warning Atenție
-- La **lungime**, o treaptă înseamnă **10**.
-- La **arie**, o treaptă înseamnă **100**.
-- La **volum**, o treaptă înseamnă **1000**.
+:::tip De reținut
+La volum, o treaptă înseamnă **<HighlightText color="red">1000</HighlightText>**.
+
+- Spre o unitate mai mică: înmulțim cu 1000.
+- Spre o unitate mai mare: împărțim la 1000.
 :::
 
-**Exemplul 1.** Transformăm în decimetri cubi. Coborâm **o treaptă**, deci **înmulțim cu 1000**:
+**Exemplu.** Transformăm din metri cubi în decimetri cubi.
+
+**Pasul 1.** Coborâm o treaptă.
+
+**Pasul 2.** Înmulțim cu 1000.
 
 <Katex>
 {String.raw`
@@ -73,45 +55,29 @@ La volum, o treaptă înseamnă **<HighlightText color="red">1000</HighlightText
 `}
 </Katex>
 
-**Exemplul 2.** Transformăm în decimetri cubi. Urcăm **o treaptă**, deci **împărțim la 1000**:
-
-<Katex>
-{String.raw`
-126{,}5\,cm^3 = 126{,}5 : 1000 = \color{#4ECDC4}{0{,}1265\,dm^3}
-`}
-</Katex>
-
 ---
 
 ## Volumul cubului
 
-Luăm un cub cu muchia de trei centimetri. Numărăm cuburile unitate din care este format:
+Cubul are toate muchiile egale.
 
-- 3 cuburi pe lungime
-- 3 cuburi pe lățime
-- 3 cuburi pe înălțime
-
-<Katex>
-{String.raw`
-3 \cdot 3 \cdot 3 = 27 \;\text{cuburi unitate} \;\Rightarrow\; V = 27\,cm^3
-`}
-</Katex>
-
-:::danger Formulă
-Volumul cubului cu muchia **<HighlightText color="red">l</HighlightText>**:
+**Reținem:**
 
 <Katex>
 {String.raw`
 V_{cub} = l \cdot l \cdot l = \color{#FF6B6B}{l^3}
 `}
 </Katex>
-:::
 
-**Exemplu.** Un cub are muchia de șase centimetri. Scriem formula, înlocuim muchia și calculăm:
+**Exemplu.** Un cub are muchia de patru centimetri.
+
+**Pasul 1.** Scriem formula și înlocuim muchia.
+
+**Pasul 2.** Calculăm.
 
 <Katex>
 {String.raw`
-V = l^3 = 6 \cdot 6 \cdot 6 = \color{#FF6B6B}{216\,cm^3}
+V = l^3 = 4 \cdot 4 \cdot 4 = \color{#FF6B6B}{64\,cm^3}
 `}
 </Katex>
 
@@ -119,61 +85,53 @@ V = l^3 = 6 \cdot 6 \cdot 6 = \color{#FF6B6B}{216\,cm^3}
 
 ## Volumul paralelipipedului dreptunghic
 
-Paralelipipedul dreptunghic are **trei dimensiuni**:
-
-- **<HighlightText color="red">lungimea L</HighlightText>**
-- **<HighlightText color="teal">lățimea l</HighlightText>**
-- **<HighlightText color="orange">înălțimea h</HighlightText>**
-
 <div style={{ display: "flex", justifyContent: "center", margin: "1.5rem 0" }}>
-<svg width="340" height="260" viewBox="0 0 340 260" xmlns="http://www.w3.org/2000/svg">
-  <rect x="50" y="110" width="180" height="100" fill="#4ECDC4" fillOpacity="0.25" stroke="black" strokeWidth="2.5"/>
-  <line x1="50" y1="110" x2="110" y2="60" stroke="black" strokeWidth="2.5"/>
-  <line x1="230" y1="110" x2="290" y2="60" stroke="black" strokeWidth="2.5"/>
-  <line x1="230" y1="210" x2="290" y2="160" stroke="black" strokeWidth="2.5"/>
-  <line x1="110" y1="60" x2="290" y2="60" stroke="black" strokeWidth="2.5"/>
-  <line x1="290" y1="60" x2="290" y2="160" stroke="black" strokeWidth="2.5"/>
-  <text x="132" y="240" fontSize="24" fontFamily="serif" fill="#FF6B6B">L</text>
-  <text x="24" y="168" fontSize="24" fontFamily="serif" fill="#FF8C00">h</text>
-  <text x="190" y="92" fontSize="24" fontFamily="serif" fill="#4ECDC4">l</text>
+<svg width="320" height="240" viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg">
+  <rect x="50" y="100" width="180" height="100" fill="#4ECDC4" fillOpacity="0.2" stroke="black" strokeWidth="2.5"/>
+  <line x1="50" y1="100" x2="110" y2="55" stroke="black" strokeWidth="2.5"/>
+  <line x1="230" y1="100" x2="290" y2="55" stroke="black" strokeWidth="2.5"/>
+  <line x1="230" y1="200" x2="290" y2="155" stroke="black" strokeWidth="2.5"/>
+  <line x1="110" y1="55" x2="290" y2="55" stroke="black" strokeWidth="2.5"/>
+  <line x1="290" y1="55" x2="290" y2="155" stroke="black" strokeWidth="2.5"/>
+  <text x="130" y="230" fontSize="26" fontFamily="serif" fill="#FF6B6B">L</text>
+  <text x="22" y="160" fontSize="26" fontFamily="serif" fill="#FF8C00">h</text>
+  <text x="190" y="88" fontSize="26" fontFamily="serif" fill="#4ECDC4">l</text>
 </svg>
 </div>
 
-:::danger Formulă
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#FF6B6B}{L} = \text{lungimea}\\[6pt]
+& \color{#4ECDC4}{l} = \text{lățimea}\\[6pt]
+& \color{#FF8C00}{h} = \text{înălțimea}
+\end{aligned}
+`}
+</Katex>
+
+**Reținem:**
+
 <Katex>
 {String.raw`
 V = \color{#FF6B6B}{L} \cdot \color{#4ECDC4}{l} \cdot \color{#FF8C00}{h}
 `}
 </Katex>
-:::
 
-:::warning Atenție
-Toate dimensiunile trebuie exprimate în **aceeași unitate de măsură**.
-:::
-
-**Exemplu.** Un container are dimensiunile:
+**Exemplu.** Un acvariu are dimensiunile:
 
 <Katex>
 {String.raw`
-L = 10\,m, \quad l = 6\,m, \quad h = 5\,m
+L = 5\,dm, \quad l = 3\,dm, \quad h = 2\,dm
 `}
 </Katex>
 
-Aflăm volumul, exprimat în decimetri cubi.
+**Pasul 1.** Înlocuim în formulă.
 
-**Pasul 1.** Calculăm volumul:
-
-<Katex>
-{String.raw`
-V = L \cdot l \cdot h = 10 \cdot 6 \cdot 5 = 300\,m^3
-`}
-</Katex>
-
-**Pasul 2.** Transformăm în decimetri cubi. Coborâm o treaptă, deci înmulțim cu 1000:
+**Pasul 2.** Calculăm.
 
 <Katex>
 {String.raw`
-300\,m^3 = 300 \cdot 1000 = \color{#FF6B6B}{300\,000\,dm^3}
+V = 5 \cdot 3 \cdot 2 = \color{#FF6B6B}{30\,dm^3}
 `}
 </Katex>
 
@@ -181,21 +139,13 @@ V = L \cdot l \cdot h = 10 \cdot 6 \cdot 5 = 300\,m^3
 
 ## Aria laterală și aria totală
 
-Aria fețelor unui corp ne arată, de exemplu, cât carton ne trebuie pentru o cutie.
+Aria fețelor arată cât carton trebuie pentru o cutie.
 
-:::danger Definiție
-- **<HighlightText color="red">Aria laterală</HighlightText>** este suma ariilor **fețelor laterale**. Fețele laterale sunt fețele din jur. Baza de jos și baza de sus nu intră aici.
-- **<HighlightText color="teal">Aria totală</HighlightText>** este suma ariilor **tuturor fețelor**.
-:::
+- **<HighlightText color="red">Aria laterală</HighlightText>** este suma ariilor fețelor din jur.
+- **<HighlightText color="teal">Aria totală</HighlightText>** este suma ariilor tuturor fețelor.
 
-### Aria cubului
+Cubul are 6 fețe egale. Fețele din jur sunt 4.
 
-Cubul are **6 fețe**. Toate fețele sunt pătrate cu latura **l**.
-
-- Fețele laterale sunt **4**.
-- Toate fețele sunt **6**.
-
-:::danger Formule
 <Katex>
 {String.raw`
 \begin{aligned}
@@ -204,39 +154,35 @@ Cubul are **6 fețe**. Toate fețele sunt pătrate cu latura **l**.
 \end{aligned}
 `}
 </Katex>
-:::
 
-**Exemplu.** Un cub are muchia de cinci centimetri.
+**Exemplu.** Un cub are muchia de trei centimetri.
 
-**Pasul 1.** Calculăm aria unei fețe:
-
-<Katex>
-{String.raw`
-l^2 = 5 \cdot 5 = 25\,cm^2
-`}
-</Katex>
-
-**Pasul 2.** Calculăm aria laterală. Sunt 4 fețe laterale:
+**Pasul 1.** Calculăm aria unei fețe.
 
 <Katex>
 {String.raw`
-\mathcal{A}_\ell = 4 \cdot 25 = \color{#FF6B6B}{100\,cm^2}
+l^2 = 3 \cdot 3 = 9\,cm^2
 `}
 </Katex>
 
-**Pasul 3.** Calculăm aria totală. Sunt 6 fețe în total:
+**Pasul 2.** Calculăm aria laterală.
 
 <Katex>
 {String.raw`
-\mathcal{A}_t = 6 \cdot 25 = \color{#4ECDC4}{150\,cm^2}
+\mathcal{A}_\ell = 4 \cdot 9 = \color{#FF6B6B}{36\,cm^2}
 `}
 </Katex>
 
-### Aria paralelipipedului dreptunghic
+**Pasul 3.** Calculăm aria totală.
 
-Paralelipipedul dreptunghic are **6 fețe** dreptunghiulare. Fețele opuse sunt egale.
+<Katex>
+{String.raw`
+\mathcal{A}_t = 6 \cdot 9 = \color{#4ECDC4}{54\,cm^2}
+`}
+</Katex>
 
-:::danger Formule
+La paralelipipedul dreptunghic folosim formulele:
+
 <Katex>
 {String.raw`
 \begin{aligned}
@@ -245,75 +191,32 @@ Paralelipipedul dreptunghic are **6 fețe** dreptunghiulare. Fețele opuse sunt 
 \end{aligned}
 `}
 </Katex>
-:::
-
-**Exemplu.** Un paralelipiped dreptunghic are:
-
-<Katex>
-{String.raw`
-L = 6\,cm, \quad l = 4\,cm, \quad h = 5\,cm
-`}
-</Katex>
-
-**Pasul 1.** Calculăm aria laterală:
-
-<Katex>
-{String.raw`
-\mathcal{A}_\ell = 2 \cdot 5 \cdot (6 + 4) = 10 \cdot 10 = \color{#FF6B6B}{100\,cm^2}
-`}
-</Katex>
-
-**Pasul 2.** Calculăm aria totală:
-
-<Katex>
-{String.raw`
-\mathcal{A}_t = 2 \cdot (6 \cdot 4 + 6 \cdot 5 + 4 \cdot 5) = 2 \cdot (24 + 30 + 20) = 2 \cdot 74 = \color{#4ECDC4}{148\,cm^2}
-`}
-</Katex>
-
-:::warning Atenție
-Nu confundăm volumul cu aria.
-
-<Katex>
-{String.raw`
-\begin{aligned}
-& \text{Volumul se măsoară în } \color{#FF6B6B}{cm^3,\; m^3}\\[6pt]
-& \text{Aria se măsoară în } \color{#4ECDC4}{cm^2,\; m^2}
-\end{aligned}
-`}
-</Katex>
-:::
 
 ---
 
 ## Măsurarea capacității (volumul lichidelor)
 
-Capacitatea unui vas arată **cât lichid încape** în vas.
-
-:::danger Definiție
-Unitatea principală pentru capacitate este **<HighlightText color="red">litrul</HighlightText>**. Legătura cu volumul:
+Capacitatea arată cât lichid încape în vas. Unitatea principală este litrul.
 
 <Katex>
 {String.raw`
 \color{#FF6B6B}{1\,l = 1\,dm^3}
 `}
 </Katex>
-:::
 
-:::tip De reținut
-La capacitate, o treaptă înseamnă **<HighlightText color="teal">10</HighlightText>**. La volum era 1000.
-:::
+La capacitate, o treaptă înseamnă 10.
 
 <Katex>
 {String.raw`
-\begin{aligned}
-& kl \xrightarrow{\;\times 10\;} hl \xrightarrow{\;\times 10\;} dal \xrightarrow{\;\times 10\;} l\\[8pt]
-& l \xrightarrow{\;\times 10\;} dl \xrightarrow{\;\times 10\;} cl \xrightarrow{\;\times 10\;} ml
-\end{aligned}
+kl \xrightarrow{\;\cdot 10\;} hl \xrightarrow{\;\cdot 10\;} dal \xrightarrow{\;\cdot 10\;} l \xrightarrow{\;\cdot 10\;} dl \xrightarrow{\;\cdot 10\;} cl \xrightarrow{\;\cdot 10\;} ml
 `}
 </Katex>
 
-**Exemplul 1.** Transformăm în mililitri. Coborâm **trei trepte**, deci **înmulțim cu 1000**:
+**Exemplu.** Transformăm din litri în mililitri.
+
+**Pasul 1.** Coborâm trei trepte.
+
+**Pasul 2.** Înmulțim cu 1000.
 
 <Katex>
 {String.raw`
@@ -321,33 +224,23 @@ La capacitate, o treaptă înseamnă **<HighlightText color="teal">10</Highlight
 `}
 </Katex>
 
-**Exemplul 2.** Transformăm în litri. Urcăm **două trepte**, deci **împărțim la 100**:
-
-<Katex>
-{String.raw`
-250\,cl = 250 : 100 = \color{#4ECDC4}{2{,}5\,l}
-`}
-</Katex>
-
 ### Legătura dintre volum și capacitate
 
-Calculăm volumul vasului în decimetri cubi. Obținem direct capacitatea în litri.
+**Exemplu.** Un vas cub are muchia de doi decimetri.
 
-**Exemplu.** Un bazin are forma unui cub cu muchia de zece decimetri. Câți litri încap în bazin?
-
-**Pasul 1.** Calculăm volumul:
+**Pasul 1.** Calculăm volumul.
 
 <Katex>
 {String.raw`
-V = l^3 = 10 \cdot 10 \cdot 10 = 1000\,dm^3
+V = 2 \cdot 2 \cdot 2 = 8\,dm^3
 `}
 </Katex>
 
-**Pasul 2.** Transformăm în litri:
+**Pasul 2.** Scriem capacitatea în litri.
 
 <Katex>
 {String.raw`
-1000\,dm^3 = \color{#FF6B6B}{1000\,l}
+8\,dm^3 = \color{#4ECDC4}{8\,l}
 `}
 </Katex>
 

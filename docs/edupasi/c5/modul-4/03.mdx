@@ -14,24 +14,47 @@ import HighlightText from '@site/src/components/HighlightText';
 ## Ridicarea la putere a unei fracții
 
 :::danger Definiție
-Pentru a ridica o fracție la putere, ridicăm la putere **<HighlightText color="red">numărătorul</HighlightText>** și **<HighlightText color="teal">numitorul</HighlightText>**.
+Ridicăm la putere <HighlightText color="red">numărătorul</HighlightText> și <HighlightText color="teal">numitorul</HighlightText>.
 :::
 
 <Katex>
 {String.raw`
-\left( \dfrac{\color{#FF6B6B}{a}}{\color{#4ECDC4}{b}} \right)^{\color{#9370DB}{n}} = \dfrac{\color{#FF6B6B}{a}^{\color{#9370DB}{n}}}{\color{#4ECDC4}{b}^{\color{#9370DB}{n}}}
+\left( \dfrac{\color{#FF6B6B}{a}}{\color{#4ECDC4}{b}} \right)^{n} = \dfrac{\color{#FF6B6B}{a}^{n}}{\color{#4ECDC4}{b}^{n}}
 `}
 </Katex>
 
+Observăm desenul:
+
+<svg viewBox="0 0 400 220" width="100%" role="img">
+  <rect x="30" y="30" width="150" height="150" fill="#ffffff" stroke="#4ECDC4" strokeWidth="3" />
+  <rect x="30" y="30" width="60" height="60" fill="#FF6B6B" fillOpacity="0.55" />
+  <line x1="60" y1="30" x2="60" y2="180" stroke="#4ECDC4" strokeWidth="1.5" />
+  <line x1="90" y1="30" x2="90" y2="180" stroke="#4ECDC4" strokeWidth="1.5" />
+  <line x1="120" y1="30" x2="120" y2="180" stroke="#4ECDC4" strokeWidth="1.5" />
+  <line x1="150" y1="30" x2="150" y2="180" stroke="#4ECDC4" strokeWidth="1.5" />
+  <line x1="30" y1="60" x2="180" y2="60" stroke="#4ECDC4" strokeWidth="1.5" />
+  <line x1="30" y1="90" x2="180" y2="90" stroke="#4ECDC4" strokeWidth="1.5" />
+  <line x1="30" y1="120" x2="180" y2="120" stroke="#4ECDC4" strokeWidth="1.5" />
+  <line x1="30" y1="150" x2="180" y2="150" stroke="#4ECDC4" strokeWidth="1.5" />
+  <text x="210" y="85" fontSize="22" fill="#FF6B6B">4 părți colorate</text>
+  <text x="210" y="125" fontSize="22" fill="#4ECDC4">25 părți în total</text>
+</svg>
+
 Calculăm pas cu pas:
 
-1. Ridicăm numărătorul la putere: <Katex>{String.raw`2^2 = 4`}</Katex>
-2. Ridicăm numitorul la putere: <Katex>{String.raw`5^2 = 25`}</Katex>
-3. Scriem rezultatul.
+**Pasul 1:** Ridicăm numărătorul.
+
+<Katex>{String.raw`2^2 = 4`}</Katex>
+
+**Pasul 2:** Ridicăm numitorul.
+
+<Katex>{String.raw`5^2 = 25`}</Katex>
+
+**Pasul 3:** Scriem fracția.
 
 <Katex>
 {String.raw`
-\left( \dfrac{\color{#FF6B6B}{2}}{\color{#4ECDC4}{5}} \right)^2 = \dfrac{\color{#FF6B6B}{2}^2}{\color{#4ECDC4}{5}^2} = \dfrac{\color{#FF6B6B}{4}}{\color{#4ECDC4}{25}}
+\left( \dfrac{\color{#FF6B6B}{2}}{\color{#4ECDC4}{5}} \right)^{2} = \dfrac{\color{#FF6B6B}{2}^{2}}{\color{#4ECDC4}{5}^{2}} = \dfrac{\color{#FF6B6B}{4}}{\color{#4ECDC4}{25}}
 `}
 </Katex>
 
@@ -39,135 +62,38 @@ Calculăm pas cu pas:
 
 ## Reguli de calcul
 
-### 1. Înmulțirea puterilor cu aceeași bază
+Baza rămâne aceeași. Lucrăm doar cu exponenții.
 
-Păstrăm baza. **<HighlightText color="red">Adunăm</HighlightText>** exponenții.
+### 1. Înmulțire: adunăm exponenții
 
 <Katex>
 {String.raw`
-\left( \dfrac{a}{b} \right)^{m} \cdot \left( \dfrac{a}{b} \right)^{n} = \left( \dfrac{a}{b} \right)^{\color{#FF6B6B}{m+n}}
+\begin{aligned}
+& \left( \dfrac{a}{b} \right)^{m} \cdot \left( \dfrac{a}{b} \right)^{n} = \left( \dfrac{a}{b} \right)^{\color{#FF6B6B}{m+n}} \\[10pt]
+& \left( \dfrac{3}{4} \right)^{2} \cdot \left( \dfrac{3}{4} \right)^{3} = \left( \dfrac{3}{4} \right)^{\color{#FF6B6B}{2+3}} = \left( \dfrac{3}{4} \right)^{5}
+\end{aligned}
 `}
 </Katex>
 
-**Exemplu:**
+### 2. Împărțire: scădem exponenții
 
 <Katex>
 {String.raw`
-\left( \dfrac{5}{2} \right)^3 \cdot \left( \dfrac{5}{2} \right)^4 = \left( \dfrac{5}{2} \right)^{\color{#FF6B6B}{3+4}} = \left( \dfrac{5}{2} \right)^7
+\begin{aligned}
+& \left( \dfrac{a}{b} \right)^{m} : \left( \dfrac{a}{b} \right)^{n} = \left( \dfrac{a}{b} \right)^{\color{#4ECDC4}{m-n}} \\[10pt]
+& \left( \dfrac{4}{5} \right)^{5} : \left( \dfrac{4}{5} \right)^{2} = \left( \dfrac{4}{5} \right)^{\color{#4ECDC4}{5-2}} = \left( \dfrac{4}{5} \right)^{3}
+\end{aligned}
 `}
 </Katex>
 
----
-
-### 2. Împărțirea puterilor cu aceeași bază
-
-Păstrăm baza. **<HighlightText color="teal">Scădem</HighlightText>** exponenții. Primul exponent este mai mare sau egal cu al doilea.
+### 3. Putere la putere: înmulțim exponenții
 
 <Katex>
 {String.raw`
-\left( \dfrac{a}{b} \right)^{m} : \left( \dfrac{a}{b} \right)^{n} = \left( \dfrac{a}{b} \right)^{\color{#4ECDC4}{m-n}}
-`}
-</Katex>
-
-**Exemplu:**
-
-<Katex>
-{String.raw`
-\left( \dfrac{4}{5} \right)^7 : \left( \dfrac{4}{5} \right)^4 = \left( \dfrac{4}{5} \right)^{\color{#4ECDC4}{7-4}} = \left( \dfrac{4}{5} \right)^3
-`}
-</Katex>
-
----
-
-### 3. Puterea unei puteri
-
-Păstrăm baza. **<HighlightText color="orange">Înmulțim</HighlightText>** exponenții.
-
-<Katex>
-{String.raw`
-\left[ \left( \dfrac{a}{b} \right)^{m} \right]^{n} = \left( \dfrac{a}{b} \right)^{\color{#FF8C00}{m \cdot n}}
-`}
-</Katex>
-
-**Exemplu:**
-
-<Katex>
-{String.raw`
-\left[ \left( \dfrac{2}{5} \right)^2 \right]^5 = \left( \dfrac{2}{5} \right)^{\color{#FF8C00}{2 \cdot 5}} = \left( \dfrac{2}{5} \right)^{10}
-`}
-</Katex>
-
-:::warning Atenție
-Orice fracție nenulă ridicată la **<HighlightText color="red">puterea 0</HighlightText>** este egală cu **1**.
-
-<Katex>
-{String.raw`
-\left( \dfrac{11}{101} \right)^{\color{#FF6B6B}{0}} = 1
-`}
-</Katex>
-:::
-
----
-
-### 4. Puterea unui produs
-
-Ridicăm **fiecare factor** la aceeași putere.
-
-<Katex>
-{String.raw`
-\left( \dfrac{a}{b} \cdot \dfrac{c}{d} \right)^{n} = \left( \dfrac{a}{b} \right)^{n} \cdot \left( \dfrac{c}{d} \right)^{n}
-`}
-</Katex>
-
-**Exemplu:**
-
-<Katex>
-{String.raw`
-\left( \dfrac{2}{3} \cdot \dfrac{5}{7} \right)^3 = \left( \dfrac{2}{3} \right)^3 \cdot \left( \dfrac{5}{7} \right)^3
-`}
-</Katex>
-
-Regula se aplică și invers: produsul a două puteri cu același exponent este puterea produsului.
-
-<Katex>
-{String.raw`
-\left( \dfrac{a}{b} \right)^{n} \cdot \left( \dfrac{c}{d} \right)^{n} = \left( \dfrac{a}{b} \cdot \dfrac{c}{d} \right)^{n}
-`}
-</Katex>
-
----
-
-### 5. Puterea unui cât
-
-Ridicăm **fiecare fracție** din cât la aceeași putere.
-
-<Katex>
-{String.raw`
-\left( \dfrac{a}{b} : \dfrac{c}{d} \right)^{n} = \left( \dfrac{a}{b} \right)^{n} : \left( \dfrac{c}{d} \right)^{n}
-`}
-</Katex>
-
-**Exemplu:**
-
-<Katex>
-{String.raw`
-\left( \dfrac{4}{9} : \dfrac{2}{7} \right)^5 = \left( \dfrac{4}{9} \right)^5 : \left( \dfrac{2}{7} \right)^5
-`}
-</Katex>
-
-Regula se aplică și invers: câtul a două puteri cu același exponent este puterea câtului.
-
-<Katex>
-{String.raw`
-\left( \dfrac{a}{b} \right)^{n} : \left( \dfrac{c}{d} \right)^{n} = \left( \dfrac{a}{b} : \dfrac{c}{d} \right)^{n}
-`}
-</Katex>
-
-**Exemplu:**
-
-<Katex>
-{String.raw`
-\left( \dfrac{3}{13} \right)^6 : \left( \dfrac{5}{13} \right)^6 = \left( \dfrac{3}{13} : \dfrac{5}{13} \right)^6 = \left( \dfrac{3}{5} \right)^6
+\begin{aligned}
+& \left[ \left( \dfrac{a}{b} \right)^{m} \right]^{n} = \left( \dfrac{a}{b} \right)^{\color{#FF8C00}{m \cdot n}} \\[10pt]
+& \left[ \left( \dfrac{2}{3} \right)^{2} \right]^{3} = \left( \dfrac{2}{3} \right)^{\color{#FF8C00}{2 \cdot 3}} = \left( \dfrac{2}{3} \right)^{6}
+\end{aligned}
 `}
 </Katex>
 
@@ -175,9 +101,9 @@ Regula se aplică și invers: câtul a două puteri cu același exponent este pu
 <Katex>
 {String.raw`
 \begin{aligned}
-& \text{Înmulțire cu aceeași bază: } \color{#FF6B6B}{\text{ADUNĂM exponenții}}\\[8pt]
-& \text{Împărțire cu aceeași bază: } \color{#4ECDC4}{\text{SCĂDEM exponenții}}\\[8pt]
-& \text{Putere ridicată la putere: } \color{#FF8C00}{\text{ÎNMULȚIM exponenții}}
+& \text{Înmulțire: } \color{#FF6B6B}{\text{ADUNĂM exponenții}} \\[8pt]
+& \text{Împărțire: } \color{#4ECDC4}{\text{SCĂDEM exponenții}} \\[8pt]
+& \text{Putere la putere: } \color{#FF8C00}{\text{ÎNMULȚIM exponenții}}
 \end{aligned}
 `}
 </Katex>

@@ -14,164 +14,72 @@ import HighlightText from '@site/src/components/HighlightText';
 ## Definiție
 
 :::danger Definiție
-Pe o **<HighlightText color="red">semidreaptă gradată</HighlightText>**, fiecare punct este reperat printr-un număr.
-Acest număr se numește **<HighlightText color="teal">abscisă</HighlightText>**.
+Numărul din dreptul unui punct se numește **<HighlightText color="red">abscisă</HighlightText>**.
 :::
-
-O semidreaptă gradată are trei elemente:
-
-1. **<HighlightText color="red">originea</HighlightText>** — punctul cu abscisa 0;
-2. **<HighlightText color="teal">sensul</HighlightText>** — săgeata arată încotro cresc numerele;
-3. **<HighlightText color="orange">unitatea</HighlightText>** — segmentul de la 0 la 1, repetat mereu la fel.
-
----
 
 ### Exemple
 
-**Exemplul 1 — abscise numere naturale**
-
-<svg xmlns="http://www.w3.org/2000/svg" width="600" height="160" viewBox="0 0 600 160" role="img" aria-label="Semidreaptă gradată de la 0 la 10 cu punctele A și B">
-  <line x1="40" y1="100" x2="560" y2="100" stroke="#111" stroke-width="3"/>
-  <path d="M560,94 L560,106 L578,100 Z" fill="#111"/>
-  <line x1="184" y1="60" x2="184" y2="110" stroke="#9370DB" stroke-width="3"/>
-  <line x1="448" y1="60" x2="448" y2="110" stroke="#9370DB" stroke-width="3"/>
-  <text x="177" y="48" font-size="22" fill="#9370DB">A</text>
-  <text x="441" y="48" font-size="22" fill="#9370DB">B</text>
-  <line x1="40" y1="92" x2="40" y2="108" stroke="#111" stroke-width="2"/>
-  <line x1="88" y1="92" x2="88" y2="108" stroke="#111" stroke-width="2"/>
-  <line x1="136" y1="92" x2="136" y2="108" stroke="#111" stroke-width="2"/>
-  <line x1="184" y1="92" x2="184" y2="108" stroke="#111" stroke-width="2"/>
-  <line x1="232" y1="92" x2="232" y2="108" stroke="#111" stroke-width="2"/>
-  <line x1="280" y1="92" x2="280" y2="108" stroke="#111" stroke-width="2"/>
-  <line x1="328" y1="92" x2="328" y2="108" stroke="#111" stroke-width="2"/>
-  <line x1="376" y1="92" x2="376" y2="108" stroke="#111" stroke-width="2"/>
-  <line x1="424" y1="92" x2="424" y2="108" stroke="#111" stroke-width="2"/>
-  <line x1="472" y1="92" x2="472" y2="108" stroke="#111" stroke-width="2"/>
-  <line x1="520" y1="92" x2="520" y2="108" stroke="#111" stroke-width="2"/>
-  <text x="35" y="136" font-size="18">0</text>
-  <text x="83" y="136" font-size="18">1</text>
-  <text x="131" y="136" font-size="18">2</text>
-  <text x="179" y="136" font-size="18">3</text>
-  <text x="227" y="136" font-size="18">4</text>
-  <text x="275" y="136" font-size="18">5</text>
-  <text x="323" y="136" font-size="18">6</text>
-  <text x="371" y="136" font-size="18">7</text>
-  <text x="419" y="136" font-size="18">8</text>
-  <text x="467" y="136" font-size="18">9</text>
-  <text x="510" y="136" font-size="18">10</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="170" viewBox="0 0 600 170" role="img" aria-label="Semidreaptă gradată de la 0 la 6, punctul A la 3 și punctul C la 5,8">
+  <line x1="40" y1="90" x2="556" y2="90" stroke="#111" stroke-width="3"/>
+  <path d="M552,80 L552,100 L578,90 Z" fill="#111"/>
+  <line x1="40" y1="78" x2="40" y2="102" stroke="#111" stroke-width="3"/>
+  <line x1="120" y1="78" x2="120" y2="102" stroke="#111" stroke-width="3"/>
+  <line x1="200" y1="78" x2="200" y2="102" stroke="#111" stroke-width="3"/>
+  <line x1="280" y1="78" x2="280" y2="102" stroke="#111" stroke-width="3"/>
+  <line x1="360" y1="78" x2="360" y2="102" stroke="#111" stroke-width="3"/>
+  <line x1="440" y1="78" x2="440" y2="102" stroke="#111" stroke-width="3"/>
+  <line x1="520" y1="78" x2="520" y2="102" stroke="#111" stroke-width="3"/>
+  <line x1="448" y1="84" x2="448" y2="96" stroke="#111" stroke-width="2"/>
+  <line x1="456" y1="84" x2="456" y2="96" stroke="#111" stroke-width="2"/>
+  <line x1="464" y1="84" x2="464" y2="96" stroke="#111" stroke-width="2"/>
+  <line x1="472" y1="84" x2="472" y2="96" stroke="#111" stroke-width="2"/>
+  <line x1="480" y1="84" x2="480" y2="96" stroke="#111" stroke-width="2"/>
+  <line x1="488" y1="84" x2="488" y2="96" stroke="#111" stroke-width="2"/>
+  <line x1="496" y1="84" x2="496" y2="96" stroke="#111" stroke-width="2"/>
+  <line x1="512" y1="84" x2="512" y2="96" stroke="#111" stroke-width="2"/>
+  <text x="40" y="128" font-size="20" text-anchor="middle">0</text>
+  <text x="120" y="128" font-size="20" text-anchor="middle">1</text>
+  <text x="200" y="128" font-size="20" text-anchor="middle">2</text>
+  <text x="280" y="128" font-size="20" text-anchor="middle">3</text>
+  <text x="360" y="128" font-size="20" text-anchor="middle">4</text>
+  <text x="440" y="128" font-size="20" text-anchor="middle">5</text>
+  <text x="520" y="128" font-size="20" text-anchor="middle">6</text>
+  <circle cx="280" cy="90" r="9" fill="#FF6B6B"/>
+  <text x="280" y="56" font-size="24" text-anchor="middle" fill="#FF6B6B">A</text>
+  <circle cx="504" cy="90" r="9" fill="#4ECDC4"/>
+  <text x="504" y="56" font-size="24" text-anchor="middle" fill="#4ECDC4">C</text>
+  <text x="504" y="158" font-size="20" text-anchor="middle" fill="#4ECDC4">5,8</text>
 </svg>
 
-Citim figura pas cu pas:
-
-1. Punctul A este în dreptul reperului 3. Abscisa lui A este **3**.
-2. Punctul B este între reperele 8 și 9. Abscisa lui B este cuprinsă **între 8 și 9**.
-
-**Exemplul 2 — abscisă număr zecimal**
-
-Împărțim unitatea dintre 5 și 6 în 10 părți egale.
-Punctul C este la 8 părți după reperul 5.
-
 <Katex>
 {String.raw`
-\text{Abscisa lui C} = 5 + \frac{\color{#FF6B6B}{8}}{10} = \color{#4ECDC4}{5{,}8}
+\begin{aligned}
+& \text{Abscisa punctului } \color{#FF6B6B}{A} \text{ este } \color{#FF6B6B}{3} \\[8pt]
+& \text{Abscisa punctului } \color{#4ECDC4}{C} \text{ este } \color{#4ECDC4}{5{,}8}
+\end{aligned}
 `}
 </Katex>
-
-**Exemplul 3 — abscisă fracție**
-
-Împărțim fiecare unitate în 3 părți egale.
-Punctul D este la 2 unități întregi și încă o parte.
-
-<Katex>
-{String.raw`
-\text{Abscisa lui D} = 2 + \frac{1}{3} = \color{#FF8C00}{\frac{7}{3}}
-`}
-</Katex>
-
-Punctul E se află între reperul 1 și reperul 2, între a patra și a cincea liniuță.
-
-<Katex>
-{String.raw`
-\frac{4}{3} < \text{abscisa lui E} < \frac{5}{3}
-`}
-</Katex>
-
-:::tip De reținut
-Abscisa unui punct poate fi:
-- un **<HighlightText color="red">număr natural</HighlightText>**;
-- un **<HighlightText color="teal">număr zecimal</HighlightText>**;
-- o **<HighlightText color="orange">fracție</HighlightText>**.
-:::
 
 ---
 
 ## Metodă
 
-### Gradarea unei semidrepte și plasarea reperelor
+Semidreapta merge de la 0 la 50. Plasăm punctul P cu abscisa 20.
 
-Un magazin vinde trei aparate:
-- DVD player = 199 €
-- aparat foto = 280 €
-- televizor = 450 €
-
-Vrem să arătăm aceste prețuri pe o semidreaptă gradată de la 0 € la 500 €.
-Lucrăm pas cu pas.
-
-**Pasul 1)** Măsurăm segmentul de la 0 € la 500 €.
-Segmentul are 10 cm.
-
-**Pasul 2)** Aflăm câți euro corespund pentru 1 cm.
-Construim un tabel de proporționalitate:
-
-| Lungime (cm) | 10  | 1 |
-|--------------|-----|---|
-| Preț (€)     | 500 | ? |
-
-Calculăm:
+Calculăm pas cu pas:
 
 <Katex>
 {String.raw`
-500 \div 10 = \color{#FF6B6B}{50}
+\begin{aligned}
+& \text{Pasul 1: împart segmentul în } \color{#9370DB}{5} \text{ părți egale} \\[8pt]
+& \text{Pasul 2: o parte valorează } 50 \div 5 = \color{#FF6B6B}{10} \\[8pt]
+& \text{Pasul 3: număr } 2 \text{ părți: } 2 \times 10 = \color{#4ECDC4}{20}
+\end{aligned}
 `}
 </Katex>
 
-Deci 1 cm corespunde cu **50 €**.
+Punctul P stă la capătul părții a doua.
 
-**Pasul 3)** Plasăm punctele pe semidreaptă:
-
-1. P (DVD player): 199 € — chiar înainte de reperul 200;
-2. A (aparat foto): 280 € — între reperele 250 și 300;
-3. T (televizor): 450 € — la jumătate între 400 și 500.
-
-<svg xmlns="http://www.w3.org/2000/svg" width="600" height="160" viewBox="0 0 600 160" role="img" aria-label="Semidreaptă gradată de la 0 la 500 de euro cu punctele P, A și T">
-  <line x1="40" y1="100" x2="560" y2="100" stroke="#111" stroke-width="3"/>
-  <path d="M560,94 L560,106 L578,100 Z" fill="#111"/>
-  <line x1="239" y1="60" x2="239" y2="110" stroke="#9370DB" stroke-width="3"/>
-  <line x1="320" y1="60" x2="320" y2="110" stroke="#9370DB" stroke-width="3"/>
-  <line x1="490" y1="60" x2="490" y2="110" stroke="#9370DB" stroke-width="3"/>
-  <text x="232" y="48" font-size="22" fill="#9370DB">P</text>
-  <text x="313" y="48" font-size="22" fill="#9370DB">A</text>
-  <text x="483" y="48" font-size="22" fill="#9370DB">T</text>
-  <line x1="40" y1="92" x2="40" y2="108" stroke="#111" stroke-width="2"/>
-  <line x1="140" y1="92" x2="140" y2="108" stroke="#111" stroke-width="2"/>
-  <line x1="240" y1="92" x2="240" y2="108" stroke="#111" stroke-width="2"/>
-  <line x1="340" y1="92" x2="340" y2="108" stroke="#111" stroke-width="2"/>
-  <line x1="440" y1="92" x2="440" y2="108" stroke="#111" stroke-width="2"/>
-  <line x1="540" y1="92" x2="540" y2="108" stroke="#111" stroke-width="2"/>
-  <line x1="90" y1="94" x2="90" y2="106" stroke="#111" stroke-width="2"/>
-  <line x1="190" y1="94" x2="190" y2="106" stroke="#111" stroke-width="2"/>
-  <line x1="290" y1="94" x2="290" y2="106" stroke="#111" stroke-width="2"/>
-  <line x1="390" y1="94" x2="390" y2="106" stroke="#111" stroke-width="2"/>
-  <line x1="490" y1="94" x2="490" y2="106" stroke="#111" stroke-width="2"/>
-  <text x="35" y="136" font-size="18">0</text>
-  <text x="125" y="136" font-size="18">100</text>
-  <text x="225" y="136" font-size="18">200</text>
-  <text x="325" y="136" font-size="18">300</text>
-  <text x="425" y="136" font-size="18">400</text>
-  <text x="525" y="136" font-size="18">500</text>
-</svg>
-
-:::warning Atenție
-Verificăm mereu unitatea semidreptei înainte să plasăm un punct.
-Aici 1 cm valorează 50 €, nu 1 €.
+:::tip De reținut
+Gradațiile stau la distanțe egale. Pornim mereu de la 0.
 :::

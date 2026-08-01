@@ -14,61 +14,62 @@ import HighlightText from '@site/src/components/HighlightText';
 ## Vocabular
 
 :::danger Definiție
-Numerele pe care le înmulțim se numesc **<HighlightText color="red">factori</HighlightText>**.
-Rezultatul înmulțirii se numește **<HighlightText color="teal">produs</HighlightText>**.
+Numerele înmulțite se numesc **<HighlightText color="teal">factori</HighlightText>**. Rezultatul se numește **<HighlightText color="purple">produs</HighlightText>**.
 :::
 
-<Katex>{String.raw`\underbrace{\color{#FF6B6B}{6{,}8}}_{\text{factor}} \times \underbrace{\color{#FF6B6B}{3{,}4}}_{\text{factor}} = \underbrace{\color{#4ECDC4}{23{,}12}}_{\text{produs}}`}</Katex>
+<Katex>
+{String.raw`
+\underbrace{\color{#4ECDC4}{2{,}4}}_{\text{factor}} \times \underbrace{\color{#4ECDC4}{1{,}3}}_{\text{factor}} = \underbrace{\color{#9370DB}{3{,}12}}_{\text{produs}}
+`}
+</Katex>
 
 ---
 
 ## Metode
 
-### 1. Înmulțirea a două numere zecimale
+### 1. Două numere zecimale
 
-Calculăm pas cu pas: <Katex>{String.raw`4{,}48 \times 2{,}3`}</Katex>
+Calculăm pas cu pas 2,4 × 1,3:
 
-1. Înmulțim numerele fără virgule: <Katex>{String.raw`448 \times 23 = 10\,304`}</Katex>
-2. Numărăm cifrele de după virgulă: 4,**48** are 2 cifre, iar 2,**3** are 1 cifră. În total: 2 + 1 = **3 cifre**.
-3. Punem virgula în produs, separând **3 cifre** de la dreapta: **10,304**.
+- Pasul 1: Înmulțim fără virgule: 24 × 13 = 312.
+- Pasul 2: Numărăm zecimalele factorilor: 1 + 1 = 2.
+- Pasul 3: Punem virgula la 2 cifre.
 
-<Katex>{String.raw`\Large\begin{array}{r}4\ {,}\ \color{#FF8C00}{4}\ 8 \\ \times \quad 2{,}\color{#FF8C00}3 \\ \hline 1\ 3\ 4\ 4\  \\ 8\ 9\ 6\ \  .\ \\ \hline 1\ 0{,}\color{#FF8C00}3\ 0\ 4\ \end{array}`}</Katex>
-
-:::tip De reținut
-Produsul are atâtea cifre după virgulă câte au **cei doi factori împreună**.
-:::
-
-### 2. Înmulțirea cu 10, 100 sau 1 000
+<Katex>
+{String.raw`
+\Large\begin{array}{r} 2{,}\color{#FF8C00}{4} \\ \times\ \ 1{,}\color{#FF8C00}{3} \\ \hline 7\ 2 \\ 2\ 4\ \ . \\ \hline 3{,}\color{#FF8C00}{1\ 2} \end{array}
+`}
+</Katex>
 
 :::tip De reținut
-Mutăm virgula spre **<HighlightText color="red">DREAPTA</HighlightText>**:
-- cu 10 → 1 rang
-- cu 100 → 2 ranguri
-- cu 1 000 → 3 ranguri
+Câte zecimale au factorii, atâtea are produsul.
 :::
 
-**Exemple:**
+---
 
-<Katex>{String.raw`\begin{aligned}& 4{,}85 \times 10 = 48{,}5\\[6pt]& 3{,}9 \times 100 = 390\\[6pt]& 12{,}379 \times 1\,000 = 12\,379\end{aligned}`}</Katex>
+### 2. Cu 10, 100 sau cu 0,1
 
-:::warning Atenție
-Dacă nu mai avem cifre, adăugăm zerouri.
-La <Katex>{String.raw`3{,}9 \times 100 = 390`}</Katex> mutăm virgula cu 2 ranguri, dar avem o singură cifră după virgulă. Adăugăm un zero.
-:::
+<svg viewBox="0 0 440 190" width="100%" role="img" aria-label="Virgula se mută spre dreapta sau spre stânga">
+  <rect x="170" y="85" width="100" height="46" rx="10" fill="none" stroke="currentColor" strokeWidth="2" />
+  <text x="220" y="114" textAnchor="middle" fontSize="20" fill="currentColor">virgula</text>
+  <line x1="165" y1="108" x2="58" y2="108" stroke="#4ECDC4" strokeWidth="5" />
+  <polygon points="40,108 62,97 62,119" fill="#4ECDC4" />
+  <line x1="275" y1="108" x2="382" y2="108" stroke="#FF8C00" strokeWidth="5" />
+  <polygon points="400,108 378,97 378,119" fill="#FF8C00" />
+  <text x="110" y="58" textAnchor="middle" fontSize="24" fill="#4ECDC4">× 0,1</text>
+  <text x="110" y="162" textAnchor="middle" fontSize="22" fill="#4ECDC4">stânga</text>
+  <text x="330" y="58" textAnchor="middle" fontSize="24" fill="#FF8C00">× 10</text>
+  <text x="330" y="162" textAnchor="middle" fontSize="22" fill="#FF8C00">dreapta</text>
+</svg>
 
-### 3. Înmulțirea cu 0,1; 0,01 sau 0,001
+Numărăm zerourile lui 10. Mutăm virgula cu atâtea ranguri.
 
-:::tip De reținut
-Mutăm virgula spre **<HighlightText color="teal">STÂNGA</HighlightText>**:
-- cu 0,1 → 1 rang
-- cu 0,01 → 2 ranguri
-- cu 0,001 → 3 ranguri
-:::
-
-**Exemple:**
-
-<Katex>{String.raw`\begin{aligned}& 9\,756{,}4 \times 0{,}01 = 97{,}564\\[6pt]& 4{,}51 \times 0{,}001 = 0{,}00451\end{aligned}`}</Katex>
-
-Observăm: a împărți la 10, 100 sau 1 000 înseamnă a înmulți cu 0,1; 0,01 sau 0,001.
-
-<Katex>{String.raw`\begin{aligned}& 1\,235 : 100 = 1\,235 \times 0{,}01 = 12{,}35\\[6pt]& 583 : 1\,000 = 583 \times 0{,}001 = 0{,}583\end{aligned}`}</Katex>
+<Katex>
+{String.raw`
+\begin{aligned}
+& 3{,}6 \times 10 = 36 \quad \color{#FF8C00}{\text{1 rang}}\\[6pt]
+& 3{,}6 \times 100 = 360 \quad \color{#FF8C00}{\text{2 ranguri, un zero adăugat}}\\[6pt]
+& 3{,}6 \times 0{,}1 = 0{,}36 \quad \color{#4ECDC4}{\text{1 rang}}
+\end{aligned}
+`}
+</Katex>
