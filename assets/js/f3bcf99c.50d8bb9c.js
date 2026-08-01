@@ -1,0 +1,40 @@
+"use strict";(self.webpackChunkedumat_58=self.webpackChunkedumat_58||[]).push([[9080],{18552:(e,r,n)=>{n.d(r,{A:()=>o});n(96540);const i={highlight:"highlight_gdqz",bold:"bold_KYOs",regular:"regular_fWYe",red:"red_o6Pp",teal:"teal_mhy2",orange:"orange_vOWG",purple:"purple_nx5u",blue:"blue_KRBQ",green:"green_vHcB"};var t=n(74848);const l=new Set(["red","teal","orange","purple","blue","green"]),o=({children:e,color:r="red",bold:n=!0})=>{const o=l.has(r),s=[i.highlight,o?i[r]:"",n?i.bold:i.regular].filter(Boolean).join(" ");return(0,t.jsx)("span",{className:s,style:o?void 0:{color:r},children:e})}},28453:(e,r,n)=>{n.d(r,{R:()=>o,x:()=>s});var i=n(96540);const t={},l=i.createContext(t);function o(e){const r=i.useContext(l);return i.useMemo((function(){return"function"==typeof e?e(r):{...r,...e}}),[r,e])}function s(e){let r;return r=e.disableParentContext?"function"==typeof e.components?e.components(t):e.components||t:o(e.components),i.createElement(l.Provider,{value:r},e.children)}},48374:(e,r,n)=>{n.d(r,{A:()=>o});var i=n(96540),t=n(22130);function l(){return(l=Object.assign||function(e){for(var r=1;r<arguments.length;r++){var n=arguments[r];for(var i in n)Object.prototype.hasOwnProperty.call(n,i)&&(e[i]=n[i])}return e}).apply(this,arguments)}const o=(0,i.memo)((function(e){var r=e.children,n=e.math,o=e.block,s=e.errorColor,a=e.renderError,c=e.settings,u=e.as,d=function(e,r){if(null==e)return{};var n,i,t={},l=Object.keys(e);for(i=0;i<l.length;i++)r.indexOf(n=l[i])>=0||(t[n]=e[n]);return t}(e,["children","math","block","errorColor","renderError","settings","as"]),p=u||(o?"div":"span"),h=null!=r?r:n,m=(0,i.useState)({innerHtml:""}),x=m[0],g=m[1];return(0,i.useEffect)((function(){try{var e=t.default.renderToString(h,l({displayMode:!!o,errorColor:s,throwOnError:!!a},c));g({innerHtml:e})}catch(e){if(!(e instanceof t.default.ParseError||e instanceof TypeError))throw e;g(a?{errorElement:a(e)}:{innerHtml:e.message})}}),[o,h,s,a,c]),"errorElement"in x?x.errorElement:i.createElement(p,Object.assign({},d,{dangerouslySetInnerHTML:{__html:x.innerHtml}}))}))},67280:(e,r,n)=>{n.r(r),n.d(r,{assets:()=>u,contentTitle:()=>c,default:()=>h,frontMatter:()=>a,metadata:()=>i,toc:()=>d});const i=JSON.parse('{"id":"edupasi/c7/modul-2/06","title":"C13.2 - Probleme care se rezolv\u0103 cu ajutorul sistemelor de ecua\u021bii","description":"","source":"@site/docs/edupasi/c7/modul-2/06.mdx","sourceDirName":"edupasi/c7/modul-2","slug":"/edupasi/c7/modul-2/06","permalink":"/curs/docs/edupasi/c7/modul-2/06","draft":false,"unlisted":false,"tags":[],"version":"current","sidebarPosition":6,"frontMatter":{"sidebar_position":6,"slug":"/edupasi/c7/modul-2/06","description":""},"sidebar":"edupasiSidebar","previous":{"title":"C13.1 - Sisteme de ecua\u021bii","permalink":"/curs/docs/edupasi/c7/modul-2/05"},"next":{"title":"G6 - Centrul de greutate al unui triunghi","permalink":"/curs/docs/edupasi/c7/modul-2/07"}}');var t=n(74848),l=n(28453),o=n(98584),s=n(18552);const a={sidebar_position:6,slug:"/edupasi/c7/modul-2/06",description:""},c="C13.2 - Probleme care se rezolv\u0103 cu ajutorul sistemelor de ecua\u021bii",u={},d=[{value:"Etapele rezolv\u0103rii unei probleme prin ecua\u021bii",id:"etapele-rezolv\u0103rii-unei-probleme-prin-ecua\u021bii",level:2},{value:"Probleme rezolvate",id:"probleme-rezolvate",level:2},{value:"Problema 1",id:"problema-1",level:3},{value:"Problema 2",id:"problema-2",level:3}];function p(e){const r={admonition:"admonition",h1:"h1",h2:"h2",h3:"h3",header:"header",hr:"hr",p:"p",strong:"strong",...(0,l.R)(),...e.components};return(0,t.jsxs)(t.Fragment,{children:[(0,t.jsx)(r.header,{children:(0,t.jsx)(r.h1,{id:"c132---probleme-care-se-rezolv\u0103-cu-ajutorul-sistemelor-de-ecua\u021bii",children:"C13.2 - Probleme care se rezolv\u0103 cu ajutorul sistemelor de ecua\u021bii"})}),"\n",(0,t.jsx)(r.hr,{}),"\n",(0,t.jsx)(r.h2,{id:"etapele-rezolv\u0103rii-unei-probleme-prin-ecua\u021bii",children:"Etapele rezolv\u0103rii unei probleme prin ecua\u021bii"}),"\n",(0,t.jsx)(r.admonition,{title:"De re\u021binut",type:"tip",children:(0,t.jsx)(o.A,{children:String.raw`
+\begin{aligned}
+& \text{Pasul 1: notăm necunoscutele } \color{#FF6B6B}{x} \text{ și } \color{#4ECDC4}{y} \\[8pt]
+& \text{Pasul 2: scriem două ecuații} \\[8pt]
+& \text{Pasul 3: rezolvăm sistemul} \\[8pt]
+& \text{Pasul 4: scriem răspunsul}
+\end{aligned}
+`})}),"\n",(0,t.jsx)(r.hr,{}),"\n",(0,t.jsx)(r.h2,{id:"probleme-rezolvate",children:"Probleme rezolvate"}),"\n",(0,t.jsx)(r.h3,{id:"problema-1",children:"Problema 1"}),"\n",(0,t.jsx)(r.p,{children:"Suma a dou\u0103 numere este 20. Diferen\u021ba lor este 6."}),"\n",(0,t.jsxs)("svg",{xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 420 190",width:"420",height:"190",children:[(0,t.jsx)("rect",{x:"70",y:"30",width:"140",height:"40",fill:"#FF6B6B"}),(0,t.jsx)("rect",{x:"210",y:"30",width:"120",height:"40",fill:"#FF8C00"}),(0,t.jsx)("rect",{x:"70",y:"100",width:"140",height:"40",fill:"#4ECDC4"}),(0,t.jsx)("text",{x:"40",y:"60","font-size":"24",fill:"#FF6B6B",children:"x"}),(0,t.jsx)("text",{x:"40",y:"130","font-size":"24",fill:"#4ECDC4",children:"y"}),(0,t.jsx)("text",{x:"260",y:"60","font-size":"24",fill:"#fff",children:"6"}),(0,t.jsx)("path",{d:"M348 30 L364 30 L364 140 L348 140",fill:"none",stroke:"#9370DB","stroke-width":"3"}),(0,t.jsx)("text",{x:"372",y:"93","font-size":"24",fill:"#9370DB",children:"20"})]}),"\n",(0,t.jsx)(r.p,{children:"Not\u0103m num\u0103rul mare cu x. Not\u0103m num\u0103rul mic cu y."}),"\n",(0,t.jsx)(o.A,{children:String.raw`
+\begin{cases}
+\color{#FF6B6B}{x} + \color{#4ECDC4}{y} = 20 \\
+\color{#FF6B6B}{x} - \color{#4ECDC4}{y} = 6
+\end{cases}
+`}),"\n",(0,t.jsx)(r.p,{children:"Calcul\u0103m pas cu pas:"}),"\n",(0,t.jsx)(o.A,{children:String.raw`
+\begin{aligned}
+& \text{Pasul 1: adunăm cele două ecuații} \\[8pt]
+& 2\color{#FF6B6B}{x} = 26 \\[8pt]
+& \text{Pasul 2: } \color{#FF6B6B}{x} = 26 : 2 = 13 \\[8pt]
+& \text{Pasul 3: înlocuim în prima ecuație} \\[8pt]
+& 13 + \color{#4ECDC4}{y} = 20 \Rightarrow \color{#4ECDC4}{y} = 7
+\end{aligned}
+`}),"\n",(0,t.jsxs)(r.p,{children:["Numerele sunt ",(0,t.jsx)(r.strong,{children:(0,t.jsx)(s.A,{color:"red",children:"13"})})," \u0219i ",(0,t.jsx)(r.strong,{children:(0,t.jsx)(s.A,{color:"teal",children:"7"})}),"."]}),"\n",(0,t.jsx)(r.hr,{}),"\n",(0,t.jsx)(r.h3,{id:"problema-2",children:"Problema 2"}),"\n",(0,t.jsx)(r.p,{children:"Un elev are iepuri \u0219i porumbei. Are 8 capete \u0219i 22 de picioare."}),"\n",(0,t.jsx)(r.p,{children:"Un iepure are 4 picioare. Un porumbel are 2 picioare."}),"\n",(0,t.jsx)(o.A,{children:String.raw`
+\begin{cases}
+\color{#FF6B6B}{x} + \color{#4ECDC4}{y} = 8 \\
+4\color{#FF6B6B}{x} + 2\color{#4ECDC4}{y} = 22
+\end{cases}
+`}),"\n",(0,t.jsx)(r.p,{children:"Calcul\u0103m pas cu pas:"}),"\n",(0,t.jsx)(o.A,{children:String.raw`
+\begin{aligned}
+& \text{Pasul 1: împărțim a doua ecuație la } 2 \\[8pt]
+& 2\color{#FF6B6B}{x} + \color{#4ECDC4}{y} = 11 \\[8pt]
+& \text{Pasul 2: scădem prima ecuație} \\[8pt]
+& \color{#FF6B6B}{x} = 11 - 8 = 3 \\[8pt]
+& \text{Pasul 3: înlocuim în prima ecuație} \\[8pt]
+& 3 + \color{#4ECDC4}{y} = 8 \Rightarrow \color{#4ECDC4}{y} = 5
+\end{aligned}
+`}),"\n",(0,t.jsx)(r.p,{children:"Elevul are 3 iepuri \u0219i 5 porumbei."}),"\n",(0,t.jsxs)(r.admonition,{title:"Aten\u021bie",type:"warning",children:[(0,t.jsx)(r.p,{children:"Verific\u0103m r\u0103spunsul \xeen enun\u021b."}),(0,t.jsx)(o.A,{children:String.raw`
+\begin{aligned}
+& 3 + 5 = 8 \text{ capete} \\[8pt]
+& 4 \cdot 3 + 2 \cdot 5 = 22 \text{ picioare}
+\end{aligned}
+`})]})]})}function h(e={}){const{wrapper:r}={...(0,l.R)(),...e.components};return r?(0,t.jsx)(r,{...e,children:(0,t.jsx)(p,{...e})}):p(e)}},98584:(e,r,n)=>{n.d(r,{A:()=>l});n(96540);var i=n(48374),t=n(74848);function l({children:e}){return(0,t.jsx)(i.A,{block:!0,math:e})}}}]);
