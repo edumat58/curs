@@ -271,7 +271,40 @@
      `body` — vezi `tipareste` în Evaluare.jsx. */
   :global([data-ascuns-la-tipar]) { display: none !important; }
 
+  /* Strămoșii foii își pierd lățimile de ecran. `main` are
+     `max-width: calc(100% - 300px)`, `.container` are 1140px, coloana de
+     lecție 880px — toate gândite pentru monitor. Pe telefon ele valorează
+     ~375px, iar foaia n-ar putea lua lățimea colii. Marcarea o face
+     `tipareste` din Evaluare.jsx. */
+  :global([data-lant-tipar]) {
+    display: block !important;
+    width: auto !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    float: none !important;
+  }
+
   .foaie {
+    /* ── de ce o lățime în centimetri ──────────────────────────────────
+       Safari nu paginează la lățimea colii, ci la lățimea CONȚINUTULUI, pe
+       care apoi o scalează până umple hârtia. WebKit, PrintContext.cpp:
+
+         scaledPageSize.scale(view->contentsSize().width() / pageSize.width());
+
+       Pe iPhone conținutul are lățimea ecranului, ~390px. Scala iese
+       688/390 = 1,76, deci înălțimea utilă a colii scade de la 1016 la 576
+       de pixeli CSS. Antetul, care pe desktop încape lejer, nu mai are unde
+       — și se rupe. Exact asta se vedea în dialogul de tipărire: un test pe
+       zece file, cu grila și legenda azvârlite pe file separate.
+
+       Cu o lățime absolută, conținutul măsoară cât coala oriunde ai tipări,
+       scala devine 1, iar telefonul paginează la fel ca monitorul.
+       18,2 cm = 21 cm de A4 minus cele două margini de 1,4 cm. */
+    width: 18.2cm;
+    max-width: 18.2cm;
     /* În flux, nu absolut: un element scos din flux nu se paginează corect,
        iar antetul se rupea între pagini. */
     margin: 0;

@@ -165,12 +165,23 @@ export default function Evaluare({ capitol, clasa, automatisme }) {
        * ascunde totul ar ascunde și strămoșii foii, adică foaia însăși.
        */
       const ascunse = [];
+      const lant = [];
       for (let el = foaie; el && el !== document.body; el = el.parentElement) {
         for (const frate of el.parentElement.children) {
           if (frate !== el) {
             frate.setAttribute('data-ascuns-la-tipar', '');
             ascunse.push(frate);
           }
+        }
+        /*
+         * Strămoșii foii îi marcăm ca să le putem desface, la tipar, lățimile
+         * lor de ecran. Coloana de lecție, `.container`, `main` — fiecare are
+         * un `max-width` gândit pentru monitor; foaia trebuie să poată lua
+         * lățimea colii, nu pe a lor. Vezi `data-lant-tipar` în CSS.
+         */
+        if (el !== foaie) {
+          el.setAttribute('data-lant-tipar', '');
+          lant.push(el);
         }
       }
 
@@ -182,15 +193,21 @@ export default function Evaluare({ capitol, clasa, automatisme }) {
 
       const curata = () => {
         ascunse.forEach((el) => el.removeAttribute('data-ascuns-la-tipar'));
+        lant.forEach((el) => el.removeAttribute('data-lant-tipar'));
         document.title = titluVechi;
         window.removeEventListener('afterprint', curata);
       };
       window.addEventListener('afterprint', curata);
 
       window.print();
-      // Safari pe iOS nu emite mereu `afterprint`; curățăm și după un răgaz,
-      // altfel pagina rămâne goală după ce se închide dialogul.
-      setTimeout(curata, 1500);
+      /*
+       * Safari pe iOS nu emite mereu `afterprint`, deci ne trebuie și un
+       * răgaz. Era de 1,5 secunde — prea scurt: pe telefon, tipărirea trece
+       * prin foaia de partajare, iar dacă marcajele dispar înainte, coala se
+       * generează din pagina nemarcată. Marcajele nu se văd pe ecran (regulile
+       * lor stau doar în `@media print`), deci un răgaz lung nu costă nimic.
+       */
+      setTimeout(curata, 20000);
     }));
   }, [pregateste, capitol, clasa]);
 
