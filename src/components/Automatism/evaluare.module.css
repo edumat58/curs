@@ -146,14 +146,26 @@
   color: var(--ifm-color-emphasis-700, #555);
 }
 
-/* Nume/Prenume pe linii de completat, ca în șablon. */
+/* Nume/Prenume pe linii de completat, ca în șablon — alături cât e loc,
+   una sub alta pe ecran îngust. */
 .identitate {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 1.5rem;
   line-height: 2.1;
+}
+
+.campNume {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  flex: 1 1 16rem;
 }
 
 .linieScris {
   display: inline-block;
-  width: 6.5cm;
+  flex: 1 1 auto;
+  min-width: 5cm;
   border-bottom: 1.5px solid currentColor;
   vertical-align: baseline;
 }
@@ -167,7 +179,7 @@
 }
 
 .coloanaGrila { flex: 1 1 18rem; }
-.coloanaCalificative { flex: 1 1 18rem; }
+.coloanaSubiecte { flex: 1 1 18rem; }
 
 .subtitluAntet {
   margin: 0 0 0.5rem;
@@ -179,61 +191,32 @@
   margin: 0;
 }
 
-/* Numele capitolului la stânga, casetele la dreapta, pe același rând: la un
-   capitol cu opt automatisme, varianta pe două rânduri împingea legenda pe
-   pagina a doua. */
-.calificativ {
-  display: flex;
-  gap: 0.6rem;
-  align-items: baseline;
-  justify-content: space-between;
-  margin: 0 0 0.3rem;
+.randSubiect {
+  margin: 0 0 0.25rem;
   font-size: 0.9rem;
 }
 
-.calificativNume {
-  flex: 1 1 auto;
-  min-width: 0;
-}
-
-.calificativCasete {
-  display: inline-flex;
-  gap: 0.5rem;
-  flex: 0 0 auto;
-  white-space: nowrap;
-}
-
-.bifa input {
-  vertical-align: middle;
-  margin-right: 0.15rem;
-}
-
-.legenda { margin: 1rem 0 0; }
 
 .titluSubiect {
   margin: 1.6rem 0 0.8rem;
 }
 
 .exercitiu {
+  margin: 0 0 1.1rem;
   page-break-inside: avoid;
   break-inside: avoid;
 }
 
 .exercitiuTitlu {
-  margin: 1rem 0 0.4rem;
+  margin: 0 0 0.4rem;
   font-size: 1.05rem;
   font-weight: 600;
 }
 
-.enunt { margin: 0 0 0.35rem; }
-
-.subpuncte {
-  margin: 0;
-  padding-left: 1.4rem;
-}
-
-.subpunct { margin: 0.4rem 0; }
-.formula { margin-left: 0.35rem; }
+.enuntIntrebare { margin: 0; }
+.calculeaza { margin-right: 0.3rem; }
+.formula { margin-left: 0.15rem; }
+.seCere { font-size: 0.92em; }
 
 .figura svg {
   display: block;
@@ -242,11 +225,52 @@
   margin: 0.3rem 0;
 }
 
-.seCere { font-size: 0.92rem; }
+/* ── rubrica de răspunsuri ─────────────────────────────────────────────
 
-/* Loc de scris rezolvarea. Un test fără el se rezolvă pe ciornă, iar
-   profesorul corectează rezultate, nu raționamente. */
-.spatiu { height: 2.4cm; }
+   Toate răspunsurile finale, pe prima filă, într-un tabel de examen: perechi
+   de coloane „Nr. | Răspuns", cu aceleași hairline-uri ca grila de notare.
+   Celulele au aceeași înălțime și aceleași lățimi, deci folia perforată a
+   profesorului se potrivește peste orice test — de zece sau de treizeci de
+   întrebări.
+
+   Locul de calcul a dispărut de sub exerciții: se lucrează pe ciornă, se scrie
+   doar răspunsul. */
+
+.blocRubrica {
+  margin: 1.1rem 0 0;
+}
+
+.notaRubrica {
+  margin: 0 0 0.5rem;
+  font-size: 0.88rem;
+  color: var(--ifm-color-emphasis-700, #555);
+}
+
+.rubrica {
+  /* Tema face tabelele `display: block` cu derulare pe orizontală; aici avem
+     nevoie de un tabel adevărat, ca lățimile fixe să fie respectate și rubrica
+     să umple coala. */
+  display: table;
+  width: 100%;
+  margin: 0;
+  table-layout: fixed;
+}
+
+.capNumar,
+.celulaNumar {
+  width: 1.5cm;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.celulaNumar {
+  font-weight: 700;
+}
+
+/* Înălțime de scris, nu de citit: un rând de tabel gol s-ar strânge. */
+.celulaRaspuns {
+  height: 0.95cm;
+}
 
 .baremFoaie {
   page-break-before: always;
@@ -330,7 +354,7 @@
      n-are reguli scrise pentru fragmentarea containerelor flex (bug 70795) și
      ignoră tăcut `break-inside` pe ele. Și `avoid`, nu `avoid-page`: în
      context paginat, Safari nu implementează `avoid-page`. */
-  .blocColoane, .legenda {
+  .blocColoane, .blocRubrica {
     page-break-inside: avoid;
     break-inside: avoid;
   }
@@ -338,8 +362,9 @@
   .titlu { font-size: 15pt; }
   .subtitlu { font-size: 10pt; }
   .subtitluAntet { font-size: 11.5pt; }
-  .calificativ { font-size: 9pt; margin-bottom: 0.25rem; }
+  .randSubiect { font-size: 9pt; margin-bottom: 0.2rem; }
   .grila { font-size: 9.5pt; }
+  .notaRubrica { font-size: 9pt; margin-bottom: 0.35rem; }
 
   /* Grila are un rând pe subiect, deci până la zece rânduri la un capitol cu
      opt automatisme. Cu cei 12px de padding ai temei pe fiecare celulă, ieșea
@@ -349,11 +374,43 @@
   .grila td {
     padding: 0.15rem 0.45rem;
   }
-  .spatiu { height: 2cm; }
+  .rubrica { font-size: 9.5pt; }
+  .rubrica th, .rubrica td { padding: 0.15rem 0.45rem; }
+  .celulaRaspuns { height: 0.85cm; }
+  .exercitiu { margin-bottom: 0.8rem; }
+
+  /* Caseta „Nu completați" purta doi centimetri pentru două rânduri de text:
+     aerul temei, gândit pentru ecran. */
+  .foaie :global(.theme-admonition) {
+    margin-bottom: 0;
+    padding: 0.35rem 0.7rem;
+  }
+
+  .foaie :global([class*='admonitionHeading_']) {
+    margin-bottom: 0.1rem;
+  }
+
+  .foaie :global([class*='admonitionContent_']) > :last-child {
+    margin-bottom: 0;
+  }
+
+  /* Un exercițiu nu se rupe între file, iar banda de subiect stă lipită de
+     primul ei exercițiu — vezi `inceputSubiect` în Evaluare.jsx. */
+  .exercitiu,
+  .inceputSubiect {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Prima bandă vine imediat după ruperea cerută de antet; marginea ei de sus
+     ar împinge-o inutil în josul filei. */
+  .inceputSubiect:first-child .titluSubiect {
+    margin-top: 0;
+  }
 
   /* Fundalurile colorate se pierd dacă browserul „economisește" cerneala:
-     banda ar ieși alb pe alb, casetele ar dispărea. */
-  .foaie :global(.admonition),
+     banda ar ieși alb pe alb, iar numerele rubricii și-ar pierde fundalul. */
+  .foaie :global(.theme-admonition),
   .titluSubiect span {
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
