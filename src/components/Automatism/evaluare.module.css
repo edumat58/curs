@@ -176,8 +176,11 @@
   padding: 0.35cm 0.3cm;
 }
 
+/* Lățimea coloanei de număr e în procente, nu în centimetri: cu
+   `table-layout: fixed`, cinci coloane de 1,1 cm mâncau tot tabelul pe un ecran
+   îngust și celula de răspuns rămânea la zero. */
 .blocRubrica td:nth-child(odd) {
-  width: 1.1cm;
+  width: 6%;
   padding-left: 0;
   padding-right: 0;
   text-align: center;
