@@ -157,6 +157,32 @@
   margin: 0.3rem 0;
 }
 
+/* Numărul stă într-o coloană îngustă, ca restul lățimii să rămână pentru
+   răspuns. Înălțimea n-o impunem: padding-ul temei dă oricum un centimetru pe
+   rând, iar o înălțime scrisă peste el dubla rândul și scotea rubrica de pe
+   prima filă. */
+/* Tabelul umple coala: celulele goale nu cer lățime, așa că fără asta se
+   strâng toate la stânga și rămân un centimetru de scris. */
+.blocRubrica table {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.blocRubrica td {
+  /* Un rând de scris: 0,35 cm sus și jos peste înălțimea cifrei fac vreo
+     0,95 cm în total. Fără asta, padding-ul temei dădea rânduri de 85 de
+     pixeli, iar rubrica de treizeci de răspunsuri nu mai încăpea pe prima filă. */
+  padding: 0.35cm 0.3cm;
+}
+
+.blocRubrica td:nth-child(odd) {
+  width: 1.1cm;
+  padding-left: 0;
+  padding-right: 0;
+  text-align: center;
+}
+
 /* ── rubrica de răspunsuri ─────────────────────────────────────────────
 
    Toate răspunsurile finale, pe prima filă, într-un tabel de examen: perechi
@@ -239,16 +265,6 @@
      mărimea din testele profesorului; ruperea pe primul subiect lăsa rubrica
      singură pe fila a doua, cu trei sferturi de coală albe. */
 
-  /* Numele și prenumele stau strâns: patru rânduri cu aer de ecran costau un
-     centimetru și jumătate. */
-  
-
-  
-
-  
-
-  
-
   /* Regula se cere pe învelișul BLOC, nu pe `.coloane`, care e flex: WebKit
      n-are reguli scrise pentru fragmentarea containerelor flex (bug 70795) și
      ignoră tăcut `break-inside` pe ele. Și `avoid`, nu `avoid-page`: în
@@ -258,19 +274,6 @@
     break-inside: avoid;
   }
 
-  
-
-  /* Grila are un rând pe subiect, deci până la zece rânduri la un capitol cu
-     opt automatisme. Cu cei 12px de padding ai temei pe fiecare celulă, ieșea
-     un antet de 1057px pe o filă de 1031 — se rupea taman capitolul cel mai
-     încărcat. Pe hârtie tabelul n-are nevoie de aerul de pe ecran. */
-  
-  
-  
-  
-  /* Titlul rămâne greu, dar nu cât pe ecran: „Automatisme: Mulțimea numerelor
-     reale — Clasa a VII-a" se rupea pe trei rânduri și împingea rubrica de
-     răspunsuri pe fila a doua. */
   
 
   /* Un exercițiu nu se rupe între file, iar banda de subiect stă lipită de

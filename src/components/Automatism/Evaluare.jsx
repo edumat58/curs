@@ -547,8 +547,7 @@ function FoaieTest({ capitol, clasa, subiecte, cuBarem }) {
   );
 }
 
-const RANDURI_MAXIME = 5;
-const coloaneRubrica = (n) => Math.min(6, Math.max(2, Math.ceil(n / RANDURI_MAXIME)));
+const coloaneRubrica = (n) => Math.min(5, Math.max(2, n));
 
 /**
  * Etichetele celulelor sunt chiar numerele exercițiilor: 1, 2, 3 … prin tot
