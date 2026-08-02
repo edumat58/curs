@@ -340,6 +340,15 @@
   .subtitluAntet { font-size: 11.5pt; }
   .calificativ { font-size: 9pt; margin-bottom: 0.25rem; }
   .grila { font-size: 9.5pt; }
+
+  /* Grila are un rând pe subiect, deci până la zece rânduri la un capitol cu
+     opt automatisme. Cu cei 12px de padding ai temei pe fiecare celulă, ieșea
+     un antet de 1057px pe o filă de 1031 — se rupea taman capitolul cel mai
+     încărcat. Pe hârtie tabelul n-are nevoie de aerul de pe ecran. */
+  .grila th,
+  .grila td {
+    padding: 0.15rem 0.45rem;
+  }
   .spatiu { height: 2cm; }
 
   /* Fundalurile colorate se pierd dacă browserul „economisește" cerneala:

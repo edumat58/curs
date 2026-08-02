@@ -9,11 +9,17 @@
  * Forma NU e inventată aici: e șablonul din `teste/template.mdx`, urmat bucată
  * cu bucată — antetul cu Nume/Prenume pe linii de completat, cele patru
  * condiții de lucru, caseta „Nu completați!" pentru evaluator, grila de notare
- * cu subiectele I/II/III (35+30+15 = 80, plus 20 din oficiu), calificativele pe
+ * (80 de puncte pe subiecte, plus 20 din oficiu), calificativele pe
  * capitole cu N|S|B|E, legenda, subiectele cu bandă portocalie #e65100,
  * exercițiile cu subpuncte a), b), c) și formula de punctaj în titlu, banda
  * „SFÂRȘIT TEST" la coadă. Un test care arată altfel decât celelalte ale
  * profesorului se corectează mai greu și miroase a generat.
+ *
+ * Câte subiecte are testul o spune capitolul, nu un tipar fix: fiecare
+ * automatism atins devine un subiect, în ordinea capitolului. Divizibilitatea
+ * atinge patru automatisme, deci testul ei are patru subiecte. Grila de notare,
+ * subiectele și rândurile de calificativ poartă același număr, ca profesorul să
+ * corecteze pe linie, fără să caute ce automatism a fost unde.
  *
  * Tipărirea folosește dialogul browserului: de acolo se salvează PDF pe orice
  * sistem și se vede exact ce iese pe hârtie. Caseta pentru evaluator promite că
@@ -29,12 +35,13 @@ import styles from './evaluare.module.css';
 
 const CANTITATI = [5, 10, 15, 20, 25, 30];
 
-/** Punctajul din oficiu și împărțirea pe subiecte, ca în șablonul testelor. */
+/** Punctajul din oficiu; restul de 80 se împarte pe subiecte. */
 const OFICIU = 20;
-const TOTALURI = { 1: [80], 2: [45, 35], 3: [35, 30, 15] };
 
 const NUME_CLASA = { 5: 'a V-a', 6: 'a VI-a', 7: 'a VII-a', 8: 'a VIII-a' };
-const NUMERAL = ['I', 'al II-lea', 'al III-lea'];
+/* Un capitol are până la opt automatisme, deci testul are până la opt subiecte. */
+const NUMERAL = ['I', 'al II-lea', 'al III-lea', 'al IV-lea', 'al V-lea', 'al VI-lea', 'al VII-lea', 'al VIII-lea'];
+const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'];
 const LITERE = 'abcdefghij';
 
 /* Banda subiectului, copiată din `teste/template.mdx`: aceleași valori, ca
@@ -71,67 +78,53 @@ function impartePuncte(total, cate) {
 }
 
 /**
- * Construiește foaia: întrebările, grupate pe exerciții și subiecte.
+ * Construiește foaia: un subiect pentru fiecare automatism al capitolului.
  *
- * Un exercițiu = un automatism, cu întrebările lui ca subpuncte a), b), c) —
- * așa arată și testele scrise de mână („Să se calculeze: a) … b) …"), nu ca
- * treizeci de exerciții separate de câte un rând.
+ * Subiectele nu mai sunt trei, cu punctaje fixe și tăieturi arbitrare între
+ * exerciții. Un capitol de divizibilitate atinge patru automatisme, deci
+ * testul are patru subiecte; unul de mulțimea numerelor reale atinge opt, deci
+ * are opt. Așa rândurile din grila de notare, subiectele de pe foaie și
+ * rândurile de calificativ se citesc pe aceeași linie, iar profesorul
+ * corectează fără să caute ce automatism a fost unde.
+ *
+ * Într-un subiect intră un singur exercițiu — automatismul lui — cu întrebările
+ * ca subpuncte a), b), c), ca în testele scrise de mână.
  */
 function construiesteFoaie(cate, chei) {
   // Câte întrebări primește fiecare automatism: se împart pe rând, ca niciunul
-  // să nu domine testul.
-  const ordinea = [...chei].sort(() => Math.random() - 0.5);
-  const cateDe = new Map(ordinea.map((k) => [k, 0]));
+  // să nu domine testul. Tragerea la sorți contează doar când s-au cerut mai
+  // puține întrebări decât automatisme — atunci decide care rămân pe dinafară.
+  const ordineaImpartirii = [...chei].sort(() => Math.random() - 0.5);
+  const cateDe = new Map(chei.map((k) => [k, 0]));
   for (let i = 0; i < cate; i += 1) {
-    const k = ordinea[i % ordinea.length];
+    const k = ordineaImpartirii[i % ordineaImpartirii.length];
     cateDe.set(k, cateDe.get(k) + 1);
   }
 
-  const exercitii = ordinea
-    .filter((k) => cateDe.get(k) > 0)
-    .map((k) => ({
-      cheie: k,
-      titlu: REGISTRY[k].title,
-      items: Array.from({ length: cateDe.get(k) }, () => REGISTRY[k].fn()),
-    }));
+  // Ordinea de pe foaie e a capitolului, nu a împărțirii: subiectele urmează
+  // firul lecțiilor, iar un automatism fără întrebări nu produce subiect.
+  const alese = chei.filter((k) => cateDe.get(k) > 0);
 
-  // Subiectele I/II/III taie ÎNTRE exerciții, cu numărul de întrebări cât mai
-  // aproape de proporția punctajelor (35/30/15).
-  const nSubiecte = Math.min(exercitii.length, 3);
-  const totaluri = TOTALURI[nSubiecte];
-  const subiecte = Array.from({ length: nSubiecte }, () => []);
-  let indice = 0;
-  let acoperit = 0;
-  const totalIntrebari = exercitii.reduce((s, e) => s + e.items.length, 0);
-  for (const ex of exercitii) {
-    const tintaCumulata = totaluri.slice(0, indice + 1).reduce((s, x) => s + x, 0) / 80;
-    if (indice < nSubiecte - 1 && acoperit / totalIntrebari >= tintaCumulata) indice += 1;
-    subiecte[indice].push(ex);
-    acoperit += ex.items.length;
-  }
-  // Un subiect nu rămâne gol: dacă tăierea a lăsat unul fără exerciții, se ia
-  // ultimul exercițiu al subiectului precedent.
-  for (let s = 1; s < nSubiecte; s += 1) {
-    if (subiecte[s].length === 0 && subiecte[s - 1].length > 1) {
-      subiecte[s].push(subiecte[s - 1].pop());
-    }
-  }
+  /* Punctele: cele 80 se împart pe TOATE întrebările testului, deci fiecare
+     valorează la fel indiferent în ce subiect a nimerit. Totalul unui subiect
+     iese din câte întrebări are — nu mai e o cifră fixă aleasă dinainte. */
+  const totalIntrebari = alese.reduce((s, k) => s + cateDe.get(k), 0);
+  const puncte = impartePuncte(80, totalIntrebari);
+  let i = 0;
 
-  // Punctele: fiecare subiect își împarte totalul pe întrebările lui.
-  const cuPuncte = subiecte.map((exs, s) => {
-    const items = exs.reduce((sum, e) => sum + e.items.length, 0);
-    const puncte = impartePuncte(totaluri[s], items);
-    let i = 0;
+  return alese.map((k) => {
+    const cateAici = cateDe.get(k);
+    const puncteExercitiu = Array.from({ length: cateAici }, () => puncte[i++]);
     return {
-      total: totaluri[s],
-      exercitii: exs.map((e) => ({
-        ...e,
-        puncte: e.items.map(() => puncte[i++]),
-      })),
+      total: puncteExercitiu.reduce((s, p) => s + p, 0),
+      exercitii: [{
+        cheie: k,
+        titlu: REGISTRY[k].title,
+        items: Array.from({ length: cateAici }, () => REGISTRY[k].fn()),
+        puncte: puncteExercitiu,
+      }],
     };
   });
-
-  return cuPuncte;
 }
 
 export default function Evaluare({ capitol, clasa, automatisme }) {
@@ -334,7 +327,7 @@ function FoaieTest({ capitol, clasa, subiecte, cuBarem, cate }) {
             </thead>
             <tbody>
               {subiecte.map((s, i) => (
-                <tr key={i}><td>{['I', 'II', 'III'][i]}</td><td>{s.total}</td><td /></tr>
+                <tr key={i}><td>{ROMAN[i]}</td><td>{s.total}</td><td /></tr>
               ))}
               <tr><td>Total</td><td>{subiecte.reduce((x, s) => x + s.total, 0)}</td><td /></tr>
               <tr><td>Oficiu</td><td>{OFICIU}</td><td>{OFICIU}</td></tr>
@@ -344,9 +337,11 @@ function FoaieTest({ capitol, clasa, subiecte, cuBarem, cate }) {
 
         <div className={styles.coloanaCalificative}>
           <h2 className={styles.subtitluAntet}>Calificativ capitole incluse</h2>
-          {toateExercitiile.map((e) => (
+          {/* Numărul din față leagă rândul de subiectul lui: „III." de aici e
+              „Subiectul al III-lea" de pe foaie și rândul III din grilă. */}
+          {toateExercitiile.map((e, i) => (
             <p className={styles.calificativ} key={e.cheie}>
-              <em className={styles.calificativNume}>{e.titlu}</em>
+              <em className={styles.calificativNume}>{ROMAN[i]}. {e.titlu}</em>
               <span className={styles.calificativCasete}>
                 {['N', 'S', 'B', 'E'].map((litera) => (
                   <span key={litera} className={styles.bifa}>
@@ -368,26 +363,23 @@ function FoaieTest({ capitol, clasa, subiecte, cuBarem, cate }) {
 
       {/* ── subiectele — de pe pagina următoare, cum promite caseta; ruperea
              o cere antetul, prin `break-after`, nu subiectul ── */}
-      {subiecte.map((subiect, s) => {
+      {(() => {
+        /* Exercițiile se numără în continuare, prin tot testul. Cu un exercițiu
+           pe subiect, o numerotare care repornește ar scrie „Exercițiul 1" de
+           opt ori. */
         let numarExercitiu = 0;
-        return (
+        return subiecte.map((subiect, s) => (
           <section key={s}>
             <h2 className={styles.titluSubiect}>
               <span style={BANDA}>Subiectul {NUMERAL[s]} - {subiect.total} puncte</span>
             </h2>
             {subiect.exercitii.map((ex) => {
               numarExercitiu += 1;
-              return (
-                <Exercitiu
-                  key={ex.cheie}
-                  numar={numarExercitiu}
-                  exercitiu={ex}
-                />
-              );
+              return <Exercitiu key={ex.cheie} numar={numarExercitiu} exercitiu={ex} />;
             })}
           </section>
-        );
-      })}
+        ));
+      })()}
 
       <h2 className={styles.titluSubiect}><span style={BANDA}>SFÂRȘIT TEST</span></h2>
 
