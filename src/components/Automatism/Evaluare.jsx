@@ -197,10 +197,14 @@ function mdxDinFoaie({ capitol, clasa, subiecte, cuBarem, cate }) {
   l.push(':::warning Nu completați!', 'Rubrica aceasta se completează **doar de profesorul evaluator**!', '', '**Testul începe de pe pagina următoare.**', ':::', '');
 
   l.push('## Capitole incluse', '');
-  // Bara de la capăt e ruperea de rând din Markdown; pe ultimul rând ar rămâne
-  // orfană și ar lăsa un rând gol în plus.
-  subiecte.forEach((s, i) => l.push(`- **${ROMAN[i]}.** *${s.titlu}*`));
-  l.push('');
+  // Pe două coloane, cu idiomul din `teste/`: un capitol poate atinge opt
+  // automatisme, iar opt rânduri unul sub altul umflă prima filă.
+  const jum = Math.ceil(subiecte.length / 2);
+  l.push("<div style={{display: 'flex'}}>", "<div style={{width: '50%'}}>", '');
+  subiecte.slice(0, jum).forEach((s, i) => l.push(`- **${ROMAN[i]}.** *${s.titlu}*`));
+  l.push('', '</div>', "<div style={{paddingLeft: '20px', width: '47%'}}>", '');
+  subiecte.slice(jum).forEach((s, i) => l.push(`- **${ROMAN[i + jum]}.** *${s.titlu}*`));
+  l.push('', '</div>', '</div>', '');
   l.push('', '## Răspunsuri', '');
   l.push('Scrie aici răspunsul final al fiecărui exercițiu.', '');
   l.push(`|${' Nr. | Răspuns |'.repeat(coloane)}`);
@@ -466,16 +470,27 @@ function FoaieTest({ capitol, clasa, subiecte, cuBarem, cate }) {
           profesorului CE s-a verificat. */}
       <div className={styles.blocColoane}>
         <h2>Capitole incluse</h2>
-        {/* Fiecare capitol pe paragraful lui, cu numele în italice — cum arată
-            `*Organizarea datelor în tabele, grafice, diagrame*` în fișierele
-            din `teste/`. Îngrămădite într-un paragraf cu rupturi de rând,
-            câștigau un centimetru pe filă, dar spațierea nu mai era a MDX-ului.
-            Numărul leagă rândul de banda subiectului și de celulele rubricii. */}
-        <ul>
-          {subiecte.map((e, i) => (
-            <li key={e.cheie}><strong>{ROMAN[i]}.</strong> <em>{e.titlu}</em></li>
-          ))}
-        </ul>
+        {/* Pe două coloane, cu idiomul din `teste/`: un capitol poate atinge opt
+            automatisme, iar opt rânduri unul sub altul împing rubrica de
+            răspunsuri pe fila a doua. */}
+        <div style={{ display: 'flex' }}>
+          <div style={{ width: '50%' }}>
+            <ul>
+              {subiecte.slice(0, Math.ceil(subiecte.length / 2)).map((e, i) => (
+                <li key={e.cheie}><strong>{ROMAN[i]}.</strong> <em>{e.titlu}</em></li>
+              ))}
+            </ul>
+          </div>
+          <div style={{ paddingLeft: '20px', width: '47%' }}>
+            <ul>
+              {subiecte.slice(Math.ceil(subiecte.length / 2)).map((e, k) => (
+                <li key={e.cheie}>
+                  <strong>{ROMAN[k + Math.ceil(subiecte.length / 2)]}.</strong> <em>{e.titlu}</em>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </div>
 
       <RubricaRaspunsuri subiecte={subiecte} />

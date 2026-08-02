@@ -168,10 +168,6 @@
    Locul de calcul a dispărut de sub exerciții: se lucrează pe ciornă, se scrie
    doar răspunsul. */
 
-.blocRubrica {
-  margin: 1.1rem 0 0;
-}
-
 /* Înălțime de scris, nu de citit: un rând de tabel gol s-ar strânge. */
 
 .baremFoaie {
@@ -229,39 +225,6 @@
 
   .panou { display: none; }
 
-  /* Rândurile rubricii de răspunsuri, strânse — și numai ele.
-
-     Tema dă tabelelor 12px de padding pe fiecare celulă, gândit pentru citit pe
-     ecran. Rubrica are șapte rânduri, deci 168px numai aer, iar pe prima filă
-     rămân 363 după antet: cu aerul temei, rubrica de 460 nu încape și trece pe
-     fila a doua. Strânsă, intră. Celulele tot au un centimetru înălțime, cât
-     să scrii un număr în ele. */
-  .blocRubrica th,
-  .blocRubrica td {
-    padding: 0.25rem 0.6rem;
-  }
-
-  /* Aerul dintre blocuri, strâns la tipar. Marginile temei sunt gândite pentru
-     derulat pe ecran; pe coală, cele două linii orizontale și titlurile de
-     secțiune costau împreună aproape un centimetru, exact cât lipsea ca rubrica
-     de răspunsuri să încapă pe prima filă. */
-  .foaie h2 {
-    margin-top: 0.8rem;
-    margin-bottom: 0.4rem;
-  }
-
-  .foaie hr {
-    margin: 0.6rem 0;
-  }
-
-  .blocRubrica {
-    margin-top: 0.3rem;
-  }
-
-  .blocRubrica p {
-    margin-bottom: 0.35rem;
-  }
-
   /* Nicio rupere forțată de pagină.
 
      Testul are două bucăți care nu se rup pe dinăuntru: blocul de capitole și
@@ -275,8 +238,6 @@
      filă — și nu încape la treizeci de întrebări decât micșorând textul sub
      mărimea din testele profesorului; ruperea pe primul subiect lăsa rubrica
      singură pe fila a doua, cu trei sferturi de coală albe. */
-
-
 
   /* Numele și prenumele stau strâns: patru rânduri cu aer de ecran costau un
      centimetru și jumătate. */
@@ -311,22 +272,6 @@
      reale — Clasa a VII-a" se rupea pe trei rânduri și împingea rubrica de
      răspunsuri pe fila a doua. */
   
-  .exercitiu { margin-bottom: 0.8rem; }
-
-  /* Caseta „Nu completați" purta doi centimetri pentru două rânduri de text:
-     aerul temei, gândit pentru ecran. */
-  .foaie :global(.theme-admonition) {
-    margin-bottom: 0;
-    padding: 0.35rem 0.7rem;
-  }
-
-  .foaie :global([class*='admonitionHeading_']) {
-    margin-bottom: 0.1rem;
-  }
-
-  .foaie :global([class*='admonitionContent_']) > :last-child {
-    margin-bottom: 0;
-  }
 
   /* Un exercițiu nu se rupe între file, iar banda de subiect stă lipită de
      primul ei exercițiu — vezi `inceputSubiect` în Evaluare.jsx. */
@@ -334,12 +279,6 @@
   .inceputSubiect {
     page-break-inside: avoid;
     break-inside: avoid;
-  }
-
-  /* Prima bandă vine imediat după ruperea de pagină; marginea ei de sus ar
-     împinge-o inutil în josul filei. */
-  .inceputSubiect:first-child h2 {
-    margin-top: 0;
   }
 
   /* Fundalurile colorate se pierd dacă browserul „economisește" cerneala:
