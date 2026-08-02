@@ -182,14 +182,13 @@ function enuntMdx({ prompt, blanks }) {
  */
 function mdxDinFoaie({ capitol, clasa, subiecte, cuBarem, cate }) {
   const banda = (text) => `## <span style={{backgroundColor: '#e65100', color: 'white', padding: '4px 8px', borderRadius: '4px'}}>${text}</span>`;
-  const total = subiecte.reduce((s, x) => s + x.total, 0);
   const etichete = etichetePentru(subiecte);
   const coloane = coloaneRubrica(etichete.length);
   const randuri = Math.ceil(etichete.length / coloane);
 
   const l = [];
   l.push('---', 'sidebar_position: 1', `title: "Automatisme: ${capitol}"`, 'description: ""', '---', '');
-  l.push(`# Automatisme: ${capitol} — Clasa ${NUME_CLASA[clasa]}`, '');
+  l.push(`# Automatisme: ${capitol}`, '', `Clasa ${NUME_CLASA[clasa]}`, '');
   l.push('**Nume: \\', '_______________________** \\', '**Prenume: \\', '_______________________**', '');
   l.push('- Toate subiectele sunt obligatorii');
   l.push(`- Timpul efectiv de lucru este de **${MINUTE[cate] || 50} de minute**`);
@@ -197,16 +196,13 @@ function mdxDinFoaie({ capitol, clasa, subiecte, cuBarem, cate }) {
   l.push(`- Se acordă **${OFICIU} puncte** din oficiu`, '', '---', '');
   l.push(':::warning Nu completați!', 'Rubrica aceasta se completează **doar de profesorul evaluator**!', '', '**Testul începe de pe pagina următoare.**', ':::', '');
 
-  l.push('## Grila de notare', '', '| Subiect | Punctaj total | Punctaj obținut |', '|---|---|---|');
-  subiecte.forEach((s, i) => l.push(`| ${ROMAN[i]} | ${s.total} |  |`));
-  l.push(`| Total | ${total} |  |`, `| Oficiu | ${OFICIU} | ${OFICIU} |`, '');
-
-  l.push('## Subiectele testului', '');
+  l.push('## Capitole incluse', '');
   // Bara de la capăt e ruperea de rând din Markdown; pe ultimul rând ar rămâne
   // orfană și ar lăsa un rând gol în plus.
-  subiecte.forEach((s, i) => l.push(`**${ROMAN[i]}.** ${s.titlu}${i < subiecte.length - 1 ? ' \\' : ''}`));
+  subiecte.forEach((s, i) => l.push(`- **${ROMAN[i]}.** *${s.titlu}*`));
+  l.push('');
   l.push('', '## Răspunsuri', '');
-  l.push('Scrie aici răspunsul final al fiecărui exercițiu. Calculele se fac pe ciornă și nu se predau.', '');
+  l.push('Scrie aici răspunsul final al fiecărui exercițiu.', '');
   l.push(`|${' Nr. | Răspuns |'.repeat(coloane)}`);
   l.push(`|${'---|---|'.repeat(coloane)}`);
   for (let r = 0; r < randuri; r += 1) {
@@ -425,167 +421,121 @@ export default function Evaluare({ capitol, clasa, automatisme }) {
   );
 }
 
-/** Foaia propriu-zisă — urmează `teste/template.mdx`, bucată cu bucată. */
+/**
+ * Foaia propriu-zisă.
+ *
+ * Randează exact ce ar randa fișierul MDX copiat de butonul „Copiază codul MDX":
+ * aceleași etichete, aceleași stiluri scrise pe element, aceleași tabele ale
+ * temei. Nicio clasă proprie pentru înfățișare — doar pentru paginare la tipar.
+ *
+ * Varianta de dinainte își desena antetul cu CSS de-al ei: linii de scris din
+ * `border-bottom`, coloane din `flex` cu clase, rubrica cu lățimi fixe. Ieșea
+ * un document care semăna cu al profesorului fără să fie el. Ce se vede pe
+ * ecran și ce iese din butonul de cod trebuie să fie același lucru.
+ */
 function FoaieTest({ capitol, clasa, subiecte, cuBarem, cate }) {
   return (
-    <article className={styles.coala}>
-      {/* ── antetul: o singură unitate, ca legenda să nu treacă pe pagina a doua ── */}
-      <header className={styles.antet}>
-      {/* Titlul poartă și clasa, ca în testele profesorului („Test Clasa a V-a
-          REFACERE"). Fără subtitlu: acolo nu există. */}
-      <h1 className={styles.titlu}>
-        Automatisme: {capitol} — Clasa {NUME_CLASA[clasa]}
-      </h1>
+    <article>
+      <h1>Automatisme: {capitol}</h1>
 
-      {/* Nume și Prenume, fiecare pe rândul lui, cu linia groasă dedesubt —
-          exact ce dau cele douăzeci și trei de liniuțe de subliniere din
-          fișierele din `teste/`. */}
-      <p className={styles.identitate}>
-        <strong>Nume:</strong>
-        <span className={styles.linieScris} />
-        <strong>Prenume:</strong>
-        <span className={styles.linieScris} />
+      <p>Clasa {NUME_CLASA[clasa]}</p>
+
+      {/* `**Nume: \` urmat de liniuțe de subliniere, ca în fișierele din
+          `teste/`: liniile de scris sunt caractere, nu chenare. */}
+      <p>
+        <strong>Nume: <br />_______________________</strong> <br />
+        <strong>Prenume: <br />_______________________</strong>
       </p>
 
-      <ul className={styles.conditii}>
+      <ul>
         <li>Toate subiectele sunt obligatorii</li>
         <li>Timpul efectiv de lucru este de <strong>{MINUTE[cate] || 50} de minute</strong></li>
         <li>Utilizarea instrumentelor de geometrie este <strong>permisă și recomandată</strong></li>
         <li>Se acordă <strong>{OFICIU} puncte</strong> din oficiu</li>
       </ul>
 
-      <hr className={styles.linie} />
+      <hr />
 
       <Admonition type="warning" title="Nu completați!">
         <p>Rubrica aceasta se completează <strong>doar de profesorul evaluator</strong>!</p>
         <p><strong>Testul începe de pe pagina următoare.</strong></p>
       </Admonition>
 
-      {/* Învelișul e bloc, nu flex: `break-inside: avoid` se cere pe EL, fiindcă
-          WebKit nu are reguli scrise pentru fragmentarea containerelor flex
-          (bug 70795), iar pe un flex regula e ignorată tăcut. */}
+      {/* Fără grilă de notare: punctajul unui subiect stă pe banda lui, iar
+          totalul se adună din rubrica de răspunsuri. Rămâne doar ce spune
+          profesorului CE s-a verificat. */}
       <div className={styles.blocColoane}>
-      <div className={styles.coloane}>
-        <div className={styles.coloanaGrila}>
-          <h2 className={styles.subtitluAntet}>Grila de notare</h2>
-          <table className={styles.grila}>
-            <thead>
-              <tr><th>Subiect</th><th>Punctaj total</th><th>Punctaj obținut</th></tr>
-            </thead>
-            <tbody>
-              {subiecte.map((s, i) => (
-                <tr key={i}><td>{ROMAN[i]}</td><td>{s.total}</td><td /></tr>
-              ))}
-              <tr><td>Total</td><td>{subiecte.reduce((x, s) => x + s.total, 0)}</td><td /></tr>
-              <tr><td>Oficiu</td><td>{OFICIU}</td><td>{OFICIU}</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div className={styles.coloanaSubiecte}>
-          <h2 className={styles.subtitluAntet}>Subiectele testului</h2>
-          {/* Numărul leagă rândul din grilă de banda de pe foaie. */}
+        <h2>Capitole incluse</h2>
+        {/* Fiecare capitol pe paragraful lui, cu numele în italice — cum arată
+            `*Organizarea datelor în tabele, grafice, diagrame*` în fișierele
+            din `teste/`. Îngrămădite într-un paragraf cu rupturi de rând,
+            câștigau un centimetru pe filă, dar spațierea nu mai era a MDX-ului.
+            Numărul leagă rândul de banda subiectului și de celulele rubricii. */}
+        <ul>
           {subiecte.map((e, i) => (
-            <p className={styles.randSubiect} key={e.cheie}>
-              <strong>{ROMAN[i]}.</strong> {e.titlu}
-            </p>
+            <li key={e.cheie}><strong>{ROMAN[i]}.</strong> <em>{e.titlu}</em></li>
           ))}
-        </div>
-      </div>
+        </ul>
       </div>
 
       <RubricaRaspunsuri subiecte={subiecte} />
-      </header>
 
-      {/* ── subiectele — de pe pagina următoare, cum promite caseta; ruperea
-             o cere antetul, prin `break-after`, nu subiectul ── */}
-      {(() => {
-        /* Numerotarea repornește la fiecare subiect, ca în `teste/template.mdx`.
-           În rubrica de răspunsuri, celula poartă atunci numele întreg —
-           „III.2" — deci nu se pierde legătura. */
-        return subiecte.map((subiect, s) => (
-          <section key={s}>
-            {subiect.intrebari.map((x, j) => {
-              const ex = (
-                <Exercitiu
-                  key={`${subiect.cheie}-${j}`}
-                  numar={j + 1}
-                  intrebare={x.q}
-                  puncte={x.puncte}
-                />
-              );
-              /* Banda merge lipită de primul ei exercițiu. WebKit nu
-                 implementează `break-after: avoid` (bug 294559), așa că
-                 singurul mod de a nu lăsa banda singură la baza filei e s-o
-                 pui împreună cu exercițiul într-un bloc care nu se rupe. */
-              if (j > 0) return ex;
-              return (
-                <div className={styles.inceputSubiect} key={`cap-${s}`}>
-                  <h2 className={styles.titluSubiect}>
-                    <span style={BANDA}>Subiectul {NUMERAL[s]} - {subiect.total} puncte</span>
-                  </h2>
-                  {ex}
-                </div>
-              );
-            })}
-          </section>
-        ));
-      })()}
+      <hr />
 
-      <h2 className={styles.titluSubiect}><span style={BANDA}>SFÂRȘIT TEST</span></h2>
+      {subiecte.map((subiect, s) => (
+        <section key={s}>
+          {subiect.intrebari.map((x, j) => {
+            const ex = (
+              <Exercitiu
+                key={`${subiect.cheie}-${j}`}
+                numar={j + 1}
+                intrebare={x.q}
+                puncte={x.puncte}
+              />
+            );
+            /* Banda merge lipită de primul ei exercițiu. WebKit nu implementează
+               `break-after: avoid` (bug 294559), așa că singurul mod de a nu lăsa
+               banda singură la baza filei e s-o pui împreună cu exercițiul
+               într-un bloc care nu se rupe. */
+            if (j > 0) return ex;
+            return (
+              <div className={styles.inceputSubiect} key={`cap-${s}`}>
+                <h2>
+                  <span style={BANDA}>Subiectul {NUMERAL[s]} - {subiect.total} puncte</span>
+                </h2>
+                {ex}
+              </div>
+            );
+          })}
+        </section>
+      ))}
+
+      <h2><span style={BANDA}>SFÂRȘIT TEST</span></h2>
 
       {cuBarem && (
         <section className={styles.baremFoaie}>
-          <h2 className={styles.titluSubiect}><span style={BANDA}>Barem de corectare</span></h2>
-          <p className={styles.baremNota}>
-            Pagina aceasta este pentru profesor. Nu se distribuie elevilor.
-          </p>
-          {(() => {
-            let n = 0;
-            return subiecte.map((subiect, s) => (
-              <div key={s}>
-                <p className={styles.baremSubiect}>
-                  Subiectul {NUMERAL[s]} — {subiect.titlu}
-                </p>
-                <ul className={styles.baremLista}>
-                  {subiect.intrebari.map((x, j) => {
-                    n += 1;
-                    return (
-                      <li key={j} className={styles.baremRaspuns}>
-                        <strong>{n}.</strong>{' '}
-                        {x.q.blanks.map((b) => `${b.label}: ${b.answer}`).join('; ')}
-                        {' '}({x.puncte}p)
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            ));
-          })()}
+          <hr />
+          <h2><span style={BANDA}>Barem de corectare</span></h2>
+          <p><em>Pagina aceasta este pentru profesor. Nu se distribuie elevilor.</em></p>
+          {subiecte.map((subiect, s) => (
+            <div key={s}>
+              <p><strong>Subiectul {NUMERAL[s]} — {subiect.titlu}</strong></p>
+              <ul>
+                {subiect.intrebari.map((x, j) => (
+                  <li key={j}>
+                    <strong>{ROMAN[s]}.{j + 1}.</strong>{' '}
+                    {x.q.blanks.map((b) => `${b.label}: ${b.answer}`).join('; ')} ({x.puncte}p)
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </section>
       )}
     </article>
   );
 }
 
-/**
- * Rubrica de răspunsuri — toate răspunsurile finale, într-un singur loc, pe
- * prima filă.
- *
- * Un automatism are răspuns scurt: un număr, o măsură, „da"/„nu". Împrăștiate
- * prin foaie, cele treizeci de răspunsuri se caută unul câte unul; adunate
- * într-o rețea cu celule de aceeași mărime, se corectează dintr-o privire —
- * sau cu folia perforată pusă deasupra, ca la examenele din facultate.
- *
- * De aceea geometria e FIXĂ, nu curge după conținut: cinci celule pe rând,
- * fiecare de aceeași înălțime, umplute de la stânga la dreapta. Celula a
- * șaptea stă în același loc la un test de zece întrebări și la unul de
- * treizeci, deci aceeași folie se potrivește peste toate.
- */
-/* Rubrica nu trece niciodată de șase rânduri: la un capitol cu opt automatisme
-   și treizeci de întrebări, antetul are oricum zece rânduri de grilă, iar o
-   rubrică pe opt rânduri o împingea pe fila a doua. Numărul de perechi
-   „Nr. | Răspuns" se ia deci din câte răspunsuri sunt, nu invers. */
 const RANDURI_MAXIME = 6;
 const coloaneRubrica = (n) => Math.min(5, Math.max(2, Math.ceil(n / RANDURI_MAXIME)));
 
@@ -601,17 +551,14 @@ function RubricaRaspunsuri({ subiecte }) {
 
   return (
     <div className={styles.blocRubrica}>
-      <h2 className={styles.subtitluAntet}>Răspunsuri</h2>
-      <p className={styles.notaRubrica}>
-        Scrie aici răspunsul final al fiecărui exercițiu. Calculele se fac pe
-        ciornă și nu se predau.
-      </p>
-      <table className={styles.rubrica}>
+      <h2>Răspunsuri</h2>
+      <p>Scrie aici răspunsul final al fiecărui exercițiu.</p>
+      <table>
         <thead>
           <tr>
             {Array.from({ length: coloane }, (_, c) => (
               <React.Fragment key={c}>
-                <th className={styles.capNumar}>Nr.</th>
+                <th>Nr.</th>
                 <th>Răspuns</th>
               </React.Fragment>
             ))}
@@ -622,12 +569,12 @@ function RubricaRaspunsuri({ subiecte }) {
             <tr key={r}>
               {Array.from({ length: coloane }, (_, c) => {
                 /* Se umple pe COLOANE, nu pe rânduri: așa I.1, I.2, I.3 stau
-                   unul sub altul, în ordinea de pe foaie, nu împrăștiate. */
-                const i = c * randuri + r;
+                   unul sub altul, în ordinea de pe foaie. */
+                const e = etichete[c * randuri + r];
                 return (
                   <React.Fragment key={c}>
-                    <td className={styles.celulaNumar}>{etichete[i] || ''}</td>
-                    <td className={styles.celulaRaspuns} />
+                    <td>{e ? <strong>{e}</strong> : ''}</td>
+                    <td />
                   </React.Fragment>
                 );
               })}
@@ -661,19 +608,16 @@ function Exercitiu({ numar, intrebare, puncte }) {
 
   return (
     <div className={styles.exercitiu}>
-      <h3 className={styles.exercitiuTitlu}>
-        Exercițiul {numar} <strong>({puncte}p)</strong>
-      </h3>
+      <h3>Exercițiul {numar} <strong>({puncte}p)</strong></h3>
 
       <Admonition type="note">
-        <p className={styles.enuntIntrebare}>
-          {doarCalcul && <span className={styles.calculeaza}>Să se calculeze:</span>}
+        <p>
+          {doarCalcul && <>Să se calculeze: </>}
           {prompt.text && (
             <span dangerouslySetInnerHTML={{ __html: bogat(prompt.text) }} />
           )}
           {prompt.latex && (
             <span
-              className={styles.formula}
               dangerouslySetInnerHTML={{
                 __html: katex.renderToString(prompt.latex, { throwOnError: false }),
               }}
@@ -705,7 +649,7 @@ function CeSeCere({ blanks }) {
   if (alegeri.length === 0 && numite.length <= 1) return null;
 
   return (
-    <span className={styles.seCere}>
+    <span>
       {alegeri.map((b, i) => (
         <span key={`c${i}`}> Scrie <strong>{b.options.join(' sau ')}</strong>.</span>
       ))}

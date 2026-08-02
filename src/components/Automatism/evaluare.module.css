@@ -137,83 +137,18 @@
   margin: 2rem 0;
 }
 
-.titlu {
-  margin: 0 0 1.1rem;
-}
-
 /* Nume/Prenume, fiecare pe rândul lui, cu linia de scris dedesubt. În
    fișierele din `teste/` asta se scrie cu douăzeci și trei de liniuțe de
    subliniere; aici e o linie, dar cu aceeași greutate pe pagină. */
-.identitate {
-  margin: 0 0 1.1rem;
-  line-height: 1.7;
-}
-
-.identitate strong {
-  display: block;
-  margin-top: 0.5rem;
-}
-
-.linieScris {
-  display: block;
-  width: 8.2cm;
-  max-width: 100%;
-  height: 0;
-  margin: 0.15rem 0 0.2rem;
-  border-bottom: 2.5px solid currentColor;
-}
-
-.linie {
-  margin: 1.2rem 0;
-}
 
 /* Grila și calificativele stau alături cât e loc; pe hârtie îngustă sau pe
    telefon trec una sub alta, ca să nu se strivească. */
-.coloane {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-}
-
-.coloanaGrila { flex: 1 1 18rem; }
-.coloanaSubiecte { flex: 1 1 18rem; }
-
-.subtitluAntet {
-  margin: 0 0 0.5rem;
-  font-size: 1.1rem;
-}
-
-.grila {
-  width: 100%;
-  margin: 0;
-}
-
-.randSubiect {
-  margin: 0 0 0.25rem;
-  font-size: 0.9rem;
-}
-
-
-.titluSubiect {
-  margin: 1.6rem 0 0.8rem;
-}
 
 .exercitiu {
   margin: 0 0 1.1rem;
   page-break-inside: avoid;
   break-inside: avoid;
 }
-
-.exercitiuTitlu {
-  margin: 0 0 0.4rem;
-  font-size: 1.05rem;
-  font-weight: 600;
-}
-
-.enuntIntrebare { margin: 0; }
-.calculeaza { margin-right: 0.3rem; }
-.formula { margin-left: 0.15rem; }
-.seCere { font-size: 0.92em; }
 
 .figura svg {
   display: block;
@@ -237,51 +172,12 @@
   margin: 1.1rem 0 0;
 }
 
-.notaRubrica {
-  margin: 0 0 0.5rem;
-  font-size: 0.88rem;
-  color: var(--ifm-color-emphasis-700, #555);
-}
-
-.rubrica {
-  /* Tema face tabelele `display: block` cu derulare pe orizontală; aici avem
-     nevoie de un tabel adevărat, ca lățimile fixe să fie respectate și rubrica
-     să umple coala. */
-  display: table;
-  width: 100%;
-  margin: 0;
-  table-layout: fixed;
-}
-
-.capNumar,
-.celulaNumar {
-  width: 1.3cm;
-  text-align: center;
-  white-space: nowrap;
-}
-
-.celulaNumar {
-  font-weight: 700;
-}
-
 /* Înălțime de scris, nu de citit: un rând de tabel gol s-ar strânge. */
-.celulaRaspuns {
-  height: 0.95cm;
-}
 
 .baremFoaie {
   page-break-before: always;
   break-before: page;
 }
-
-.baremNota {
-  margin: 0.5rem 0 0.8rem;
-  font-style: italic;
-}
-
-.baremSubiect { margin: 0.6rem 0 0.2rem; font-weight: 700; }
-.baremLista { margin: 0; padding-left: 1.4rem; }
-.baremRaspuns { font-size: 0.92rem; }
 
 /* ── la tipărire ───────────────────────────────────────────────────────── */
 
@@ -329,23 +225,68 @@
     /* În flux, nu absolut: un element scos din flux nu se paginează corect,
        iar antetul se rupea între pagini. */
     margin: 0;
-    /* Corpul textului scade puțin la tipar: pe ecran e citit de la 60 cm, pe
-       hârtie de la 30, iar antetul trebuie să încapă pe prima pagină. */
-    font-size: 10.5pt;
-    line-height: 1.45;
   }
 
   .panou { display: none; }
 
-  /* „Testul începe de pe pagina următoare" — caseta promite, tiparul ține.
-     Ruperea o cere ANTETUL, o singură dată: așa prima filă e antetul întreg,
-     iar Subiectul I pornește pe a doua. Dacă ar cere-o și subiectul, ar ieși
-     o filă goală între ele; dacă n-ar cere-o niciunul, antetul s-ar rupe
-     când grila și legenda nu mai încap în spațiul rămas. */
-  .antet {
-    page-break-after: always;
-    break-after: page;
+  /* Rândurile rubricii de răspunsuri, strânse — și numai ele.
+
+     Tema dă tabelelor 12px de padding pe fiecare celulă, gândit pentru citit pe
+     ecran. Rubrica are șapte rânduri, deci 168px numai aer, iar pe prima filă
+     rămân 363 după antet: cu aerul temei, rubrica de 460 nu încape și trece pe
+     fila a doua. Strânsă, intră. Celulele tot au un centimetru înălțime, cât
+     să scrii un număr în ele. */
+  .blocRubrica th,
+  .blocRubrica td {
+    padding: 0.25rem 0.6rem;
   }
+
+  /* Aerul dintre blocuri, strâns la tipar. Marginile temei sunt gândite pentru
+     derulat pe ecran; pe coală, cele două linii orizontale și titlurile de
+     secțiune costau împreună aproape un centimetru, exact cât lipsea ca rubrica
+     de răspunsuri să încapă pe prima filă. */
+  .foaie h2 {
+    margin-top: 0.8rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .foaie hr {
+    margin: 0.6rem 0;
+  }
+
+  .blocRubrica {
+    margin-top: 0.3rem;
+  }
+
+  .blocRubrica p {
+    margin-bottom: 0.35rem;
+  }
+
+  /* Nicio rupere forțată de pagină.
+
+     Testul are două bucăți care nu se rup pe dinăuntru: blocul de capitole și
+     rubrica de răspunsuri. Restul curge. Când rubrica încape sub antet, fila
+     întâi le ține pe amândouă și exercițiile încep pe a doua; când nu încape,
+     trece întreagă pe fila a doua și exercițiile pornesc imediat sub ea.
+     În ambele cazuri nu rămâne coală albă.
+
+     Variantele forțate, încercate înainte, lăsau fiecare câte o filă irosită:
+     ruperea pe antet cerea ca tot antetul, cu rubrică cu tot, să încapă pe o
+     filă — și nu încape la treizeci de întrebări decât micșorând textul sub
+     mărimea din testele profesorului; ruperea pe primul subiect lăsa rubrica
+     singură pe fila a doua, cu trei sferturi de coală albe. */
+
+
+
+  /* Numele și prenumele stau strâns: patru rânduri cu aer de ecran costau un
+     centimetru și jumătate. */
+  
+
+  
+
+  
+
+  
 
   /* Regula se cere pe învelișul BLOC, nu pe `.coloane`, care e flex: WebKit
      n-are reguli scrise pentru fragmentarea containerelor flex (bug 70795) și
@@ -356,24 +297,20 @@
     break-inside: avoid;
   }
 
-  .notaRubrica { font-size: 9pt; margin-bottom: 0.35rem; }
+  
 
   /* Grila are un rând pe subiect, deci până la zece rânduri la un capitol cu
      opt automatisme. Cu cei 12px de padding ai temei pe fiecare celulă, ieșea
      un antet de 1057px pe o filă de 1031 — se rupea taman capitolul cel mai
      încărcat. Pe hârtie tabelul n-are nevoie de aerul de pe ecran. */
-  .grila th,
-  .grila td {
-    padding: 0.15rem 0.45rem;
-  }
-  .rubrica th, .rubrica td { padding: 0.15rem 0.35rem; }
-  .celulaRaspuns { height: 0.8cm; }
-  .blocRubrica { margin-top: 0.7rem; }
-  .notaRubrica { margin-bottom: 0.3rem; }
+  
+  
+  
+  
   /* Titlul rămâne greu, dar nu cât pe ecran: „Automatisme: Mulțimea numerelor
      reale — Clasa a VII-a" se rupea pe trei rânduri și împingea rubrica de
      răspunsuri pe fila a doua. */
-  .titlu { font-size: 1.9rem; line-height: 1.15; margin-bottom: 0.7rem; }
+  
   .exercitiu { margin-bottom: 0.8rem; }
 
   /* Caseta „Nu completați" purta doi centimetri pentru două rânduri de text:
@@ -399,16 +336,16 @@
     break-inside: avoid;
   }
 
-  /* Prima bandă vine imediat după ruperea cerută de antet; marginea ei de sus
-     ar împinge-o inutil în josul filei. */
-  .inceputSubiect:first-child .titluSubiect {
+  /* Prima bandă vine imediat după ruperea de pagină; marginea ei de sus ar
+     împinge-o inutil în josul filei. */
+  .inceputSubiect:first-child h2 {
     margin-top: 0;
   }
 
   /* Fundalurile colorate se pierd dacă browserul „economisește" cerneala:
      banda ar ieși alb pe alb, iar numerele rubricii și-ar pierde fundalul. */
   .foaie :global(.theme-admonition),
-  .titluSubiect span {
+  .foaie h2 span {
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
