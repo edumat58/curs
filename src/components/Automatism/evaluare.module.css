@@ -138,36 +138,33 @@
 }
 
 .titlu {
-  margin: 0 0 0.2rem;
+  margin: 0 0 1.1rem;
 }
 
-.subtitlu {
-  margin: 0 0 0.9rem;
-  color: var(--ifm-color-emphasis-700, #555);
-}
-
-/* Nume/Prenume pe linii de completat, ca în șablon — alături cât e loc,
-   una sub alta pe ecran îngust. */
+/* Nume/Prenume, fiecare pe rândul lui, cu linia de scris dedesubt. În
+   fișierele din `teste/` asta se scrie cu douăzeci și trei de liniuțe de
+   subliniere; aici e o linie, dar cu aceeași greutate pe pagină. */
 .identitate {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.3rem 1.5rem;
-  line-height: 2.1;
+  margin: 0 0 1.1rem;
+  line-height: 1.7;
 }
 
-.campNume {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 0.4rem;
-  flex: 1 1 16rem;
+.identitate strong {
+  display: block;
+  margin-top: 0.5rem;
 }
 
 .linieScris {
-  display: inline-block;
-  flex: 1 1 auto;
-  min-width: 5cm;
-  border-bottom: 1.5px solid currentColor;
-  vertical-align: baseline;
+  display: block;
+  width: 8.2cm;
+  max-width: 100%;
+  height: 0;
+  margin: 0.15rem 0 0.2rem;
+  border-bottom: 2.5px solid currentColor;
+}
+
+.linie {
+  margin: 1.2rem 0;
 }
 
 /* Grila și calificativele stau alături cât e loc; pe hârtie îngustă sau pe
@@ -258,7 +255,7 @@
 
 .capNumar,
 .celulaNumar {
-  width: 1.5cm;
+  width: 1.3cm;
   text-align: center;
   white-space: nowrap;
 }
@@ -359,11 +356,6 @@
     break-inside: avoid;
   }
 
-  .titlu { font-size: 15pt; }
-  .subtitlu { font-size: 10pt; }
-  .subtitluAntet { font-size: 11.5pt; }
-  .randSubiect { font-size: 9pt; margin-bottom: 0.2rem; }
-  .grila { font-size: 9.5pt; }
   .notaRubrica { font-size: 9pt; margin-bottom: 0.35rem; }
 
   /* Grila are un rând pe subiect, deci până la zece rânduri la un capitol cu
@@ -374,9 +366,14 @@
   .grila td {
     padding: 0.15rem 0.45rem;
   }
-  .rubrica { font-size: 9.5pt; }
-  .rubrica th, .rubrica td { padding: 0.15rem 0.45rem; }
-  .celulaRaspuns { height: 0.85cm; }
+  .rubrica th, .rubrica td { padding: 0.15rem 0.35rem; }
+  .celulaRaspuns { height: 0.8cm; }
+  .blocRubrica { margin-top: 0.7rem; }
+  .notaRubrica { margin-bottom: 0.3rem; }
+  /* Titlul rămâne greu, dar nu cât pe ecran: „Automatisme: Mulțimea numerelor
+     reale — Clasa a VII-a" se rupea pe trei rânduri și împingea rubrica de
+     răspunsuri pe fila a doua. */
+  .titlu { font-size: 1.9rem; line-height: 1.15; margin-bottom: 0.7rem; }
   .exercitiu { margin-bottom: 0.8rem; }
 
   /* Caseta „Nu completați" purta doi centimetri pentru două rânduri de text:

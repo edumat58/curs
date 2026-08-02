@@ -71,6 +71,11 @@ function bogat(text) {
     .join('');
 }
 
+/** Amprenta unei întrebări: enunțul ei, ca să nu se repete în același subiect. */
+function amprenta(q) {
+  return `${q.prompt.text || ''}|${q.prompt.latex || ''}|${q.prompt.svg || ''}`;
+}
+
 /** `total` puncte pe `cate` întrebări, cu suma exactă — restul, câte unu, primelor. */
 function impartePuncte(total, cate) {
   const baza = Math.floor(total / cate);
@@ -115,10 +120,19 @@ function construiesteFoaie(cate, chei) {
   let i = 0;
 
   return alese.map((k) => {
-    const intrebari = Array.from({ length: cateDe.get(k) }, () => ({
-      q: REGISTRY[k].fn(),
-      puncte: puncte[i++],
-    }));
+    /* Generatoarele trag la sorți, deci pot nimeri de două ori același număr:
+       „Exercițiul 1: √225" urmat de „Exercițiul 2: √225" pe aceeași filă. Cerem
+       întrebări până iese una nouă, cu un plafon de încercări — la un automatism
+       cu puține variante posibile, insistența ar învârti la nesfârșit. */
+    const vazute = new Set();
+    const intrebari = Array.from({ length: cateDe.get(k) }, () => {
+      let q = REGISTRY[k].fn();
+      for (let incercari = 0; incercari < 30 && vazute.has(amprenta(q)); incercari += 1) {
+        q = REGISTRY[k].fn();
+      }
+      vazute.add(amprenta(q));
+      return { q, puncte: puncte[i++] };
+    });
     return {
       cheie: k,
       titlu: REGISTRY[k].title,
@@ -170,11 +184,12 @@ function mdxDinFoaie({ capitol, clasa, subiecte, cuBarem, cate }) {
   const banda = (text) => `## <span style={{backgroundColor: '#e65100', color: 'white', padding: '4px 8px', borderRadius: '4px'}}>${text}</span>`;
   const total = subiecte.reduce((s, x) => s + x.total, 0);
   const etichete = etichetePentru(subiecte);
-  const randuri = Math.ceil(etichete.length / COLOANE_RUBRICA);
+  const coloane = coloaneRubrica(etichete.length);
+  const randuri = Math.ceil(etichete.length / coloane);
 
   const l = [];
   l.push('---', 'sidebar_position: 1', `title: "Automatisme: ${capitol}"`, 'description: ""', '---', '');
-  l.push(`# Automatisme: ${capitol}`, '', `Matematică · Clasa ${NUME_CLASA[clasa]}`, '');
+  l.push(`# Automatisme: ${capitol} — Clasa ${NUME_CLASA[clasa]}`, '');
   l.push('**Nume: \\', '_______________________** \\', '**Prenume: \\', '_______________________**', '');
   l.push('- Toate subiectele sunt obligatorii');
   l.push(`- Timpul efectiv de lucru este de **${MINUTE[cate] || 50} de minute**`);
@@ -192,11 +207,11 @@ function mdxDinFoaie({ capitol, clasa, subiecte, cuBarem, cate }) {
   subiecte.forEach((s, i) => l.push(`**${ROMAN[i]}.** ${s.titlu}${i < subiecte.length - 1 ? ' \\' : ''}`));
   l.push('', '## Răspunsuri', '');
   l.push('Scrie aici răspunsul final al fiecărui exercițiu. Calculele se fac pe ciornă și nu se predau.', '');
-  l.push(`|${' Nr. | Răspuns |'.repeat(COLOANE_RUBRICA)}`);
-  l.push(`|${'---|---|'.repeat(COLOANE_RUBRICA)}`);
+  l.push(`|${' Nr. | Răspuns |'.repeat(coloane)}`);
+  l.push(`|${'---|---|'.repeat(coloane)}`);
   for (let r = 0; r < randuri; r += 1) {
     const celule = [];
-    for (let c = 0; c < COLOANE_RUBRICA; c += 1) {
+    for (let c = 0; c < coloane; c += 1) {
       const e = etichete[c * randuri + r];
       // O celulă fără etichetă rămâne goală; `****` ar fi un bold gol.
       celule.push(e ? ` **${e}** |  |` : '  |  |');
@@ -416,20 +431,20 @@ function FoaieTest({ capitol, clasa, subiecte, cuBarem, cate }) {
     <article className={styles.coala}>
       {/* ── antetul: o singură unitate, ca legenda să nu treacă pe pagina a doua ── */}
       <header className={styles.antet}>
-      <h1 className={styles.titlu}>Automatisme: {capitol}</h1>
+      {/* Titlul poartă și clasa, ca în testele profesorului („Test Clasa a V-a
+          REFACERE"). Fără subtitlu: acolo nu există. */}
+      <h1 className={styles.titlu}>
+        Automatisme: {capitol} — Clasa {NUME_CLASA[clasa]}
+      </h1>
 
-      <p className={styles.subtitlu}>Matematică · Clasa {NUME_CLASA[clasa]}</p>
-
-      {/* Numele și prenumele pe același rând: pe patru rânduri, antetul
-          creștea cu un centimetru și jumătate, iar rubrica de răspunsuri
-          trecea pe fila a doua. */}
+      {/* Nume și Prenume, fiecare pe rândul lui, cu linia groasă dedesubt —
+          exact ce dau cele douăzeci și trei de liniuțe de subliniere din
+          fișierele din `teste/`. */}
       <p className={styles.identitate}>
-        <span className={styles.campNume}>
-          <strong>Nume:</strong> <span className={styles.linieScris} />
-        </span>
-        <span className={styles.campNume}>
-          <strong>Prenume:</strong> <span className={styles.linieScris} />
-        </span>
+        <strong>Nume:</strong>
+        <span className={styles.linieScris} />
+        <strong>Prenume:</strong>
+        <span className={styles.linieScris} />
       </p>
 
       <ul className={styles.conditii}>
@@ -438,6 +453,8 @@ function FoaieTest({ capitol, clasa, subiecte, cuBarem, cate }) {
         <li>Utilizarea instrumentelor de geometrie este <strong>permisă și recomandată</strong></li>
         <li>Se acordă <strong>{OFICIU} puncte</strong> din oficiu</li>
       </ul>
+
+      <hr className={styles.linie} />
 
       <Admonition type="warning" title="Nu completați!">
         <p>Rubrica aceasta se completează <strong>doar de profesorul evaluator</strong>!</p>
@@ -565,9 +582,12 @@ function FoaieTest({ capitol, clasa, subiecte, cuBarem, cate }) {
  * șaptea stă în același loc la un test de zece întrebări și la unul de
  * treizeci, deci aceeași folie se potrivește peste toate.
  */
-/* Patru perechi „Nr. | Răspuns" pe rând: la trei, cele treizeci de răspunsuri
-   cereau zece rânduri, iar rubrica nu mai încăpea pe prima filă. */
-const COLOANE_RUBRICA = 4;
+/* Rubrica nu trece niciodată de șase rânduri: la un capitol cu opt automatisme
+   și treizeci de întrebări, antetul are oricum zece rânduri de grilă, iar o
+   rubrică pe opt rânduri o împingea pe fila a doua. Numărul de perechi
+   „Nr. | Răspuns" se ia deci din câte răspunsuri sunt, nu invers. */
+const RANDURI_MAXIME = 6;
+const coloaneRubrica = (n) => Math.min(5, Math.max(2, Math.ceil(n / RANDURI_MAXIME)));
 
 /** Etichetele celulelor: „I.1", „I.2", „II.1" … — subiectul și exercițiul. */
 function etichetePentru(subiecte) {
@@ -576,7 +596,8 @@ function etichetePentru(subiecte) {
 
 function RubricaRaspunsuri({ subiecte }) {
   const etichete = etichetePentru(subiecte);
-  const randuri = Math.ceil(etichete.length / COLOANE_RUBRICA);
+  const coloane = coloaneRubrica(etichete.length);
+  const randuri = Math.ceil(etichete.length / coloane);
 
   return (
     <div className={styles.blocRubrica}>
@@ -588,7 +609,7 @@ function RubricaRaspunsuri({ subiecte }) {
       <table className={styles.rubrica}>
         <thead>
           <tr>
-            {Array.from({ length: COLOANE_RUBRICA }, (_, c) => (
+            {Array.from({ length: coloane }, (_, c) => (
               <React.Fragment key={c}>
                 <th className={styles.capNumar}>Nr.</th>
                 <th>Răspuns</th>
@@ -599,7 +620,7 @@ function RubricaRaspunsuri({ subiecte }) {
         <tbody>
           {Array.from({ length: randuri }, (_, r) => (
             <tr key={r}>
-              {Array.from({ length: COLOANE_RUBRICA }, (_, c) => {
+              {Array.from({ length: coloane }, (_, c) => {
                 /* Se umple pe COLOANE, nu pe rânduri: așa I.1, I.2, I.3 stau
                    unul sub altul, în ordinea de pe foaie, nu împrăștiate. */
                 const i = c * randuri + r;
