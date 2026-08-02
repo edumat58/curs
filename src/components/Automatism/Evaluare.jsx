@@ -7,8 +7,8 @@
  * în forma testelor din catalogul profesorului.
  *
  * Forma NU e inventată aici: e șablonul din `teste/template.mdx`, urmat bucată
- * cu bucată — antetul cu Nume/Prenume pe linii de completat, cele patru
- * condiții de lucru, caseta de atenționare, subiectele cu bandă
+ * cu bucată — antetul cu Nume/Prenume pe linii de completat, punctajul din
+ * oficiu, caseta de atenționare, subiectele cu bandă
  * portocalie #e65100, exercițiile scrise „### Exercițiul N **(3p)**" cu cerința
  * într-o casetă `:::note`, banda „SFÂRȘIT TEST" la coadă. Un test care arată
  * altfel decât celelalte ale profesorului se corectează mai greu și miroase a
@@ -52,9 +52,6 @@ const BANDA = {
   padding: '4px 8px',
   borderRadius: '4px',
 };
-
-/** Timpul de lucru crește cu testul, în trepte de manual. */
-const MINUTE = { 5: 20, 10: 30, 15: 40, 20: 45, 25: 50, 30: 50 };
 
 function escapeHtml(s) {
   return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -179,7 +176,7 @@ function enuntMdx({ prompt, blanks }) {
  * Testul, ca fișier MDX — aceeași formă cu `teste/template.mdx`, ca fișierul
  * copiat să stea lângă celelalte teste fără să se deosebească.
  */
-function mdxDinFoaie({ capitol, clasa, subiecte, cuBarem, cate }) {
+function mdxDinFoaie({ capitol, clasa, subiecte, cuBarem }) {
   const banda = (text) => `## <span style={{backgroundColor: '#e65100', color: 'white', padding: '4px 8px', borderRadius: '4px'}}>${text}</span>`;
   const etichete = etichetePentru(subiecte);
   const coloane = coloaneRubrica(etichete.length);
@@ -189,9 +186,6 @@ function mdxDinFoaie({ capitol, clasa, subiecte, cuBarem, cate }) {
   l.push('---', 'sidebar_position: 1', `title: "Automatisme: ${capitol}"`, 'description: ""', '---', '');
   l.push(`# Automatisme: ${capitol}`, '', `Clasa ${NUME_CLASA[clasa]}`, '');
   l.push('**Nume: \\', '_______________________** \\', '**Prenume: \\', '_______________________**', '');
-  l.push('- Toate subiectele sunt obligatorii');
-  l.push(`- Timpul efectiv de lucru este de **${MINUTE[cate] || 50} de minute**`);
-  l.push('- Utilizarea instrumentelor de geometrie este **permisă și recomandată**');
   l.push(`- Se acordă **${OFICIU} puncte** din oficiu`, '');
   l.push(':::warning Atenție', 'În această rubrică puneți direct răspunsul.', ':::', '');
 
@@ -205,7 +199,8 @@ function mdxDinFoaie({ capitol, clasa, subiecte, cuBarem, cate }) {
   subiecte.slice(jum).forEach((s, i) => l.push(`- **${ROMAN[i + jum]}.** *${s.titlu}*`));
   l.push('', '</div>', '</div>', '');
   l.push('', '## Răspunsuri', '');
-  l.push(`|${' Nr. | Răspuns |'.repeat(coloane)}`);
+  // Fără rând de cap: numărul din celulă spune deja ce se completează.
+  l.push(`|${'  |  |'.repeat(coloane)}`);
   l.push(`|${'---|---|'.repeat(coloane)}`);
   for (let r = 0; r < randuri; r += 1) {
     const celule = [];
@@ -218,10 +213,12 @@ function mdxDinFoaie({ capitol, clasa, subiecte, cuBarem, cate }) {
   }
   l.push('', '---', '');
 
+  let nr = 0;
   subiecte.forEach((s, i) => {
     l.push(banda(`Subiectul ${NUMERAL[i]} - ${s.total} puncte`), '');
-    s.intrebari.forEach((x, j) => {
-      l.push(`### Exercițiul ${j + 1} **(${x.puncte}p)**`, '', ':::note', enuntMdx(x.q), ':::', '');
+    s.intrebari.forEach((x) => {
+      nr += 1;
+      l.push(`### Exercițiul ${nr} **(${x.puncte}p)**`, '', ':::note', enuntMdx(x.q), ':::', '');
     });
     l.push('---', '');
   });
@@ -230,10 +227,12 @@ function mdxDinFoaie({ capitol, clasa, subiecte, cuBarem, cate }) {
 
   if (cuBarem) {
     l.push('---', '', banda('Barem de corectare'), '', '*Pagina aceasta este pentru profesor. Nu se distribuie elevilor.*', '');
+    let m = 0;
     subiecte.forEach((s, i) => {
       l.push(`**Subiectul ${NUMERAL[i]} — ${s.titlu}**`, '');
-      s.intrebari.forEach((x, j) => {
-        l.push(`- **${ROMAN[i]}.${j + 1}.** ${x.q.blanks.map((b) => `${b.label}: ${b.answer}`).join('; ')} (${x.puncte}p)`);
+      s.intrebari.forEach((x) => {
+        m += 1;
+        l.push(`- **${m}.** ${x.q.blanks.map((b) => `${b.label}: ${b.answer}`).join('; ')} (${x.puncte}p)`);
       });
       l.push('');
     });
@@ -435,7 +434,7 @@ export default function Evaluare({ capitol, clasa, automatisme }) {
  * un document care semăna cu al profesorului fără să fie el. Ce se vede pe
  * ecran și ce iese din butonul de cod trebuie să fie același lucru.
  */
-function FoaieTest({ capitol, clasa, subiecte, cuBarem, cate }) {
+function FoaieTest({ capitol, clasa, subiecte, cuBarem }) {
   return (
     <article>
       <h1>Automatisme: {capitol}</h1>
@@ -450,9 +449,6 @@ function FoaieTest({ capitol, clasa, subiecte, cuBarem, cate }) {
       </p>
 
       <ul>
-        <li>Toate subiectele sunt obligatorii</li>
-        <li>Timpul efectiv de lucru este de <strong>{MINUTE[cate] || 50} de minute</strong></li>
-        <li>Utilizarea instrumentelor de geometrie este <strong>permisă și recomandată</strong></li>
         <li>Se acordă <strong>{OFICIU} puncte</strong> din oficiu</li>
       </ul>
 
@@ -496,13 +492,14 @@ function FoaieTest({ capitol, clasa, subiecte, cuBarem, cate }) {
 
       <hr />
 
-      {subiecte.map((subiect, s) => (
+      {(() => { let n = 0; return subiecte.map((subiect, s) => (
         <section key={s}>
           {subiect.intrebari.map((x, j) => {
+            n += 1;
             const ex = (
               <Exercitiu
                 key={`${subiect.cheie}-${j}`}
-                numar={j + 1}
+                numar={n}
                 intrebare={x.q}
                 puncte={x.puncte}
               />
@@ -522,7 +519,7 @@ function FoaieTest({ capitol, clasa, subiecte, cuBarem, cate }) {
             );
           })}
         </section>
-      ))}
+      )); })()}
 
       <h2><span style={BANDA}>SFÂRȘIT TEST</span></h2>
 
@@ -531,31 +528,36 @@ function FoaieTest({ capitol, clasa, subiecte, cuBarem, cate }) {
           <hr />
           <h2><span style={BANDA}>Barem de corectare</span></h2>
           <p><em>Pagina aceasta este pentru profesor. Nu se distribuie elevilor.</em></p>
-          {subiecte.map((subiect, s) => (
+          {(() => { let n = 0; return subiecte.map((subiect, s) => (
             <div key={s}>
               <p><strong>Subiectul {NUMERAL[s]} — {subiect.titlu}</strong></p>
               <ul>
                 {subiect.intrebari.map((x, j) => (
                   <li key={j}>
-                    <strong>{ROMAN[s]}.{j + 1}.</strong>{' '}
+                    <strong>{(n += 1)}.</strong>{' '}
                     {x.q.blanks.map((b) => `${b.label}: ${b.answer}`).join('; ')} ({x.puncte}p)
                   </li>
                 ))}
               </ul>
             </div>
-          ))}
+          )); })()}
         </section>
       )}
     </article>
   );
 }
 
-const RANDURI_MAXIME = 3;
-const coloaneRubrica = (n) => Math.min(5, Math.max(2, Math.ceil(n / RANDURI_MAXIME)));
+const RANDURI_MAXIME = 5;
+const coloaneRubrica = (n) => Math.min(6, Math.max(2, Math.ceil(n / RANDURI_MAXIME)));
 
-/** Etichetele celulelor: „I.1", „I.2", „II.1" … — subiectul și exercițiul. */
+/**
+ * Etichetele celulelor sunt chiar numerele exercițiilor: 1, 2, 3 … prin tot
+ * testul. Purtau înainte numărul subiectului și pe al exercițiului din el —
+ * „III.2" —, ceea ce cerea o socoteală de fiecare dată ca să nimerești celula.
+ */
 function etichetePentru(subiecte) {
-  return subiecte.flatMap((s, i) => s.intrebari.map((_, j) => `${ROMAN[i]}.${j + 1}`));
+  let n = 0;
+  return subiecte.flatMap((s) => s.intrebari.map(() => String(++n)));
 }
 
 function RubricaRaspunsuri({ subiecte }) {
@@ -566,23 +568,15 @@ function RubricaRaspunsuri({ subiecte }) {
   return (
     <div className={styles.blocRubrica}>
       <h2>Răspunsuri</h2>
+      {/* Fără rând de cap: numărul din celulă spune deja ce se completează, iar
+          rândul câștigat aduce rubrica pe prima filă și la treizeci de întrebări. */}
       <table>
-        <thead>
-          <tr>
-            {Array.from({ length: coloane }, (_, c) => (
-              <React.Fragment key={c}>
-                <th>Nr.</th>
-                <th>Răspuns</th>
-              </React.Fragment>
-            ))}
-          </tr>
-        </thead>
         <tbody>
           {Array.from({ length: randuri }, (_, r) => (
             <tr key={r}>
               {Array.from({ length: coloane }, (_, c) => {
-                /* Se umple pe COLOANE, nu pe rânduri: așa I.1, I.2, I.3 stau
-                   unul sub altul, în ordinea de pe foaie. */
+                /* Se umple pe COLOANE, nu pe rânduri: așa 1, 2, 3 stau unul
+                   sub altul, în ordinea exercițiilor de pe foaie. */
                 const e = etichete[c * randuri + r];
                 return (
                   <React.Fragment key={c}>
