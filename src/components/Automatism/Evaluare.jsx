@@ -493,7 +493,7 @@ function FoaieTest({ capitol, clasa, subiecte, cuBarem }) {
       <hr />
 
       {(() => { let n = 0; return subiecte.map((subiect, s) => (
-        <section key={s}>
+        <section key={s} className={s === 0 ? styles.primulSubiect : undefined}>
           {subiect.intrebari.map((x, j) => {
             n += 1;
             const ex = (

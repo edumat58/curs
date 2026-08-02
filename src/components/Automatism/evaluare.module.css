@@ -272,6 +272,19 @@
      n-are reguli scrise pentru fragmentarea containerelor flex (bug 70795) și
      ignoră tăcut `break-inside` pe ele. Și `avoid`, nu `avoid-page`: în
      context paginat, Safari nu implementează `avoid-page`. */
+  /* Testul începe pe fila a doua. Fila întâi e a elevului: numele, punctajul
+     din oficiu, capitolele verificate și rubrica în care scrie răspunsurile —
+     nimic din ce trebuie rezolvat.
+
+     Ruperea o cere primul subiect, nu antetul. Pe antet ar însemna că tot ce e
+     în el, cu rubrică cu tot, trebuie să încapă pe o filă; acum încape, dar
+     dacă vreodată n-ar mai încăpea, cerința s-ar transforma într-o filă
+     irosită. Cerută de subiect, promisiunea se ține oricum. */
+  .primulSubiect {
+    page-break-before: always;
+    break-before: page;
+  }
+
   .blocColoane, .blocRubrica {
     page-break-inside: avoid;
     break-inside: avoid;
