@@ -8,8 +8,7 @@
  *
  * Forma NU e inventată aici: e șablonul din `teste/template.mdx`, urmat bucată
  * cu bucată — antetul cu Nume/Prenume pe linii de completat, cele patru
- * condiții de lucru, caseta „Nu completați!" pentru evaluator, grila de notare
- * (80 de puncte pe subiecte, plus 20 din oficiu), subiectele cu bandă
+ * condiții de lucru, caseta de atenționare, subiectele cu bandă
  * portocalie #e65100, exercițiile scrise „### Exercițiul N **(3p)**" cu cerința
  * într-o casetă `:::note`, banda „SFÂRȘIT TEST" la coadă. Un test care arată
  * altfel decât celelalte ale profesorului se corectează mai greu și miroase a
@@ -193,8 +192,8 @@ function mdxDinFoaie({ capitol, clasa, subiecte, cuBarem, cate }) {
   l.push('- Toate subiectele sunt obligatorii');
   l.push(`- Timpul efectiv de lucru este de **${MINUTE[cate] || 50} de minute**`);
   l.push('- Utilizarea instrumentelor de geometrie este **permisă și recomandată**');
-  l.push(`- Se acordă **${OFICIU} puncte** din oficiu`, '', '---', '');
-  l.push(':::warning Nu completați!', 'Rubrica aceasta se completează **doar de profesorul evaluator**!', '', '**Testul începe de pe pagina următoare.**', ':::', '');
+  l.push(`- Se acordă **${OFICIU} puncte** din oficiu`, '');
+  l.push(':::warning Atenție', 'În această rubrică puneți direct răspunsul.', ':::', '');
 
   l.push('## Capitole incluse', '');
   // Pe două coloane, cu idiomul din `teste/`: un capitol poate atinge opt
@@ -206,7 +205,6 @@ function mdxDinFoaie({ capitol, clasa, subiecte, cuBarem, cate }) {
   subiecte.slice(jum).forEach((s, i) => l.push(`- **${ROMAN[i + jum]}.** *${s.titlu}*`));
   l.push('', '</div>', '</div>', '');
   l.push('', '## Răspunsuri', '');
-  l.push('Scrie aici răspunsul final al fiecărui exercițiu.', '');
   l.push(`|${' Nr. | Răspuns |'.repeat(coloane)}`);
   l.push(`|${'---|---|'.repeat(coloane)}`);
   for (let r = 0; r < randuri; r += 1) {
@@ -458,11 +456,12 @@ function FoaieTest({ capitol, clasa, subiecte, cuBarem, cate }) {
         <li>Se acordă <strong>{OFICIU} puncte</strong> din oficiu</li>
       </ul>
 
-      <hr />
-
-      <Admonition type="warning" title="Nu completați!">
-        <p>Rubrica aceasta se completează <strong>doar de profesorul evaluator</strong>!</p>
-        <p><strong>Testul începe de pe pagina următoare.</strong></p>
+      {/* Un singur rând. Cele două de dinainte — „se completează doar de
+          profesorul evaluator" și „testul începe de pe pagina următoare" — au
+          rămas fără obiect de când grila de notare a dispărut, iar caseta
+          ocupa 136 de pixeli din prima filă pentru ele. */}
+      <Admonition type="warning" title="Atenție">
+        <p>În această rubrică puneți direct răspunsul.</p>
       </Admonition>
 
       {/* Fără grilă de notare: punctajul unui subiect stă pe banda lui, iar
@@ -551,7 +550,7 @@ function FoaieTest({ capitol, clasa, subiecte, cuBarem, cate }) {
   );
 }
 
-const RANDURI_MAXIME = 6;
+const RANDURI_MAXIME = 3;
 const coloaneRubrica = (n) => Math.min(5, Math.max(2, Math.ceil(n / RANDURI_MAXIME)));
 
 /** Etichetele celulelor: „I.1", „I.2", „II.1" … — subiectul și exercițiul. */
@@ -567,7 +566,6 @@ function RubricaRaspunsuri({ subiecte }) {
   return (
     <div className={styles.blocRubrica}>
       <h2>Răspunsuri</h2>
-      <p>Scrie aici răspunsul final al fiecărui exercițiu.</p>
       <table>
         <thead>
           <tr>
