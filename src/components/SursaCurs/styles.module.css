@@ -1,0 +1,65 @@
+/* Nota de sursă: text mic, tonuri stinse, o linie subțire în stânga. Fără
+   fundal și fără chenar — trebuie citită când o cauți, nu înaintea lecției. */
+
+.sursa {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.2rem 0.55rem;
+  margin: 0 0 1rem;
+  padding: 0.15rem 0 0.15rem 0.7rem;
+  border-left: 2px solid var(--km-line, rgba(28, 26, 22, 0.14));
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--km-ink3, #8b857a);
+}
+
+.eticheta {
+  flex: 0 0 auto;
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--km-ink3, #8b857a);
+}
+
+.text {
+  flex: 1 1 20rem;
+  min-width: 0;
+  margin: 0;
+}
+
+/* Numele editurii, ceva mai apăsat decât restul, fără să devină titlu. */
+.editura {
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.sursa strong {
+  font-weight: 600;
+  color: var(--km-ink2, #4f4b43);
+}
+
+.sursa a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.sursa a:hover {
+  color: var(--km-orange-deep, #c2540a);
+}
+
+/* Pe hârtie rămâne — e o notă de drepturi —, dar linkul se scrie în clar,
+   fiindcă pe o foaie tipărită nu-l poate apăsa nimeni. */
+@media print {
+  .sursa {
+    font-size: 8pt;
+  }
+
+  .sursa a::after {
+    content: ' (' attr(href) ')';
+    word-break: break-all;
+  }
+}

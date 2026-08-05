@@ -669,13 +669,27 @@ export default function SectionVoice() {
       // Codul canonic, etichetă discretă sus-stânga deasupra titlului.
       const cod = codPagina(route, h1, flaguri);
       let etichetaCod = null;
-      if (cod && !h1.previousElementSibling?.hasAttribute?.('data-edupasi-cod')) {
+      if (cod && !root.querySelector('[data-edupasi-cod]')) {
         etichetaCod = document.createElement('div');
         etichetaCod.setAttribute('data-edupasi-cod', '');
         etichetaCod.className = styles.codLectie;
         etichetaCod.textContent = cod;
         etichetaCod.title = 'Cod canonic al lecției (identitate + flaguri)';
-        h1.insertAdjacentElement('beforebegin', etichetaCod);
+        /*
+         * Nota de sursă, când există, e scrisă în lecție înaintea titlului, deci
+         * ajunge în DOM înaintea locului unde am insera eticheta. Fără căutarea
+         * de mai jos, codul ar cădea între notă și titlu; ordinea cerută e
+         * cod → notă → titlu.
+         *
+         * Căutarea pleacă din rădăcină, nu din părintele titlului: Docusaurus
+         * înfășoară primul `h1` într-un `<header>`, deci nota nu-i e frate.
+         */
+        const nota = root.querySelector('[data-sursa-curs]');
+        const inainteDe = nota
+          && (nota.compareDocumentPosition(h1) & Node.DOCUMENT_POSITION_FOLLOWING)
+          ? nota
+          : h1;
+        inainteDe.insertAdjacentElement('beforebegin', etichetaCod);
       }
 
       // Gazda de deasupra titlului: butonul, sau mesajul de indisponibilitate.
