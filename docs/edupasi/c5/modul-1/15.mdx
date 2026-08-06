@@ -7,93 +7,97 @@ description: ""
 import Katex from '@site/src/components/Katex';
 import HighlightText from '@site/src/components/HighlightText';
 
-# C13 - Ordinea efectuării operațiilor
+# C12 - Scrierea în baza 10 și baza 2
 
 ---
 
-## Ordin de calcul
+## Scrierea în baza 10
 
 :::danger Definiție
-Operațiile au **<HighlightText color="orange">trei ordine</HighlightText>**. Calculăm de sus în jos.
+În **<HighlightText color="red">baza 10</HighlightText>** folosim zece cifre: **0, 1, 2, 3, 4, 5, 6, 7, 8, 9**.
 :::
 
-<svg xmlns="http://www.w3.org/2000/svg" width="440" height="210" viewBox="0 0 440 210" role="img" aria-label="Cele trei ordine de calcul, de sus în jos: ordinul III puteri, ordinul II înmulțire și împărțire, ordinul I adunare și scădere">
-  <line x1="24" y1="16" x2="24" y2="176" stroke="#9370DB" stroke-width="4"/>
-  <path d="M14,176 L34,176 L24,196 Z" fill="#9370DB"/>
+**Exemplu:** numărul 135.
 
-  <rect x="50" y="8" width="382" height="52" rx="8" ry="8" fill="none" stroke="#FF8C00" stroke-width="2"/>
-  <text x="68" y="41" font-size="22" fill="#FF8C00">ordinul III</text>
-  <text x="240" y="41" font-size="22" fill="#111">2<tspan dy="-9" font-size="14">3</tspan><tspan dy="9"> = 8</tspan></text>
-
-  <rect x="50" y="72" width="382" height="52" rx="8" ry="8" fill="none" stroke="#4ECDC4" stroke-width="2"/>
-  <text x="68" y="105" font-size="22" fill="#4ECDC4">ordinul II</text>
-  <text x="240" y="105" font-size="22" fill="#111">6 · 3</text>
-  <text x="340" y="105" font-size="22" fill="#111">12 : 4</text>
-
-  <rect x="50" y="136" width="382" height="52" rx="8" ry="8" fill="none" stroke="#FF6B6B" stroke-width="2"/>
-  <text x="68" y="169" font-size="22" fill="#FF6B6B">ordinul I</text>
-  <text x="240" y="169" font-size="22" fill="#111">8 + 5</text>
-  <text x="340" y="169" font-size="22" fill="#111">9 - 4</text>
+<div style={{display: 'flex', justifyContent: 'center', margin: '20px 0'}}>
+<svg width="420" height="170" viewBox="0 0 420 170" xmlns="http://www.w3.org/2000/svg">
+  <text x="75" y="28" textAnchor="middle" fontSize="20" fill="#FF6B6B">sute</text>
+  <text x="210" y="28" textAnchor="middle" fontSize="20" fill="#4ECDC4">zeci</text>
+  <text x="345" y="28" textAnchor="middle" fontSize="20" fill="#9370DB">unități</text>
+  <rect x="20" y="42" width="110" height="70" rx="8" fill="none" stroke="#FF6B6B" strokeWidth="3" />
+  <rect x="155" y="42" width="110" height="70" rx="8" fill="none" stroke="#4ECDC4" strokeWidth="3" />
+  <rect x="290" y="42" width="110" height="70" rx="8" fill="none" stroke="#9370DB" strokeWidth="3" />
+  <text x="75" y="93" textAnchor="middle" fontSize="42" fill="#FF6B6B">1</text>
+  <text x="210" y="93" textAnchor="middle" fontSize="42" fill="#4ECDC4">3</text>
+  <text x="345" y="93" textAnchor="middle" fontSize="42" fill="#9370DB">5</text>
+  <text x="75" y="145" textAnchor="middle" fontSize="22" fill="#FF6B6B">100</text>
+  <text x="210" y="145" textAnchor="middle" fontSize="22" fill="#4ECDC4">10</text>
+  <text x="345" y="145" textAnchor="middle" fontSize="22" fill="#9370DB">1</text>
 </svg>
+</div>
+
+Înmulțim fiecare cifră cu valoarea locului ei:
+
+<Katex>
+{String.raw`
+135 = \color{#FF6B6B}{1} \cdot 100 + \color{#4ECDC4}{3} \cdot 10 + \color{#9370DB}{5} \cdot 1
+`}
+</Katex>
+
+Reținem:
+
+<Katex>
+{String.raw`
+\overline{abc}_{(10)} = a \cdot 100 + b \cdot 10 + c
+`}
+</Katex>
 
 ---
 
-## Reguli de calcul
+## Scrierea în baza 2
+
+În **<HighlightText color="orange">baza 2</HighlightText>** folosim doar două cifre: **0** și **1**.
+
+Aici locurile sunt: 1, 2, 4, 8.
+
+**Exemplu:** trecem numărul <Katex>{String.raw`101_{(2)}`}</Katex> în baza 10.
+
+<Katex>
+{String.raw`
+101_{(2)} = \color{#FF6B6B}{1} \cdot 4 + \color{#4ECDC4}{0} \cdot 2 + \color{#9370DB}{1} \cdot 1 = 5_{(10)}
+`}
+</Katex>
+
+---
+
+## Trecerea de la baza 10 la baza 2
+
+Împărțim numărul la 2, din nou și din nou.
+
+- Pasul 1: Împărțim la 2. Scriem câtul și restul.
+- Pasul 2: Împărțim iar câtul la 2.
+- Pasul 3: Ne oprim când câtul este 0.
+- Pasul 4: Citim resturile de jos în sus.
+
+**Exemplu:** trecem numărul 13 în baza 2. Calculăm pas cu pas:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+13 : 2 &\rightarrow \text{cât } 6,\ \text{rest } \color{#FF8C00}{1}\\[6pt]
+6 : 2 &\rightarrow \text{cât } 3,\ \text{rest } \color{#9370DB}{0}\\[6pt]
+3 : 2 &\rightarrow \text{cât } 1,\ \text{rest } \color{#4ECDC4}{1}\\[6pt]
+1 : 2 &\rightarrow \text{cât } 0,\ \text{rest } \color{#FF6B6B}{1}
+\end{aligned}
+`}
+</Katex>
+
+<Katex>
+{String.raw`
+13_{(10)} = \color{#FF6B6B}{1}\color{#4ECDC4}{1}\color{#9370DB}{0}\color{#FF8C00}{1}_{(2)}
+`}
+</Katex>
 
 :::tip De reținut
-Calculăm în această ordine:
-
-<Katex>
-{String.raw`
-\begin{aligned}
-& 1.\ \color{#9370DB}{\text{paranteze}}\quad (\ )\quad [\ ]\quad \{\ \}\\[8pt]
-& 2.\ \color{#FF8C00}{\text{ordinul III}}\\[8pt]
-& 3.\ \color{#4ECDC4}{\text{ordinul II}}\\[8pt]
-& 4.\ \color{#FF6B6B}{\text{ordinul I}}
-\end{aligned}
-`}
-</Katex>
-
-Operații de același ordin: de la stânga la dreapta.
+Resturile se citesc **<HighlightText color="teal">de jos în sus</HighlightText>**.
 :::
-
-**Atenție!** Verificăm întâi ordinul operațiilor.
-
-<Katex>
-{String.raw`
-\begin{aligned}
-& \color{#4ECDC4}{\text{corect: }} 4 + 2 \cdot 3 = 4 + 6 = 10\\[6pt]
-& \color{#FF6B6B}{\text{greșit: }} 4 + 2 \cdot 3 = 6 \cdot 3 = 18
-\end{aligned}
-`}
-</Katex>
-
----
-
-## Exemple
-
-**Exemplul 1.** Calculăm pas cu pas:
-
-<Katex>
-{String.raw`
-\begin{aligned}
-& 81 : 3^2 + 57\\[8pt]
-& \color{#FF8C00}{\text{Pasul 1: }} 3^2 = 9\\[6pt]
-& \color{#4ECDC4}{\text{Pasul 2: }} 81 : 9 = 9\\[6pt]
-& \color{#FF6B6B}{\text{Pasul 3: }} 9 + 57 = 66
-\end{aligned}
-`}
-</Katex>
-
-**Exemplul 2.** Calculăm pas cu pas:
-
-<Katex>
-{String.raw`
-\begin{aligned}
-& (7^2 + 35) \cdot 10\\[8pt]
-& \color{#FF8C00}{\text{Pasul 1: }} 7^2 = 49\\[6pt]
-& \color{#FF6B6B}{\text{Pasul 2: }} 49 + 35 = 84\\[6pt]
-& \color{#4ECDC4}{\text{Pasul 3: }} 84 \cdot 10 = 840
-\end{aligned}
-`}
-</Katex>

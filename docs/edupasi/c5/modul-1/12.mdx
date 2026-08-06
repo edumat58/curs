@@ -7,87 +7,118 @@ description: ""
 import Katex from '@site/src/components/Katex';
 import HighlightText from '@site/src/components/HighlightText';
 
-# C10 - Factor comun
+# C9 - Proprietăți puteri cu exponent natural
 
 ---
 
-## Definiție
+## Ce este o putere
 
 :::danger Definiție
-**<HighlightText color="red">Factorul comun</HighlightText>** este numărul sau litera care apare în **<HighlightText color="teal">fiecare termen</HighlightText>**.
+**<HighlightText color="red">Puterea</HighlightText>** este o înmulțire repetată. **<HighlightText color="teal">Exponentul</HighlightText>** arată câți factori scriem.
 :::
 
-Termenii sunt despărțiți prin semnele **+** sau **–**.
+<svg xmlns="http://www.w3.org/2000/svg" width="460" height="170" viewBox="0 0 460 170" role="img" aria-label="Puterea 2 la a treia scrisă ca produs de trei factori egali cu 2, rezultat 8">
+  <text x="10" y="75" font-size="38" fill="#FF6B6B">2<tspan font-size="24" dy="-16" fill="#4ECDC4">3</tspan></text>
+  <text x="72" y="75" font-size="32" fill="#9370DB">=</text>
+  <rect x="110" y="38" width="56" height="56" rx="8" fill="none" stroke="#FF6B6B" stroke-width="3"/>
+  <text x="138" y="78" font-size="32" fill="#FF6B6B" text-anchor="middle">2</text>
+  <text x="178" y="75" font-size="32" fill="#9370DB">×</text>
+  <rect x="208" y="38" width="56" height="56" rx="8" fill="none" stroke="#FF6B6B" stroke-width="3"/>
+  <text x="236" y="78" font-size="32" fill="#FF6B6B" text-anchor="middle">2</text>
+  <text x="276" y="75" font-size="32" fill="#9370DB">×</text>
+  <rect x="306" y="38" width="56" height="56" rx="8" fill="none" stroke="#FF6B6B" stroke-width="3"/>
+  <text x="334" y="78" font-size="32" fill="#FF6B6B" text-anchor="middle">2</text>
+  <text x="378" y="78" font-size="32" fill="#FF8C00">= 8</text>
+  <line x1="110" y1="110" x2="362" y2="110" stroke="#4ECDC4" stroke-width="3"/>
+  <text x="236" y="142" font-size="24" fill="#4ECDC4" text-anchor="middle">3 factori</text>
+</svg>
 
 <Katex>
 {String.raw`
-\begin{aligned}
-& \text{Expresia: } \color{#FF6B6B}{6x} + \color{#4ECDC4}{9}\\[6pt]
-& \text{Primul termen: } \color{#FF6B6B}{6x} = \color{#9370DB}{3} \cdot 2x\\[6pt]
-& \text{Al doilea termen: } \color{#4ECDC4}{9} = \color{#9370DB}{3} \cdot 3\\[6pt]
-& \text{Factorul comun: } \color{#9370DB}{3}
-\end{aligned}
+\color{#FF6B6B}{2}^{\color{#4ECDC4}{3}} = 2 \times 2 \times 2 = 8
 `}
 </Katex>
 
 ---
 
-## Distributivitatea simplă
+## Reguli de calcul
 
-Numărul din fața parantezei se înmulțește cu fiecare termen.
+Aceeași bază, înmulțire. Adunăm exponenții.
+
+<Katex>
+{String.raw`
+2^3 \times 2^2 = 2^{\color{#FF6B6B}{3+2}} = 2^5
+`}
+</Katex>
+
+Aceeași bază, împărțire. Scădem exponenții.
+
+<Katex>
+{String.raw`
+\frac{5^6}{5^2} = 5^{\color{#4ECDC4}{6-2}} = 5^4
+`}
+</Katex>
+
+Putere la putere. Înmulțim exponenții.
+
+<Katex>
+{String.raw`
+\bigl(3^2\bigr)^4 = 3^{\color{#9370DB}{2 \times 4}} = 3^8
+`}
+</Katex>
 
 :::tip De reținut
 <Katex>
 {String.raw`
 \begin{aligned}
-& \color{#FF6B6B}{a}(b + c) = \color{#FF6B6B}{a} \cdot b + \color{#FF6B6B}{a} \cdot c\\[8pt]
-& \color{#FF6B6B}{a}(b - c) = \color{#FF6B6B}{a} \cdot b - \color{#FF6B6B}{a} \cdot c
+& a^m \times a^n = a^{\color{#FF6B6B}{m+n}}\\[6pt]
+& \frac{a^m}{a^n} = a^{\color{#4ECDC4}{m-n}}\\[6pt]
+& \bigl(a^m\bigr)^n = a^{\color{#9370DB}{m \times n}}\\[6pt]
+& \text{Doar la } \color{#FF8C00}{\text{aceeași bază}}
 \end{aligned}
 `}
 </Katex>
 :::
 
-**Exemplu.** Dezvoltăm:
+---
+
+## Puterile lui 10
+
+Scriem cifra 1. Adăugăm atâtea zerouri cât arată exponentul.
 
 <Katex>
 {String.raw`
-\color{#FF6B6B}{7}(x + 2) = \color{#FF6B6B}{7} \cdot x + \color{#FF6B6B}{7} \cdot 2 = 7x + 14
+\begin{aligned}
+& 10^{\color{#4ECDC4}{2}} = 1\underline{00}\\[6pt]
+& 10^{\color{#4ECDC4}{4}} = 1\underline{0\,000}
+\end{aligned}
+`}
+</Katex>
+
+Înmulțim cu o putere a lui 10. Mutăm virgula spre dreapta.
+
+<Katex>
+{String.raw`
+3{,}5 \times 10^{\color{#4ECDC4}{2}} = 350
 `}
 </Katex>
 
 ---
 
-## Scoaterea factorului comun
+## Scrierea științifică
 
-Factorizarea este drumul invers. Calculăm pas cu pas:
+Scrierea științifică are o singură cifră înainte de virgulă. Apoi înmulțim cu o putere a lui 10.
 
-**Pasul 1:** Căutăm factorul care apare în fiecare termen.
+Scriem numărul 4 500.
 
-**Pasul 2:** Scriem fiecare termen ca produs cu acest factor.
+Pasul 1: punem virgula după prima cifră. Avem 4,5.
 
-**Pasul 3:** Scriem factorul în față. Restul rămâne în paranteză.
+Pasul 2: numărăm rangurile mutate. Sunt 3 ranguri.
 
-**Exemplu.** Factorizăm:
-
-<Katex>
-{String.raw`
-\begin{aligned}
-& 6x + 9\\[8pt]
-& \text{Pasul 1: factorul comun este } \color{#FF6B6B}{3}\\[6pt]
-& \text{Pasul 2: } 6x + 9 = \color{#FF6B6B}{3} \cdot 2x + \color{#FF6B6B}{3} \cdot 3\\[6pt]
-& \text{Pasul 3: } 6x + 9 = \color{#FF6B6B}{3}(2x + 3)
-\end{aligned}
-`}
-</Katex>
-
-Reținem: în paranteză rămâne ce nu a fost scos.
-
-:::warning Atenție
-Când factorul comun rămâne singur, scriem **<HighlightText color="orange">1</HighlightText>** în paranteză.
+Pasul 3: scriem puterea lui 10.
 
 <Katex>
 {String.raw`
-3x + 3 = \color{#FF6B6B}{3} \cdot x + \color{#FF6B6B}{3} \cdot \color{#FF8C00}{1} = \color{#FF6B6B}{3}(x + \color{#FF8C00}{1})
+4\,500 = \color{#FF8C00}{4{,}5} \times 10^{\color{#9370DB}{3}}
 `}
 </Katex>
-:::

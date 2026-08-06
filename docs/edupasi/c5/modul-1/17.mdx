@@ -1,0 +1,100 @@
+---
+sidebar_position: 17
+slug: /edupasi/c5/modul-1/17
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C14 - Media aritmetică
+
+---
+
+## Media aritmetică a două numere naturale
+
+:::danger Definiție
+**<HighlightText color="red">Adunăm</HighlightText>** cele două numere. Apoi **<HighlightText color="teal">împărțim suma la 2</HighlightText>**.
+:::
+
+<svg viewBox="0 0 420 180" width="100%" role="img">
+  <text x="20" y="24" fontSize="17" fill="#FF6B6B" fontWeight="bold">2 lei</text>
+  <rect x="20" y="34" width="60" height="30" fill="#FF6B6B" />
+  <text x="20" y="94" fontSize="17" fill="#FF8C00" fontWeight="bold">4 lei</text>
+  <rect x="20" y="104" width="120" height="30" fill="#FF8C00" />
+  <text x="185" y="95" fontSize="34" fill="#9370DB">→</text>
+  <text x="250" y="24" fontSize="17" fill="#4ECDC4" fontWeight="bold">3 lei</text>
+  <rect x="250" y="34" width="90" height="30" fill="#4ECDC4" />
+  <text x="250" y="94" fontSize="17" fill="#4ECDC4" fontWeight="bold">3 lei</text>
+  <rect x="250" y="104" width="90" height="30" fill="#4ECDC4" />
+  <text x="20" y="165" fontSize="17" fill="#9370DB">părți diferite</text>
+  <text x="250" y="165" fontSize="17" fill="#9370DB">părți egale</text>
+</svg>
+
+<Katex>
+{String.raw`
+ma = \frac{\color{#FF6B6B}{a + b}}{\color{#4ECDC4}{2}}
+`}
+</Katex>
+
+**Exemplu:** media numerelor 7 și 11.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1. Adunăm: } 7 + 11 = \color{#FF6B6B}{18}\\[6pt]
+& \text{Pasul 2. Împărțim la 2: } 18 : 2 = \color{#4ECDC4}{9}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Media aritmetică a trei numere naturale
+
+**<HighlightText color="red">Adunăm</HighlightText>** cele trei numere. Apoi **<HighlightText color="teal">împărțim suma la 3</HighlightText>**.
+
+<Katex>
+{String.raw`
+ma = \frac{\color{#FF6B6B}{a + b + c}}{\color{#4ECDC4}{3}}
+`}
+</Katex>
+
+**Exemplu:** media numerelor 6, 15 și 24.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1. Adunăm: } 6 + 15 + 24 = \color{#FF6B6B}{45}\\[6pt]
+& \text{Pasul 2. Împărțim la 3: } 45 : 3 = \color{#4ECDC4}{15}
+\end{aligned}
+`}
+</Katex>
+
+---
+
+## Media aritmetică a n numere naturale
+
+Adunăm toate numerele. Împărțim suma la câte numere sunt.
+
+<Katex>
+{String.raw`
+ma = \frac{\color{#FF6B6B}{a_1 + a_2 + \ldots + a_n}}{\color{#4ECDC4}{n}}
+`}
+</Katex>
+
+**Exemplu:** notele 9, 10, 7, 10, 9.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1. Numărăm notele: } \color{#9370DB}{5}\\[6pt]
+& \text{Pasul 2. Adunăm: } 9 + 10 + 7 + 10 + 9 = \color{#FF6B6B}{45}\\[6pt]
+& \text{Pasul 3. Împărțim la 5: } 45 : 5 = \color{#4ECDC4}{9}
+\end{aligned}
+`}
+</Katex>
+
+:::tip De reținut
+Media este între cel mai mic și cel mai mare număr.
+:::

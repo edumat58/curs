@@ -7,82 +7,123 @@ description: ""
 import Katex from '@site/src/components/Katex';
 import HighlightText from '@site/src/components/HighlightText';
 
-# C7.1 – Ilustrarea fracţiilor echiunitare, subunitare și supraunitare
+# C6.2 - Scrierea si citirea nr. naturale
 
 ---
 
-## Introducere
+## Ne reamintim
+
+Fiecare cifră stă pe locul ei. Locul se numește **<HighlightText color="red">ordin</HighlightText>**.
+
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="160" viewBox="0 0 420 160" role="img" aria-label="Numărul 347 așezat pe ordine: 3 sute, 4 zeci, 7 unități">
+  <text x="75" y="24" text-anchor="middle" font-size="20" fill="#FF6B6B">sute</text>
+  <rect x="20" y="36" width="110" height="70" rx="8" fill="none" stroke="#FF6B6B" stroke-width="3"/>
+  <text x="75" y="92" text-anchor="middle" font-size="42" fill="#FF6B6B">3</text>
+  <text x="75" y="142" text-anchor="middle" font-size="26" fill="#FF6B6B">300</text>
+
+  <text x="210" y="24" text-anchor="middle" font-size="20" fill="#4ECDC4">zeci</text>
+  <rect x="155" y="36" width="110" height="70" rx="8" fill="none" stroke="#4ECDC4" stroke-width="3"/>
+  <text x="210" y="92" text-anchor="middle" font-size="42" fill="#4ECDC4">4</text>
+  <text x="210" y="142" text-anchor="middle" font-size="26" fill="#4ECDC4">40</text>
+
+  <text x="345" y="24" text-anchor="middle" font-size="20" fill="#9370DB">unități</text>
+  <rect x="290" y="36" width="110" height="70" rx="8" fill="none" stroke="#9370DB" stroke-width="3"/>
+  <text x="345" y="92" text-anchor="middle" font-size="42" fill="#9370DB">7</text>
+  <text x="345" y="142" text-anchor="middle" font-size="26" fill="#9370DB">7</text>
+</svg>
+
+Numărul 347 se citește trei sute patruzeci și șapte.
+
+Numerele se scriu și cu **<HighlightText color="teal">cifre romane</HighlightText>**.
+
+| Simbol | I | V | X | L | C |
+|---|---|---|---|---|---|
+| Valoare | 1 | 5 | 10 | 50 | 100 |
+
+<Katex>
+{String.raw`
+12 = \color{#4ECDC4}{XII} \qquad 24 = \color{#4ECDC4}{XXIV}
+`}
+</Katex>
+
+---
+
+## Descompunerea unui nr. natural
 
 :::danger Definiție
-Comparăm **<HighlightText color="red">numărătorul</HighlightText>** cu **<HighlightText color="teal">numitorul</HighlightText>**.
-
-- Numărător mai mic: fracție **subunitară**.
-- Numărător egal: fracție **echiunitară**.
-- Numărător mai mare: fracție **supraunitară**.
+A descompune un număr înseamnă a-l scrie ca sumă de ordine.
 :::
 
 <Katex>
 {String.raw`
-\begin{aligned}
-& \color{#4ECDC4}{\text{subunitară: }} \frac{1}{2},\ \frac{3}{4}\\[6pt]
-& \color{#FF8C00}{\text{echiunitară: }} \frac{2}{2},\ \frac{5}{5}\\[6pt]
-& \color{#FF6B6B}{\text{supraunitară: }} \frac{3}{2},\ \frac{5}{3}
-\end{aligned}
+347 = \color{#FF6B6B}{3} \times 100 + \color{#4ECDC4}{4} \times 10 + \color{#9370DB}{7}
+`}
+</Katex>
+
+Un număr cu cifre necunoscute are linie deasupra.
+
+<Katex>
+{String.raw`
+\overline{abc} = \color{#FF6B6B}{a} \times 100 + \color{#4ECDC4}{b} \times 10 + \color{#9370DB}{c}
 `}
 </Katex>
 
 ---
 
-## Reprezentări grafice
+## Metode
 
-Pasul 1: Împărțim întregul în părți egale, cât numitorul.
-
-Pasul 2: Colorăm atâtea părți cât numărătorul.
-
-<div style={{textAlign:'center'}}>
-<svg width="450" height="210" viewBox="0 0 450 210">
-  <rect x="20" y="15" width="120" height="40" fill="none" stroke="#333" strokeWidth="3"/>
-  <rect x="20" y="15" width="60" height="40" fill="#4ECDC4" stroke="#333" strokeWidth="3"/>
-  <text x="285" y="42" fontSize="17" fontWeight="bold" fill="#4ECDC4">1/2 subunitară</text>
-
-  <rect x="20" y="80" width="120" height="40" fill="#FF8C00" stroke="#333" strokeWidth="3"/>
-  <line x1="80" y1="80" x2="80" y2="120" stroke="#333" strokeWidth="3"/>
-  <text x="285" y="107" fontSize="17" fontWeight="bold" fill="#FF8C00">2/2 echiunitară</text>
-
-  <rect x="20" y="145" width="120" height="40" fill="#FF6B6B" stroke="#333" strokeWidth="3"/>
-  <line x1="80" y1="145" x2="80" y2="185" stroke="#333" strokeWidth="3"/>
-  <rect x="150" y="145" width="120" height="40" fill="none" stroke="#333" strokeWidth="3"/>
-  <rect x="150" y="145" width="60" height="40" fill="#FF6B6B" stroke="#333" strokeWidth="3"/>
-  <text x="285" y="172" fontSize="17" fontWeight="bold" fill="#FF6B6B">3/2 supraunitară</text>
-</svg>
-</div>
-
----
-
-## Exemplu rezolvat
-
-Calculăm pas cu pas:
+Aflăm cifrele a și b din egalitatea:
 
 <Katex>
 {String.raw`
-\begin{aligned}
-& \text{Fracția: } \color{#9370DB}{\frac{4}{3}}\\[8pt]
-& \text{Pasul 1: numărătorul este } \color{#FF6B6B}{4}\\[6pt]
-& \text{Pasul 2: numitorul este } \color{#4ECDC4}{3}\\[6pt]
-& \text{Pasul 3: } \color{#FF6B6B}{4} > \color{#4ECDC4}{3}\\[6pt]
-& \text{Pasul 4: } \frac{4}{3} \text{ este } \color{#FF6B6B}{\text{supraunitară}}
-\end{aligned}
+459 = \color{#FF6B6B}{a} \times 100 + \color{#4ECDC4}{b} \times 10 + 9
+`}
+</Katex>
+
+Calculăm pas cu pas:
+
+**Pasul 1:** Descompunem numărul 459.
+
+<Katex>
+{String.raw`
+459 = 400 + 50 + 9
+`}
+</Katex>
+
+**Pasul 2:** Scriem fiecare ordin ca produs.
+
+<Katex>
+{String.raw`
+459 = \color{#FF6B6B}{4} \times 100 + \color{#4ECDC4}{5} \times 10 + 9
+`}
+</Katex>
+
+**Pasul 3:** Așezăm cele două scrieri în tabel.
+
+| sute | zeci | unități |
+|---|---|---|
+| 4 | 5 | 9 |
+| a | b | 9 |
+
+Observăm că litera a stă sub 4. Litera b stă sub 5.
+
+**Pasul 4:** Scriem răspunsul.
+
+<Katex>
+{String.raw`
+\color{#FF6B6B}{a = 4} \qquad \color{#4ECDC4}{b = 5}
+`}
+</Katex>
+
+**Pasul 5:** Verificăm.
+
+<Katex>
+{String.raw`
+4 \times 100 + 5 \times 10 + 9 = 400 + 50 + 9 = 459
 `}
 </Katex>
 
 :::tip De reținut
-<Katex>
-{String.raw`
-\begin{aligned}
-& \color{#4ECDC4}{\frac{1}{2}} < 1 \qquad \color{#4ECDC4}{\text{subunitară}}\\[6pt]
-& \color{#FF8C00}{\frac{2}{2}} = 1 \qquad \color{#FF8C00}{\text{echiunitară}}\\[6pt]
-& \color{#FF6B6B}{\frac{3}{2}} > 1 \qquad \color{#FF6B6B}{\text{supraunitară}}
-\end{aligned}
-`}
-</Katex>
+Fiecare cifră se înmulțește cu valoarea locului ei.
+Sutele au 100, zecile au 10, unitățile au 1.
 :::

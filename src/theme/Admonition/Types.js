@@ -5,6 +5,7 @@ import AdmonitionTypeInfo from '@theme/Admonition/Type/Info';
 import AdmonitionTypeWarning from '@theme/Admonition/Type/Warning';
 import AdmonitionTypeDanger from '@theme/Admonition/Type/Danger';
 import AdmonitionTypeCaution from '@theme/Admonition/Type/Caution';
+import AdmonitionTypeSoft from '@theme/Admonition/Type/Soft';
 
 
 const admonitionTypes = {
@@ -14,7 +15,7 @@ const admonitionTypes = {
   warning: AdmonitionTypeWarning,
   danger: AdmonitionTypeDanger,
   caution: AdmonitionTypeCaution,
-
+  soft: AdmonitionTypeSoft,
 };
 // Undocumented legacy admonition type aliases
 // Provide hardcoded/untranslated retrocompatible label

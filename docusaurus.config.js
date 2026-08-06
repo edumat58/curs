@@ -34,6 +34,56 @@ function flagurileLectiilor() {
   }
 }
 
+/**
+ * Resursele pentru părinți din `docs/parinti/`, citite la BUILD.
+ *
+ * Componenta `<ResurseParinti fisier="00" />` din lecție are nevoie de TITLUL
+ * resursei, cel din `#`. Titlul nu există în datele globale ale Docusaurus (acolo
+ * fiecare document are doar id, cale și sidebar), așa că se citește de pe disc
+ * aici, exact cum se citesc flagurile lecțiilor mai sus: aceeași valoare la
+ * randarea de pe server și în browser, fără fetch și fără cache de stricat.
+ *
+ * Consecință de știut: un fișier NOU în `docs/parinti/` apare după repornirea
+ * serverului de dev, fiindcă atunci se citește din nou configurația. Modificarea
+ * titlului într-un fișier existent, la fel.
+ *
+ * Fără subfoldere, cum s-a cerut: `docs/parinti/00.mdx`, `01.mdx`, ș.a.m.d.
+ */
+function resurseleParintilor() {
+  try {
+    const fs = require('fs');
+    const path = require('path');
+    const folder = path.join(__dirname, 'docs', 'parinti');
+    if (!fs.existsSync(folder)) return {};
+
+    const resurse = {};
+    for (const fisier of fs.readdirSync(folder)) {
+      if (!/\.mdx?$/.test(fisier) || fisier.startsWith('_')) continue;
+      const cheie = fisier.replace(/\.mdx?$/, '');
+      const brut = fs.readFileSync(path.join(folder, fisier), 'utf8');
+      const frontmatter = brut.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+      const corp = brut.replace(/^---\r?\n[\s\S]*?\r?\n---/, '');
+      const titlu = corp.match(/^#\s+(.+)$/m);
+      const slug = frontmatter && frontmatter[1].match(/^slug:\s*['"]?([^'"\n]+)['"]?\s*$/m);
+
+      let cale;
+      if (slug) {
+        const val = slug[1].trim();
+        // Un slug care începe cu „/" e relativ la routeBasePath („docs"); altfel
+        // e relativ la folderul fișierului.
+        cale = val.startsWith('/') ? `/docs${val}` : `/docs/parinti/${val}`;
+      } else {
+        cale = `/docs/parinti/${cheie}`;
+      }
+
+      resurse[cheie] = { titlu: titlu ? titlu[1].trim() : cheie, cale };
+    }
+    return resurse;
+  } catch {
+    return {};
+  }
+}
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Edumat58',
@@ -41,6 +91,7 @@ const config = {
 
   customFields: {
     lessonFlags: flagurileLectiilor(),
+    resurseParinti: resurseleParintilor(),
   },
 
   // Set the production url of your site here
@@ -95,7 +146,7 @@ const config = {
           remarkPlugins: [math],
           rehypePlugins: [katex],
           admonitions: {
-            keywords: ['edumat'],
+            keywords: ['edumat', 'soft'],
             extendDefaults: true,
           },
           sidebarPath: './sidebars.js',
@@ -181,6 +232,7 @@ const config = {
       customTypes: {
         def: 'tip',
         edumat: 'edumat',
+        soft: 'soft',
       },
     },
     navbar: {
@@ -201,6 +253,16 @@ const config = {
           to: '/edupasi',
           position: 'left',
           className: 'edupasi-nav-link',
+        },
+        // Rubrică proprie în navbarul edumat, imediat după EduPAȘI: părintele ajunge
+        // la ghid direct, fără să treacă prin lecția copilului. Ținta e pagina de
+        // rubrică generată de categoria `docs/parinti`, deci se completează singură
+        // la fiecare fișier nou.
+        {
+          position: 'left',
+          label: 'Ghidul părintelui',
+          to: '/docs/parinti',
+          className: 'ghid-parinte-nav-link',
         },
         {
           position: 'left',
@@ -262,7 +324,7 @@ const config = {
                 <circle cx="12" cy="12" r="9"></circle>
                 <polyline points="12 7 12 12 15.5 14"></polyline>
               </svg>
-              <span class="nav-update-date">30.07.2026, 18:44</span>
+              <span class="nav-update-date">06.08.2026, 03:49</span>
             </span>
           `,
         },

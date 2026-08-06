@@ -7,38 +7,26 @@ description: ""
 import Katex from '@site/src/components/Katex';
 import HighlightText from '@site/src/components/HighlightText';
 
-# C7.2 – Fracții și scrierea procentuală
+# C7.1 – Ilustrarea fracţiilor echiunitare, subunitare și supraunitare
 
 ---
 
 ## Introducere
 
 :::danger Definiție
-Un **<HighlightText color="red">procent</HighlightText>** este o parte din **<HighlightText color="teal">100 de părți egale</HighlightText>**. Semnul **%** se citește „la sută".
+Comparăm **<HighlightText color="red">numărătorul</HighlightText>** cu **<HighlightText color="teal">numitorul</HighlightText>**.
+
+- Numărător mai mic: fracție **subunitară**.
+- Numărător egal: fracție **echiunitară**.
+- Numărător mai mare: fracție **supraunitară**.
 :::
 
 <Katex>
 {String.raw`
-\color{#FF6B6B}{x\%} = \frac{x}{100}
-`}
-</Katex>
-
----
-
-## Scrierea unui procent sub formă de fracție ordinară
-
-- Pasul 1: Ștergem semnul %.
-- Pasul 2: Scriem numărul la numărător.
-- Pasul 3: Scriem 100 la numitor.
-- Pasul 4: Simplificăm fracția.
-
-Calculăm pas cu pas:
-
-<Katex>
-{String.raw`
 \begin{aligned}
-& 50\% = \frac{50}{100} = \frac{50 \div 50}{100 \div 50} = \color{#FF6B6B}{\frac{1}{2}}\\[8pt]
-& 25\% = \frac{25}{100} = \frac{25 \div 25}{100 \div 25} = \color{#4ECDC4}{\frac{1}{4}}
+& \color{#4ECDC4}{\text{subunitară: }} \frac{1}{2},\ \frac{3}{4}\\[6pt]
+& \color{#FF8C00}{\text{echiunitară: }} \frac{2}{2},\ \frac{5}{5}\\[6pt]
+& \color{#FF6B6B}{\text{supraunitară: }} \frac{3}{2},\ \frac{5}{3}
 \end{aligned}
 `}
 </Katex>
@@ -47,41 +35,54 @@ Calculăm pas cu pas:
 
 ## Reprezentări grafice
 
+Pasul 1: Împărțim întregul în părți egale, cât numitorul.
+
+Pasul 2: Colorăm atâtea părți cât numărătorul.
+
 <div style={{textAlign:'center'}}>
-<svg width="340" height="200" viewBox="0 0 340 200" role="img">
-  <text x="20" y="22" fontSize="18" fill="currentColor">1 întreg</text>
+<svg width="450" height="210" viewBox="0 0 450 210">
+  <rect x="20" y="15" width="120" height="40" fill="none" stroke="#333" strokeWidth="3"/>
+  <rect x="20" y="15" width="60" height="40" fill="#4ECDC4" stroke="#333" strokeWidth="3"/>
+  <text x="285" y="42" fontSize="17" fontWeight="bold" fill="#4ECDC4">1/2 subunitară</text>
 
-  <rect x="20" y="32" width="280" height="46" fill="none" stroke="#888888" strokeWidth="3"/>
-  <rect x="20" y="32" width="140" height="46" fill="#4ECDC4"/>
-  <line x1="160" y1="32" x2="160" y2="78" stroke="#888888" strokeWidth="3"/>
-  <text x="20" y="100" fontSize="20" fill="currentColor">50 % = 1 din 2 părți</text>
+  <rect x="20" y="80" width="120" height="40" fill="#FF8C00" stroke="#333" strokeWidth="3"/>
+  <line x1="80" y1="80" x2="80" y2="120" stroke="#333" strokeWidth="3"/>
+  <text x="285" y="107" fontSize="17" fontWeight="bold" fill="#FF8C00">2/2 echiunitară</text>
 
-  <rect x="20" y="122" width="280" height="46" fill="none" stroke="#888888" strokeWidth="3"/>
-  <rect x="20" y="122" width="140" height="46" fill="#FF8C00"/>
-  <line x1="90" y1="122" x2="90" y2="168" stroke="#888888" strokeWidth="3"/>
-  <line x1="160" y1="122" x2="160" y2="168" stroke="#888888" strokeWidth="3"/>
-  <line x1="230" y1="122" x2="230" y2="168" stroke="#888888" strokeWidth="3"/>
-  <text x="20" y="190" fontSize="20" fill="currentColor">50 % = 2 din 4 părți</text>
+  <rect x="20" y="145" width="120" height="40" fill="#FF6B6B" stroke="#333" strokeWidth="3"/>
+  <line x1="80" y1="145" x2="80" y2="185" stroke="#333" strokeWidth="3"/>
+  <rect x="150" y="145" width="120" height="40" fill="none" stroke="#333" strokeWidth="3"/>
+  <rect x="150" y="145" width="60" height="40" fill="#FF6B6B" stroke="#333" strokeWidth="3"/>
+  <text x="285" y="172" fontSize="17" fontWeight="bold" fill="#FF6B6B">3/2 supraunitară</text>
 </svg>
 </div>
 
 ---
 
-## Verificarea echivalenței a două fracții
+## Exemplu rezolvat
 
-:::tip De reținut
-Două fracții sunt **<HighlightText color="orange">echivalente</HighlightText>** dacă arată aceeași parte din întreg.
-:::
-
-Înmulțim încrucișat. Calculăm pas cu pas:
+Calculăm pas cu pas:
 
 <Katex>
 {String.raw`
 \begin{aligned}
-& \text{Verificăm } \frac{1}{2} \text{ și } \frac{2}{4}\\[8pt]
-& \text{Pasul 1: } \color{#FF6B6B}{1 \times 4 = 4}\\[6pt]
-& \text{Pasul 2: } \color{#4ECDC4}{2 \times 2 = 4}\\[6pt]
-& \text{Pasul 3: } 4 = 4 \Rightarrow \frac{1}{2} = \frac{2}{4} = \color{#9370DB}{50\%}
+& \text{Fracția: } \color{#9370DB}{\frac{4}{3}}\\[8pt]
+& \text{Pasul 1: numărătorul este } \color{#FF6B6B}{4}\\[6pt]
+& \text{Pasul 2: numitorul este } \color{#4ECDC4}{3}\\[6pt]
+& \text{Pasul 3: } \color{#FF6B6B}{4} > \color{#4ECDC4}{3}\\[6pt]
+& \text{Pasul 4: } \frac{4}{3} \text{ este } \color{#FF6B6B}{\text{supraunitară}}
 \end{aligned}
 `}
 </Katex>
+
+:::tip De reținut
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#4ECDC4}{\frac{1}{2}} < 1 \qquad \color{#4ECDC4}{\text{subunitară}}\\[6pt]
+& \color{#FF8C00}{\frac{2}{2}} = 1 \qquad \color{#FF8C00}{\text{echiunitară}}\\[6pt]
+& \color{#FF6B6B}{\frac{3}{2}} > 1 \qquad \color{#FF6B6B}{\text{supraunitară}}
+\end{aligned}
+`}
+</Katex>
+:::

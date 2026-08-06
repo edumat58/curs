@@ -1701,6 +1701,90 @@ article {
   padding-bottom: 0.35rem;
 }
 
+/* 7. Semn vizibil că un element se poate trage pe orizontală
+   ------------------------------------------------------------------
+   Punctul 3 le dă scroll propriu formulelor lungi, tabelelor și figurilor, dar pe
+   telefon bara de scroll e invizibilă: elevul vede o formulă tăiată la marginea
+   ecranului și crede că lecția e stricată, nu că mai are conținut la dreapta.
+
+   Semnul e o UMBRĂ INTERIOARĂ pe marginea unde mai urmează conținut, plus o bară
+   de scroll subțire, dar vizibilă. Umbra `inset` se desenează pe marginea
+   elementului și NU se mișcă cu conținutul, deci nu trebuie urmărită din
+   JavaScript la fiecare pixel.
+
+   Ce NU merge, și de ce e scris aici ca să nu se reîncerce:
+   - fundal pictat în culoarea paginii (`background-attachment: local`) — cere un
+     fundal opac pe fiecare tabel și pe fiecare formulă, adică o pată bej peste
+     tot, inclusiv unde nu e nimic de tras;
+   - `mask-image` pe elementul care se derulează — arată bine, dar scoate
+     derularea de pe compositor: pe telefon devine sacadată exact la elementele
+     lungi, adică fix acolo unde ne trebuia.
+
+   Starea vine din `src/components/ScrollOrizontal`: `start` = mai e la dreapta,
+   `mid` = de amândouă părțile, `end` = doar în stânga. Fără atribut nu se aplică
+   nimic, deci elementele care încap arată exact ca înainte.
+
+   Umbrele doar pe ecran îngust: pe desktop există bară de scroll adevărată. */
+[data-scroll-x] {
+  /* Prima tragere trebuie să miște CONȚINUTUL. Fără asta, gestul orizontal
+     ajunge la browser și devine „pagina precedentă" (sau nu face nimic), iar
+     elevul trage de două ori ca să pornească tabelul. */
+  overscroll-behavior-x: contain;
+}
+
+@media (max-width: 996px) {
+  [data-scroll-x] {
+    --scrollx-umbra: rgba(0, 0, 0, 0.3);
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.28) transparent;
+  }
+
+  [data-scroll-x]::-webkit-scrollbar {
+    height: 5px;
+  }
+
+  [data-scroll-x]::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.28);
+    border-radius: 3px;
+  }
+
+  [data-scroll-x='start'] {
+    box-shadow: inset -18px 0 15px -15px var(--scrollx-umbra);
+  }
+
+  [data-scroll-x='mid'] {
+    box-shadow:
+      inset -18px 0 15px -15px var(--scrollx-umbra),
+      inset 18px 0 15px -15px var(--scrollx-umbra);
+  }
+
+  [data-scroll-x='end'] {
+    box-shadow: inset 18px 0 15px -15px var(--scrollx-umbra);
+  }
+
+  /* Pe fundal închis o umbră neagră nu se vede: marginea se marchează cu lumină. */
+  [data-theme='dark'] [data-scroll-x] {
+    --scrollx-umbra: rgba(255, 255, 255, 0.34);
+    scrollbar-color: rgba(255, 255, 255, 0.32) transparent;
+  }
+
+  [data-theme='dark'] [data-scroll-x]::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.32);
+  }
+}
+
+/* 3bis. O formulă display are UN SINGUR scroll, nu două unul în altul.
+   Punctul 4 dă `overflow-x: auto` fiecărui `.katex`, ca formulele dintre rânduri
+   să nu spargă coloana de text. Într-o formulă de tip display asta însemna însă
+   două scrollere suprapuse: `.katex-display` pe dinafară și `.katex` pe dinăuntru.
+   Degetul mișca mai întâi cel interior până la capătul lui și abia a doua tragere
+   pornea formula — de aici senzația de scroll sacadat, care trebuie repornit. */
+.theme-doc-markdown .katex-display > .katex,
+.katex-display > .katex {
+  overflow: visible;
+  max-width: none;
+}
+
 /* 4. Formulele inline KaTeX previn spargerea containerului pe mobil */
 .katex {
   max-width: 100%;
@@ -2033,4 +2117,161 @@ html[data-edupasi-spacing]:not([data-edupasi-spacing='normal'])
   .theme-doc-markdown :where(.katex, .katex-display, code, pre) {
   letter-spacing: normal;
   word-spacing: normal;
+}
+
+/* ==========================================================================
+   Subtitlurile lecțiilor EduPAȘI, scrise de mână
+   ==========================================================================
+
+   Manualul de la care s-a pornit are titlurile de activitate scrise cu mâna, iar
+   în lecțiile EduPAȘI păstrăm ductul, dar la `##`/`###` obișnuite: rămân
+   titluri reale în cuprins și în navigarea cu cititor de ecran, nu imagini și
+   nici benzi colorate.
+
+   Fontul e o listă de fonturi DE SISTEM: pe macOS iese Bradley Hand, pe Windows
+   Segoe Script, iar unde nu există niciunul cade pe `cursive` — deci nu se
+   descarcă nimic în plus. Dacă vrei același duct pe toate calculatoarele,
+   pune un woff2 în `static/fonts` și adaugă-l la începutul listei.
+
+   Variabila e globală (o folosesc și componentele din `src/components/Lectie`
+   pentru cifrele „scrise de elev"), dar REGULA se aplică numai unde proiectul a
+   marcat pagina ca fiind EduPAȘI, în `src/theme/DocRoot/Layout`. Lecțiile
+   normale de la Curs V–VIII nu sunt atinse. */
+/* Scrisul de mână al lecțiilor: **Playwrite IT Tradizionale** (Google Fonts,
+   licență OFL). Din familia Playwrite, care are un font pe țară, desenat după
+   modelul de scriere predat acolo. Varianta italiană tradițională e DREAPTĂ, nu
+   înclinată ca Playwrite RO, și are tot setul de care avem nevoie: 486 de glife,
+   cu ă Ă â Â î Î ș Ș ț Ț și cifrele — deci nicio literă adăugată de mână, cum a
+   fost nevoie la cursivele franțuzești încercate înainte.
+
+   Fontul are o singură grosime folosibilă: axa `wght` merge 100–400, iar 400 e
+   maximul. NU se cere bold nicăieri, deliberat:
+   - bold sintetizat de browser umple buclele scrisului de mână și arată mâzgălit;
+   - o tăietură bold generată prin suprapunerea literei cu ea însăși („smear
+     bold") s-a încercat și arată la fel de rău pe un cursiv.
+   De aceea subtitlurile folosesc greutatea 400 și primesc prezență din mărime și
+   din plăcuța cremă, iar `font-synthesis: none` oprește explicit falsificarea în
+   browserele care ar încerca-o oricum. */
+@font-face {
+  font-family: 'LectieScris';
+  src: url('/fonts/PlaywriteITTrad.woff2') format('woff2');
+  font-weight: 100 400;
+  font-display: swap;
+}
+
+:root {
+  --lectie-scris: 'LectieScris', 'Bradley Hand', 'Segoe Script', 'Comic Sans MS', cursive;
+}
+
+/* Numele familiei trebuie să apară măcar o dată într-un `font-family` ADEVĂRAT.
+   Minifierul de producție (cssnano) aruncă orice `@font-face` a cărui familie nu
+   e folosită nicăieri, iar o folosire prin `var(--lectie-scris)` nu se pune: el
+   nu urmărește variabilele. În dev, unde CSS-ul nu se minifică, totul mergea; la
+   build regula dispărea, fișierul fontului rămânea nefolosit în `assets/fonts`,
+   iar site-ul publicat cădea pe scrisul de sistem. Exact asta s-a văzut după
+   primul deploy. Rândul de mai jos nu e pus pe niciun element — există ca să țină
+   `@font-face`-ul în viață. */
+.pastreaza-scrisul-de-mana {
+  font-family: 'LectieScris';
+}
+
+html[data-edupasi-page='true'] .theme-doc-markdown :where(h2, h3) {
+  font-family: var(--lectie-scris);
+  font-weight: 400;
+  font-synthesis: none;
+  /* Fără `-webkit-text-stroke` pentru îngroșare: pe un cursiv fără tăietură bold
+     conturul se lipește de buclele literelor și scrisul devine greu de citit.
+     Grosimea vine din fontul ales, iar dimensiunea puțin mai mare ține locul
+     bold-ului lipsă. */
+  font-size: 1.85rem;
+  line-height: 1.45;
+
+  /* Aceeași plăcuță cremă ca eticheta cu codul lecției (`SectionVoice`,
+     `.codLectie`): aceleași `--km-cream-2` și `--km-line`, ca să se vadă că sunt
+     din aceeași familie. `inline-block` ține fundalul strâns pe text — pe toată
+     lățimea coloanei ar arăta ca o bandă de titlu, exact ce n-am vrut. */
+  display: inline-block;
+  background: var(--km-cream-2, #fffcf5);
+  border: 1px solid var(--km-line, rgba(28, 26, 22, 0.14));
+  border-radius: 6px;
+  padding: 0.12em 0.5em;
+}
+
+html[data-edupasi-page='true'] .theme-doc-markdown h3 {
+  font-size: 1.4rem;
+}
+
+/* Textul ușor de citit e o setare de accesibilitate: ea are ultimul cuvânt.
+   Regula de mai sus ar câștiga altfel după specificitate, iar elevul care apasă
+   „text ușor de citit" ar rămâne cu titlurile de mână — exact scrierea de care
+   încerca să scape. (La `data-edupasi-font` nu e nevoie de nimic: acolo regula
+   proiectului e deja `!important` pe tot subarborele lecției.) */
+html[data-edupasi-page='true'][data-edupasi-easy-text='true']
+  .theme-doc-markdown :where(h2, h3) {
+  font-family: Verdana, Arial, system-ui, sans-serif;
+}
+
+/* ==========================================================================
+   `:::soft` — caseta blândă
+   ==========================================================================
+
+   Celelalte casete anunță ceva: definiție, atenție, cerință. Aceasta doar
+   recomandă, deci nu are voie să strige: fundal cremă ca al etichetei cu codul
+   lecției, o dungă subțire în stânga în locul conturului colorat, titlu discret.
+
+   E tip nou, nu suprascriere: lecțiile care nu-l folosesc arată exact ca înainte,
+   pe tot site-ul. */
+.admonition-soft {
+  --ifm-alert-background-color: var(--km-cream-2, #fffcf5);
+  --ifm-alert-background-color-highlight: transparent;
+  --ifm-alert-foreground-color: var(--km-ink2, #4f4b43);
+  --ifm-alert-border-color: rgba(94, 74, 124, 0.45);
+
+  border: 1px solid var(--km-line, rgba(28, 26, 22, 0.14));
+  border-left: 3px solid var(--ifm-alert-border-color);
+  border-radius: 10px;
+  box-shadow: none;
+}
+
+.admonition-soft .admonitionHeading,
+.admonition-soft [class*='admonitionHeading'] {
+  color: var(--km-ink3, #8b857a);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+}
+
+.admonition-soft a {
+  color: var(--ifm-link-color);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.15em;
+}
+
+[data-theme='dark'] .admonition-soft {
+  --ifm-alert-background-color: rgba(255, 255, 255, 0.045);
+  --ifm-alert-foreground-color: var(--ifm-font-color-base);
+  --ifm-alert-border-color: rgba(196, 184, 214, 0.5);
+}
+
+/* Rubrica „Ghidul părintelui" din navbar — roșu închis.
+   Are culoare proprie pentru că se adresează altcuiva decât restul barei: elevul
+   trece prin EduPAȘI și prin cursuri, părintele intră direct aici. Aceeași
+   familie de roșu ca `HighlightText color="red"`, ca să nu apară o culoare nouă
+   în pagină. */
+.ghid-parinte-nav-link {
+  color: #b42318 !important;
+  font-weight: 600;
+}
+
+.ghid-parinte-nav-link:hover,
+.ghid-parinte-nav-link.navbar__link--active {
+  color: #8c1a12 !important;
+}
+
+[data-theme='dark'] .ghid-parinte-nav-link {
+  color: #f2a79d !important;
+}
+
+[data-theme='dark'] .ghid-parinte-nav-link:hover,
+[data-theme='dark'] .ghid-parinte-nav-link.navbar__link--active {
+  color: #ffc2b8 !important;
 }

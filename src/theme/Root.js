@@ -2,6 +2,7 @@ import React from 'react';
 import { useLocation } from '@docusaurus/router';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 import useBaseUrl from '@docusaurus/useBaseUrl';
+import ScrollOrizontal from '@site/src/components/ScrollOrizontal';
 
 // Root înfășoară toată aplicația (în interiorul router-ului). Montăm butonul de
 // chat Doamna Căpșunică DOAR pe paginile de lecție (/docs/…), în colț, în
@@ -19,6 +20,8 @@ export default function Root({ children }) {
   return (
     <>
       {children}
+      {/* Semnul „se poate trage pe orizontală" — pe tot site-ul, nu doar la lecții. */}
+      <ScrollOrizontal />
       {onLesson && (
         <BrowserOnly>
           {() => {

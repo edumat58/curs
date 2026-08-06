@@ -195,7 +195,7 @@
     "clasa 5 a cincea V",
     "modul 1"
    ],
-   "text": "# C4 - Împărțirea Euclidiană. Împărțirea nr. zecimale\n\n---"
+   "text": "# C4 - Împărțirea Euclidiană. Împărțirea nr. zecimale\n\n---\n\n## Împărțirea euclidiană\n\nLa împărțirea cu ** rest ** avem patru numere.\n\n $$\\color{#FF6B6B}{\\text{deîmpărțit}} = \\color{#4ECDC4}{\\text{împărțitor}} \\times \\color{#9370DB}{\\text{cât}} + \\color{#FF8C00}{\\text{rest}}$$ \n\n [figură] \n\n $$\\underbrace{17}_{\\color{#FF6B6B}{\\text{deîmpărțit}}} = \\underbrace{5}_{\\color{#4ECDC4}{\\text{împărțitor}}} \\times \\underbrace{3}_{\\color{#9370DB}{\\text{cât}}} + \\underbrace{2}_{\\color{#FF8C00}{\\text{rest}}}$$ \n\n**Exemplu:** Calculăm pas cu pas 17 : 5.\n\n $$\\begin{aligned}\n& \\text{Pasul 1: căutăm câtul: } 5 \\times \\color{#9370DB}{3} = 15\\\\[6pt]\n& \\text{Pasul 2: aflăm restul: } 17 - 15 = \\color{#FF8C00}{2}\\\\[6pt]\n& \\text{Pasul 3: facem proba: } 5 \\times 3 + 2 = 17\n\\end{aligned}$$ \n\nRestul este mereu mai mic decât împărțitorul.\n\n $$\\color{#FF8C00}{2} \\lt \\color{#4ECDC4}{5}$$ \n\n---\n\n## Împărțirea unui număr zecimal la un număr natural\n\nÎmpărțim ca la numerele naturale. Punem virgula la cât.\n\n**Exemplu:** Calculăm pas cu pas 7,5 : 3.\n\n $$\\begin{aligned}\n& \\text{Pasul 1: } 7 \\div 3 = 2 \\text{ rest } 1\\\\[6pt]\n& \\text{Pasul 2: punem } \\color{#FF6B6B}{\\text{virgula}} \\text{ la cât}\\\\[6pt]\n& \\text{Pasul 3: coborâm zecimala } 5 \\text{ și avem } 15\\\\[6pt]\n& \\text{Pasul 4: } 15 \\div 3 = 5\\\\[6pt]\n& \\text{Rezultat: } 7{,}5 \\div 3 = \\color{#9370DB}{2{,}5}\n\\end{aligned}$$ \n\nFacem proba.\n\n $$3 \\times 2{,}5 = 7{,}5$$ \n\n---\n\n## Împărțirea la un număr zecimal\n\nMutăm ** virgula ** spre dreapta la amândouă numerele.\n\n**Exemplu:** Calculăm pas cu pas 7,2 : 0,3.\n\n $$\\begin{aligned}\n& \\text{Pasul 1: mutăm virgula: } 7{,}2 \\to \\color{#FF6B6B}{72} \\text{ și } 0{,}3 \\to \\color{#4ECDC4}{3}\\\\[6pt]\n& \\text{Pasul 2: } 72 \\div 3 = 24\\\\[6pt]\n& \\text{Rezultat: } 7{,}2 \\div 0{,}3 = \\color{#9370DB}{24}\n\\end{aligned}$$"
   },
   {
    "title": "C1 - Scrierea sub forma zecimala",
@@ -2406,7 +2406,7 @@
    "text": "export default function LectiiTreeView() {\n const saptamani = [\n {\n hide: true,\n titlu: 'Săptămâna 22: 16.03 - 20.03',\n note: 'Materiale incarcate',\n lectii: [\n ],\n },\n {\n titlu: 'Săptămâna 21: 09.03 - 13.03',\n note: 'Materiale incarcate',\n lectii: [\n {titlu: 'LP - Funcția de gradul I', zi: '09.03', tip: 'Algebra', link: '', pdf: ''},\n {titlu: 'C17 - Elemente de statistică: indicatorii tendinței centrale (frecvență, medie, mediană, mod și amplitudine a unui set de date) ', zi: '11.03 (ora 1)', tip: 'Algebra', link: 'c8/modul-4/04', pdf: ''},\n {titlu: 'LP - Elemente de statistică: indicatorii tendinței centrale', zi: '11.03 (ora 1)', tip: 'Algebra', link: '', pdf: ''},\n {titlu: 'PREZENTARE PORTOFOLIU', zi: '12.03 (ora 1)', tip: 'PORTOFOLIU', link: '', pdf: ''},\n {titlu: 'RECAPITULARE SIMULARE NAȚIONALǍ', zi: '11.03 (ora 2)', tip: 'Algebra', link: '', pdf: ''},\n ],\n },\n {\n titlu: 'Săptămâna 20: 02.03 - 06.03',\n note: 'Materiale incarcate',\n lectii: [\n {titlu: 'LP - Funcția de gradul I', zi: '02.03', tip: 'Algebra', link: '', pdf: ''},\n {titlu: 'C16.1 - Funcții trigonometrice (demonstrații)', zi: '04.03 (ora 1)', tip: 'Algebra', link: 'c8/modul-4/02', pdf: ''},\n {titlu: 'C16.2 - Funcții trigonometrice (proprietăți)', zi: '04.03 (ora 2)', tip: 'Algebra', link: 'c8/modul-4/03', pdf: ''},\n {titlu: 'LP - Simulare | Subiectul I+II EN', zi: '05.03 (ora 1)', tip: 'Algebra', link: '', pdf: ''},\n {titlu: 'LP - Simulare | Subiectul III EN', zi: '05.03 (ora 2)', tip: 'Geometrie', link: '', pdf: ''},\n\n ],\n },\n {\n titlu: 'Săptămâna 19: 23.02 - 27.02',\n note: 'Modulul 4: 23.02 -> 03.04',\n lectii: [\n {titlu: 'C15 - Funcția de gradul I', zi: '23.02', tip: 'Algebra', link: 'c8/modul-4/00', pdf: ''},\n {titlu: 'LP - Funcția de gradul I', zi: '25.02 (ora 1)', tip: 'Algebra', link: '', pdf: ''},\n {titlu: 'LP - Funcția de gradul I', zi: '25.02 (ora 2)', tip: 'Algebra', link: '', pdf: ''},\n {titlu: 'LP - Simulare | Subiectul I+II EN', zi: '26.02 (ora 1)', tip: 'Algebra', link: '', pdf: ''},\n {titlu: 'LP - Simulare | Subiectul III EN', zi: '26.02 (ora 2)', tip: 'Geometrie', link: '', pdf: ''},\n\n ],\n },\n {\n titlu: 'Săptămâna 18: 09.02 - 13.02',\n note: 'Materiale incarcate',\n lectii: [\n { titlu: 'G8.1 - Trunchi de piramidă regulată', zi: '02.02', tip: 'Geometrie', link: 'c8/modul-3/09', pdf: '' },\n { titlu: 'LP - Trunchi de piramidă regulată', zi: '04.02 (ora 1)', tip: 'Geometrie', link: '', pdf: '' },\n { titlu: 'G8.2 - Trunchi de con circular drept', zi: '04.02 (ora 2)', tip: 'Geometrie', link: 'c8/modul-3/10', pdf: '' },\n { titlu: 'Simulare EN (S1+2)', zi: '05.02 (ora 1)', tip: 'Simulare EN', link: '', pdf: '' },\n { titlu: 'Simulare EN (S3)', zi: '05.02 (ora 2)', tip: 'Simulare EN', link: '', pdf: '' },\n ],\n },\n {\n titlu: 'Săptămâna 17: 02.02 - 06.02',\n note: 'Materiale incarcate',\n lectii: [\n { titlu: 'TEST (50% NOTA 6) | C14.1 - C14.3 & G6.1 - G7', zi: '02.02', tip: 'Evaluare Sumativa', link: '', pdf: '' },\n { titlu: 'G7 - Conul circular drept', zi: '04.02 (ora 1)', tip: 'Geometrie', link: 'c8/modul-3/08', pdf: '' },\n { titlu: 'LP - REZOLVARE TEST', zi: '04.02 (ora 2)', tip: 'Recapitulare', link: '', pdf: '' },\n { titlu: 'LP - Conul circular drept', zi: '05.02 (ora 1)', tip: 'Rezolvare Test', link: '', pdf: '' },\n { titlu: 'LP - Conul circular drept', zi: '05.02 (ora 2)', tip: 'Geometrie', link: '', pdf: '' },\n ],\n },\n {\n titlu: 'Săptămâna 16: 26.01 - 30.01',\n note: 'Materiae incarcate',\n lectii: [\n { titlu: 'G6.2 - Dreapta paralelă cu planul', zi: '26.01', tip: 'Geometrie', link: 'c8/modul-3/06', pdf: '' },\n { titlu: 'Simulare EN 2 | PARTEA I (Algebra)', zi: '28.01 (ora 1)', tip: 'Simulare EN 2', link: '', pdf: '' },\n { titlu: 'Simulare EN 2 | PARTEA II (Geometrie)', zi: '28.01 (ora 2)', tip: 'Simulare EN 2', link: '', pdf: '' },\n { titlu: 'RECUPERAT 20.01 (ora 1)', zi: '29.01 (ora 1)', tip: '-', link: '', pdf: '' },\n { titlu: 'LP - Dreapta paralelă cu planul ', zi: '29.01 (ora 2)', tip: 'Geometrie', link: '', pdf: '' },\n ],\n },\n {\n titlu: 'Săptămâna"
   },
   {
-   "title": "C1s - Scrierea sub forma zecimală",
+   "title": "C1s - Scrierea sub forma zecimala",
    "url": "/curs/docs/edupasi/c5/modul-1/01",
    "collection": "edupasi",
    "course": "c5",
@@ -2418,10 +2418,10 @@
     "modul 1",
     "EduPASI lectie adaptata accesibila"
    ],
-   "text": "# C1s - Scrierea sub forma zecimală\n\n---\n\n## Introducere\n\nNumim **număr zecimal**, un număr ce se poate scrie sub forma unei fracții zecimale.\n\nAcesta se poate scrie ca sumă dintre un ** număr întreg ** \n\n $$\\begin{aligned}\n& \\text{Exemplu: } \\color{#FF6B6B}{37\\,540}\\color{#4ECDC4}{{,85}} \\\\\n& \\text{Parte întreagă: } \\color{#FF6B6B}{37\\,540} \\\\\n& \\text{Parte fracționară: } \\color{#4ECDC4}{0{,}85}\n\\end{aligned}$$ \n\n---\n\n## Reprezentarea pozițională\n\n| milioane | sute de mii | zeci de mii | unități de mii | sute | zeci | unități | zecimi | sutimi | miimi |\n|----------|-------------|-------------|----------------|------|------|---------|--------|--------|-------|\n| | 3 | 7 | 5 | 4 | 0 | 8 | 5 | | |\n\n $$37\\,540{,}85 = 3 \\times 10\\,000 + \\\\[6pt]\n7 \\times 1\\,000 + 5 \\times 100 +\\\\[6pt] 4 \\times 10 + 0 \\times 1 + 8 \\times 0{,}1 + 5 \\times 0{,}01$$ \n\n---\n\n## Citirea numerelor zecimale\n\n $$\\begin{aligned}\n& \\text{1. Citim } \\color{#FF6B6B}{\\text{partea întreagă}} \\text{ ca un număr natural}\\\\[6pt]\n& \\text{2. Spunem „} \\color{#4ECDC4}{\\text{virgulă}} \\text{\"}\\\\[6pt]\n& \\text{3. Citim } \\color{#4ECDC4}{\\text{partea fracționară}} \\text{ cifră cu cifră}\n\\end{aligned}$$ \n\n**Exemplu:**\n- **37 540,85** se citește „treizeci și șapte de mii cinci sute patruzeci ** virgulă ** optzeci și cinci\"\n- Sau: „treizeci și șapte de mii cinci sute patruzeci și 85 ** sutimi **\"\n\n---\n\n## Scrierea numerelor zecimale\n\n $$\\begin{aligned}\n& \\text{1. Scriere } \\color{#FF6B6B}{\\text{zecimală: }} 37\\,540{,}85\\\\[6pt]\n& \\text{2. Scriere } \\color{#4ECDC4}{\\text{fracționară: }} 37\\,540 + \\frac{85}{100} = 37\\,540 + \\frac{17}{20}\\\\[6pt]\n& \\text{3. Scriere } \\color{#9370DB}{\\text{mixtă: }} 37\\,540\\frac{85}{100} = 37\\,540\\frac{17}{20}\n\\end{aligned}$$ \n\n** Numerele întregi ** sunt un caz particular al ** numerelor zecimale ** cu ** partea fracționară ** nulă.\n\n $$\\color{#FF6B6B}{38} = 38{,}0 = 38{,}00 = 38{,}000$$ \n\n---\n\n## Conversii\n\n $$\\begin{aligned}\n& \\text{4,72} = \\frac{472}{100} = \\frac{118}{25} \\quad (472 \\color{#FF8C00}{\\text{sutimi}})\\\\[6pt]\n& \\text{4,72} = \\frac{4720}{1000} = \\frac{118}{25} \\quad (4720 \\color{#9370DB}{\\text{miimi}})\n\\end{aligned}$$ \n\n---\n\n## Cifră vs Număr\n\n- ** Cifra ** = simbolul care reprezintă o valoare într-un anumit ** rang **\n- ** Numărul ** = valoarea numerică a tuturor cifrelor din ** rangul ** respectiv\n\nÎn numărul **37 540,85**:\n\n $$\\begin{aligned}\n& \\text{Cifra } \\color{#FF6B6B}{\\text{zecilor}} = 4\\\\[6pt]\n& \\text{Numărul } \\color{#4ECDC4}{\\text{zecilor}} = 3\\,754\n\\end{aligned}$$ \n\n---\n\n## Operații cu puteri zecimale\n\n $$\\begin{aligned}\n& \\text{Înmulțire cu 10, 100, 1000: } \\color{#FF6B6B}{\\text{virgula spre DREAPTA}}\\\\[8pt]\n& \\text{Împărțire la 10, 100, 1000: } \\color{#4ECDC4}{\\text{virgula spre STÂNGA}}\n\\end{aligned}$$ \n\n**Exemple de înmulțire:**\n $$\\begin{aligned}\n& 64 \\times 10 = 640\\\\[6pt]\n& 23{,}6 \\times 100 = 2\\,360\\\\[6pt]\n& 0{,}07 \\times 1\\,000 = 70\n\\end{aligned}$$ \n\n**Exemple de împărțire:**\n $$\\begin{aligned}\n& 53{,}2 \\div 10 = 5{,}32\\\\[6pt]\n& 6{,}4 \\div 100 = 0{,}064\\\\[6pt]\n& 5\\,140 \\div 1\\,000 = 5{,}140\n\\end{aligned}$$ \n\n---\n\n## Aproximări\n\n $$\\begin{aligned}\n& \\text{Trunchiere: } 5{,}73 \\to 5 \\quad (\\color{#FF6B6B}{\\text{se ignoră zecimalele}})\\\\[6pt]\n& \\text{Rotunjire: } 5{,}73 \\to 6 \\quad (\\color{#4ECDC4}{\\text{la cea mai apropiată unitate}})\n\\end{aligned}$$"
+   "text": "# C1s - Scrierea sub forma zecimala\n\n---\n \n\n## Pasul 1: Înțeleg teoria\n\nSe numește **număr zecimal** un număr care se poate scrie sub forma unei fracții zecimale.\n\nUn număr zecimal se poate scrie ca suma dintre un ** număr întreg **, numit ** parte întreagă **, și o ** fracție zecimală mai mică decât 1 **, numită ** parte zecimală **.\n\n $$\\begin{aligned}\n\\frac{24\\,356}{1000}\n&= \\textcolor{#b42318}{\\frac{24\\,000}{1000}}\n+ \\textcolor{#005a91}{\\frac{356}{1000}}\n= \\textcolor{#b42318}{24} + \\textcolor{#005a91}{\\frac{356}{1000}} \\\\[8pt]\n&= 24 + 0{,}356 = 24{,}\\textcolor{#005a91}{356}\n\\end{aligned}$$ \n\nÎn scrierea zecimală a unui număr, valoarea unei cifre depinde de locul ei.\n\nConsiderăm numărul zecimal **31,478**:\n\n \n\n \nAcest număr se citește complet: \ntreizeci și una de unități\n \n\n \n...și patru sute șaptezeci și opt de miimi \nsau patru zecimi șapte sutimi și opt miimi \nsau virgulă patru sute șaptezeci și opt.\n \n\n---\n\n## Pasul 2: Observ exemplele\n\nObservă tabelul cu numerele zecimale.\n\n \n\nObservă cantitățile scrise sub formă de număr zecimal.\n\n \n \n \n \n\n---\n\n## Pasul 3: Exersez și devin mai bun\n\nPentru fiecare număr, scrie suma dintre partea întreagă și partea zecimală, apoi scrierea lui zecimală.\n\n>Exemplu:\n\n$\n\\dfrac {17825}{1000} = \\dfrac {17000}{1000} + \\dfrac {825}{1000}=17 +0,825 = 17,825\n$\n\n>De exersat:\n\n$a) \\dfrac {78}{10} \\quad b)\\dfrac {639}{100} \\quad c)\\dfrac {5623}{1000} \\quad d) \\dfrac {381}{10} \\quad e) \\dfrac {8903}{100} \\quad f) \\dfrac {327}{1000}$\n\n---\n\nPentru fiecare număr precizează scrierea lui zecimală.\n\n>Exemplu:\n\n$\n\\dfrac {54}{10} = 5 +0,4 = 5,4\n$\n\n>De exersat:\n\n$a) \\dfrac {872}{1000} \\quad b)\\dfrac {2134}{100} \\quad c)\\dfrac {6006}{1000} \\quad d) \\dfrac {44}{100} \\quad e) \\dfrac {1734}{100}$\n\n$f) \\dfrac {12542}{1000} \\quad g) \\dfrac {193}{10} \\quad h)\\dfrac {30407}{100}$\n\n---"
   },
   {
-   "title": "C2 - Adunarea și scăderea nr. zecimale",
+   "title": "C2s - Adunarea și scăderea nr. zecimale",
    "url": "/curs/docs/edupasi/c5/modul-1/02",
    "collection": "edupasi",
    "course": "c5",
@@ -2433,10 +2433,10 @@
     "modul 1",
     "EduPASI lectie adaptata accesibila"
    ],
-   "text": "# C2 - Adunarea și scăderea nr. zecimale\n\n---\n\n## Generalități\n\nUn ** număr zecimal ** este un număr pe care îl putem scrie cu un număr finit de cifre și o virgulă.\n\n**Exemple:**\n- 2,37 și 5 (=5,0) sunt numere zecimale.\n\nRezultatul unei adunări se numește ** sumă **; rezultatul unei scăderi se numește ** diferență **.\n\n**Exemple:**\n- 5,7 + 3,12 = 8,82 ; 5,32 – 2,5 = 2,82.\n\n```\ntermeni: 5,7 și 3,12 → sumă: 8,82\ntermeni: 5,32 şi 2,5 → diferență: 2,82\n```\n\nÎntr-o suită de adunări, putem efectua calculele în ordinea pe care o dorim.\n\nAceastă proprietate este **valabilă pentru adunare**! Scăderea **NU** este comutativă.\n\n**Exemplu:**\n- 8 - 3 = 5\n- 3 - 8 = -5\n\nOrdinea termenilor **schimbă rezultatul**!\n\n**Exemplu:** Pentru a efectua 12,4 + 3,9 + 2,6, putem:\n- începe prin a efectua 12,4 + 3,9;\n- sau începe prin a efectua 3,9 + 2,6;\n- sau începe prin a efectua 12,4 + 2,6.\n\nAceastă ultimă grupare facilitează calculul, deoarece 12,4 + 2,6 = 15.\n\nObținem deci:\n12,4 + 3,9 + 2,6 = (12,4 + 2,6) + 3,9 = 15 + 3,9 = 18,9.\n\n---\n\nPutem schimba locurile... nu schimbă rezultatul!\n\n $$12{,}4 + 3{,}9 + 2{,}6 = 12{,}4 + 2{,}6 + 3{,}9$$ \n\n---\n\n## Metoda\n\n### Adunarea și scăderea numerelor zecimale prin poziționare\n\n** PASUL 1. ** Scriem termenii adunării sau scăderii, unii sub alții (în coloană), aliniind vertical virgulele, cifrele unităților, etc.\n\n** PASUL 2. ** Efectuăm adunarea sau scăderea cifrelor, fără a uita ce ținem minte sau împrumutǎm.\n\n**Notă:** *Adăugăm dacă este necesar o virgulă și zerouri la sfârșitul părții zecimale.*\n\n** PASUL 3. ** Plasăm virgula la rezultat.\n\n---\n\n## Exemple practice\n\n**Calculați 345,20 + 7,92 și 125 – 6,21.**\n\n### Reținutul\n\n**Adunare:** Când suma cifrelor > 9, ținem minte 1 la ordinul superior\n\n**Scădere:** Când cifra de sus < cifra de jos, împrumutăm 1 de la ordinul superior\n\n### Operații\n\n \n \n Adunare \n $$\\Large\\begin{array}{r}345{,}20 \\\\ +\\ 7{,}92 \\\\ \\hline 353{,}12\\end{array}$$ \n \n\n \n\n \n Scădere \n $$\\Large\\begin{array}{r}125{,}00 \\\\ -\\ 6{,}21 \\\\ \\hline 118{,}79\\end{array}$$ \n \n \n\n---"
+   "text": "# C2s - Adunarea și scăderea nr. zecimale\n\n---\n \n\n## Pasul 1: Înțeleg teoria\n\nSe numește:\n\n1. ** sumă **, rezultatul unei adunări;\n2. ** diferență **, rezultatul unei scăderi;\n3. ** termeni **, numerele care se adună sau care se scad.\n\n**Exemplu.** Iată două exemple:\n\n- $4{,}7 + 2{,}03 = 6{,}73$. Aici, $6{,}73$ este **suma** termenilor $4{,}7$ și $2{,}03$.\n- $23{,}1 - 5{,}8 = 17{,}3$. Aici, $17{,}3$ este **diferența** termenilor $23{,}1$ și $5{,}8$.\n\nSunt trei feluri de a calcula o sumă sau o diferență:\n\n- așezând operația;\n- folosind calculatorul;\n- socotind în minte, cu tehnici de calcul.\n\nO **adunare se verifică printr-o scădere**: $8{,}17 + 5{,}83 = 14$, pentru că $14 - 5{,}83 = 8{,}17$.\n\nO **scădere se verifică printr-o adunare**: $2\\,000 - 177{,}5 = 1\\,822{,}5$, pentru că $1\\,822{,}5 + 177{,}5 = 2\\,000$.\n\n---\n\n## Pasul 2: Observ exemplele\n\nLa operația așezată, cifrele se aliniază **după virgulă**, nu după capătul din dreapta.\n\nCând unui număr îi lipsește un rang zecimal, locul rămâne gol: la $456{,}75 - 175{,}642$, sutimile stau sub sutimi, iar la miimi nu e nimic de scăzut din nimic.\n\nObservă aceste adunări și scăderi așezate una sub alta.\n\n \n \n \n \n \n \n \n \n\n---\n\n## Pasul 3: Exersez și devin mai bun\n\nAșază fiecare operație în coloane, cu virgula sub virgulă, apoi calculează. Verifică-te singur.\n\n \n \n \n \n \n \n \n \n \n \n \n \n \n\n---"
   },
   {
-   "title": "C3 - Înmulțirea nr. zecimale",
+   "title": "C3.1s - Înmulțirea și împărțirea nr. zecimale cu 10, 100 sau 1000",
    "url": "/curs/docs/edupasi/c5/modul-1/03",
    "collection": "edupasi",
    "course": "c5",
@@ -2448,11 +2448,26 @@
     "modul 1",
     "EduPASI lectie adaptata accesibila"
    ],
-   "text": "# C3 - Înmulțirea nr. zecimale\n\n---\n\n## Vocabular\n\nNumerele înmulțite se numesc ** factori **. Rezultatul se numește ** produs **.\n\n $$\\underbrace{\\color{#4ECDC4}{2{,}4}}_{\\text{factor}} \\times \\underbrace{\\color{#4ECDC4}{1{,}3}}_{\\text{factor}} = \\underbrace{\\color{#9370DB}{3{,}12}}_{\\text{produs}}$$ \n\n---\n\n## Metode\n\n### 1. Două numere zecimale\n\nCalculăm pas cu pas 2,4 × 1,3:\n\n- Pasul 1: Înmulțim fără virgule: 24 × 13 = 312.\n- Pasul 2: Numărăm zecimalele factorilor: 1 + 1 = 2.\n- Pasul 3: Punem virgula la 2 cifre.\n\n $$\\Large\\begin{array}{r} 2{,}\\color{#FF8C00}{4} \\\\ \\times\\ \\ 1{,}\\color{#FF8C00}{3} \\\\ \\hline 7\\ 2 \\\\ 2\\ 4\\ \\ . \\\\ \\hline 3{,}\\color{#FF8C00}{1\\ 2} \\end{array}$$ \n\nCâte zecimale au factorii, atâtea are produsul.\n\n---\n\n### 2. Cu 10, 100 sau cu 0,1\n\n [figură] \n\nNumărăm zerourile lui 10. Mutăm virgula cu atâtea ranguri.\n\n $$\\begin{aligned}\n& 3{,}6 \\times 10 = 36 \\quad \\color{#FF8C00}{\\text{1 rang}}\\\\[6pt]\n& 3{,}6 \\times 100 = 360 \\quad \\color{#FF8C00}{\\text{2 ranguri, un zero adăugat}}\\\\[6pt]\n& 3{,}6 \\times 0{,}1 = 0{,}36 \\quad \\color{#4ECDC4}{\\text{1 rang}}\n\\end{aligned}$$"
+   "text": "# C3.1s - Înmulțirea și împărțirea nr. zecimale cu 10, 100 sau 1000\n\n---\n \n\n## Pasul 1: Înțeleg teoria\n\nCând ** înmulțim ** un număr zecimal cu:\n\n- **10**, mutăm virgula cu **un rang spre dreapta**;\n- **100**, mutăm virgula cu **două ranguri spre dreapta**;\n- **1 000**, mutăm virgula cu **trei ranguri spre dreapta**.\n\nCând ** împărțim ** un număr zecimal la:\n\n- **10**, mutăm virgula cu **un rang spre stânga**;\n- **100**, mutăm virgula cu **două ranguri spre stânga**;\n- **1 000**, mutăm virgula cu **trei ranguri spre stânga**.\n\nCifrele numărului rămân aceleași și în aceeași ordine — se mută doar virgula. La înmulțire fiecare cantitate urcă un rang, la împărțire coboară un rang.\n\n \n\n---\n\n## Pasul 2: Observ exemplele\n\nUrmărește cartonașele: numărul lor rămâne același, se schimbă doar rangul lor.\n\n### Înmulțesc\n\n \n\n \n\n \n\n### Împart\n\n \n\n \n\n \n\n---\n\n## Pasul 3: Exersez și devin mai bun\n\n**1. Efectuează aceste înmulțiri.**\n\n- a) $3{,}18 \\times 10 = 31{,}8$ — virgula se mută cu un rang spre dreapta\n- b) $37{,}08 \\times 100 = \\ldots$\n- c) $0{,}738 \\times 1\\,000 = \\ldots$\n- d) $8{,}09 \\times 100 = \\ldots$\n- e) $637{,}9 \\times 10 = \\ldots$\n- f) $0{,}08 \\times 1\\,000 = \\ldots$\n- g) $72{,}03 \\times 100 = \\ldots$\n- h) $20{,}6 \\times 10 = \\ldots$\n\n**2. Completează cu numărul potrivit.**\n\n- a) $5{,}06 \\times 100 = 506$ — virgula a sărit două ranguri spre dreapta, deci s-a înmulțit cu 100\n- b) $24{,}81 \\times \\ldots = 248{,}1$\n- c) $382{,}5 \\times \\ldots = 3\\,825$\n- d) $0{,}1633 \\times \\ldots = 16\\,330$\n- e) $\\ldots \\times 10 = 23{,}9$\n- f) $58{,}25 \\times \\ldots = 5\\,825$\n- g) $0{,}071 \\times \\ldots = 7{,}1$\n- h) $\\ldots \\times 10 = 3{,}96$\n- i) $0{,}07 \\times \\ldots = 70$\n- j) $0{,}936 \\times \\ldots = 936$\n- k) $\\ldots \\times 100 = 901$\n- l) $\\ldots \\times 100 = 12{,}5$\n\n**3. Completează tabelul.** Primul rând este completat ca model.\n\n| Numărul | ÷ 1 000 | ÷ 10 | ÷ 100 |\n|---|---|---|---|\n| 9 | 0,009 | 0,9 | 0,09 |\n| 6 051 | | | |\n| 68 | | | |\n| 392 | | | |\n| 54 | | | |\n\n**4. Efectuează aceste împărțiri.**\n\n- a) $26 \\div 1\\,000 = 0{,}026$ — virgula se mută cu trei ranguri spre stânga\n- b) $0{,}38 \\div \\ldots = 0{,}038$\n- c) $540 \\div 100 = \\ldots$\n- d) $218{,}9 \\div \\ldots = 2{,}189$\n- e) $37{,}91 \\div 100 = \\ldots$\n- f) $267 \\div \\ldots = 0{,}267$\n- g) $627{,}6 \\div 100 = \\ldots$\n- h) $8{,}1 \\div \\ldots = 0{,}081$\n- i) $9\\,164 \\div 1\\,000 = \\ldots$"
+  },
+  {
+   "title": "C3.2s - Înmulțirea nr. zecimale",
+   "url": "/curs/docs/edupasi/c5/modul-1/04",
+   "collection": "edupasi",
+   "course": "c5",
+   "module": "modul-1",
+   "final": false,
+   "vizibilPermanent": false,
+   "keywords": [
+    "clasa 5 a cincea V",
+    "modul 1",
+    "EduPASI lectie adaptata accesibila"
+   ],
+   "text": "# C3.2s - Înmulțirea nr. zecimale\n\n---\n \n\n## Pasul 1: Înțeleg teoria\n\nSe numește:\n\n1. ** produs **, rezultatul unei înmulțiri;\n2. ** factori **, numerele care se înmulțesc.\n\n**Exemplu.** $7{,}9 \\times 3 = 23{,}7$. Aici, $23{,}7$ este **produsul** factorilor $7{,}9$ și $3$.\n\n $$\\underbrace{\\color{#4ECDC4}{2{,}4}}_{\\text{factor}} \\times \\underbrace{\\color{#4ECDC4}{1{,}3}}_{\\text{factor}} = \\underbrace{\\color{#9370DB}{3{,}12}}_{\\text{produs}}$$ \n\nSunt trei feluri de a face o înmulțire: așezând operația, folosind calculatorul sau socotind în minte, cu tehnici de calcul.\n\n---\n\n## Pasul 2: Observ exemplele\n\n### 1. Două numere zecimale\n\nCalculăm pas cu pas 2,4 × 1,3:\n\n- Pasul 1: Înmulțim fără virgule: 24 × 13 = 312.\n- Pasul 2: Numărăm zecimalele factorilor: 1 + 1 = 2.\n- Pasul 3: Punem virgula la 2 cifre.\n\n $$\\Large\\begin{array}{r} 2{,}\\color{#FF8C00}{4} \\\\ \\times\\ \\ 1{,}\\color{#FF8C00}{3} \\\\ \\hline 7\\ 2 \\\\ 2\\ 4\\ \\ . \\\\ \\hline 3{,}\\color{#FF8C00}{1\\ 2} \\end{array}$$ \n\nCâte zecimale au factorii, atâtea are produsul.\n\n---\n\n### 2. Cu 10, 100 sau cu 0,1\n\n [figură] \n\nNumărăm zerourile lui 10. Mutăm virgula cu atâtea ranguri.\n\n $$\\begin{aligned}\n& 3{,}6 \\times 10 = 36 \\quad \\color{#FF8C00}{\\text{1 rang}}\\\\[6pt]\n& 3{,}6 \\times 100 = 360 \\quad \\color{#FF8C00}{\\text{2 ranguri, un zero adăugat}}\\\\[6pt]\n& 3{,}6 \\times 0{,}1 = 0{,}36 \\quad \\color{#4ECDC4}{\\text{1 rang}}\n\\end{aligned}$$ \n\n---\n\n### 3. Ordinul de mărime\n\nUneori nu e nevoie de rezultatul exact, ci doar de ordinul lui de mărime. Înlocuim atunci fiecare factor cu unul apropiat, dar mai simplu.\n\n$$\n312{,}08 \\times 42{,}7 \\approx 300 \\times 40 = 12\\,000\n$$\n\n---\n\n### 4. Verific cifra unităților\n\nCifra unităților produsului se află ușor, din cifrele unităților factorilor.\n\n$$\n17{,}3 \\times 8{,}6 \\quad\\longrightarrow\\quad 3 \\times 6 = 18\n$$\n\nProdusul se termină neapărat cu **8**.\n\nVerificarea aceasta nu garantează că rezultatul e corect — arată doar că unele greșeli există. Un produs cu cifra unităților potrivită poate fi totuși greșit.\n\n---\n\n### 5. Proba prin nouă\n\nEste a doua cale de verificare. Se adună cifrele fiecărui număr până rămâne o singură cifră, apoi se compară.\n\nCare dintre cele două egalități este adevărată?\n\n$$\n12{,}7 \\times 34 = 431{,}8 \\qquad \\text{sau} \\qquad 12{,}7 \\times 34 = 331{,}8 \\;?\n$$\n\n- Pentru factori: $1 + 2 + 7 = 10$ și $1 + 0 = 1$; $3 + 4 = 7$. Deci $1 \\times 7 = 7$.\n- Pentru primul rezultat: $4 + 3 + 1 + 8 = 16$ și $1 + 6 = 7$. Nimic nu arată o greșeală.\n- Pentru al doilea: $3 + 3 + 1 + 8 = 15$ și $1 + 5 = 6 \\neq 7$. Egalitatea aceasta este **sigur falsă**.\n\nNici proba prin nouă nu garantează exactitatea calculului. Ea doar dă în vileag anumite greșeli.\n\n---\n\n### 6. Înmulțirea „per gelosia\"\n\nTehnica apare într-o carte a lui Fibonacci din 1202. Numele vine de la ferestrele cu jaluzele, pe care soarele desena o umbră în diagonală și prin care se putea privi fără a fi văzut.\n\nFiecare căsuță ține produsul a două cifre, tăiat de diagonală: zecile deasupra, unitățile dedesubt. Rezultatul se citește pe dungile diagonale, de la dreapta-jos spre stânga.\n\n \n\n---\n\n### 7. Înmulțirea japoneză\n\nAceeași înmulțire, văzută geometric: fiecare cifră devine un mănunchi de linii, iar intersecțiile se numără pe grupuri. Grupul din mijloc adună două produse, exact ca la înmulțirea scrisă.\n\n \n\n---\n\n## Pasul 3: Exersez și devin mai bun\n\n**1. Efectuează aceste înmulțiri așezate.**\n\nPrima este rezolvată ca model: înmulțim fără să ținem seama de virgule, apoi punem în produs atâtea zecimale câte au împreună cei doi factori — aici $2 + 1 = 3$.\n\n \n \n \n \n \n \n \n \n \n \n\n**2. Așază în coloane și efectuează aceste înmulțiri.**\n\nPrima este așezată ca model."
   },
   {
    "title": "C4 - Împărțirea Euclidiană. Împărțirea nr. zecimale",
-   "url": "/curs/docs/edupasi/c5/modul-1/04",
+   "url": "/curs/docs/edupasi/c5/modul-1/05",
    "collection": "edupasi",
    "course": "c5",
    "module": "modul-1",
@@ -2467,7 +2482,7 @@
   },
   {
    "title": "C5 - Semidreapta gradată",
-   "url": "/curs/docs/edupasi/c5/modul-1/05",
+   "url": "/curs/docs/edupasi/c5/modul-1/06",
    "collection": "edupasi",
    "course": "c5",
    "module": "modul-1",
@@ -2482,7 +2497,7 @@
   },
   {
    "title": "C6.1 - Mulțimi. Mulțimea nr. naturale",
-   "url": "/curs/docs/edupasi/c5/modul-1/06",
+   "url": "/curs/docs/edupasi/c5/modul-1/07",
    "collection": "edupasi",
    "course": "c5",
    "module": "modul-1",
@@ -2497,7 +2512,7 @@
   },
   {
    "title": "C6.2 - Scrierea si citirea nr. naturale",
-   "url": "/curs/docs/edupasi/c5/modul-1/07",
+   "url": "/curs/docs/edupasi/c5/modul-1/08",
    "collection": "edupasi",
    "course": "c5",
    "module": "modul-1",
@@ -2512,7 +2527,7 @@
   },
   {
    "title": "C7.1 – Ilustrarea fracţiilor echiunitare, subunitare și supraunitare",
-   "url": "/curs/docs/edupasi/c5/modul-1/08",
+   "url": "/curs/docs/edupasi/c5/modul-1/09",
    "collection": "edupasi",
    "course": "c5",
    "module": "modul-1",
@@ -2527,7 +2542,7 @@
   },
   {
    "title": "C7.2 – Fracții și scrierea procentuală",
-   "url": "/curs/docs/edupasi/c5/modul-1/09",
+   "url": "/curs/docs/edupasi/c5/modul-1/10",
    "collection": "edupasi",
    "course": "c5",
    "module": "modul-1",
@@ -2542,7 +2557,7 @@
   },
   {
    "title": "C8 - Proprietăți ale înmulțirii",
-   "url": "/curs/docs/edupasi/c5/modul-1/10",
+   "url": "/curs/docs/edupasi/c5/modul-1/11",
    "collection": "edupasi",
    "course": "c5",
    "module": "modul-1",
@@ -2557,7 +2572,7 @@
   },
   {
    "title": "C9 - Proprietăți puteri cu exponent natural",
-   "url": "/curs/docs/edupasi/c5/modul-1/11",
+   "url": "/curs/docs/edupasi/c5/modul-1/12",
    "collection": "edupasi",
    "course": "c5",
    "module": "modul-1",
@@ -2572,7 +2587,7 @@
   },
   {
    "title": "C10 - Factor comun",
-   "url": "/curs/docs/edupasi/c5/modul-1/12",
+   "url": "/curs/docs/edupasi/c5/modul-1/13",
    "collection": "edupasi",
    "course": "c5",
    "module": "modul-1",
@@ -2587,7 +2602,7 @@
   },
   {
    "title": "C11 - Compararea nr. ridicate la o putere și pătratul perfect",
-   "url": "/curs/docs/edupasi/c5/modul-1/13",
+   "url": "/curs/docs/edupasi/c5/modul-1/14",
    "collection": "edupasi",
    "course": "c5",
    "module": "modul-1",
@@ -2602,7 +2617,7 @@
   },
   {
    "title": "C12 - Scrierea în baza 10 și baza 2",
-   "url": "/curs/docs/edupasi/c5/modul-1/14",
+   "url": "/curs/docs/edupasi/c5/modul-1/15",
    "collection": "edupasi",
    "course": "c5",
    "module": "modul-1",
@@ -2617,7 +2632,7 @@
   },
   {
    "title": "C13 - Ordinea efectuării operațiilor",
-   "url": "/curs/docs/edupasi/c5/modul-1/15",
+   "url": "/curs/docs/edupasi/c5/modul-1/16",
    "collection": "edupasi",
    "course": "c5",
    "module": "modul-1",
@@ -2632,7 +2647,7 @@
   },
   {
    "title": "C14 - Media aritmetică",
-   "url": "/curs/docs/edupasi/c5/modul-1/16",
+   "url": "/curs/docs/edupasi/c5/modul-1/17",
    "collection": "edupasi",
    "course": "c5",
    "module": "modul-1",

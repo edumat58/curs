@@ -7,40 +7,17 @@ description: ""
 import Katex from '@site/src/components/Katex';
 import HighlightText from '@site/src/components/HighlightText';
 
-# C12 - Scrierea în baza 10 și baza 2
+# C11 - Compararea nr. ridicate la o putere și pătratul perfect
 
 ---
 
-## Scrierea în baza 10
+## Puterea unui număr
 
-:::danger Definiție
-În **<HighlightText color="red">baza 10</HighlightText>** folosim zece cifre: **0, 1, 2, 3, 4, 5, 6, 7, 8, 9**.
-:::
-
-**Exemplu:** numărul 135.
-
-<div style={{display: 'flex', justifyContent: 'center', margin: '20px 0'}}>
-<svg width="420" height="170" viewBox="0 0 420 170" xmlns="http://www.w3.org/2000/svg">
-  <text x="75" y="28" textAnchor="middle" fontSize="20" fill="#FF6B6B">sute</text>
-  <text x="210" y="28" textAnchor="middle" fontSize="20" fill="#4ECDC4">zeci</text>
-  <text x="345" y="28" textAnchor="middle" fontSize="20" fill="#9370DB">unități</text>
-  <rect x="20" y="42" width="110" height="70" rx="8" fill="none" stroke="#FF6B6B" strokeWidth="3" />
-  <rect x="155" y="42" width="110" height="70" rx="8" fill="none" stroke="#4ECDC4" strokeWidth="3" />
-  <rect x="290" y="42" width="110" height="70" rx="8" fill="none" stroke="#9370DB" strokeWidth="3" />
-  <text x="75" y="93" textAnchor="middle" fontSize="42" fill="#FF6B6B">1</text>
-  <text x="210" y="93" textAnchor="middle" fontSize="42" fill="#4ECDC4">3</text>
-  <text x="345" y="93" textAnchor="middle" fontSize="42" fill="#9370DB">5</text>
-  <text x="75" y="145" textAnchor="middle" fontSize="22" fill="#FF6B6B">100</text>
-  <text x="210" y="145" textAnchor="middle" fontSize="22" fill="#4ECDC4">10</text>
-  <text x="345" y="145" textAnchor="middle" fontSize="22" fill="#9370DB">1</text>
-</svg>
-</div>
-
-Înmulțim fiecare cifră cu valoarea locului ei:
+<HighlightText color="red">Baza</HighlightText> este numărul înmulțit. <HighlightText color="teal">Exponentul</HighlightText> arată de câte ori.
 
 <Katex>
 {String.raw`
-135 = \color{#FF6B6B}{1} \cdot 100 + \color{#4ECDC4}{3} \cdot 10 + \color{#9370DB}{5} \cdot 1
+\color{#FF6B6B}{2}^{\color{#4ECDC4}{3}} = 2 \cdot 2 \cdot 2 = 8
 `}
 </Katex>
 
@@ -48,56 +25,81 @@ Reținem:
 
 <Katex>
 {String.raw`
-\overline{abc}_{(10)} = a \cdot 100 + b \cdot 10 + c
+a^0 = 1 \qquad a^1 = a
 `}
 </Katex>
 
 ---
 
-## Scrierea în baza 2
+## Compararea puterilor
 
-În **<HighlightText color="orange">baza 2</HighlightText>** folosim doar două cifre: **0** și **1**.
-
-Aici locurile sunt: 1, 2, 4, 8.
-
-**Exemplu:** trecem numărul <Katex>{String.raw`101_{(2)}`}</Katex> în baza 10.
+Aceeași bază: mai mare este cea cu exponentul mai mare.
 
 <Katex>
 {String.raw`
-101_{(2)} = \color{#FF6B6B}{1} \cdot 4 + \color{#4ECDC4}{0} \cdot 2 + \color{#9370DB}{1} \cdot 1 = 5_{(10)}
+\color{#FF6B6B}{5}^{2} < \color{#FF6B6B}{5}^{3}
+`}
+</Katex>
+
+Același exponent: mai mare este cea cu baza mai mare.
+
+<Katex>
+{String.raw`
+3^{\color{#4ECDC4}{4}} < 7^{\color{#4ECDC4}{4}}
 `}
 </Katex>
 
 ---
 
-## Trecerea de la baza 10 la baza 2
+## Pătratul perfect
 
-Împărțim numărul la 2, din nou și din nou.
+:::danger Definiție
+Un <HighlightText color="orange">pătrat perfect</HighlightText> este un număr scris ca <Katex>{String.raw`a^2`}</Katex>.
+:::
 
-- Pasul 1: Împărțim la 2. Scriem câtul și restul.
-- Pasul 2: Împărțim iar câtul la 2.
-- Pasul 3: Ne oprim când câtul este 0.
-- Pasul 4: Citim resturile de jos în sus.
+<svg viewBox="0 0 300 240" width="100%" style={{maxWidth: '320px'}} xmlns="http://www.w3.org/2000/svg">
+  <rect x="70" y="40" width="168" height="168" fill="#4ECDC4" fillOpacity="0.18" stroke="#4ECDC4" strokeWidth="3" />
+  <line x1="98" y1="40" x2="98" y2="208" stroke="#4ECDC4" strokeWidth="1.5" />
+  <line x1="126" y1="40" x2="126" y2="208" stroke="#4ECDC4" strokeWidth="1.5" />
+  <line x1="154" y1="40" x2="154" y2="208" stroke="#4ECDC4" strokeWidth="1.5" />
+  <line x1="182" y1="40" x2="182" y2="208" stroke="#4ECDC4" strokeWidth="1.5" />
+  <line x1="210" y1="40" x2="210" y2="208" stroke="#4ECDC4" strokeWidth="1.5" />
+  <line x1="70" y1="68" x2="238" y2="68" stroke="#4ECDC4" strokeWidth="1.5" />
+  <line x1="70" y1="96" x2="238" y2="96" stroke="#4ECDC4" strokeWidth="1.5" />
+  <line x1="70" y1="124" x2="238" y2="124" stroke="#4ECDC4" strokeWidth="1.5" />
+  <line x1="70" y1="152" x2="238" y2="152" stroke="#4ECDC4" strokeWidth="1.5" />
+  <line x1="70" y1="180" x2="238" y2="180" stroke="#4ECDC4" strokeWidth="1.5" />
+  <text x="154" y="28" fontSize="22" fontWeight="bold" fill="#FF6B6B" textAnchor="middle">6</text>
+  <text x="48" y="132" fontSize="22" fontWeight="bold" fill="#FF6B6B" textAnchor="middle">6</text>
+  <text x="154" y="232" fontSize="22" fontWeight="bold" fill="#FF8C00" textAnchor="middle">36</text>
+</svg>
 
-**Exemplu:** trecem numărul 13 în baza 2. Calculăm pas cu pas:
+Pasul 1: Numărăm pătrățelele de pe o latură. Sunt 6.
+
+Pasul 2: Înmulțim latura cu latura.
 
 <Katex>
 {String.raw`
-\begin{aligned}
-13 : 2 &\rightarrow \text{cât } 6,\ \text{rest } \color{#FF8C00}{1}\\[6pt]
-6 : 2 &\rightarrow \text{cât } 3,\ \text{rest } \color{#9370DB}{0}\\[6pt]
-3 : 2 &\rightarrow \text{cât } 1,\ \text{rest } \color{#4ECDC4}{1}\\[6pt]
-1 : 2 &\rightarrow \text{cât } 0,\ \text{rest } \color{#FF6B6B}{1}
-\end{aligned}
+6 \cdot 6 = 36
 `}
 </Katex>
 
+Pasul 3: Scriem 36 ca putere.
+
 <Katex>
 {String.raw`
-13_{(10)} = \color{#FF6B6B}{1}\color{#4ECDC4}{1}\color{#9370DB}{0}\color{#FF8C00}{1}_{(2)}
+36 = \color{#FF8C00}{6^2}
 `}
 </Katex>
+
+Deci 36 este pătrat perfect.
 
 :::tip De reținut
-Resturile se citesc **<HighlightText color="teal">de jos în sus</HighlightText>**.
+Pătratele perfecte până la 100:
+
+<Katex>
+{String.raw`
+0,\ 1,\ 4,\ 9,\ 16,\ 25,\ 36,\ 49,\ 64,\ 81,\ 100
+`}
+</Katex>
 :::

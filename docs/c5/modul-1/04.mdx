@@ -1,5 +1,5 @@
 ---
-sidebar_position: 4
+sidebar_position: 13
 slug: /c5/06
 description: ""
 ---
@@ -10,3 +10,107 @@ import HighlightText from '@site/src/components/HighlightText';
 # C4 - Împărțirea Euclidiană. Împărțirea nr. zecimale
 
 ---
+
+## Împărțirea euclidiană
+
+:::danger Definiție
+La împărțirea cu **<HighlightText color="orange">rest</HighlightText>** avem patru numere.
+
+<Katex>
+{String.raw`
+\color{#FF6B6B}{\text{deîmpărțit}} = \color{#4ECDC4}{\text{împărțitor}} \times \color{#9370DB}{\text{cât}} + \color{#FF8C00}{\text{rest}}
+`}
+</Katex>
+:::
+
+Punem 17 bomboane în grupe de câte 5.
+
+<svg xmlns="http://www.w3.org/2000/svg" width="620" height="180" viewBox="0 0 620 180" role="img" aria-label="17 bomboane puse în 3 grupe de câte 5, cu 2 bomboane rămase">
+  <text x="20" y="30" font-size="22" fill="#111">17 bomboane</text>
+  <g fill="#4ECDC4" stroke="#111" stroke-width="2">
+    <rect x="20" y="50" width="130" height="50" rx="4"/>
+    <rect x="165" y="50" width="130" height="50" rx="4"/>
+    <rect x="310" y="50" width="130" height="50" rx="4"/>
+  </g>
+  <g fill="#FF8C00" stroke="#111" stroke-width="2">
+    <rect x="470" y="50" width="30" height="50" rx="4"/>
+    <rect x="506" y="50" width="30" height="50" rx="4"/>
+  </g>
+  <g font-size="22" fill="#111" text-anchor="middle">
+    <text x="85" y="83">5</text>
+    <text x="230" y="83">5</text>
+    <text x="375" y="83">5</text>
+  </g>
+  <text x="20" y="140" font-size="22" fill="#006b67">3 grupe de câte 5 = cât 3</text>
+  <text x="450" y="140" font-size="22" fill="#934500">rest 2</text>
+</svg>
+
+<Katex>
+{String.raw`
+\underbrace{17}_{\color{#FF6B6B}{\text{deîmpărțit}}} = \underbrace{5}_{\color{#4ECDC4}{\text{împărțitor}}} \times \underbrace{3}_{\color{#9370DB}{\text{cât}}} + \underbrace{2}_{\color{#FF8C00}{\text{rest}}}
+`}
+</Katex>
+
+**Exemplu:** Calculăm pas cu pas 17 : 5.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: căutăm câtul: } 5 \times \color{#9370DB}{3} = 15\\[6pt]
+& \text{Pasul 2: aflăm restul: } 17 - 15 = \color{#FF8C00}{2}\\[6pt]
+& \text{Pasul 3: facem proba: } 5 \times 3 + 2 = 17
+\end{aligned}
+`}
+</Katex>
+
+:::tip De reținut
+Restul este mereu mai mic decât împărțitorul.
+
+<Katex>
+{String.raw`\color{#FF8C00}{2} \lt \color{#4ECDC4}{5}`}
+</Katex>
+:::
+
+---
+
+## Împărțirea unui număr zecimal la un număr natural
+
+Împărțim ca la numerele naturale. Punem virgula la cât.
+
+**Exemplu:** Calculăm pas cu pas 7,5 : 3.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: } 7 \div 3 = 2 \text{ rest } 1\\[6pt]
+& \text{Pasul 2: punem } \color{#FF6B6B}{\text{virgula}} \text{ la cât}\\[6pt]
+& \text{Pasul 3: coborâm zecimala } 5 \text{ și avem } 15\\[6pt]
+& \text{Pasul 4: } 15 \div 3 = 5\\[6pt]
+& \text{Rezultat: } 7{,}5 \div 3 = \color{#9370DB}{2{,}5}
+\end{aligned}
+`}
+</Katex>
+
+Facem proba.
+
+<Katex>
+{String.raw`3 \times 2{,}5 = 7{,}5`}
+</Katex>
+
+---
+
+## Împărțirea la un număr zecimal
+
+Mutăm **<HighlightText color="red">virgula</HighlightText>** spre dreapta la amândouă numerele.
+
+**Exemplu:** Calculăm pas cu pas 7,2 : 0,3.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: mutăm virgula: } 7{,}2 \to \color{#FF6B6B}{72} \text{ și } 0{,}3 \to \color{#4ECDC4}{3}\\[6pt]
+& \text{Pasul 2: } 72 \div 3 = 24\\[6pt]
+& \text{Rezultat: } 7{,}2 \div 0{,}3 = \color{#9370DB}{24}
+\end{aligned}
+`}
+</Katex>

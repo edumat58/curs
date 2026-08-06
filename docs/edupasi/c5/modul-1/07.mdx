@@ -7,123 +7,85 @@ description: ""
 import Katex from '@site/src/components/Katex';
 import HighlightText from '@site/src/components/HighlightText';
 
-# C6.2 - Scrierea si citirea nr. naturale
+# C6.1 - Mulțimi. Mulțimea nr. naturale
 
 ---
 
-## Ne reamintim
-
-Fiecare cifră stă pe locul ei. Locul se numește **<HighlightText color="red">ordin</HighlightText>**.
-
-<svg xmlns="http://www.w3.org/2000/svg" width="420" height="160" viewBox="0 0 420 160" role="img" aria-label="Numărul 347 așezat pe ordine: 3 sute, 4 zeci, 7 unități">
-  <text x="75" y="24" text-anchor="middle" font-size="20" fill="#FF6B6B">sute</text>
-  <rect x="20" y="36" width="110" height="70" rx="8" fill="none" stroke="#FF6B6B" stroke-width="3"/>
-  <text x="75" y="92" text-anchor="middle" font-size="42" fill="#FF6B6B">3</text>
-  <text x="75" y="142" text-anchor="middle" font-size="26" fill="#FF6B6B">300</text>
-
-  <text x="210" y="24" text-anchor="middle" font-size="20" fill="#4ECDC4">zeci</text>
-  <rect x="155" y="36" width="110" height="70" rx="8" fill="none" stroke="#4ECDC4" stroke-width="3"/>
-  <text x="210" y="92" text-anchor="middle" font-size="42" fill="#4ECDC4">4</text>
-  <text x="210" y="142" text-anchor="middle" font-size="26" fill="#4ECDC4">40</text>
-
-  <text x="345" y="24" text-anchor="middle" font-size="20" fill="#9370DB">unități</text>
-  <rect x="290" y="36" width="110" height="70" rx="8" fill="none" stroke="#9370DB" stroke-width="3"/>
-  <text x="345" y="92" text-anchor="middle" font-size="42" fill="#9370DB">7</text>
-  <text x="345" y="142" text-anchor="middle" font-size="26" fill="#9370DB">7</text>
-</svg>
-
-Numărul 347 se citește trei sute patruzeci și șapte.
-
-Numerele se scriu și cu **<HighlightText color="teal">cifre romane</HighlightText>**.
-
-| Simbol | I | V | X | L | C |
-|---|---|---|---|---|---|
-| Valoare | 1 | 5 | 10 | 50 | 100 |
-
-<Katex>
-{String.raw`
-12 = \color{#4ECDC4}{XII} \qquad 24 = \color{#4ECDC4}{XXIV}
-`}
-</Katex>
-
----
-
-## Descompunerea unui nr. natural
+## Mulțimi
 
 :::danger Definiție
-A descompune un număr înseamnă a-l scrie ca sumă de ordine.
+O **<HighlightText color="red">mulțime</HighlightText>** este o grupă de **<HighlightText color="teal">elemente</HighlightText>**. Numele ei se scrie cu literă mare. Elementele stau între acolade.
 :::
 
-<Katex>
-{String.raw`
-347 = \color{#FF6B6B}{3} \times 100 + \color{#4ECDC4}{4} \times 10 + \color{#9370DB}{7}
-`}
-</Katex>
+**Exemplu:** mulțimea literelor cuvântului „mama".
 
-Un număr cu cifre necunoscute are linie deasupra.
+Pasul 1: Literele sunt m, a, m, a.
+
+Pasul 2: Scriem fiecare literă o singură dată.
 
 <Katex>
 {String.raw`
-\overline{abc} = \color{#FF6B6B}{a} \times 100 + \color{#4ECDC4}{b} \times 10 + \color{#9370DB}{c}
+\color{#FF6B6B}{B} = \{\color{#4ECDC4}{m;\, a}\}
 `}
 </Katex>
 
 ---
 
-## Metode
+## Mulțimea nr. naturale
 
-Aflăm cifrele a și b din egalitatea:
+Numerele naturale sunt numerele cu care numărăm.
 
 <Katex>
 {String.raw`
-459 = \color{#FF6B6B}{a} \times 100 + \color{#4ECDC4}{b} \times 10 + 9
+\color{#9370DB}{\mathbb{N}} = \{0;\,1;\,2;\,3;\,4;\,\ldots\}
 `}
 </Katex>
 
-Calculăm pas cu pas:
+Mulțimea este infinită. Numerele nu se termină.
 
-**Pasul 1:** Descompunem numărul 459.
+---
+
+### Definirea unei mulțimi
+
+O mulțime se scrie și cu o condiție.
 
 <Katex>
 {String.raw`
-459 = 400 + 50 + 9
+D = \{\,\color{#FF6B6B}{x}\ \mid\ \color{#4ECDC4}{2 < x \le 6}\,\}
 `}
 </Katex>
 
-**Pasul 2:** Scriem fiecare ordin ca produs.
+Observăm că x este mai mare decât 2. Și x este cel mult 6.
+
+<svg viewBox="0 0 400 110" width="100%" role="img" aria-label="Axa numerelor de la 1 la 7">
+  <line x1="20" y1="50" x2="375" y2="50" stroke="#9370DB" strokeWidth="3" />
+  <polygon points="375,44 390,50 375,56" fill="#9370DB" />
+  <circle cx="90" cy="50" r="9" fill="#ffffff" stroke="#FF6B6B" strokeWidth="4" />
+  <circle cx="140" cy="50" r="9" fill="#4ECDC4" />
+  <circle cx="190" cy="50" r="9" fill="#4ECDC4" />
+  <circle cx="240" cy="50" r="9" fill="#4ECDC4" />
+  <circle cx="290" cy="50" r="9" fill="#4ECDC4" />
+  <text x="40" y="88" fontSize="20" textAnchor="middle" fill="#666666">1</text>
+  <text x="90" y="88" fontSize="20" textAnchor="middle" fill="#FF6B6B">2</text>
+  <text x="140" y="88" fontSize="20" textAnchor="middle" fill="#4ECDC4">3</text>
+  <text x="190" y="88" fontSize="20" textAnchor="middle" fill="#4ECDC4">4</text>
+  <text x="240" y="88" fontSize="20" textAnchor="middle" fill="#4ECDC4">5</text>
+  <text x="290" y="88" fontSize="20" textAnchor="middle" fill="#4ECDC4">6</text>
+  <text x="340" y="88" fontSize="20" textAnchor="middle" fill="#666666">7</text>
+</svg>
+
+Pasul 1: Pe 2 nu îl luăm.
+
+Pasul 2: Pe 6 îl luăm.
+
+Pasul 3: Scriem numerele colorate.
 
 <Katex>
 {String.raw`
-459 = \color{#FF6B6B}{4} \times 100 + \color{#4ECDC4}{5} \times 10 + 9
-`}
-</Katex>
-
-**Pasul 3:** Așezăm cele două scrieri în tabel.
-
-| sute | zeci | unități |
-|---|---|---|
-| 4 | 5 | 9 |
-| a | b | 9 |
-
-Observăm că litera a stă sub 4. Litera b stă sub 5.
-
-**Pasul 4:** Scriem răspunsul.
-
-<Katex>
-{String.raw`
-\color{#FF6B6B}{a = 4} \qquad \color{#4ECDC4}{b = 5}
-`}
-</Katex>
-
-**Pasul 5:** Verificăm.
-
-<Katex>
-{String.raw`
-4 \times 100 + 5 \times 10 + 9 = 400 + 50 + 9 = 459
+\Rightarrow D = \{\color{#4ECDC4}{3;\,4;\,5;\,6}\}
 `}
 </Katex>
 
 :::tip De reținut
-Fiecare cifră se înmulțește cu valoarea locului ei.
-Sutele au 100, zecile au 10, unitățile au 1.
+Cercul **<HighlightText color="red">gol</HighlightText>** arată că numărul nu intră. Cercul **<HighlightText color="teal">plin</HighlightText>** arată că numărul intră.
 :::

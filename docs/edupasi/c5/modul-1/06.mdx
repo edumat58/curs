@@ -7,85 +7,79 @@ description: ""
 import Katex from '@site/src/components/Katex';
 import HighlightText from '@site/src/components/HighlightText';
 
-# C6.1 - Mulțimi. Mulțimea nr. naturale
+# C5 - Semidreapta gradată
 
 ---
 
-## Mulțimi
+## Definiție
 
 :::danger Definiție
-O **<HighlightText color="red">mulțime</HighlightText>** este o grupă de **<HighlightText color="teal">elemente</HighlightText>**. Numele ei se scrie cu literă mare. Elementele stau între acolade.
+Numărul din dreptul unui punct se numește **<HighlightText color="red">abscisă</HighlightText>**.
 :::
 
-**Exemplu:** mulțimea literelor cuvântului „mama".
+### Exemple
 
-Pasul 1: Literele sunt m, a, m, a.
-
-Pasul 2: Scriem fiecare literă o singură dată.
-
-<Katex>
-{String.raw`
-\color{#FF6B6B}{B} = \{\color{#4ECDC4}{m;\, a}\}
-`}
-</Katex>
-
----
-
-## Mulțimea nr. naturale
-
-Numerele naturale sunt numerele cu care numărăm.
-
-<Katex>
-{String.raw`
-\color{#9370DB}{\mathbb{N}} = \{0;\,1;\,2;\,3;\,4;\,\ldots\}
-`}
-</Katex>
-
-Mulțimea este infinită. Numerele nu se termină.
-
----
-
-### Definirea unei mulțimi
-
-O mulțime se scrie și cu o condiție.
-
-<Katex>
-{String.raw`
-D = \{\,\color{#FF6B6B}{x}\ \mid\ \color{#4ECDC4}{2 < x \le 6}\,\}
-`}
-</Katex>
-
-Observăm că x este mai mare decât 2. Și x este cel mult 6.
-
-<svg viewBox="0 0 400 110" width="100%" role="img" aria-label="Axa numerelor de la 1 la 7">
-  <line x1="20" y1="50" x2="375" y2="50" stroke="#9370DB" strokeWidth="3" />
-  <polygon points="375,44 390,50 375,56" fill="#9370DB" />
-  <circle cx="90" cy="50" r="9" fill="#ffffff" stroke="#FF6B6B" strokeWidth="4" />
-  <circle cx="140" cy="50" r="9" fill="#4ECDC4" />
-  <circle cx="190" cy="50" r="9" fill="#4ECDC4" />
-  <circle cx="240" cy="50" r="9" fill="#4ECDC4" />
-  <circle cx="290" cy="50" r="9" fill="#4ECDC4" />
-  <text x="40" y="88" fontSize="20" textAnchor="middle" fill="#666666">1</text>
-  <text x="90" y="88" fontSize="20" textAnchor="middle" fill="#FF6B6B">2</text>
-  <text x="140" y="88" fontSize="20" textAnchor="middle" fill="#4ECDC4">3</text>
-  <text x="190" y="88" fontSize="20" textAnchor="middle" fill="#4ECDC4">4</text>
-  <text x="240" y="88" fontSize="20" textAnchor="middle" fill="#4ECDC4">5</text>
-  <text x="290" y="88" fontSize="20" textAnchor="middle" fill="#4ECDC4">6</text>
-  <text x="340" y="88" fontSize="20" textAnchor="middle" fill="#666666">7</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="170" viewBox="0 0 600 170" role="img" aria-label="Semidreaptă gradată de la 0 la 6, punctul A la 3 și punctul C la 5,8">
+  <line x1="40" y1="90" x2="556" y2="90" stroke="#111" stroke-width="3"/>
+  <path d="M552,80 L552,100 L578,90 Z" fill="#111"/>
+  <line x1="40" y1="78" x2="40" y2="102" stroke="#111" stroke-width="3"/>
+  <line x1="120" y1="78" x2="120" y2="102" stroke="#111" stroke-width="3"/>
+  <line x1="200" y1="78" x2="200" y2="102" stroke="#111" stroke-width="3"/>
+  <line x1="280" y1="78" x2="280" y2="102" stroke="#111" stroke-width="3"/>
+  <line x1="360" y1="78" x2="360" y2="102" stroke="#111" stroke-width="3"/>
+  <line x1="440" y1="78" x2="440" y2="102" stroke="#111" stroke-width="3"/>
+  <line x1="520" y1="78" x2="520" y2="102" stroke="#111" stroke-width="3"/>
+  <line x1="448" y1="84" x2="448" y2="96" stroke="#111" stroke-width="2"/>
+  <line x1="456" y1="84" x2="456" y2="96" stroke="#111" stroke-width="2"/>
+  <line x1="464" y1="84" x2="464" y2="96" stroke="#111" stroke-width="2"/>
+  <line x1="472" y1="84" x2="472" y2="96" stroke="#111" stroke-width="2"/>
+  <line x1="480" y1="84" x2="480" y2="96" stroke="#111" stroke-width="2"/>
+  <line x1="488" y1="84" x2="488" y2="96" stroke="#111" stroke-width="2"/>
+  <line x1="496" y1="84" x2="496" y2="96" stroke="#111" stroke-width="2"/>
+  <line x1="512" y1="84" x2="512" y2="96" stroke="#111" stroke-width="2"/>
+  <text x="40" y="128" font-size="20" text-anchor="middle">0</text>
+  <text x="120" y="128" font-size="20" text-anchor="middle">1</text>
+  <text x="200" y="128" font-size="20" text-anchor="middle">2</text>
+  <text x="280" y="128" font-size="20" text-anchor="middle">3</text>
+  <text x="360" y="128" font-size="20" text-anchor="middle">4</text>
+  <text x="440" y="128" font-size="20" text-anchor="middle">5</text>
+  <text x="520" y="128" font-size="20" text-anchor="middle">6</text>
+  <circle cx="280" cy="90" r="9" fill="#FF6B6B"/>
+  <text x="280" y="56" font-size="24" text-anchor="middle" fill="#FF6B6B">A</text>
+  <circle cx="504" cy="90" r="9" fill="#4ECDC4"/>
+  <text x="504" y="56" font-size="24" text-anchor="middle" fill="#4ECDC4">C</text>
+  <text x="504" y="158" font-size="20" text-anchor="middle" fill="#4ECDC4">5,8</text>
 </svg>
 
-Pasul 1: Pe 2 nu îl luăm.
-
-Pasul 2: Pe 6 îl luăm.
-
-Pasul 3: Scriem numerele colorate.
-
 <Katex>
 {String.raw`
-\Rightarrow D = \{\color{#4ECDC4}{3;\,4;\,5;\,6}\}
+\begin{aligned}
+& \text{Abscisa punctului } \color{#FF6B6B}{A} \text{ este } \color{#FF6B6B}{3} \\[8pt]
+& \text{Abscisa punctului } \color{#4ECDC4}{C} \text{ este } \color{#4ECDC4}{5{,}8}
+\end{aligned}
 `}
 </Katex>
 
+---
+
+## Metodă
+
+Semidreapta merge de la 0 la 50. Plasăm punctul P cu abscisa 20.
+
+Calculăm pas cu pas:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: împart segmentul în } \color{#9370DB}{5} \text{ părți egale} \\[8pt]
+& \text{Pasul 2: o parte valorează } 50 \div 5 = \color{#FF6B6B}{10} \\[8pt]
+& \text{Pasul 3: număr } 2 \text{ părți: } 2 \times 10 = \color{#4ECDC4}{20}
+\end{aligned}
+`}
+</Katex>
+
+Punctul P stă la capătul părții a doua.
+
 :::tip De reținut
-Cercul **<HighlightText color="red">gol</HighlightText>** arată că numărul nu intră. Cercul **<HighlightText color="teal">plin</HighlightText>** arată că numărul intră.
+Gradațiile stau la distanțe egale. Pornim mereu de la 0.
 :::

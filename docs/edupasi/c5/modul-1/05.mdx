@@ -7,79 +7,110 @@ description: ""
 import Katex from '@site/src/components/Katex';
 import HighlightText from '@site/src/components/HighlightText';
 
-# C5 - Semidreapta gradată
+# C4 - Împărțirea Euclidiană. Împărțirea nr. zecimale
 
 ---
 
-## Definiție
+## Împărțirea euclidiană
 
 :::danger Definiție
-Numărul din dreptul unui punct se numește **<HighlightText color="red">abscisă</HighlightText>**.
+La împărțirea cu **<HighlightText color="orange">rest</HighlightText>** avem patru numere.
+
+<Katex>
+{String.raw`
+\color{#FF6B6B}{\text{deîmpărțit}} = \color{#4ECDC4}{\text{împărțitor}} \times \color{#9370DB}{\text{cât}} + \color{#FF8C00}{\text{rest}}
+`}
+</Katex>
 :::
 
-### Exemple
+Punem 17 bomboane în grupe de câte 5.
 
-<svg xmlns="http://www.w3.org/2000/svg" width="600" height="170" viewBox="0 0 600 170" role="img" aria-label="Semidreaptă gradată de la 0 la 6, punctul A la 3 și punctul C la 5,8">
-  <line x1="40" y1="90" x2="556" y2="90" stroke="#111" stroke-width="3"/>
-  <path d="M552,80 L552,100 L578,90 Z" fill="#111"/>
-  <line x1="40" y1="78" x2="40" y2="102" stroke="#111" stroke-width="3"/>
-  <line x1="120" y1="78" x2="120" y2="102" stroke="#111" stroke-width="3"/>
-  <line x1="200" y1="78" x2="200" y2="102" stroke="#111" stroke-width="3"/>
-  <line x1="280" y1="78" x2="280" y2="102" stroke="#111" stroke-width="3"/>
-  <line x1="360" y1="78" x2="360" y2="102" stroke="#111" stroke-width="3"/>
-  <line x1="440" y1="78" x2="440" y2="102" stroke="#111" stroke-width="3"/>
-  <line x1="520" y1="78" x2="520" y2="102" stroke="#111" stroke-width="3"/>
-  <line x1="448" y1="84" x2="448" y2="96" stroke="#111" stroke-width="2"/>
-  <line x1="456" y1="84" x2="456" y2="96" stroke="#111" stroke-width="2"/>
-  <line x1="464" y1="84" x2="464" y2="96" stroke="#111" stroke-width="2"/>
-  <line x1="472" y1="84" x2="472" y2="96" stroke="#111" stroke-width="2"/>
-  <line x1="480" y1="84" x2="480" y2="96" stroke="#111" stroke-width="2"/>
-  <line x1="488" y1="84" x2="488" y2="96" stroke="#111" stroke-width="2"/>
-  <line x1="496" y1="84" x2="496" y2="96" stroke="#111" stroke-width="2"/>
-  <line x1="512" y1="84" x2="512" y2="96" stroke="#111" stroke-width="2"/>
-  <text x="40" y="128" font-size="20" text-anchor="middle">0</text>
-  <text x="120" y="128" font-size="20" text-anchor="middle">1</text>
-  <text x="200" y="128" font-size="20" text-anchor="middle">2</text>
-  <text x="280" y="128" font-size="20" text-anchor="middle">3</text>
-  <text x="360" y="128" font-size="20" text-anchor="middle">4</text>
-  <text x="440" y="128" font-size="20" text-anchor="middle">5</text>
-  <text x="520" y="128" font-size="20" text-anchor="middle">6</text>
-  <circle cx="280" cy="90" r="9" fill="#FF6B6B"/>
-  <text x="280" y="56" font-size="24" text-anchor="middle" fill="#FF6B6B">A</text>
-  <circle cx="504" cy="90" r="9" fill="#4ECDC4"/>
-  <text x="504" y="56" font-size="24" text-anchor="middle" fill="#4ECDC4">C</text>
-  <text x="504" y="158" font-size="20" text-anchor="middle" fill="#4ECDC4">5,8</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="620" height="180" viewBox="0 0 620 180" role="img" aria-label="17 bomboane puse în 3 grupe de câte 5, cu 2 bomboane rămase">
+  <text x="20" y="30" font-size="22" fill="#111">17 bomboane</text>
+  <g fill="#4ECDC4" stroke="#111" stroke-width="2">
+    <rect x="20" y="50" width="130" height="50" rx="4"/>
+    <rect x="165" y="50" width="130" height="50" rx="4"/>
+    <rect x="310" y="50" width="130" height="50" rx="4"/>
+  </g>
+  <g fill="#FF8C00" stroke="#111" stroke-width="2">
+    <rect x="470" y="50" width="30" height="50" rx="4"/>
+    <rect x="506" y="50" width="30" height="50" rx="4"/>
+  </g>
+  <g font-size="22" fill="#111" text-anchor="middle">
+    <text x="85" y="83">5</text>
+    <text x="230" y="83">5</text>
+    <text x="375" y="83">5</text>
+  </g>
+  <text x="20" y="140" font-size="22" fill="#006b67">3 grupe de câte 5 = cât 3</text>
+  <text x="450" y="140" font-size="22" fill="#934500">rest 2</text>
 </svg>
 
 <Katex>
 {String.raw`
-\begin{aligned}
-& \text{Abscisa punctului } \color{#FF6B6B}{A} \text{ este } \color{#FF6B6B}{3} \\[8pt]
-& \text{Abscisa punctului } \color{#4ECDC4}{C} \text{ este } \color{#4ECDC4}{5{,}8}
-\end{aligned}
+\underbrace{17}_{\color{#FF6B6B}{\text{deîmpărțit}}} = \underbrace{5}_{\color{#4ECDC4}{\text{împărțitor}}} \times \underbrace{3}_{\color{#9370DB}{\text{cât}}} + \underbrace{2}_{\color{#FF8C00}{\text{rest}}}
 `}
 </Katex>
 
----
-
-## Metodă
-
-Semidreapta merge de la 0 la 50. Plasăm punctul P cu abscisa 20.
-
-Calculăm pas cu pas:
+**Exemplu:** Calculăm pas cu pas 17 : 5.
 
 <Katex>
 {String.raw`
 \begin{aligned}
-& \text{Pasul 1: împart segmentul în } \color{#9370DB}{5} \text{ părți egale} \\[8pt]
-& \text{Pasul 2: o parte valorează } 50 \div 5 = \color{#FF6B6B}{10} \\[8pt]
-& \text{Pasul 3: număr } 2 \text{ părți: } 2 \times 10 = \color{#4ECDC4}{20}
+& \text{Pasul 1: căutăm câtul: } 5 \times \color{#9370DB}{3} = 15\\[6pt]
+& \text{Pasul 2: aflăm restul: } 17 - 15 = \color{#FF8C00}{2}\\[6pt]
+& \text{Pasul 3: facem proba: } 5 \times 3 + 2 = 17
 \end{aligned}
 `}
 </Katex>
 
-Punctul P stă la capătul părții a doua.
-
 :::tip De reținut
-Gradațiile stau la distanțe egale. Pornim mereu de la 0.
+Restul este mereu mai mic decât împărțitorul.
+
+<Katex>
+{String.raw`\color{#FF8C00}{2} \lt \color{#4ECDC4}{5}`}
+</Katex>
 :::
+
+---
+
+## Împărțirea unui număr zecimal la un număr natural
+
+Împărțim ca la numerele naturale. Punem virgula la cât.
+
+**Exemplu:** Calculăm pas cu pas 7,5 : 3.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: } 7 \div 3 = 2 \text{ rest } 1\\[6pt]
+& \text{Pasul 2: punem } \color{#FF6B6B}{\text{virgula}} \text{ la cât}\\[6pt]
+& \text{Pasul 3: coborâm zecimala } 5 \text{ și avem } 15\\[6pt]
+& \text{Pasul 4: } 15 \div 3 = 5\\[6pt]
+& \text{Rezultat: } 7{,}5 \div 3 = \color{#9370DB}{2{,}5}
+\end{aligned}
+`}
+</Katex>
+
+Facem proba.
+
+<Katex>
+{String.raw`3 \times 2{,}5 = 7{,}5`}
+</Katex>
+
+---
+
+## Împărțirea la un număr zecimal
+
+Mutăm **<HighlightText color="red">virgula</HighlightText>** spre dreapta la amândouă numerele.
+
+**Exemplu:** Calculăm pas cu pas 7,2 : 0,3.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Pasul 1: mutăm virgula: } 7{,}2 \to \color{#FF6B6B}{72} \text{ și } 0{,}3 \to \color{#4ECDC4}{3}\\[6pt]
+& \text{Pasul 2: } 72 \div 3 = 24\\[6pt]
+& \text{Rezultat: } 7{,}2 \div 0{,}3 = \color{#9370DB}{24}
+\end{aligned}
+`}
+</Katex>

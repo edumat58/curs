@@ -7,99 +7,87 @@ description: ""
 import Katex from '@site/src/components/Katex';
 import HighlightText from '@site/src/components/HighlightText';
 
-# C11 - Compararea nr. ridicate la o putere și pătratul perfect
+# C10 - Factor comun
 
 ---
 
-## Puterea unui număr
-
-<HighlightText color="red">Baza</HighlightText> este numărul înmulțit. <HighlightText color="teal">Exponentul</HighlightText> arată de câte ori.
-
-<Katex>
-{String.raw`
-\color{#FF6B6B}{2}^{\color{#4ECDC4}{3}} = 2 \cdot 2 \cdot 2 = 8
-`}
-</Katex>
-
-Reținem:
-
-<Katex>
-{String.raw`
-a^0 = 1 \qquad a^1 = a
-`}
-</Katex>
-
----
-
-## Compararea puterilor
-
-Aceeași bază: mai mare este cea cu exponentul mai mare.
-
-<Katex>
-{String.raw`
-\color{#FF6B6B}{5}^{2} < \color{#FF6B6B}{5}^{3}
-`}
-</Katex>
-
-Același exponent: mai mare este cea cu baza mai mare.
-
-<Katex>
-{String.raw`
-3^{\color{#4ECDC4}{4}} < 7^{\color{#4ECDC4}{4}}
-`}
-</Katex>
-
----
-
-## Pătratul perfect
+## Definiție
 
 :::danger Definiție
-Un <HighlightText color="orange">pătrat perfect</HighlightText> este un număr scris ca <Katex>{String.raw`a^2`}</Katex>.
+**<HighlightText color="red">Factorul comun</HighlightText>** este numărul sau litera care apare în **<HighlightText color="teal">fiecare termen</HighlightText>**.
 :::
 
-<svg viewBox="0 0 300 240" width="100%" style={{maxWidth: '320px'}} xmlns="http://www.w3.org/2000/svg">
-  <rect x="70" y="40" width="168" height="168" fill="#4ECDC4" fillOpacity="0.18" stroke="#4ECDC4" strokeWidth="3" />
-  <line x1="98" y1="40" x2="98" y2="208" stroke="#4ECDC4" strokeWidth="1.5" />
-  <line x1="126" y1="40" x2="126" y2="208" stroke="#4ECDC4" strokeWidth="1.5" />
-  <line x1="154" y1="40" x2="154" y2="208" stroke="#4ECDC4" strokeWidth="1.5" />
-  <line x1="182" y1="40" x2="182" y2="208" stroke="#4ECDC4" strokeWidth="1.5" />
-  <line x1="210" y1="40" x2="210" y2="208" stroke="#4ECDC4" strokeWidth="1.5" />
-  <line x1="70" y1="68" x2="238" y2="68" stroke="#4ECDC4" strokeWidth="1.5" />
-  <line x1="70" y1="96" x2="238" y2="96" stroke="#4ECDC4" strokeWidth="1.5" />
-  <line x1="70" y1="124" x2="238" y2="124" stroke="#4ECDC4" strokeWidth="1.5" />
-  <line x1="70" y1="152" x2="238" y2="152" stroke="#4ECDC4" strokeWidth="1.5" />
-  <line x1="70" y1="180" x2="238" y2="180" stroke="#4ECDC4" strokeWidth="1.5" />
-  <text x="154" y="28" fontSize="22" fontWeight="bold" fill="#FF6B6B" textAnchor="middle">6</text>
-  <text x="48" y="132" fontSize="22" fontWeight="bold" fill="#FF6B6B" textAnchor="middle">6</text>
-  <text x="154" y="232" fontSize="22" fontWeight="bold" fill="#FF8C00" textAnchor="middle">36</text>
-</svg>
-
-Pasul 1: Numărăm pătrățelele de pe o latură. Sunt 6.
-
-Pasul 2: Înmulțim latura cu latura.
+Termenii sunt despărțiți prin semnele **+** sau **–**.
 
 <Katex>
 {String.raw`
-6 \cdot 6 = 36
+\begin{aligned}
+& \text{Expresia: } \color{#FF6B6B}{6x} + \color{#4ECDC4}{9}\\[6pt]
+& \text{Primul termen: } \color{#FF6B6B}{6x} = \color{#9370DB}{3} \cdot 2x\\[6pt]
+& \text{Al doilea termen: } \color{#4ECDC4}{9} = \color{#9370DB}{3} \cdot 3\\[6pt]
+& \text{Factorul comun: } \color{#9370DB}{3}
+\end{aligned}
 `}
 </Katex>
 
-Pasul 3: Scriem 36 ca putere.
+---
 
-<Katex>
-{String.raw`
-36 = \color{#FF8C00}{6^2}
-`}
-</Katex>
+## Distributivitatea simplă
 
-Deci 36 este pătrat perfect.
+Numărul din fața parantezei se înmulțește cu fiecare termen.
 
 :::tip De reținut
-Pătratele perfecte până la 100:
+<Katex>
+{String.raw`
+\begin{aligned}
+& \color{#FF6B6B}{a}(b + c) = \color{#FF6B6B}{a} \cdot b + \color{#FF6B6B}{a} \cdot c\\[8pt]
+& \color{#FF6B6B}{a}(b - c) = \color{#FF6B6B}{a} \cdot b - \color{#FF6B6B}{a} \cdot c
+\end{aligned}
+`}
+</Katex>
+:::
+
+**Exemplu.** Dezvoltăm:
 
 <Katex>
 {String.raw`
-0,\ 1,\ 4,\ 9,\ 16,\ 25,\ 36,\ 49,\ 64,\ 81,\ 100
+\color{#FF6B6B}{7}(x + 2) = \color{#FF6B6B}{7} \cdot x + \color{#FF6B6B}{7} \cdot 2 = 7x + 14
+`}
+</Katex>
+
+---
+
+## Scoaterea factorului comun
+
+Factorizarea este drumul invers. Calculăm pas cu pas:
+
+**Pasul 1:** Căutăm factorul care apare în fiecare termen.
+
+**Pasul 2:** Scriem fiecare termen ca produs cu acest factor.
+
+**Pasul 3:** Scriem factorul în față. Restul rămâne în paranteză.
+
+**Exemplu.** Factorizăm:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& 6x + 9\\[8pt]
+& \text{Pasul 1: factorul comun este } \color{#FF6B6B}{3}\\[6pt]
+& \text{Pasul 2: } 6x + 9 = \color{#FF6B6B}{3} \cdot 2x + \color{#FF6B6B}{3} \cdot 3\\[6pt]
+& \text{Pasul 3: } 6x + 9 = \color{#FF6B6B}{3}(2x + 3)
+\end{aligned}
+`}
+</Katex>
+
+Reținem: în paranteză rămâne ce nu a fost scos.
+
+:::warning Atenție
+Când factorul comun rămâne singur, scriem **<HighlightText color="orange">1</HighlightText>** în paranteză.
+
+<Katex>
+{String.raw`
+3x + 3 = \color{#FF6B6B}{3} \cdot x + \color{#FF6B6B}{3} \cdot \color{#FF8C00}{1} = \color{#FF6B6B}{3}(x + \color{#FF8C00}{1})
 `}
 </Katex>
 :::

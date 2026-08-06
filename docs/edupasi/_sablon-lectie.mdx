@@ -1,0 +1,121 @@
+---
+sidebar_position: 1
+slug: /edupasi/cX/modul-Y/NN
+description: ""
+---
+
+{/*
+  ȘABLON DE LECȚIE EduPAȘI — se copiază și se completează.
+
+  Fișierul începe cu `_`, deci Docusaurus îl ignoră la build: nu apare pe site și
+  nu intră în sidebar. Copiază-l cu alt nume în folderul lecției.
+
+  Ce NU trebuie importat: TabelPozitional, TabelDescompunere, Bula, Blocuri și
+  Alaturi sunt înregistrate global în `src/theme/MDXComponents.js`. Se scriu
+  direct. Katex și HighlightText se importă în continuare, ca până acum.
+
+  Reguli de formă, ca lecțiile să arate la fel:
+  - subtitlurile sunt `##` / `###` obișnuite; pe paginile EduPAȘI se desenează
+    singure cu scris de mână și bold (`custom.css`, secțiunea „Subtitlurile
+    lecțiilor EduPAȘI"). Nu pune benzi colorate și nu scrie titluri ca imagini —
+    s-ar pierde din cuprins și de la cititorul de ecran;
+  - cerințele stau direct în `:::note` (se afișează „CERINȚĂ");
+  - definițiile în `:::tip Definiție`, atenționările în `:::warning Atenție`,
+    lucrurile de ținut minte în `:::tip De reținut`;
+  - secțiunile se despart cu `---`;
+  - în KaTeX: separator de mii `\,`, virgulă zecimală `{,}`, culori cu
+    `\textcolor{#b42318}{...}` (roșu = parte întreagă) și `\textcolor{#005a91}{...}`
+    (albastru = parte zecimală). NU `\color{...}`, care se scurge în restul grupului.
+*/}
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# CN - Titlul lecției
+
+---
+
+## Primul subtitlu
+
+Text obișnuit, cu termenii cheie evidențiați:
+**<HighlightText color="red">parte întreagă</HighlightText>** și
+**<HighlightText color="blue">parte zecimală</HighlightText>**.
+Culori acceptate: `red`, `teal`, `orange`, `purple`, `blue`, `green` — fiecare are și
+un stil propriu de subliniere, ca să se distingă și fără culoare.
+
+<Katex>
+{String.raw`
+\begin{aligned}
+\frac{24\,356}{1000}
+&= \textcolor{#b42318}{\frac{24\,000}{1000}} + \textcolor{#005a91}{\frac{356}{1000}} \\[8pt]
+&= 24 + 0{,}356 = 24{,}\textcolor{#005a91}{356}
+\end{aligned}
+`}
+</Katex>
+
+:::note
+Cerința, scrisă exact cum o citește elevul.
+:::
+
+{/* Tabelul pozițional. `_` = căsuță goală (rangul nu există în număr),
+    iar dacă nu dai deloc `cifre`, tot rândul e de completat de elev.
+    Ranguri disponibile: milioane sutedemii zecidemii mii sute zeci unitati
+    zecimi sutimi miimi — implicit „sute zeci unitati zecimi sutimi miimi". */}
+<TabelPozitional cifre="_ 3 1 4 7 8" />
+
+<TabelPozitional ranguri="mii sute zeci unitati zecimi" cifre="1 2 3 4 5" valori={false} />
+
+{/* Bule de dialog: prima la stânga, replica la dreapta — se citesc ca un schimb. */}
+<Bula>
+Acest număr se citește:<br />
+treizeci și una de unități
+</Bula>
+
+<Bula parte="dreapta">
+...sau patru sute șaptezeci și opt de miimi.
+</Bula>
+
+---
+
+## Al doilea subtitlu
+
+{/* Tabel de descompunere: „fracție | cifre | rezultat".
+    - `*` la început = rândul dat ca model (se colorează ușor);
+    - fără partea cu cifre = rând de completat;
+    - fracția se scrie „26478/1000", grupele de mii se pun singure. */}
+<TabelDescompunere
+  randuri={[
+    '* 26478/1000 | _ 2 6 4 7 8 | 26,478',
+    '12527/1000 | _ 1 2 5 2 7 | 12,527',
+    '935/100',
+  ]}
+/>
+
+:::note
+Scrie cantitățile sub formă de număr zecimal.
+:::
+
+{/* Cantități desenate cu pătrățele, un pătrat pentru fiecare unitate de rang.
+    `rezolvat` scrie și cifrele pe linii; fără el, liniile rămân goale. */}
+<Alaturi>
+  <Blocuri cifre="1 8 3 2 5 8" rezolvat />
+  <Blocuri cifre="3 7 0 8 1 5" />
+</Alaturi>
+
+:::tip Definiție
+Ce trebuie să rețină elevul.
+:::
+
+{/* Caseta blândă: o sugestie, nu o cerință. */}
+:::soft
+Se poate lucra și cu bani de jucărie: 1 leu, 10 bani, 1 ban.
+:::
+
+{/* Trimitere către rubrica „Ghidul părintelui", în tab nou. Scrii doar fișierul
+    din `docs/parinti/`; titlul apare singur, citit din `#`-ul resursei.
+    Merg și „00", și „docs/parinti/00.mdx", și mai multe: fisier="00 04". */}
+<ResurseParinti fisier="00" />
+
+:::warning Atenție
+Capcana obișnuită la acest subiect.
+:::
