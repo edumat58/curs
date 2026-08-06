@@ -324,7 +324,7 @@ const config = {
                 <circle cx="12" cy="12" r="9"></circle>
                 <polyline points="12 7 12 12 15.5 14"></polyline>
               </svg>
-              <span class="nav-update-date">06.08.2026, 03:49</span>
+              <span class="nav-update-date">06.08.2026, 04:47</span>
             </span>
           `,
         },

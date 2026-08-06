@@ -2,43 +2,82 @@ import React, { useEffect, useRef } from 'react';
 import styles from './StepsCanvas.module.css';
 
 /**
- * „Parcursul EduPAȘI" — animația din chenarul albastru al paginii EduPAȘI.
+ * Grafica din eroul paginii EduPAȘI: REGRUPAREA RANGURILOR.
  *
- * NOU DESIGN DE LA 0 — fără shuriken, fără arme, fără metafore violente.
+ * Desenul nu e decor: e chiar ideea pe care o predă rubrica. Pătrățelele se adună
+ * într-un rang, iar când se strâng zece se schimbă într-unul singur, cu un rang
+ * mai la stânga — de la miimi spre sute, exact ca materialul de pe masă din
+ * lecții. Cine a lucrat o lecție recunoaște coloanele, culorile și mișcarea.
  *
- * Limbaj vizual autentic EduPAȘI / edumat58 / Kulturosfera:
- *  • Steaua concavă Kulturosfera (4 vârfuri) — emblema reală a brandului
- *  • Scară de PAȘI ascendenti — gestul din wordmark (bare crescătoare + punct)
- *  • Astrolab didactic: cerc unitate, sinus, ineluri, grilă — matematica vizibilă
- *  • Un punct-elev care urcă pas cu pas, aprinzând treptele în culorile familiei
- *  • Paleta exactă: #003058, #d23d2d, #0197b0, #d8b45a, #545454
- *  • Fundal #D9EEF7, tuș bleumarin la opacități miche
- *  • Respectă `prefers-reduced-motion`
- *  • Accesibilitate completă: teme contrast, dislexie, focus vizibil
+ * Varianta dinainte avea stea în patru colțuri, astrolab și inele rotitoare:
+ * frumoase, dar dintr-o altă poveste, iar steaua citindu-se ca un shuriken. Aici
+ * nu e nimic care să nu se regăsească într-o pagină de lecție.
+ *
+ * Culorile sunt exact cele din `src/components/Lectie`: bulina verde de la
+ * „unități" e verdele de aici, în același loc al șirului.
+ *
+ * Compoziția stă în DREAPTA, fiindcă textul eroului stă în stânga, iar masca din
+ * CSS topește animația spre el. Respectă `prefers-reduced-motion`: atunci se
+ * desenează o singură stare, așezată, fără buclă.
  */
 
-// Paleta familiei — ordinea barelor = ordinea culorilor din wordmark / KulturosferaLine
-const CULORI = ['#003058', '#d23d2d', '#0197b0', '#d8b45a', '#545454'];
+const RANGURI = [
+  { eticheta: '100', culoare: '#b03a2a' },
+  { eticheta: '10', culoare: '#5f9cbb' },
+  { eticheta: '1', culoare: '#93a72f' },
+  { eticheta: '0,1', culoare: '#86b1b5' },
+  { eticheta: '0,01', culoare: '#c5808f' },
+  { eticheta: '0,001', culoare: '#a9bd3f' },
+];
+const INDICE_UNITATI = 2; // după el vine virgula
 const BLEU = '#003058';
-const FUNDAL = '#D9EEF7';
-
-// Steaua concavă Kulturosfera (4 vârfuri) — emblema reală, nu shuriken
-const steaConcava = (ctx, cx, cy, exterior, talie, rot = 0) => {
-  ctx.beginPath();
-  for (let i = 0; i < 4; i++) {
-    const vf = rot + (i * Math.PI) / 2 - Math.PI / 2;
-    const vx = cx + exterior * Math.cos(vf), vy = cy + exterior * Math.sin(vf);
-    const tx = cx + talie * Math.cos(vf + Math.PI / 4), ty = cy + talie * Math.sin(vf + Math.PI / 4);
-    if (i === 0) ctx.moveTo(vx, vy); else ctx.lineTo(vx, vy);
-    ctx.quadraticCurveTo(cx, cy, tx, ty);
-  }
-  ctx.closePath();
-};
+const NEUTRU = '#5b6670'; // virgula și bara: gri, ca să nu ia culoarea niciunui rang
 
 const cuAlpha = (hex, a) => {
   const n = parseInt(hex.slice(1), 16);
   return `rgba(${(n >> 16) & 255},${(n >> 8) & 255},${n & 255},${a})`;
 };
+
+/**
+ * Scenariul, calculat o singură dată la încărcare: se adaugă un pătrat în rangul
+ * cel mai mic, iar când un rang strânge zece, ele se schimbă într-unul singur cu
+ * un rang mai sus. Se oprește înainte ca rangul cel mare să se umple, ca desenul
+ * să nu iasă din cadru, apoi o ia de la capăt.
+ */
+function construiesteScenariul() {
+  const cate = RANGURI.map(() => 0);
+  const pasi = [];
+  const limita = 60;
+
+  while (pasi.length < limita) {
+    const plin = cate.findIndex((n) => n >= 10);
+    if (plin === 0) break; // s-a umplut și rangul cel mare
+    if (plin > 0) {
+      const inainte = cate.slice();
+      cate[plin] = 0;
+      cate[plin - 1] += 1;
+      pasi.push({ tip: 'regrupare', coloana: plin, inainte, dupa: cate.slice() });
+      continue;
+    }
+    const inainte = cate.slice();
+    cate[RANGURI.length - 1] += 1;
+    pasi.push({ tip: 'adauga', coloana: RANGURI.length - 1, inainte, dupa: cate.slice() });
+  }
+  pasi.push({ tip: 'reia', coloana: -1, inainte: cate.slice(), dupa: RANGURI.map(() => 0) });
+  return pasi;
+}
+
+const SCENARIU = construiesteScenariul();
+const DURATA_ADAUGA = 0.58;
+const DURATA_REGRUPARE = 1.05;
+const DURATA_RELUARE = 1.5;
+
+const durataPasului = (pas) =>
+  pas.tip === 'regrupare' ? DURATA_REGRUPARE : pas.tip === 'reia' ? DURATA_RELUARE : DURATA_ADAUGA;
+
+const CICLU = SCENARIU.reduce((s, pas) => s + durataPasului(pas), 0);
+
+const usor = (p) => (p < 0.5 ? 2 * p * p : 1 - (-2 * p + 2) ** 2 / 2);
 
 export default function StepsCanvas() {
   const gazdaRef = useRef(null);
@@ -54,17 +93,15 @@ export default function StepsCanvas() {
     let latime = 0;
     let inaltime = 0;
     let raf = 0;
-    let t = 0;
+    let pornire = 0;
 
-    // Accesibilitate: preia accentul temei active
-    const paleta = () => {
+    /* Paletele de accesibilitate au ultimul cuvânt: dacă elevul a ales „culori
+       sigure" sau „contrast", desenul folosește accentul lor, nu paleta de rang. */
+    const accentAles = () => {
       const root = document.documentElement;
       if (!root.hasAttribute('data-edupasi-palette')) return null;
-      const cs = getComputedStyle(root);
-      const accent = cs.getPropertyValue('--edupasi-accent').trim();
-      const focus = cs.getPropertyValue('--edupasi-focus').trim();
-      if (!accent) return null;
-      return { accent, focus: focus || accent };
+      const val = getComputedStyle(root).getPropertyValue('--edupasi-accent').trim();
+      return val || null;
     };
 
     const redimensioneaza = () => {
@@ -83,403 +120,177 @@ export default function StepsCanvas() {
       return true;
     };
 
-    const intra = (delay, dur = 1) => Math.max(0, Math.min(1, (t - delay) / dur));
-
-    // Geometria scării PAȘI: bare ascendente + spațiu pentru astrolab în stânga
+    /* Coloanele stau în jumătatea dreaptă. Pe ecran îngust rămân doar rangurile
+       mici — cele care încap fără să se îngrămădească — iar compoziția pornește
+       de mai la stânga, fiindcă acolo masca lasă loc. */
     const geometrie = () => {
-      const trepte = latime < 560 ? 3 : latime < 900 ? 4 : 5;
-      const stanga = latime * 0.42;
-      const zonaLat = latime - stanga - latime * 0.06;
-      const latimeTreapta = zonaLat / (trepte + 0.5);
-      const inaltimeTreapta = Math.min(latimeTreapta * 0.55, (inaltime * 0.5) / trepte);
-      const baseX = stanga;
-      const baseY = inaltime * 0.78;
-      return { trepte, latimeTreapta, inaltimeTreapta, baseX, baseY };
+      const coloane = latime < 520 ? 4 : latime < 820 ? 5 : 6;
+      const primul = RANGURI.length - coloane;
+      const zonaX = latime * (latime < 720 ? 0.08 : 0.44);
+      const zonaLat = Math.max(60, latime - zonaX - latime * 0.06);
+      const pas = zonaLat / coloane;
+      /* Linia de bază stă jos, ca pe o masă de lucru: coloanele cresc DIN ea, nu
+         plutesc la mijlocul cadrului. Latura pătratului se strânge odată cu ea,
+         altfel stiva de zece ar ieși din chenar (10 × 1,22 × latură). */
+      const baza = inaltime * 0.78;
+      const latPatrat = Math.max(6, Math.min(pas * 0.44, (baza - inaltime * 0.1) / 12.6));
+      return { coloane, primul, zonaX, pas, latPatrat, baza };
     };
 
-    const coltTreapta = (g, i) => ({
-      x: g.baseX + i * g.latimeTreapta,
-      y: g.baseY - i * g.inaltimeTreapta,
-    });
+    const centrul = (g, i) => g.zonaX + (i - g.primul) * g.pas + g.pas / 2;
+    const pasStivei = (g) => g.latPatrat * 1.22;
+    const inaltimeStiva = (g, n) => n * pasStivei(g);
 
-    // Grilă subtilă (ca la astrolab)
-    const grila = () => {
-      const pas = 44;
-      const drift = (t * 3.5) % pas;
-      ctx.strokeStyle = cuAlpha(BLEU, 0.045);
-      ctx.lineWidth = 1;
+    const patrat = (g, x, yJos, culoare, alfa, scara = 1) => {
+      const l = g.latPatrat * scara;
+      ctx.fillStyle = cuAlpha(culoare, Math.max(0, Math.min(1, alfa)));
       ctx.beginPath();
-      for (let x = latime * 0.32 - drift; x < latime; x += pas) {
-        ctx.moveTo(x, 0); ctx.lineTo(x, inaltime);
-      }
-      for (let y = -drift * 0.5; y < inaltime; y += pas) {
-        ctx.moveTo(latime * 0.32, y); ctx.lineTo(latime, y);
-      }
-      ctx.stroke();
-    };
-
-    // Barele ascendente — ADN-ul wordmark-ului: crește din bază, capăt plin, corp translucid
-    const desenScara = (g, culoareActiva) => {
-      const pBaza = intra(0.15, 0.7);
-      if (pBaza > 0) {
-        ctx.strokeStyle = cuAlpha(BLEU, 0.35);
-        ctx.lineWidth = 2.5;
-        ctx.lineCap = 'round';
-        ctx.beginPath();
-        ctx.moveTo(g.baseX - g.latimeTreapta * 0.15, g.baseY);
-        ctx.lineTo(
-          g.baseX + (g.trepte - 1) * g.latimeTreapta + g.latimeTreapta * 1.1 * pBaza,
-          g.baseY
-        );
-        ctx.stroke();
-      }
-
-      const latBara = g.latimeTreapta * 0.58;
-      for (let i = 0; i < g.trepte; i++) {
-        const p = intra(0.35 + i * 0.18, 0.8);
-        if (p <= 0) continue;
-        const col = coltTreapta(g, i);
-        const inaltBara = (i + 1) * g.inaltimeTreapta * p;
-        const x = col.x + (g.latimeTreapta - latBara) / 2;
-        const yTop = g.baseY - inaltBara;
-        const c = culoareActiva(i);
-
-        // Corp translucid cu gradient (ca barele din wordmark)
-        const grad = ctx.createLinearGradient(0, yTop, 0, g.baseY);
-        grad.addColorStop(0, cuAlpha(c, 0.38));
-        grad.addColorStop(0.6, cuAlpha(c, 0.12));
-        grad.addColorStop(1, cuAlpha(c, 0.04));
-        ctx.fillStyle = grad;
-        ctx.beginPath();
-        ctx.roundRect(x, yTop, latBara, inaltBara, 3);
-        ctx.fill();
-
-        // Contur subțire + capăt plin (gestul "gros/subțire" din font)
-        ctx.strokeStyle = cuAlpha(c, 0.75);
-        ctx.lineWidth = 1.5;
-        ctx.strokeRect(x, yTop, latBara, inaltBara);
-        ctx.fillStyle = c;
-        ctx.beginPath();
-        ctx.roundRect(x, yTop, latBara, Math.min(7, inaltBara), 3);
-        ctx.fill();
-      }
-    };
-
-    const varfBarei = (g, i) => ({
-      x: coltTreapta(g, i).x + g.latimeTreapta / 2,
-      y: g.baseY - (i + 1) * g.inaltimeTreapta,
-    });
-
-    // ============================================================
-    // ASTROLAB DIDACTIC — matematica vizibilă, nemaipomenită
-    // Plasat în stânga scării, ca fundament al parcursului
-    // ============================================================
-    const desenAstrolab = (g, pal) => {
-      const cx = g.baseX - g.latimeTreapta * 0.9;
-      const cy = g.baseY - g.trepte * g.inaltimeTreapta * 0.45;
-      const R = g.latimeTreapta * 1.1;
-
-      // Ineluri concentrice (trasate la intrare)
-      [1, 0.72, 0.45].forEach((f, i) => {
-        const p = intra(0.2 + i * 0.3);
-        if (p <= 0) return;
-        ctx.beginPath();
-        ctx.arc(cx, cy, R * f, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * p);
-        ctx.strokeStyle = cuAlpha(BLEU, 0.28 - i * 0.06);
-        ctx.lineWidth = i === 0 ? 1.5 : 1;
-        ctx.stroke();
-      });
-
-      // Gradații inel exterior (la π/6) — astrolab clasic
-      const pTicks = intra(0.9);
-      for (let k = 0; k < 24 * pTicks; k++) {
-        const ang = (k * Math.PI) / 12 + t * 0.015;
-        const major = k % 6 === 0;
-        const r1 = R, r2 = R + (major ? 9 : 4);
-        ctx.beginPath();
-        ctx.moveTo(cx + r1 * Math.cos(ang), cy + r1 * Math.sin(ang));
-        ctx.lineTo(cx + r2 * Math.cos(ang), cy + r2 * Math.sin(ang));
-        ctx.strokeStyle = cuAlpha(BLEU, major ? 0.35 : 0.18);
-        ctx.lineWidth = major ? 1.2 : 0.8;
-        ctx.stroke();
-      }
-
-      // Inele punctate contra-rotative (ADN vizual)
-      if (intra(1.3) > 0) {
-        const dashRing = (r, rot, dashes, alpha) => {
-          for (let k = 0; k < dashes; k++) {
-            const a0 = rot + (k * Math.PI * 2) / dashes;
-            ctx.beginPath();
-            ctx.arc(cx, cy, r, a0, a0 + 0.055);
-            ctx.strokeStyle = cuAlpha(BLEU, alpha);
-            ctx.lineWidth = 1;
-            ctx.stroke();
-          }
-        };
-        dashRing(R * 0.85, t * 0.08, 32, 0.22);
-        dashRing(R * 0.55, -t * 0.12, 20, 0.18);
-      }
-
-      // Poligon morfoză (3→4→5→6) — poligoane regulate
-      const pPoly = intra(1.6);
-      if (pPoly > 0) {
-        const cycle = (t * 0.09) % 4;
-        const nBase = 3 + Math.floor(cycle);
-        const frac = cycle - Math.floor(cycle);
-        const drawPoly = (n, alpha, rot) => {
-          ctx.beginPath();
-          for (let i = 0; i <= n; i++) {
-            const a = rot + (i * Math.PI * 2) / n - Math.PI / 2;
-            const x = cx + R * 0.42 * Math.cos(a), y = cy + R * 0.42 * Math.sin(a);
-            i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-          }
-          ctx.strokeStyle = cuAlpha(BLEU, alpha * pPoly);
-          ctx.lineWidth = 1.1;
-          ctx.stroke();
-        };
-        drawPoly(nBase, 0.28 * (1 - frac), t * 0.07);
-        drawPoly(nBase + 1, 0.28 * frac, t * 0.07);
-      }
-
-      // CERCUL UNITATE: rază rotitoare + proiecții + unghi
-      const ang = t * 0.55;
-      const ux = cx + R * 0.72 * Math.cos(ang), uy = cy + R * 0.72 * Math.sin(ang);
-      const pUnit = intra(1.9);
-      if (pUnit > 0) {
-        ctx.globalAlpha = pUnit;
-        // Raza
-        ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(ux, uy);
-        ctx.strokeStyle = cuAlpha(BLEU, 0.65); ctx.lineWidth = 1.3; ctx.stroke();
-        // Unghiul
-        ctx.beginPath(); ctx.arc(cx, cy, R * 0.14, 0, ang % (Math.PI * 2));
-        ctx.strokeStyle = cuAlpha(BLEU, 0.4); ctx.lineWidth = 1; ctx.stroke();
-        // Proiecții punctate pe axe
-        ctx.setLineDash([3, 5]);
-        ctx.beginPath(); ctx.moveTo(ux, uy); ctx.lineTo(ux, cy);
-        ctx.moveTo(ux, uy); ctx.lineTo(cx, uy);
-        ctx.strokeStyle = cuAlpha(BLEU, 0.3); ctx.lineWidth = 0.8; ctx.stroke();
-        ctx.setLineDash([]);
-        // Punct pe cerc
-        ctx.beginPath(); ctx.arc(ux, uy, 3, 0, Math.PI * 2);
-        ctx.fillStyle = cuAlpha(pal ? pal.focus : '#d8b45a', 0.95); ctx.fill();
-        // Axele cercului unitate
-        ctx.beginPath();
-        ctx.moveTo(cx - R * 0.78, cy); ctx.lineTo(cx + R * 0.78, cy);
-        ctx.moveTo(cx, cy - R * 0.78); ctx.lineTo(cx, cy + R * 0.78);
-        ctx.strokeStyle = cuAlpha(BLEU, 0.1); ctx.lineWidth = 0.8; ctx.stroke();
-        ctx.globalAlpha = 1;
-      }
-
-      // SINUSUL emanat din cerc unitate — pleacă spre dreapta, către scară
-      // Metaforă: matematica (cerc/sinus) → învățare (pași)
-      const pSine = intra(2.2);
-      if (pSine > 0) {
-        const sineLen = g.baseX - cx - R * 0.92;
-        ctx.beginPath();
-        for (let d = 0; d <= sineLen; d += 3.5) {
-          const y = cy + R * 0.72 * Math.sin(ang - d * 0.014);
-          const x = cx + R * 0.92 + d;
-          d === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-        }
-        ctx.strokeStyle = cuAlpha(BLEU, 0.42);
-        ctx.lineWidth = 1.3;
-        ctx.stroke();
-        // Legătură punctată punct → început undă
-        ctx.setLineDash([3, 5]);
-        ctx.beginPath();
-        ctx.moveTo(ux, uy);
-        ctx.lineTo(cx + R * 0.92, cy + R * 0.72 * Math.sin(ang));
-        ctx.strokeStyle = cuAlpha(BLEU, 0.22); ctx.lineWidth = 0.8; ctx.stroke();
-        ctx.setLineDash([]);
-      }
-
-      // Sateliti stele concave pe orbite — embleme mici ale progresului
-      const pSat = intra(2.0);
-      if (pSat > 0) {
-        ctx.globalAlpha = pSat * 0.8;
-        [
-          { r: R * 0.85, sp: 0.18, size: 6, ph: 0 },
-          { r: R * 0.55, sp: -0.28, size: 4.5, ph: 2.2 },
-          { r: R * 1.02, sp: 0.11, size: 3.5, ph: 4.7 }
-        ].forEach((s) => {
-          const a = s.ph + t * s.sp;
-          const sx = cx + s.r * Math.cos(a), sy = cy + s.r * Math.sin(a);
-          steaConcava(ctx, sx, sy, s.size, s.size * 0.32, a);
-          ctx.fillStyle = cuAlpha(BLEU, 0.65);
-          ctx.fill();
-        });
-        ctx.globalAlpha = 1;
-      }
-
-      // Nucleu: steaua concavă emblema, respirând
-      const pCore = intra(2.4);
-      if (pCore > 0) {
-        const breathe = 1 + Math.sin(t * 0.75) * 0.05;
-        ctx.globalAlpha = pCore;
-        steaConcava(ctx, cx, cy, 11 * breathe, 3.6 * breathe, 0);
-        ctx.fillStyle = cuAlpha(pal ? pal.focus : '#d8b45a', 0.9);
-        ctx.fill();
-        ctx.strokeStyle = cuAlpha(BLEU, 0.6);
-        ctx.lineWidth = 1.5;
-        ctx.lineJoin = 'round';
-        ctx.stroke();
-        ctx.globalAlpha = 1;
-      }
-    };
-
-    // Steaua-destinație deasupra scării (stea concavă Kulturosfera)
-    const desenSteaDestinatie = (g, pal) => {
-      const varf = varfBarei(g, g.trepte - 1);
-      const steaX = varf.x;
-      const steaY = varf.y - g.latimeTreapta * 0.9;
-      const pStea = intra(1.5, 1.2);
-      const raza = g.latimeTreapta * 0.48;
-      if (pStea <= 0) return;
-
-      // Aură punctată rotitoare
-      ctx.save();
-      ctx.globalAlpha = pStea * 0.7;
-      for (let k = 0; k < 18; k++) {
-        const a0 = t * 0.12 + (k * Math.PI * 2) / 18;
-        ctx.beginPath();
-        ctx.arc(steaX, steaY, raza * 2.1, a0, a0 + 0.07);
-        ctx.strokeStyle = cuAlpha(BLEU, 0.18);
-        ctx.lineWidth = 1;
-        ctx.stroke();
-      }
-
-      // Steaua concavă — nu rotește ca shuriken, doar o legănare blândă
-      const legan = Math.sin(t * 0.6) * 0.1;
-      steaConcava(ctx, steaX, steaY, raza * pStea, raza * 0.32 * pStea, legan);
-      ctx.fillStyle = cuAlpha(pal ? pal.focus : '#d8b45a', 0.15);
+      ctx.roundRect(x - l / 2, yJos - l, l, l, Math.max(1, l * 0.18));
       ctx.fill();
-      ctx.strokeStyle = pal ? pal.accent : BLEU;
-      ctx.lineWidth = 2.2;
-      ctx.lineJoin = 'round';
-      ctx.stroke();
-      ctx.restore();
     };
 
-    // Elevul care urcă pe bare — parabolă scurtă între vârfuri
-    // Un punct cald, uman, care face PAȘI
-    const desenElev = (g, culoareActiva) => {
-      if (intra(1.4) <= 0 || redus) return;
+    /** O coloană: banda palidă de rang, eticheta ei și stiva de pătrate. */
+    const desenColoana = (g, i, cate, culoare, extra) => {
+      const cx = centrul(g, i);
+      const inaltBanda = inaltimeStiva(g, 10) + g.latPatrat * 0.6;
 
-      const perTreapta = 1.6;
-      const start = 1.4;
-      const total = g.trepte * perTreapta;
-      const local = Math.max(0, (t - start) % total);
-      const idx = Math.min(g.trepte - 1, Math.floor(local / perTreapta));
-      const f = (local - idx * perTreapta) / perTreapta;
+      ctx.fillStyle = cuAlpha(culoare, 0.1);
+      ctx.beginPath();
+      ctx.roundRect(
+        cx - g.latPatrat * 0.8,
+        g.baza - inaltBanda,
+        g.latPatrat * 1.6,
+        inaltBanda + g.latPatrat * 0.25,
+        g.latPatrat * 0.8,
+      );
+      ctx.fill();
 
-      const aici = varfBarei(g, idx);
-      if (idx === 0 || f > 0.58) {
-        // Aterizat pe bară — odihnește, a reușit pasul
-        const c = culoareActiva(idx);
-        ctx.beginPath();
-        ctx.arc(aici.x, aici.y - 8, 2.8, 0, Math.PI * 2);
-        ctx.fillStyle = cuAlpha(BLEU, 0.15); ctx.fill();
-        ctx.beginPath();
-        ctx.arc(aici.x, aici.y - 8, 8, 0, Math.PI * 2);
-        ctx.fillStyle = cuAlpha(c, 0.15); ctx.fill();
-        ctx.beginPath();
-        ctx.arc(aici.x, aici.y - 8, 4.5, 0, Math.PI * 2);
-        ctx.fillStyle = c; ctx.fill();
-        ctx.strokeStyle = '#fff'; ctx.lineWidth = 1.4; ctx.stroke();
+      ctx.fillStyle = cuAlpha(culoare, 0.75);
+      ctx.font = `600 ${Math.max(9, g.latPatrat * 0.6)}px system-ui, -apple-system, sans-serif`;
+      ctx.textAlign = 'center';
+      ctx.fillText(RANGURI[i].eticheta, cx, g.baza + g.latPatrat * 1.4);
+
+      for (let k = 0; k < cate; k += 1) {
+        patrat(g, cx, g.baza - k * pasStivei(g), culoare, 0.85);
+      }
+      if (extra) extra(cx, culoare);
+    };
+
+    const deseneaza = (timp) => {
+      if (!redimensioneaza()) {
+        raf = requestAnimationFrame(deseneaza);
         return;
       }
+      if (!pornire) pornire = timp;
+      const t = redus ? CICLU * 0.42 : ((timp - pornire) / 1000) % CICLU;
 
-      // În zbor către bară — arcul pasului
-      const inainte = varfBarei(g, idx - 1);
-      const q = f / 0.58;
-      const x = inainte.x + (aici.x - inainte.x) * q;
-      const y = inainte.y + (aici.y - inainte.y) * q;
-      const salt = Math.sin(q * Math.PI) * g.inaltimeTreapta * 0.32;
-      const c = culoareActiva(idx);
-
-      ctx.beginPath();
-      ctx.arc(x, y - 8 - salt, 2.8, 0, Math.PI * 2);
-      ctx.fillStyle = cuAlpha(BLEU, 0.15); ctx.fill();
-      ctx.beginPath();
-      ctx.arc(x, y - 8 - salt, 8, 0, Math.PI * 2);
-      ctx.fillStyle = cuAlpha(c, 0.15); ctx.fill();
-      ctx.beginPath();
-      ctx.arc(x, y - 8 - salt, 4.5, 0, Math.PI * 2);
-      ctx.fillStyle = c; ctx.fill();
-      ctx.strokeStyle = '#fff'; ctx.lineWidth = 1.4; ctx.stroke();
-    };
-
-    // Cadru static pentru reduced-motion
-    const compuneStatic = (g, pal, culoareActiva) => {
-      ctx.clearRect(0, 0, latime, inaltime);
-      grila();
-      desenAstrolab(g, pal);
-      desenScara(g, culoareActiva);
-      desenSteaDestinatie(g, pal);
-
-      // Elev pe ultima bară
-      const varf = varfBarei(g, g.trepte - 1);
-      ctx.beginPath();
-      ctx.arc(varf.x, varf.y - 8, 4.5, 0, Math.PI * 2);
-      ctx.fillStyle = BLEU; ctx.fill();
-      ctx.strokeStyle = '#fff'; ctx.lineWidth = 1.4; ctx.stroke();
-    };
-
-    const compune = () => {
       ctx.clearRect(0, 0, latime, inaltime);
       const g = geometrie();
-      if (![g.baseX, g.baseY, g.latimeTreapta, g.inaltimeTreapta].every(Number.isFinite)
-        || g.latimeTreapta < 1 || g.inaltimeTreapta < 1) {
-        return;
-      }
-      const pal = paleta();
-      const culoareActiva = (i) => (pal ? (i % 2 ? pal.focus : pal.accent) : CULORI[i % CULORI.length]);
+      const accent = accentAles();
 
-      grila();
-      desenAstrolab(g, pal);
-      desenScara(g, culoareActiva);
-      desenSteaDestinatie(g, pal);
-      desenElev(g, culoareActiva);
-    };
+      // capetele zonei desenate — le folosește bara de sub coloane
+      const stangaZona = centrul(g, g.primul) - g.pas * 0.55;
+      const dreaptaZona = centrul(g, RANGURI.length - 1) + g.pas * 0.55;
 
-    let t0 = 0;
-    let jurnalizat = false;
-    const animeaza = (acum) => {
-      if (!t0) t0 = acum;
-      t = (acum - t0) / 1000;
-      try {
-        if (redimensioneaza()) compune();
-      } catch (e) {
-        if (!jurnalizat) {
-          jurnalizat = true;
-          console.error('[StepsCanvas] cadru sărit:', e && e.message);
+      let acumulat = 0;
+      let pas = SCENARIU[0];
+      let p = 0;
+      for (const candidat of SCENARIU) {
+        const d = durataPasului(candidat);
+        if (t < acumulat + d) {
+          pas = candidat;
+          p = usor((t - acumulat) / d);
+          break;
         }
+        acumulat += d;
       }
-      raf = requestAnimationFrame(animeaza);
-    };
+      const cate = pas.inainte;
 
-    const ro = new ResizeObserver(() => redimensioneaza());
-    ro.observe(gazda);
+      for (let i = g.primul; i < RANGURI.length; i += 1) {
+        const culoare = accent || RANGURI[i].culoare;
 
-    if (redus) {
-      const cadruStatic = () => {
-        if (redimensioneaza()) {
-          const g = geometrie();
-          const pal = paleta();
-          const culoareActiva = (i) => (pal ? (i % 2 ? pal.focus : pal.accent) : CULORI[i % CULORI.length]);
-          compuneStatic(g, pal, culoareActiva);
+        if (pas.tip === 'adauga' && i === pas.coloana) {
+          desenColoana(g, i, cate[i], culoare, (cx) => {
+            // pătratul care tocmai coboară la locul lui
+            const sus = g.baza - inaltimeStiva(g, cate[i]) - g.latPatrat * 2.6 * (1 - p);
+            patrat(g, cx, sus, culoare, 0.2 + 0.65 * p, 0.7 + 0.3 * p);
+          });
+        } else if (pas.tip === 'regrupare' && i === pas.coloana) {
+          // cele zece se strâng spre bază și se sting, iar coloana se aprinde scurt:
+          // momentul „zece de aici fac unu dincolo" e ideea lecției, merită văzut
+          desenColoana(g, i, 0, culoare, (cx) => {
+            const inaltBanda = inaltimeStiva(g, 10) + g.latPatrat * 0.6;
+            ctx.strokeStyle = cuAlpha(culoare, 0.55 * (1 - p));
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.roundRect(cx - g.latPatrat * 0.8, g.baza - inaltBanda, g.latPatrat * 1.6,
+              inaltBanda + g.latPatrat * 0.25, g.latPatrat * 0.8);
+            ctx.stroke();
+            for (let k = 0; k < 10; k += 1) {
+              patrat(g, cx, g.baza - k * pasStivei(g) * (1 - p), culoare, 0.85 * (1 - p), 1 - 0.3 * p);
+            }
+          });
+        } else if (pas.tip === 'regrupare' && i === pas.coloana - 1) {
+          // și se întorc ca un singur pătrat, cu un rang mai sus
+          desenColoana(g, i, cate[i], culoare, (cx) => {
+            const dela = centrul(g, pas.coloana);
+            // urmă scurtă în spate, ca ochiul să prindă de unde vine pătratul
+            for (let u = 3; u >= 0; u -= 1) {
+              const pu = Math.max(0, p - u * 0.07);
+              const x = dela + (cx - dela) * pu;
+              const y = g.baza - inaltimeStiva(g, cate[i]) * pu;
+              patrat(g, x, y, culoare, (0.3 + 0.55 * pu) * (u === 0 ? 1 : 0.18), 0.75 + 0.25 * pu);
+            }
+          });
+        } else if (pas.tip === 'reia') {
+          desenColoana(g, i, 0, culoare, (cx) => {
+            for (let k = 0; k < cate[i]; k += 1) {
+              patrat(g, cx, g.baza - k * pasStivei(g), culoare, 0.85 * (1 - p));
+            }
+          });
         } else {
-          raf = requestAnimationFrame(cadruStatic);
+          desenColoana(g, i, cate[i], culoare);
         }
-      };
-      cadruStatic();
-    } else {
-      raf = requestAnimationFrame(animeaza);
-    }
+      }
+
+      /* Bara desparte cantitatea de scriere: stă la mijloc între capătul de jos al
+         benzilor (g.baza + 0,25·latură) și marginea de sus a cifrelor. */
+      ctx.strokeStyle = cuAlpha(NEUTRU, 0.28);
+      ctx.lineWidth = 1;
+      const yBara = Math.round(g.baza + g.latPatrat * 0.62) + 0.5;
+      ctx.beginPath();
+      ctx.moveTo(stangaZona, yBara);
+      ctx.lineTo(dreaptaZona, yBara);
+      ctx.stroke();
+
+      /* Virgula: pe rândul cifrelor, exact la mijlocul dintre unități și zecimi,
+         în gri — nu ține de niciun rang. */
+      if (g.primul <= INDICE_UNITATI) {
+        const xVirgula = (centrul(g, INDICE_UNITATI) + centrul(g, INDICE_UNITATI + 1)) / 2;
+        ctx.fillStyle = cuAlpha(NEUTRU, 0.7);
+        ctx.font = `600 ${Math.max(9, g.latPatrat * 0.6)}px system-ui, -apple-system, sans-serif`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'alphabetic';
+        ctx.fillText(',', xVirgula, g.baza + g.latPatrat * 1.4);
+      }
+
+      if (!redus) raf = requestAnimationFrame(deseneaza);
+    };
+
+    raf = requestAnimationFrame(deseneaza);
+
+    const observator = new ResizeObserver(() => {
+      if (redus) {
+        pornire = 0;
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(deseneaza);
+      }
+    });
+    observator.observe(gazda);
 
     return () => {
-      ro.disconnect();
-      if (raf) cancelAnimationFrame(raf);
+      observator.disconnect();
+      cancelAnimationFrame(raf);
     };
   }, []);
 

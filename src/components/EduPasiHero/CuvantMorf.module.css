@@ -1,0 +1,32 @@
+/**
+ * Cuvântul desenat se poartă ca un cuvânt: stă pe linia de bază a titlului și
+ * ocupă mereu lățimea celui mai lat font, ca rândul să nu se rearanjeze în
+ * timpul metamorfozei.
+ */
+.cuvant {
+  display: inline;
+  white-space: nowrap;
+}
+
+.desen {
+  display: inline-block;
+  overflow: visible;
+}
+
+/* inițiala păstrează culoarea acronimului din titlu (.acr) */
+.initiala {
+  fill: #003058;
+}
+
+/* textul adevărat: invizibil, dar citit de cititoarele de ecran și copiabil */
+.doarCitit {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  border: 0;
+  clip-path: inset(50%);
+}

@@ -4,6 +4,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 import Layout from '@theme/Layout';
 import EduPasiAccessibility from '@site/src/components/EduPasiAccessibility/SectionAccessibility';
 import StepsCanvas from '@site/src/components/EduPasiHero/StepsCanvas';
+import CuvantMorf from '@site/src/components/EduPasiHero/CuvantMorf';
 import styles from './edupasi.module.css';
 
 /* Etichete de clasă și ordinea lor. Lecțiile în sine vin AUTOMAT din
@@ -186,7 +187,10 @@ export default function EduPasiPage() {
                 <span className={styles.acr}>P</span>latforma de{' '}
                 <span className={styles.acr}>A</span>daptare{' '}
                 <span className={styles.acr}>Ș</span>colară{' '}
-                <span className={styles.acr}>I</span>ncluzivă
+                {/* „Incluzivă" se metamorfozează prin fonturile din panoul de
+                    accesibilitate: același cuvânt, alt fel de literă — chiar
+                    ideea rubricii. Vezi CuvantMorf. */}
+                <CuvantMorf />
               </h1>
               <p className={styles.lead}>
                 Fiecare lecție este adaptată și reorganizată în secțiuni scurte și

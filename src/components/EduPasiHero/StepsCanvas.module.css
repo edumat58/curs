@@ -27,8 +27,9 @@
   /* Pe telefon animația trece sub text, foarte discretă, ca să nu fure atenția
      de la conținut. */
   .gazda {
-    opacity: 0.5;
-    -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 55%);
-    mask-image: linear-gradient(180deg, transparent 0%, #000 55%);
+    opacity: 0.32;
+    /* se stinge și jos, ca etichetele rangurilor să nu cadă peste butoane */
+    -webkit-mask-image: linear-gradient(180deg, transparent 4%, #000 42%, #000 74%, transparent 98%);
+    mask-image: linear-gradient(180deg, transparent 4%, #000 42%, #000 74%, transparent 98%);
   }
 }
