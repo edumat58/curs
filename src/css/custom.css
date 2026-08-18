@@ -2275,3 +2275,15 @@ html[data-edupasi-page='true'][data-edupasi-easy-text='true']
 [data-theme='dark'] .ghid-parinte-nav-link.navbar__link--active {
   color: #ffc2b8 !important;
 }
+
+/* ================================================================
+   MODUL APLICAȚIE — cursul deschis în aplicația Kulturosfera.
+
+   Semnul îl pune `src/clientModules/modApp.js` (atribut pe <html>).
+   Aici dispare doar SUBSOLUL: într-o aplicație cu bară de tab-uri, harta
+   site-ului din subsol e o a doua navigare, lipită peste prima.
+   Bara de sus a cursului RĂMÂNE — ea e cuprinsul, nu navigarea aplicației.
+   ================================================================ */
+html[data-app='kulturosfera'] .footer {
+  display: none !important;
+}

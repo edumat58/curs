@@ -110,7 +110,11 @@ const config = {
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
 
-  clientModules: [require.resolve('./src/clientModules/uiFixes.js')],
+  clientModules: [
+    require.resolve('./src/clientModules/uiFixes.js'),
+    // Modul aplicație: cursul, când e deschis în aplicația Kulturosfera.
+    require.resolve('./src/clientModules/modApp.js'),
+  ],
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
@@ -324,7 +328,7 @@ const config = {
                 <circle cx="12" cy="12" r="9"></circle>
                 <polyline points="12 7 12 12 15.5 14"></polyline>
               </svg>
-              <span class="nav-update-date">06.08.2026, 04:47</span>
+              <span class="nav-update-date">11.08.2026, 16:44</span>
             </span>
           `,
         },
