@@ -19,6 +19,12 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 static/admin-manifest.json
+
+# Pachetul de lecții pentru aplicație: generat la fiecare build din `docs/` și
+# din `build/` (vezi scripts/build-app-lectii.mjs), ~21 MB de HTML derivat.
+# Comis, ar umfla depozitul la fiecare lecție atinsă, fără să spună nimic nou:
+# ce se publică e oglinda din `build/`, iar CI îl regenerează la fiecare deploy.
+static/app-lectii/
 backend/node_modules/
 backend/.tts-cache/
 

@@ -1,0 +1,60 @@
+{
+  "name": "edumat-diacritice",
+  "displayName": "Diacritice românești pentru MDX",
+  "description": "Pune diacriticele în timp ce scrii, în lecțiile Markdown și MDX, fără să atingă cod, formule sau JSX.",
+  "version": "1.0.0",
+  "private": true,
+  "publisher": "edumat",
+  "engines": { "vscode": "^1.85.0" },
+  "categories": ["Other"],
+  "activationEvents": ["onLanguage:mdx", "onLanguage:markdown"],
+  "main": "./extensie.js",
+  "contributes": {
+    "configuration": {
+      "title": "Diacritice românești",
+      "properties": {
+        "diacritice.pornit": {
+          "type": "boolean",
+          "default": true,
+          "description": "Pune diacriticele automat în timp ce scrii."
+        },
+        "diacritice.limbi": {
+          "type": "array",
+          "items": { "type": "string" },
+          "default": ["mdx", "markdown"],
+          "description": "În ce fel de fișiere lucrează."
+        },
+        "diacritice.foloseșteGemini": {
+          "type": "boolean",
+          "default": true,
+          "description": "Pentru cuvintele ambigue („fata\" / „față\"), cere-i lui Gemini să aleagă după sensul propoziției. Fără asta, cuvintele neclare rămân doar subliniate."
+        },
+        "diacritice.model": {
+          "type": "string",
+          "default": "gemini-3.5-flash-lite",
+          "description": "Modelul Gemini folosit la dezambiguizare."
+        },
+        "diacritice.pauzăScris": {
+          "type": "number",
+          "default": 260,
+          "description": "Milisecunde de liniște înainte de a pune diacriticele sigure."
+        },
+        "diacritice.pauzăGemini": {
+          "type": "number",
+          "default": 1400,
+          "description": "Milisecunde de liniște înainte de a întreba Gemini. Mai mare = mai puține cereri."
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "diacritice.comută",
+        "title": "Diacritice: pornește sau oprește"
+      },
+      {
+        "command": "diacritice.reparăTot",
+        "title": "Diacritice: repară tot fișierul"
+      }
+    ]
+  }
+}

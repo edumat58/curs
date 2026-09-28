@@ -15,8 +15,14 @@
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
     "update-sidebar": "node update-sidebar.js",
+    "diacritice": "node scripts/diacritice/repara.mjs",
+    "diacritice:instalează": "node scripts/diacritice/instaleaza.mjs",
+    "diacritice:construiește": "node scripts/diacritice/construieste-lexicon.mjs && node scripts/diacritice/construieste-context.mjs",
+    "diacritice:evaluează": "node scripts/diacritice/evalueaza.mjs",
+    "diacritice:test": "node --test scripts/diacritice/motor.test.mjs",
     "predeploy": "node update-deploy-date.js && npm run update-sidebar",
-    "prebuild": "node scripts/build-admin-manifest.mjs && node scripts/build-lessons-index.mjs"
+    "prebuild": "node scripts/build-admin-manifest.mjs && node scripts/build-lessons-index.mjs",
+    "postbuild": "node scripts/build-app-lectii.mjs"
   },
   "dependencies": {
     "@docusaurus/core": "^3.7.0",
@@ -62,9 +68,11 @@
     "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {
+    "@cspell/dict-ro-ro": "^2.0.6",
     "@docusaurus/module-type-aliases": "3.7.0",
     "@docusaurus/types": "3.7.0",
-    "@types/react-big-calendar": "^1.16.1"
+    "@types/react-big-calendar": "^1.16.1",
+    "cspell-trie-lib": "^10.0.1"
   },
   "browserslist": {
     "production": [

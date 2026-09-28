@@ -1,0 +1,8 @@
+# Lista de frecvențe (15 MB) și fișierele derivate din ea se reconstruiesc
+# oricând, identic, cu scripturile din folderul de deasupra. Nu le ținem în git.
+ro_full.txt
+lexicon.txt
+context.json
+
+# `ascii-reale.txt` NU e aici dinadins: el costă 20 de cereri la Gemini și se
+# poate corecta cu mâna, deci merită păstrat. Vezi curata-ascii.mjs.

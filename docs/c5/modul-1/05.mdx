@@ -1,0 +1,184 @@
+---
+sidebar_position: 5
+slug: /c5/modul-1/05
+description: ""
+---
+
+import Katex from '@site/src/components/Katex';
+import HighlightText from '@site/src/components/HighlightText';
+
+# C4.2 - Divizori și multipli
+
+---
+
+## Multipli
+
+:::tip Definiție
+Fie $a$ și $b$ două numere naturale. Spunem că $a$ este **<HighlightText color="red">multiplu</HighlightText>** al lui $b$ dacă restul împărțirii euclidiene a lui $a$ la $b$ este nul.
+:::
+
+> Exemplu:
+
+$56$ este multiplu al lui $8$, deoarece $56 = 8 \cdot 7 + 0$.
+
+### Observații
+
+1. Următoarele formulări sunt logic echivalente (adică, dacă una este adevărată, atunci și cealaltă este adevărată):
+
+    a) $a$ este **<HighlightText color="red">multiplu</HighlightText>** al lui $b$;
+
+    b) $b$ are ca multiplu pe $a$;
+
+    c) $b$ este **<HighlightText color="blue">divizor</HighlightText>** al lui $a$;
+
+    d) $a$ are ca divizor pe $b$;
+
+    e) $b$ **divide** pe $a$.
+
+2. Fie $a$ un număr natural nenul. Dacă $0$ l-ar divide pe $a$, atunci ar exista un număr natural $b$ astfel încât $a = 0 \cdot b$. Dar $0 \cdot b = 0$, deci $a = 0$, ceea ce este contrar ipotezei de la care am plecat.
+
+    Așadar **$0$ nu divide niciun număr natural nenul**. Cât despre împărțirea lui $0$ la $0$, o lăsăm deoparte în gimnaziu.
+
+---
+
+## Exerciții rezolvate
+
+**1. Să se demonstreze că $91$ este multiplu al lui $13$.**
+
+> Soluție:
+
+$91 = 13 \cdot 7$, deci, prin definiție, $91$ este multiplu al lui $13$ (și al lui $7$).
+
+**2. Să se demonstreze că $17$ divide pe $357$.**
+
+> Soluție:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& \text{Știm că } 17 \times 10 = 170\\[6pt]
+& \text{Deci } 17 \times 20 = 340\\[6pt]
+& \text{Prin urmare } 17 \times 21 = 357
+\end{aligned}
+`}
+</Katex>
+
+Astfel, $17$ divide pe $357$.
+
+**3. Să se demonstreze că $1\,024$ este divizibil cu $16$.**
+
+> Soluție:
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& 16 \times 10 = 160 \text{, deci } 16 \times 60 = 960\\[6pt]
+& \text{Or } 1\,024 - 960 = 64 \text{ și } 64 = 16 \times 4\\[6pt]
+& \text{Prin urmare } 1\,024 = 16 \times 64
+\end{aligned}
+`}
+</Katex>
+
+Așadar $1\,024$ este într-adevăr divizibil cu $16$.
+
+---
+
+## Două proprietăți
+
+:::tip Propoziția 1
+Orice număr natural este multiplu al lui $1$ și al lui însuși.
+:::
+
+> Demonstrație:
+
+Fie $a$ un număr natural. Avem $a = a \cdot 1$. Deci $a$ este multiplu al lui $1$ și al lui $a$.
+
+:::tip Propoziția 2
+$0$ este multiplu al oricărui număr natural.
+:::
+
+> Demonstrație:
+
+$0 = 0 \cdot a$, deci $0$ este multiplu al lui $a$.
+
+---
+
+## Numere pare și impare
+
+:::info Vocabular
+Dacă un număr natural este multiplu al lui $2$, atunci el se numește număr natural **<HighlightText color="teal">par</HighlightText>**. Altfel, se numește număr natural **<HighlightText color="orange">impar</HighlightText>**.
+:::
+
+Există mai multe sau mai puține numere naturale pare decât numere naturale? La prima vedere, intuiția ne îndeamnă să credem că există mai puține, de vreme ce, enumerând numerele pare, omitem un număr natural din doi. Și totuși… Să privim tabelul următor:
+
+| Numere naturale | 1 | 2 | 3 | 4 | 5 | 6 | … | 2 023 | … |
+|-----------------|---|---|---|---|---|---|---|-------|---|
+| Numere naturale pare | 2 | 4 | 6 | 8 | 10 | 12 | … | 4 046 | … |
+
+Ești tot convins că există mai multe numere naturale decât numere naturale pare? Dar despre numerele naturale impare ce ai spune?
+
+---
+
+## Criterii de divizibilitate
+
+:::danger Teoremă
+Fie $n$ un număr natural.
+
+1. $n$ este divizibil cu $2$ dacă și numai dacă cifra unităților sale este $0$, $2$, $4$, $6$ sau $8$.
+
+2. $n$ este divizibil cu $3$ dacă și numai dacă suma cifrelor sale este divizibilă cu $3$.
+
+3. $n$ este divizibil cu $4$ dacă și numai dacă numărul format din ultimele sale două cifre este divizibil cu $4$.
+
+4. $n$ este divizibil cu $5$ dacă și numai dacă cifra unităților sale este $0$ sau $5$.
+
+5. $n$ este divizibil cu $7$ dacă și numai dacă suma dintre numărul zecilor sale și de cinci ori cifra unităților sale este divizibilă cu $7$.
+
+6. $n$ este divizibil cu $8$ dacă și numai dacă numărul format din ultimele sale trei cifre este divizibil cu $8$.
+
+7. $n$ este divizibil cu $9$ dacă și numai dacă suma cifrelor sale este divizibilă cu $9$.
+
+8. $n$ este divizibil cu $10$ dacă și numai dacă cifra unităților sale este $0$.
+
+9. $n$ este divizibil cu $11$ dacă și numai dacă suma alternată a cifrelor sale este divizibilă cu $11$.
+:::
+
+> Demonstrație:
+
+Punctele $1$, $4$ și $8$ sunt destul de evidente. Punctul $3$ se înțelege ușor. Punctele $5$, $6$ și $9$ sunt admise și nu se cer în gimnaziu. Punctele $2$ și $7$ se pot înțelege pe un exemplu.
+
+Să luăm numărul $429$. De ce, din punctul de vedere al divizibilității cu $3$, este totuna să studiem $429$ și $4 + 2 + 9$?
+
+<Katex>
+{String.raw`
+\begin{aligned}
+& 429 = (4 \times 100) + (2 \times 10) + (9 \times 1)\\[6pt]
+& \text{de unde } 429 = (4 \times 99) + (2 \times 9) + (4 + 2 + 9)
+\end{aligned}
+`}
+</Katex>
+
+Or $(4 \times 99) + (2 \times 9)$ este multiplu al lui $3$. Deci divizibilitatea lui $429$ cu $3$ nu mai depinde decât de cea a lui $4 + 2 + 9$. Același argument este valabil și pentru divizibilitatea cu $9$.
+
+> Exemplu:
+
+$381$ nu este divizibil nici cu $2$, nici cu $5$, fiindcă cifra unităților sale este $1$. Este divizibil cu $3$, fiindcă $3 + 8 + 1 = 12$ și $12 = 3 \times 4$. Nu este divizibil cu $9$, fiindcă $12$ nu este multiplu al lui $9$.
+
+---
+
+## Numere prime
+
+:::tip Definiție
+Fie $n$ un număr întreg mai mare sau egal cu $2$. Spunem că $n$ este **<HighlightText color="purple">prim</HighlightText>** dacă singurii săi divizori pozitivi sunt $1$ și $n$.
+:::
+
+> Exemple:
+
+- $7$ este prim, fiindcă singurii săi divizori sunt $1$ și $7$.
+- $12$ nu este prim, fiindcă $3$ divide pe $12$.
+- $23$ este prim, fiindcă singurii săi divizori sunt $1$ și $23$.
+- $91$ nu este prim, fiindcă $91 = 7 \cdot 13$.
+
+:::info Observație
+Un studiu mai amănunțit al numerelor prime va fi propus în cursul de clasa a VIII-a.
+:::

@@ -1,116 +1,78 @@
 ---
-sidebar_position: 13
-slug: /c5/06
+sidebar_position: 4
+slug: /c5/modul-1/04
 description: ""
 ---
 
 import Katex from '@site/src/components/Katex';
 import HighlightText from '@site/src/components/HighlightText';
 
-# C4 - Împărțirea Euclidiană. Împărțirea nr. zecimale
+# C4.1 - Împărțirea euclidiană
 
 ---
+
+:::info Cine a fost Euclid?
+Euclid a transformat geometria dintr-o colecție de reguli practice într-o știință deductivă riguroasă. El a demonstrat că teoremele complexe pot fi derivate logic dintr-un set minim de adevăruri evidente numite axiome.
+Deși este faimos pentru geometrie, Euclid a adus contribuții majore în aritmetică
+:::
 
 ## Împărțirea euclidiană
 
-:::danger Definiție
-La împărțirea cu **<HighlightText color="orange">rest</HighlightText>** avem patru numere.
+:::tip Teorema împărțirii euclidiene
+Fie $a$ și $b$ două numere naturale, cu $b$ diferit de $0$. Atunci există o unică pereche de numere naturale $c$ și $r$, astfel încât:
 
-<Katex>
-{String.raw`
-\color{#FF6B6B}{\text{deîmpărțit}} = \color{#4ECDC4}{\text{împărțitor}} \times \color{#9370DB}{\text{cât}} + \color{#FF8C00}{\text{rest}}
-`}
-</Katex>
+$$a = b \cdot c + r, \quad 0 \leq r < b$$
 :::
 
-Punem 17 bomboane în grupe de câte 5.
+### Demonstrație
 
-<svg xmlns="http://www.w3.org/2000/svg" width="620" height="180" viewBox="0 0 620 180" role="img" aria-label="17 bomboane puse în 3 grupe de câte 5, cu 2 bomboane rămase">
-  <text x="20" y="30" font-size="22" fill="#111">17 bomboane</text>
-  <g fill="#4ECDC4" stroke="#111" stroke-width="2">
-    <rect x="20" y="50" width="130" height="50" rx="4"/>
-    <rect x="165" y="50" width="130" height="50" rx="4"/>
-    <rect x="310" y="50" width="130" height="50" rx="4"/>
-  </g>
-  <g fill="#FF8C00" stroke="#111" stroke-width="2">
-    <rect x="470" y="50" width="30" height="50" rx="4"/>
-    <rect x="506" y="50" width="30" height="50" rx="4"/>
-  </g>
-  <g font-size="22" fill="#111" text-anchor="middle">
-    <text x="85" y="83">5</text>
-    <text x="230" y="83">5</text>
-    <text x="375" y="83">5</text>
-  </g>
-  <text x="20" y="140" font-size="22" fill="#006b67">3 grupe de câte 5 = cât 3</text>
-  <text x="450" y="140" font-size="22" fill="#934500">rest 2</text>
-</svg>
+>Exemplu:
 
-<Katex>
-{String.raw`
-\underbrace{17}_{\color{#FF6B6B}{\text{deîmpărțit}}} = \underbrace{5}_{\color{#4ECDC4}{\text{împărțitor}}} \times \underbrace{3}_{\color{#9370DB}{\text{cât}}} + \underbrace{2}_{\color{#FF8C00}{\text{rest}}}
-`}
-</Katex>
+Împărțirea euclidiană a numărului $85$ cu $11$:
 
-**Exemplu:** Calculăm pas cu pas 17 : 5.
+$$
+85 = 11 \cdot 7 + 8 \text{, unde } 0 \leq 8 < 11
+$$
 
-<Katex>
-{String.raw`
-\begin{aligned}
-& \text{Pasul 1: căutăm câtul: } 5 \times \color{#9370DB}{3} = 15\\[6pt]
-& \text{Pasul 2: aflăm restul: } 17 - 15 = \color{#FF8C00}{2}\\[6pt]
-& \text{Pasul 3: facem proba: } 5 \times 3 + 2 = 17
-\end{aligned}
-`}
-</Katex>
+> 8 reprezintă **restul** împărțirii
 
-:::tip De reținut
-Restul este mereu mai mic decât împărțitorul.
+> 7 reprezintă **câtul** împărțirii.
 
-<Katex>
-{String.raw`\color{#FF8C00}{2} \lt \color{#4ECDC4}{5}`}
-</Katex>
-:::
+### Observații
 
----
+1. Împărțirea euclidiană înseamnă să impartim un număr $a$ în $b$ grupe egale.
+Fiecare grupă vă avea câte $c$ elemente, iar cele $r$ elemente care nu mai pot fi împărțite formează restul.
 
-## Împărțirea unui număr zecimal la un număr natural
+2. $a$ se numește **<HighlightText color="red">deimpartitul</HighlightText>**, $b$ se numește **<HighlightText color="blue">impartitorul</HighlightText>**, $c$ se numește **<HighlightText color="green">catul</HighlightText>** și $r$ se numește **<HighlightText color="orange">restul</HighlightText>**.
 
-Împărțim ca la numerele naturale. Punem virgula la cât.
+3. Există un algoritm de la care se poate realiza împărțirea euclidiană. Acesta presupune scăderea repetată a lui $b$ din $a$, până când se obține un rest mai mic decât $b$.
+Numărul de scăderi ne arată **catul**, iar numărul rămas este **restul**.
 
-**Exemplu:** Calculăm pas cu pas 7,5 : 3.
+   > Exemplu: fie împărțirea euclidiană a numărului $2187$ cu $16$
 
-<Katex>
-{String.raw`
-\begin{aligned}
-& \text{Pasul 1: } 7 \div 3 = 2 \text{ rest } 1\\[6pt]
-& \text{Pasul 2: punem } \color{#FF6B6B}{\text{virgula}} \text{ la cât}\\[6pt]
-& \text{Pasul 3: coborâm zecimala } 5 \text{ și avem } 15\\[6pt]
-& \text{Pasul 4: } 15 \div 3 = 5\\[6pt]
-& \text{Rezultat: } 7{,}5 \div 3 = \color{#9370DB}{2{,}5}
-\end{aligned}
-`}
-</Katex>
+   Așezăm împărțirea astfel:
 
-Facem proba.
+   $$
+   \begin{array}{cccc|l}
+   2 & 1 & 8 & 7 & \begin{array}{c} 16 \\ \hline 136 \end{array} \\
+     & 5 & 8 &   & \\
+     & 1 & 0 & 7 & \\
+     &   & 1 & 1 &
+   \end{array}
+   $$
 
-<Katex>
-{String.raw`3 \times 2{,}5 = 7{,}5`}
-</Katex>
+   Citim atunci:
 
----
+   $$
+   2187 = 16 \cdot 136 + 11
+   $$
 
-## Împărțirea la un număr zecimal
+4. Dacă $a < b$, atunci $a = b \cdot 0 + a$. Altfel spus, **câtul este $0$**, iar **restul este $a$**.
 
-Mutăm **<HighlightText color="red">virgula</HighlightText>** spre dreapta la amândouă numerele.
+5. Dacă $a = b$, atunci $a = a \cdot 1 + 0$. Altfel spus, **câtul este $1$**, iar **restul este $0$**.
 
-**Exemplu:** Calculăm pas cu pas 7,2 : 0,3.
+6. Condiția $0 \leq r < b$ este necesară. Într-adevăr, egalitatea $a = b \cdot c + r$ singură nu ne lasă întotdeauna să deosebim împărțitorul de cât.
 
-<Katex>
-{String.raw`
-\begin{aligned}
-& \text{Pasul 1: mutăm virgula: } 7{,}2 \to \color{#FF6B6B}{72} \text{ și } 0{,}3 \to \color{#4ECDC4}{3}\\[6pt]
-& \text{Pasul 2: } 72 \div 3 = 24\\[6pt]
-& \text{Rezultat: } 7{,}2 \div 0{,}3 = \color{#9370DB}{24}
-\end{aligned}
-`}
-</Katex>
+   > Exemplu: să luăm egalitatea $32 = 6 \cdot 5 + 2$
+
+   Restul $2$ fiind strict mai mic și decât $6$, și decât $5$, ne este imposibil să stabilim cu precizie care este **<HighlightText color="green">câtul</HighlightText>** și care este **<HighlightText color="blue">împărțitorul</HighlightText>** acestei împărțiri euclidiene.
